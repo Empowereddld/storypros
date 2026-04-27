@@ -133,7 +133,7 @@ export function AdventureMapScreen({ childName, onReset, onNavigate }: Adventure
               </p>
             </div>
             <button
-              onClick={() => setOpenNode(NODES.find((n) => n.status === "current") ?? null)}
+              onClick={() => onNavigate("story")}
               className="rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground btn-tactile"
             >
               Play

@@ -10,12 +10,24 @@ import {
 } from "@/components/empowered/DataFormScreen";
 import { SuccessScreen } from "@/components/empowered/SuccessScreen";
 import { AdventureMapScreen } from "@/components/empowered/AdventureMapScreen";
+import { StoryReaderScreen } from "@/components/empowered/StoryReaderScreen";
+import { ComprehensionScreen } from "@/components/empowered/ComprehensionScreen";
+import { AchievementGalleryScreen } from "@/components/empowered/AchievementGalleryScreen";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Step = "splash" | "intro" | "signup" | "form" | "success" | "home";
+type Step =
+  | "splash"
+  | "intro"
+  | "signup"
+  | "form"
+  | "success"
+  | "home"
+  | "story"
+  | "comprehension"
+  | "achievements";
 
 function Index() {
   const [step, setStep] = useState<Step>("splash");
@@ -50,6 +62,25 @@ function Index() {
           <AdventureMapScreen
             childName={profile.childName}
             onReset={() => setStep("splash")}
+            onNavigate={(dest) => setStep(dest)}
+          />
+        )}
+        {step === "story" && (
+          <StoryReaderScreen
+            onClose={() => setStep("home")}
+            onComplete={() => setStep("comprehension")}
+          />
+        )}
+        {step === "comprehension" && (
+          <ComprehensionScreen
+            onClose={() => setStep("home")}
+            onComplete={() => setStep("achievements")}
+          />
+        )}
+        {step === "achievements" && (
+          <AchievementGalleryScreen
+            childName={profile.childName}
+            onClose={() => setStep("home")}
           />
         )}
       </div>
