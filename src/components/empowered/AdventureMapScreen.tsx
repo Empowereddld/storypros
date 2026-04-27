@@ -2,10 +2,14 @@ import { useState } from "react";
 import childAvatar from "@/assets/child-avatar.png";
 import { cn } from "@/lib/utils";
 
+export type MapDestination = "story" | "comprehension" | "achievements";
+
 interface AdventureMapScreenProps {
   childName: string;
   onReset: () => void;
+  onNavigate: (destination: MapDestination) => void;
 }
+
 
 type NodeKind = "lesson" | "story" | "treasure" | "boss";
 
@@ -27,8 +31,18 @@ const NODES: MapNode[] = [
   { id: "n6", label: "Castle", kind: "boss", status: "locked", x: 70, y: 12 },
 ];
 
-export function AdventureMapScreen({ childName, onReset }: AdventureMapScreenProps) {
+export function AdventureMapScreen({ childName, onReset, onNavigate }: AdventureMapScreenProps) {
   const [openNode, setOpenNode] = useState<MapNode | null>(null);
+
+  function activateNode(node: MapNode) {
+    if (node.status === "locked") {
+      setOpenNode(node);
+      return;
+    }
+    if (node.kind === "story") onNavigate("story");
+    else if (node.kind === "treasure") onNavigate("achievements");
+    else onNavigate("comprehension");
+  }
 
   return (
     <div className="relative flex h-full flex-col bg-gradient-to-b from-sky/60 via-cream to-cream-deep">
@@ -48,6 +62,13 @@ export function AdventureMapScreen({ childName, onReset }: AdventureMapScreenPro
         </button>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => onNavigate("achievements")}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-card shadow-card text-lg"
+            aria-label="My achievements"
+          >
+            🏅
+          </button>
           <Stat icon={<CoinIcon />} value="24" tone="secondary" />
           <Stat icon={<FlameIcon />} value="3" tone="coral" />
         </div>
@@ -72,7 +93,7 @@ export function AdventureMapScreen({ childName, onReset }: AdventureMapScreenPro
 
         {/* Nodes */}
         {NODES.map((n) => (
-          <NodeButton key={n.id} node={n} onClick={() => setOpenNode(n)} />
+          <NodeButton key={n.id} node={n} onClick={() => activateNode(n)} />
         ))}
 
         {/* Avatar standing on current node */}
