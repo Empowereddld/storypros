@@ -59,8 +59,8 @@
 
   --shadow-tactile: 0 6px 0 0 var(--primary-deep);
   --shadow-tactile-secondary: 0 6px 0 0 var(--secondary-deep);
-  --shadow-card: 0 4px 16px -4px oklch(0.4 0.06 254 / 0.12);
-  --shadow-soft: 0 8px 24px -8px oklch(0.4 0.06 254 / 0.18);
+  --shadow-card: 0 4px 16px -2px oklch(0.36 0.18 300 / 0.10);
+  --shadow-soft: 0 12px 32px -8px oklch(0.36 0.18 300 / 0.18);
 
   --animate-float: float 4s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
