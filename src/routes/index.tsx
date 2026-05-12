@@ -11,6 +11,7 @@ import {
 import { SuccessScreen } from "@/components/empowered/SuccessScreen";
 import { AdventureMapScreen } from "@/components/empowered/AdventureMapScreen";
 import { AchievementGalleryScreen } from "@/components/empowered/AchievementGalleryScreen";
+import { OnboardingAssessment } from "@/components/empowered/OnboardingAssessment";
 import { StoryEngine } from "@/components/empowered/phases";
 import { getStory } from "@/services/stories";
 import type { StoryData } from "@/types/story";
@@ -25,6 +26,7 @@ type Step =
   | "signup"
   | "form"
   | "success"
+  | "assessment"
   | "home"
   | "playing-story"
   | "achievements";
@@ -69,7 +71,13 @@ function Index() {
         {step === "success" && (
           <SuccessScreen
             childName={profile.childName}
-            onContinue={() => setStep("home")}
+            onContinue={() => setStep("assessment")}
+          />
+        )}
+        {step === "assessment" && (
+          <OnboardingAssessment
+            childName={profile.childName}
+            onComplete={() => setStep("home")}
           />
         )}
         {step === "home" && (

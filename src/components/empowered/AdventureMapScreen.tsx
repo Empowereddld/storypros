@@ -1,42 +1,110 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import dariaSolo from "@/assets/daria-solo.png";
 import childAvatar from "@/assets/child-avatar.png";
 import { cn } from "@/lib/utils";
+import { getStoriesByLevel } from "@/services/stories";
+import { getCompletedStoryIds, getPaperPlanes, getCurrentLevel, getProgress } from "@/services/progress";
+import type { StoryData } from "@/types/story";
 
-export type MapDestination = "story" | "comprehension" | "achievements";
+export type MapDestination = "story" | "achievements";
 
 interface AdventureMapScreenProps {
   childName: string;
   onReset: () => void;
-  onNavigate: (destination: MapDestination) => void;
+  onNavigate: (destination: string) => void;
 }
 
-type PinStatus = "active" | "locked";
+type PinStatus = "active" | "completed" | "locked";
 interface Pin {
   id: string;
+  storyId: string;
   label: string;
   status: PinStatus;
+  stars: number; // 0-3 based on first-attempt accuracy
   /** horizontal offset in px from the centerline (positive = right) */
   offset: number;
   /** vertical position in px down the canvas */
   y: number;
 }
 
-const PINS: Pin[] = [
-  { id: "p1", label: "Dan and the Paper Cut", status: "active", offset: 0,    y: 80 },
-  { id: "p2", label: "The Giant's Sneeze",    status: "locked", offset: 70,  y: 360 },
-  { id: "p3", label: "Library of Whispers",   status: "locked", offset: -80, y: 600 },
-  { id: "p4", label: "Castle of Commas",      status: "locked", offset: 50,  y: 840 },
-];
+/** Map alternating offsets for visual winding path */
+const PIN_OFFSETS = [0, 70, -80, 50, -60, 70];
+const PIN_Y_START = 80;
+const PIN_Y_SPACING = 280;
+
+function buildPins(level: number, completedIds: string[]): Pin[] {
+  const stories = getStoriesByLevel(level);
+
+  // If no stories from service, show placeholder pins
+  if (stories.length === 0) {
+    return [
+      { id: "p1", storyId: "dans-papercut", label: "Dan and the Paper Cut", status: "active", stars: 0, offset: 0, y: 80 },
+      { id: "p2", storyId: "coming-2", label: "The Giant's Sneeze", status: "locked", stars: 0, offset: 70, y: 360 },
+      { id: "p3", storyId: "coming-3", label: "Library of Whispers", status: "locked", stars: 0, offset: -80, y: 600 },
+      { id: "p4", storyId: "coming-4", label: "Castle of Commas", status: "locked", stars: 0, offset: 50, y: 840 },
+    ];
+  }
+
+  let foundActive = false;
+  return stories.map((story, i) => {
+    const isCompleted = completedIds.includes(story.id);
+    let status: PinStatus;
+
+    if (isCompleted) {
+      status = "completed";
+    } else if (!foundActive) {
+      status = "active";
+      foundActive = true;
+    } else {
+      status = "locked";
+    }
+
+    // Calculate stars from completion data (placeholder: 2 stars for completed)
+    const stars = isCompleted ? 2 : 0;
+
+    return {
+      id: `p${i + 1}`,
+      storyId: story.id,
+      label: story.title,
+      status,
+      stars,
+      offset: PIN_OFFSETS[i % PIN_OFFSETS.length],
+      y: PIN_Y_START + i * PIN_Y_SPACING,
+    };
+  });
+}
 
 const CANVAS_HEIGHT = 1020;
 
-export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenProps) {
+export function AdventureMapScreen({ childName, onReset, onNavigate }: AdventureMapScreenProps) {
   const [openPin, setOpenPin] = useState<Pin | null>(null);
 
+  const level = getCurrentLevel();
+  const completedIds = getCompletedStoryIds();
+  const paperPlanes = getPaperPlanes();
+  const progress = getProgress();
+
+  const pins = useMemo(() => {
+    const built = buildPins(level, completedIds);
+    // Ensure at least 4 pins for visual completeness
+    if (built.length < 4) {
+      const placeholders: Pin[] = [
+        { id: "ph2", storyId: "", label: "The Giant's Sneeze", status: "locked", stars: 0, offset: 70, y: 360 },
+        { id: "ph3", storyId: "", label: "Library of Whispers", status: "locked", stars: 0, offset: -80, y: 600 },
+        { id: "ph4", storyId: "", label: "Castle of Commas", status: "locked", stars: 0, offset: 50, y: 840 },
+      ];
+      return [...built, ...placeholders.slice(0, 4 - built.length)];
+    }
+    return built;
+  }, [level, completedIds]);
+
   function activate(pin: Pin) {
-    if (pin.status === "locked") setOpenPin(pin);
-    else onNavigate("story");
+    if (pin.status === "locked") {
+      setOpenPin(pin);
+    } else {
+      // For completed or active stories, navigate to play
+      onNavigate("story");
+    }
   }
 
   return (
@@ -53,8 +121,8 @@ export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenPr
         </div>
 
         <div className="flex items-center gap-2">
-          <Chip tone="primary" icon={<StarIcon />}>Lv. 12</Chip>
-          <Chip tone="secondary" icon={<CoinIcon />}>450</Chip>
+          <Chip tone="primary" icon={<StarIcon />}>Lv. {level}</Chip>
+          <Chip tone="secondary" icon={<PlaneIcon />}>{paperPlanes}</Chip>
           <button
             onClick={onReset}
             aria-label="Settings"
@@ -81,10 +149,10 @@ export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenPr
             preserveAspectRatio="none"
           >
             <path
-              d={`M 200 60 C 320 220 80 380 240 ${PINS[1].y + 40}
-                  C 360 ${PINS[1].y + 200} 80 ${PINS[2].y - 20} 120 ${PINS[2].y + 40}
-                  C 40 ${PINS[2].y + 220} 320 ${PINS[3].y - 40} 240 ${PINS[3].y + 40}
-                  C 160 ${PINS[3].y + 200} 200 ${CANVAS_HEIGHT - 60} 200 ${CANVAS_HEIGHT - 20}`}
+              d={`M 200 60 C 320 220 80 380 240 ${pins[1]?.y ? pins[1].y + 40 : 400}
+                  C 360 ${pins[1]?.y ? pins[1].y + 200 : 560} 80 ${pins[2]?.y ? pins[2].y - 20 : 580} 120 ${pins[2]?.y ? pins[2].y + 40 : 640}
+                  C 40 ${pins[2]?.y ? pins[2].y + 220 : 820} 320 ${pins[3]?.y ? pins[3].y - 40 : 800} 240 ${pins[3]?.y ? pins[3].y + 40 : 880}
+                  C 160 ${pins[3]?.y ? pins[3].y + 200 : 1040} 200 ${CANVAS_HEIGHT - 60} 200 ${CANVAS_HEIGHT - 20}`}
               fill="none"
               stroke="oklch(0.86 0.018 305)"
               strokeWidth="10"
@@ -94,7 +162,7 @@ export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenPr
           </svg>
 
           {/* Pins */}
-          {PINS.map((pin) => (
+          {pins.map((pin) => (
             <PinNode key={pin.id} pin={pin} onClick={() => activate(pin)} />
           ))}
         </div>
@@ -103,7 +171,7 @@ export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenPr
         <div className="h-56" />
       </div>
 
-      {/* Daily challenge */}
+      {/* Daily challenge / streak */}
       <div className="absolute bottom-24 left-4 right-4 z-30">
         <div className="rounded-3xl bg-card/95 backdrop-blur p-4 shadow-soft border-2 border-accent/50">
           <div className="flex items-center gap-3 mb-3">
@@ -111,16 +179,25 @@ export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenPr
               <SparkleIcon />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary">Daily Challenge</p>
-              <p className="text-sm text-ink-soft leading-snug">Read 5 pages to earn 50 coins!</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary">
+                {progress.streak > 0 ? `${progress.streak} Story Streak!` : "Daily Challenge"}
+              </p>
+              <p className="text-sm text-ink-soft leading-snug">
+                {completedIds.length === 0
+                  ? "Complete your first story to start earning Paper Planes!"
+                  : `${completedIds.length} ${completedIds.length === 1 ? "story" : "stories"} completed — keep going!`}
+              </p>
             </div>
           </div>
           <div className="h-2.5 w-full rounded-full bg-accent/60 overflow-hidden">
-            <div className="h-full rounded-full bg-success" style={{ width: "60%" }} />
+            <div
+              className="h-full rounded-full bg-success transition-all duration-500"
+              style={{ width: `${Math.min(100, (completedIds.length / Math.max(1, pins.filter(p => p.storyId).length)) * 100)}%` }}
+            />
           </div>
           <div className="mt-1.5 flex justify-between text-[10px] font-bold tracking-wider">
-            <span className="text-ink-soft/70">3/5 PAGES</span>
-            <span className="text-primary">60% COMPLETE</span>
+            <span className="text-ink-soft/70">{completedIds.length}/{pins.filter(p => p.storyId).length} STORIES</span>
+            <span className="text-primary">LEVEL {level}</span>
           </div>
         </div>
       </div>
@@ -151,6 +228,9 @@ export function AdventureMapScreen({ onReset, onNavigate }: AdventureMapScreenPr
 
 function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
   const isActive = pin.status === "active";
+  const isCompleted = pin.status === "completed";
+  const isLocked = pin.status === "locked";
+
   return (
     <div
       className="absolute left-1/2 flex flex-col items-center"
@@ -168,13 +248,19 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
           onClick={onClick}
           className={cn(
             "flex items-center justify-center rounded-full border-4 border-card transition-all active:translate-y-1",
-            isActive
-              ? "h-20 w-20 bg-secondary text-secondary-foreground shadow-[0_5px_0_0_var(--secondary-deep)] hover:scale-105 animate-pulse-glow"
-              : "h-16 w-16 bg-muted text-muted-foreground shadow-[0_4px_0_0_oklch(0.86_0.018_305)] opacity-80",
+            isActive && "h-20 w-20 bg-secondary text-secondary-foreground shadow-[0_5px_0_0_var(--secondary-deep)] hover:scale-105 animate-pulse-glow",
+            isCompleted && "h-18 w-18 bg-success text-success-foreground shadow-[0_4px_0_0_oklch(0.45_0.15_155)] hover:scale-105",
+            isLocked && "h-16 w-16 bg-muted text-muted-foreground shadow-[0_4px_0_0_oklch(0.86_0.018_305)] opacity-80",
           )}
         >
-          {isActive ? (
-            <span className="text-3xl font-extrabold leading-none">1</span>
+          {isCompleted ? (
+            <svg viewBox="0 0 24 24" className="h-8 w-8" stroke="currentColor" strokeWidth="3" fill="none">
+              <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ) : isActive ? (
+            <span className="text-3xl font-extrabold leading-none">
+              <PlayIcon />
+            </span>
           ) : (
             <LockIcon />
           )}
@@ -189,8 +275,16 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
           <h3 className="text-lg font-bold text-primary leading-tight text-center mt-0.5">
             {pin.label}
           </h3>
+        </div>
+      ) : isCompleted ? (
+        <div className="mt-3 bg-card px-4 py-2.5 rounded-2xl shadow-card border-b-4 border-success/40 flex flex-col items-center min-w-[200px]">
+          <h3 className="text-sm font-bold text-primary leading-tight text-center">
+            {pin.label}
+          </h3>
           <div className="mt-1.5 flex gap-0.5 text-secondary">
-            <StarIcon filled /><StarIcon filled /><StarIcon />
+            {[1, 2, 3].map((n) => (
+              <StarIcon key={n} filled={n <= pin.stars} />
+            ))}
           </div>
         </div>
       ) : (
@@ -302,11 +396,10 @@ function StarIcon({ filled }: { filled?: boolean }) {
     </svg>
   );
 }
-function CoinIcon() {
+function PlaneIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
-      <circle cx="12" cy="12" r="9" />
-      <text x="12" y="16" textAnchor="middle" fontSize="11" fontWeight="800" fill="oklch(0.30 0.05 80)">$</text>
+      <path d="M21 3L3 10.5l7 2.5 2.5 7L21 3z" />
     </svg>
   );
 }
