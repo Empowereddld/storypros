@@ -1,0 +1,417 @@
+{
+  "id": "dans-papercut",
+  "title": "Dan and the Paper Cut",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "Dan was making a paper airplane. Suddenly, he felt a sharp pinch on his finger.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "\"Ouch!\" Dan said. The paper had given him a tiny cut.",
+      "story_element": "problem",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "Dan's finger started to bleed a little. He felt scared.",
+      "story_element": "feeling",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Daria's dad came over. He helped Dan wash the cut and put on a bandage with stars.",
+      "story_element": "action",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Dan took a deep breath and felt calm. He picked up the paper and finished his airplane. Whoosh — it took flight!",
+      "story_element": "solution",
+      "image": "slide-05.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who was making something?",
+      "story_element": "character",
+      "options": [
+        { "id": "a", "label": "Dan", "emoji": "🧒", "correct": true },
+        { "id": "b", "label": "Daria", "emoji": "👧" },
+        { "id": "c", "label": "Mom", "emoji": "👩" },
+        { "id": "d", "label": "Teacher", "emoji": "👩‍🏫" }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer the WHO question with a person?"
+    },
+    {
+      "position": 2,
+      "prompt": "What was Dan making?",
+      "story_element": "action",
+      "options": [
+        { "id": "a", "label": "Paper airplane", "emoji": "✈️", "correct": true },
+        { "id": "b", "label": "Cookie", "emoji": "🍪" },
+        { "id": "c", "label": "Painting", "emoji": "🎨" },
+        { "id": "d", "label": "Book", "emoji": "📖" }
+      ],
+      "brain_check_correct": "Great job answering that WHAT question with a THING!",
+      "brain_check_wrong": "Did you answer the WHAT question with a thing?"
+    },
+    {
+      "position": 3,
+      "prompt": "What happened to Dan's finger?",
+      "story_element": "problem",
+      "options": [
+        { "id": "a", "label": "He fell down", "emoji": "🤕" },
+        { "id": "b", "label": "A paper cut", "emoji": "📄", "correct": true },
+        { "id": "c", "label": "A bee sting", "emoji": "🐝" },
+        { "id": "d", "label": "He bumped it", "emoji": "✋" }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer what happened to Dan?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did Dan feel when he saw the blood?",
+      "story_element": "feeling",
+      "options": [
+        { "id": "a", "label": "Happy", "emoji": "😊" },
+        { "id": "b", "label": "Angry", "emoji": "😠" },
+        { "id": "c", "label": "Scared", "emoji": "😨", "correct": true },
+        { "id": "d", "label": "Silly", "emoji": "🤪" }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer the FEELING question with how someone felt?"
+    },
+    {
+      "position": 5,
+      "prompt": "Who helped Dan with his cut?",
+      "story_element": "character",
+      "options": [
+        { "id": "a", "label": "His teacher", "emoji": "👩‍🏫" },
+        { "id": "b", "label": "His dog", "emoji": "🐶" },
+        { "id": "c", "label": "Daria's dad", "emoji": "👨", "correct": true },
+        { "id": "d", "label": "Nobody", "emoji": "😢" }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer the WHO question with a person?"
+    },
+    {
+      "position": 6,
+      "prompt": "What did Dan do at the end of the story?",
+      "story_element": "solution",
+      "options": [
+        { "id": "a", "label": "Went to sleep", "emoji": "😴" },
+        { "id": "b", "label": "Finished his airplane", "emoji": "✈️", "correct": true },
+        { "id": "c", "label": "Cried", "emoji": "😭" },
+        { "id": "d", "label": "Ate lunch", "emoji": "🍽️" }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer what Dan did at the end?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "bandage",
+      "type": "noun",
+      "image": "vocab-bandage.png",
+      "sfa": {
+        "category": "It belongs to the medical/first aid group.",
+        "function": "You put it on a cut to keep it clean and help it heal.",
+        "appearance": "It's usually white or tan. Some have fun designs like stars or characters.",
+        "parts": "It has a sticky part on each end and a soft pad in the middle.",
+        "location": "You find it in a first aid kit, a bathroom cabinet, or the school nurse's office."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does a bandage belong to?",
+          "options": [
+            { "id": "a", "text": "Food", "correct": false },
+            { "id": "b", "text": "First aid / medical", "correct": true },
+            { "id": "c", "text": "Toys", "correct": false },
+            { "id": "d", "text": "Clothes", "correct": false }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with a bandage?",
+          "options": [
+            { "id": "a", "text": "Eat it", "correct": false },
+            { "id": "b", "text": "Wear it as a hat", "correct": false },
+            { "id": "c", "text": "Put it on a cut to help it heal", "correct": true },
+            { "id": "d", "text": "Throw it like a ball", "correct": false }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does a bandage look like?",
+          "options": [
+            { "id": "a", "text": "Big and round like a ball", "correct": false },
+            { "id": "b", "text": "Small and flat with sticky ends", "correct": true },
+            { "id": "c", "text": "Tall and thin like a stick", "correct": false },
+            { "id": "d", "text": "Soft and fluffy like a cloud", "correct": false }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What parts does a bandage have?",
+          "options": [
+            { "id": "a", "text": "Wheels and an engine", "correct": false },
+            { "id": "b", "text": "Sticky ends and a soft pad in the middle", "correct": true },
+            { "id": "c", "text": "Buttons and zippers", "correct": false },
+            { "id": "d", "text": "A handle and a lid", "correct": false }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where do you find a bandage?",
+          "options": [
+            { "id": "a", "text": "In a first aid kit or bathroom cabinet", "correct": true },
+            { "id": "b", "text": "In the fridge", "correct": false },
+            { "id": "c", "text": "Under your bed", "correct": false },
+            { "id": "d", "text": "At the playground", "correct": false }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'bandage' correctly?",
+          "options": [
+            { "id": "a", "text": "I put a bandage on my sandwich", "correct": false },
+            { "id": "b", "text": "Mom put a bandage on my scraped knee", "correct": true },
+            { "id": "c", "text": "I rode my bandage to school", "correct": false },
+            { "id": "d", "text": "The bandage barked at the cat", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "airplane",
+      "type": "noun",
+      "image": "vocab-airplane.png",
+      "sfa": {
+        "category": "It belongs to the vehicles / things that fly group.",
+        "function": "It flies through the air. You can make a paper one or ride in a real one.",
+        "appearance": "It has wings on the sides, a pointed nose, and a tail at the back.",
+        "parts": "It has wings, a body (fuselage), a tail, and a nose (cockpit).",
+        "location": "You see them at airports, in the sky, or you can make one from paper at home."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does an airplane belong to?",
+          "options": [
+            { "id": "a", "text": "Animals", "correct": false },
+            { "id": "b", "text": "Things that fly / vehicles", "correct": true },
+            { "id": "c", "text": "Food", "correct": false },
+            { "id": "d", "text": "Furniture", "correct": false }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What does an airplane do?",
+          "options": [
+            { "id": "a", "text": "Swims in the ocean", "correct": false },
+            { "id": "b", "text": "Flies through the air", "correct": true },
+            { "id": "c", "text": "Grows in a garden", "correct": false },
+            { "id": "d", "text": "Sits on a shelf", "correct": false }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does an airplane look like?",
+          "options": [
+            { "id": "a", "text": "Round like a ball", "correct": false },
+            { "id": "b", "text": "It has wings and a pointed nose", "correct": true },
+            { "id": "c", "text": "Square like a box", "correct": false },
+            { "id": "d", "text": "Flat like a pancake", "correct": false }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What parts does an airplane have?",
+          "options": [
+            { "id": "a", "text": "Legs and arms", "correct": false },
+            { "id": "b", "text": "Wings, a body, a tail, and a nose", "correct": true },
+            { "id": "c", "text": "Roots and leaves", "correct": false },
+            { "id": "d", "text": "Buttons and a screen", "correct": false }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where do you find an airplane?",
+          "options": [
+            { "id": "a", "text": "At the airport or in the sky", "correct": true },
+            { "id": "b", "text": "In the ocean", "correct": false },
+            { "id": "c", "text": "Under the ground", "correct": false },
+            { "id": "d", "text": "In your lunch box", "correct": false }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'airplane' correctly?",
+          "options": [
+            { "id": "a", "text": "Dan folded a paper airplane and it flew across the room", "correct": true },
+            { "id": "b", "text": "I ate an airplane for dinner", "correct": false },
+            { "id": "c", "text": "The airplane swam in the lake", "correct": false },
+            { "id": "d", "text": "She planted an airplane in the garden", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "scared",
+      "type": "emotion",
+      "image": "vocab-scared.png",
+      "sfa": {
+        "category": "It belongs to the feelings / emotions group.",
+        "function": "It's a feeling you get when something surprises you or seems dangerous.",
+        "appearance": "When someone is scared, their eyes get big, their body tenses up, and they might freeze or pull away.",
+        "parts": "Scared has parts like: a fast heartbeat, shaky hands, wanting to hide or run.",
+        "location": "You might feel scared in the dark, when you hear a loud noise, or when something unexpected happens."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'scared' belong to?",
+          "options": [
+            { "id": "a", "text": "Colors", "correct": false },
+            { "id": "b", "text": "Animals", "correct": false },
+            { "id": "c", "text": "Feelings / emotions", "correct": true },
+            { "id": "d", "text": "Foods", "correct": false }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel scared?",
+          "options": [
+            { "id": "a", "text": "When you eat ice cream", "correct": false },
+            { "id": "b", "text": "When something surprises you or seems dangerous", "correct": true },
+            { "id": "c", "text": "When you play with friends", "correct": false },
+            { "id": "d", "text": "When you take a nap", "correct": false }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they're scared?",
+          "options": [
+            { "id": "a", "text": "They smile and laugh", "correct": false },
+            { "id": "b", "text": "Their eyes get big and they freeze or pull away", "correct": true },
+            { "id": "c", "text": "They jump up and down", "correct": false },
+            { "id": "d", "text": "They fall asleep", "correct": false }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you're scared?",
+          "options": [
+            { "id": "a", "text": "Your heart beats fast and your hands might shake", "correct": true },
+            { "id": "b", "text": "You feel very sleepy", "correct": false },
+            { "id": "c", "text": "You feel hungry", "correct": false },
+            { "id": "d", "text": "Nothing happens", "correct": false }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where might you feel scared?",
+          "options": [
+            { "id": "a", "text": "At a birthday party", "correct": false },
+            { "id": "b", "text": "In the dark or when you hear a loud noise", "correct": true },
+            { "id": "c", "text": "While eating lunch", "correct": false },
+            { "id": "d", "text": "While reading a book", "correct": false }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'scared' correctly?",
+          "options": [
+            { "id": "a", "text": "Dan felt scared when he saw the blood", "correct": true },
+            { "id": "b", "text": "The scared tasted good", "correct": false },
+            { "id": "c", "text": "She rode the scared to school", "correct": false },
+            { "id": "d", "text": "They put the scared on the shelf", "correct": false }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Dan asked for a bandage because ___",
+      "choices": [
+        { "id": "a", "text": "he got a papercut", "correct": true },
+        { "id": "b", "text": "he liked playing with them", "correct": false },
+        { "id": "c", "text": "he got a small bruise", "correct": false }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria's dad helped Dan because ___",
+      "choices": [
+        { "id": "a", "text": "Dan needed help with the blood", "correct": true },
+        { "id": "b", "text": "Dan had polka dots on his arm", "correct": false },
+        { "id": "c", "text": "Dan got lost", "correct": false }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "Dan felt calm because ___",
+      "choices": [
+        { "id": "a", "text": "he took a deep breath", "correct": true },
+        { "id": "b", "text": "he took a slow walk", "correct": false },
+        { "id": "c", "text": "he took a big stretch", "correct": false }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    { "correct_position": 1, "caption": "Dan was making a paper airplane", "image": "slide-01.png" },
+    { "correct_position": 2, "caption": "Dan got a paper cut on his finger", "image": "slide-02.png" },
+    { "correct_position": 3, "caption": "Dan's finger started to bleed and he felt scared", "image": "slide-03.png" },
+    { "correct_position": 4, "caption": "Daria's dad helped wash the cut", "image": "slide-04.png" },
+    { "correct_position": 5, "caption": "Dan got a bandage with stars", "image": "slide-04.png" },
+    { "correct_position": 6, "caption": "Dan finished his airplane and it flew!", "image": "slide-05.png" }
+  ],
+  "phonological_items": [
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with 'cut'?",
+      "options": [
+        { "id": "a", "text": "hut", "correct": true },
+        { "id": "b", "text": "cap", "correct": false },
+        { "id": "c", "text": "dog", "correct": false }
+      ]
+    },
+    {
+      "type": "initial_sound",
+      "prompt": "What sound does 'bandage' start with?",
+      "options": [
+        { "id": "a", "text": "/b/", "correct": true },
+        { "id": "b", "text": "/d/", "correct": false },
+        { "id": "c", "text": "/p/", "correct": false }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "cool",
+    "meaning_1": { "text": "Low temperature — when something is cold", "image": "joke-cool-temperature.png" },
+    "meaning_2": { "text": "Awesome or impressive — when something is really great", "image": "joke-cool-awesome.png" },
+    "joke_text": "Why did Dan's paper airplane wear sunglasses? Because it was so cool!"
+  },
+  "personal_connection": {
+    "prompt": "Has something ever hurt you, like a cut or a bump? Who helped you feel better? What did they do?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": ["character", "setting", "problem", "feeling", "action", "solution"]
+  }
+}
