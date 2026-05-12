@@ -10,9 +10,10 @@ import {
 } from "@/components/empowered/DataFormScreen";
 import { SuccessScreen } from "@/components/empowered/SuccessScreen";
 import { AdventureMapScreen } from "@/components/empowered/AdventureMapScreen";
-import { StoryReaderScreen } from "@/components/empowered/StoryReaderScreen";
-import { ComprehensionScreen } from "@/components/empowered/ComprehensionScreen";
 import { AchievementGalleryScreen } from "@/components/empowered/AchievementGalleryScreen";
+import { StoryEngine } from "@/components/empowered/phases";
+import { getStory } from "@/services/stories";
+import type { StoryData } from "@/types/story";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -25,8 +26,7 @@ type Step =
   | "form"
   | "success"
   | "home"
-  | "story"
-  | "comprehension"
+  | "playing-story"
   | "achievements";
 
 function Index() {
@@ -37,6 +37,20 @@ function Index() {
     parentName: "",
     parentEmail: "",
   });
+  const [activeStory, setActiveStory] = useState<StoryData | null>(null);
+
+  function handlePlayStory(storyId?: string) {
+    const story = getStory(storyId ?? "dans-papercut");
+    if (story) {
+      setActiveStory(story);
+      setStep("playing-story");
+    }
+  }
+
+  function handleStoryFinish() {
+    setActiveStory(null);
+    setStep("home");
+  }
 
   return (
     <PhoneFrame>
@@ -62,19 +76,19 @@ function Index() {
           <AdventureMapScreen
             childName={profile.childName}
             onReset={() => setStep("splash")}
-            onNavigate={(dest) => setStep(dest)}
+            onNavigate={(dest) => {
+              if (dest === "story") {
+                handlePlayStory();
+              } else {
+                setStep(dest as Step);
+              }
+            }}
           />
         )}
-        {step === "story" && (
-          <StoryReaderScreen
-            onClose={() => setStep("home")}
-            onComplete={() => setStep("comprehension")}
-          />
-        )}
-        {step === "comprehension" && (
-          <ComprehensionScreen
-            onClose={() => setStep("home")}
-            onComplete={() => setStep("achievements")}
+        {step === "playing-story" && activeStory && (
+          <StoryEngine
+            storyData={activeStory}
+            onFinish={handleStoryFinish}
           />
         )}
         {step === "achievements" && (

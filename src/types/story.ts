@@ -1,0 +1,195 @@
+/* ─────────────────────────────────────────────
+ * Story Pros — shared type definitions
+ * Every story phase component imports from here.
+ * ───────────────────────────────────────────── */
+
+// ── Story element icons used across all stories ──
+export type StoryElement =
+  | "character"
+  | "setting"
+  | "problem"
+  | "feeling"
+  | "action"
+  | "solution";
+
+// ── Phase identifiers ──
+export type StoryPhase =
+  | "slides"
+  | "overview"
+  | "comprehension"
+  | "sequencing"
+  | "immediate-retell"
+  | "vocab-intro"
+  | "vocab-quiz"
+  | "sentence-builder"
+  | "delayed-retell"
+  | "phonological"
+  | "joke"
+  | "personal-connection"
+  | "story-complete";
+
+// ── Option shape shared by comp questions, vocab quizzes, etc. ──
+export interface AnswerOption {
+  id: string;
+  label: string;
+  emoji?: string;
+  text?: string;
+  correct: boolean;
+}
+
+// ── Story slide ──
+export interface StorySlide {
+  position: number;
+  text: string;
+  story_element: StoryElement;
+  image: string;
+}
+
+// ── Comprehension question ──
+export interface ComprehensionQuestion {
+  position: number;
+  prompt: string;
+  story_element: StoryElement;
+  options: AnswerOption[];
+  brain_check_correct: string;
+  brain_check_wrong: string;
+}
+
+// ── Vocabulary ──
+export interface SFAFeatures {
+  category: string;
+  function: string;
+  appearance: string;
+  parts: string;
+  location: string;
+}
+
+export interface VocabQuizQuestion {
+  position: number;
+  prompt: string;
+  options: AnswerOption[];
+}
+
+export interface VocabularyWord {
+  word: string;
+  type: "noun" | "emotion";
+  image: string;
+  sfa: SFAFeatures;
+  quiz_questions: VocabQuizQuestion[];
+}
+
+// ── Sentence builder ──
+export interface SentenceFrame {
+  position: number;
+  frame_text: string;
+  choices: AnswerOption[];
+  brain_check_prompt: string;
+}
+
+// ── Sequencing ──
+export interface SequencingFrame {
+  correct_position: number;
+  caption: string;
+  image: string;
+}
+
+// ── Phonological awareness ──
+export interface PhonologicalItem {
+  type: "rhyme" | "initial_sound";
+  prompt: string;
+  options: AnswerOption[];
+}
+
+// ── Joke / multiple meaning ──
+export interface JokeMeaning {
+  text: string;
+  image: string;
+}
+
+export interface JokeData {
+  word: string;
+  meaning_1: JokeMeaning;
+  meaning_2: JokeMeaning;
+  joke_text: string;
+}
+
+// ── Retell prompts ──
+export interface RetellPrompts {
+  immediate: string;
+  delayed: string;
+  story_elements: StoryElement[];
+}
+
+// ── Personal connection ──
+export interface PersonalConnectionData {
+  prompt: string;
+}
+
+// ── Complete story bundle ──
+export interface StoryData {
+  id: string;
+  title: string;
+  level: number;
+  theme: string;
+  target_connective: string;
+  slides: StorySlide[];
+  comprehension_questions: ComprehensionQuestion[];
+  vocabulary_words: VocabularyWord[];
+  sentence_frames: SentenceFrame[];
+  sequencing_frames: SequencingFrame[];
+  phonological_items: PhonologicalItem[];
+  joke: JokeData;
+  personal_connection: PersonalConnectionData;
+  retell_prompts: RetellPrompts;
+}
+
+// ── Activity attempt (what gets saved per question) ──
+export type ActivityType =
+  | "comprehension"
+  | "sequencing"
+  | "vocab_quiz"
+  | "sentence_builder"
+  | "phonological";
+
+export interface ActivityAttempt {
+  child_id: string;
+  story_id: string;
+  activity_type: ActivityType;
+  question_index: number;
+  attempt_number: number;
+  selected_option: string;
+  is_correct: boolean;
+  brain_check_response?: string;
+  time_ms: number;
+}
+
+// ── Skill domains ──
+export type SkillDomain =
+  | "listening"
+  | "story_structure"
+  | "vocabulary"
+  | "grammar"
+  | "phonological"
+  | "retell";
+
+export interface SkillScore {
+  domain: SkillDomain;
+  score: number; // 0–100 based on first-attempt accuracy
+  stories_counted: number;
+}
+
+// ── Phase result (emitted by each phase component) ──
+export interface PhaseResult {
+  phase: StoryPhase;
+  attempts: ActivityAttempt[];
+  first_attempt_accuracy: number; // 0–1
+  completed: boolean;
+}
+
+// ── Props contract for all phase components ──
+export interface StoryPhaseProps<TData = unknown> {
+  storyData: StoryData;
+  phaseData?: TData;
+  onComplete: (result: PhaseResult) => void;
+  onClose: () => void;
+}
