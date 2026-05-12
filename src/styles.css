@@ -73,8 +73,8 @@
     50% { transform: translateY(-8px); }
   }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 0 0 oklch(0.85 0.16 88 / 0.7); }
-    50% { box-shadow: 0 0 0 16px oklch(0.85 0.16 88 / 0); }
+    0%, 100% { box-shadow: 0 0 0 0 oklch(0.83 0.17 88 / 0.75); }
+    50% { box-shadow: 0 0 0 16px oklch(0.83 0.17 88 / 0); }
   }
   @keyframes slide-up {
     from { opacity: 0; transform: translateY(24px); }
