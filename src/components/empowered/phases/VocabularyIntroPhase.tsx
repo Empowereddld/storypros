@@ -7,7 +7,7 @@
 import { useState, useEffect } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
-import type { StoryPhaseProps, VocabularyWord } from "@/types/story";
+import type { StoryPhaseProps, VocabularyWord, SFATeachingSlide } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 
@@ -125,9 +125,15 @@ export function VocabularyIntroPhase({ storyData, onComplete, onClose, ttsSpeed 
           <p className="mt-2 text-base font-semibold text-ink-soft">
             {word.type === "emotion" ? "An emotion word" : "A thing word"}
           </p>
-          <p className="mt-4 text-center text-sm text-ink-soft/70">
-            Let's learn about this word!
-          </p>
+          {word.sfa_teaching?.intro_text ? (
+            <p className="mt-4 text-center text-sm text-ink-soft/70 leading-relaxed max-w-[280px]">
+              {word.sfa_teaching.intro_text}
+            </p>
+          ) : (
+            <p className="mt-4 text-center text-sm text-ink-soft/70">
+              Let's learn about this word!
+            </p>
+          )}
         </div>
       ) : (
         /* ── SFA feature exploration ── */
@@ -150,6 +156,13 @@ export function VocabularyIntroPhase({ storyData, onComplete, onClose, ttsSpeed 
               const isFuture = idx > featureIdx;
               const isRevealed = revealed.has(idx) || isPast;
 
+              // Use enriched teaching text when available
+              const teachingSlide = word.sfa_teaching?.slides?.find(
+                (s: SFATeachingSlide) => s.feature === key,
+              );
+              const displayPrompt = teachingSlide?.prompt;
+              const displayText = teachingSlide?.teaching_text || word.sfa[key];
+
               return (
                 <button
                   key={key}
@@ -167,42 +180,18 @@ export function VocabularyIntroPhase({ storyData, onComplete, onClose, ttsSpeed 
                     {SFA_ICONS[key]}
                   </span>
                   <div className="flex-1">
-                    <span className="text-sm font-bold uppercase tracking-wider text-ink-soft">
-                      {SFA_LABELS[key]}
-                    </span>
-                    {(isRevealed || isPast) ? (
-                      <p className="mt-1 text-base font-semibold leading-snug text-primary animate-slide-up">
-                        {word.sfa[key]}
-                      </p>
-                    ) : isActive ? (
-                      <p className="mt-1 text-sm font-semibold text-primary/60">
-                        Tap to reveal!
-                      </p>
-                    ) : null}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Navigation */}
-      <div className="mx-5 mb-5">
-        {isOnTitleCard ? (
-          <TactileButton onClick={handleStartExploring}>
-            Let's explore!
-          </TactileButton>
-        ) : (
-          <TactileButton onClick={handleNext} disabled={!allRevealed}>
-            {wordIdx === words.length - 1 && featureIdx === SFA_KEYS.length - 1
-              ? "Start quiz"
-              : featureIdx === SFA_KEYS.length - 1
-                ? "Next word"
-                : "Next feature"}
-          </TactileButton>
-        )}
-      </div>
-    </div>
-  );
-}
+                    {isActive && !isRevealed && displayPrompt ? (
+                      <>
+                        <span className="text-sm font-bold uppercase tracking-wider text-ink-soft">
+                          {SFA_LABELS[key]}
+                        </span>
+                        <p className="mt-1 text-sm font-semibold text-primary/70">
+                          {displayPrompt}
+                        </p>
+                      </>
+                    ) : (
+                      <span className="text-sm font-bold uppercase tracking-wider text-ink-soft">
+                        {SFA_LABELS[key]}
+                      </span>
+                    )}
+                    {(isRevealed

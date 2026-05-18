@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "c",
           "label": "Daria",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         }
       ],
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "The teacher was standing at the whiteboard",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         },
         {
           "id": "b",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "c",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "Daria could not remember all the steps",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Confused",
-          "emoji": "🫤",
+          "emoji": "\ud83e\udee4",
           "correct": true
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "c",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Daria raised her hand and asked the teacher to repeat the...",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,17 +176,17 @@
         {
           "id": "a",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
           "label": "The teacher said the steps one more time so Daria could t...",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         }
       ],
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "instructions: information or directions. Daria's teacher started giving instructions for a project.",
+        "intro_narration": "Listen for this word in the story: instructions. Daria's teacher started giving instructions for a project.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is an instructions in? Listen and look.",
+            "teaching_text": "instructions is an information or directions.",
+            "narration": "instructions is an information or directions."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with an instructions? Listen and look.",
+            "teaching_text": "Instructions tell you what to do step by step.",
+            "narration": "Instructions tell you what to do step by step."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does an instructions look like? Listen and look.",
+            "teaching_text": "instructions looks like spoken words, a written list, or steps on a board.",
+            "narration": "instructions looks like spoken words, a written list, or steps on a board."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does an instructions have? Listen and look.",
+            "teaching_text": "Parts or features of instructions include steps, order, and details.",
+            "narration": "Parts or features of instructions include steps, order, and details."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see an instructions? Listen and look.",
+            "teaching_text": "You might find or use instructions in a classroom, at home, in a recipe, or in game rules. You might need instructions when you are learning something new.",
+            "narration": "You might find or use instructions in a classroom, at home, in a recipe, or in game rules. You might need instructions when you are learning something new."
+          }
+        ],
+        "transition_text": "Now let's show what you know about an instructions.",
+        "connection_text": "Daria's teacher started giving instructions for a project.",
+        "connection_narration": "In this story, daria's teacher started giving instructions for a project."
+      }
     },
     {
       "word": "whiteboard",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "whiteboard: classroom tool. The teacher was standing at the whiteboard.",
+        "intro_narration": "Listen for this word in the story: whiteboard. The teacher was standing at the whiteboard.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a whiteboard in? Listen and look.",
+            "teaching_text": "whiteboard is a classroom tool.",
+            "narration": "whiteboard is a classroom tool."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a whiteboard? Listen and look.",
+            "teaching_text": "You use a whiteboard to write or draw on to show information.",
+            "narration": "You use a whiteboard to write or draw on to show information."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a whiteboard look like? Listen and look.",
+            "teaching_text": "whiteboard looks like a large flat white surface on a wall.",
+            "narration": "whiteboard looks like a large flat white surface on a wall."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a whiteboard have? Listen and look.",
+            "teaching_text": "Parts or features of whiteboard include surface, markers, eraser, and frame.",
+            "narration": "Parts or features of whiteboard include surface, markers, eraser, and frame."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a whiteboard? Listen and look.",
+            "teaching_text": "You might find or use a whiteboard in a classroom, office, or meeting room. A teacher might use a whiteboard to write instructions or draw diagrams.",
+            "narration": "You might find or use a whiteboard in a classroom, office, or meeting room. A teacher might use a whiteboard to write instructions or draw diagrams."
+          }
+        ],
+        "transition_text": "Now let's show what you know about a whiteboard.",
+        "connection_text": "The teacher was standing at the whiteboard.",
+        "connection_narration": "In this story, the teacher was standing at the whiteboard."
+      }
     },
     {
       "word": "confused",
@@ -736,7 +814,7 @@
   "joke": {
     "word": "step",
     "meaning_1": {
-      "text": "A part of instructions — what to do next",
+      "text": "A part of instructions \u2014 what to do next",
       "image": "joke-step-1.png"
     },
     "meaning_2": {

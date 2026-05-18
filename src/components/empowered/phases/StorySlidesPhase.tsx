@@ -29,6 +29,23 @@ const ELEMENT_LABELS: Record<string, string> = {
   result: "Result",
 };
 
+/** Highlight occurrences of the target connective in story text */
+function highlightConnective(text: string, connective: string): React.ReactNode {
+  if (!connective) return text;
+  const regex = new RegExp(`(\\b${connective}\\b)`, "gi");
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    part.toLowerCase() === connective.toLowerCase() ? (
+      <span key={i} className="inline-block rounded-lg bg-secondary/25 px-1 font-extrabold text-secondary-foreground">
+        {part}
+      </span>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+}
+
 export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const [page, setPage] = useState(0);
   const [speaking, setSpeaking] = useState(false);
@@ -95,7 +112,7 @@ export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "n
         </div>
       </div>
 
-      {/* Story element badge */}
+      {/* Story element badge + connective badge */}
       <div className="mx-5 mt-3 flex items-center gap-2">
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm">
           {ELEMENT_ICONS[current.story_element]}
@@ -103,12 +120,17 @@ export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "n
         <span className="text-xs font-bold uppercase tracking-wider text-primary">
           {ELEMENT_LABELS[current.story_element]}
         </span>
+        {page === 0 && storyData.target_connective && (
+          <span className="ml-auto flex items-center gap-1 rounded-full bg-secondary/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-secondary-foreground">
+            <span>🔗</span> Today's word: {storyData.target_connective}
+          </span>
+        )}
       </div>
 
-      {/* Story text */}
+      {/* Story text — connective words highlighted */}
       <div key={`t-${page}`} className="mx-5 mt-2 flex-1 animate-slide-up">
         <p className="font-display text-[22px] leading-[1.45] font-semibold text-primary">
-          {current.text}
+          {highlightConnective(current.text, storyData.target_connective)}
         </p>
       </div>
 
@@ -122,36 +144,3 @@ export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "n
               speaking
                 ? "bg-destructive text-destructive-foreground animate-pulse-glow"
                 : "bg-primary text-primary-foreground",
-            )}
-            aria-label={speaking ? "Stop audio" : "Play audio"}
-          >
-            {speaking ? (
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
-                <rect x="6" y="6" width="12" height="12" rx="2" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" className="ml-0.5 h-6 w-6" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            )}
-          </button>
-          <span className="text-sm font-semibold text-ink-soft">
-            {speaking ? "Stop" : "Listen"}
-          </span>
-        </div>
-      )}
-
-      {/* Navigation */}
-      <div className="mx-5 mb-5 flex gap-3">
-        {page > 0 && (
-          <TactileButton variant="ghost" fullWidth={false} className="px-6" onClick={() => setPage(page - 1)}>
-            Back
-          </TactileButton>
-        )}
-        <TactileButton onClick={handleNext}>
-          {isLast ? "Done reading" : "Next"}
-        </TactileButton>
-      </div>
-    </div>
-  );
-}

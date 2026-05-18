@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Dan",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         },
         {
           "id": "b",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         },
         {
           "id": "c",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,17 +76,17 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "b",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "c",
           "label": "the basketball court",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         }
       ],
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "b",
           "label": "One kid laughed when Dan paused before answering",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "c",
           "label": "Embarrassed",
-          "emoji": "😳",
+          "emoji": "\ud83d\ude33",
           "correct": true
         }
       ],
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Dan told his mom what happened",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "His mom listened and said they would talk to his teacher ...",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "basketball court: place. Dan was near the basketball court when he tried to join the group.",
+        "intro_narration": "basketball court: place. Dan was near the basketball court when he tried to join the group.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a basketball court in? Listen and look.",
+            "teaching_text": "basketball court is a place.",
+            "narration": "basketball court is a place."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a basketball court? Listen and look.",
+            "teaching_text": "You use or think about basketball court to play basketball or other games there.",
+            "narration": "You use or think about basketball court to play basketball or other games there."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a basketball court look like? Listen and look.",
+            "teaching_text": "basketball court looks like flat hard surface with lines and hoops.",
+            "narration": "basketball court looks like flat hard surface with lines and hoops."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a basketball court have? Listen and look.",
+            "teaching_text": "Parts or features of basketball court include hoops, lines, floor, key, space.",
+            "narration": "Parts or features of basketball court include hoops, lines, floor, key, space."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a basketball court? Listen and look.",
+            "teaching_text": "You might see or use basketball court in school, park, gym, recreation centre.",
+            "narration": "You might see or use basketball court in school, park, gym, recreation centre."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a basketball court.",
+        "connection_text": "Dan was near the basketball court when he tried to join the group.",
+        "connection_narration": "Dan was near the basketball court when he tried to join the group."
+      }
     },
     {
       "word": "teacher",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "teacher: person word. Dan's mom said they would talk to his teacher together.",
+        "intro_narration": "teacher: person word. Dan's mom said they would talk to his teacher together.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a teacher in? Listen and look.",
+            "teaching_text": "teacher is a person word.",
+            "narration": "teacher is a person word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a teacher? Listen and look.",
+            "teaching_text": "You use or think about teacher to helps students learn and solve problems.",
+            "narration": "You use or think about teacher to helps students learn and solve problems."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a teacher look like? Listen and look.",
+            "teaching_text": "teacher looks like adult or person at school who teaches.",
+            "narration": "teacher looks like adult or person at school who teaches."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a teacher have? Listen and look.",
+            "teaching_text": "Parts or features of teacher include classroom, lesson, questions, support.",
+            "narration": "Parts or features of teacher include classroom, lesson, questions, support."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a teacher? Listen and look.",
+            "teaching_text": "You might see or use teacher in school, classroom, hallway, online class.",
+            "narration": "You might see or use teacher in school, classroom, hallway, online class."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a teacher.",
+        "connection_text": "Dan's mom said they would talk to his teacher together.",
+        "connection_narration": "Dan's mom said they would talk to his teacher together."
+      }
     }
   ],
   "sentence_frames": [

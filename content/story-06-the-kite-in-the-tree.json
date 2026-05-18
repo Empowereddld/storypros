@@ -19,7 +19,7 @@
     },
     {
       "position": 3,
-      "text": "The wind pushed Dan’s kite into a tree and it got stuck.",
+      "text": "The wind pushed Dan\u2019s kite into a tree and it got stuck.",
       "story_element": "problem",
       "image": "slide-03.png"
     },
@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Dan and Daria",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "c",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,17 +76,17 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "b",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "c",
           "label": "They went to the park",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         }
       ],
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         },
         {
           "id": "b",
-          "label": "The wind pushed Dan’s kite into a tree and it got stuck",
-          "emoji": "📄",
+          "label": "The wind pushed Dan\u2019s kite into a tree and it got stuck",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "c",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "c",
           "label": "Frustrated",
-          "emoji": "😤",
+          "emoji": "\ud83d\ude24",
           "correct": true
         }
       ],
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "c",
           "label": "Daria asked a grown up for a ladder",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         }
       ],
@@ -176,17 +176,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "c",
           "label": "The grown up used the ladder to get the kite down",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         }
       ],
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "kite: toy. Dan\u2019s kite got stuck in a tree.",
+        "intro_narration": "Listen for this word in the story: kite. Dan\u2019s kite got stuck in a tree.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a kite in? Listen and look.",
+            "teaching_text": "kite is a toy.",
+            "narration": "kite is a toy."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a kite? Listen and look.",
+            "teaching_text": "You fly a kite in the air with wind and a string.",
+            "narration": "You fly a kite in the air with wind and a string."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a kite look like? Listen and look.",
+            "teaching_text": "kite looks like diamond or triangle shape with a tail and string.",
+            "narration": "kite looks like diamond or triangle shape with a tail and string."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a kite have? Listen and look.",
+            "teaching_text": "Parts or features of kite include string, tail, and kite body.",
+            "narration": "Parts or features of kite include string, tail, and kite body."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a kite? Listen and look.",
+            "teaching_text": "You might find or use kite in park, beach, or big open space. You might use a kite on a windy day at the park or beach.",
+            "narration": "You might find or use kite in park, beach, or big open space. You might use a kite on a windy day at the park or beach."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a kite.",
+        "connection_text": "Dan\u2019s kite got stuck in a tree.",
+        "connection_narration": "In this story, Dan\u2019s kite got stuck in a tree."
+      }
     },
     {
       "word": "ladder",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "ladder: tool. A grown up used a ladder to get Dan\u2019s kite down.",
+        "intro_narration": "Listen for this word in the story: ladder. A grown up used a ladder to get Dan\u2019s kite down.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a ladder in? Listen and look.",
+            "teaching_text": "ladder is a tool.",
+            "narration": "ladder is a tool."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a ladder? Listen and look.",
+            "teaching_text": "You use a ladder to climb up and reach something high.",
+            "narration": "You use a ladder to climb up and reach something high."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a ladder look like? Listen and look.",
+            "teaching_text": "ladder looks like a tall frame with steps.",
+            "narration": "ladder looks like a tall frame with steps."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a ladder have? Listen and look.",
+            "teaching_text": "Parts or features of ladder include steps, side rails, and feet.",
+            "narration": "Parts or features of ladder include steps, side rails, and feet."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a ladder? Listen and look.",
+            "teaching_text": "You might find or use ladder in garage, home, outside, or work area. You might use a ladder when something is up high, like a shelf, roof, or kite in a tree.",
+            "narration": "You might find or use ladder in garage, home, outside, or work area. You might use a ladder when something is up high, like a shelf, roof, or kite in a tree."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a ladder.",
+        "connection_text": "A grown up used a ladder to get Dan\u2019s kite down.",
+        "connection_narration": "In this story, A grown up used a ladder to get Dan\u2019s kite down."
+      }
     },
     {
       "word": "frustrated",
@@ -691,7 +769,7 @@
     },
     {
       "correct_position": 3,
-      "caption": "The wind pushed Dan’s kite into a tree and it got stuck.",
+      "caption": "The wind pushed Dan\u2019s kite into a tree and it got stuck.",
       "image": "slide-03.png"
     },
     {

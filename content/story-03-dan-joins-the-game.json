@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Dan",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         },
         {
           "id": "b",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         },
         {
           "id": "c",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "They were playing on the field",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         },
         {
           "id": "b",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "c",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "The game had already started",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "c",
           "label": "Lonely",
-          "emoji": "😔",
+          "emoji": "\ud83d\ude14",
           "correct": true
         }
       ],
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "c",
           "label": "Dan smiled and asked Daria and Jack if he could play",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         }
       ],
@@ -176,17 +176,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "c",
           "label": "Daria invited Dan to join the game",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         }
       ],
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "game: activity. Dan wanted to join the soccer game with his friends.",
+        "intro_narration": "Listen for this word in the story: game. Dan wanted to join the soccer game with his friends.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a game in? Listen and look.",
+            "teaching_text": "game is a activity.",
+            "narration": "game is a activity."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a game? Listen and look.",
+            "teaching_text": "You play a game with rules or turns.",
+            "narration": "You play a game with rules or turns."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a game look like? Listen and look.",
+            "teaching_text": "game looks like can look different depending on the game.",
+            "narration": "game looks like can look different depending on the game."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a game have? Listen and look.",
+            "teaching_text": "Parts or features of game include players, rules, turns, score, and equipment.",
+            "narration": "Parts or features of game include players, rules, turns, score, and equipment."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a game? Listen and look.",
+            "teaching_text": "You might find or use game in field, playground, classroom, or home. A game can be played with friends, classmates, family, or teammates.",
+            "narration": "You might find or use game in field, playground, classroom, or home. A game can be played with friends, classmates, family, or teammates."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a game.",
+        "connection_text": "Dan wanted to join the soccer game with his friends.",
+        "connection_narration": "In this story, Dan wanted to join the soccer game with his friends."
+      }
     },
     {
       "word": "field",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "field: place. The kids were playing soccer on the field.",
+        "intro_narration": "Listen for this word in the story: field. The kids were playing soccer on the field.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a field in? Listen and look.",
+            "teaching_text": "field is a place.",
+            "narration": "field is a place."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a field? Listen and look.",
+            "teaching_text": "A field is a large open space for playing or sports.",
+            "narration": "A field is a large open space for playing or sports."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a field look like? Listen and look.",
+            "teaching_text": "field looks like grass or open ground with lots of space.",
+            "narration": "field looks like grass or open ground with lots of space."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a field have? Listen and look.",
+            "teaching_text": "Parts or features of field include lines, grass, goals, and space.",
+            "narration": "Parts or features of field include lines, grass, goals, and space."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a field? Listen and look.",
+            "teaching_text": "You might find or use field in school, park, or sports area. You might use a field for soccer, running, games, or gym class.",
+            "narration": "You might find or use field in school, park, or sports area. You might use a field for soccer, running, games, or gym class."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a field.",
+        "connection_text": "The kids were playing soccer on the field.",
+        "connection_narration": "In this story, The kids were playing soccer on the field."
+      }
     },
     {
       "word": "lonely",

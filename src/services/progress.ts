@@ -29,6 +29,8 @@ interface ChildProgress {
   paperPlanes: number;
   currentLevel: number;
   streak: number;
+  /** ISO date string of last story completion (for streak tracking) */
+  lastPlayedDate?: string;
 }
 
 // Singleton store for the current session
@@ -89,8 +91,28 @@ export function recordStoryCompletion(
   const planesEarned = calculatePaperPlanes(overallScore, !!existing);
   currentProgress.paperPlanes += planesEarned;
 
-  // Update streak
-  currentProgress.streak += 1;
+  // Update streak (tracks consecutive days, not consecutive stories)
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  if (currentProgress.lastPlayedDate !== today) {
+    const lastDate = currentProgress.lastPlayedDate;
+    if (lastDate) {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayStr = yesterday.toISOString().slice(0, 10);
+      if (lastDate === yesterdayStr) {
+        // Played yesterday → extend streak
+        currentProgress.streak += 1;
+      } else {
+        // Missed a day → reset to 1
+        currentProgress.streak = 1;
+      }
+    } else {
+      // First ever play
+      currentProgress.streak = 1;
+    }
+    currentProgress.lastPlayedDate = today;
+  }
+  // If already played today, streak stays the same
 
   // Check for level promotion
   checkLevelPromotion();
@@ -205,6 +227,16 @@ function checkBadgeAwards(completion: StoryCompletion): void {
   if (allDomainsHigh) {
     awardBadge(childId, "badge-all-elements");
   }
+
+  // Level Up! — reached Level 2
+  if (currentProgress.currentLevel >= 2) {
+    awardBadge(childId, "badge-level-2");
+  }
+
+  // Story Explorer — completed all 11 Level 1 stories
+  if (distinctStories >= 11) {
+    awardBadge(childId, "badge-all-stories");
+  }
 }
 
 /* ─────────────────────────────────────────────
@@ -248,45 +280,4 @@ function checkLevelPromotion(): void {
   const recent = firstAttempts.slice(-STORIES_REQUIRED);
   const allMastered = recent.every(
     (c) => c.overallScore >= MASTERY_THRESHOLD,
-  );
-
-  if (allMastered) {
-    currentProgress.currentLevel = 2;
-    // Award bonus Paper Planes for leveling up
-    currentProgress.paperPlanes += 50;
-  }
-}
-
-/** Get star rating (1-3) for a completed story based on overall score */
-export function getStarRating(storyId: string): number {
-  const completions = getStoryCompletions(storyId);
-  if (completions.length === 0) return 0;
-
-  // Use best score across all attempts
-  const best = Math.max(...completions.map((c) => c.overallScore));
-  if (best >= 90) return 3;
-  if (best >= 70) return 2;
-  return 1;
-}
-
-/** Check if child is close to promotion (for UI indicators) */
-export function getMasteryProgress(): {
-  storiesMastered: number;
-  storiesRequired: number;
-  ready: boolean;
-} {
-  const seen = new Set<string>();
-  let mastered = 0;
-  for (const c of currentProgress.completions) {
-    if (!seen.has(c.storyId) && c.replayCount === 0 && c.overallScore >= MASTERY_THRESHOLD) {
-      seen.add(c.storyId);
-      mastered++;
-    }
-  }
-
-  return {
-    storiesMastered: mastered,
-    storiesRequired: STORIES_REQUIRED,
-    ready: mastered >= STORIES_REQUIRED,
-  };
-}
+  

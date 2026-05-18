@@ -13,7 +13,7 @@
     },
     {
       "position": 2,
-      "text": "They walked to the entrance with Daria’s dad.",
+      "text": "They walked to the entrance with Daria\u2019s dad.",
       "story_element": "place",
       "image": "slide-02.png"
     },
@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "c",
           "label": "Dan and Daria",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         }
       ],
@@ -76,17 +76,17 @@
         {
           "id": "a",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "b",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "c",
-          "label": "They walked to the entrance with Daria’s dad",
-          "emoji": "🏠",
+          "label": "They walked to the entrance with Daria\u2019s dad",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         }
       ],
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "Daria spilled juice on her ticket",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "b",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         },
         {
           "id": "c",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "c",
           "label": "Worried",
-          "emoji": "😟",
+          "emoji": "\ud83d\ude1f",
           "correct": true
         }
       ],
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "b",
           "label": "Daria asked her dad for help",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Her dad dried the ticket so they could go into the carnival",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "ticket: object for entering. Daria spilled juice on her ticket before entering the carnival.",
+        "intro_narration": "Listen for this word in the story: ticket. Daria spilled juice on her ticket before entering the carnival.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a ticket in? Listen and look.",
+            "teaching_text": "ticket is a object for entering.",
+            "narration": "ticket is a object for entering."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a ticket? Listen and look.",
+            "teaching_text": "You show a ticket to go into a place or event.",
+            "narration": "You show a ticket to go into a place or event."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a ticket look like? Listen and look.",
+            "teaching_text": "ticket looks like small paper or digital pass with words or numbers.",
+            "narration": "ticket looks like small paper or digital pass with words or numbers."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a ticket have? Listen and look.",
+            "teaching_text": "Parts or features of ticket include words, numbers, barcode, or picture.",
+            "narration": "Parts or features of ticket include words, numbers, barcode, or picture."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a ticket? Listen and look.",
+            "teaching_text": "You might find or use ticket in entrance, carnival, theatre, bus, or event. You might use a ticket when you go to a carnival, movie, show, bus, or train.",
+            "narration": "You might find or use ticket in entrance, carnival, theatre, bus, or event. You might use a ticket when you go to a carnival, movie, show, bus, or train."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a ticket.",
+        "connection_text": "Daria spilled juice on her ticket before entering the carnival.",
+        "connection_narration": "In this story, Daria spilled juice on her ticket before entering the carnival."
+      }
     },
     {
       "word": "entrance",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "entrance: place. Dan and Daria needed to show the ticket at the entrance.",
+        "intro_narration": "Listen for this word in the story: entrance. Dan and Daria needed to show the ticket at the entrance.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is an entrance in? Listen and look.",
+            "teaching_text": "entrance is a place.",
+            "narration": "entrance is a place."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with an entrance? Listen and look.",
+            "teaching_text": "An entrance is where people go in.",
+            "narration": "An entrance is where people go in."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does an entrance look like? Listen and look.",
+            "teaching_text": "entrance looks like door, gate, opening, or front area.",
+            "narration": "entrance looks like door, gate, opening, or front area."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does an entrance have? Listen and look.",
+            "teaching_text": "Parts or features of entrance include door or gate, sign, line, and helper.",
+            "narration": "Parts or features of entrance include door or gate, sign, line, and helper."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see an entrance? Listen and look.",
+            "teaching_text": "You might find or use entrance in carnival, school, store, library, house, or park. An entrance is the place where people go in.",
+            "narration": "You might find or use entrance in carnival, school, store, library, house, or park. An entrance is the place where people go in."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about an entrance.",
+        "connection_text": "Dan and Daria needed to show the ticket at the entrance.",
+        "connection_narration": "In this story, Dan and Daria needed to show the ticket at the entrance."
+      }
     },
     {
       "word": "worried",
@@ -686,7 +764,7 @@
     },
     {
       "correct_position": 2,
-      "caption": "They walked to the entrance with Daria’s dad.",
+      "caption": "They walked to the entrance with Daria\u2019s dad.",
       "image": "slide-02.png"
     },
     {

@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "b",
           "label": "Dan",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         },
         {
           "id": "c",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,17 +76,17 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "b",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "c",
           "label": "He walked toward a table in the lunchroom",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         }
       ],
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "A kid told Dan he could not sit there because they were s...",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Embarrassed",
-          "emoji": "😳",
+          "emoji": "\ud83d\ude33",
           "correct": true
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "c",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "b",
           "label": "Dan found a different spot and sat by himself",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "After school, Dan told his mom what happened at lunch",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "tray: object. Dan picked up his tray and looked for his friends in the lunchroom.",
+        "intro_narration": "Listen for this word in the story: tray. Dan picked up his tray and looked for his friends in the lunchroom.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a tray in? Listen and look.",
+            "teaching_text": "tray is a object.",
+            "narration": "tray is a object."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a tray? Listen and look.",
+            "teaching_text": "You use a tray to carry food and drinks.",
+            "narration": "You use a tray to carry food and drinks."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a tray look like? Listen and look.",
+            "teaching_text": "tray looks like a flat surface with raised edges.",
+            "narration": "tray looks like a flat surface with raised edges."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a tray have? Listen and look.",
+            "teaching_text": "Parts or features of tray include flat bottom, raised edges, and sometimes handles.",
+            "narration": "Parts or features of tray include flat bottom, raised edges, and sometimes handles."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a tray? Listen and look.",
+            "teaching_text": "You might find or use a tray in a lunchroom, cafeteria, restaurant, or kitchen. You might use a tray when you need to carry food to a table.",
+            "narration": "You might find or use a tray in a lunchroom, cafeteria, restaurant, or kitchen. You might use a tray when you need to carry food to a table."
+          }
+        ],
+        "transition_text": "Now let's show what you know about a tray.",
+        "connection_text": "Dan picked up his tray and looked for his friends in the lunchroom.",
+        "connection_narration": "In this story, dan picked up his tray and looked for his friends in the lunchroom."
+      }
     },
     {
       "word": "seat",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "seat: place or furniture. The kids said they were saving the seat for someone else.",
+        "intro_narration": "Listen for this word in the story: seat. The kids said they were saving the seat for someone else.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a seat in? Listen and look.",
+            "teaching_text": "seat is a place or furniture.",
+            "narration": "seat is a place or furniture."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a seat? Listen and look.",
+            "teaching_text": "A seat is a place to sit down.",
+            "narration": "A seat is a place to sit down."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a seat look like? Listen and look.",
+            "teaching_text": "seat looks like a chair, bench, or spot at a table.",
+            "narration": "seat looks like a chair, bench, or spot at a table."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a seat have? Listen and look.",
+            "teaching_text": "Parts or features of seat include back, legs, cushion, or a flat surface.",
+            "narration": "Parts or features of seat include back, legs, cushion, or a flat surface."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a seat? Listen and look.",
+            "teaching_text": "You might find or use a seat in a lunchroom, classroom, bus, or theatre. You might look for a seat when you need a place to sit.",
+            "narration": "You might find or use a seat in a lunchroom, classroom, bus, or theatre. You might look for a seat when you need a place to sit."
+          }
+        ],
+        "transition_text": "Now let's show what you know about a seat.",
+        "connection_text": "The kids said they were saving the seat for someone else.",
+        "connection_narration": "In this story, the kids said they were saving the seat for someone else."
+      }
     },
     {
       "word": "embarrassed",

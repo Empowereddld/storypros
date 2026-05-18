@@ -17,6 +17,23 @@ type FeedbackState =
   | { type: "correct"; brainCheck: string }
   | { type: "wrong"; brainCheck: string };
 
+/** Highlight the target connective in frame text (before the blank) */
+function highlightConnective(text: string, connective: string): React.ReactNode {
+  if (!connective) return text;
+  const regex = new RegExp(`(\\b${connective}\\b)`, "gi");
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    part.toLowerCase() === connective.toLowerCase() ? (
+      <span key={i} className="inline-block rounded-lg bg-secondary/25 px-1 font-extrabold text-secondary-foreground">
+        {part}
+      </span>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+}
+
 export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const frames = storyData.sentence_frames;
   const [frameIdx, setFrameIdx] = useState(0);
@@ -170,11 +187,11 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
         </div>
       )}
 
-      {/* Sentence frame display */}
+      {/* Sentence frame display — connective highlighted */}
       <div key={`frame-${frameIdx}`} className="mx-5 mt-5 animate-slide-up">
         <div className="rounded-3xl bg-card p-5 shadow-card">
           <p className="font-display text-[22px] leading-snug font-semibold text-primary">
-            {beforeBlank}
+            {highlightConnective(beforeBlank, storyData.target_connective)}
             <span className={cn(
               "inline-block min-w-[120px] border-b-3 mx-1 pb-0.5 text-center transition-all",
               selected ? "border-primary text-primary" : "border-ink-soft/30 text-ink-soft/50",
@@ -185,13 +202,13 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
         </div>
       </div>
 
-      {/* Connective hint */}
+      {/* Connective hint — dynamic based on target connective */}
       <div className="mx-5 mt-3 flex items-center gap-2">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground text-xs font-bold">
-          💡
+          🔗
         </span>
         <span className="text-sm font-semibold text-ink-soft">
-          Pick the ending that tells <span className="text-primary font-bold">why</span>
+          Use <span className="rounded bg-secondary/25 px-1 font-bold text-secondary-foreground">{storyData.target_connective}</span> to tell <span className="text-primary font-bold">why</span>
         </span>
       </div>
 
@@ -219,29 +236,4 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
               onClick={() => !isDisabled && setSelected(choice.id)}
               disabled={isDisabled}
               className={cn(
-                "flex w-full items-center gap-3 rounded-3xl border-2 bg-card p-4 text-left shadow-card transition-all",
-                isSelected && "border-primary bg-primary/5 -translate-y-0.5",
-                !isSelected && !isDisabled && "border-transparent hover:border-primary/40",
-                isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
-              )}
-            >
-              <span className={cn(
-                "flex-1 text-base font-bold",
-                isDisabled ? "text-ink-soft line-through" : "text-primary",
-              )}>
-                {choice.text}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Check button */}
-      <div className="mx-5 mb-5">
-        <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-          Check
-        </TactileButton>
-      </div>
-    </div>
-  );
-}
+                "flex w-full items-center gap-3 rounded-3xl border-2 bg-card

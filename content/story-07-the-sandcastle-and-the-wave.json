@@ -7,7 +7,7 @@
   "slides": [
     {
       "position": 1,
-      "text": "In the summer, Dan and Daria’s families met up.",
+      "text": "In the summer, Dan and Daria\u2019s families met up.",
       "story_element": "character",
       "image": "slide-01.png"
     },
@@ -31,7 +31,7 @@
     },
     {
       "position": 5,
-      "text": "Daria said, “Let’s move further away from the ocean.”",
+      "text": "Daria said, \u201cLet\u2019s move further away from the ocean.\u201d",
       "story_element": "action",
       "image": "slide-05.png"
     },
@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "c",
           "label": "Dan and Daria",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         }
       ],
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "They went to a sandy beach",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         },
         {
           "id": "b",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,17 +101,17 @@
         {
           "id": "a",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "b",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         },
         {
           "id": "c",
           "label": "A wave crashed in and destroyed their sandcastle",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         }
       ],
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "c",
           "label": "Disappointed",
-          "emoji": "😞",
+          "emoji": "\ud83d\ude1e",
           "correct": true
         }
       ],
@@ -150,19 +150,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria said, “Let’s move further away from the ocean”",
-          "emoji": "✈️",
+          "label": "Daria said, \u201cLet\u2019s move further away from the ocean\u201d",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "They built a new sandcastle farther from the water and it...",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "sandcastle: something you build. Dan and Daria built a sandcastle near the water.",
+        "intro_narration": "Listen for this word in the story: sandcastle. Dan and Daria built a sandcastle near the water.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a sandcastle in? Listen and look.",
+            "teaching_text": "sandcastle is a something you build.",
+            "narration": "sandcastle is a something you build."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a sandcastle? Listen and look.",
+            "teaching_text": "You build a sandcastle for fun at the beach.",
+            "narration": "You build a sandcastle for fun at the beach."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a sandcastle look like? Listen and look.",
+            "teaching_text": "sandcastle looks like castle shape made of sand, often with towers.",
+            "narration": "sandcastle looks like castle shape made of sand, often with towers."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a sandcastle have? Listen and look.",
+            "teaching_text": "Parts or features of sandcastle include towers, walls, and base.",
+            "narration": "Parts or features of sandcastle include towers, walls, and base."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a sandcastle? Listen and look.",
+            "teaching_text": "You might find or use sandcastle in beach or sandbox. You might make a sandcastle when you have sand and time to build.",
+            "narration": "You might find or use sandcastle in beach or sandbox. You might make a sandcastle when you have sand and time to build."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a sandcastle.",
+        "connection_text": "Dan and Daria built a sandcastle near the water.",
+        "connection_narration": "In this story, Dan and Daria built a sandcastle near the water."
+      }
     },
     {
       "word": "wave",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "wave: part of the ocean. A wave crashed into the sandcastle and knocked it down.",
+        "intro_narration": "Listen for this word in the story: wave. A wave crashed into the sandcastle and knocked it down.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a wave in? Listen and look.",
+            "teaching_text": "wave is a part of the ocean.",
+            "narration": "wave is a part of the ocean."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a wave? Listen and look.",
+            "teaching_text": "A wave moves water toward the shore.",
+            "narration": "A wave moves water toward the shore."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a wave look like? Listen and look.",
+            "teaching_text": "wave looks like moving bump of water that can splash.",
+            "narration": "wave looks like moving bump of water that can splash."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a wave have? Listen and look.",
+            "teaching_text": "Parts or features of wave include top, middle, and bottom.",
+            "narration": "Parts or features of wave include top, middle, and bottom."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a wave? Listen and look.",
+            "teaching_text": "You might find or use wave in ocean, beach, lake, or pool with waves. You might watch waves when you are at the beach.",
+            "narration": "You might find or use wave in ocean, beach, lake, or pool with waves. You might watch waves when you are at the beach."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a wave.",
+        "connection_text": "A wave crashed into the sandcastle and knocked it down.",
+        "connection_narration": "In this story, A wave crashed into the sandcastle and knocked it down."
+      }
     },
     {
       "word": "disappointed",
@@ -681,7 +759,7 @@
   "sequencing_frames": [
     {
       "correct_position": 1,
-      "caption": "In the summer, Dan and Daria’s families met up.",
+      "caption": "In the summer, Dan and Daria\u2019s families met up.",
       "image": "slide-01.png"
     },
     {
@@ -701,7 +779,7 @@
     },
     {
       "correct_position": 5,
-      "caption": "Daria said, “Let’s move further away from the ocean.”",
+      "caption": "Daria said, \u201cLet\u2019s move further away from the ocean.\u201d",
       "image": "slide-05.png"
     },
     {

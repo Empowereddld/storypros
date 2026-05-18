@@ -13,7 +13,7 @@
     },
     {
       "position": 2,
-      "text": "They walked all the way to Daria’s house.",
+      "text": "They walked all the way to Daria\u2019s house.",
       "story_element": "place",
       "image": "slide-02.png"
     },
@@ -31,13 +31,13 @@
     },
     {
       "position": 5,
-      "text": "Dan asked Daria’s dad for a bandage.",
+      "text": "Dan asked Daria\u2019s dad for a bandage.",
       "story_element": "action",
       "image": "slide-05.png"
     },
     {
       "position": 6,
-      "text": "He put the bandage on Dan’s finger so he could keep making paper airplanes.",
+      "text": "He put the bandage on Dan\u2019s finger so he could keep making paper airplanes.",
       "story_element": "result",
       "image": "slide-06.png"
     }
@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "b",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         },
         {
           "id": "c",
           "label": "Dan",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         }
       ],
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "b",
-          "label": "They walked all the way to Daria’s house",
-          "emoji": "🏠",
+          "label": "They walked all the way to Daria\u2019s house",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,17 +101,17 @@
         {
           "id": "a",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "c",
           "label": "When Dan was folding his paper airplane, he got a papercu...",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         }
       ],
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Calm",
-          "emoji": "😌",
+          "emoji": "\ud83d\ude0c",
           "correct": true
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "c",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "c",
-          "label": "Dan asked Daria’s dad for a bandage",
-          "emoji": "✈️",
+          "label": "Dan asked Daria\u2019s dad for a bandage",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         }
       ],
@@ -175,19 +175,19 @@
       "options": [
         {
           "id": "a",
-          "label": "He put the bandage on Dan’s finger so he could keep makin...",
-          "emoji": "😴",
+          "label": "He put the bandage on Dan\u2019s finger so he could keep makin...",
+          "emoji": "\ud83d\ude34",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "bandage: first aid item. Dan needed a bandage after he got a papercut.",
+        "intro_narration": "Listen for this word in the story: bandage. Dan needed a bandage after he got a papercut.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a bandage in? Listen and look.",
+            "teaching_text": "bandage is a first aid item.",
+            "narration": "bandage is a first aid item."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a bandage? Listen and look.",
+            "teaching_text": "You use a bandage to cover a cut and help stop bleeding.",
+            "narration": "You use a bandage to cover a cut and help stop bleeding."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a bandage look like? Listen and look.",
+            "teaching_text": "bandage looks like a small sticky strip.",
+            "narration": "bandage looks like a small sticky strip."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a bandage have? Listen and look.",
+            "teaching_text": "Parts or features of bandage include soft pad and sticky sides.",
+            "narration": "Parts or features of bandage include soft pad and sticky sides."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a bandage? Listen and look.",
+            "teaching_text": "You might find or use bandage in first aid kit, home, school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow.",
+            "narration": "You might find or use bandage in first aid kit, home, school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a bandage.",
+        "connection_text": "Dan needed a bandage after he got a papercut.",
+        "connection_narration": "In this story, Dan needed a bandage after he got a papercut."
+      }
     },
     {
       "word": "paper airplane",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "paper airplane: toy. Dan was making a paper airplane when he got a papercut.",
+        "intro_narration": "Listen for this word in the story: paper airplane. Dan was making a paper airplane when he got a papercut.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a paper airplane in? Listen and look.",
+            "teaching_text": "paper airplane is a toy.",
+            "narration": "paper airplane is a toy."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a paper airplane? Listen and look.",
+            "teaching_text": "You throw a paper airplane so it can fly.",
+            "narration": "You throw a paper airplane so it can fly."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a paper airplane look like? Listen and look.",
+            "teaching_text": "paper airplane looks like folded paper with wings.",
+            "narration": "paper airplane looks like folded paper with wings."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a paper airplane have? Listen and look.",
+            "teaching_text": "Parts or features of paper airplane include wings, nose, and middle fold.",
+            "narration": "Parts or features of paper airplane include wings, nose, and middle fold."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a paper airplane? Listen and look.",
+            "teaching_text": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends.",
+            "narration": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a paper airplane.",
+        "connection_text": "Dan was making a paper airplane when he got a papercut.",
+        "connection_narration": "In this story, Dan was making a paper airplane when he got a papercut."
+      }
     },
     {
       "word": "calm",
@@ -686,7 +764,7 @@
     },
     {
       "correct_position": 2,
-      "caption": "They walked all the way to Daria’s house.",
+      "caption": "They walked all the way to Daria\u2019s house.",
       "image": "slide-02.png"
     },
     {
@@ -701,12 +779,12 @@
     },
     {
       "correct_position": 5,
-      "caption": "Dan asked Daria’s dad for a bandage.",
+      "caption": "Dan asked Daria\u2019s dad for a bandage.",
       "image": "slide-05.png"
     },
     {
       "correct_position": 6,
-      "caption": "He put the bandage on Dan’s finger so he could keep making paper ai...",
+      "caption": "He put the bandage on Dan\u2019s finger so he could keep making paper ai...",
       "image": "slide-06.png"
     }
   ],

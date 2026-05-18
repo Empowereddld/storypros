@@ -70,12 +70,32 @@ export interface VocabQuizQuestion {
   options: AnswerOption[];
 }
 
+/** Per-feature teaching slide data from SFA Slide Details */
+export interface SFATeachingSlide {
+  feature: keyof SFAFeatures;
+  prompt: string;        // screen prompt ("What group is a bandage in?")
+  teaching_text: string;  // on-screen text ("bandage is a first aid item.")
+  narration: string;      // TTS audio text
+}
+
+/** Optional enriched SFA teaching flow (from Excel SFA Slide Details) */
+export interface SFATeaching {
+  intro_text: string;       // word intro definition + context
+  intro_narration: string;  // TTS for intro
+  slides: SFATeachingSlide[];
+  transition_text: string;  // "Now let's show what you know about..."
+  connection_text: string;  // "How does [word] connect to the story?"
+  connection_narration: string;
+}
+
 export interface VocabularyWord {
   word: string;
   type: "noun" | "emotion";
   image: string;
   sfa: SFAFeatures;
   quiz_questions: VocabQuizQuestion[];
+  /** Enriched SFA teaching slides (optional — falls back to simple SFA display) */
+  sfa_teaching?: SFATeaching;
 }
 
 // ── Sentence builder ──
@@ -159,39 +179,4 @@ export interface ActivityAttempt {
   attempt_number: number;
   selected_option: string;
   is_correct: boolean;
-  brain_check_response?: string;
-  time_ms: number;
-}
-
-// ── Skill domains ──
-export type SkillDomain =
-  | "listening"
-  | "story_structure"
-  | "vocabulary"
-  | "grammar"
-  | "phonological"
-  | "retell";
-
-export interface SkillScore {
-  domain: SkillDomain;
-  score: number; // 0–100 based on first-attempt accuracy
-  stories_counted: number;
-}
-
-// ── Phase result (emitted by each phase component) ──
-export interface PhaseResult {
-  phase: StoryPhase;
-  attempts: ActivityAttempt[];
-  first_attempt_accuracy: number; // 0–1
-  completed: boolean;
-}
-
-// ── Props contract for all phase components ──
-export interface StoryPhaseProps<TData = unknown> {
-  storyData: StoryData;
-  phaseData?: TData;
-  onComplete: (result: PhaseResult) => void;
-  onClose: () => void;
-  /** TTS speed from child settings */
-  ttsSpeed?: "slow" | "normal" | "fast";
-}
+  brain_check_r

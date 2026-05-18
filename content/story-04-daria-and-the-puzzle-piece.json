@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Daria",
-          "emoji": "🧒",
+          "emoji": "\ud83e\uddd2",
           "correct": true
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "🤖"
+          "emoji": "\ud83e\udd16"
         },
         {
           "id": "c",
           "label": "A cat",
-          "emoji": "🐱"
+          "emoji": "\ud83d\udc31"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "A store",
-          "emoji": "🏪"
+          "emoji": "\ud83c\udfea"
         },
         {
           "id": "b",
           "label": "They sat at the table",
-          "emoji": "🏠",
+          "emoji": "\ud83c\udfe0",
           "correct": true
         },
         {
           "id": "c",
           "label": "The moon",
-          "emoji": "🌙"
+          "emoji": "\ud83c\udf19"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "She lost her shoe",
-          "emoji": "👟"
+          "emoji": "\ud83d\udc5f"
         },
         {
           "id": "b",
           "label": "They both wanted the same puzzle piece",
-          "emoji": "📄",
+          "emoji": "\ud83d\udcc4",
           "correct": true
         },
         {
           "id": "c",
           "label": "He fell down",
-          "emoji": "🤕"
+          "emoji": "\ud83e\udd15"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Angry",
-          "emoji": "😠"
+          "emoji": "\ud83d\ude20"
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "😊"
+          "emoji": "\ud83d\ude0a"
         },
         {
           "id": "c",
           "label": "Upset",
-          "emoji": "😠",
+          "emoji": "\ud83d\ude20",
           "correct": true
         }
       ],
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Ate lunch",
-          "emoji": "🍽️"
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
           "label": "Daria took a breath and let her friend use the piece",
-          "emoji": "✈️",
+          "emoji": "\u2708\ufe0f",
           "correct": true
         }
       ],
@@ -176,17 +176,17 @@
         {
           "id": "a",
           "label": "Went home",
-          "emoji": "🏠"
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "😴"
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
           "label": "They finished the puzzle together",
-          "emoji": "😴",
+          "emoji": "\ud83d\ude34",
           "correct": true
         }
       ],
@@ -333,7 +333,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "puzzle: activity or toy. Daria and her friend were building a puzzle together.",
+        "intro_narration": "Listen for this word in the story: puzzle. Daria and her friend were building a puzzle together.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a puzzle in? Listen and look.",
+            "teaching_text": "puzzle is a activity or toy.",
+            "narration": "puzzle is a activity or toy."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a puzzle? Listen and look.",
+            "teaching_text": "You use a puzzle to put pieces together to make a picture.",
+            "narration": "You use a puzzle to put pieces together to make a picture."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a puzzle look like? Listen and look.",
+            "teaching_text": "puzzle looks like many pieces that fit together to make a picture.",
+            "narration": "puzzle looks like many pieces that fit together to make a picture."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a puzzle have? Listen and look.",
+            "teaching_text": "Parts or features of puzzle include pieces, picture, edges, and corners.",
+            "narration": "Parts or features of puzzle include pieces, picture, edges, and corners."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a puzzle? Listen and look.",
+            "teaching_text": "You might find or use puzzle in table, classroom, or home. You might use a puzzle when you want to build a picture or solve something with pieces.",
+            "narration": "You might find or use puzzle in table, classroom, or home. You might use a puzzle when you want to build a picture or solve something with pieces."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a puzzle.",
+        "connection_text": "Daria and her friend were building a puzzle together.",
+        "connection_narration": "In this story, Daria and her friend were building a puzzle together."
+      }
     },
     {
       "word": "piece",
@@ -473,7 +512,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "piece: part of something. Daria and her friend both wanted the same puzzle piece.",
+        "intro_narration": "Listen for this word in the story: piece. Daria and her friend both wanted the same puzzle piece.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is a piece in? Listen and look.",
+            "teaching_text": "piece is a part of something.",
+            "narration": "piece is a part of something."
+          },
+          {
+            "feature": "function",
+            "prompt": "What do you do with a piece? Listen and look.",
+            "teaching_text": "A piece fits with other parts.",
+            "narration": "A piece fits with other parts."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does a piece look like? Listen and look.",
+            "teaching_text": "piece looks like a small section or shape.",
+            "narration": "piece looks like a small section or shape."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts or features does a piece have? Listen and look.",
+            "teaching_text": "Parts or features of piece include edges, shape, and picture part.",
+            "narration": "Parts or features of piece include edges, shape, and picture part."
+          },
+          {
+            "feature": "location",
+            "prompt": "Where or when might you see a piece? Listen and look.",
+            "teaching_text": "You might find or use piece in puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set.",
+            "narration": "You might find or use piece in puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set."
+          }
+        ],
+        "transition_text": "Now let\u2019s show what you know about a piece.",
+        "connection_text": "Daria and her friend both wanted the same puzzle piece.",
+        "connection_narration": "In this story, Daria and her friend both wanted the same puzzle piece."
+      }
     },
     {
       "word": "upset",

@@ -45,6 +45,8 @@ const CATALOG: Collectible[] = [
   { id: "badge-perfect", category: "badge", name: "Perfect Landing", description: "Got 100% on a story!", icon: "💎", price: 0, rarity: "rare", unlockCondition: "100% first-attempt accuracy" },
   { id: "badge-5-streak", category: "badge", name: "Five Day Streak", description: "Played 5 days in a row!", icon: "🔥", price: 0, rarity: "rare", unlockCondition: "5-day streak" },
   { id: "badge-all-elements", category: "badge", name: "Story Master", description: "Aced every story element.", icon: "👑", price: 0, rarity: "legendary", unlockCondition: "All domains above 90%" },
+  { id: "badge-level-2", category: "badge", name: "Level Up!", description: "Reached Level 2!", icon: "🚀", price: 0, rarity: "rare", unlockCondition: "Advance to Level 2" },
+  { id: "badge-all-stories", category: "badge", name: "Story Explorer", description: "Completed all 11 stories!", icon: "🗺️", price: 0, rarity: "legendary", unlockCondition: "Complete all Level 1 stories" },
 
   // Wallpapers
   { id: "wall-meadow", category: "wallpaper", name: "Sunny Meadow", description: "A bright field of wildflowers.", icon: "🌻", price: 10, rarity: "common" },
@@ -112,14 +114,4 @@ export function purchaseItem(
 export function awardBadge(childId: string, badgeId: string): boolean {
   const item = CATALOG.find((c) => c.id === badgeId && c.category === "badge");
   if (!item) return false;
-  getOwned(childId).add(badgeId);
-  return true;
-}
-
-export const CATEGORY_META: Record<CollectibleCategory, { label: string; icon: string }> = {
-  airplane_design: { label: "Airplane Designs", icon: "✈️" },
-  badge: { label: "Badges", icon: "🏅" },
-  wallpaper: { label: "Wallpapers", icon: "🖼️" },
-  lore_card: { label: "Lore Cards", icon: "📖" },
-  airplane_trick: { label: "Tricks", icon: "🎪" },
-};
+  getOwned(childId).add(badg
