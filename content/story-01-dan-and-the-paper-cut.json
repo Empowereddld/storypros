@@ -1,0 +1,763 @@
+{
+  "id": "dan-and-the-paper-cut",
+  "title": "Dan and the Paper Cut",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "On Friday, Dan and his mom went on a walk.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They walked all the way to Daria’s house.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "When Dan was folding his paper airplane, he got a papercut that started to bleed.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Dan asked Daria’s dad for a bandage.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "He put the bandage on Dan’s finger so he could keep making paper airplanes.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "A robot",
+          "emoji": "🤖"
+        },
+        {
+          "id": "b",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "c",
+          "label": "Dan",
+          "emoji": "🧒",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "The moon",
+          "emoji": "🌙"
+        },
+        {
+          "id": "b",
+          "label": "They walked all the way to Daria’s house",
+          "emoji": "🏠",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "A store",
+          "emoji": "🏪"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        },
+        {
+          "id": "b",
+          "label": "He fell down",
+          "emoji": "🤕"
+        },
+        {
+          "id": "c",
+          "label": "When Dan was folding his paper airplane, he got a papercu...",
+          "emoji": "📄",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Calm",
+          "emoji": "😌",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "c",
+          "label": "Angry",
+          "emoji": "😠"
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "b",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        },
+        {
+          "id": "c",
+          "label": "Dan asked Daria’s dad for a bandage",
+          "emoji": "✈️",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "He put the bandage on Dan’s finger so he could keep makin...",
+          "emoji": "😴",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Went home",
+          "emoji": "🏠"
+        },
+        {
+          "id": "c",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "bandage",
+      "type": "noun",
+      "image": "vocab-bandage.png",
+      "sfa": {
+        "category": "It belongs to the first aid item group.",
+        "function": "You use it to cover a cut and help stop bleeding.",
+        "appearance": "It looks like small sticky strip.",
+        "parts": "It has soft pad, sticky sides.",
+        "location": "You find it first aid kit, home, school."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is bandage in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "first aid item",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "animal",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with bandage?",
+          "options": [
+            {
+              "id": "a",
+              "text": "cover a cut",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "throw it",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does bandage look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "a long rope",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "a round ball",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "a small sticky strip",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of bandage?",
+          "options": [
+            {
+              "id": "a",
+              "text": "soft pad",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "wheel",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "leaf",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a bandage?",
+          "options": [
+            {
+              "id": "a",
+              "text": "fish tank",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "first aid kit",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "freezer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'bandage' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Mom put a bandage on my scraped knee",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "I put a bandage on my sandwich",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "I rode my bandage to school",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "paper airplane",
+      "type": "noun",
+      "image": "vocab-paper-airplane.png",
+      "sfa": {
+        "category": "It belongs to the toy group.",
+        "function": "You use it to throw it so it can fly.",
+        "appearance": "It looks like folded paper with wings.",
+        "parts": "It has wings, nose, middle fold.",
+        "location": "You find it home, school, open space."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is paper airplane in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "fruit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "toy",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "clothing",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with paper airplane?",
+          "options": [
+            {
+              "id": "a",
+              "text": "brush teeth",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "cook it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "throw it so it can fly",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does paper airplane look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "a flat sheet of paper",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "folded paper with wings",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "a round ball of paper",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of paper airplane?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wings",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "roots",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "teeth",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a paper airplane?",
+          "options": [
+            {
+              "id": "a",
+              "text": "open space",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "bathtub",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "lunch box",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'paper airplane' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Dan folded a paper airplane and it flew across the room",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "The paper airplane sang a song",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "I ate a paper airplane for breakfast",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "calm",
+      "type": "emotion",
+      "image": "vocab-calm.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It's a feeling you get when describes how the character felt.",
+        "appearance": "When someone is calm, facial expression and body clues.",
+        "parts": "Calm has parts like: face, body, voice.",
+        "location": "You might feel calm during or after the problem."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'calm' belong to?",
+          "options": [
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "Colors",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Animals",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel calm?",
+          "options": [
+            {
+              "text": "When you stub your toe",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "When you take a deep breath and relax",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "When you eat ice cream",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they feel calm?",
+          "options": [
+            {
+              "text": "Jumping up and down, screaming",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Relaxed face, slow breathing, still body",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Crying with a red face",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you feel calm?",
+          "options": [
+            {
+              "text": "Your breathing slows down and muscles relax",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "Your heart beats very fast",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "You feel very hungry",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you feel calm?",
+          "options": [
+            {
+              "text": "During a loud thunderstorm",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "While running a race",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "After taking a deep breath or resting",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'calm' correctly?",
+          "options": [
+            {
+              "text": "She put the calm in a box",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "The calm tasted like chocolate",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Dan took a deep breath and felt calm",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Dan asked for a bandage because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "he liked playing with them"
+        },
+        {
+          "id": "b",
+          "text": "he got a small bruise"
+        },
+        {
+          "id": "c",
+          "text": "he got a papercut",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria's dad helped Dan because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Dan got lost"
+        },
+        {
+          "id": "b",
+          "text": "Dan had polka dots on his arm"
+        },
+        {
+          "id": "c",
+          "text": "Dan needed help with the blood",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "Dan felt calm because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "he took a deep breath",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "he took a big stretch"
+        },
+        {
+          "id": "c",
+          "text": "he took a slow walk"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "On Friday, Dan and his mom went on a walk.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They walked all the way to Daria’s house.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "When Dan was folding his paper airplane, he got a papercut that sta...",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Dan felt scared when he saw the blood so he took a deep breath to f...",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Dan asked Daria’s dad for a bandage.",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "He put the bandage on Dan’s finger so he could keep making paper ai...",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with cut?",
+      "options": [
+        {
+          "id": "a",
+          "text": "nut",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "hat",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "bed",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "stick",
+    "meaning_1": {
+      "text": "To attach or fasten something",
+      "image": "joke-stick-1.png"
+    },
+    "meaning_2": {
+      "text": "To stay with someone or stay close",
+      "image": "joke-stick-2.png"
+    },
+    "joke_text": "What did the bandage say to Dan's finger? I'm going to stick with you!"
+  },
+  "personal_connection": {
+    "prompt": "Has something ever hurt you, like a cut or a bump? Who helped you feel better? What did they do?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

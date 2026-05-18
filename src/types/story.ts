@@ -6,11 +6,11 @@
 // ── Story element icons used across all stories ──
 export type StoryElement =
   | "character"
-  | "setting"
+  | "place"
   | "problem"
-  | "feeling"
+  | "emotion"
   | "action"
-  | "solution";
+  | "result";
 
 // ── Phase identifiers ──
 export type StoryPhase =
@@ -192,4 +192,6 @@ export interface StoryPhaseProps<TData = unknown> {
   phaseData?: TData;
   onComplete: (result: PhaseResult) => void;
   onClose: () => void;
+  /** TTS speed from child settings */
+  ttsSpeed?: "slow" | "normal" | "fast";
 }

@@ -4,33 +4,60 @@
  * Not scored — engagement tracked.
  * ───────────────────────────────────────────── */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, PhaseResult, StorySlide } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { speak, stop, isSpeaking, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 
 const ELEMENT_ICONS: Record<string, string> = {
   character: "👤",
-  setting: "📍",
+  place: "📍",
   problem: "❗",
-  feeling: "💛",
+  emotion: "💛",
   action: "➡️",
-  solution: "💡",
+  result: "💡",
 };
 
 const ELEMENT_LABELS: Record<string, string> = {
   character: "Character",
-  setting: "Setting",
+  place: "Place",
   problem: "Problem",
-  feeling: "Feeling",
+  emotion: "Emotion",
   action: "Action",
-  solution: "Solution",
+  result: "Result",
 };
 
-export function StorySlidesPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const [page, setPage] = useState(0);
+  const [speaking, setSpeaking] = useState(false);
   const slides = storyData.slides;
+
+  // Preload TTS voices
+  useEffect(() => {
+    preloadVoices();
+  }, []);
+
+  // Stop speech when page changes or unmount
+  useEffect(() => {
+    return () => { stop(); setSpeaking(false); };
+  }, [page]);
+
+  async function handleListen() {
+    if (speaking) {
+      stop();
+      setSpeaking(false);
+      return;
+    }
+    setSpeaking(true);
+    try {
+      await speak(current.text, { rate: speedToRate(ttsSpeed) });
+    } catch {
+      // ignore TTS errors
+    }
+    setSpeaking(false);
+  }
   const current = slides[page];
   const isLast = page === slides.length - 1;
   const progress = ((page + 1) / slides.length) * 100;
@@ -86,17 +113,33 @@ export function StorySlidesPhase({ storyData, onComplete, onClose }: StoryPhaseP
       </div>
 
       {/* Read-to-me button */}
-      <div className="mx-5 mb-3 flex items-center justify-center gap-3">
-        <button
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground btn-tactile"
-          aria-label="Play audio"
-        >
-          <svg viewBox="0 0 24 24" className="ml-0.5 h-6 w-6" fill="currentColor">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        </button>
-        <span className="text-sm font-semibold text-ink-soft">Listen</span>
-      </div>
+      {isSupported() && (
+        <div className="mx-5 mb-3 flex items-center justify-center gap-3">
+          <button
+            onClick={handleListen}
+            className={cn(
+              "flex h-12 w-12 items-center justify-center rounded-full btn-tactile transition-all",
+              speaking
+                ? "bg-destructive text-destructive-foreground animate-pulse-glow"
+                : "bg-primary text-primary-foreground",
+            )}
+            aria-label={speaking ? "Stop audio" : "Play audio"}
+          >
+            {speaking ? (
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="ml-0.5 h-6 w-6" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </button>
+          <span className="text-sm font-semibold text-ink-soft">
+            {speaking ? "Stop" : "Listen"}
+          </span>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="mx-5 mb-5 flex gap-3">

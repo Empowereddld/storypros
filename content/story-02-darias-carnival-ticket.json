@@ -1,0 +1,763 @@
+{
+  "id": "darias-carnival-ticket",
+  "title": "Daria's Carnival Ticket",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "On Saturday, Dan and Daria went to the carnival.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They walked to the entrance with Daria’s dad.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "Daria spilled juice on her ticket.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Daria felt worried.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Daria asked her dad for help.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "Her dad dried the ticket so they could go into the carnival.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "b",
+          "label": "A robot",
+          "emoji": "🤖"
+        },
+        {
+          "id": "c",
+          "label": "Dan and Daria",
+          "emoji": "🧒",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "A store",
+          "emoji": "🏪"
+        },
+        {
+          "id": "b",
+          "label": "The moon",
+          "emoji": "🌙"
+        },
+        {
+          "id": "c",
+          "label": "They walked to the entrance with Daria’s dad",
+          "emoji": "🏠",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria spilled juice on her ticket",
+          "emoji": "📄",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        },
+        {
+          "id": "c",
+          "label": "He fell down",
+          "emoji": "🤕"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "b",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "c",
+          "label": "Worried",
+          "emoji": "😟",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        },
+        {
+          "id": "b",
+          "label": "Daria asked her dad for help",
+          "emoji": "✈️",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Her dad dried the ticket so they could go into the carnival",
+          "emoji": "😴",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "c",
+          "label": "Went home",
+          "emoji": "🏠"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "ticket",
+      "type": "noun",
+      "image": "vocab-ticket.png",
+      "sfa": {
+        "category": "It belongs to the object for entering group.",
+        "function": "You use it to show it to go into a place or event.",
+        "appearance": "It looks like small paper or digital pass.",
+        "parts": "It has words, numbers, barcode or picture.",
+        "location": "You find it entrance, carnival, theatre, bus."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is ticket in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "animal",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "object for entering",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with ticket?",
+          "options": [
+            {
+              "id": "a",
+              "text": "show it to enter",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "wear it",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does ticket look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "small paper or digital pass",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "round ball",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "long rope",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of ticket?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wings",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "roots",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "words or numbers",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a ticket?",
+          "options": [
+            {
+              "id": "a",
+              "text": "entrance",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "freezer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "fish tank",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'ticket' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The ticket climbed a tree",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "Daria showed her ticket to get into the carnival",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "She ate the ticket for lunch",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "entrance",
+      "type": "noun",
+      "image": "vocab-entrance.png",
+      "sfa": {
+        "category": "It belongs to the place group.",
+        "function": "You use it to where people go in.",
+        "appearance": "It looks like door, gate, opening, front area.",
+        "parts": "It has door or gate, sign, line.",
+        "location": "You find it carnival, school, store, library."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is entrance in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "place",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "toy",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with entrance?",
+          "options": [
+            {
+              "id": "a",
+              "text": "sleep on it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "write with it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "go in",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does entrance look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "round fruit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "door or gate",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "tiny spoon",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of entrance?",
+          "options": [
+            {
+              "id": "a",
+              "text": "soft pad",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "gate or sign",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "tail and string",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see an entrance?",
+          "options": [
+            {
+              "id": "a",
+              "text": "lunch box",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "bedroom drawer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "carnival",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'entrance' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The entrance barked at a cat",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "He put the entrance in his pocket",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "They walked through the entrance to the carnival",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "worried",
+      "type": "emotion",
+      "image": "vocab-worried.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It's a feeling you get when describes how the character felt.",
+        "appearance": "When someone is worried, facial expression and body clues.",
+        "parts": "Worried has parts like: face, body, voice.",
+        "location": "You might feel worried during or after the problem."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'worried' belong to?",
+          "options": [
+            {
+              "text": "Foods",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Animals",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel worried?",
+          "options": [
+            {
+              "text": "When you play with friends",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "When you eat your favorite food",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "When you think something bad might happen",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they are worried?",
+          "options": [
+            {
+              "text": "Sleeping peacefully",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Frowning, biting lip, wringing hands",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Smiling and laughing",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you feel worried?",
+          "options": [
+            {
+              "text": "Your tummy feels funny and you can't stop thinking",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "Nothing at all",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "You feel very sleepy",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you feel worried?",
+          "options": [
+            {
+              "text": "Before a test or when something goes wrong",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "While eating lunch with friends",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "While watching your favorite show",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'worried' correctly?",
+          "options": [
+            {
+              "text": "The worried was under the table",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "He wore the worried on his head",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Daria felt worried when her ticket got wet",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Daria felt worried because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she spilled juice on her ticket",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "she ate too much popcorn"
+        },
+        {
+          "id": "c",
+          "text": "she lost her favorite hat"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria asked her dad for help because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she needed a nap"
+        },
+        {
+          "id": "b",
+          "text": "her ticket was damaged",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "she wanted cotton candy"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "They could go into the carnival because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "they found a new door"
+        },
+        {
+          "id": "b",
+          "text": "her dad dried the ticket",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "the ticket grew wings"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "On Saturday, Dan and Daria went to the carnival.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They walked to the entrance with Daria’s dad.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "Daria spilled juice on her ticket.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Daria felt worried.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Daria asked her dad for help.",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "Her dad dried the ticket so they could go into the carnival.",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "initial_sound",
+      "prompt": "Which word starts with the same sound as ticket?",
+      "options": [
+        {
+          "id": "a",
+          "text": "tiger",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "ball",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "sun",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "ticket",
+    "meaning_1": {
+      "text": "Something you show to enter a place or event",
+      "image": "joke-ticket-1.png"
+    },
+    "meaning_2": {
+      "text": "A note from an officer for breaking a rule",
+      "image": "joke-ticket-2.png"
+    },
+    "joke_text": "Why did the car go to the carnival? Because it already had a ticket!"
+  },
+  "personal_connection": {
+    "prompt": "Have you ever been worried that something might not work out? What happened?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

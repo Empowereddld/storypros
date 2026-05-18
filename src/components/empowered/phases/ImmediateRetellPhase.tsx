@@ -13,20 +13,20 @@ import { cn } from "@/lib/utils";
 
 const ELEMENT_ICONS: Record<StoryElement, string> = {
   character: "👤",
-  setting: "📍",
+  place: "📍",
   problem: "❗",
-  feeling: "💛",
+  emotion: "💛",
   action: "➡️",
-  solution: "💡",
+  result: "💡",
 };
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Who",
-  setting: "Where",
+  place: "Where",
   problem: "Problem",
-  feeling: "Feeling",
+  emotion: "Emotion",
   action: "What happened",
-  solution: "Solution",
+  result: "Result",
 };
 
 export function ImmediateRetellPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {

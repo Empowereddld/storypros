@@ -1,0 +1,763 @@
+{
+  "id": "daria-and-the-puzzle-piece",
+  "title": "Daria and the Puzzle Piece",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "After lunch, Daria built a puzzle with her friend.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They sat at the table.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "They both wanted the same puzzle piece.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Daria felt upset.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Daria took a breath and let her friend use the piece.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "They finished the puzzle together.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria",
+          "emoji": "🧒",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "A robot",
+          "emoji": "🤖"
+        },
+        {
+          "id": "c",
+          "label": "A cat",
+          "emoji": "🐱"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "A store",
+          "emoji": "🏪"
+        },
+        {
+          "id": "b",
+          "label": "They sat at the table",
+          "emoji": "🏠",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "The moon",
+          "emoji": "🌙"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        },
+        {
+          "id": "b",
+          "label": "They both wanted the same puzzle piece",
+          "emoji": "📄",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "He fell down",
+          "emoji": "🤕"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "b",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "c",
+          "label": "Upset",
+          "emoji": "😠",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "c",
+          "label": "Daria took a breath and let her friend use the piece",
+          "emoji": "✈️",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went home",
+          "emoji": "🏠"
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "c",
+          "label": "They finished the puzzle together",
+          "emoji": "😴",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "puzzle",
+      "type": "noun",
+      "image": "vocab-puzzle.png",
+      "sfa": {
+        "category": "It belongs to the activity or toy group.",
+        "function": "You use it to put pieces together to make a picture.",
+        "appearance": "It looks like many pieces that fit together.",
+        "parts": "It has pieces, picture, edges.",
+        "location": "You find it table, classroom, home."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is puzzle in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "animal",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "activity or toy",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with puzzle?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wear it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "put pieces together",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does puzzle look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "a long rope",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "a round ball",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "many pieces with a picture",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of puzzle?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wheels and pedals",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "roots and leaves",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "pieces and edges",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a puzzle?",
+          "options": [
+            {
+              "id": "a",
+              "text": "fish tank",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "freezer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "table",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'puzzle' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The puzzle cooked dinner",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "She rode the puzzle to school",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "Daria was building a puzzle with her friend",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "piece",
+      "type": "noun",
+      "image": "vocab-piece.png",
+      "sfa": {
+        "category": "It belongs to the part of something group.",
+        "function": "You use it to fits with other parts.",
+        "appearance": "It looks like small part or section.",
+        "parts": "It has edges, shape, picture part.",
+        "location": "You find it puzzle box, table."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is piece in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "place",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "part of something",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with piece?",
+          "options": [
+            {
+              "id": "a",
+              "text": "move water",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "shine in the dark",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "fit with other parts",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does piece look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "moving bump of water",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "tall frame with steps",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "small section or shape",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of piece?",
+          "options": [
+            {
+              "id": "a",
+              "text": "button and light",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "towers and walls",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "edges and shape",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a piece?",
+          "options": [
+            {
+              "id": "a",
+              "text": "garage",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "ocean",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "puzzle box",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'piece' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The piece flew through the sky like a bird",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "He planted the piece in the garden",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "They both wanted the same puzzle piece",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "upset",
+      "type": "emotion",
+      "image": "vocab-upset.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It's a feeling you get when describes how the character felt.",
+        "appearance": "When someone is upset, facial expression and body clues.",
+        "parts": "Upset has parts like: face, body, voice.",
+        "location": "You might feel upset during or after the problem."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'upset' belong to?",
+          "options": [
+            {
+              "text": "Vehicles",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Clothes",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel upset?",
+          "options": [
+            {
+              "text": "When you take a nap",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "When you get a new toy",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "When something is not fair or does not go your way",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they are upset?",
+          "options": [
+            {
+              "text": "Yawning and stretching",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Frowning, arms crossed, maybe teary eyes",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Smiling with bright eyes",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you feel upset?",
+          "options": [
+            {
+              "text": "You feel very relaxed",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "You feel very hungry",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Your face gets tight and you might want to cry",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you feel upset?",
+          "options": [
+            {
+              "text": "While sleeping",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "When someone takes your turn or breaks something",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "When you eat your favorite dessert",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'upset' correctly?",
+          "options": [
+            {
+              "text": "The upset drove a car",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "She wore the upset on her feet",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Daria felt upset when they both wanted the same piece",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Daria felt upset because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "they both wanted the same puzzle piece",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "the puzzle was too easy"
+        },
+        {
+          "id": "c",
+          "text": "she was hungry"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria let her friend use the piece because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "the piece was broken"
+        },
+        {
+          "id": "b",
+          "text": "she found a better one"
+        },
+        {
+          "id": "c",
+          "text": "she took a breath and decided to share",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "They finished the puzzle because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "the teacher did it for them"
+        },
+        {
+          "id": "b",
+          "text": "they worked together",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "the puzzle put itself together"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "After lunch, Daria built a puzzle with her friend.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They sat at the table.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "They both wanted the same puzzle piece.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Daria felt upset.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Daria took a breath and let her friend use the piece.",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "They finished the puzzle together.",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "initial_sound",
+      "prompt": "Which word starts with the same sound as puzzle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "pencil",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "kite",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "dog",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "piece",
+    "meaning_1": {
+      "text": "One part of a puzzle or whole",
+      "image": "joke-piece-1.png"
+    },
+    "meaning_2": {
+      "text": "A portion of food, like a piece of cake",
+      "image": "joke-piece-2.png"
+    },
+    "joke_text": "Why did the puzzle go to the party? Because it wanted a piece of cake!"
+  },
+  "personal_connection": {
+    "prompt": "Have you ever had to share something with a friend, even when it was hard? What happened?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

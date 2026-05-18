@@ -1,0 +1,623 @@
+{
+  "id": "daria-asks-for-the-next-step",
+  "title": "Daria Asks for the Next Step",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "Daria worked with her group during science class.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They were at a table near the window.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "Daria missed one part of the instructions.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Daria felt confused.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Daria asked her partner to explain the next step.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "Her partner showed her the page, and Daria knew what to do next.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "b",
+          "label": "Daria",
+          "emoji": "🧒",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "A robot",
+          "emoji": "🤖"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "at a table near the window",
+          "emoji": "🏠",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "A store",
+          "emoji": "🏪"
+        },
+        {
+          "id": "c",
+          "label": "The moon",
+          "emoji": "🌙"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria missed one part of the instructions",
+          "emoji": "📄",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        },
+        {
+          "id": "c",
+          "label": "He fell down",
+          "emoji": "🤕"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "b",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "c",
+          "label": "Confused",
+          "emoji": "🫤",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria asked her partner to explain the next step",
+          "emoji": "✈️",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "c",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Her partner showed her the page, and Daria knew what to d...",
+          "emoji": "😴",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Went home",
+          "emoji": "🏠"
+        },
+        {
+          "id": "c",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "table",
+      "type": "noun",
+      "image": "vocab-table.png",
+      "sfa": {
+        "category": "It belongs to the furniture group.",
+        "function": "You use it to gives people a place to work, eat, or build.",
+        "appearance": "It looks like flat top with legs.",
+        "parts": "It has top, legs, edge, surface.",
+        "location": "You find it classroom, kitchen, dining room, library."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is table in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "furniture",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "weather word",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "person word",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with table?",
+          "options": [
+            {
+              "id": "a",
+              "text": "fly it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "cover a cut",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "work or eat on it",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does table look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "flat top with legs",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "small tube",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "moving bump of water",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of table?",
+          "options": [
+            {
+              "id": "a",
+              "text": "leg",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "barcode",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "tail",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a table?",
+          "options": [
+            {
+              "id": "a",
+              "text": "classroom or kitchen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "tree branch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "first aid kit",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'table' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "She wore the table as a hat",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "Daria sat at the table to do her project",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "The table went swimming",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "instruction page",
+      "type": "noun",
+      "image": "vocab-instruction-page.png",
+      "sfa": {
+        "category": "It belongs to the object with directions group.",
+        "function": "You use it to shows the steps for what to do.",
+        "appearance": "It looks like paper or screen with words, numbers, or pictures.",
+        "parts": "It has steps, words, numbers, pictures.",
+        "location": "You find it classroom, worksheet, book, activity, recipe."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is instruction page in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "object with directions",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "emotion word",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "animal",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with instruction page?",
+          "options": [
+            {
+              "id": "a",
+              "text": "moves water",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "makes music",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "shows the steps",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does instruction page look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "long rope",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "round ball",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "page with words or pictures",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of instruction page?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wheels",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "steps",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "roots",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see an instruction page?",
+          "options": [
+            {
+              "id": "a",
+              "text": "freezer",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "classroom or worksheet",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "soccer goal",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'instruction page' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Daria looked at the instruction page to find the next step",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "She ate the instruction page for lunch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "The instruction page flew away",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Daria felt confused because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she didn't want to sit down"
+        },
+        {
+          "id": "b",
+          "text": "she missed one part of the instructions",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "she had too many pencils"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria asked her partner because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she was looking for her eraser"
+        },
+        {
+          "id": "b",
+          "text": "she wanted to play a game"
+        },
+        {
+          "id": "c",
+          "text": "she needed help with the next step",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "Daria knew what to do next because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "her partner showed her the page",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "the answer was on the ceiling"
+        },
+        {
+          "id": "c",
+          "text": "she guessed correctly"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "Daria worked with her group during science class.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They were at a table near the window.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "Daria missed one part of the instructions.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Daria felt confused.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Daria asked her partner to explain the next step.",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "Her partner showed her the page, and Daria knew what to do next",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "initial_sound",
+      "prompt": "Which word starts with the same sound as table?",
+      "options": [
+        {
+          "id": "a",
+          "text": "turtle",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "sand",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "ball",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "table",
+    "meaning_1": {
+      "text": "Furniture where people eat, work, or play",
+      "image": "joke-table-1.png"
+    },
+    "meaning_2": {
+      "text": "A chart that organizes information",
+      "image": "joke-table-2.png"
+    },
+    "joke_text": "Why did the math book sit on the furniture? Because it needed a table!"
+  },
+  "personal_connection": {
+    "prompt": "Have you ever been confused about what to do? Who helped you figure it out?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

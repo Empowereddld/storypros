@@ -59,7 +59,7 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
   const [domainScores, setDomainScores] = useState<Record<SkillDomain, number> | null>(null);
   const [overallScore, setOverallScore] = useState(0);
 
-  const story = getStory("dans-papercut");
+  const story = getStory("dan-and-the-paper-cut");
 
   function handleStoryFinish() {
     // After story completion, check the progress service for results

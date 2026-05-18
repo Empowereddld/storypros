@@ -4,11 +4,12 @@
  * Tracked separately (10% weight).
  * ───────────────────────────────────────────── */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-solo.png";
 
 type FeedbackState =
@@ -16,7 +17,7 @@ type FeedbackState =
   | { type: "correct" }
   | { type: "wrong" };
 
-export function PhonologicalPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function PhonologicalPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const items = storyData.phonological_items;
   const [qi, setQi] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -25,6 +26,16 @@ export function PhonologicalPhase({ storyData, onComplete, onClose }: StoryPhase
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const startTime = useRef(Date.now());
+
+  useEffect(() => { preloadVoices(); }, []);
+  useEffect(() => { return () => { stop(); }; }, [qi]);
+
+  function pronounceOption(text: string) {
+    stop();
+    // Phonological items are always slow or slower for clarity
+    const phonSpeed = ttsSpeed === "fast" ? "normal" : ttsSpeed;
+    speak(text, { rate: speedToRate(phonSpeed) }).catch(() => {});
+  }
 
   const item = items[qi];
   const progress = (qi / items.length) * 100;
@@ -184,24 +195,34 @@ export function PhonologicalPhase({ storyData, onComplete, onClose }: StoryPhase
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
           return (
-            <button
-              key={opt.id}
-              onClick={() => !isDisabled && setSelected(opt.id)}
-              disabled={isDisabled}
-              className={cn(
-                "flex w-full items-center justify-center rounded-3xl border-2 bg-card p-5 shadow-card transition-all",
-                isSelected && "border-primary bg-primary/5 -translate-y-0.5",
-                !isSelected && !isDisabled && "border-transparent hover:border-primary/40",
-                isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
+            <div key={opt.id} className="flex items-center gap-2">
+              <button
+                onClick={() => !isDisabled && setSelected(opt.id)}
+                disabled={isDisabled}
+                className={cn(
+                  "flex flex-1 items-center justify-center rounded-3xl border-2 bg-card p-5 shadow-card transition-all",
+                  isSelected && "border-primary bg-primary/5 -translate-y-0.5",
+                  !isSelected && !isDisabled && "border-transparent hover:border-primary/40",
+                  isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
+                )}
+              >
+                <span className={cn(
+                  "text-2xl font-bold",
+                  isDisabled ? "text-ink-soft line-through" : "text-primary",
+                )}>
+                  {opt.text}
+                </span>
+              </button>
+              {isSupported() && !isDisabled && (
+                <button
+                  onClick={() => pronounceOption(opt.text)}
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary active:scale-90 transition-transform"
+                  aria-label={`Hear ${opt.text}`}
+                >
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                </button>
               )}
-            >
-              <span className={cn(
-                "text-2xl font-bold",
-                isDisabled ? "text-ink-soft line-through" : "text-primary",
-              )}>
-                {opt.text}
-              </span>
-            </button>
+            </div>
           );
         })}
       </div>

@@ -1,0 +1,763 @@
+{
+  "id": "dan-joins-the-game",
+  "title": "Dan Joins the Game",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "During break time, Dan watched the kids play soccer.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They were playing on the field.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "The game had already started.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Dan felt lonely.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Dan smiled and asked Daria and Jack if he could play.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "Daria invited Dan to join the game.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dan",
+          "emoji": "🧒",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "c",
+          "label": "A robot",
+          "emoji": "🤖"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "They were playing on the field",
+          "emoji": "🏠",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "A store",
+          "emoji": "🏪"
+        },
+        {
+          "id": "c",
+          "label": "The moon",
+          "emoji": "🌙"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "The game had already started",
+          "emoji": "📄",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "He fell down",
+          "emoji": "🤕"
+        },
+        {
+          "id": "c",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "b",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "c",
+          "label": "Lonely",
+          "emoji": "😔",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "b",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        },
+        {
+          "id": "c",
+          "label": "Dan smiled and asked Daria and Jack if he could play",
+          "emoji": "✈️",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "b",
+          "label": "Went home",
+          "emoji": "🏠"
+        },
+        {
+          "id": "c",
+          "label": "Daria invited Dan to join the game",
+          "emoji": "😴",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "game",
+      "type": "noun",
+      "image": "vocab-game.png",
+      "sfa": {
+        "category": "It belongs to the activity group.",
+        "function": "You use it to play it with rules or turns.",
+        "appearance": "It looks like can look different depending on the game.",
+        "parts": "It has players, rules, turns, score.",
+        "location": "You find it field, playground, classroom, home."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is game in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "animal",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "activity",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "food",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with game?",
+          "options": [
+            {
+              "id": "a",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "play it",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "wear it",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does game look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "a round fruit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "players and rules",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "a sticky strip",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of game?",
+          "options": [
+            {
+              "id": "a",
+              "text": "cream and wipes",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "players and rules",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "wings and roots",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a game?",
+          "options": [
+            {
+              "id": "a",
+              "text": "field",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "fish tank",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "freezer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'game' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The game fell asleep",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "She ate the game with a fork",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "Dan wanted to join the soccer game",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "field",
+      "type": "noun",
+      "image": "vocab-field.png",
+      "sfa": {
+        "category": "It belongs to the place group.",
+        "function": "You use it to a large open space for playing or sports.",
+        "appearance": "It looks like grass or open ground.",
+        "parts": "It has lines, grass, goals, space.",
+        "location": "You find it school, park, sports area."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is field in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "toy",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "place",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "food",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with field?",
+          "options": [
+            {
+              "id": "a",
+              "text": "sleep on it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "draw with it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "play sports there",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does field look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "a tiny button",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "grass and open space",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "a folded paper shape",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of field?",
+          "options": [
+            {
+              "id": "a",
+              "text": "soft pad",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "lines and grass",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "tail and string",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a field?",
+          "options": [
+            {
+              "id": "a",
+              "text": "lunch box",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "bathtub",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "school or park",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'field' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The kids played soccer on the field",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "She drank the field from a cup",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "The field jumped over a fence",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "lonely",
+      "type": "emotion",
+      "image": "vocab-lonely.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It's a feeling you get when describes how the character felt.",
+        "appearance": "When someone is lonely, facial expression and body clues.",
+        "parts": "Lonely has parts like: face, body, voice.",
+        "location": "You might feel lonely during or after the problem."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'lonely' belong to?",
+          "options": [
+            {
+              "text": "Places",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Toys",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel lonely?",
+          "options": [
+            {
+              "text": "When you are by yourself and wish someone was with you",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "When you are playing with all your friends",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "When you eat a big meal",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they feel lonely?",
+          "options": [
+            {
+              "text": "Running very fast",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Sitting alone, looking down, quiet",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Dancing and singing",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you feel lonely?",
+          "options": [
+            {
+              "text": "You feel very excited",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "You feel very full",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Your chest feels heavy and you feel sad inside",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you feel lonely?",
+          "options": [
+            {
+              "text": "While reading your favorite book at home",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "At recess when no one is playing with you",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "At a birthday party with all your friends",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'lonely' correctly?",
+          "options": [
+            {
+              "text": "Dan felt lonely watching the other kids play",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "He put the lonely on a shelf",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "The lonely swam in the pool",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Dan felt lonely because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "the game had already started without him",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "his shoe was untied"
+        },
+        {
+          "id": "c",
+          "text": "he forgot his lunch"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Dan asked to play because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "he needed to borrow a pencil"
+        },
+        {
+          "id": "b",
+          "text": "he was looking for his bag"
+        },
+        {
+          "id": "c",
+          "text": "he wanted to join the soccer game",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "Daria invited Dan because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she needed help with homework"
+        },
+        {
+          "id": "b",
+          "text": "she wanted him to join their game",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "she had extra cookies"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "During break time, Dan watched the kids play soccer.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They were playing on the field.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "The game had already started.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Dan felt lonely.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Dan smiled and asked Daria and Jack if he could play.",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "Daria invited Dan to join the game.",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with game?",
+      "options": [
+        {
+          "id": "a",
+          "text": "name",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "cup",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "tree",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "field",
+    "meaning_1": {
+      "text": "A place to play sports like soccer",
+      "image": "joke-field-1.png"
+    },
+    "meaning_2": {
+      "text": "A large area of grass or crops",
+      "image": "joke-field-2.png"
+    },
+    "joke_text": "Why did the soccer player bring a tractor? Because they heard it was a great field!"
+  },
+  "personal_connection": {
+    "prompt": "Have you ever felt left out when other kids were playing? What did you do?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

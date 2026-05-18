@@ -1,0 +1,623 @@
+{
+  "id": "dan-talks-about-recess",
+  "title": "Dan Talks About Recess",
+  "level": 1,
+  "theme": "at-school",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "Dan tried to join a group of kids during recess.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They were near the basketball court.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "One kid laughed when Dan paused before answering.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Dan felt embarrassed.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Dan told his mom what happened after school.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "His mom listened and said they would talk to his teacher together.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dan",
+          "emoji": "🧒",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "c",
+          "label": "A robot",
+          "emoji": "🤖"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "The moon",
+          "emoji": "🌙"
+        },
+        {
+          "id": "b",
+          "label": "A store",
+          "emoji": "🏪"
+        },
+        {
+          "id": "c",
+          "label": "the basketball court",
+          "emoji": "🏠",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "He fell down",
+          "emoji": "🤕"
+        },
+        {
+          "id": "b",
+          "label": "One kid laughed when Dan paused before answering",
+          "emoji": "📄",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "b",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "c",
+          "label": "Embarrassed",
+          "emoji": "😳",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dan told his mom what happened",
+          "emoji": "✈️",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        },
+        {
+          "id": "c",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "b",
+          "label": "His mom listened and said they would talk to his teacher ...",
+          "emoji": "😴",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Went home",
+          "emoji": "🏠"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "basketball court",
+      "type": "noun",
+      "image": "vocab-basketball-court.png",
+      "sfa": {
+        "category": "It belongs to the place group.",
+        "function": "You use it to play basketball or other games there.",
+        "appearance": "It looks like flat hard surface with lines and hoops.",
+        "parts": "It has hoops, lines, floor, key, space.",
+        "location": "You find it school, park, gym, recreation centre."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is basketball court in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "place",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "animal",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "food",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with basketball court?",
+          "options": [
+            {
+              "id": "a",
+              "text": "play basketball there",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "wear it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "eat it",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does basketball court look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "round fruit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "flat surface with lines and hoops",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "small sticky strip",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of basketball court?",
+          "options": [
+            {
+              "id": "a",
+              "text": "hoop",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "barcode",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "leaf",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a basketball court?",
+          "options": [
+            {
+              "id": "a",
+              "text": "freezer",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "fish tank",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "school or park",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'basketball court' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The basketball court ate lunch",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "Dan played basketball on the court at recess",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "She wore the basketball court as a hat",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "teacher",
+      "type": "noun",
+      "image": "vocab-teacher.png",
+      "sfa": {
+        "category": "It belongs to the person word group.",
+        "function": "You use it to helps students learn and solve problems.",
+        "appearance": "It looks like adult or person at school who teaches.",
+        "parts": "It has classroom, lesson, questions, support.",
+        "location": "You find it school, classroom, hallway, online class."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is teacher in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "person word",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "food word",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "place word",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with teacher?",
+          "options": [
+            {
+              "id": "a",
+              "text": "helps students learn",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "moves water",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "gives power",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does teacher look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "person at school who teaches",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "a tall frame with steps",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "a folded paper shape",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of teacher?",
+          "options": [
+            {
+              "id": "a",
+              "text": "lesson",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "soft pad",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "wing",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a teacher?",
+          "options": [
+            {
+              "id": "a",
+              "text": "ocean",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "school or classroom",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "lunch box",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'teacher' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "She planted the teacher in a pot",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "The teacher helped the class with the project",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "The teacher flew like a kite",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Dan felt embarrassed because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "he found a dollar"
+        },
+        {
+          "id": "b",
+          "text": "he won the game"
+        },
+        {
+          "id": "c",
+          "text": "a kid laughed when he paused",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Dan told his mom because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "he felt embarrassed at school",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "he lost a pencil"
+        },
+        {
+          "id": "c",
+          "text": "he wanted a sandwich"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "His mom said they would talk to the teacher because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she wanted to help Dan feel better",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "she needed directions"
+        },
+        {
+          "id": "c",
+          "text": "she liked visiting school"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "Dan tried to join a group of kids during recess.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They were near the basketball court.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "One kid laughed when Dan paused before answering.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Dan felt embarrassed.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Dan told his mom what happened after school.",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "His mom listened and said they would talk to his teacher together",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with court?",
+      "options": [
+        {
+          "id": "a",
+          "text": "short",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "kite",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "sun",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "court",
+    "meaning_1": {
+      "text": "A place to play basketball or tennis",
+      "image": "joke-court-1.png"
+    },
+    "meaning_2": {
+      "text": "A place where a judge works",
+      "image": "joke-court-2.png"
+    },
+    "joke_text": "Why did the basketball go to see the judge? Because it was already at court!"
+  },
+  "personal_connection": {
+    "prompt": "Has someone ever laughed at you or made you feel embarrassed? What happened after?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

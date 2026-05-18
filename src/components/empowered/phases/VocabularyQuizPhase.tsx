@@ -25,6 +25,7 @@ export function VocabularyQuizPhase({ storyData, onComplete, onClose }: StoryPha
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
+  const [optionsRevealed, setOptionsRevealed] = useState(false);
   const startTime = useRef(Date.now());
 
   const word = words[wordIdx];
@@ -90,6 +91,7 @@ export function VocabularyQuizPhase({ storyData, onComplete, onClose }: StoryPha
       setFeedback({ type: "none" });
       setCurrentAttempt(1);
       setWrongIds(new Set());
+      setOptionsRevealed(false);
       startTime.current = Date.now();
     } else {
       // Wrong — try again
@@ -178,7 +180,7 @@ export function VocabularyQuizPhase({ storyData, onComplete, onClose }: StoryPha
         </span>
       </div>
 
-      {/* Question */}
+      {/* Question prompt — always visible */}
       <h2
         key={`vq-${wordIdx}-${qIdx}`}
         className="mx-5 mt-3 font-display text-[24px] leading-tight font-extrabold text-primary animate-slide-up"
@@ -186,40 +188,54 @@ export function VocabularyQuizPhase({ storyData, onComplete, onClose }: StoryPha
         {q.prompt}
       </h2>
 
-      {/* Options */}
-      <div className="mx-5 mt-4 space-y-3 flex-1 overflow-y-auto no-scrollbar pb-2">
-        {q.options.map((opt) => {
-          const isSelected = selected === opt.id;
-          const isDisabled = wrongIds.has(opt.id);
-          return (
-            <button
-              key={opt.id}
-              onClick={() => !isDisabled && setSelected(opt.id)}
-              disabled={isDisabled}
-              className={cn(
-                "flex w-full items-center gap-4 rounded-3xl border-2 bg-card p-4 text-left shadow-card transition-all",
-                isSelected && "border-primary bg-primary/5 -translate-y-0.5",
-                !isSelected && !isDisabled && "border-transparent hover:border-primary/40",
-                isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
-              )}
-            >
-              <span className={cn(
-                "flex-1 text-base font-bold",
-                isDisabled ? "text-ink-soft line-through" : "text-primary",
-              )}>
-                {opt.text || opt.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+      {/* Say-Then-Choose: show prompt first, reveal options on tap */}
+      {!optionsRevealed ? (
+        <div className="flex flex-1 flex-col items-center justify-center px-5">
+          <p className="text-center text-base font-semibold text-ink-soft mb-4">
+            Think about what you learned, then tap below!
+          </p>
+          <TactileButton onClick={() => { setOptionsRevealed(true); startTime.current = Date.now(); }}>
+            Show answers
+          </TactileButton>
+        </div>
+      ) : (
+        <>
+          {/* Options revealed */}
+          <div className="mx-5 mt-4 space-y-3 flex-1 overflow-y-auto no-scrollbar pb-2 animate-slide-up">
+            {q.options.map((opt) => {
+              const isSelected = selected === opt.id;
+              const isDisabled = wrongIds.has(opt.id);
+              return (
+                <button
+                  key={opt.id}
+                  onClick={() => !isDisabled && setSelected(opt.id)}
+                  disabled={isDisabled}
+                  className={cn(
+                    "flex w-full items-center gap-4 rounded-3xl border-2 bg-card p-4 text-left shadow-card transition-all",
+                    isSelected && "border-primary bg-primary/5 -translate-y-0.5",
+                    !isSelected && !isDisabled && "border-transparent hover:border-primary/40",
+                    isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
+                  )}
+                >
+                  <span className={cn(
+                    "flex-1 text-base font-bold",
+                    isDisabled ? "text-ink-soft line-through" : "text-primary",
+                  )}>
+                    {opt.text || opt.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-      {/* Check button */}
-      <div className="mx-5 mb-5">
-        <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-          Check
-        </TactileButton>
-      </div>
+          {/* Check button */}
+          <div className="mx-5 mb-5">
+            <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
+              Check
+            </TactileButton>
+          </div>
+        </>
+      )}
     </div>
   );
 }

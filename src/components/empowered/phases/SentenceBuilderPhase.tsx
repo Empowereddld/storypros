@@ -4,11 +4,12 @@
  * Brain check: "Does your ending tell why?"
  * ───────────────────────────────────────────── */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-solo.png";
 
 type FeedbackState =
@@ -16,7 +17,7 @@ type FeedbackState =
   | { type: "correct"; brainCheck: string }
   | { type: "wrong"; brainCheck: string };
 
-export function SentenceBuilderPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const frames = storyData.sentence_frames;
   const [frameIdx, setFrameIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -24,7 +25,18 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose }: StoryPh
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
+  const [speaking, setSpeaking] = useState(false);
   const startTime = useRef(Date.now());
+
+  useEffect(() => { preloadVoices(); }, []);
+  useEffect(() => { return () => { stop(); setSpeaking(false); }; }, [frameIdx]);
+
+  async function handleListenFrame() {
+    if (speaking) { stop(); setSpeaking(false); return; }
+    setSpeaking(true);
+    try { await speak(frame.frame_text.replace("___", "blank"), { rate: speedToRate(ttsSpeed) }); } catch {}
+    setSpeaking(false);
+  }
 
   const frame = frames[frameIdx];
   const progress = (frameIdx / frames.length) * 100;
@@ -182,6 +194,19 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose }: StoryPh
           Pick the ending that tells <span className="text-primary font-bold">why</span>
         </span>
       </div>
+
+      {/* Support: Listen Again */}
+      {isSupported() && (
+        <div className="mx-5 mt-2">
+          <button
+            onClick={handleListenFrame}
+            className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary btn-tactile"
+          >
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+            {speaking ? "Stop" : "Listen again"}
+          </button>
+        </div>
+      )}
 
       {/* Choice chips */}
       <div className="mx-5 mt-4 space-y-3 flex-1 overflow-y-auto no-scrollbar pb-2">

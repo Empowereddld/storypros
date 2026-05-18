@@ -1,12 +1,196 @@
+/* ─────────────────────────────────────────────
+ * Sign Up Screen
+ * Creates a new account with email + password.
+ * Google OAuth placeholder for Supabase.
+ * ───────────────────────────────────────────── */
+
+import { useState } from "react";
 import { TactileButton } from "./TactileButton";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface SignUpScreenProps {
-  onContinue: () => void;
+  onContinue: (role?: "parent" | "slp" | "teacher") => void;
+  onSignIn: () => void;
 }
 
-export function SignUpScreen({ onContinue }: SignUpScreenProps) {
+type AccountRole = "parent" | "slp" | "teacher";
+
+export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
+  const { signUp } = useAuth();
+  const [mode, setMode] = useState<"choose" | "role" | "email">("choose");
+  const [accountRole, setAccountRole] = useState<AccountRole>("parent");
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleEmailSignUp(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim() || !password || !displayName.trim()) return;
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    const result = await signUp(email.trim(), password, displayName.trim(), accountRole);
+    setLoading(false);
+
+    if (result.error) {
+      setError(result.error);
+    } else {
+      onContinue(accountRole);
+    }
+  }
+
+  if (mode === "role") {
+    return (
+      <div className="flex h-full flex-col bg-cream">
+        <div className="px-5 pt-4">
+          <button
+            onClick={() => setMode("choose")}
+            className="text-sm font-semibold text-ink-soft hover:text-primary transition-colors"
+          >
+            ← Back
+          </button>
+        </div>
+
+        <div className="flex flex-1 flex-col items-center justify-center px-6">
+          <div className="w-full animate-slide-up">
+            <div className="text-center mb-8">
+              <h2 className="font-display text-[26px] font-extrabold text-primary mb-2">
+                I am a...
+              </h2>
+              <p className="text-sm font-semibold text-ink-soft">
+                This helps us set up the right experience for you.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              {([
+                { role: "parent" as const, emoji: "👨‍👩‍👧", title: "Parent / Caregiver", desc: "Track your child's language journey at home" },
+                { role: "slp" as const, emoji: "🩺", title: "Speech-Language Pathologist", desc: "Monitor your caseload and assign stories" },
+                { role: "teacher" as const, emoji: "📚", title: "Teacher / Educator", desc: "Track classroom progress and assign activities" },
+              ]).map((opt) => (
+                <button
+                  key={opt.role}
+                  onClick={() => { setAccountRole(opt.role); setMode("email"); }}
+                  className={`w-full flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all active:scale-[0.98] ${
+                    accountRole === opt.role
+                      ? "border-primary bg-primary/5"
+                      : "border-muted bg-card hover:border-primary/40"
+                  }`}
+                >
+                  <span className="text-3xl">{opt.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-primary text-base">{opt.title}</p>
+                    <p className="text-xs text-ink-soft mt-0.5">{opt.desc}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (mode === "email") {
+    return (
+      <div className="flex h-full flex-col bg-cream">
+        <div className="px-5 pt-4">
+          <button
+            onClick={() => setMode("choose")}
+            className="text-sm font-semibold text-ink-soft hover:text-primary transition-colors"
+          >
+            ← Back
+          </button>
+        </div>
+
+        <div className="flex flex-1 flex-col items-center justify-center px-6">
+          <div className="w-full animate-slide-up">
+            <div className="text-center mb-6">
+              <h2 className="font-display text-[26px] font-extrabold text-primary mb-2">
+                Create your account
+              </h2>
+              <p className="text-sm font-semibold text-ink-soft">
+                {accountRole === "parent"
+                  ? "Set up your parent account to get started."
+                  : accountRole === "slp"
+                  ? "Set up your SLP account to track your caseload."
+                  : "Set up your teacher account to track your students."}
+              </p>
+            </div>
+
+            <form onSubmit={handleEmailSignUp} className="space-y-3">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
+                  Your name
+                </label>
+                <input
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  placeholder="Enter your name"
+                  autoComplete="name"
+                  className="w-full rounded-2xl border-2 border-muted bg-card p-4 text-base font-semibold text-primary placeholder:text-ink-soft/40 focus:border-primary focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="parent@email.com"
+                  autoComplete="email"
+                  className="w-full rounded-2xl border-2 border-muted bg-card p-4 text-base font-semibold text-primary placeholder:text-ink-soft/40 focus:border-primary focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="At least 6 characters"
+                  autoComplete="new-password"
+                  className="w-full rounded-2xl border-2 border-muted bg-card p-4 text-base font-semibold text-primary placeholder:text-ink-soft/40 focus:border-primary focus:outline-none transition-colors"
+                />
+              </div>
+
+              {error && (
+                <div className="rounded-2xl bg-destructive/10 border border-destructive/30 p-3">
+                  <p className="text-sm font-semibold text-destructive">{error}</p>
+                </div>
+              )}
+
+              <TactileButton
+                onClick={() => {}}
+                disabled={loading || !email.trim() || !password || !displayName.trim()}
+              >
+                {loading ? "Creating account..." : "Create account"}
+              </TactileButton>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Choose method screen ──
   return (
-    <div className="flex h-full flex-col px-6 pb-8 pt-6">
+    <div className="flex h-full flex-col px-6 pb-8 pt-6 bg-cream">
       {/* Floating paper airplane */}
       <div className="flex justify-end animate-float">
         <PaperPlane className="w-24 text-sky-foreground" />
@@ -25,16 +209,16 @@ export function SignUpScreen({ onContinue }: SignUpScreenProps) {
 
       {/* Auth options */}
       <div className="space-y-4 animate-slide-up">
-        <TactileButton onClick={onContinue} leadingIcon={<GoogleMark />}>
+        <TactileButton onClick={() => {}} leadingIcon={<GoogleMark />} disabled>
           Continue with Google
         </TactileButton>
-        <TactileButton onClick={onContinue} leadingIcon={<MailIcon />}>
+        <TactileButton onClick={() => setMode("role")} leadingIcon={<MailIcon />}>
           Continue with Email
         </TactileButton>
 
         <button
           type="button"
-          onClick={onContinue}
+          onClick={onSignIn}
           className="block w-full text-center text-sm font-semibold text-ink underline underline-offset-4"
         >
           Already have an account? Sign in.

@@ -14,6 +14,7 @@
 import { useState, useCallback } from "react";
 import type { StoryData, StoryPhase, PhaseResult } from "@/types/story";
 import { recordPhaseAttempts, recordStoryCompletion, getPaperPlanes } from "@/services/progress";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Phase components
 import { StorySlidesPhase } from "./StorySlidesPhase";
@@ -51,6 +52,9 @@ interface StoryEngineProps {
 }
 
 export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
+  const { activeChild } = useAuth();
+  const ttsSpeed = activeChild?.ttsSpeed ?? "normal";
+
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [phaseResults, setPhaseResults] = useState<PhaseResult[]>([]);
   const [paperPlanesEarned, setPaperPlanesEarned] = useState(0);
@@ -99,6 +103,7 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
     storyData,
     onComplete: handlePhaseComplete,
     onClose: handleClose,
+    ttsSpeed,
   };
 
   function renderPhase() {

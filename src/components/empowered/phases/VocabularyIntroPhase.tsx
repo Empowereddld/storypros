@@ -4,11 +4,12 @@
  * NOT scored — engagement only.
  * ───────────────────────────────────────────── */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, VocabularyWord } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
 
@@ -28,11 +29,24 @@ const SFA_LABELS: Record<string, string> = {
   location: "Where you find it",
 };
 
-export function VocabularyIntroPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function VocabularyIntroPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const words = storyData.vocabulary_words;
   const [wordIdx, setWordIdx] = useState(0);
   const [featureIdx, setFeatureIdx] = useState(-1); // -1 = word title card
   const [revealed, setRevealed] = useState<Set<number>>(new Set());
+  const [speaking, setSpeaking] = useState(false);
+
+  useEffect(() => { preloadVoices(); }, []);
+  useEffect(() => { return () => { stop(); setSpeaking(false); }; }, [wordIdx]);
+
+  async function handlePronounce() {
+    if (speaking) { stop(); setSpeaking(false); return; }
+    setSpeaking(true);
+    // Vocab pronunciation is always slow or slower (never fast)
+    const vocabSpeed = ttsSpeed === "fast" ? "normal" : ttsSpeed;
+    try { await speak(word.word, { rate: speedToRate(vocabSpeed) }); } catch {}
+    setSpeaking(false);
+  }
 
   const word = words[wordIdx];
   const totalSteps = words.length * (SFA_KEYS.length + 1); // +1 for title card each word
@@ -90,8 +104,26 @@ export function VocabularyIntroPhase({ storyData, onComplete, onClose }: StoryPh
           <h2 className="font-display text-[32px] font-extrabold text-primary capitalize">
             {word.word}
           </h2>
+          {isSupported() && (
+            <button
+              onClick={handlePronounce}
+              className={cn(
+                "mt-3 flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold btn-tactile transition-all",
+                speaking
+                  ? "bg-destructive text-destructive-foreground animate-pulse-glow"
+                  : "bg-primary/15 text-primary",
+              )}
+            >
+              {speaking ? "Stop" : "Hear it"}
+              {speaking ? (
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
+              ) : (
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+              )}
+            </button>
+          )}
           <p className="mt-2 text-base font-semibold text-ink-soft">
-            {word.type === "emotion" ? "A feeling word" : "A thing word"}
+            {word.type === "emotion" ? "An emotion word" : "A thing word"}
           </p>
           <p className="mt-4 text-center text-sm text-ink-soft/70">
             Let's learn about this word!

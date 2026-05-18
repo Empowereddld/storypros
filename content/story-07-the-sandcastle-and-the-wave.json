@@ -1,0 +1,763 @@
+{
+  "id": "the-sandcastle-and-the-wave",
+  "title": "The Sandcastle and the Wave",
+  "level": 1,
+  "theme": "adventures",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "In the summer, Dan and Daria’s families met up.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "They went to a sandy beach.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "A wave crashed in and destroyed their sandcastle.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Dan and Daria felt disappointed.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Daria said, “Let’s move further away from the ocean.”",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "They built a new sandcastle farther from the water and it stayed safe from the waves.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "b",
+          "label": "A robot",
+          "emoji": "🤖"
+        },
+        {
+          "id": "c",
+          "label": "Dan and Daria",
+          "emoji": "🧒",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "They went to a sandy beach",
+          "emoji": "🏠",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "The moon",
+          "emoji": "🌙"
+        },
+        {
+          "id": "c",
+          "label": "A store",
+          "emoji": "🏪"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "He fell down",
+          "emoji": "🤕"
+        },
+        {
+          "id": "b",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        },
+        {
+          "id": "c",
+          "label": "A wave crashed in and destroyed their sandcastle",
+          "emoji": "📄",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "b",
+          "label": "Happy",
+          "emoji": "😊"
+        },
+        {
+          "id": "c",
+          "label": "Disappointed",
+          "emoji": "😞",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria said, “Let’s move further away from the ocean”",
+          "emoji": "✈️",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "c",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "b",
+          "label": "They built a new sandcastle farther from the water and it...",
+          "emoji": "😴",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Went home",
+          "emoji": "🏠"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "sandcastle",
+      "type": "noun",
+      "image": "vocab-sandcastle.png",
+      "sfa": {
+        "category": "It belongs to the something you build group.",
+        "function": "You use it to make it for fun at the beach.",
+        "appearance": "It looks like castle shape made of sand.",
+        "parts": "It has towers, walls, base.",
+        "location": "You find it beach, sandbox."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is sandcastle in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "something you build",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "animal",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with sandcastle?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wear it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "build it for fun",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does sandcastle look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "long rope",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "castle shape made of sand",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "round ball",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of sandcastle?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wheel",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "tower",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "leaf",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a sandcastle?",
+          "options": [
+            {
+              "id": "a",
+              "text": "car",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "beach",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "freezer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'sandcastle' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "She ate the sandcastle for dinner",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "Dan and Daria built a sandcastle on the beach",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "The sandcastle drove to school",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "wave",
+      "type": "noun",
+      "image": "vocab-wave.png",
+      "sfa": {
+        "category": "It belongs to the part of water or ocean group.",
+        "function": "You use it to moves water toward shore.",
+        "appearance": "It looks like moving bump of water that can splash.",
+        "parts": "It has top, middle, bottom.",
+        "location": "You find it ocean, beach, lake."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is wave in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "part of the ocean",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "toy",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "clothing",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with wave?",
+          "options": [
+            {
+              "id": "a",
+              "text": "writes words",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "cooks food",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "moves water toward shore",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does wave look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "moving bump of water",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "square box",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "pile of sand",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of wave?",
+          "options": [
+            {
+              "id": "a",
+              "text": "wing",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "spoon",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "top",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see a wave?",
+          "options": [
+            {
+              "id": "a",
+              "text": "backpack",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "ocean",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "bedroom",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'wave' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "A big wave knocked down the sandcastle",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "He wore the wave as a scarf",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "The wave did homework",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "disappointed",
+      "type": "emotion",
+      "image": "vocab-disappointed.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It's a feeling you get when describes how the character felt.",
+        "appearance": "When someone is disappointed, facial expression and body clues.",
+        "parts": "Disappointed has parts like: face, body, voice.",
+        "location": "You might feel disappointed during or after the problem."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'disappointed' belong to?",
+          "options": [
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "Animals",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Toys",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel disappointed?",
+          "options": [
+            {
+              "text": "When something you hoped for does not happen",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "When you eat lunch",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "When you get a surprise gift",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they are disappointed?",
+          "options": [
+            {
+              "text": "Jumping with joy",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Shoulders droop, face looks sad, might sigh",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Running around excitedly",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you feel disappointed?",
+          "options": [
+            {
+              "text": "Nothing changes at all",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "You feel very energetic",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Your heart sinks and you feel let down",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you feel disappointed?",
+          "options": [
+            {
+              "text": "When something you built gets knocked down",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "When you pet a puppy",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "When you win a game",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'disappointed' correctly?",
+          "options": [
+            {
+              "text": "The disappointed climbed a ladder",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "She rode the disappointed to the park",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Dan felt disappointed when the wave destroyed the sandcastle",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Dan and Daria felt disappointed because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "the sun was too bright"
+        },
+        {
+          "id": "b",
+          "text": "they had too much sand"
+        },
+        {
+          "id": "c",
+          "text": "a wave destroyed their sandcastle",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria said they should move because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "they were too close to the water",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "she wanted to find shells"
+        },
+        {
+          "id": "c",
+          "text": "the sand was too hot"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "Their new sandcastle stayed safe because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "it was made of rocks"
+        },
+        {
+          "id": "b",
+          "text": "they built it farther from the waves",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "the ocean stopped moving"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "In the summer, Dan and Daria’s families met up.",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "They went to a sandy beach.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "A wave crashed in and destroyed their sandcastle.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Dan and Daria felt disappointed.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Daria said, “Let’s move further away from the ocean.”",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "They built a new sandcastle farther from the water and it stayed sa...",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with wave?",
+      "options": [
+        {
+          "id": "a",
+          "text": "cave",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "bed",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "sun",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "wave",
+    "meaning_1": {
+      "text": "Ocean water that moves toward the shore",
+      "image": "joke-wave-1.png"
+    },
+    "meaning_2": {
+      "text": "Moving your hand to say hello or goodbye",
+      "image": "joke-wave-2.png"
+    },
+    "joke_text": "Why did Dan greet the ocean? Because he liked to wave at waves!"
+  },
+  "personal_connection": {
+    "prompt": "Have you ever built something and then it broke or got ruined? How did you feel? What did you do?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

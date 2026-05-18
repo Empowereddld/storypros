@@ -1,3 +1,9 @@
+/* ─────────────────────────────────────────────
+ * Data Form Screen (Onboarding)
+ * Collects child name + age after account creation.
+ * Parent info already captured at sign-up.
+ * ───────────────────────────────────────────── */
+
 import { useState } from "react";
 import { TactileButton } from "./TactileButton";
 import { cn } from "@/lib/utils";
@@ -5,8 +11,6 @@ import { cn } from "@/lib/utils";
 export interface OnboardingFormValues {
   childName: string;
   childAge: number | null;
-  parentName: string;
-  parentEmail: string;
 }
 
 interface DataFormScreenProps {
@@ -19,21 +23,16 @@ export function DataFormScreen({ onSubmit }: DataFormScreenProps) {
   const [values, setValues] = useState<OnboardingFormValues>({
     childName: "",
     childAge: null,
-    parentName: "",
-    parentEmail: "",
   });
 
   const isValid =
-    values.childName.trim().length > 0 &&
-    values.childAge !== null &&
-    values.parentName.trim().length > 0 &&
-    /^\S+@\S+\.\S+$/.test(values.parentEmail);
+    values.childName.trim().length > 0 && values.childAge !== null;
 
   return (
-    <div className="flex h-full flex-col px-6 pb-6 pt-4">
+    <div className="flex h-full flex-col px-6 pb-6 pt-4 bg-cream">
       {/* Progress dots */}
       <div className="flex items-center justify-center gap-2">
-        {[0, 1, 2, 3].map((i) => (
+        {[0, 1, 2].map((i) => (
           <span
             key={i}
             className={cn(
@@ -45,7 +44,7 @@ export function DataFormScreen({ onSubmit }: DataFormScreenProps) {
       </div>
 
       <h1 className="mt-5 text-center font-display text-2xl font-bold leading-tight text-ink-soft">
-        Tell us a little<br />about your family
+        Tell us about<br />your child
       </h1>
 
       <div className="mt-5 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
@@ -80,27 +79,6 @@ export function DataFormScreen({ onSubmit }: DataFormScreenProps) {
               );
             })}
           </div>
-        </FieldCard>
-
-        <FieldCard label="What should we call you?">
-          <input
-            type="text"
-            value={values.parentName}
-            onChange={(e) => setValues((v) => ({ ...v, parentName: e.target.value }))}
-            placeholder="Enter parent's name"
-            className="w-full bg-transparent text-base text-ink placeholder:text-ink-soft/60 focus:outline-none"
-          />
-        </FieldCard>
-
-        <FieldCard label="Parent email">
-          <input
-            type="email"
-            value={values.parentEmail}
-            onChange={(e) => setValues((v) => ({ ...v, parentEmail: e.target.value }))}
-            placeholder="Enter email address"
-            inputMode="email"
-            className="w-full bg-transparent text-base text-ink placeholder:text-ink-soft/60 focus:outline-none"
-          />
         </FieldCard>
       </div>
 

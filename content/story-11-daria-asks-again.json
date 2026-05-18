@@ -1,0 +1,763 @@
+{
+  "id": "daria-asks-again",
+  "title": "Daria Asks Again",
+  "level": 1,
+  "theme": "with-friends",
+  "target_connective": "because",
+  "slides": [
+    {
+      "position": 1,
+      "text": "On Wednesday, Daria's teacher started giving instructions for a project.",
+      "story_element": "character",
+      "image": "slide-01.png"
+    },
+    {
+      "position": 2,
+      "text": "The teacher was standing at the whiteboard.",
+      "story_element": "place",
+      "image": "slide-02.png"
+    },
+    {
+      "position": 3,
+      "text": "Daria could not remember all the steps.",
+      "story_element": "problem",
+      "image": "slide-03.png"
+    },
+    {
+      "position": 4,
+      "text": "Daria felt confused.",
+      "story_element": "emotion",
+      "image": "slide-04.png"
+    },
+    {
+      "position": 5,
+      "text": "Daria raised her hand and asked the teacher to repeat the steps.",
+      "story_element": "action",
+      "image": "slide-05.png"
+    },
+    {
+      "position": 6,
+      "text": "The teacher said the steps one more time so Daria could try again.",
+      "story_element": "result",
+      "image": "slide-06.png"
+    }
+  ],
+  "comprehension_questions": [
+    {
+      "position": 1,
+      "prompt": "Who is in the story?",
+      "story_element": "character",
+      "options": [
+        {
+          "id": "a",
+          "label": "A cat",
+          "emoji": "🐱"
+        },
+        {
+          "id": "b",
+          "label": "A robot",
+          "emoji": "🤖"
+        },
+        {
+          "id": "c",
+          "label": "Daria",
+          "emoji": "🧒",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
+      "brain_check_wrong": "Did you answer with a person or people?"
+    },
+    {
+      "position": 2,
+      "prompt": "Where are they?",
+      "story_element": "place",
+      "options": [
+        {
+          "id": "a",
+          "label": "The teacher was standing at the whiteboard",
+          "emoji": "🏠",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "A store",
+          "emoji": "🏪"
+        },
+        {
+          "id": "c",
+          "label": "The moon",
+          "emoji": "🌙"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
+      "brain_check_wrong": "Did you answer with a place?"
+    },
+    {
+      "position": 3,
+      "prompt": "What went wrong?",
+      "story_element": "problem",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria could not remember all the steps",
+          "emoji": "📄",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "He fell down",
+          "emoji": "🤕"
+        },
+        {
+          "id": "c",
+          "label": "She lost her shoe",
+          "emoji": "👟"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
+      "brain_check_wrong": "Did you answer with what went wrong?"
+    },
+    {
+      "position": 4,
+      "prompt": "How did they feel?",
+      "story_element": "emotion",
+      "options": [
+        {
+          "id": "a",
+          "label": "Confused",
+          "emoji": "🫤",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Angry",
+          "emoji": "😠"
+        },
+        {
+          "id": "c",
+          "label": "Happy",
+          "emoji": "😊"
+        }
+      ],
+      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
+      "brain_check_wrong": "Did you answer with a feeling word?"
+    },
+    {
+      "position": 5,
+      "prompt": "What did the character do?",
+      "story_element": "action",
+      "options": [
+        {
+          "id": "a",
+          "label": "Daria raised her hand and asked the teacher to repeat the...",
+          "emoji": "✈️",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Ate lunch",
+          "emoji": "🍽️"
+        },
+        {
+          "id": "c",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
+      "brain_check_wrong": "Did you answer with what they did?"
+    },
+    {
+      "position": 6,
+      "prompt": "What happened after that?",
+      "story_element": "result",
+      "options": [
+        {
+          "id": "a",
+          "label": "Went home",
+          "emoji": "🏠"
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "😴"
+        },
+        {
+          "id": "c",
+          "label": "The teacher said the steps one more time so Daria could t...",
+          "emoji": "😴",
+          "correct": true
+        }
+      ],
+      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
+      "brain_check_wrong": "Did you answer with what happened after?"
+    }
+  ],
+  "vocabulary_words": [
+    {
+      "word": "instructions",
+      "type": "noun",
+      "image": "vocab-instructions.png",
+      "sfa": {
+        "category": "It belongs to the information/directions group.",
+        "function": "You use it to tell you what to do step by step.",
+        "appearance": "It looks like spoken words, written list, steps on a board.",
+        "parts": "It has steps, order, details.",
+        "location": "You find it classroom, home, recipe, game rules."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is instructions in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "eat them",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "information or directions",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with instructions?",
+          "options": [
+            {
+              "id": "a",
+              "text": "round ball",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "follow the steps",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "wings",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does instructions look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "food",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "freezer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "written list or spoken steps",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of instructions?",
+          "options": [
+            {
+              "id": "a",
+              "text": "eat them",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "steps and order",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "round ball",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see instructions?",
+          "options": [
+            {
+              "id": "a",
+              "text": "classroom",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "freezer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "wings",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'instructions' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The teacher gave instructions for the project",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "She wore the instructions as a scarf",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "The instructions played tag",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "whiteboard",
+      "type": "noun",
+      "image": "vocab-whiteboard.png",
+      "sfa": {
+        "category": "It belongs to the classroom tool group.",
+        "function": "You use it to write or draw on to show information.",
+        "appearance": "It looks like large flat white surface on a wall.",
+        "parts": "It has surface, markers, eraser, frame.",
+        "location": "You find it classroom, office, meeting room."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What category is whiteboard in?",
+          "options": [
+            {
+              "id": "a",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "classroom tool",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "fruit",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "What do you do with whiteboard?",
+          "options": [
+            {
+              "id": "a",
+              "text": "write or draw on it",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "roots",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "round ball",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does whiteboard look like?",
+          "options": [
+            {
+              "id": "a",
+              "text": "bathtub",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "large flat white surface",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "fruit",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What is a part or feature of whiteboard?",
+          "options": [
+            {
+              "id": "a",
+              "text": "markers and eraser",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "eat it",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "round ball",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you see whiteboard?",
+          "options": [
+            {
+              "id": "a",
+              "text": "classroom",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "roots",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "bathtub",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'whiteboard' correctly?",
+          "options": [
+            {
+              "id": "a",
+              "text": "She ate the whiteboard with a fork",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "The whiteboard went for a swim",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "The teacher wrote the steps on the whiteboard",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "confused",
+      "type": "emotion",
+      "image": "vocab-confused.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It's a feeling you get when describes how the character felt.",
+        "appearance": "When someone is confused, facial expression and body clues.",
+        "parts": "Confused has parts like: face, body, voice.",
+        "location": "You might feel confused during or after the problem."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "What group does 'confused' belong to?",
+          "options": [
+            {
+              "text": "Animals",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Clothes",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "When do you feel confused?",
+          "options": [
+            {
+              "text": "When you eat your favorite snack",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "When you play with your best friend",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "When you do not understand something",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What does someone look like when they are confused?",
+          "options": [
+            {
+              "text": "Fast asleep",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Tilted head, scrunched eyebrows, looking around",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Clapping and cheering",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "What happens in your body when you feel confused?",
+          "options": [
+            {
+              "text": "You feel very relaxed",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Your tummy growls",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Your head feels fuzzy and you need to think harder",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "Where or when might you feel confused?",
+          "options": [
+            {
+              "text": "When the teacher gives instructions too fast",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "When you open a birthday present",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "While eating lunch",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'confused' correctly?",
+          "options": [
+            {
+              "text": "The confused drove a truck",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Daria felt confused when she missed a step",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "She planted the confused in the ground",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sentence_frames": [
+    {
+      "position": 1,
+      "frame_text": "Daria felt confused because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "her pencil broke"
+        },
+        {
+          "id": "b",
+          "text": "she could not remember all the steps",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "she finished too fast"
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 2,
+      "frame_text": "Daria raised her hand because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she saw a bird"
+        },
+        {
+          "id": "b",
+          "text": "she needed to go outside"
+        },
+        {
+          "id": "c",
+          "text": "she wanted the teacher to repeat the steps",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    },
+    {
+      "position": 3,
+      "frame_text": "Daria could try again because ___",
+      "choices": [
+        {
+          "id": "a",
+          "text": "she found a magic book"
+        },
+        {
+          "id": "b",
+          "text": "the project finished itself"
+        },
+        {
+          "id": "c",
+          "text": "the teacher said the steps one more time",
+          "correct": true
+        }
+      ],
+      "brain_check_prompt": "Does your ending tell why?"
+    }
+  ],
+  "sequencing_frames": [
+    {
+      "correct_position": 1,
+      "caption": "On Wednesday, Daria's teacher started giving instructions for a pro...",
+      "image": "slide-01.png"
+    },
+    {
+      "correct_position": 2,
+      "caption": "The teacher was standing at the whiteboard.",
+      "image": "slide-02.png"
+    },
+    {
+      "correct_position": 3,
+      "caption": "Daria could not remember all the steps.",
+      "image": "slide-03.png"
+    },
+    {
+      "correct_position": 4,
+      "caption": "Daria felt confused.",
+      "image": "slide-04.png"
+    },
+    {
+      "correct_position": 5,
+      "caption": "Daria raised her hand and asked the teacher to repeat the steps",
+      "image": "slide-05.png"
+    },
+    {
+      "correct_position": 6,
+      "caption": "The teacher said the steps one more time so Daria could try again",
+      "image": "slide-06.png"
+    }
+  ],
+  "phonological_items": [
+    {
+      "type": "initial_sound",
+      "prompt": "Which word starts with the same sound as whiteboard?",
+      "options": [
+        {
+          "id": "a",
+          "text": "whistle",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "ball",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "sun",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "joke": {
+    "word": "step",
+    "meaning_1": {
+      "text": "A part of instructions — what to do next",
+      "image": "joke-step-1.png"
+    },
+    "meaning_2": {
+      "text": "Moving your foot forward to walk",
+      "image": "joke-step-2.png"
+    },
+    "joke_text": "Why did the instructions go for a walk? Because they had so many steps!"
+  },
+  "personal_connection": {
+    "prompt": "Have you ever had to ask for help when you did not understand something? How did it go?"
+  },
+  "retell_prompts": {
+    "immediate": "Can you tell me what happened in the story?",
+    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "story_elements": [
+      "character",
+      "place",
+      "problem",
+      "emotion",
+      "action",
+      "result"
+    ]
+  }
+}

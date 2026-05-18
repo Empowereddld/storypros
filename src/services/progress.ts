@@ -10,6 +10,7 @@ import {
   calculateOverallScore,
   type SkillDomain,
 } from "./scoring";
+import { awardBadge } from "./shop";
 
 // ── In-memory store (replaced by Supabase later) ──
 
@@ -91,6 +92,12 @@ export function recordStoryCompletion(
   // Update streak
   currentProgress.streak += 1;
 
+  // Check for level promotion
+  checkLevelPromotion();
+
+  // Check for badge milestones
+  checkBadgeAwards(completion);
+
   return completion;
 }
 
@@ -134,6 +141,13 @@ export function getPaperPlanes(): number {
   return currentProgress.paperPlanes;
 }
 
+/** Spend Paper Planes (shop purchases) */
+export function spendPaperPlanes(amount: number): boolean {
+  if (amount > currentProgress.paperPlanes) return false;
+  currentProgress.paperPlanes -= amount;
+  return true;
+}
+
 /** Set current level (for parent override) */
 export function setCurrentLevel(level: number): void {
   currentProgress.currentLevel = level;
@@ -142,4 +156,137 @@ export function setCurrentLevel(level: number): void {
 /** Get current level */
 export function getCurrentLevel(): number {
   return currentProgress.currentLevel;
+}
+
+/** Get all completions (for parent dashboard) */
+export function getAllCompletions(): StoryCompletion[] {
+  return [...currentProgress.completions];
+}
+
+/* ─────────────────────────────────────────────
+ * Badge Awards — Milestone Checking
+ *
+ * Called after every story completion to see if
+ * any new badges should be unlocked. Uses the
+ * badge IDs from shop.ts catalog.
+ * ───────────────────────────────────────────── */
+
+function checkBadgeAwards(completion: StoryCompletion): void {
+  const childId = "demo"; // single-child mock — Supabase will use real IDs
+
+  const distinctStories = new Set(
+    currentProgress.completions.map((c) => c.storyId),
+  ).size;
+
+  // First Flight — complete 1 story
+  if (distinctStories >= 1) {
+    awardBadge(childId, "badge-first-story");
+  }
+
+  // Frequent Flyer — complete 3 stories
+  if (distinctStories >= 3) {
+    awardBadge(childId, "badge-3-stories");
+  }
+
+  // Perfect Landing — 100% on any story (use >= 95 to be forgiving)
+  if (completion.overallScore >= 95) {
+    awardBadge(childId, "badge-perfect");
+  }
+
+  // Five Day Streak
+  if (currentProgress.streak >= 5) {
+    awardBadge(childId, "badge-5-streak");
+  }
+
+  // Story Master — all domains above 90% on this story
+  const allDomainsHigh = Object.values(completion.domainScores).every(
+    (score) => score >= 90,
+  );
+  if (allDomainsHigh) {
+    awardBadge(childId, "badge-all-elements");
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * Level Promotion — Mastery Criteria
+ *
+ * A child advances from Level 1 → Level 2 when
+ * they consistently achieve 80%+ overall score
+ * across 5 distinct stories (first attempts only).
+ *
+ * This matches the level-guide.md spec:
+ *   - Sequence 6-picture stories independently
+ *   - Answer all 6 comprehension questions correctly
+ *   - Retell story with 5/6 elements present
+ *   - Use 2-3 target vocabulary words
+ *   - Complete "because" sentences correctly
+ *   - Complete activities with minimal supports
+ *
+ * The 80% threshold captures these collectively.
+ * ───────────────────────────────────────────── */
+
+const MASTERY_THRESHOLD = 80;
+const STORIES_REQUIRED = 5;
+
+function checkLevelPromotion(): void {
+  // Only auto-promote Level 1 → Level 2 for now
+  if (currentProgress.currentLevel !== 1) return;
+
+  // Get first-attempt completions for distinct stories
+  const seen = new Set<string>();
+  const firstAttempts: StoryCompletion[] = [];
+  for (const c of currentProgress.completions) {
+    if (!seen.has(c.storyId) && c.replayCount === 0) {
+      seen.add(c.storyId);
+      firstAttempts.push(c);
+    }
+  }
+
+  if (firstAttempts.length < STORIES_REQUIRED) return;
+
+  // Check the most recent N stories
+  const recent = firstAttempts.slice(-STORIES_REQUIRED);
+  const allMastered = recent.every(
+    (c) => c.overallScore >= MASTERY_THRESHOLD,
+  );
+
+  if (allMastered) {
+    currentProgress.currentLevel = 2;
+    // Award bonus Paper Planes for leveling up
+    currentProgress.paperPlanes += 50;
+  }
+}
+
+/** Get star rating (1-3) for a completed story based on overall score */
+export function getStarRating(storyId: string): number {
+  const completions = getStoryCompletions(storyId);
+  if (completions.length === 0) return 0;
+
+  // Use best score across all attempts
+  const best = Math.max(...completions.map((c) => c.overallScore));
+  if (best >= 90) return 3;
+  if (best >= 70) return 2;
+  return 1;
+}
+
+/** Check if child is close to promotion (for UI indicators) */
+export function getMasteryProgress(): {
+  storiesMastered: number;
+  storiesRequired: number;
+  ready: boolean;
+} {
+  const seen = new Set<string>();
+  let mastered = 0;
+  for (const c of currentProgress.completions) {
+    if (!seen.has(c.storyId) && c.replayCount === 0 && c.overallScore >= MASTERY_THRESHOLD) {
+      seen.add(c.storyId);
+      mastered++;
+    }
+  }
+
+  return {
+    storiesMastered: mastered,
+    storiesRequired: STORIES_REQUIRED,
+    ready: mastered >= STORIES_REQUIRED,
+  };
 }
