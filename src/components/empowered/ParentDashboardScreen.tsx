@@ -17,6 +17,7 @@ import {
   scoreToLabel,
   labelToDisplayText,
 } from "@/services/scoring";
+import { getStory, getAllStories } from "@/services/stories";
 import type { SkillDomain } from "@/types/story";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -283,7 +284,7 @@ function OverviewTab({
         <StatCard
           icon="📚"
           label="Stories Done"
-          value={String(stats.storiesCompleted)}
+          value={`${stats.storiesCompleted}/${getAllStories().length}`}
         />
         <StatCard
           icon="🎯"
@@ -402,8 +403,8 @@ function StoriesTab({
           >
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="text-base font-bold text-primary capitalize">
-                  {c.storyId.replace(/-/g, " ")}
+                <h3 className="text-base font-bold text-primary">
+                  {getStory(c.storyId)?.title ?? c.storyId.replace(/-/g, " ")}
                 </h3>
                 <p className="text-xs text-ink-soft mt-0.5">
                   {dateStr}
@@ -649,10 +650,4 @@ function MiniBarChart({
               )}
               style={{ height }}
             />
-            <span className="text-[8px] text-ink-soft mt-1">#{d.index}</span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+            <span className="t

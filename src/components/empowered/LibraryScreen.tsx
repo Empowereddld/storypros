@@ -21,14 +21,7 @@ interface LibraryScreenProps {
 
 type FilterTab = "all" | "in-progress" | "completed" | "locked";
 
-// Stories that don't exist yet but are coming — shown as placeholders
-const COMING_SOON: { id: string; title: string; level: number; theme: string }[] = [
-  { id: "giants-sneeze", title: "The Giant's Sneeze", level: 1, theme: "cause-effect" },
-  { id: "library-whispers", title: "Library of Whispers", level: 1, theme: "sequencing" },
-  { id: "castle-commas", title: "Castle of Commas", level: 1, theme: "grammar" },
-  { id: "rain-song", title: "The Rain Song", level: 1, theme: "emotions" },
-  { id: "lost-letter", title: "The Lost Letter", level: 1, theme: "problem-solving" },
-];
+// No "coming soon" placeholders — all 11 L1 stories are real content now
 
 export function LibraryScreen({ onClose, onPlayStory }: LibraryScreenProps) {
   const { children, activeChild } = useAuth();
@@ -41,35 +34,19 @@ export function LibraryScreen({ onClose, onPlayStory }: LibraryScreenProps) {
   const hasPremium = isPremium(childId);
   const allStories = getAllStories();
 
-  // Build enriched story list (real + coming soon)
+  // Build enriched story list from all real stories
   const enrichedStories = useMemo(() => {
-    const real = allStories.map((story) => ({
+    return allStories.map((story) => ({
       id: story.id,
       title: story.title,
       level: story.level,
       theme: story.theme,
       isCompleted: completedIds.includes(story.id),
       stars: getStarRating(story.id),
-      isFree: canAccessStory(childId, story.id) || !hasPremium ? canAccessStory(childId, story.id) : true,
+      isFree: canAccessStory(childId, story.id),
       isAvailable: true,
       isPremiumLocked: !canAccessStory(childId, story.id),
     }));
-
-    const coming = COMING_SOON
-      .filter((cs) => !allStories.some((s) => s.id === cs.id))
-      .map((cs) => ({
-        id: cs.id,
-        title: cs.title,
-        level: cs.level,
-        theme: cs.theme,
-        isCompleted: false,
-        stars: 0,
-        isFree: false,
-        isAvailable: false,
-        isPremiumLocked: false,
-      }));
-
-    return [...real, ...coming];
   }, [allStories, completedIds, childId, hasPremium]);
 
   // Apply filters
@@ -212,6 +189,9 @@ interface EnrichedStory {
 
 function StoryCard({ story, onPlay }: { story: EnrichedStory; onPlay: () => void }) {
   const themeIcons: Record<string, string> = {
+    "with-friends": "👫",
+    "adventures": "🗺️",
+    "at-school": "🏫",
     "cause-effect": "🔗",
     "sequencing": "📋",
     "grammar": "✏️",
@@ -372,3 +352,4 @@ function CrownIcon() {
     </svg>
   );
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

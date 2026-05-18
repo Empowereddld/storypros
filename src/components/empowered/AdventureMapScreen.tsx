@@ -6,7 +6,7 @@ import { getStoriesByLevel } from "@/services/stories";
 import { getCompletedStoryIds, getPaperPlanes, getCurrentLevel, getProgress, getStarRating } from "@/services/progress";
 import { canAccessStory } from "@/services/subscription";
 import { useAuth } from "@/contexts/AuthContext";
-import type { StoryData } from "@/types/story";
+
 
 export type MapDestination = "story" | "achievements" | "settings" | "shop" | "dashboard" | "library";
 
@@ -29,25 +29,22 @@ interface Pin {
   y: number;
   /** true if this story requires a premium subscription */
   isPremium?: boolean;
+  /** 1-based story number for display */
+  storyNum: number;
+  /** Story pair number (stories 1&2 = pair 1, 3&4 = pair 2, etc.) */
+  pairNum: number;
 }
 
 /** Map alternating offsets for visual winding path */
-const PIN_OFFSETS = [0, 70, -80, 50, -60, 70];
+const PIN_OFFSETS = [0, 70, -80, 50, -60, 70, -40, 80, -70, 60, -50];
 const PIN_Y_START = 80;
-const PIN_Y_SPACING = 280;
+const PIN_Y_SPACING = 240;
+
+/** Story pair index (0-based) — stories alternate Dan/Daria */
+const PAIR_EMOJIS = ["📄", "🎪", "⚽", "🧩", "🗺️", "🪁", "🏖️", "🏫", "📐", "🍽️", "🔁"];
 
 function buildPins(level: number, completedIds: string[], childId: string): Pin[] {
   const stories = getStoriesByLevel(level);
-
-  // If no stories from service, show placeholder pins
-  if (stories.length === 0) {
-    return [
-      { id: "p1", storyId: "dan-and-the-paper-cut", label: "Dan and the Paper Cut", status: "active", stars: 0, offset: 0, y: 80, isPremium: false },
-      { id: "p2", storyId: "darias-carnival-ticket", label: "Daria's Carnival Ticket", status: "locked", stars: 0, offset: 70, y: 360, isPremium: true },
-      { id: "p3", storyId: "dan-joins-the-game", label: "Dan Joins the Game", status: "locked", stars: 0, offset: -80, y: 600, isPremium: true },
-      { id: "p4", storyId: "daria-and-the-puzzle-piece", label: "Daria and the Puzzle Piece", status: "locked", stars: 0, offset: 50, y: 840, isPremium: true },
-    ];
-  }
 
   let foundActive = false;
   return stories.map((story, i) => {
@@ -63,9 +60,7 @@ function buildPins(level: number, completedIds: string[], childId: string): Pin[
       status = "locked";
     }
 
-    // Real star rating from progress data
     const stars = isCompleted ? getStarRating(story.id) : 0;
-    // Check if this story requires premium
     const isPremium = !canAccessStory(childId, story.id);
 
     return {
@@ -77,11 +72,33 @@ function buildPins(level: number, completedIds: string[], childId: string): Pin[
       offset: PIN_OFFSETS[i % PIN_OFFSETS.length],
       y: PIN_Y_START + i * PIN_Y_SPACING,
       isPremium,
+      storyNum: i + 1,
+      pairNum: Math.ceil((i + 1) / 2),
     };
   });
 }
 
-const CANVAS_HEIGHT = 1020;
+/** Build a smooth SVG cubic bezier path that winds through all pins */
+function buildWindingPath(pins: Pin[], height: number): string {
+  if (pins.length === 0) return "";
+  // Convert pin positions to SVG-space x,y (center = 200, offset applied)
+  const points = pins.map((p) => ({ x: 200 + p.offset, y: p.y + 20 }));
+
+  let d = `M ${points[0].x} ${points[0].y - 40}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const curr = points[i];
+    const next = points[i + 1];
+    const midY = (curr.y + next.y) / 2;
+    // Control points swing opposite to create S-curves
+    const cpx1 = curr.x + (next.x > curr.x ? 60 : -60);
+    const cpx2 = next.x + (curr.x > next.x ? 60 : -60);
+    d += ` C ${cpx1} ${midY}, ${cpx2} ${midY}, ${next.x} ${next.y}`;
+  }
+  // Tail below last pin
+  const last = points[points.length - 1];
+  d += ` L ${last.x} ${Math.min(last.y + 80, height - 20)}`;
+  return d;
+}
 
 export function AdventureMapScreen({ childName, onReset, onNavigate }: AdventureMapScreenProps) {
   const { children, activeChild } = useAuth();
@@ -93,19 +110,15 @@ export function AdventureMapScreen({ childName, onReset, onNavigate }: Adventure
   const progress = getProgress();
   const childId = activeChild?.id ?? children[0]?.id ?? "";
 
-  const pins = useMemo(() => {
-    const built = buildPins(level, completedIds, childId);
-    // Ensure at least 4 pins for visual completeness
-    if (built.length < 4) {
-      const placeholders: Pin[] = [
-        { id: "ph2", storyId: "", label: "The Giant's Sneeze", status: "locked", stars: 0, offset: 70, y: 360, isPremium: true },
-        { id: "ph3", storyId: "", label: "Library of Whispers", status: "locked", stars: 0, offset: -80, y: 600, isPremium: true },
-        { id: "ph4", storyId: "", label: "Castle of Commas", status: "locked", stars: 0, offset: 50, y: 840, isPremium: true },
-      ];
-      return [...built, ...placeholders.slice(0, 4 - built.length)];
-    }
-    return built;
-  }, [level, completedIds, childId]);
+  const pins = useMemo(
+    () => buildPins(level, completedIds, childId),
+    [level, completedIds, childId],
+  );
+
+  // Dynamic canvas height based on number of pins
+  const canvasHeight = pins.length > 0
+    ? PIN_Y_START + (pins.length - 1) * PIN_Y_SPACING + 200
+    : 1020;
 
   function activate(pin: Pin) {
     if (pin.status === "locked") {
@@ -159,18 +172,15 @@ export function AdventureMapScreen({ childName, onReset, onNavigate }: Adventure
           <div className="absolute bottom-40 -right-12 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto" style={{ height: CANVAS_HEIGHT, width: "100%" }}>
-          {/* Dotted winding path */}
+        <div className="relative z-10 mx-auto" style={{ height: canvasHeight, width: "100%" }}>
+          {/* Dotted winding path connecting all pins */}
           <svg
             className="absolute inset-0 h-full w-full pointer-events-none"
-            viewBox={`0 0 400 ${CANVAS_HEIGHT}`}
+            viewBox={`0 0 400 ${canvasHeight}`}
             preserveAspectRatio="none"
           >
             <path
-              d={`M 200 60 C 320 220 80 380 240 ${pins[1]?.y ? pins[1].y + 40 : 400}
-                  C 360 ${pins[1]?.y ? pins[1].y + 200 : 560} 80 ${pins[2]?.y ? pins[2].y - 20 : 580} 120 ${pins[2]?.y ? pins[2].y + 40 : 640}
-                  C 40 ${pins[2]?.y ? pins[2].y + 220 : 820} 320 ${pins[3]?.y ? pins[3].y - 40 : 800} 240 ${pins[3]?.y ? pins[3].y + 40 : 880}
-                  C 160 ${pins[3]?.y ? pins[3].y + 200 : 1040} 200 ${CANVAS_HEIGHT - 60} 200 ${CANVAS_HEIGHT - 20}`}
+              d={buildWindingPath(pins, canvasHeight)}
               fill="none"
               stroke="oklch(0.86 0.018 305)"
               strokeWidth="10"
@@ -268,7 +278,7 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
         <button
           onClick={onClick}
           className={cn(
-            "flex items-center justify-center rounded-full border-4 border-card transition-all active:translate-y-1",
+            "relative flex items-center justify-center rounded-full border-4 border-card transition-all active:translate-y-1",
             isActive && "h-20 w-20 bg-secondary text-secondary-foreground shadow-[0_5px_0_0_var(--secondary-deep)] hover:scale-105 animate-pulse-glow",
             isCompleted && "h-18 w-18 bg-success text-success-foreground shadow-[0_4px_0_0_oklch(0.45_0.15_155)] hover:scale-105",
             isLocked && "h-16 w-16 bg-muted text-muted-foreground shadow-[0_4px_0_0_oklch(0.86_0.018_305)] opacity-80",
@@ -279,21 +289,25 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
               <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           ) : isActive ? (
-            <span className="text-3xl font-extrabold leading-none">
-              <PlayIcon />
-            </span>
+            <PlayIcon />
           ) : (
-            <LockIcon />
+            <span className="text-base font-extrabold">{pin.storyNum}</span>
+          )}
+          {/* Story number badge */}
+          {(isActive || isCompleted) && (
+            <span className="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-card text-[10px] font-extrabold text-primary shadow-card border border-accent/60">
+              {pin.storyNum}
+            </span>
           )}
         </button>
       </div>
 
       {isActive ? (
-        <div className="mt-3 bg-card px-5 py-3 rounded-2xl shadow-card border-b-4 border-accent/60 flex flex-col items-center min-w-[220px]">
+        <div className="mt-3 bg-card px-5 py-3 rounded-2xl shadow-card border-b-4 border-accent/60 flex flex-col items-center min-w-[220px] max-w-[260px]">
           <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-ink-soft/70">
-            Active Adventure
+            Adventure {pin.pairNum} — Story {pin.storyNum % 2 === 1 ? "A" : "B"}
           </span>
-          <h3 className="text-lg font-bold text-primary leading-tight text-center mt-0.5">
+          <h3 className="text-base font-bold text-primary leading-tight text-center mt-0.5">
             {pin.label}
           </h3>
           {pin.isPremium && (
@@ -303,7 +317,7 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
           )}
         </div>
       ) : isCompleted ? (
-        <div className="mt-3 bg-card px-4 py-2.5 rounded-2xl shadow-card border-b-4 border-success/40 flex flex-col items-center min-w-[200px]">
+        <div className="mt-3 bg-card px-4 py-2.5 rounded-2xl shadow-card border-b-4 border-success/40 flex flex-col items-center min-w-[180px] max-w-[240px]">
           <h3 className="text-sm font-bold text-primary leading-tight text-center">
             {pin.label}
           </h3>
@@ -314,9 +328,9 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
           </div>
         </div>
       ) : (
-        <div className="mt-3 bg-card/60 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-accent/40">
+        <div className="mt-3 bg-card/60 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-accent/40 max-w-[220px]">
           <div className="flex items-center gap-1.5">
-            <h3 className="text-sm font-medium text-ink-soft">{pin.label}</h3>
+            <h3 className="text-xs font-medium text-ink-soft text-center leading-tight">{pin.label}</h3>
             {pin.isPremium && <CrownIcon />}
           </div>
         </div>
@@ -505,6 +519,4 @@ function CrownIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-secondary-foreground" fill="currentColor" aria-hidden>
       <path d="M2 8l4 4 6-6 6 6 4-4-2 12H4L2 8z" />
-    </svg>
-  );
-}
+    </svg>
