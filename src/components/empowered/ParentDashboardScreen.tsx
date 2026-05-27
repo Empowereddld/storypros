@@ -660,4 +660,3 @@ function MiniBarChart({
   );
 }
 
-            <span className="t
