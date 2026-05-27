@@ -200,9 +200,10 @@ export interface PhaseResult {
 }
 
 // ── Shared phase component props ──
-export interface StoryPhaseProps {
+export interface StoryPhaseProps<TData = unknown> {
   storyData: StoryData;
   onComplete: (result: PhaseResult) => void;
   onClose: () => void;
   ttsSpeed?: "slow" | "normal" | "fast";
+  phaseData?: TData;
 }
