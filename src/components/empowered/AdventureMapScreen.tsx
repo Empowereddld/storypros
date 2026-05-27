@@ -246,7 +246,7 @@ export function AdventureMapScreen({ childName, onReset, onNavigate }: Adventure
       <nav className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-around px-3 pt-2 pb-3 bg-card/95 backdrop-blur rounded-t-3xl border-t-4 border-accent/60 shadow-[0_-8px_30px_-10px_oklch(0.36_0.18_305/0.18)]">
         <NavItem icon={<BookIcon />} label="Library" onClick={() => onNavigate("library")} />
         <NavItem icon={<MapIcon />} label="Adventures" active />
-        <NavItem icon={<MicIcon />} label="Speak" onClick={() => setOpenPin({ id: "soon", label: "Speak", status: "locked", offset: 0, y: 0 })} />
+        <NavItem icon={<MicIcon />} label="Speak" onClick={() => setOpenPin({ id: "soon", storyId: "", label: "Speak", status: "locked", stars: 0, offset: 0, y: 0, storyNum: 0, pairNum: 0 })} />
         <NavItem icon={<MedalIcon />} label="Rewards" onClick={() => onNavigate("achievements")} />
       </nav>
 

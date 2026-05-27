@@ -161,7 +161,7 @@ export async function cancelSubscription(
   const sub = state.children[childId];
 
   if (!sub || sub.tier !== "premium") {
-    return { error: "No active subscription found" };
+    return { success: false, error: "No active subscription found" };
   }
 
   sub.cancelAtPeriodEnd = true;
@@ -181,7 +181,7 @@ export async function reactivateSubscription(
   const sub = state.children[childId];
 
   if (!sub || sub.tier !== "premium") {
-    return { error: "No active subscription found" };
+    return { success: false, error: "No active subscription found" };
   }
 
   sub.cancelAtPeriodEnd = false;

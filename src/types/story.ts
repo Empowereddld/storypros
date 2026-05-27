@@ -182,4 +182,28 @@ export interface ActivityAttempt {
   time_ms?: number;
 }
 
-  brain_check_r
+// ── Skill domains (scoring) ──
+export type SkillDomain =
+  | "listening"
+  | "story_structure"
+  | "vocabulary"
+  | "grammar"
+  | "retell"
+  | "phonological";
+
+// ── Phase result, reported by each phase to the engine ──
+export interface PhaseResult {
+  phase: StoryPhase;
+  attempts: ActivityAttempt[];
+  first_attempt_accuracy: number;
+  completed: boolean;
+}
+
+// ── Shared phase component props ──
+export interface StoryPhaseProps<TData = unknown> {
+  storyData: StoryData;
+  onComplete: (result: PhaseResult) => void;
+  onClose: () => void;
+  ttsSpeed?: "slow" | "normal" | "fast";
+  phaseData?: TData;
+}

@@ -456,3 +456,14 @@ function SettingsRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
+function FieldCard({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-3xl bg-card p-4 shadow-card">
+      <div className="text-xs font-bold uppercase tracking-wider text-ink-soft mb-2">
+        {label}
+      </div>
+      {children}
+    </div>
+  );
+}
