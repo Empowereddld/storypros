@@ -114,4 +114,10 @@ export function purchaseItem(
 export function awardBadge(childId: string, badgeId: string): boolean {
   const item = CATALOG.find((c) => c.id === badgeId && c.category === "badge");
   if (!item) return false;
+  const owned = getOwned(childId);
+  if (owned.has(badgeId)) return false;
+  owned.add(badgeId);
+  return true;
+}
+
   getOwned(childId).add(badg
