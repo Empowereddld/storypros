@@ -215,7 +215,7 @@ export function PhonologicalPhase({ storyData, onComplete, onClose, ttsSpeed = "
               </button>
               {isSupported() && !isDisabled && (
                 <button
-                  onClick={() => pronounceOption(opt.text)}
+                  onClick={() => pronounceOption(opt.text ?? opt.label)}
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary active:scale-90 transition-transform"
                   aria-label={`Hear ${opt.text}`}
                 >
