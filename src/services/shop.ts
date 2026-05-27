@@ -119,5 +119,3 @@ export function awardBadge(childId: string, badgeId: string): boolean {
   owned.add(badgeId);
   return true;
 }
-
-  getOwned(childId).add(badg
