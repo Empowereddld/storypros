@@ -45,8 +45,10 @@ export function isDemoSeeded(): boolean {
 
 /** Seed the full demo account — safe to call multiple times, only runs once */
 export function seedDemoAccount(): void {
+  if (typeof window === "undefined") return;
   promoteExistingRovonnDemo();
   if (isDemoSeeded()) return;
+
 
   const userId = DEMO_USER_ID;
   const childId = "demo-child-ava";
