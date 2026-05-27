@@ -259,7 +259,11 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
 
   const updateProfile = useCallback(async (updates: Partial<Profile>) => {
     if (!user) return;
-    const payload: Record<string, unknown> = {};
+    const payload: {
+      display_name?: string;
+      role?: string;
+      onboarded?: boolean;
+    } = {};
     if (updates.displayName !== undefined) payload.display_name = updates.displayName;
     if (updates.role !== undefined) payload.role = updates.role;
     if (updates.onboarded !== undefined) payload.onboarded = updates.onboarded;
@@ -269,7 +273,14 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
   }, [user]);
 
   const updateChild = useCallback(async (childId: string, updates: Partial<Child>) => {
-    const payload: Record<string, unknown> = {};
+    const payload: {
+      name?: string;
+      age?: number | null;
+      current_level?: number;
+      level_override?: boolean;
+      tts_speed?: string;
+      tts_autoplay?: boolean;
+    } = {};
     if (updates.name !== undefined) payload.name = updates.name;
     if (updates.age !== undefined) payload.age = updates.age;
     if (updates.currentLevel !== undefined) payload.current_level = updates.currentLevel;
