@@ -280,4 +280,35 @@ function checkLevelPromotion(): void {
   const recent = firstAttempts.slice(-STORIES_REQUIRED);
   const allMastered = recent.every(
     (c) => c.overallScore >= MASTERY_THRESHOLD,
+  );
+
+  if (allMastered) {
+    currentProgress.currentLevel = 2;
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * Mastery Progress — for UI display
+ * ───────────────────────────────────────────── */
+export function getMasteryProgress(): {
+  storiesMastered: number;
+  storiesRequired: number;
+  ready: boolean;
+} {
+  const seen = new Set<string>();
+  let mastered = 0;
+  for (const c of currentProgress.completions) {
+    if (!seen.has(c.storyId) && c.replayCount === 0) {
+      seen.add(c.storyId);
+      if (c.overallScore >= MASTERY_THRESHOLD) mastered++;
+    }
+  }
+  const capped = Math.min(mastered, STORIES_REQUIRED);
+  return {
+    storiesMastered: capped,
+    storiesRequired: STORIES_REQUIRED,
+    ready: capped >= STORIES_REQUIRED,
+  };
+}
+
   
