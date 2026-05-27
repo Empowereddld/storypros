@@ -179,4 +179,7 @@ export interface ActivityAttempt {
   attempt_number: number;
   selected_option: string;
   is_correct: boolean;
+  time_ms?: number;
+}
+
   brain_check_r

@@ -194,4 +194,37 @@ export function VocabularyIntroPhase({ storyData, onComplete, onClose, ttsSpeed 
                         {SFA_LABELS[key]}
                       </span>
                     )}
-                    {(isRevealed
+                    {isRevealed && (
+                      <p className="mt-1 text-base font-semibold text-primary">
+                        {displayText}
+                      </p>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-3 mb-4">
+            <TactileButton
+              onClick={handleNext}
+              disabled={!allRevealed}
+            >
+              {featureIdx === SFA_KEYS.length - 1 && wordIdx === words.length - 1
+                ? "Done"
+                : "Next"}
+            </TactileButton>
+          </div>
+        </div>
+      )}
+
+      {isOnTitleCard && (
+        <div className="mx-5 mb-4">
+          <TactileButton onClick={handleStartExploring}>
+            Let's explore!
+          </TactileButton>
+        </div>
+      )}
+    </div>
+  );
+}

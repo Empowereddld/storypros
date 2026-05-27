@@ -236,4 +236,26 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
               onClick={() => !isDisabled && setSelected(choice.id)}
               disabled={isDisabled}
               className={cn(
+                "w-full rounded-3xl border-2 bg-card p-4 text-left text-base font-semibold shadow-card transition-all btn-tactile",
+                isSelected
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-transparent text-ink",
+                isDisabled && "opacity-40 line-through",
+              )}
+            >
+              {choice.text}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mx-5 mb-4 mt-3">
+        <TactileButton onClick={handleCheck} disabled={!selected}>
+          Check
+        </TactileButton>
+      </div>
+    </div>
+  );
+}
+
                 "flex w-full items-center gap-3 rounded-3xl border-2 bg-card
