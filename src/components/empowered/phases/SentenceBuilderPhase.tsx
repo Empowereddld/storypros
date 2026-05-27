@@ -257,5 +257,3 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
     </div>
   );
 }
-
-                "flex w-full items-center gap-3 rounded-3xl border-2 bg-card
