@@ -7,12 +7,13 @@
 import { useState } from "react";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
+import type { Profile } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
 interface LoginScreenProps {
   onSignUp: () => void;
   onForgotPassword: () => void;
-  onSuccess: (role?: "parent" | "slp" | "teacher") => void;
+  onSuccess: (role?: Profile["role"]) => void;
 }
 
 export function LoginScreen({ onSignUp, onForgotPassword, onSuccess }: LoginScreenProps) {

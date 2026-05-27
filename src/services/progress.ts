@@ -33,14 +33,43 @@ interface ChildProgress {
   lastPlayedDate?: string;
 }
 
-// Singleton store for the current session
-let currentProgress: ChildProgress = {
-  completions: [],
-  attempts: [],
-  paperPlanes: 0,
-  currentLevel: 1,
-  streak: 0,
-};
+// ── localStorage persistence ──
+
+const PROGRESS_KEY = "storypros_progress";
+
+function loadProgress(): ChildProgress {
+  try {
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* ignore */ }
+  return {
+    completions: [],
+    attempts: [],
+    paperPlanes: 0,
+    currentLevel: 1,
+    streak: 0,
+  };
+}
+
+function saveProgress(): void {
+  try {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(currentProgress));
+  } catch { /* ignore */ }
+}
+
+// Singleton store — now hydrated from localStorage on load
+let currentProgress: ChildProgress = loadProgress();
+
+/** Reload progress from localStorage (useful after demo seed) */
+export function reloadProgress(): void {
+  currentProgress = loadProgress();
+}
+
+/** Seed progress directly (for demo accounts) */
+export function seedProgress(data: Partial<ChildProgress>): void {
+  currentProgress = { ...currentProgress, ...data };
+  saveProgress();
+}
 
 /** Reset progress (for demo / onboarding) */
 export function resetProgress(): void {
@@ -51,11 +80,13 @@ export function resetProgress(): void {
     currentLevel: 1,
     streak: 0,
   };
+  saveProgress();
 }
 
 /** Record all attempts from a completed phase */
 export function recordPhaseAttempts(attempts: ActivityAttempt[]): void {
   currentProgress.attempts.push(...attempts);
+  saveProgress();
 }
 
 /** Record story completion with scoring */
@@ -120,6 +151,7 @@ export function recordStoryCompletion(
   // Check for badge milestones
   checkBadgeAwards(completion);
 
+  saveProgress();
   return completion;
 }
 
@@ -167,12 +199,14 @@ export function getPaperPlanes(): number {
 export function spendPaperPlanes(amount: number): boolean {
   if (amount > currentProgress.paperPlanes) return false;
   currentProgress.paperPlanes -= amount;
+  saveProgress();
   return true;
 }
 
 /** Set current level (for parent override) */
 export function setCurrentLevel(level: number): void {
   currentProgress.currentLevel = level;
+  saveProgress();
 }
 
 /** Get current level */

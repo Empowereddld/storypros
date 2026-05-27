@@ -11,7 +11,7 @@ export interface Profile {
   id: string;
   email: string;
   displayName: string;
-  role: "parent" | "slp" | "teacher";
+  role: "parent" | "slp" | "teacher" | "admin";
   onboarded: boolean;
 }
 

@@ -67,14 +67,42 @@ const CATALOG: Collectible[] = [
   { id: "trick-sonic", category: "airplane_trick", name: "Sonic Boom", description: "Break the sound barrier!", icon: "💥", price: 60, rarity: "legendary" },
 ];
 
-// ── In-memory owned items (per child) ──
+// ── Persisted owned items (per child) ──
 
-const ownedItems = new Map<string, Set<string>>(); // childId → Set<collectibleId>
+const SHOP_KEY = "storypros_shop";
+
+function loadOwnedItems(): Map<string, Set<string>> {
+  try {
+    const raw = localStorage.getItem(SHOP_KEY);
+    if (raw) {
+      const obj = JSON.parse(raw) as Record<string, string[]>;
+      const map = new Map<string, Set<string>>();
+      for (const [k, v] of Object.entries(obj)) {
+        map.set(k, new Set(v));
+      }
+      return map;
+    }
+  } catch { /* ignore */ }
+  return new Map();
+}
+
+function saveOwnedItems(): void {
+  try {
+    const obj: Record<string, string[]> = {};
+    for (const [k, v] of ownedItems.entries()) {
+      obj[k] = [...v];
+    }
+    localStorage.setItem(SHOP_KEY, JSON.stringify(obj));
+  } catch { /* ignore */ }
+}
+
+const ownedItems = loadOwnedItems();
 
 function getOwned(childId: string): Set<string> {
   if (!ownedItems.has(childId)) {
     // Everyone starts with the classic plane
     ownedItems.set(childId, new Set(["plane-classic"]));
+    saveOwnedItems();
   }
   return ownedItems.get(childId)!;
 }
@@ -108,6 +136,7 @@ export function purchaseItem(
   if (item.price > currentPlanes) return { success: false, error: "Not enough Paper Planes" };
 
   getOwned(childId).add(collectibleId);
+  saveOwnedItems();
   return { success: true, remaining: currentPlanes - item.price };
 }
 
@@ -117,6 +146,7 @@ export function awardBadge(childId: string, badgeId: string): boolean {
   const owned = getOwned(childId);
   if (owned.has(badgeId)) return false;
   owned.add(badgeId);
+  saveOwnedItems();
   return true;
 }
 

@@ -1,5 +1,9 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { seedDemoAccount } from "@/services/demoSeed";
+
+// Seed demo data before React renders (runs once, safe to call multiple times)
+seedDemoAccount();
 
 import appCss from "../styles.css?url";
 
