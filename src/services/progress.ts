@@ -280,4 +280,49 @@ function checkLevelPromotion(): void {
   const recent = firstAttempts.slice(-STORIES_REQUIRED);
   const allMastered = recent.every(
     (c) => c.overallScore >= MASTERY_THRESHOLD,
+  );
+
+  if (allMastered) {
+    currentProgress.currentLevel = 2;
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * Mastery Progress — for UI display
+ * ───────────────────────────────────────────── */
+export function getMasteryProgress(): {
+  storiesMastered: number;
+  storiesRequired: number;
+  ready: boolean;
+} {
+  const seen = new Set<string>();
+  let mastered = 0;
+  for (const c of currentProgress.completions) {
+    if (!seen.has(c.storyId) && c.replayCount === 0) {
+      seen.add(c.storyId);
+      if (c.overallScore >= MASTERY_THRESHOLD) mastered++;
+    }
+  }
+  const capped = Math.min(mastered, STORIES_REQUIRED);
+  return {
+    storiesMastered: capped,
+    storiesRequired: STORIES_REQUIRED,
+    ready: capped >= STORIES_REQUIRED,
+  };
+}
+
   
+/* ─────────────────────────────────────────────
+ * Star Rating — 0-3 stars based on best score
+ * ───────────────────────────────────────────── */
+export function getStarRating(storyId: string): number {
+  const completions = currentProgress.completions.filter(
+    (c) => c.storyId === storyId,
+  );
+  if (completions.length === 0) return 0;
+  const best = Math.max(...completions.map((c) => c.overallScore));
+  if (best >= 90) return 3;
+  if (best >= 70) return 2;
+  if (best >= 50) return 1;
+  return 0;
+}

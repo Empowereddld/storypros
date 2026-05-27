@@ -114,4 +114,16 @@ export function purchaseItem(
 export function awardBadge(childId: string, badgeId: string): boolean {
   const item = CATALOG.find((c) => c.id === badgeId && c.category === "badge");
   if (!item) return false;
-  getOwned(childId).add(badg
+  const owned = getOwned(childId);
+  if (owned.has(badgeId)) return false;
+  owned.add(badgeId);
+  return true;
+}
+
+export const CATEGORY_META: Record<CollectibleCategory, { label: string; icon: string }> = {
+  airplane_design: { label: "Planes", icon: "✈️" },
+  badge: { label: "Badges", icon: "🏅" },
+  wallpaper: { label: "Wallpapers", icon: "🖼️" },
+  lore_card: { label: "Lore", icon: "📜" },
+  airplane_trick: { label: "Tricks", icon: "🌀" },
+};

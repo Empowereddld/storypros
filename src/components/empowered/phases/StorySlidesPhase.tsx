@@ -144,3 +144,24 @@ export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "n
               speaking
                 ? "bg-destructive text-destructive-foreground animate-pulse-glow"
                 : "bg-primary text-primary-foreground",
+            )}
+            aria-label="Listen"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+              <path d={speaking ? "M6 6h12v12H6z" : "M8 5v14l11-7z"} />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      <div className="mx-5 mb-4">
+        <button
+          onClick={handleNext}
+          className="w-full h-14 rounded-3xl bg-primary text-primary-foreground font-bold btn-tactile"
+        >
+          {page === slides.length - 1 ? "Done" : "Next"}
+        </button>
+      </div>
+    </div>
+  );
+}
