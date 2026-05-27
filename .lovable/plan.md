@@ -1,61 +1,49 @@
-## Build #1 — EmpoweredDLD Onboarding + Child Home
+## Why login doesn't work today
 
-A clickable, mobile-first prototype of the parent onboarding flow plus the child's home screen. UI only — nothing saved to a backend yet.
+On `src/components/empowered/SignUpScreen.tsx` the **Continue with Google** button is hard-disabled with an empty `onClick`, so nothing happens when you tap it. There's no Apple button at all. Email sign-up/sign-in does submit, but the whole `AuthContext` is a `localStorage` mock — there's no real account system, so signing in on another device or browser just fails.
 
-### Design system (foundation)
+Now that Lovable Cloud is connected, we can replace the mock with real auth.
 
-Built from the project's `DESIGN.md` so every later screen stays consistent:
+## Plan
 
-- **Palette**: warm cream background (`#fdf9ee`), denim blue primary (`#1e406a`), golden yellow secondary (`#ffde59`) reserved for celebration moments, soft sky blue for character bubbles.
-- **Typography**: Lexend (loaded from Google Fonts). Child-facing copy at 24px, generous 1.5× line height.
-- **Shapes**: 24px rounded cards/buttons, fully-rounded progress pills, no sharp corners.
-- **Buttons**: 56px tall, "tactile" thick-border depth (4px darker shade at the bottom), shifts down 2px on press.
-- **Cards**: white fill, soft ambient shadow.
+### 1. Enable social providers on Lovable Cloud
+- Call `supabase--configure_social_auth` with `providers: ["google", "apple"]`. This provisions the managed OAuth broker and creates `src/integrations/lovable/`.
 
-All values land in `src/styles.css` as semantic tokens so future screens (story reader, achievement gallery, etc.) can plug in without restyling.
+### 2. Add a `profiles` table (so user data survives sign-out / device switch)
+- `profiles` table linked to `auth.users(id)` with: `display_name`, `role` (`parent` | `slp` | `teacher`), `onboarded` (bool).
+- `children` table linked to `profiles(id)` with the existing fields (`name`, `age`, `current_level`, `level_override`, `tts_speed`, `tts_autoplay`).
+- RLS: users can only read/write their own profile and their own children.
+- Trigger `handle_new_user()` on `auth.users` insert → auto-create a profile row (role defaults to `parent`, can be updated after signup).
 
-### Phone frame shell
+### 3. Replace mock `AuthContext`
+- Switch `signIn` → `supabase.auth.signInWithPassword`.
+- Switch `signUp` → `supabase.auth.signUp` with `emailRedirectTo: window.location.origin`, then upsert the profile with the chosen role + display name.
+- Switch `signOut` → `supabase.auth.signOut`.
+- Switch `resetPassword` → `supabase.auth.resetPasswordForEmail(email, { redirectTo: origin + '/reset-password' })`.
+- Hydrate session via `onAuthStateChange` + initial `getSession`; fetch `profile` + `children` from Supabase.
+- Add `addChild` / `updateChild` / `markOnboarded` as Supabase writes.
+- Keep the same `useAuth()` API so the rest of the app doesn't change.
 
-A reusable `<PhoneFrame>` component renders a 390×844 device frame centered on desktop (rounded bezel, subtle shadow, status bar with time + battery icons). On real mobile it falls back to full-screen.
+### 4. Wire the Welcome screen buttons
+- **Continue with Google** → enabled; calls `lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin })`.
+- **Continue with Apple** → new button, same pattern with `"apple"`.
+- **Continue with Email** → unchanged flow (role picker → email form), but now backed by real Supabase signup.
+- After successful OAuth callback, if the user has no role yet, route to the role-picker step before the Adventure Map.
 
-### Screens & flow
+### 5. Add a `/reset-password` route
+Required so password-reset emails land somewhere that calls `supabase.auth.updateUser({ password })`.
 
-A single onboarding state machine drives navigation between screens (no URL routing inside the flow yet — feels like a native app). Order:
+### 6. Keep emails confirmable
+We will NOT enable auto-confirm — users will receive a verification email before they can sign in (Lovable's default). If you'd prefer instant sign-in without email verification for testing, say so and I'll flip `auto_confirm_email: true`.
 
-1. **Splash** (`/`) — "EmpoweredDLD / Words take flight." Paper-airplane illustration of Daria + her friend, golden glow behind the wordmark. Auto-advances after ~2s, or tap to continue.
-2. **Intro carousel** — 3 swipeable slides with page dots, Skip + Next:
-   - *Stories that grow with your child* — forest reading illustration
-   - *Vocabulary, comprehension, and storytelling* — Ms. Lopez (Daria) with speech bubble of words
-   - *Adventure through every story* — adventure map illustration, "Get Started" CTA on last slide
-3. **Welcome / sign-up** — "Welcome — let's get your child started." Two big tactile buttons: *Continue with Google*, *Continue with Email*. "Already have an account? Sign in." link. Privacy reassurance footer. (Both buttons advance to the next step — no real auth.)
-4. **Minimal data form** — 4 cards: child's first name, child's age (chip selector 4–10), parent name, parent email. Page-dot progress at top. Validation: Continue disabled until all four are filled.
-5. **Success / handoff** — short "All set, [child name]!" celebration with confetti-style golden burst, then auto-advance to the child home.
-6. **Child home — adventure map** — full illustrated map with path nodes (lessons), the child's avatar standing on a glowing golden tile, coin counter and streak in the top bar, current node pulsing. Tapping a node opens a placeholder modal ("Coming in build #2").
+## Files touched
+- `src/contexts/AuthContext.tsx` — rewrite to use Supabase
+- `src/components/empowered/SignUpScreen.tsx` — enable Google, add Apple
+- `src/components/empowered/LoginScreen.tsx` — minor; works as-is once context is real
+- `src/routes/reset-password.tsx` — new
+- New migration: `profiles`, `children`, RLS policies, signup trigger
+- `src/start.ts` — append `attachSupabaseAuth` to `functionMiddleware` if not already there
+- `src/integrations/lovable/*` — generated by `configure_social_auth`
 
-### Characters & art
-
-I'll use the four uploaded character illustrations as bitmap assets:
-- Daria + friend (paper airplane scene + intro slide 1)
-- Daria solo (intro slide 2 / Ms. Lopez stand-in)
-- The boy character (child avatar on the adventure map)
-- Ms. Lopez (yellow blazer) reserved for later builds (SLP-facing screens)
-
-The adventure map illustration and small UI icons (coin, star, book, lock) will be inline SVG so they tint cleanly with the palette.
-
-### Interactions
-
-- Swipe + dot navigation on the intro carousel
-- Form fields show inline validation; age chips toggle with a clear selected state (denim blue tint)
-- Buttons have the press-down depth animation specified in the design system
-- Confetti celebration on the success screen uses CSS keyframes (no heavy library)
-
-### Out of scope for build #1 (called out so we can plan build #2)
-
-- Real authentication and any database persistence
-- The actual lesson screens (story reader, comprehension question, level-up, etc.)
-- SLP/parent dashboards, message center, progress reports
-- Audio recording, daily language minute, achievement gallery
-
-### Acceptance check
-
-When you click *Implement plan*, you'll be able to: open the preview, see the phone frame with the splash, swipe through the 3 intro slides, "sign up" with either button, fill in the form, see the celebration, and land on the adventure map — end-to-end, in the EmpoweredDLD visual style.
+## One thing to confirm
+The current mock stores **children per parent**. To keep that working after sign-in, I need to move children into a `children` table (step 2). If you'd rather skip the children migration for now and only fix sign-in (children stay in `localStorage` for the moment), tell me and I'll drop step 2's `children` table.
