@@ -14,7 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      children: {
+        Row: {
+          age: number | null
+          created_at: string
+          current_level: number
+          id: string
+          level_override: boolean
+          name: string
+          profile_id: string
+          tts_autoplay: boolean
+          tts_speed: string
+          updated_at: string
+        }
+        Insert: {
+          age?: number | null
+          created_at?: string
+          current_level?: number
+          id?: string
+          level_override?: boolean
+          name: string
+          profile_id: string
+          tts_autoplay?: boolean
+          tts_speed?: string
+          updated_at?: string
+        }
+        Update: {
+          age?: number | null
+          created_at?: string
+          current_level?: number
+          id?: string
+          level_override?: boolean
+          name?: string
+          profile_id?: string
+          tts_autoplay?: boolean
+          tts_speed?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "children_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          email: string | null
+          id: string
+          onboarded: boolean
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          email?: string | null
+          id: string
+          onboarded?: boolean
+          role?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          email?: string | null
+          id?: string
+          onboarded?: boolean
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

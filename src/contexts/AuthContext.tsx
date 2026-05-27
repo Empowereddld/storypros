@@ -1,14 +1,9 @@
 /* ─────────────────────────────────────────────
- * Auth Context
- * Manages authentication state, parent profile,
- * and child profiles. Wraps the whole app.
- *
- * For now: mock auth (localStorage-based).
- * When Supabase is connected on Lovable, swap
- * the mock functions for real Supabase calls.
+ * Auth Context — backed by Supabase
  * ───────────────────────────────────────────── */
 
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 // ── Types ──
 
@@ -40,12 +35,14 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, displayName: string, role?: Profile["role"]) => Promise<{ error?: string }>;
   signIn: (email: string, password: string) => Promise<{ error?: string; role?: Profile["role"] }>;
+  signInWithGoogle: () => Promise<{ error?: string }>;
+  signInWithApple: () => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error?: string }>;
-  updateProfile: (updates: Partial<Profile>) => void;
-  updateChild: (childId: string, updates: Partial<Child>) => void;
-  addChild: (name: string, age: number | null) => Child;
-  markOnboarded: () => void;
+  updateProfile: (updates: Partial<Profile>) => Promise<void>;
+  updateChild: (childId: string, updates: Partial<Child>) => Promise<void>;
+  addChild: (name: string, age: number | null) => Promise<Child>;
+  markOnboarded: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -56,64 +53,51 @@ export function useAuth() {
   return ctx;
 }
 
-// ── Storage keys ──
+// ── Row mappers ──
 
-const STORAGE_KEY = "storypros_auth";
-
-interface StoredAuth {
-  user: { id: string; email: string };
-  profile: Profile;
-  children: Child[];
-  activeChildId: string | null;
+interface ProfileRow {
+  id: string;
+  email: string | null;
+  display_name: string;
+  role: string;
+  onboarded: boolean;
 }
 
-function loadStored(): StoredAuth | null {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw);
-  } catch {
-    return null;
-  }
+interface ChildRow {
+  id: string;
+  profile_id: string;
+  name: string;
+  age: number | null;
+  current_level: number;
+  level_override: boolean;
+  tts_speed: string;
+  tts_autoplay: boolean;
 }
 
-function saveStored(data: StoredAuth) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+function mapProfile(row: ProfileRow): Profile {
+  return {
+    id: row.id,
+    email: row.email ?? "",
+    displayName: row.display_name ?? "",
+    role: (row.role as Profile["role"]) ?? "parent",
+    onboarded: !!row.onboarded,
+  };
 }
 
-function clearStored() {
-  localStorage.removeItem(STORAGE_KEY);
+function mapChild(row: ChildRow): Child {
+  return {
+    id: row.id,
+    profileId: row.profile_id,
+    name: row.name,
+    age: row.age,
+    currentLevel: row.current_level,
+    levelOverride: row.level_override,
+    ttsSpeed: (row.tts_speed as Child["ttsSpeed"]) ?? "normal",
+    ttsAutoplay: !!row.tts_autoplay,
+  };
 }
 
-// ── Mock auth store (all accounts in one browser) ──
-
-const ACCOUNTS_KEY = "storypros_accounts";
-
-interface StoredAccount {
-  email: string;
-  password: string; // In production this is handled by Supabase, never stored client-side
-  userId: string;
-  profile: Profile;
-  children: Child[];
-}
-
-function loadAccounts(): StoredAccount[] {
-  try {
-    const raw = localStorage.getItem(ACCOUNTS_KEY);
-    if (!raw) return [];
-    return JSON.parse(raw);
-  } catch {
-    return [];
-  }
-}
-
-function saveAccount(account: StoredAccount) {
-  const accounts = loadAccounts();
-  const idx = accounts.findIndex((a) => a.email === account.email);
-  if (idx >= 0) accounts[idx] = account;
-  else accounts.push(account);
-  localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
-}
+const ACTIVE_CHILD_KEY = "storypros_active_child";
 
 // ── Provider ──
 
@@ -123,149 +107,225 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
   const [childProfiles, setChildProfiles] = useState<Child[]>([]);
   const [activeChild, setActiveChildState] = useState<Child | null>(null);
   const [loading, setLoading] = useState(true);
+  const pendingSignUpMetaRef = useRef<{ displayName: string; role: Profile["role"] } | null>(null);
 
-  // Load from storage on mount
-  useEffect(() => {
-    const stored = loadStored();
-    if (stored) {
-      setUser(stored.user);
-      setProfile(stored.profile);
-      setChildProfiles(stored.children);
-      if (stored.activeChildId) {
-        const child = stored.children.find((c) => c.id === stored.activeChildId);
-        if (child) setActiveChildState(child);
+  const loadProfileAndChildren = useCallback(async (userId: string, email: string) => {
+    const [{ data: profileRow }, { data: childRows }] = await Promise.all([
+      supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
+      supabase.from("children").select("*").eq("profile_id", userId).order("created_at", { ascending: true }),
+    ]);
+
+    let p: Profile | null = profileRow ? mapProfile(profileRow as ProfileRow) : null;
+
+    // If signup just happened with extra metadata, patch the profile row
+    if (p && pendingSignUpMetaRef.current) {
+      const meta = pendingSignUpMetaRef.current;
+      pendingSignUpMetaRef.current = null;
+      if (meta.displayName && (!p.displayName || p.displayName !== meta.displayName)) {
+        const { data: updated } = await supabase
+          .from("profiles")
+          .update({ display_name: meta.displayName, role: meta.role })
+          .eq("id", userId)
+          .select()
+          .maybeSingle();
+        if (updated) p = mapProfile(updated as ProfileRow);
       }
     }
-    setLoading(false);
+
+    // Fallback: trigger may not have run yet (race), create profile row
+    if (!p) {
+      const { data: inserted } = await supabase
+        .from("profiles")
+        .insert({ id: userId, email, display_name: "", role: "parent" })
+        .select()
+        .maybeSingle();
+      if (inserted) p = mapProfile(inserted as ProfileRow);
+    }
+
+    const kids = (childRows ?? []).map((r) => mapChild(r as ChildRow));
+    setProfile(p);
+    setChildProfiles(kids);
+
+    // restore active child
+    const storedId = typeof window !== "undefined" ? localStorage.getItem(ACTIVE_CHILD_KEY) : null;
+    const found = storedId ? kids.find((c) => c.id === storedId) : null;
+    setActiveChildState(found ?? kids[0] ?? null);
   }, []);
 
-  // Persist on change
-  const persist = useCallback(() => {
-    if (user && profile) {
-      saveStored({
-        user,
-        profile,
-        children: childProfiles,
-        activeChildId: activeChild?.id ?? null,
-      });
-      // Also update the accounts store
-      saveAccount({
-        email: user.email,
-        password: "", // password already stored from signup
-        userId: user.id,
-        profile,
-        children: childProfiles,
-      });
-    }
-  }, [user, profile, childProfiles, activeChild]);
-
+  // Initial session + listener
   useEffect(() => {
-    if (user) persist();
-  }, [user, profile, childProfiles, activeChild, persist]);
+    let mounted = true;
 
-  const signUp = useCallback(async (email: string, password: string, displayName: string, role: Profile["role"] = "parent") => {
-    // Check if account already exists
-    const accounts = loadAccounts();
-    if (accounts.find((a) => a.email.toLowerCase() === email.toLowerCase())) {
-      return { error: "An account with this email already exists" };
-    }
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      if (session?.user) {
+        const u = { id: session.user.id, email: session.user.email ?? "" };
+        setUser(u);
+        // defer DB calls to avoid deadlock inside the listener
+        setTimeout(() => {
+          void loadProfileAndChildren(u.id, u.email);
+        }, 0);
+      } else {
+        setUser(null);
+        setProfile(null);
+        setChildProfiles([]);
+        setActiveChildState(null);
+      }
+    });
 
-    const userId = crypto.randomUUID();
-    const newProfile: Profile = {
-      id: userId,
-      email,
-      displayName,
-      role,
-      onboarded: false,
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!mounted) return;
+      if (data.session?.user) {
+        const u = { id: data.session.user.id, email: data.session.user.email ?? "" };
+        setUser(u);
+        await loadProfileAndChildren(u.id, u.email);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
     };
+  }, [loadProfileAndChildren]);
 
-    const account: StoredAccount = {
+  const signUp = useCallback<AuthContextType["signUp"]>(async (email, password, displayName, role = "parent") => {
+    pendingSignUpMetaRef.current = { displayName, role };
+    const { error } = await supabase.auth.signUp({
       email,
       password,
-      userId,
-      profile: newProfile,
-      children: [],
-    };
-    saveAccount(account);
-
-    setUser({ id: userId, email });
-    setProfile(newProfile);
-    setChildProfiles([]);
-    setActiveChildState(null);
-
+      options: {
+        emailRedirectTo: `${window.location.origin}/`,
+        data: { display_name: displayName, role },
+      },
+    });
+    if (error) {
+      pendingSignUpMetaRef.current = null;
+      return { error: error.message };
+    }
     return {};
   }, []);
 
-  const signIn = useCallback(async (email: string, password: string) => {
-    const accounts = loadAccounts();
-    const account = accounts.find(
-      (a) => a.email.toLowerCase() === email.toLowerCase() && a.password === password,
-    );
-
-    if (!account) {
-      return { error: "Invalid email or password" };
+  const signIn = useCallback<AuthContextType["signIn"]>(async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) return { error: error.message };
+    // Profile load will be triggered by onAuthStateChange. Try to read role quickly:
+    if (data.user) {
+      const { data: row } = await supabase.from("profiles").select("role").eq("id", data.user.id).maybeSingle();
+      return { role: (row?.role as Profile["role"]) ?? "parent" };
     }
+    return {};
+  }, []);
 
-    setUser({ id: account.userId, email: account.email });
-    setProfile(account.profile);
-    setChildProfiles(account.children);
-    if (account.children.length > 0) {
-      setActiveChildState(account.children[0]);
+  const signInWithGoogle = useCallback(async () => {
+    try {
+      const { lovable } = await import("@/integrations/lovable");
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) return { error: result.error instanceof Error ? result.error.message : String(result.error) };
+      return {};
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : String(e) };
     }
+  }, []);
 
-    return { role: account.profile.role };
+  const signInWithApple = useCallback(async () => {
+    try {
+      const { lovable } = await import("@/integrations/lovable");
+      const result = await lovable.auth.signInWithOAuth("apple", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) return { error: result.error instanceof Error ? result.error.message : String(result.error) };
+      return {};
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : String(e) };
+    }
   }, []);
 
   const signOut = useCallback(async () => {
-    setUser(null);
-    setProfile(null);
-    setChildProfiles([]);
-    setActiveChildState(null);
-    clearStored();
+    await supabase.auth.signOut();
+    if (typeof window !== "undefined") localStorage.removeItem(ACTIVE_CHILD_KEY);
   }, []);
 
-  const resetPassword = useCallback(async (_email: string) => {
-    // In mock auth, just return success
-    // Real implementation: supabase.auth.resetPasswordForEmail(email)
+  const resetPassword = useCallback(async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) return { error: error.message };
     return {};
   }, []);
 
-  const updateProfile = useCallback((updates: Partial<Profile>) => {
-    setProfile((prev) => prev ? { ...prev, ...updates } : prev);
+  const updateProfile = useCallback(async (updates: Partial<Profile>) => {
+    if (!user) return;
+    const payload: {
+      display_name?: string;
+      role?: string;
+      onboarded?: boolean;
+    } = {};
+    if (updates.displayName !== undefined) payload.display_name = updates.displayName;
+    if (updates.role !== undefined) payload.role = updates.role;
+    if (updates.onboarded !== undefined) payload.onboarded = updates.onboarded;
+    if (Object.keys(payload).length === 0) return;
+    const { data } = await supabase.from("profiles").update(payload).eq("id", user.id).select().maybeSingle();
+    if (data) setProfile(mapProfile(data as ProfileRow));
+  }, [user]);
+
+  const updateChild = useCallback(async (childId: string, updates: Partial<Child>) => {
+    const payload: {
+      name?: string;
+      age?: number | null;
+      current_level?: number;
+      level_override?: boolean;
+      tts_speed?: string;
+      tts_autoplay?: boolean;
+    } = {};
+    if (updates.name !== undefined) payload.name = updates.name;
+    if (updates.age !== undefined) payload.age = updates.age;
+    if (updates.currentLevel !== undefined) payload.current_level = updates.currentLevel;
+    if (updates.levelOverride !== undefined) payload.level_override = updates.levelOverride;
+    if (updates.ttsSpeed !== undefined) payload.tts_speed = updates.ttsSpeed;
+    if (updates.ttsAutoplay !== undefined) payload.tts_autoplay = updates.ttsAutoplay;
+    if (Object.keys(payload).length === 0) return;
+    const { data } = await supabase.from("children").update(payload).eq("id", childId).select().maybeSingle();
+    if (data) {
+      const mapped = mapChild(data as ChildRow);
+      setChildProfiles((prev) => prev.map((c) => (c.id === childId ? mapped : c)));
+      setActiveChildState((prev) => (prev && prev.id === childId ? mapped : prev));
+    }
   }, []);
 
-  const updateChild = useCallback((childId: string, updates: Partial<Child>) => {
-    setChildProfiles((prev) =>
-      prev.map((c) => (c.id === childId ? { ...c, ...updates } : c)),
-    );
-    setActiveChildState((prev) =>
-      prev && prev.id === childId ? { ...prev, ...updates } : prev,
-    );
-  }, []);
-
-  const addChild = useCallback((name: string, age: number | null): Child => {
-    const child: Child = {
-      id: crypto.randomUUID(),
-      profileId: user?.id ?? "",
-      name,
-      age,
-      currentLevel: 1,
-      levelOverride: false,
-      ttsSpeed: "normal",
-      ttsAutoplay: false,
-    };
-    setChildProfiles((prev) => [...prev, child]);
-    setActiveChildState(child);
-    return child;
+  const addChild = useCallback(async (name: string, age: number | null): Promise<Child> => {
+    if (!user) throw new Error("Not signed in");
+    const { data, error } = await supabase
+      .from("children")
+      .insert({ profile_id: user.id, name, age })
+      .select()
+      .single();
+    if (error || !data) throw new Error(error?.message ?? "Failed to add child");
+    const mapped = mapChild(data as ChildRow);
+    setChildProfiles((prev) => [...prev, mapped]);
+    setActiveChildState(mapped);
+    if (typeof window !== "undefined") localStorage.setItem(ACTIVE_CHILD_KEY, mapped.id);
+    return mapped;
   }, [user]);
 
   const setActiveChild = useCallback((child: Child) => {
     setActiveChildState(child);
+    if (typeof window !== "undefined") localStorage.setItem(ACTIVE_CHILD_KEY, child.id);
   }, []);
 
-  const markOnboarded = useCallback(() => {
-    setProfile((prev) => prev ? { ...prev, onboarded: true } : prev);
-  }, []);
+  const markOnboarded = useCallback(async () => {
+    if (!user) return;
+    const { data } = await supabase
+      .from("profiles")
+      .update({ onboarded: true })
+      .eq("id", user.id)
+      .select()
+      .maybeSingle();
+    if (data) setProfile(mapProfile(data as ProfileRow));
+  }, [user]);
 
   return (
     <AuthContext.Provider
@@ -278,6 +338,8 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
         loading,
         signUp,
         signIn,
+        signInWithGoogle,
+        signInWithApple,
         signOut,
         resetPassword,
         updateProfile,

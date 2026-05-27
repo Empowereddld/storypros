@@ -16,7 +16,7 @@ interface SignUpScreenProps {
 type AccountRole = "parent" | "slp" | "teacher";
 
 export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
-  const { signUp } = useAuth();
+  const { signUp, signInWithGoogle, signInWithApple } = useAuth();
   const [mode, setMode] = useState<"choose" | "role" | "email">("choose");
   const [accountRole, setAccountRole] = useState<AccountRole>("parent");
   const [displayName, setDisplayName] = useState("");
@@ -24,6 +24,19 @@ export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [oauthLoading, setOauthLoading] = useState<"google" | "apple" | null>(null);
+
+  async function handleOAuth(provider: "google" | "apple") {
+    setOauthLoading(provider);
+    setError("");
+    const fn = provider === "google" ? signInWithGoogle : signInWithApple;
+    const result = await fn();
+    if (result.error) {
+      setError(result.error);
+      setOauthLoading(null);
+    }
+    // On success the browser is redirected; no further action needed.
+  }
 
   async function handleEmailSignUp(e: React.FormEvent) {
     e.preventDefault();
@@ -208,13 +221,31 @@ export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
       <div className="flex-1" />
 
       {/* Auth options */}
-      <div className="space-y-4 animate-slide-up">
-        <TactileButton onClick={() => {}} leadingIcon={<GoogleMark />} disabled>
-          Continue with Google
+      <div className="space-y-3 animate-slide-up">
+        <TactileButton
+          onClick={() => handleOAuth("google")}
+          leadingIcon={<GoogleMark />}
+          disabled={oauthLoading !== null}
+        >
+          {oauthLoading === "google" ? "Connecting…" : "Continue with Google"}
+        </TactileButton>
+        <TactileButton
+          onClick={() => handleOAuth("apple")}
+          leadingIcon={<AppleMark />}
+          disabled={oauthLoading !== null}
+          variant="secondary"
+        >
+          {oauthLoading === "apple" ? "Connecting…" : "Continue with Apple"}
         </TactileButton>
         <TactileButton onClick={() => setMode("role")} leadingIcon={<MailIcon />}>
           Continue with Email
         </TactileButton>
+
+        {error && (
+          <div className="rounded-2xl bg-destructive/10 border border-destructive/30 p-3">
+            <p className="text-sm font-semibold text-destructive">{error}</p>
+          </div>
+        )}
 
         <button
           type="button"
@@ -229,6 +260,16 @@ export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
         </p>
       </div>
     </div>
+  );
+}
+
+function AppleMark() {
+  return (
+    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white">
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#000" aria-hidden>
+        <path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9s-2-.9-3.3-.9c-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.3.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.9 3.4-.9s2 .9 3.4.9c1.4 0 2.3-1.3 3.1-2.6.7-1 1.3-2.1 1.7-3.3-2.6-1-3.4-3.9-3.4-3.7zM14 5.6c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.5-.7.8-1.3 2-1.1 3.2 1.2.1 2.3-.5 3-1.4z" />
+      </svg>
+    </span>
   );
 }
 
