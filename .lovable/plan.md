@@ -1,44 +1,30 @@
-## Audit results
+## Full audit results
 
-I reviewed everything that landed via the GitHub pushes (auth context, routes, Supabase integration, Lovable OAuth wrapper, migrations). Most of it is wired correctly:
+I walked the entire app (routes, AuthContext, Supabase clients, Lovable OAuth broker, sign-in/up screens, reset-password route, root layout, admin route, and all services) to verify the Claude + Codex GitHub pushes are wired correctly.
 
-- `AuthContext` is real Supabase, with `onAuthStateChange` + `getSession`, `signUp/signIn/signOut/resetPassword`, Google + Apple via `@/integrations/lovable`.
-- `SignUpScreen` calls `signInWithGoogle` / `signInWithApple` on its buttons.
-- `profiles` + `children` tables exist with RLS, policies, `handle_new_user` trigger on `auth.users`, and `updated_at` trigger.
-- Routes shell is intact (`__root.tsx`, `index.tsx`, `reset-password.tsx`, `admin/content.tsx`).
-- `src/integrations/lovable/index.ts` properly hands tokens back to `supabase.auth.setSession`.
+### What's already wired correctly
+- **Auth flow** — `AuthContext` uses real Supabase with `onAuthStateChange` + `getSession`, profile/children load after sign-in, signup metadata patch + fallback insert.
+- **LoginScreen** — Sign-in button now correctly uses `type="submit"`; `TactileButton` extends `ButtonHTMLAttributes` so the type is forwarded.
+- **SignUpScreen** — Google/Apple buttons call `signInWithGoogle` / `signInWithApple` through the Lovable broker; email/password signup wired to `useAuth().signUp`.
+- **`/reset-password` route** — Exists, calls `supabase.auth.updateUser`, navigates back home.
+- **Root** — `AuthProvider` wraps `<Outlet />`; root metadata + 404 in place.
+- **DB** — `profiles` + `children` tables have RLS scoped to `auth.uid()`, `handle_new_user` trigger inserts profile on signup, Data API GRANTs for `authenticated` + `service_role` were applied in the last migration.
+- **No server functions** — App uses only the browser Supabase client, so the `attachSupabaseAuth` middleware in `src/start.ts` is not required.
 
-However two real wiring bugs remain:
+### One real gap remains
 
-### 1. `profiles` / `children` have NO Data API grants
+**Google + Apple providers are not enabled in Supabase Auth.** The frontend correctly calls them via the Lovable broker, but the first attempt will fail with `Unsupported provider: provider is not enabled` until I run `configure_social_auth` with `providers: ["google", "apple"]`. This is the canonical "wire the broker AND enable in Supabase" pairing the Lovable docs require.
 
-Current grants on both tables: only `sandbox_exec`. PostgREST roles (`authenticated`, `service_role`, `anon`) have nothing. As soon as the AuthContext tries `supabase.from("profiles").select(...)` after sign-in, it will fail with a permission error and the user will appear "logged in but broken."
+### Known mocks (pre-existing, not from the pushes)
 
-Fix via migration:
-```sql
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.profiles TO authenticated;
-GRANT ALL ON public.profiles TO service_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.children TO authenticated;
-GRANT ALL ON public.children TO service_role;
-```
-(No `anon` grant — every policy is scoped to `auth.uid()`.)
+- `src/services/subscription.ts` — uses `localStorage` for trial/subscription state.
+- `src/services/slp.ts` — file is explicitly labeled "Mock/localStorage for now — swap for Supabase" (caseload, assignments, notes).
 
-### 2. `LoginScreen` sign-in button does nothing
-
-The form has a proper `handleSubmit` that calls `signIn`, but the submit button is:
-```tsx
-<TactileButton onClick={() => {}} disabled={...}>Sign in</TactileButton>
-```
-`onClick` is an empty no-op and there's no `type="submit"`, so pressing the button never submits the form. Email/password login is currently dead on this screen.
-
-Fix: change to `<TactileButton type="submit" onClick={handleSubmit} ...>` (and ensure `TactileButton` forwards `type`; if it doesn't, just wire `onClick={handleSubmit}` which already accepts the event).
+These were intentional placeholders before Cloud was added. Not blocking auth or the build, so I'm flagging them but **not changing them** in this pass unless you ask.
 
 ## Plan
 
-1. Add a migration granting Data API privileges on `profiles` and `children` to `authenticated` and `service_role`.
-2. Patch `src/components/empowered/LoginScreen.tsx` so the Sign-in button actually triggers `handleSubmit` (wire `onClick={handleSubmit}` and add `type="submit"`; verify `TactileButton` forwards `type`, otherwise relying on `onClick` is enough).
-3. Quick verification: typecheck, then a smoke check that a fresh signup → profile row appears and login completes without permission errors.
+1. Enable Google and Apple providers in Supabase Auth via `configure_social_auth` so the OAuth buttons in `SignUpScreen` actually complete the flow.
+2. Smoke check: verify build is clean and confirm via a brief read that no other pushed file imports a missing module or stale mock auth path.
 
-No other files need changes. Google/Apple buttons, reset-password route, signup trigger, RLS, and the Supabase clients are all correctly in place.
-
-Nothing else from the external pushes is broken.
+No code edits are needed — only the provider config change. If you want me to also migrate `subscription.ts` / `slp.ts` off `localStorage` onto Supabase in a follow-up, say the word and I'll plan that separately.
