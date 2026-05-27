@@ -16,7 +16,7 @@ interface SignUpScreenProps {
 type AccountRole = "parent" | "slp" | "teacher";
 
 export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
-  const { signUp } = useAuth();
+  const { signUp, signInWithGoogle, signInWithApple } = useAuth();
   const [mode, setMode] = useState<"choose" | "role" | "email">("choose");
   const [accountRole, setAccountRole] = useState<AccountRole>("parent");
   const [displayName, setDisplayName] = useState("");
@@ -24,6 +24,19 @@ export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [oauthLoading, setOauthLoading] = useState<"google" | "apple" | null>(null);
+
+  async function handleOAuth(provider: "google" | "apple") {
+    setOauthLoading(provider);
+    setError("");
+    const fn = provider === "google" ? signInWithGoogle : signInWithApple;
+    const result = await fn();
+    if (result.error) {
+      setError(result.error);
+      setOauthLoading(null);
+    }
+    // On success the browser is redirected; no further action needed.
+  }
 
   async function handleEmailSignUp(e: React.FormEvent) {
     e.preventDefault();
