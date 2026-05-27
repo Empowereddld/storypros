@@ -89,7 +89,7 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess }: LoginScre
             </div>
           )}
 
-          <TactileButton onClick={() => {}} disabled={loading || !email.trim() || !password}>
+          <TactileButton type="submit" disabled={loading || !email.trim() || !password}>
             {loading ? "Signing in..." : "Sign in"}
           </TactileButton>
 
