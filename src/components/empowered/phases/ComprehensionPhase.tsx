@@ -16,8 +16,7 @@ import dariaSolo from "@/assets/daria-solo.png";
 type BrainCheckState =
   | { type: "none" }
   | { type: "correct"; message: string }
-  | { type: "wrong"; message: string }
-  | { type: "explain"; actual: string; expected: string };
+  | { type: "wrong"; message: string };
 
 export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const questions = storyData.comprehension_questions;
