@@ -34,10 +34,14 @@ export const Route = createRootRoute({
       { name: "description", content: "Evidence-based reading adventures designed by speech-language pathologists for kids with Developmental Language Disorder." },
       { name: "author", content: "EmpoweredDLD" },
       { property: "og:title", content: "EmpoweredDLD — Words take flight" },
-      { property: "og:description", content: "Evidence-based reading adventures designed by speech-language pathologists for kids with DLD." },
+      { property: "og:description", content: "Evidence-based reading adventures designed by speech-language pathologists for kids with Developmental Language Disorder." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "EmpoweredDLD — Words take flight" },
+      { name: "twitter:description", content: "Evidence-based reading adventures designed by speech-language pathologists for kids with Developmental Language Disorder." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0d202b3b-9b6d-473e-bca4-033b5ae466a0/id-preview-1b4e8886--3cc1090b-e5f1-426f-9234-1408a01f8435.lovable.app-1779147773726.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0d202b3b-9b6d-473e-bca4-033b5ae466a0/id-preview-1b4e8886--3cc1090b-e5f1-426f-9234-1408a01f8435.lovable.app-1779147773726.png" },
     ],
     links: [
       {
