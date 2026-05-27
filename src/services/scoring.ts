@@ -21,6 +21,7 @@
  * ───────────────────────────────────────────── */
 
 import type { ActivityAttempt, SkillDomain, PhaseResult } from "@/types/story";
+export type { SkillDomain, PhaseResult } from "@/types/story";
 
 // ── Domain weights ──
 
