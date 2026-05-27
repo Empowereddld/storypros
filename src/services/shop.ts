@@ -119,3 +119,11 @@ export function awardBadge(childId: string, badgeId: string): boolean {
   owned.add(badgeId);
   return true;
 }
+
+export const CATEGORY_META: Record<CollectibleCategory, { label: string; icon: string }> = {
+  airplane_design: { label: "Planes", icon: "✈️" },
+  badge: { label: "Badges", icon: "🏅" },
+  wallpaper: { label: "Wallpapers", icon: "🖼️" },
+  lore_card: { label: "Lore", icon: "📜" },
+  airplane_trick: { label: "Tricks", icon: "🌀" },
+};
