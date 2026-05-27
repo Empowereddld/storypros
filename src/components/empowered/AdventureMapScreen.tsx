@@ -520,6 +520,6 @@ function CrownIcon() {
     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-secondary-foreground" fill="currentColor" aria-hidden>
       <path d="M2 8l4 4 6-6 6 6 4-4-2 12H4L2 8z" />
     </svg>
-    </svg>
+
   );
 }
