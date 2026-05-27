@@ -1,30 +1,87 @@
-## Full audit results
+# Convert in-app "steps" to real routes
 
-I walked the entire app (routes, AuthContext, Supabase clients, Lovable OAuth broker, sign-in/up screens, reset-password route, root layout, admin route, and all services) to verify the Claude + Codex GitHub pushes are wired correctly.
+Today `src/routes/index.tsx` is a giant state machine that swaps ~17 screen components based on a local `step` string. Nothing has a URL, the back button doesn't work, and links can't be shared. I'll give every screen its own route under `src/routes/` so the navigator drives the app.
 
-### What's already wired correctly
-- **Auth flow** — `AuthContext` uses real Supabase with `onAuthStateChange` + `getSession`, profile/children load after sign-in, signup metadata patch + fallback insert.
-- **LoginScreen** — Sign-in button now correctly uses `type="submit"`; `TactileButton` extends `ButtonHTMLAttributes` so the type is forwarded.
-- **SignUpScreen** — Google/Apple buttons call `signInWithGoogle` / `signInWithApple` through the Lovable broker; email/password signup wired to `useAuth().signUp`.
-- **`/reset-password` route** — Exists, calls `supabase.auth.updateUser`, navigates back home.
-- **Root** — `AuthProvider` wraps `<Outlet />`; root metadata + 404 in place.
-- **DB** — `profiles` + `children` tables have RLS scoped to `auth.uid()`, `handle_new_user` trigger inserts profile on signup, Data API GRANTs for `authenticated` + `service_role` were applied in the last migration.
-- **No server functions** — App uses only the browser Supabase client, so the `attachSupabaseAuth` middleware in `src/start.ts` is not required.
+## New route map
 
-### One real gap remains
+Public (no auth required):
+- `/` → Splash (auto-forwards signed-in users to their home)
+- `/intro` → IntroCarousel
+- `/signup` → SignUpScreen
+- `/login` → LoginScreen
+- `/forgot-password` → ForgotPasswordScreen
+- `/reset-password` → existing, unchanged
 
-**Google + Apple providers are not enabled in Supabase Auth.** The frontend correctly calls them via the Lovable broker, but the first attempt will fail with `Unsupported provider: provider is not enabled` until I run `configure_social_auth` with `providers: ["google", "apple"]`. This is the canonical "wire the broker AND enable in Supabase" pairing the Lovable docs require.
+Authenticated layout (`_authenticated.tsx`, redirects to `/login` if no session):
+- `/onboarding/profile` → DataFormScreen (add child)
+- `/onboarding/success` → SuccessScreen
+- `/onboarding/assessment` → OnboardingAssessment
+- `/home` → AdventureMapScreen (parent/child)
+- `/library` → LibraryScreen
+- `/achievements` → AchievementGalleryScreen
+- `/shop` → CollectibleShopScreen
+- `/settings` → SettingsScreen
+- `/dashboard` → ParentDashboardScreen
+- `/slp` → SlpDashboardScreen (for `role === "slp" | "teacher"`)
+- `/paywall` → PaywallScreen (reads `?storyId=` from search)
+- `/story/$storyId` → StoryEngine wrapped in StoryErrorBoundary
 
-### Known mocks (pre-existing, not from the pushes)
+Admin (unchanged): `/admin/content`.
 
-- `src/services/subscription.ts` — uses `localStorage` for trial/subscription state.
-- `src/services/slp.ts` — file is explicitly labeled "Mock/localStorage for now — swap for Supabase" (caseload, assignments, notes).
+## Routing/redirect rules
 
-These were intentional placeholders before Cloud was added. Not blocking auth or the build, so I'm flagging them but **not changing them** in this pass unless you ask.
+A small `beforeLoad` in `_authenticated.tsx` (and on `/login`, `/signup`) handles all the role-based gating that's currently in `getInitialStep()`:
+- Not signed in + protected route → redirect `/login`.
+- Signed in + on `/login` or `/signup` → redirect to home/slp.
+- Signed in, role=slp/teacher → redirect non-slp app routes to `/slp`.
+- Signed in, parent, `!profile.onboarded` → redirect to `/onboarding/profile`.
+- `/` always renders Splash; a "Continue" button just navigates to `/intro` (or to the right home if already signed in).
 
-## Plan
+## Screen wiring changes
 
-1. Enable Google and Apple providers in Supabase Auth via `configure_social_auth` so the OAuth buttons in `SignUpScreen` actually complete the flow.
-2. Smoke check: verify build is clean and confirm via a brief read that no other pushed file imports a missing module or stale mock auth path.
+Each screen currently takes callbacks like `onClose`, `onContinue`, `onNavigate`. I'll keep the components' props as-is and pass `useNavigate()`-based handlers from the new route files — no changes to the empowered components themselves. Examples:
+- `SettingsScreen onClose={() => navigate({ to: "/home" })}`
+- `AdventureMapScreen onNavigate={(dest, storyId) => navigate(...)}` maps `"story"` → `/story/$storyId`, `"achievements"` → `/achievements`, etc.
+- `LibraryScreen onPlayStory={(id) => navigate({ to: "/story/$storyId", params: { storyId: id } })}`.
+- `PaywallScreen` reads `storyId` from `Route.useSearch()` to look up the title; subscription path navigates to `/home`.
+- `StoryEngine` route loads the story via `getStory(storyId)` in the loader; `notFoundComponent` handles unknown IDs; `onFinish` navigates to `/home`.
 
-No code edits are needed — only the provider config change. If you want me to also migrate `subscription.ts` / `slp.ts` off `localStorage` onto Supabase in a follow-up, say the word and I'll plan that separately.
+Paywall gating (currently inside `handlePlayStory`) moves into `/story/$storyId`'s `beforeLoad`: if `!canAccessStory(activeChildId, storyId)`, throw `redirect({ to: "/paywall", search: { storyId } })`.
+
+`processExpiredSubscriptions()` moves into `_authenticated.tsx`'s component (one-shot `useEffect`).
+
+## Files to add
+
+```
+src/routes/
+  _authenticated.tsx
+  _authenticated/home.tsx
+  _authenticated/library.tsx
+  _authenticated/achievements.tsx
+  _authenticated/shop.tsx
+  _authenticated/settings.tsx
+  _authenticated/dashboard.tsx
+  _authenticated/slp.tsx
+  _authenticated/paywall.tsx
+  _authenticated/story.$storyId.tsx
+  _authenticated/onboarding.profile.tsx
+  _authenticated/onboarding.success.tsx
+  _authenticated/onboarding.assessment.tsx
+  intro.tsx
+  signup.tsx
+  login.tsx
+  forgot-password.tsx
+```
+
+`src/routes/index.tsx` shrinks to just the Splash screen + redirect logic. The `PhoneFrame` wrapper moves into `__root.tsx` (or a thin layout) so every page keeps the device frame.
+
+## Not in scope
+
+- No visual changes to the screens themselves.
+- No new features, no auth/RBAC changes beyond moving the existing gating into route guards.
+- Admin route untouched.
+
+## Notes for review
+
+- Deep-linking now works (e.g. `/story/dan-and-the-paper-cut`), which is a behavior change vs. the current step machine where you can only reach a story by clicking through the map.
+- The slide-up animation that's keyed on `step` will instead key on route pathname inside `__root.tsx` so the transition feel is preserved.
