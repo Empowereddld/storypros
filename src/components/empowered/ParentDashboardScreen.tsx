@@ -650,4 +650,14 @@ function MiniBarChart({
               )}
               style={{ height }}
             />
+            <span className="text-[9px] font-semibold text-ink-soft mt-1">
+              {d.index + 1}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
             <span className="t
