@@ -312,3 +312,17 @@ export function getMasteryProgress(): {
 }
 
   
+/* ─────────────────────────────────────────────
+ * Star Rating — 0-3 stars based on best score
+ * ───────────────────────────────────────────── */
+export function getStarRating(storyId: string): number {
+  const completions = currentProgress.completions.filter(
+    (c) => c.storyId === storyId,
+  );
+  if (completions.length === 0) return 0;
+  const best = Math.max(...completions.map((c) => c.overallScore));
+  if (best >= 90) return 3;
+  if (best >= 70) return 2;
+  if (best >= 50) return 1;
+  return 0;
+}
