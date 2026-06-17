@@ -1,22 +1,16 @@
 /* ─────────────────────────────────────────────
  * Error Boundary
- * Catches React render errors and shows a
- * friendly recovery UI instead of a white screen.
- *
- * Usage:
- *   <StoryErrorBoundary onReset={() => goHome()}>
- *     <StoryEngine ... />
- *   </StoryErrorBoundary>
+ * Catches React render errors and shows a friendly,
+ * branded recovery UI instead of a white screen.
  * ───────────────────────────────────────────── */
 
 import { Component, type ReactNode } from "react";
-import dariaSolo from "@/assets/daria-solo.png";
+import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
-  /** Called when the user taps "Go back" — navigate them somewhere safe */
   onReset: () => void;
-  /** Optional label for context (e.g. "story", "dashboard") */
   context?: string;
 }
 
@@ -36,7 +30,6 @@ export class StoryErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    // In production: send to error tracking (Sentry, etc.)
     console.error(`[StoryErrorBoundary] Caught error in ${this.props.context ?? "component"}:`, error, info.componentStack);
   }
 
@@ -52,50 +45,46 @@ export class StoryErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex h-full flex-col items-center justify-center bg-cream px-6 text-center">
-          {/* Daria looking concerned */}
-          <img
-            src={dariaSolo}
-            alt=""
-            className="h-28 w-auto object-contain mb-4 drop-shadow-lg"
-          />
+        <div className="relative flex h-full flex-col items-center justify-center bg-cream px-6 text-center">
+          <AuthBackdrop />
+          <div className="relative z-10 flex w-full max-w-[300px] flex-col items-center">
+            <StoryProsLogo layout="row" size="sm" />
+            <Star className="mt-4 h-7 w-7 text-secondary" />
+            <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-ink">
+              Almost there!
+            </h2>
+            <p className="font-display text-xl font-extrabold text-primary">Let's try again.</p>
+            <img src={dariaAndFriend} alt="" className="mt-4 h-28 w-auto object-contain" />
+            <p className="mt-3 text-sm font-medium leading-relaxed text-ink-soft">
+              Don't worry — your progress is saved! Let's give that another go.
+            </p>
 
-          <h2 className="font-display text-[26px] font-extrabold text-primary leading-tight mb-2">
-            Oops! Something went wrong
-          </h2>
+            <div className="mt-6 w-full space-y-3">
+              <button
+                onClick={this.handleRetry}
+                className="h-12 w-full rounded-2xl bg-secondary font-bold text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)] transition-all active:translate-y-[2px]"
+              >
+                Try Again
+              </button>
+              <button
+                onClick={this.handleReset}
+                className="h-12 w-full rounded-2xl border-2 border-primary/30 bg-card font-bold text-primary shadow-card transition-all active:scale-[0.98]"
+              >
+                Go Back
+              </button>
+            </div>
 
-          <p className="text-sm text-ink-soft leading-relaxed mb-6 max-w-[280px]">
-            Don't worry — your progress is saved! Let's try that again.
-          </p>
-
-          {/* Action buttons */}
-          <div className="w-full max-w-[280px] space-y-3">
-            <button
-              onClick={this.handleRetry}
-              className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-bold text-base shadow-[0_4px_0_0_var(--primary-deep)] hover:shadow-[0_2px_0_0_var(--primary-deep)] hover:translate-y-[2px] transition-all active:scale-[0.98]"
-            >
-              Try Again
-            </button>
-
-            <button
-              onClick={this.handleReset}
-              className="w-full h-12 rounded-2xl bg-card border-2 border-primary/20 text-primary font-bold text-base shadow-card transition-all active:scale-[0.98]"
-            >
-              Go Back to Map
-            </button>
+            {this.state.error && (
+              <details className="mt-6 w-full text-left">
+                <summary className="cursor-pointer text-[10px] font-bold uppercase tracking-wider text-ink-soft/50">
+                  Error details
+                </summary>
+                <pre className="mt-2 overflow-x-auto whitespace-pre-wrap break-words rounded-xl bg-card p-3 text-[10px] text-ink-soft">
+                  {this.state.error.message}
+                </pre>
+              </details>
+            )}
           </div>
-
-          {/* Error detail (collapsed, for debugging) */}
-          {this.state.error && (
-            <details className="mt-6 w-full max-w-[280px] text-left">
-              <summary className="text-[10px] font-bold uppercase tracking-wider text-ink-soft/50 cursor-pointer">
-                Error details
-              </summary>
-              <pre className="mt-2 rounded-xl bg-card p-3 text-[10px] text-ink-soft overflow-x-auto whitespace-pre-wrap break-words">
-                {this.state.error.message}
-              </pre>
-            </details>
-          )}
         </div>
       );
     }

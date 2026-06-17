@@ -24,6 +24,7 @@ import { Route as AuthenticatedPaywallRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedLibraryRouteImport } from './routes/_authenticated/library'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
+import { Route as AuthenticatedSelectChildRouteImport } from './routes/_authenticated/select-child'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedStoryStoryIdRouteImport } from './routes/_authenticated/story.$storyId'
@@ -105,6 +106,11 @@ const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
   path: '/map',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedSelectChildRoute = AuthenticatedSelectChildRouteImport.update({
+  id: '/select-child',
+  path: '/select-child',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -152,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/home': typeof AuthenticatedHomeRoute
   '/map': typeof AuthenticatedMapRoute
+  '/select-child': typeof AuthenticatedSelectChildRoute
   '/library': typeof AuthenticatedLibraryRoute
   '/paywall': typeof AuthenticatedPaywallRoute
   '/settings': typeof AuthenticatedSettingsRoute
@@ -174,6 +181,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/home': typeof AuthenticatedHomeRoute
   '/map': typeof AuthenticatedMapRoute
+  '/select-child': typeof AuthenticatedSelectChildRoute
   '/library': typeof AuthenticatedLibraryRoute
   '/paywall': typeof AuthenticatedPaywallRoute
   '/settings': typeof AuthenticatedSettingsRoute
@@ -198,6 +206,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/map': typeof AuthenticatedMapRoute
+  '/_authenticated/select-child': typeof AuthenticatedSelectChildRoute
   '/_authenticated/library': typeof AuthenticatedLibraryRoute
   '/_authenticated/paywall': typeof AuthenticatedPaywallRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
@@ -222,6 +231,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/home'
     | '/map'
+    | '/select-child'
     | '/library'
     | '/paywall'
     | '/settings'
@@ -244,6 +254,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/home'
     | '/map'
+    | '/select-child'
     | '/library'
     | '/paywall'
     | '/settings'
@@ -267,6 +278,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/home'
     | '/_authenticated/map'
+    | '/_authenticated/select-child'
     | '/_authenticated/library'
     | '/_authenticated/paywall'
     | '/_authenticated/settings'
@@ -397,6 +409,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMapRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/select-child': {
+      id: '/_authenticated/select-child'
+      path: '/select-child'
+      fullPath: '/select-child'
+      preLoaderRoute: typeof AuthenticatedSelectChildRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -447,6 +466,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedMapRoute: typeof AuthenticatedMapRoute
+  AuthenticatedSelectChildRoute: typeof AuthenticatedSelectChildRoute
   AuthenticatedLibraryRoute: typeof AuthenticatedLibraryRoute
   AuthenticatedPaywallRoute: typeof AuthenticatedPaywallRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
@@ -463,6 +483,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedMapRoute: AuthenticatedMapRoute,
+  AuthenticatedSelectChildRoute: AuthenticatedSelectChildRoute,
   AuthenticatedLibraryRoute: AuthenticatedLibraryRoute,
   AuthenticatedPaywallRoute: AuthenticatedPaywallRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,

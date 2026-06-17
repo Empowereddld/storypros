@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, Navigate, useLocation } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
+import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { processExpiredSubscriptions } from "@/services/subscription";
 
@@ -19,9 +20,7 @@ function AuthenticatedLayout() {
   if (loading) {
     return (
       <PhoneFrame>
-        <div className="flex h-full items-center justify-center bg-cream">
-          <span className="text-4xl animate-float">✈️</span>
-        </div>
+        <LoadingScreen />
       </PhoneFrame>
     );
   }

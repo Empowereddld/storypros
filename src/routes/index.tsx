@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Navigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { SplashScreen } from "@/components/empowered/SplashScreen";
+import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const Route = createFileRoute("/")({
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { user, profile, loading } = useAuth();
+  const { user, profile, children, loading } = useAuth();
   const navigate = useNavigate();
 
   // Auto-forward signed-in users
@@ -20,21 +21,26 @@ function Index() {
     } else if (profile && !profile.onboarded) {
       navigate({ to: "/onboarding/profile" });
     } else if (profile?.onboarded) {
-      navigate({ to: "/home" });
+      navigate({ to: children.length > 1 ? "/select-child" : "/home" });
     }
-  }, [loading, user, profile, navigate]);
+  }, [loading, user, profile, children, navigate]);
 
   if (loading) {
     return (
       <PhoneFrame>
-        <div className="flex h-full items-center justify-center bg-cream">
-          <span className="text-4xl animate-float">✈️</span>
-        </div>
+        <LoadingScreen />
       </PhoneFrame>
     );
   }
 
-  if (user) return <Navigate to="/home" />;
+  if (user) {
+    // Signed in — the effect routes to the right place; show loading meanwhile
+    return (
+      <PhoneFrame>
+        <LoadingScreen />
+      </PhoneFrame>
+    );
+  }
 
   return (
     <PhoneFrame>
