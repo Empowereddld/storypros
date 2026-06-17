@@ -14,6 +14,17 @@ function AchievementsPage() {
     <AchievementGalleryScreen
       childName={childName}
       onClose={() => navigate({ to: "/home" })}
+      onNavigate={(dest) => {
+        switch (dest) {
+          case "home": navigate({ to: "/home" }); break;
+          case "library": navigate({ to: "/library" }); break;
+          case "map": navigate({ to: "/map" }); break;
+          case "shop": navigate({ to: "/shop" }); break;
+          case "achievements": navigate({ to: "/achievements" }); break;
+          case "settings": navigate({ to: "/settings" }); break;
+          case "dashboard": navigate({ to: "/dashboard" }); break;
+        }
+      }}
     />
   );
 }

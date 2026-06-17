@@ -1,6 +1,9 @@
 /* ─────────────────────────────────────────────
  * Paper Planes Collectible Shop
- * Five category tabs, purchase flow, badge display.
+ * Rebuilt from the "Shop" mockup: logo + currency
+ * header, category chips, pastel item cards, and a
+ * product-detail purchase sheet. Catalog / purchase /
+ * ownership logic and Paper Planes spend preserved.
  * ───────────────────────────────────────────── */
 
 import { useState } from "react";
@@ -16,6 +19,8 @@ import {
   type Collectible,
 } from "@/services/shop";
 import { cn } from "@/lib/utils";
+import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import { StoryProsLogo, CurrencyBadge } from "./StoryProsBrand";
 
 interface CollectibleShopScreenProps {
   onClose: () => void;
@@ -33,8 +38,10 @@ const RARITY_COLORS: Record<string, string> = {
   common: "bg-ink-soft/20 text-ink-soft",
   uncommon: "bg-success/20 text-success",
   rare: "bg-primary/20 text-primary",
-  legendary: "bg-secondary/20 text-secondary-foreground",
+  legendary: "bg-secondary/30 text-secondary-foreground",
 };
+
+const TILE_TINTS = ["bg-accent/40", "bg-sky/50", "bg-secondary/15", "bg-success/15", "bg-coral/15"];
 
 export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
   const { activeChild } = useAuth();
@@ -43,7 +50,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
   const [activeTab, setActiveTab] = useState<CollectibleCategory>("airplane_design");
   const [selectedItem, setSelectedItem] = useState<Collectible | null>(null);
   const [planes, setPlanes] = useState(getPaperPlanes());
-  const [justPurchased, setJustPurchased] = useState<string | null>(null);
+  const [justPurchased, setJustPurchased] = useState<Collectible | null>(null);
 
   const items = getCatalogByCategory(activeTab);
 
@@ -52,115 +59,105 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
     if (result.success && result.remaining !== undefined) {
       spendPaperPlanes(item.price);
       setPlanes(result.remaining);
-      setJustPurchased(item.id);
-      setTimeout(() => setJustPurchased(null), 1500);
       setSelectedItem(null);
+      setJustPurchased(item);
+      setTimeout(() => setJustPurchased(null), 1800);
     }
   }
 
   return (
-    <div className="flex h-full flex-col bg-cream">
+    <div className="relative flex h-full flex-col bg-background">
       {/* Header */}
-      <header className="flex items-center justify-between px-5 pt-4 pb-2">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-card shadow-card text-primary"
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <h2 className="font-display text-xl font-extrabold text-primary">Shop</h2>
-        </div>
-
-        {/* Paper Planes balance */}
-        <div className="flex items-center gap-1.5 rounded-full bg-secondary/20 px-3 py-1.5">
-          <span className="text-lg">✈️</span>
-          <span className="text-sm font-extrabold text-primary">{planes}</span>
-        </div>
+      <header className="sticky top-0 z-30 flex items-center justify-between gap-2 bg-card/95 px-4 py-3 backdrop-blur">
+        <button
+          onClick={onClose}
+          aria-label="Back"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft transition-colors hover:bg-accent/60 active:scale-95"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </button>
+        <StoryProsLogo layout="row" size="sm" />
+        <CurrencyBadge count={planes} />
       </header>
 
-      {/* Category tabs */}
-      <div className="flex gap-1 overflow-x-auto px-5 py-2 no-scrollbar">
-        {CATEGORIES.map((cat) => {
-          const meta = CATEGORY_META[cat];
-          const active = activeTab === cat;
-          return (
-            <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
-              className={cn(
-                "flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-xs font-bold transition-all whitespace-nowrap",
-                active
-                  ? "bg-primary text-primary-foreground shadow-[0_2px_0_0_var(--primary-deep)] -translate-y-0.5"
-                  : "bg-card text-ink-soft hover:bg-cream-deep",
-              )}
-            >
-              <span>{meta.icon}</span>
-              {meta.label}
-            </button>
-          );
-        })}
-      </div>
+      <div className="flex-1 overflow-y-auto no-scrollbar px-4 pb-6 pt-2">
+        {/* Intro */}
+        <div className="flex items-end justify-between gap-2">
+          <div>
+            <h1 className="text-2xl font-extrabold text-primary">Shop</h1>
+            <p className="mt-0.5 max-w-[12rem] text-sm text-ink-soft">
+              Spend your Paper Planes and make your story world yours!
+            </p>
+          </div>
+          <img src={dariaAndFriend} alt="" className="h-20 w-auto object-contain" />
+        </div>
 
-      {/* Items grid */}
-      <div className="flex-1 overflow-y-auto px-5 pt-2 pb-5 no-scrollbar">
+        {/* Category chips */}
+        <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar pb-1">
+          {CATEGORIES.map((cat) => {
+            const meta = CATEGORY_META[cat];
+            const active = activeTab === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveTab(cat)}
+                className={cn(
+                  "flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-bold transition-all",
+                  active
+                    ? "bg-primary text-primary-foreground"
+                    : "border border-accent bg-card text-ink-soft hover:text-primary",
+                )}
+              >
+                <span>{meta.icon}</span>
+                {meta.label}
+              </button>
+            );
+          })}
+        </div>
+
         {activeTab === "badge" && (
-          <p className="mb-3 text-xs font-semibold text-ink-soft text-center">
+          <p className="mt-3 rounded-2xl bg-accent/40 p-3 text-center text-xs font-semibold text-ink-soft">
             Badges are earned automatically through your adventures!
           </p>
         )}
 
-        <div className="grid grid-cols-2 gap-3">
-          {items.map((item) => {
+        {/* Item grid */}
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {items.map((item, i) => {
             const owned = isOwned(childId, item.id);
-            const justBought = justPurchased === item.id;
-
             return (
               <button
                 key={item.id}
                 onClick={() => !owned && setSelectedItem(item)}
                 disabled={owned}
                 className={cn(
-                  "relative flex flex-col items-center rounded-3xl bg-card p-4 shadow-card text-center transition-all",
-                  owned
-                    ? "opacity-75"
-                    : "hover:shadow-lg hover:-translate-y-0.5 active:scale-95",
-                  justBought && "animate-pop-in",
+                  "relative flex flex-col items-center overflow-hidden rounded-3xl border border-accent/50 bg-card text-center shadow-card transition-all",
+                  owned ? "opacity-80" : "active:scale-[0.98]",
                 )}
               >
-                {/* Rarity badge */}
-                <span
-                  className={cn(
-                    "absolute top-2 right-2 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase",
-                    RARITY_COLORS[item.rarity],
-                  )}
-                >
+                <span className={cn("absolute right-2 top-2 rounded-full px-2 py-0.5 text-[9px] font-extrabold uppercase", RARITY_COLORS[item.rarity])}>
                   {item.rarity}
                 </span>
-
-                {/* Icon */}
-                <span className="text-4xl mt-2 mb-2">{item.icon}</span>
-
-                {/* Name */}
-                <p className="text-sm font-bold text-primary leading-tight">{item.name}</p>
-
-                {/* Price or owned */}
-                <div className="mt-2">
-                  {owned ? (
-                    <span className="text-xs font-bold text-success">
-                      {item.category === "badge" ? "Earned!" : "Owned"}
-                    </span>
-                  ) : item.price === 0 ? (
-                    <span className="text-xs font-bold text-ink-soft">
-                      {item.category === "badge" ? "Not earned yet" : "Free"}
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-1 text-xs font-bold text-primary">
-                      <span>✈️</span> {item.price}
-                    </span>
-                  )}
+                <span className={cn("flex h-24 w-full items-center justify-center text-4xl", TILE_TINTS[i % TILE_TINTS.length])}>
+                  {item.icon}
+                </span>
+                <div className="flex w-full flex-1 flex-col items-center p-3">
+                  <p className="text-sm font-extrabold leading-tight text-ink">{item.name}</p>
+                  <div className="mt-2">
+                    {owned ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-success/15 px-2.5 py-1 text-xs font-bold text-success">
+                        ✓ {item.category === "badge" ? "Earned" : "Owned"}
+                      </span>
+                    ) : item.price === 0 ? (
+                      <span className="text-xs font-bold text-ink-soft">
+                        {item.category === "badge" ? "Not earned yet" : "Free"}
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-secondary/20 px-2.5 py-1 text-xs font-extrabold text-secondary-foreground">
+                        ✈️ {item.price}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </button>
             );
@@ -168,7 +165,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
         </div>
       </div>
 
-      {/* Purchase modal */}
+      {/* Purchase sheet */}
       {selectedItem && (
         <PurchaseModal
           item={selectedItem}
@@ -177,11 +174,23 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
           onClose={() => setSelectedItem(null)}
         />
       )}
+
+      {/* Reward unlocked celebration */}
+      {justPurchased && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+          <div className="mx-6 w-full max-w-xs rounded-[28px] bg-card p-6 text-center shadow-soft animate-pop-in">
+            <p className="text-sm font-extrabold uppercase tracking-wider text-secondary-foreground">Reward Unlocked!</p>
+            <span className="mt-3 block text-6xl">{justPurchased.icon}</span>
+            <h3 className="mt-2 font-display text-xl font-extrabold text-primary">{justPurchased.name}</h3>
+            <p className="mt-1 text-sm text-ink-soft">It's yours — find it in My Collection.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-// ── Purchase confirmation modal ──
+// ── Purchase confirmation sheet ──
 
 function PurchaseModal({
   item,
@@ -197,11 +206,15 @@ function PurchaseModal({
   const canAfford = planes >= item.price;
 
   return (
-    <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40">
-      <div className="w-full rounded-t-3xl bg-card p-6 shadow-2xl animate-slide-up">
+    <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40" onClick={onClose}>
+      <div className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up" onClick={(e) => e.stopPropagation()}>
+        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
         <div className="text-center">
-          <span className="text-6xl block mb-3">{item.icon}</span>
-          <h3 className="font-display text-xl font-extrabold text-primary">{item.name}</h3>
+          <span className="mb-3 block text-6xl">{item.icon}</span>
+          <span className={cn("inline-block rounded-full px-2.5 py-0.5 text-[10px] font-extrabold uppercase", RARITY_COLORS[item.rarity])}>
+            {item.rarity}
+          </span>
+          <h3 className="mt-2 font-display text-xl font-extrabold text-primary">{item.name}</h3>
           <p className="mt-1 text-sm text-ink-soft">{item.description}</p>
 
           <div className="mt-4 flex items-center justify-center gap-2">
@@ -218,8 +231,8 @@ function PurchaseModal({
         </div>
 
         <div className="mt-5 space-y-3">
-          <TactileButton onClick={onPurchase} disabled={!canAfford}>
-            {canAfford ? "Buy it!" : "Not enough"}
+          <TactileButton variant="secondary" onClick={onPurchase} disabled={!canAfford}>
+            {canAfford ? "Unlock " + item.price + " ✈️" : "Not enough"}
           </TactileButton>
           <TactileButton variant="ghost" onClick={onClose}>
             Maybe later
