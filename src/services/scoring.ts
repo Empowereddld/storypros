@@ -64,19 +64,16 @@ export function calculateDomainScores(
     phonological: 0,
   };
 
-  // Comprehension → Listening (50%)
+  // Comprehension → Listening
+  // V1: 100% comprehension first-attempt accuracy.
+  // Jinean's full spec (comprehension 50% / brain checks 30% / slide engagement 20%)
+  // is deferred to V2 — in V1 both brain checks and slide completion are
+  // must-complete steps with no real signal, so weighting them granted every
+  // child an automatic 50-point Listening floor and inflated parent reports.
   const compResult = phaseResults.find((r) => r.phase === "comprehension");
-  const compScore = compResult ? compResult.first_attempt_accuracy * 100 : 0;
-
-  // Story engagement → Listening (20%) — placeholder: full credit for completing slides
-  const slidesResult = phaseResults.find((r) => r.phase === "slides");
-  const slidesScore = slidesResult?.completed ? 100 : 0;
-
-  // Listening composite
-  scores.listening = compScore * 0.5 + slidesScore * 0.2;
-  // Brain checks contribute 30% but are metacognition-only (tracked, not truly scored)
-  // For V1, we give full credit if the child completed comprehension
-  scores.listening += (compResult?.completed ? 100 : 0) * 0.3;
+  scores.listening = compResult
+    ? compResult.first_attempt_accuracy * 100
+    : 0;
 
   // Sequencing → Story Structure
   const seqResult = phaseResults.find((r) => r.phase === "sequencing");

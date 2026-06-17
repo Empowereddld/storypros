@@ -206,4 +206,6 @@ export interface StoryPhaseProps<TData = unknown> {
   onClose: () => void;
   ttsSpeed?: "slow" | "normal" | "fast";
   phaseData?: TData;
+  /** The child playing this story — used on every recorded attempt */
+  childId?: string;
 }

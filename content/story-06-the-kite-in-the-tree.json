@@ -50,19 +50,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Dan and Daria",
-          "emoji": "\ud83e\uddd2",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "A robot",
           "emoji": "\ud83e\udd16"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "A cat",
           "emoji": "\ud83d\udc31"
+        },
+        {
+          "id": "c",
+          "label": "Dan and Daria",
+          "emoji": "\ud83e\uddd2",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -75,19 +75,19 @@
       "options": [
         {
           "id": "a",
+          "label": "They went to the park",
+          "emoji": "\ud83c\udfe0",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "The moon",
           "emoji": "\ud83c\udf19"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "A store",
           "emoji": "\ud83c\udfea"
-        },
-        {
-          "id": "c",
-          "label": "They went to the park",
-          "emoji": "\ud83c\udfe0",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -105,14 +105,14 @@
         },
         {
           "id": "b",
-          "label": "The wind pushed Dan\u2019s kite into a tree and it got stuck",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
+          "label": "He fell down",
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "c",
-          "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "label": "The wind pushed Dan\u2019s kite into a tree and it got stuck",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -125,19 +125,19 @@
       "options": [
         {
           "id": "a",
+          "label": "Frustrated",
+          "emoji": "\ud83d\ude24",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "Angry",
           "emoji": "\ud83d\ude20"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "Happy",
           "emoji": "\ud83d\ude0a"
-        },
-        {
-          "id": "c",
-          "label": "Frustrated",
-          "emoji": "\ud83d\ude24",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -155,14 +155,14 @@
         },
         {
           "id": "b",
-          "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
-        },
-        {
-          "id": "c",
           "label": "Daria asked a grown up for a ladder",
           "emoji": "\u2708\ufe0f",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Ate lunch",
+          "emoji": "\ud83c\udf7d\ufe0f"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -180,14 +180,14 @@
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "\ud83c\udfe0"
-        },
-        {
-          "id": "c",
           "label": "The grown up used the ladder to get the kite down",
           "emoji": "\ud83d\ude34",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Went home",
+          "emoji": "\ud83c\udfe0"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -218,13 +218,13 @@
             },
             {
               "id": "b",
-              "text": "toy",
-              "correct": true
+              "text": "food",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "food",
-              "correct": false
+              "text": "toy",
+              "correct": true
             }
           ]
         },
@@ -234,18 +234,18 @@
           "options": [
             {
               "id": "a",
+              "text": "fly it",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "eat it",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "wear it",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "fly it",
-              "correct": true
             }
           ]
         },
@@ -260,13 +260,13 @@
             },
             {
               "id": "b",
-              "text": "round ball",
-              "correct": false
+              "text": "diamond or triangle with a tail",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "diamond or triangle with a tail",
-              "correct": true
+              "text": "round ball",
+              "correct": false
             }
           ]
         },
@@ -297,18 +297,18 @@
           "options": [
             {
               "id": "a",
-              "text": "park",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "fish tank",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "freezer",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "park",
+              "correct": true
             }
           ]
         },
@@ -318,18 +318,18 @@
           "options": [
             {
               "id": "a",
+              "text": "Dan flew his kite at the park",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "She ate the kite for dessert",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "The kite cooked dinner",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "Dan flew his kite at the park",
-              "correct": true
             }
           ]
         }
@@ -392,18 +392,18 @@
           "options": [
             {
               "id": "a",
+              "text": "tool",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "clothing",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "fruit",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "tool",
-              "correct": true
             }
           ]
         },
@@ -434,13 +434,13 @@
           "options": [
             {
               "id": "a",
-              "text": "tall frame with steps",
-              "correct": true
+              "text": "round ball",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "round ball",
-              "correct": false
+              "text": "tall frame with steps",
+              "correct": true
             },
             {
               "id": "c",
@@ -455,18 +455,18 @@
           "options": [
             {
               "id": "a",
-              "text": "steps",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "wings",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "roots",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "steps",
+              "correct": true
             }
           ]
         },
@@ -476,18 +476,18 @@
           "options": [
             {
               "id": "a",
+              "text": "garage",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "lunch box",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "bathtub",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "garage",
-              "correct": true
             }
           ]
         },
@@ -502,13 +502,13 @@
             },
             {
               "id": "b",
-              "text": "They used a ladder to reach the kite in the tree",
-              "correct": true
+              "text": "The ladder sang a song",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "The ladder sang a song",
-              "correct": false
+              "text": "They used a ladder to reach the kite in the tree",
+              "correct": true
             }
           ]
         }
@@ -591,13 +591,13 @@
           "prompt": "When do you feel frustrated?",
           "options": [
             {
-              "text": "When you play your favorite game",
-              "correct": false,
+              "text": "When you try hard but things do not work",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When you try hard but things do not work",
-              "correct": true,
+              "text": "When you play your favorite game",
+              "correct": false,
               "id": "b"
             },
             {
@@ -659,13 +659,13 @@
               "id": "a"
             },
             {
-              "text": "When opening a birthday present",
-              "correct": false,
+              "text": "When something gets stuck and you cannot fix it",
+              "correct": true,
               "id": "b"
             },
             {
-              "text": "When something gets stuck and you cannot fix it",
-              "correct": true,
+              "text": "When opening a birthday present",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -675,18 +675,18 @@
           "prompt": "Which sentence uses 'frustrated' correctly?",
           "options": [
             {
-              "text": "Dan felt frustrated when his kite got stuck in the tree",
-              "correct": true,
-              "id": "a"
-            },
-            {
               "text": "The frustrated went to sleep",
               "correct": false,
-              "id": "b"
+              "id": "a"
             },
             {
               "text": "She put the frustrated in her bag",
               "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Dan felt frustrated when his kite got stuck in the tree",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -725,12 +725,12 @@
         },
         {
           "id": "b",
-          "text": "she needed to climb onto the roof"
+          "text": "the kite was too high to reach",
+          "correct": true
         },
         {
           "id": "c",
-          "text": "the kite was too high to reach",
-          "correct": true
+          "text": "she needed to climb onto the roof"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -741,16 +741,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "the grown up used the ladder",
-          "correct": true
-        },
-        {
-          "id": "b",
           "text": "a bird brought it down"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "the tree shook it loose"
+        },
+        {
+          "id": "c",
+          "text": "the grown up used the ladder",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"

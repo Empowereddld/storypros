@@ -75,14 +75,14 @@
       "options": [
         {
           "id": "a",
-          "label": "They were in Dan\u2019s backyard for a treasure hunt",
-          "emoji": "\ud83c\udfe0",
-          "correct": true
+          "label": "The moon",
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "b",
-          "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "label": "They were in Dan\u2019s backyard for a treasure hunt",
+          "emoji": "\ud83c\udfe0",
+          "correct": true
         },
         {
           "id": "c",
@@ -150,19 +150,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria asked Dan\u2019s mom for a battery",
-          "emoji": "\u2708\ufe0f",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Ate lunch",
           "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Went to sleep",
           "emoji": "\ud83d\ude34"
+        },
+        {
+          "id": "c",
+          "label": "Daria asked Dan\u2019s mom for a battery",
+          "emoji": "\u2708\ufe0f",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -180,14 +180,14 @@
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "\ud83c\udfe0"
-        },
-        {
-          "id": "c",
           "label": "Dan\u2019s mom put the battery in the flashlight so they could...",
           "emoji": "\ud83d\ude34",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Went home",
+          "emoji": "\ud83c\udfe0"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -213,13 +213,13 @@
           "options": [
             {
               "id": "a",
-              "text": "tool",
-              "correct": true
+              "text": "food",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "food",
-              "correct": false
+              "text": "tool",
+              "correct": true
             },
             {
               "id": "c",
@@ -260,13 +260,13 @@
             },
             {
               "id": "b",
-              "text": "handheld light shaped like a tube",
-              "correct": true
+              "text": "round ball",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "round ball",
-              "correct": false
+              "text": "handheld light shaped like a tube",
+              "correct": true
             }
           ]
         },
@@ -276,18 +276,18 @@
           "options": [
             {
               "id": "a",
+              "text": "button",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "leaf",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "wheel",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "button",
-              "correct": true
             }
           ]
         },
@@ -302,13 +302,13 @@
             },
             {
               "id": "b",
-              "text": "when it is dark",
-              "correct": true
+              "text": "when you are swimming",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "when you are swimming",
-              "correct": false
+              "text": "when it is dark",
+              "correct": true
             }
           ]
         },
@@ -323,13 +323,13 @@
             },
             {
               "id": "b",
-              "text": "The flashlight ate a pizza",
-              "correct": false
+              "text": "Dan used the flashlight to see in the dark",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "Dan used the flashlight to see in the dark",
-              "correct": true
+              "text": "The flashlight ate a pizza",
+              "correct": false
             }
           ]
         }
@@ -392,18 +392,18 @@
           "options": [
             {
               "id": "a",
-              "text": "power source",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "fruit",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "clothing",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "power source",
+              "correct": true
             }
           ]
         },
@@ -455,18 +455,18 @@
           "options": [
             {
               "id": "a",
+              "text": "two ends",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "roots",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "wings",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "two ends",
-              "correct": true
             }
           ]
         },
@@ -481,13 +481,13 @@
             },
             {
               "id": "b",
-              "text": "when you are hungry",
-              "correct": false
+              "text": "when something will not turn on",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "when something will not turn on",
-              "correct": true
+              "text": "when you are hungry",
+              "correct": false
             }
           ]
         },
@@ -591,18 +591,18 @@
           "prompt": "When do you feel worried?",
           "options": [
             {
-              "text": "When you play with friends",
-              "correct": false,
+              "text": "When you think something bad might happen",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When you eat your favorite food",
+              "text": "When you play with friends",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "When you think something bad might happen",
-              "correct": true,
+              "text": "When you eat your favorite food",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -612,13 +612,13 @@
           "prompt": "What does someone look like when they are worried?",
           "options": [
             {
-              "text": "Sleeping peacefully",
-              "correct": false,
+              "text": "Frowning, biting lip, wringing hands",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "Frowning, biting lip, wringing hands",
-              "correct": true,
+              "text": "Sleeping peacefully",
+              "correct": false,
               "id": "b"
             },
             {
@@ -633,13 +633,13 @@
           "prompt": "What happens in your body when you feel worried?",
           "options": [
             {
-              "text": "Your tummy feels funny and you can't stop thinking",
-              "correct": true,
+              "text": "Nothing at all",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "Nothing at all",
-              "correct": false,
+              "text": "Your tummy feels funny and you can't stop thinking",
+              "correct": true,
               "id": "b"
             },
             {
@@ -654,13 +654,13 @@
           "prompt": "Where or when might you feel worried?",
           "options": [
             {
-              "text": "Before a test or when something goes wrong",
-              "correct": true,
+              "text": "While eating lunch with friends",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "While eating lunch with friends",
-              "correct": false,
+              "text": "Before a test or when something goes wrong",
+              "correct": true,
               "id": "b"
             },
             {
@@ -705,12 +705,12 @@
         },
         {
           "id": "b",
-          "text": "the flashlight would not turn on",
-          "correct": true
+          "text": "they found too much treasure"
         },
         {
           "id": "c",
-          "text": "they found too much treasure"
+          "text": "the flashlight would not turn on",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -721,16 +721,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "they wanted a snack"
+          "text": "they needed a new battery",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "they were too hot"
+          "text": "they wanted a snack"
         },
         {
           "id": "c",
-          "text": "they needed a new battery",
-          "correct": true
+          "text": "they were too hot"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -741,12 +741,12 @@
       "choices": [
         {
           "id": "a",
-          "text": "the flashlight worked with the new battery",
-          "correct": true
+          "text": "a rainbow appeared"
         },
         {
           "id": "b",
-          "text": "a rainbow appeared"
+          "text": "the flashlight worked with the new battery",
+          "correct": true
         },
         {
           "id": "c",

@@ -17,7 +17,7 @@ type FeedbackState =
   | { type: "correct" }
   | { type: "wrong" };
 
-export function PhonologicalPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
+export function PhonologicalPhase({ storyData, onComplete, onClose, ttsSpeed = "normal", childId = "demo" }: StoryPhaseProps) {
   const items = storyData.phonological_items;
   const [qi, setQi] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -48,7 +48,7 @@ export function PhonologicalPhase({ storyData, onComplete, onClose, ttsSpeed = "
     const isCorrect = option.correct;
 
     const attempt: ActivityAttempt = {
-      child_id: "demo",
+      child_id: childId,
       story_id: storyData.id,
       activity_type: "phonological",
       question_index: qi,

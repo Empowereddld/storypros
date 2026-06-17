@@ -100,19 +100,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria missed one part of the instructions",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "She lost her shoe",
           "emoji": "\ud83d\udc5f"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "He fell down",
           "emoji": "\ud83e\udd15"
+        },
+        {
+          "id": "c",
+          "label": "Daria missed one part of the instructions",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -150,14 +150,14 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria asked her partner to explain the next step",
-          "emoji": "\u2708\ufe0f",
-          "correct": true
+          "label": "Went to sleep",
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "b",
-          "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "label": "Daria asked her partner to explain the next step",
+          "emoji": "\u2708\ufe0f",
+          "correct": true
         },
         {
           "id": "c",
@@ -255,13 +255,13 @@
           "options": [
             {
               "id": "a",
-              "text": "flat top with legs",
-              "correct": true
+              "text": "small tube",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "small tube",
-              "correct": false
+              "text": "flat top with legs",
+              "correct": true
             },
             {
               "id": "c",
@@ -297,13 +297,13 @@
           "options": [
             {
               "id": "a",
-              "text": "classroom or kitchen",
-              "correct": true
+              "text": "tree branch",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "tree branch",
-              "correct": false
+              "text": "classroom or kitchen",
+              "correct": true
             },
             {
               "id": "c",
@@ -323,13 +323,13 @@
             },
             {
               "id": "b",
-              "text": "Daria sat at the table to do her project",
-              "correct": true
+              "text": "The table went swimming",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "The table went swimming",
-              "correct": false
+              "text": "Daria sat at the table to do her project",
+              "correct": true
             }
           ]
         }
@@ -392,13 +392,13 @@
           "options": [
             {
               "id": "a",
-              "text": "object with directions",
-              "correct": true
+              "text": "emotion word",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "emotion word",
-              "correct": false
+              "text": "object with directions",
+              "correct": true
             },
             {
               "id": "c",
@@ -413,18 +413,18 @@
           "options": [
             {
               "id": "a",
+              "text": "shows the steps",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "moves water",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "makes music",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "shows the steps",
-              "correct": true
             }
           ]
         },
@@ -434,18 +434,18 @@
           "options": [
             {
               "id": "a",
+              "text": "page with words or pictures",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "long rope",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "round ball",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "page with words or pictures",
-              "correct": true
             }
           ]
         },
@@ -460,13 +460,13 @@
             },
             {
               "id": "b",
-              "text": "steps",
-              "correct": true
+              "text": "roots",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "roots",
-              "correct": false
+              "text": "steps",
+              "correct": true
             }
           ]
         },
@@ -497,18 +497,18 @@
           "options": [
             {
               "id": "a",
-              "text": "Daria looked at the instruction page to find the next step",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "She ate the instruction page for lunch",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "The instruction page flew away",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "Daria looked at the instruction page to find the next step",
+              "correct": true
             }
           ]
         }
@@ -552,6 +552,146 @@
         "connection_text": "Daria's partner showed her the instruction page so she knew what to do next.",
         "connection_narration": "Daria's partner showed her the instruction page so she knew what to do next."
       }
+    },
+    {
+      "word": "confused",
+      "type": "emotion",
+      "image": "vocab-confused.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It tells how Daria felt when she missed the instructions.",
+        "appearance": "When someone is confused, they may frown and tilt their head.",
+        "parts": "Confused shows in parts like: face, eyebrows, voice.",
+        "location": "You might feel confused when you don't know what to do next."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "Is 'confused' a feeling, an animal, or a place?",
+          "options": [
+            {
+              "text": "A feeling",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "An animal",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "A place",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "How did Daria feel when she missed one part of the instructions?",
+          "options": [
+            {
+              "text": "Excited",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Sleepy",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Confused",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What might your face look like when you feel confused?",
+          "options": [
+            {
+              "text": "A big happy smile",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Eyes closed, fast asleep",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "A frown with squinted eyes",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "Which one could make someone feel confused?",
+          "options": [
+            {
+              "text": "Eating your favorite snack",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Missing part of the directions",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Playing your favorite game",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "What can help when you feel confused?",
+          "options": [
+            {
+              "text": "Give up and walk away",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Ask someone to explain, like Daria asked her partner",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Pretend you understand",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'confused' correctly?",
+          "options": [
+            {
+              "text": "Daria felt confused because she missed a step",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "She drank a glass of confused",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "The confused flew over the house",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        }
+      ]
     }
   ],
   "sentence_frames": [
@@ -565,12 +705,12 @@
         },
         {
           "id": "b",
-          "text": "she missed one part of the instructions",
-          "correct": true
+          "text": "she had too many pencils"
         },
         {
           "id": "c",
-          "text": "she had too many pencils"
+          "text": "she missed one part of the instructions",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -585,12 +725,12 @@
         },
         {
           "id": "b",
-          "text": "she wanted to play a game"
+          "text": "she needed help with the next step",
+          "correct": true
         },
         {
           "id": "c",
-          "text": "she needed help with the next step",
-          "correct": true
+          "text": "she wanted to play a game"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"

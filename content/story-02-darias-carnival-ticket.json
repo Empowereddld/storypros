@@ -50,19 +50,19 @@
       "options": [
         {
           "id": "a",
+          "label": "Dan and Daria",
+          "emoji": "\ud83e\uddd2",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "A cat",
           "emoji": "\ud83d\udc31"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "A robot",
           "emoji": "\ud83e\udd16"
-        },
-        {
-          "id": "c",
-          "label": "Dan and Daria",
-          "emoji": "\ud83e\uddd2",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -80,14 +80,14 @@
         },
         {
           "id": "b",
-          "label": "The moon",
-          "emoji": "\ud83c\udf19"
-        },
-        {
-          "id": "c",
           "label": "They walked to the entrance with Daria\u2019s dad",
           "emoji": "\ud83c\udfe0",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "The moon",
+          "emoji": "\ud83c\udf19"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -100,19 +100,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria spilled juice on her ticket",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "She lost her shoe",
           "emoji": "\ud83d\udc5f"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "He fell down",
           "emoji": "\ud83e\udd15"
+        },
+        {
+          "id": "c",
+          "label": "Daria spilled juice on her ticket",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -125,19 +125,19 @@
       "options": [
         {
           "id": "a",
+          "label": "Worried",
+          "emoji": "\ud83d\ude1f",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "Happy",
           "emoji": "\ud83d\ude0a"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "Angry",
           "emoji": "\ud83d\ude20"
-        },
-        {
-          "id": "c",
-          "label": "Worried",
-          "emoji": "\ud83d\ude1f",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -175,19 +175,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Her dad dried the ticket so they could go into the carnival",
-          "emoji": "\ud83d\ude34",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Went to sleep",
           "emoji": "\ud83d\ude34"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Went home",
           "emoji": "\ud83c\udfe0"
+        },
+        {
+          "id": "c",
+          "label": "Her dad dried the ticket so they could go into the carnival",
+          "emoji": "\ud83d\ude34",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -255,13 +255,13 @@
           "options": [
             {
               "id": "a",
-              "text": "small paper or digital pass",
-              "correct": true
+              "text": "round ball",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "round ball",
-              "correct": false
+              "text": "small paper or digital pass",
+              "correct": true
             },
             {
               "id": "c",
@@ -281,13 +281,13 @@
             },
             {
               "id": "b",
-              "text": "roots",
-              "correct": false
+              "text": "words or numbers",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "words or numbers",
-              "correct": true
+              "text": "roots",
+              "correct": false
             }
           ]
         },
@@ -323,13 +323,13 @@
             },
             {
               "id": "b",
-              "text": "Daria showed her ticket to get into the carnival",
-              "correct": true
+              "text": "She ate the ticket for lunch",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "She ate the ticket for lunch",
-              "correct": false
+              "text": "Daria showed her ticket to get into the carnival",
+              "correct": true
             }
           ]
         }
@@ -392,18 +392,18 @@
           "options": [
             {
               "id": "a",
-              "text": "place",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "food",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "toy",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "place",
+              "correct": true
             }
           ]
         },
@@ -434,13 +434,13 @@
           "options": [
             {
               "id": "a",
-              "text": "round fruit",
-              "correct": false
+              "text": "door or gate",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "door or gate",
-              "correct": true
+              "text": "round fruit",
+              "correct": false
             },
             {
               "id": "c",
@@ -476,18 +476,18 @@
           "options": [
             {
               "id": "a",
+              "text": "carnival",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "lunch box",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "bedroom drawer",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "carnival",
-              "correct": true
             }
           ]
         },
@@ -502,13 +502,13 @@
             },
             {
               "id": "b",
-              "text": "He put the entrance in his pocket",
-              "correct": false
+              "text": "They walked through the entrance to the carnival",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "They walked through the entrance to the carnival",
-              "correct": true
+              "text": "He put the entrance in his pocket",
+              "correct": false
             }
           ]
         }
@@ -570,18 +570,18 @@
           "prompt": "What group does 'worried' belong to?",
           "options": [
             {
-              "text": "Foods",
-              "correct": false,
+              "text": "Feelings / emotions",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "Animals",
+              "text": "Foods",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Feelings / emotions",
-              "correct": true,
+              "text": "Animals",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -596,13 +596,13 @@
               "id": "a"
             },
             {
-              "text": "When you eat your favorite food",
-              "correct": false,
+              "text": "When you think something bad might happen",
+              "correct": true,
               "id": "b"
             },
             {
-              "text": "When you think something bad might happen",
-              "correct": true,
+              "text": "When you eat your favorite food",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -633,18 +633,18 @@
           "prompt": "What happens in your body when you feel worried?",
           "options": [
             {
-              "text": "Your tummy feels funny and you can't stop thinking",
-              "correct": true,
-              "id": "a"
-            },
-            {
               "text": "Nothing at all",
               "correct": false,
-              "id": "b"
+              "id": "a"
             },
             {
               "text": "You feel very sleepy",
               "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Your tummy feels funny and you can't stop thinking",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -701,16 +701,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "she spilled juice on her ticket",
-          "correct": true
-        },
-        {
-          "id": "b",
           "text": "she ate too much popcorn"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "she lost her favorite hat"
+        },
+        {
+          "id": "c",
+          "text": "she spilled juice on her ticket",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -741,12 +741,12 @@
       "choices": [
         {
           "id": "a",
-          "text": "they found a new door"
+          "text": "her dad dried the ticket",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "her dad dried the ticket",
-          "correct": true
+          "text": "they found a new door"
         },
         {
           "id": "c",

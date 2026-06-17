@@ -125,19 +125,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Confused",
-          "emoji": "\ud83e\udee4",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Angry",
           "emoji": "\ud83d\ude20"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Happy",
           "emoji": "\ud83d\ude0a"
+        },
+        {
+          "id": "c",
+          "label": "Confused",
+          "emoji": "\ud83e\udee4",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -150,14 +150,14 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria raised her hand and asked the teacher to repeat the...",
-          "emoji": "\u2708\ufe0f",
-          "correct": true
+          "label": "Ate lunch",
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "b",
-          "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "label": "Daria raised her hand and asked the teacher to repeat the...",
+          "emoji": "\u2708\ufe0f",
+          "correct": true
         },
         {
           "id": "c",
@@ -180,14 +180,14 @@
         },
         {
           "id": "b",
-          "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
-        },
-        {
-          "id": "c",
           "label": "The teacher said the steps one more time so Daria could t...",
           "emoji": "\ud83d\ude34",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Went to sleep",
+          "emoji": "\ud83d\ude34"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -213,18 +213,18 @@
           "options": [
             {
               "id": "a",
+              "text": "information or directions",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "food",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "eat them",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "information or directions",
-              "correct": true
             }
           ]
         },
@@ -260,13 +260,13 @@
             },
             {
               "id": "b",
-              "text": "freezer",
-              "correct": false
+              "text": "written list or spoken steps",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "written list or spoken steps",
-              "correct": true
+              "text": "freezer",
+              "correct": false
             }
           ]
         },
@@ -276,13 +276,13 @@
           "options": [
             {
               "id": "a",
-              "text": "eat them",
-              "correct": false
+              "text": "steps and order",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "steps and order",
-              "correct": true
+              "text": "eat them",
+              "correct": false
             },
             {
               "id": "c",
@@ -297,18 +297,18 @@
           "options": [
             {
               "id": "a",
-              "text": "classroom",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "freezer",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "wings",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "classroom",
+              "correct": true
             }
           ]
         },
@@ -318,18 +318,18 @@
           "options": [
             {
               "id": "a",
-              "text": "The teacher gave instructions for the project",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "She wore the instructions as a scarf",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "The instructions played tag",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "The teacher gave instructions for the project",
+              "correct": true
             }
           ]
         }
@@ -392,13 +392,13 @@
           "options": [
             {
               "id": "a",
-              "text": "eat it",
-              "correct": false
+              "text": "classroom tool",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "classroom tool",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             },
             {
               "id": "c",
@@ -413,18 +413,18 @@
           "options": [
             {
               "id": "a",
-              "text": "write or draw on it",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "roots",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "round ball",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "write or draw on it",
+              "correct": true
             }
           ]
         },
@@ -455,13 +455,13 @@
           "options": [
             {
               "id": "a",
-              "text": "markers and eraser",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "eat it",
-              "correct": false
+              "text": "markers and eraser",
+              "correct": true
             },
             {
               "id": "c",
@@ -476,18 +476,18 @@
           "options": [
             {
               "id": "a",
-              "text": "classroom",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "roots",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "bathtub",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "classroom",
+              "correct": true
             }
           ]
         },
@@ -497,18 +497,18 @@
           "options": [
             {
               "id": "a",
+              "text": "The teacher wrote the steps on the whiteboard",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "She ate the whiteboard with a fork",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "The whiteboard went for a swim",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "The teacher wrote the steps on the whiteboard",
-              "correct": true
             }
           ]
         }
@@ -591,18 +591,18 @@
           "prompt": "When do you feel confused?",
           "options": [
             {
-              "text": "When you eat your favorite snack",
-              "correct": false,
+              "text": "When you do not understand something",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When you play with your best friend",
+              "text": "When you eat your favorite snack",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "When you do not understand something",
-              "correct": true,
+              "text": "When you play with your best friend",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -617,13 +617,13 @@
               "id": "a"
             },
             {
-              "text": "Tilted head, scrunched eyebrows, looking around",
-              "correct": true,
+              "text": "Clapping and cheering",
+              "correct": false,
               "id": "b"
             },
             {
-              "text": "Clapping and cheering",
-              "correct": false,
+              "text": "Tilted head, scrunched eyebrows, looking around",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -633,18 +633,18 @@
           "prompt": "What happens in your body when you feel confused?",
           "options": [
             {
-              "text": "You feel very relaxed",
-              "correct": false,
+              "text": "Your head feels fuzzy and you need to think harder",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "Your tummy growls",
+              "text": "You feel very relaxed",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Your head feels fuzzy and you need to think harder",
-              "correct": true,
+              "text": "Your tummy growls",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -654,13 +654,13 @@
           "prompt": "Where or when might you feel confused?",
           "options": [
             {
-              "text": "When the teacher gives instructions too fast",
-              "correct": true,
+              "text": "When you open a birthday present",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "When you open a birthday present",
-              "correct": false,
+              "text": "When the teacher gives instructions too fast",
+              "correct": true,
               "id": "b"
             },
             {
@@ -701,12 +701,12 @@
       "choices": [
         {
           "id": "a",
-          "text": "her pencil broke"
+          "text": "she could not remember all the steps",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "she could not remember all the steps",
-          "correct": true
+          "text": "her pencil broke"
         },
         {
           "id": "c",
@@ -725,12 +725,12 @@
         },
         {
           "id": "b",
-          "text": "she needed to go outside"
+          "text": "she wanted the teacher to repeat the steps",
+          "correct": true
         },
         {
           "id": "c",
-          "text": "she wanted the teacher to repeat the steps",
-          "correct": true
+          "text": "she needed to go outside"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"

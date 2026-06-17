@@ -9,6 +9,7 @@ import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { highlightConnective } from "@/lib/highlightConnective";
 import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-solo.png";
 
@@ -17,24 +18,7 @@ type FeedbackState =
   | { type: "correct"; brainCheck: string }
   | { type: "wrong"; brainCheck: string };
 
-/** Highlight the target connective in frame text (before the blank) */
-function highlightConnective(text: string, connective: string): React.ReactNode {
-  if (!connective) return text;
-  const regex = new RegExp(`(\\b${connective}\\b)`, "gi");
-  const parts = text.split(regex);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) =>
-    part.toLowerCase() === connective.toLowerCase() ? (
-      <span key={i} className="inline-block rounded-lg bg-secondary/25 px-1 font-extrabold text-secondary-foreground">
-        {part}
-      </span>
-    ) : (
-      <span key={i}>{part}</span>
-    ),
-  );
-}
-
-export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
+export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed = "normal", childId = "demo" }: StoryPhaseProps) {
   const frames = storyData.sentence_frames;
   const [frameIdx, setFrameIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -66,7 +50,7 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
     const isCorrect = choice.correct;
 
     const attempt: ActivityAttempt = {
-      child_id: "demo",
+      child_id: childId,
       story_id: storyData.id,
       activity_type: "sentence_builder",
       question_index: frameIdx,

@@ -50,19 +50,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria",
-          "emoji": "\ud83e\uddd2",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "A robot",
           "emoji": "\ud83e\udd16"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "A cat",
           "emoji": "\ud83d\udc31"
+        },
+        {
+          "id": "c",
+          "label": "Daria",
+          "emoji": "\ud83e\uddd2",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -105,14 +105,14 @@
         },
         {
           "id": "b",
-          "label": "They both wanted the same puzzle piece",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
+          "label": "He fell down",
+          "emoji": "\ud83e\udd15"
         },
         {
           "id": "c",
-          "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "label": "They both wanted the same puzzle piece",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -130,14 +130,14 @@
         },
         {
           "id": "b",
-          "label": "Happy",
-          "emoji": "\ud83d\ude0a"
-        },
-        {
-          "id": "c",
           "label": "Upset",
           "emoji": "\ud83d\ude20",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "Happy",
+          "emoji": "\ud83d\ude0a"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -150,19 +150,19 @@
       "options": [
         {
           "id": "a",
+          "label": "Daria took a breath and let her friend use the piece",
+          "emoji": "\u2708\ufe0f",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "Ate lunch",
           "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "Went to sleep",
           "emoji": "\ud83d\ude34"
-        },
-        {
-          "id": "c",
-          "label": "Daria took a breath and let her friend use the piece",
-          "emoji": "\u2708\ufe0f",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -175,19 +175,19 @@
       "options": [
         {
           "id": "a",
+          "label": "They finished the puzzle together",
+          "emoji": "\ud83d\ude34",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "Went home",
           "emoji": "\ud83c\udfe0"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "Went to sleep",
           "emoji": "\ud83d\ude34"
-        },
-        {
-          "id": "c",
-          "label": "They finished the puzzle together",
-          "emoji": "\ud83d\ude34",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -213,18 +213,18 @@
           "options": [
             {
               "id": "a",
+              "text": "activity or toy",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "food",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "animal",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "activity or toy",
-              "correct": true
             }
           ]
         },
@@ -239,13 +239,13 @@
             },
             {
               "id": "b",
-              "text": "eat it",
-              "correct": false
+              "text": "put pieces together",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "put pieces together",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             }
           ]
         },
@@ -260,13 +260,13 @@
             },
             {
               "id": "b",
-              "text": "a round ball",
-              "correct": false
+              "text": "many pieces with a picture",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "many pieces with a picture",
-              "correct": true
+              "text": "a round ball",
+              "correct": false
             }
           ]
         },
@@ -276,18 +276,18 @@
           "options": [
             {
               "id": "a",
+              "text": "pieces and edges",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "wheels and pedals",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "roots and leaves",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "pieces and edges",
-              "correct": true
             }
           ]
         },
@@ -392,18 +392,18 @@
           "options": [
             {
               "id": "a",
+              "text": "part of something",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "place",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "food",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "part of something",
-              "correct": true
             }
           ]
         },
@@ -413,18 +413,18 @@
           "options": [
             {
               "id": "a",
+              "text": "fit with other parts",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "move water",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "shine in the dark",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "fit with other parts",
-              "correct": true
             }
           ]
         },
@@ -439,13 +439,13 @@
             },
             {
               "id": "b",
-              "text": "tall frame with steps",
-              "correct": false
+              "text": "small section or shape",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "small section or shape",
-              "correct": true
+              "text": "tall frame with steps",
+              "correct": false
             }
           ]
         },
@@ -502,13 +502,13 @@
             },
             {
               "id": "b",
-              "text": "He planted the piece in the garden",
-              "correct": false
+              "text": "They both wanted the same puzzle piece",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "They both wanted the same puzzle piece",
-              "correct": true
+              "text": "He planted the piece in the garden",
+              "correct": false
             }
           ]
         }
@@ -575,13 +575,13 @@
               "id": "a"
             },
             {
-              "text": "Clothes",
-              "correct": false,
+              "text": "Feelings / emotions",
+              "correct": true,
               "id": "b"
             },
             {
-              "text": "Feelings / emotions",
-              "correct": true,
+              "text": "Clothes",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -654,13 +654,13 @@
           "prompt": "Where or when might you feel upset?",
           "options": [
             {
-              "text": "While sleeping",
-              "correct": false,
+              "text": "When someone takes your turn or breaks something",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When someone takes your turn or breaks something",
-              "correct": true,
+              "text": "While sleeping",
+              "correct": false,
               "id": "b"
             },
             {
@@ -675,18 +675,18 @@
           "prompt": "Which sentence uses 'upset' correctly?",
           "options": [
             {
-              "text": "The upset drove a car",
-              "correct": false,
+              "text": "Daria felt upset when they both wanted the same piece",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "She wore the upset on her feet",
+              "text": "The upset drove a car",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Daria felt upset when they both wanted the same piece",
-              "correct": true,
+              "text": "She wore the upset on her feet",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -701,16 +701,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "they both wanted the same puzzle piece",
-          "correct": true
-        },
-        {
-          "id": "b",
           "text": "the puzzle was too easy"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "she was hungry"
+        },
+        {
+          "id": "c",
+          "text": "they both wanted the same puzzle piece",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -721,16 +721,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "the piece was broken"
+          "text": "she took a breath and decided to share",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "she found a better one"
+          "text": "the piece was broken"
         },
         {
           "id": "c",
-          "text": "she took a breath and decided to share",
-          "correct": true
+          "text": "she found a better one"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"

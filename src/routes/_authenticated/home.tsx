@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { AdventureMapScreen } from "@/components/empowered/AdventureMapScreen";
+import { HomeDashboardScreen } from "@/components/empowered/HomeDashboardScreen";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const Route = createFileRoute("/_authenticated/home")({
@@ -12,7 +12,7 @@ function HomePage() {
   const childName = activeChild?.name ?? children[0]?.name ?? "";
 
   return (
-    <AdventureMapScreen
+    <HomeDashboardScreen
       childName={childName}
       onReset={async () => {
         await signOut();
@@ -22,6 +22,9 @@ function HomePage() {
         switch (dest) {
           case "story":
             if (storyId) navigate({ to: "/story/$storyId", params: { storyId } });
+            break;
+          case "map":
+            navigate({ to: "/map" });
             break;
           case "achievements":
             navigate({ to: "/achievements" });
@@ -37,6 +40,9 @@ function HomePage() {
             break;
           case "library":
             navigate({ to: "/library" });
+            break;
+          case "home":
+            navigate({ to: "/home" });
             break;
         }
       }}

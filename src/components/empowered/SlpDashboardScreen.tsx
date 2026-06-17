@@ -18,12 +18,13 @@ import {
   getCaseload,
   getAssignments,
   getNotes,
-  addChildToCaseload,
+  redeemInviteCode,
   assignStory,
   updateAssignment,
   addNote,
   deleteNote,
   seedDemoCaseload,
+  hydrateSlpFromCloud,
   type CaseloadChild,
   type StoryAssignment,
   type SessionNote,
@@ -59,11 +60,6 @@ export function SlpDashboardScreen({ onClose }: SlpDashboardScreenProps) {
   const slpId = user?.id ?? "";
   const roleLabel = profile?.role === "slp" ? "SLP" : "Teacher";
 
-  // Seed demo data on first load
-  useEffect(() => {
-    if (slpId) seedDemoCaseload(slpId);
-  }, [slpId]);
-
   // State
   const [view, setView] = useState<"caseload" | "child-detail">("caseload");
   const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
@@ -71,6 +67,20 @@ export function SlpDashboardScreen({ onClose }: SlpDashboardScreenProps) {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const refresh = () => setRefreshKey((k) => k + 1);
+
+  // Hydrate real caseload from the cloud (demo SLPs get seeded data instead)
+  useEffect(() => {
+    if (!slpId) return;
+    seedDemoCaseload(slpId); // no-op for cloud accounts
+    void hydrateSlpFromCloud(slpId);
+  }, [slpId]);
+
+  // Re-read the cache when background hydration lands
+  useEffect(() => {
+    const onUpdate = () => refresh();
+    window.addEventListener("storypros:slp-updated", onUpdate);
+    return () => window.removeEventListener("storypros:slp-updated", onUpdate);
+  }, []);
 
   const caseload = useMemo(() => getCaseload(slpId), [slpId, refreshKey]);
   const allAssignments = useMemo(() => getAssignments(slpId), [slpId, refreshKey]);
@@ -652,22 +662,26 @@ function LinkParentModal({
   onClose: () => void;
   onLinked: () => void;
 }) {
-  const [email, setEmail] = useState("");
-  const [childName, setChildName] = useState("");
+  const [code, setCode] = useState("");
   const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [linkedName, setLinkedName] = useState<string | null>(null);
 
-  function handleLink(e: React.FormEvent) {
+  async function handleLink(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim() || !childName.trim()) return;
+    if (code.trim().length < 6 || busy) return;
+    setBusy(true);
+    setError("");
 
-    // In production, this would send an invitation to the parent
-    // and link once they accept. For now, just create the link.
-    addChildToCaseload(slpId, {
-      childId: crypto.randomUUID(),
-      childName: childName.trim(),
-      parentEmail: email.trim(),
-    });
-    onLinked();
+    const result = await redeemInviteCode(slpId, code.trim());
+    setBusy(false);
+
+    if (result.success) {
+      setLinkedName(result.childName ?? "the child");
+      onLinked();
+    } else {
+      setError(result.error ?? "Something went wrong. Please try again.");
+    }
   }
 
   return (
@@ -680,56 +694,70 @@ function LinkParentModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
-        <h3 className="text-lg font-extrabold text-ink mb-1">Link a parent account</h3>
-        <p className="text-sm text-ink-soft mb-4 leading-relaxed">
-          Enter the parent's email and child's name. In the full version, this sends an invitation the parent can accept.
-        </p>
 
-        <form onSubmit={handleLink} className="space-y-3">
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1">
-              Parent's email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="parent@email.com"
-              className="w-full rounded-2xl border-2 border-muted bg-background p-3 text-sm font-semibold text-ink placeholder:text-ink-soft/40 focus:border-primary focus:outline-none transition-colors"
-            />
+        {linkedName ? (
+          <div className="text-center py-4">
+            <p className="text-4xl mb-2">🎉</p>
+            <h3 className="text-lg font-extrabold text-ink mb-1">
+              {linkedName} joined your caseload
+            </h3>
+            <p className="text-sm text-ink-soft mb-5">
+              You can now see their progress and assign stories.
+            </p>
+            <button
+              onClick={onClose}
+              className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-bold transition-opacity active:scale-[0.98]"
+            >
+              Done
+            </button>
           </div>
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1">
-              Child's name
-            </label>
-            <input
-              type="text"
-              value={childName}
-              onChange={(e) => setChildName(e.target.value)}
-              placeholder="Enter child's name"
-              className="w-full rounded-2xl border-2 border-muted bg-background p-3 text-sm font-semibold text-ink placeholder:text-ink-soft/40 focus:border-primary focus:outline-none transition-colors"
-            />
-          </div>
+        ) : (
+          <>
+            <h3 className="text-lg font-extrabold text-ink mb-1">Add a child with an invite code</h3>
+            <p className="text-sm text-ink-soft mb-4 leading-relaxed">
+              Ask the parent to open Story Pros → Settings → "Share with your SLP"
+              and send you the 6-character code. Codes expire after 7 days.
+            </p>
 
-          {error && (
-            <p className="text-sm font-semibold text-destructive">{error}</p>
-          )}
+            <form onSubmit={handleLink} className="space-y-3">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1">
+                  Invite code
+                </label>
+                <input
+                  type="text"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.toUpperCase())}
+                  placeholder="e.g. K7M2QX"
+                  maxLength={6}
+                  autoCapitalize="characters"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  className="w-full rounded-2xl border-2 border-muted bg-background p-3 text-center text-xl font-extrabold tracking-[0.3em] text-ink placeholder:text-ink-soft/40 placeholder:tracking-normal placeholder:text-sm focus:border-primary focus:outline-none transition-colors"
+                />
+              </div>
 
-          <button
-            type="submit"
-            disabled={!email.trim() || !childName.trim()}
-            className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-bold disabled:opacity-40 transition-opacity active:scale-[0.98]"
-          >
-            Link child
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-full text-center text-sm font-semibold text-ink-soft py-2"
-          >
-            Cancel
-          </button>
-        </form>
+              {error && (
+                <p className="text-sm font-semibold text-destructive">{error}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={code.trim().length < 6 || busy}
+                className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-bold disabled:opacity-40 transition-opacity active:scale-[0.98]"
+              >
+                {busy ? "Checking code…" : "Link child"}
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-full text-center text-sm font-semibold text-ink-soft py-2"
+              >
+                Cancel
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );

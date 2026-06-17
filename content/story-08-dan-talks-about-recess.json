@@ -50,19 +50,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Dan",
-          "emoji": "\ud83e\uddd2",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "A cat",
           "emoji": "\ud83d\udc31"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "A robot",
           "emoji": "\ud83e\udd16"
+        },
+        {
+          "id": "c",
+          "label": "Dan",
+          "emoji": "\ud83e\uddd2",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -80,14 +80,14 @@
         },
         {
           "id": "b",
-          "label": "A store",
-          "emoji": "\ud83c\udfea"
-        },
-        {
-          "id": "c",
           "label": "the basketball court",
           "emoji": "\ud83c\udfe0",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "A store",
+          "emoji": "\ud83c\udfea"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -125,19 +125,19 @@
       "options": [
         {
           "id": "a",
+          "label": "Embarrassed",
+          "emoji": "\ud83d\ude33",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "Happy",
           "emoji": "\ud83d\ude0a"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "Angry",
           "emoji": "\ud83d\ude20"
-        },
-        {
-          "id": "c",
-          "label": "Embarrassed",
-          "emoji": "\ud83d\ude33",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -180,14 +180,14 @@
         },
         {
           "id": "b",
-          "label": "His mom listened and said they would talk to his teacher ...",
-          "emoji": "\ud83d\ude34",
-          "correct": true
+          "label": "Went home",
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "c",
-          "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "label": "His mom listened and said they would talk to his teacher ...",
+          "emoji": "\ud83d\ude34",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -213,13 +213,13 @@
           "options": [
             {
               "id": "a",
-              "text": "place",
-              "correct": true
+              "text": "animal",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "animal",
-              "correct": false
+              "text": "place",
+              "correct": true
             },
             {
               "id": "c",
@@ -234,18 +234,18 @@
           "options": [
             {
               "id": "a",
-              "text": "play basketball there",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "wear it",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "eat it",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "play basketball there",
+              "correct": true
             }
           ]
         },
@@ -318,13 +318,13 @@
           "options": [
             {
               "id": "a",
-              "text": "The basketball court ate lunch",
-              "correct": false
+              "text": "Dan played basketball on the court at recess",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "Dan played basketball on the court at recess",
-              "correct": true
+              "text": "The basketball court ate lunch",
+              "correct": false
             },
             {
               "id": "c",
@@ -413,18 +413,18 @@
           "options": [
             {
               "id": "a",
-              "text": "helps students learn",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "moves water",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "gives power",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "helps students learn",
+              "correct": true
             }
           ]
         },
@@ -434,13 +434,13 @@
           "options": [
             {
               "id": "a",
-              "text": "person at school who teaches",
-              "correct": true
+              "text": "a tall frame with steps",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "a tall frame with steps",
-              "correct": false
+              "text": "person at school who teaches",
+              "correct": true
             },
             {
               "id": "c",
@@ -455,13 +455,13 @@
           "options": [
             {
               "id": "a",
-              "text": "lesson",
-              "correct": true
+              "text": "soft pad",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "soft pad",
-              "correct": false
+              "text": "lesson",
+              "correct": true
             },
             {
               "id": "c",
@@ -476,13 +476,13 @@
           "options": [
             {
               "id": "a",
-              "text": "ocean",
-              "correct": false
+              "text": "school or classroom",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "school or classroom",
-              "correct": true
+              "text": "ocean",
+              "correct": false
             },
             {
               "id": "c",
@@ -502,13 +502,13 @@
             },
             {
               "id": "b",
-              "text": "The teacher helped the class with the project",
-              "correct": true
+              "text": "The teacher flew like a kite",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "The teacher flew like a kite",
-              "correct": false
+              "text": "The teacher helped the class with the project",
+              "correct": true
             }
           ]
         }
@@ -552,6 +552,146 @@
         "connection_text": "Dan's mom said they would talk to his teacher together.",
         "connection_narration": "Dan's mom said they would talk to his teacher together."
       }
+    },
+    {
+      "word": "embarrassed",
+      "type": "emotion",
+      "image": "vocab-embarrassed.png",
+      "sfa": {
+        "category": "It belongs to the feeling word group.",
+        "function": "It tells how Dan felt when the kid laughed at him.",
+        "appearance": "When someone is embarrassed, their cheeks may turn red and they look down.",
+        "parts": "Embarrassed shows in parts like: face, eyes, shoulders.",
+        "location": "You might feel embarrassed when people notice a mistake."
+      },
+      "quiz_questions": [
+        {
+          "position": 1,
+          "prompt": "Is 'embarrassed' a feeling, a place, or a food?",
+          "options": [
+            {
+              "text": "A place",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "A feeling",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "A food",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "prompt": "How did Dan feel when the kid laughed at him?",
+          "options": [
+            {
+              "text": "Embarrassed",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "Sleepy",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Hungry",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "What might your face do when you feel embarrassed?",
+          "options": [
+            {
+              "text": "Smile really big",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Fall asleep",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Turn red and look down",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "prompt": "Which one could make someone feel embarrassed?",
+          "options": [
+            {
+              "text": "Getting a hug from grandma",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Eating breakfast at home",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Tripping in front of the class",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "prompt": "What can help when you feel embarrassed?",
+          "options": [
+            {
+              "text": "Hide forever and never talk about it",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "Tell someone you trust, like Dan told his mom",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "Yell at the other kids",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "prompt": "Which sentence uses 'embarrassed' correctly?",
+          "options": [
+            {
+              "text": "Dan felt embarrassed because the kid laughed",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "I put embarrassed on my sandwich",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "The embarrassed is parked outside",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        }
+      ]
     }
   ],
   "sentence_frames": [
@@ -561,16 +701,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "he found a dollar"
+          "text": "a kid laughed when he paused",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "he won the game"
+          "text": "he found a dollar"
         },
         {
           "id": "c",
-          "text": "a kid laughed when he paused",
-          "correct": true
+          "text": "he won the game"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -581,12 +721,12 @@
       "choices": [
         {
           "id": "a",
-          "text": "he felt embarrassed at school",
-          "correct": true
+          "text": "he lost a pencil"
         },
         {
           "id": "b",
-          "text": "he lost a pencil"
+          "text": "he felt embarrassed at school",
+          "correct": true
         },
         {
           "id": "c",
@@ -601,16 +741,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "she wanted to help Dan feel better",
-          "correct": true
-        },
-        {
-          "id": "b",
           "text": "she needed directions"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "she liked visiting school"
+        },
+        {
+          "id": "c",
+          "text": "she wanted to help Dan feel better",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"

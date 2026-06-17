@@ -55,14 +55,14 @@
         },
         {
           "id": "b",
-          "label": "A robot",
-          "emoji": "\ud83e\udd16"
-        },
-        {
-          "id": "c",
           "label": "Dan and Daria",
           "emoji": "\ud83e\uddd2",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "A robot",
+          "emoji": "\ud83e\udd16"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -75,14 +75,14 @@
       "options": [
         {
           "id": "a",
-          "label": "They went to a sandy beach",
-          "emoji": "\ud83c\udfe0",
-          "correct": true
+          "label": "The moon",
+          "emoji": "\ud83c\udf19"
         },
         {
           "id": "b",
-          "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "label": "They went to a sandy beach",
+          "emoji": "\ud83c\udfe0",
+          "correct": true
         },
         {
           "id": "c",
@@ -100,19 +100,19 @@
       "options": [
         {
           "id": "a",
+          "label": "A wave crashed in and destroyed their sandcastle",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "He fell down",
           "emoji": "\ud83e\udd15"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "She lost her shoe",
           "emoji": "\ud83d\udc5f"
-        },
-        {
-          "id": "c",
-          "label": "A wave crashed in and destroyed their sandcastle",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -150,19 +150,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria said, \u201cLet\u2019s move further away from the ocean\u201d",
-          "emoji": "\u2708\ufe0f",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Went to sleep",
           "emoji": "\ud83d\ude34"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Ate lunch",
           "emoji": "\ud83c\udf7d\ufe0f"
+        },
+        {
+          "id": "c",
+          "label": "Daria said, \u201cLet\u2019s move further away from the ocean\u201d",
+          "emoji": "\u2708\ufe0f",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -175,14 +175,14 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
-        },
-        {
-          "id": "b",
           "label": "They built a new sandcastle farther from the water and it...",
           "emoji": "\ud83d\ude34",
           "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Went to sleep",
+          "emoji": "\ud83d\ude34"
         },
         {
           "id": "c",
@@ -213,13 +213,13 @@
           "options": [
             {
               "id": "a",
-              "text": "something you build",
-              "correct": true
+              "text": "food",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "food",
-              "correct": false
+              "text": "something you build",
+              "correct": true
             },
             {
               "id": "c",
@@ -234,18 +234,18 @@
           "options": [
             {
               "id": "a",
+              "text": "build it for fun",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "wear it",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "eat it",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "build it for fun",
-              "correct": true
             }
           ]
         },
@@ -260,13 +260,13 @@
             },
             {
               "id": "b",
-              "text": "castle shape made of sand",
-              "correct": true
+              "text": "round ball",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "round ball",
-              "correct": false
+              "text": "castle shape made of sand",
+              "correct": true
             }
           ]
         },
@@ -297,13 +297,13 @@
           "options": [
             {
               "id": "a",
-              "text": "car",
-              "correct": false
+              "text": "beach",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "beach",
-              "correct": true
+              "text": "car",
+              "correct": false
             },
             {
               "id": "c",
@@ -323,13 +323,13 @@
             },
             {
               "id": "b",
-              "text": "Dan and Daria built a sandcastle on the beach",
-              "correct": true
+              "text": "The sandcastle drove to school",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "The sandcastle drove to school",
-              "correct": false
+              "text": "Dan and Daria built a sandcastle on the beach",
+              "correct": true
             }
           ]
         }
@@ -392,13 +392,13 @@
           "options": [
             {
               "id": "a",
-              "text": "part of the ocean",
-              "correct": true
+              "text": "toy",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "toy",
-              "correct": false
+              "text": "part of the ocean",
+              "correct": true
             },
             {
               "id": "c",
@@ -413,18 +413,18 @@
           "options": [
             {
               "id": "a",
+              "text": "moves water toward shore",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "writes words",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "cooks food",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "moves water toward shore",
-              "correct": true
             }
           ]
         },
@@ -460,13 +460,13 @@
             },
             {
               "id": "b",
-              "text": "spoon",
-              "correct": false
+              "text": "top",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "top",
-              "correct": true
+              "text": "spoon",
+              "correct": false
             }
           ]
         },
@@ -481,13 +481,13 @@
             },
             {
               "id": "b",
-              "text": "ocean",
-              "correct": true
+              "text": "bedroom",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "bedroom",
-              "correct": false
+              "text": "ocean",
+              "correct": true
             }
           ]
         },
@@ -497,18 +497,18 @@
           "options": [
             {
               "id": "a",
-              "text": "A big wave knocked down the sandcastle",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "He wore the wave as a scarf",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "The wave did homework",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "A big wave knocked down the sandcastle",
+              "correct": true
             }
           ]
         }
@@ -570,18 +570,18 @@
           "prompt": "What group does 'disappointed' belong to?",
           "options": [
             {
-              "text": "Feelings / emotions",
-              "correct": true,
-              "id": "a"
-            },
-            {
               "text": "Animals",
               "correct": false,
-              "id": "b"
+              "id": "a"
             },
             {
               "text": "Toys",
               "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Feelings / emotions",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -617,13 +617,13 @@
               "id": "a"
             },
             {
-              "text": "Shoulders droop, face looks sad, might sigh",
-              "correct": true,
+              "text": "Running around excitedly",
+              "correct": false,
               "id": "b"
             },
             {
-              "text": "Running around excitedly",
-              "correct": false,
+              "text": "Shoulders droop, face looks sad, might sigh",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -633,18 +633,18 @@
           "prompt": "What happens in your body when you feel disappointed?",
           "options": [
             {
-              "text": "Nothing changes at all",
-              "correct": false,
+              "text": "Your heart sinks and you feel let down",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "You feel very energetic",
+              "text": "Nothing changes at all",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Your heart sinks and you feel let down",
-              "correct": true,
+              "text": "You feel very energetic",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -654,13 +654,13 @@
           "prompt": "Where or when might you feel disappointed?",
           "options": [
             {
-              "text": "When something you built gets knocked down",
-              "correct": true,
+              "text": "When you pet a puppy",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "When you pet a puppy",
-              "correct": false,
+              "text": "When something you built gets knocked down",
+              "correct": true,
               "id": "b"
             },
             {
@@ -680,13 +680,13 @@
               "id": "a"
             },
             {
-              "text": "She rode the disappointed to the park",
-              "correct": false,
+              "text": "Dan felt disappointed when the wave destroyed the sandcastle",
+              "correct": true,
               "id": "b"
             },
             {
-              "text": "Dan felt disappointed when the wave destroyed the sandcastle",
-              "correct": true,
+              "text": "She rode the disappointed to the park",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -705,12 +705,12 @@
         },
         {
           "id": "b",
-          "text": "they had too much sand"
+          "text": "a wave destroyed their sandcastle",
+          "correct": true
         },
         {
           "id": "c",
-          "text": "a wave destroyed their sandcastle",
-          "correct": true
+          "text": "they had too much sand"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -721,16 +721,16 @@
       "choices": [
         {
           "id": "a",
-          "text": "they were too close to the water",
-          "correct": true
-        },
-        {
-          "id": "b",
           "text": "she wanted to find shells"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "the sand was too hot"
+        },
+        {
+          "id": "c",
+          "text": "they were too close to the water",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -741,12 +741,12 @@
       "choices": [
         {
           "id": "a",
-          "text": "it was made of rocks"
+          "text": "they built it farther from the waves",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "they built it farther from the waves",
-          "correct": true
+          "text": "it was made of rocks"
         },
         {
           "id": "c",

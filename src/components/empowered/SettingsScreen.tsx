@@ -16,6 +16,7 @@ import {
   PREMIUM_PRICE_DISPLAY,
   type ChildSubscription,
 } from "@/services/subscription";
+import { createInviteCode } from "@/services/slp";
 
 interface SettingsScreenProps {
   onClose: () => void;
@@ -198,6 +199,17 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
               />
             );
           })}
+        </SettingsGroup>
+
+        {/* Share with SLP */}
+        <SettingsGroup title="Share with your SLP">
+          <p className="px-4 pt-3 text-xs leading-relaxed text-ink-soft">
+            Working with a speech-language pathologist? Generate a code and they
+            can follow your child's progress. Codes expire after 7 days.
+          </p>
+          {children.map((child) => (
+            <SlpShareRow key={child.id} child={child} />
+          ))}
         </SettingsGroup>
 
         {/* Sign out */}
@@ -415,6 +427,59 @@ function SubscriptionRow({
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── SLP share row ──
+
+function SlpShareRow({ child }: { child: Child }) {
+  const [code, setCode] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  async function handleGenerate() {
+    setBusy(true);
+    setError("");
+    const result = await createInviteCode(child.id);
+    setBusy(false);
+    if (result.code) setCode(result.code);
+    else setError(result.error ?? "Something went wrong.");
+  }
+
+  async function handleCopy() {
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch { /* clipboard unavailable */ }
+  }
+
+  return (
+    <div className="px-4 py-3">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-sm font-bold text-ink">{child.name}</p>
+        {code ? (
+          <button
+            onClick={handleCopy}
+            className="rounded-xl bg-primary/10 px-3 py-1.5 font-mono text-sm font-extrabold tracking-[0.2em] text-primary transition-colors hover:bg-primary/20"
+            title="Tap to copy"
+          >
+            {copied ? "Copied!" : code}
+          </button>
+        ) : (
+          <button
+            onClick={handleGenerate}
+            disabled={busy}
+            className="rounded-xl bg-secondary/20 px-3 py-1.5 text-xs font-bold text-secondary-foreground transition-colors hover:bg-secondary/30 disabled:opacity-50"
+          >
+            {busy ? "..." : "Get code"}
+          </button>
+        )}
+      </div>
+      {error && <p className="mt-1 text-xs font-semibold text-destructive">{error}</p>}
     </div>
   );
 }

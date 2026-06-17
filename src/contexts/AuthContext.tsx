@@ -4,6 +4,9 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { setActiveProgressChild } from "@/services/progress";
+import { hydrateOwnedFromCloud } from "@/services/shop";
+import { hydrateSubscriptionsFromCloud } from "@/services/subscription";
 
 // ── Types ──
 
@@ -151,6 +154,22 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
     const found = storedId ? kids.find((c) => c.id === storedId) : null;
     setActiveChildState(found ?? kids[0] ?? null);
   }, []);
+
+  // Keep the progress store scoped to the active child
+  // (setActiveProgressChild also hydrates progress from the cloud)
+  useEffect(() => {
+    setActiveProgressChild(activeChild?.id);
+    if (activeChild?.id) {
+      void hydrateOwnedFromCloud(activeChild.id);
+    }
+  }, [activeChild?.id]);
+
+  // Refresh subscription cache once the account's children are known
+  useEffect(() => {
+    if (childProfiles.length > 0) {
+      void hydrateSubscriptionsFromCloud();
+    }
+  }, [childProfiles.length]);
 
   // Initial session + listener
   useEffect(() => {

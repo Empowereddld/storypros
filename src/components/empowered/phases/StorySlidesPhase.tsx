@@ -9,6 +9,7 @@ import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, PhaseResult, StorySlide } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { highlightConnective } from "@/lib/highlightConnective";
 import { speak, stop, isSpeaking, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 
 const ELEMENT_ICONS: Record<string, string> = {
@@ -28,23 +29,6 @@ const ELEMENT_LABELS: Record<string, string> = {
   action: "Action",
   result: "Result",
 };
-
-/** Highlight occurrences of the target connective in story text */
-function highlightConnective(text: string, connective: string): React.ReactNode {
-  if (!connective) return text;
-  const regex = new RegExp(`(\\b${connective}\\b)`, "gi");
-  const parts = text.split(regex);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) =>
-    part.toLowerCase() === connective.toLowerCase() ? (
-      <span key={i} className="inline-block rounded-lg bg-secondary/25 px-1 font-extrabold text-secondary-foreground">
-        {part}
-      </span>
-    ) : (
-      <span key={i}>{part}</span>
-    ),
-  );
-}
 
 export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const [page, setPage] = useState(0);

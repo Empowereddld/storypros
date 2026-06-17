@@ -27,7 +27,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-export function SequencingPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function SequencingPhase({ storyData, onComplete, onClose, childId = "demo" }: StoryPhaseProps) {
   const frames = storyData.sequencing_frames;
   const [shuffled] = useState<SequencingFrame[]>(() => shuffle(frames));
   const [order, setOrder] = useState<number[]>([]); // indices into shuffled
@@ -35,6 +35,8 @@ export function SequencingPhase({ storyData, onComplete, onClose }: StoryPhasePr
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const startTime = useRef(Date.now());
+  // Fraction of frames placed correctly on the FIRST attempt (partial credit)
+  const firstAttemptFraction = useRef<number | null>(null);
 
   const progress = feedback.type === "correct" ? 100 : (order.length / frames.length) * 80;
 
@@ -54,9 +56,15 @@ export function SequencingPhase({ storyData, onComplete, onClose }: StoryPhasePr
     const elapsed = Date.now() - startTime.current;
 
     // Check if order is correct
-    const isCorrect = order.every((shuffledIdx, i) => {
-      return shuffled[shuffledIdx].correct_position === i + 1;
-    });
+    const correctCount = order.filter(
+      (shuffledIdx, i) => shuffled[shuffledIdx].correct_position === i + 1,
+    ).length;
+    const isCorrect = correctCount === frames.length;
+
+    // Capture partial credit from the first attempt only
+    if (currentAttempt === 1) {
+      firstAttemptFraction.current = frames.length > 0 ? correctCount / frames.length : 0;
+    }
 
     // Find wrong positions for feedback
     const wrongPositions = new Set<number>();
@@ -69,7 +77,7 @@ export function SequencingPhase({ storyData, onComplete, onClose }: StoryPhasePr
     }
 
     const attempt: ActivityAttempt = {
-      child_id: "demo",
+      child_id: childId,
       story_id: storyData.id,
       activity_type: "sequencing",
       question_index: 0,
@@ -90,13 +98,12 @@ export function SequencingPhase({ storyData, onComplete, onClose }: StoryPhasePr
 
   function handleContinue() {
     if (feedback.type === "correct") {
-      const firstAttempts = attempts.filter((a) => a.attempt_number === 1);
-      const correctFirst = firstAttempts.filter((a) => a.is_correct).length;
-
       onComplete({
         phase: "sequencing",
         attempts: [...attempts],
-        first_attempt_accuracy: correctFirst,
+        // Partial credit: fraction of frames correctly placed on first attempt,
+        // not all-or-nothing (one misplaced slide no longer scores 0%)
+        first_attempt_accuracy: firstAttemptFraction.current ?? 0,
         completed: true,
       });
     } else {

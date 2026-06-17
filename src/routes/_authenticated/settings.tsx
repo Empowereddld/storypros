@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { SettingsScreen } from "@/components/empowered/SettingsScreen";
+import { ParentGate } from "@/components/empowered/ParentGate";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const Route = createFileRoute("/_authenticated/settings")({
@@ -9,6 +10,20 @@ export const Route = createFileRoute("/_authenticated/settings")({
 function SettingsPage() {
   const navigate = useNavigate();
   const { profile } = useAuth();
-  const home = profile?.role === "slp" || profile?.role === "teacher" ? "/slp" : "/home";
-  return <SettingsScreen onClose={() => navigate({ to: home })} />;
+  const isClinician = profile?.role === "slp" || profile?.role === "teacher";
+  const home = isClinician ? "/slp" : "/home";
+
+  // SLP/teacher accounts are adult-only — no gate needed
+  if (isClinician) {
+    return <SettingsScreen onClose={() => navigate({ to: home })} />;
+  }
+
+  return (
+    <ParentGate
+      message="Settings is for parents and caregivers."
+      onCancel={() => navigate({ to: home })}
+    >
+      <SettingsScreen onClose={() => navigate({ to: home })} />
+    </ParentGate>
+  );
 }

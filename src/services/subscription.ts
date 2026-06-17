@@ -8,9 +8,15 @@
  *   - Per-account billing, but each child is a
  *     separate subscription slot
  *
- * Mock billing for now — swap the checkout/cancel
- * functions for real Stripe calls when connecting.
+ * Cache-first hybrid:
+ *   - localStorage = synchronous cache screens read
+ *   - child_subscriptions table = source of truth
+ *   - Mock billing still flips tiers directly; the
+ *     Stripe checkout/webhook flow replaces the
+ *     write paths later without changing this API.
  * ───────────────────────────────────────────── */
+
+import { db, isCloudId, logSyncError, emitDataUpdated } from "./cloud";
 
 // ── Types ──
 
@@ -66,6 +72,80 @@ function loadState(): SubscriptionState {
 
 function saveState(state: SubscriptionState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ── Cloud sync ──
+
+interface SubscriptionRow {
+  child_id: string;
+  tier: PlanTier;
+  subscribed_at: string | null;
+  current_period_end: string | null;
+  cancel_at_period_end: boolean | null;
+  stripe_subscription_id: string | null;
+  stripe_customer_id: string | null;
+}
+
+/**
+ * Pull all of this account's child subscriptions into the cache.
+ * Called by AuthContext once children are loaded.
+ */
+export async function hydrateSubscriptionsFromCloud(): Promise<void> {
+  try {
+    const { data: auth } = await db.auth.getUser();
+    if (!auth.user) return;
+
+    const { data, error } = await db
+      .from("child_subscriptions")
+      .select(
+        "child_id, tier, subscribed_at, current_period_end, cancel_at_period_end, stripe_subscription_id, stripe_customer_id",
+      )
+      .eq("account_id", auth.user.id);
+    if (error) throw error;
+
+    const state = loadState();
+    for (const row of (data ?? []) as SubscriptionRow[]) {
+      state.children[row.child_id] = {
+        childId: row.child_id,
+        tier: row.tier,
+        subscribedAt: row.subscribed_at ?? undefined,
+        currentPeriodEnd: row.current_period_end ?? undefined,
+        cancelAtPeriodEnd: row.cancel_at_period_end ?? undefined,
+        stripeSubscriptionId: row.stripe_subscription_id ?? undefined,
+        stripeCustomerId: row.stripe_customer_id ?? undefined,
+      };
+    }
+    saveState(state);
+    emitDataUpdated("subscriptions");
+  } catch (err) {
+    logSyncError("hydrate subscriptions")(err);
+  }
+}
+
+/** Write-through a subscription change to the cloud */
+function syncSubscriptionToCloud(sub: ChildSubscription): void {
+  if (!isCloudId(sub.childId)) return;
+  void (async () => {
+    try {
+      const { data: auth } = await db.auth.getUser();
+      if (!auth.user) return;
+      const { error } = await db.from("child_subscriptions").upsert(
+        {
+          account_id: auth.user.id,
+          child_id: sub.childId,
+          tier: sub.tier,
+          subscribed_at: sub.subscribedAt ?? null,
+          current_period_end: sub.currentPeriodEnd ?? null,
+          cancel_at_period_end: sub.cancelAtPeriodEnd ?? false,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "child_id" },
+      );
+      if (error) throw error;
+    } catch (err) {
+      logSyncError("upsert subscription")(err);
+    }
+  })();
 }
 
 // ── Core functions ──
@@ -124,7 +204,7 @@ export function getActivePremiumCount(): number {
  *   2. Redirect to Stripe
  *   3. Handle webhook → update subscription
  *
- * Mock version: instantly activates premium.
+ * Mock version: instantly activates premium (and syncs to cloud).
  */
 export async function startPremiumSubscription(
   childId: string,
@@ -135,7 +215,7 @@ export async function startPremiumSubscription(
   const periodEnd = new Date(now);
   periodEnd.setMonth(periodEnd.getMonth() + 1);
 
-  state.children[childId] = {
+  const sub: ChildSubscription = {
     childId,
     tier: "premium",
     subscribedAt: now.toISOString(),
@@ -144,8 +224,10 @@ export async function startPremiumSubscription(
     // In production: stripeSubscriptionId and stripeCustomerId
     // would come from the Stripe webhook
   };
+  state.children[childId] = sub;
 
   saveState(state);
+  syncSubscriptionToCloud(sub);
   return { success: true };
 }
 
@@ -166,6 +248,7 @@ export async function cancelSubscription(
 
   sub.cancelAtPeriodEnd = true;
   saveState(state);
+  syncSubscriptionToCloud(sub);
   return { success: true };
 }
 
@@ -186,6 +269,7 @@ export async function reactivateSubscription(
 
   sub.cancelAtPeriodEnd = false;
   saveState(state);
+  syncSubscriptionToCloud(sub);
   return { success: true };
 }
 
@@ -195,8 +279,10 @@ export async function reactivateSubscription(
  */
 export function downgradeToFree(childId: string): void {
   const state = loadState();
-  state.children[childId] = { childId, tier: "free" };
+  const sub: ChildSubscription = { childId, tier: "free" };
+  state.children[childId] = sub;
   saveState(state);
+  syncSubscriptionToCloud(sub);
 }
 
 /**
@@ -215,7 +301,9 @@ export function processExpiredSubscriptions(): void {
       new Date(sub.currentPeriodEnd) < now
     ) {
       // Subscription expired and was set to cancel
-      state.children[childId] = { childId, tier: "free" };
+      const downgraded: ChildSubscription = { childId, tier: "free" };
+      state.children[childId] = downgraded;
+      syncSubscriptionToCloud(downgraded);
     }
   }
 
@@ -236,12 +324,6 @@ export async function createCheckoutSession(
   _returnUrl: string,
 ): Promise<{ url: string } | { error: string }> {
   // Mock: just return success (no real URL)
-  // In production:
-  //   const res = await fetch('/api/create-checkout', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ childId, returnUrl }),
-  //   });
-  //   return res.json();
   return { url: "#mock-checkout" };
 }
 

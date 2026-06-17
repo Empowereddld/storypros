@@ -3,9 +3,16 @@
  * Manages caseload (linked children), story
  * assignments, and clinical session notes.
  *
- * Mock/localStorage for now — swap for Supabase
- * when the backend is connected.
+ * Cache-first hybrid:
+ *   - localStorage = synchronous cache the dashboard reads
+ *   - slp_caseload / story_assignments / session_notes
+ *     tables = source of truth
+ *   - hydrateSlpFromCloud(slpId) refreshes the cache and
+ *     emits "storypros:slp-updated"; mutations write through
+ *   - Demo SLP accounts (non-UUID ids) stay local-only
  * ───────────────────────────────────────────── */
+
+import { db, isCloudId, logSyncError, emitDataUpdated } from "./cloud";
 
 // ── Types ──
 
@@ -45,7 +52,7 @@ export interface SessionNote {
   tags: string[];
 }
 
-// ── Storage ──
+// ── Storage (synchronous cache) ──
 
 const CASELOAD_KEY = "storypros_slp_caseload";
 const ASSIGNMENTS_KEY = "storypros_slp_assignments";
@@ -84,6 +91,159 @@ function saveNotes(slpId: string, data: SessionNote[]) {
   localStorage.setItem(`${NOTES_KEY}_${slpId}`, JSON.stringify(data));
 }
 
+// ── Cloud hydration ──
+
+interface CaseloadRow {
+  child_id: string;
+  child_name: string;
+  parent_email: string;
+  tag: string | null;
+  linked_at: string;
+}
+
+interface AssignmentRow {
+  id: string;
+  child_id: string;
+  story_id: string;
+  story_title: string;
+  status: "assigned" | "in_progress" | "completed";
+  assigned_at: string;
+  due_by: string | null;
+  completed_at: string | null;
+}
+
+interface NoteRow {
+  id: string;
+  child_id: string;
+  story_id: string | null;
+  content: string;
+  tags: string[] | null;
+  created_at: string;
+}
+
+/**
+ * Pull this SLP's caseload, assignments, and notes from Supabase
+ * into the local cache. No-op for demo SLPs (non-UUID ids).
+ */
+export async function hydrateSlpFromCloud(slpId: string): Promise<void> {
+  if (!isCloudId(slpId)) return;
+  try {
+    const [caseloadRes, assignmentsRes, notesRes] = await Promise.all([
+      db
+        .from("slp_caseload")
+        .select("child_id, child_name, parent_email, tag, linked_at")
+        .eq("slp_id", slpId)
+        .order("linked_at", { ascending: true }),
+      db
+        .from("story_assignments")
+        .select("id, child_id, story_id, story_title, status, assigned_at, due_by, completed_at")
+        .eq("slp_id", slpId)
+        .order("assigned_at", { ascending: false }),
+      db
+        .from("session_notes")
+        .select("id, child_id, story_id, content, tags, created_at")
+        .eq("slp_id", slpId)
+        .order("created_at", { ascending: false }),
+    ]);
+    if (caseloadRes.error) throw caseloadRes.error;
+    if (assignmentsRes.error) throw assignmentsRes.error;
+    if (notesRes.error) throw notesRes.error;
+
+    saveCaseload(
+      slpId,
+      ((caseloadRes.data ?? []) as CaseloadRow[]).map((r) => ({
+        childId: r.child_id,
+        childName: r.child_name,
+        parentEmail: r.parent_email,
+        linkedAt: r.linked_at,
+        tag: r.tag ?? undefined,
+      })),
+    );
+    saveAssignments(
+      slpId,
+      ((assignmentsRes.data ?? []) as AssignmentRow[]).map((r) => ({
+        id: r.id,
+        childId: r.child_id,
+        storyId: r.story_id,
+        storyTitle: r.story_title,
+        assignedAt: r.assigned_at,
+        dueBy: r.due_by ?? undefined,
+        status: r.status,
+        completedAt: r.completed_at ?? undefined,
+      })),
+    );
+    saveNotes(
+      slpId,
+      ((notesRes.data ?? []) as NoteRow[]).map((r) => ({
+        id: r.id,
+        childId: r.child_id,
+        date: r.created_at,
+        content: r.content,
+        storyId: r.story_id ?? undefined,
+        tags: r.tags ?? [],
+      })),
+    );
+    emitDataUpdated("slp");
+  } catch (err) {
+    logSyncError("hydrate slp")(err);
+  }
+}
+
+/** True when both ids are cloud UUIDs (skip sync for demo data) */
+function shouldSync(slpId: string, childId?: string): boolean {
+  return isCloudId(slpId) && (childId === undefined || isCloudId(childId));
+}
+
+// ── Invite-code consent flow ──
+// Parents generate a code (createInviteCode); SLPs redeem it
+// (redeemInviteCode). Direct caseload inserts are blocked by RLS —
+// this is the only way a real child joins a caseload.
+
+export async function createInviteCode(
+  childId: string,
+): Promise<{ code?: string; error?: string }> {
+  if (!isCloudId(childId)) {
+    return { error: "Demo children can't be shared with an SLP." };
+  }
+  try {
+    const { data, error } = await db.rpc("create_slp_invite", {
+      p_child_id: childId,
+    });
+    if (error) throw error;
+    return { code: data as string };
+  } catch (err) {
+    logSyncError("create invite")(err);
+    return { error: "Couldn't create a code right now. Please try again." };
+  }
+}
+
+export async function redeemInviteCode(
+  slpId: string,
+  code: string,
+): Promise<{ success: boolean; childName?: string; error?: string }> {
+  if (!isCloudId(slpId)) {
+    return {
+      success: false,
+      error: "Invite codes require a signed-in clinician account.",
+    };
+  }
+  try {
+    const { data, error } = await db.rpc("redeem_slp_invite", {
+      p_code: code,
+    });
+    if (error) throw error;
+    const row = (data as { linked_child_name?: string }[] | null)?.[0];
+    await hydrateSlpFromCloud(slpId);
+    return { success: true, childName: row?.linked_child_name };
+  } catch (err) {
+    logSyncError("redeem invite")(err);
+    return {
+      success: false,
+      error: "That code is invalid or has expired. Ask the parent for a new one.",
+    };
+  }
+}
+
 // ── Caseload management ──
 
 export function getCaseload(slpId: string): CaseloadChild[] {
@@ -97,9 +257,8 @@ export function addChildToCaseload(
   const caseload = loadCaseload(slpId);
 
   // Don't add duplicates
-  if (caseload.find((c) => c.childId === child.childId)) {
-    return caseload.find((c) => c.childId === child.childId)!;
-  }
+  const existing = caseload.find((c) => c.childId === child.childId);
+  if (existing) return existing;
 
   const entry: CaseloadChild = {
     ...child,
@@ -107,12 +266,42 @@ export function addChildToCaseload(
   };
   caseload.push(entry);
   saveCaseload(slpId, caseload);
+
+  if (shouldSync(slpId, child.childId)) {
+    void db
+      .from("slp_caseload")
+      .upsert(
+        {
+          slp_id: slpId,
+          child_id: child.childId,
+          child_name: child.childName,
+          parent_email: child.parentEmail,
+          tag: child.tag ?? null,
+          linked_at: entry.linkedAt,
+        },
+        { onConflict: "slp_id,child_id" },
+      )
+      .then(({ error }) => {
+        if (error) logSyncError("upsert caseload")(error);
+      });
+  }
   return entry;
 }
 
 export function removeChildFromCaseload(slpId: string, childId: string) {
   const caseload = loadCaseload(slpId).filter((c) => c.childId !== childId);
   saveCaseload(slpId, caseload);
+
+  if (shouldSync(slpId, childId)) {
+    void db
+      .from("slp_caseload")
+      .delete()
+      .eq("slp_id", slpId)
+      .eq("child_id", childId)
+      .then(({ error }) => {
+        if (error) logSyncError("delete caseload")(error);
+      });
+  }
 }
 
 export function updateCaseloadChild(slpId: string, childId: string, updates: Partial<CaseloadChild>) {
@@ -120,6 +309,22 @@ export function updateCaseloadChild(slpId: string, childId: string, updates: Par
     c.childId === childId ? { ...c, ...updates } : c,
   );
   saveCaseload(slpId, caseload);
+
+  if (shouldSync(slpId, childId)) {
+    const payload: Record<string, unknown> = {};
+    if (updates.childName !== undefined) payload.child_name = updates.childName;
+    if (updates.parentEmail !== undefined) payload.parent_email = updates.parentEmail;
+    if (updates.tag !== undefined) payload.tag = updates.tag ?? null;
+    if (Object.keys(payload).length === 0) return;
+    void db
+      .from("slp_caseload")
+      .update(payload)
+      .eq("slp_id", slpId)
+      .eq("child_id", childId)
+      .then(({ error }) => {
+        if (error) logSyncError("update caseload")(error);
+      });
+  }
 }
 
 // ── Story assignments ──
@@ -148,6 +353,24 @@ export function assignStory(
   };
   assignments.push(assignment);
   saveAssignments(slpId, assignments);
+
+  if (shouldSync(slpId, childId)) {
+    void db
+      .from("story_assignments")
+      .insert({
+        id: assignment.id,
+        slp_id: slpId,
+        child_id: childId,
+        story_id: storyId,
+        story_title: storyTitle,
+        status: "assigned",
+        assigned_at: assignment.assignedAt,
+        due_by: dueBy ?? null,
+      })
+      .then(({ error }) => {
+        if (error) logSyncError("insert assignment")(error);
+      });
+  }
   return assignment;
 }
 
@@ -156,11 +379,38 @@ export function updateAssignment(slpId: string, assignmentId: string, updates: P
     a.id === assignmentId ? { ...a, ...updates } : a,
   );
   saveAssignments(slpId, assignments);
+
+  if (isCloudId(slpId)) {
+    const payload: Record<string, unknown> = {};
+    if (updates.status !== undefined) payload.status = updates.status;
+    if (updates.dueBy !== undefined) payload.due_by = updates.dueBy ?? null;
+    if (updates.completedAt !== undefined) payload.completed_at = updates.completedAt ?? null;
+    if (Object.keys(payload).length === 0) return;
+    void db
+      .from("story_assignments")
+      .update(payload)
+      .eq("id", assignmentId)
+      .eq("slp_id", slpId)
+      .then(({ error }) => {
+        if (error) logSyncError("update assignment")(error);
+      });
+  }
 }
 
 export function removeAssignment(slpId: string, assignmentId: string) {
   const assignments = loadAssignments(slpId).filter((a) => a.id !== assignmentId);
   saveAssignments(slpId, assignments);
+
+  if (isCloudId(slpId)) {
+    void db
+      .from("story_assignments")
+      .delete()
+      .eq("id", assignmentId)
+      .eq("slp_id", slpId)
+      .then(({ error }) => {
+        if (error) logSyncError("delete assignment")(error);
+      });
+  }
 }
 
 // ── Session notes ──
@@ -187,6 +437,23 @@ export function addNote(
   };
   notes.push(note);
   saveNotes(slpId, notes);
+
+  if (shouldSync(slpId, childId)) {
+    void db
+      .from("session_notes")
+      .insert({
+        id: note.id,
+        slp_id: slpId,
+        child_id: childId,
+        story_id: note.storyId ?? null,
+        content,
+        tags: note.tags,
+        created_at: note.date,
+      })
+      .then(({ error }) => {
+        if (error) logSyncError("insert note")(error);
+      });
+  }
   return note;
 }
 
@@ -195,16 +462,44 @@ export function updateNote(slpId: string, noteId: string, updates: Partial<Sessi
     n.id === noteId ? { ...n, ...updates } : n,
   );
   saveNotes(slpId, notes);
+
+  if (isCloudId(slpId)) {
+    const payload: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    if (updates.content !== undefined) payload.content = updates.content;
+    if (updates.tags !== undefined) payload.tags = updates.tags;
+    if (updates.storyId !== undefined) payload.story_id = updates.storyId ?? null;
+    void db
+      .from("session_notes")
+      .update(payload)
+      .eq("id", noteId)
+      .eq("slp_id", slpId)
+      .then(({ error }) => {
+        if (error) logSyncError("update note")(error);
+      });
+  }
 }
 
 export function deleteNote(slpId: string, noteId: string) {
   const notes = loadNotes(slpId).filter((n) => n.id !== noteId);
   saveNotes(slpId, notes);
+
+  if (isCloudId(slpId)) {
+    void db
+      .from("session_notes")
+      .delete()
+      .eq("id", noteId)
+      .eq("slp_id", slpId)
+      .then(({ error }) => {
+        if (error) logSyncError("delete note")(error);
+      });
+  }
 }
 
 // ── Demo data (for preview / testing) ──
+// Only used for demo SLP accounts; cloud SLPs see real caseload data.
 
 export function seedDemoCaseload(slpId: string) {
+  if (isCloudId(slpId)) return; // never seed fake children into real accounts
   const existing = loadCaseload(slpId);
   if (existing.length > 0) return; // already seeded
 

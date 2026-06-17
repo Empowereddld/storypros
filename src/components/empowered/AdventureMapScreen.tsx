@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import dariaSolo from "@/assets/daria-solo.png";
 import childAvatar from "@/assets/child-avatar.png";
 import { cn } from "@/lib/utils";
@@ -103,6 +103,14 @@ function buildWindingPath(pins: Pin[], height: number): string {
 export function AdventureMapScreen({ childName, onReset, onNavigate }: AdventureMapScreenProps) {
   const { children, activeChild } = useAuth();
   const [openPin, setOpenPin] = useState<Pin | null>(null);
+  const [, setProgressVersion] = useState(0);
+
+  // Re-render when cloud hydration refreshes the progress cache
+  useEffect(() => {
+    const onUpdate = () => setProgressVersion((v) => v + 1);
+    window.addEventListener("storypros:progress-updated", onUpdate);
+    return () => window.removeEventListener("storypros:progress-updated", onUpdate);
+  }, []);
 
   const level = getCurrentLevel();
   const completedIds = getCompletedStoryIds();
@@ -134,6 +142,15 @@ export function AdventureMapScreen({ childName, onReset, onNavigate }: Adventure
       {/* Top app bar */}
       <header className="sticky top-0 z-30 flex items-center justify-between gap-2 bg-card/95 backdrop-blur px-4 py-3 rounded-b-2xl border-b-4 border-accent/60 shadow-card">
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => onNavigate("home")}
+            aria-label="Back to home"
+            className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft hover:bg-accent/60 transition-colors active:scale-95"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+              <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
           <div className="h-9 w-9 overflow-hidden rounded-full bg-accent border-2 border-primary">
             <img src={childAvatar} alt="" className="h-full w-full object-cover object-top scale-[1.6] translate-y-1" />
           </div>
@@ -503,23 +520,4 @@ function ChartIcon() {
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <rect x="3" y="12" width="4" height="9" rx="1" />
       <rect x="10" y="8" width="4" height="13" rx="1" />
-      <rect x="17" y="4" width="4" height="17" rx="1" />
-    </svg>
-  );
-}
-function MedalIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <circle cx="12" cy="15" r="5" />
-      <path d="M8 3l4 7 4-7" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function CrownIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-secondary-foreground" fill="currentColor" aria-hidden>
-      <path d="M2 8l4 4 6-6 6 6 4-4-2 12H4L2 8z" />
-    </svg>
-
-  );
-}
+      <rect x="17" y="4" width="4" height="17" rx="1" /

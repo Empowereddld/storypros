@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { PaywallScreen } from "@/components/empowered/PaywallScreen";
+import { ParentGate } from "@/components/empowered/ParentGate";
 import { useAuth } from "@/contexts/AuthContext";
 import { getStory } from "@/services/stories";
 
@@ -23,12 +24,17 @@ function PaywallPage() {
   const storyTitle = storyId ? getStory(storyId)?.title : undefined;
 
   return (
-    <PaywallScreen
-      childId={childId}
-      childName={childName}
-      storyTitle={storyTitle}
-      onClose={() => navigate({ to: "/home" })}
-      onSubscribed={() => navigate({ to: "/home" })}
-    />
+    <ParentGate
+      message="Subscriptions are handled by parents and caregivers."
+      onCancel={() => navigate({ to: "/home" })}
+    >
+      <PaywallScreen
+        childId={childId}
+        childName={childName}
+        storyTitle={storyTitle}
+        onClose={() => navigate({ to: "/home" })}
+        onSubscribed={() => navigate({ to: "/home" })}
+      />
+    </ParentGate>
   );
 }

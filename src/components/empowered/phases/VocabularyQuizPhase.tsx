@@ -16,7 +16,7 @@ type FeedbackState =
   | { type: "correct" }
   | { type: "wrong" };
 
-export function VocabularyQuizPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function VocabularyQuizPhase({ storyData, onComplete, onClose, childId = "demo" }: StoryPhaseProps) {
   const words = storyData.vocabulary_words;
   const [wordIdx, setWordIdx] = useState(0);
   const [qIdx, setQIdx] = useState(0);
@@ -45,7 +45,7 @@ export function VocabularyQuizPhase({ storyData, onComplete, onClose }: StoryPha
     const isCorrect = option.correct;
 
     const attempt: ActivityAttempt = {
-      child_id: "demo",
+      child_id: childId,
       story_id: storyData.id,
       activity_type: "vocab_quiz",
       question_index: questionsCompleted,

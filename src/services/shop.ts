@@ -10,6 +10,8 @@
  *  - airplane_trick   (animations the plane does)
  * ───────────────────────────────────────────── */
 
+import { db, isCloudId, logSyncError, emitDataUpdated } from "./cloud";
+
 export type CollectibleCategory =
   | "airplane_design"
   | "badge"
@@ -68,6 +70,7 @@ const CATALOG: Collectible[] = [
 ];
 
 // ── Persisted owned items (per child) ──
+// localStorage = synchronous cache; owned_collectibles table = source of truth
 
 const SHOP_KEY = "storypros_shop";
 
@@ -107,6 +110,42 @@ function getOwned(childId: string): Set<string> {
   return ownedItems.get(childId)!;
 }
 
+/**
+ * Pull a child's owned collectibles from Supabase into the cache.
+ * No-op for demo children. Called by AuthContext on child switch.
+ */
+export async function hydrateOwnedFromCloud(childId: string): Promise<void> {
+  if (!isCloudId(childId)) return;
+  try {
+    const { data, error } = await db
+      .from("owned_collectibles")
+      .select("collectible_id")
+      .eq("child_id", childId);
+    if (error) throw error;
+    const ids = new Set((data ?? []).map((r: { collectible_id: string }) => r.collectible_id));
+    ids.add("plane-classic"); // everyone owns the default plane
+    ownedItems.set(childId, ids);
+    saveOwnedItems();
+    emitDataUpdated("collectibles");
+  } catch (err) {
+    logSyncError("hydrate collectibles")(err);
+  }
+}
+
+/** Write-through a newly acquired collectible (purchase or badge) */
+function syncOwnedToCloud(childId: string, collectibleId: string): void {
+  if (!isCloudId(childId)) return;
+  void db
+    .from("owned_collectibles")
+    .upsert(
+      { child_id: childId, collectible_id: collectibleId },
+      { onConflict: "child_id,collectible_id" },
+    )
+    .then(({ error }) => {
+      if (error) logSyncError("insert collectible")(error);
+    });
+}
+
 // ── Public API ──
 
 export function getCatalog(): Collectible[] {
@@ -137,6 +176,7 @@ export function purchaseItem(
 
   getOwned(childId).add(collectibleId);
   saveOwnedItems();
+  syncOwnedToCloud(childId, collectibleId);
   return { success: true, remaining: currentPlanes - item.price };
 }
 
@@ -147,6 +187,7 @@ export function awardBadge(childId: string, badgeId: string): boolean {
   if (owned.has(badgeId)) return false;
   owned.add(badgeId);
   saveOwnedItems();
+  syncOwnedToCloud(childId, badgeId);
   return true;
 }
 

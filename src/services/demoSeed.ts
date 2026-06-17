@@ -223,7 +223,13 @@ export function clearDemoSeed(): void {
   localStorage.removeItem(DEMO_SEEDED_KEY);
   localStorage.removeItem("storypros_auth");
   localStorage.removeItem("storypros_accounts");
-  localStorage.removeItem("storypros_progress");
   localStorage.removeItem("storypros_shop");
   localStorage.removeItem("storypros_subscriptions");
+  // Remove legacy + per-child progress keys
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith("storypros_progress")) {
+      localStorage.removeItem(key);
+    }
+  }
 }

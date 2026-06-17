@@ -50,19 +50,19 @@
       "options": [
         {
           "id": "a",
+          "label": "Dan",
+          "emoji": "\ud83e\uddd2",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "A robot",
           "emoji": "\ud83e\udd16"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "A cat",
           "emoji": "\ud83d\udc31"
-        },
-        {
-          "id": "c",
-          "label": "Dan",
-          "emoji": "\ud83e\uddd2",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -100,19 +100,19 @@
       "options": [
         {
           "id": "a",
+          "label": "When Dan was folding his paper airplane, he got a papercu...",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
+        },
+        {
+          "id": "b",
           "label": "She lost her shoe",
           "emoji": "\ud83d\udc5f"
         },
         {
-          "id": "b",
+          "id": "c",
           "label": "He fell down",
           "emoji": "\ud83e\udd15"
-        },
-        {
-          "id": "c",
-          "label": "When Dan was folding his paper airplane, he got a papercu...",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -125,19 +125,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Calm",
-          "emoji": "\ud83d\ude0c",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Happy",
           "emoji": "\ud83d\ude0a"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Angry",
           "emoji": "\ud83d\ude20"
+        },
+        {
+          "id": "c",
+          "label": "Calm",
+          "emoji": "\ud83d\ude0c",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -175,14 +175,14 @@
       "options": [
         {
           "id": "a",
-          "label": "He put the bandage on Dan\u2019s finger so he could keep makin...",
-          "emoji": "\ud83d\ude34",
-          "correct": true
+          "label": "Went home",
+          "emoji": "\ud83c\udfe0"
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "label": "He put the bandage on Dan\u2019s finger so he could keep makin...",
+          "emoji": "\ud83d\ude34",
+          "correct": true
         },
         {
           "id": "c",
@@ -213,18 +213,18 @@
           "options": [
             {
               "id": "a",
-              "text": "first aid item",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "food",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "animal",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "first aid item",
+              "correct": true
             }
           ]
         },
@@ -234,18 +234,18 @@
           "options": [
             {
               "id": "a",
-              "text": "cover a cut",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "eat it",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "throw it",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "cover a cut",
+              "correct": true
             }
           ]
         },
@@ -260,13 +260,13 @@
             },
             {
               "id": "b",
-              "text": "a round ball",
-              "correct": false
+              "text": "a small sticky strip",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "a small sticky strip",
-              "correct": true
+              "text": "a round ball",
+              "correct": false
             }
           ]
         },
@@ -413,18 +413,18 @@
           "options": [
             {
               "id": "a",
+              "text": "throw it so it can fly",
+              "correct": true
+            },
+            {
+              "id": "b",
               "text": "brush teeth",
               "correct": false
             },
             {
-              "id": "b",
+              "id": "c",
               "text": "cook it",
               "correct": false
-            },
-            {
-              "id": "c",
-              "text": "throw it so it can fly",
-              "correct": true
             }
           ]
         },
@@ -434,13 +434,13 @@
           "options": [
             {
               "id": "a",
-              "text": "a flat sheet of paper",
-              "correct": false
+              "text": "folded paper with wings",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "folded paper with wings",
-              "correct": true
+              "text": "a flat sheet of paper",
+              "correct": false
             },
             {
               "id": "c",
@@ -455,13 +455,13 @@
           "options": [
             {
               "id": "a",
-              "text": "wings",
-              "correct": true
+              "text": "roots",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "roots",
-              "correct": false
+              "text": "wings",
+              "correct": true
             },
             {
               "id": "c",
@@ -476,18 +476,18 @@
           "options": [
             {
               "id": "a",
-              "text": "open space",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "bathtub",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "lunch box",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "open space",
+              "correct": true
             }
           ]
         },
@@ -497,18 +497,18 @@
           "options": [
             {
               "id": "a",
-              "text": "Dan folded a paper airplane and it flew across the room",
-              "correct": true
-            },
-            {
-              "id": "b",
               "text": "The paper airplane sang a song",
               "correct": false
             },
             {
-              "id": "c",
+              "id": "b",
               "text": "I ate a paper airplane for breakfast",
               "correct": false
+            },
+            {
+              "id": "c",
+              "text": "Dan folded a paper airplane and it flew across the room",
+              "correct": true
             }
           ]
         }
@@ -570,13 +570,13 @@
           "prompt": "What group does 'calm' belong to?",
           "options": [
             {
-              "text": "Feelings / emotions",
-              "correct": true,
+              "text": "Colors",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "Colors",
-              "correct": false,
+              "text": "Feelings / emotions",
+              "correct": true,
               "id": "b"
             },
             {
@@ -591,13 +591,13 @@
           "prompt": "When do you feel calm?",
           "options": [
             {
-              "text": "When you stub your toe",
-              "correct": false,
+              "text": "When you take a deep breath and relax",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When you take a deep breath and relax",
-              "correct": true,
+              "text": "When you stub your toe",
+              "correct": false,
               "id": "b"
             },
             {
@@ -612,13 +612,13 @@
           "prompt": "What does someone look like when they feel calm?",
           "options": [
             {
-              "text": "Jumping up and down, screaming",
-              "correct": false,
+              "text": "Relaxed face, slow breathing, still body",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "Relaxed face, slow breathing, still body",
-              "correct": true,
+              "text": "Jumping up and down, screaming",
+              "correct": false,
               "id": "b"
             },
             {
@@ -633,18 +633,18 @@
           "prompt": "What happens in your body when you feel calm?",
           "options": [
             {
-              "text": "Your breathing slows down and muscles relax",
-              "correct": true,
-              "id": "a"
-            },
-            {
               "text": "Your heart beats very fast",
               "correct": false,
-              "id": "b"
+              "id": "a"
             },
             {
               "text": "You feel very hungry",
               "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "Your breathing slows down and muscles relax",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -680,13 +680,13 @@
               "id": "a"
             },
             {
-              "text": "The calm tasted like chocolate",
-              "correct": false,
+              "text": "Dan took a deep breath and felt calm",
+              "correct": true,
               "id": "b"
             },
             {
-              "text": "Dan took a deep breath and felt calm",
-              "correct": true,
+              "text": "The calm tasted like chocolate",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -705,12 +705,12 @@
         },
         {
           "id": "b",
-          "text": "he got a small bruise"
+          "text": "he got a papercut",
+          "correct": true
         },
         {
           "id": "c",
-          "text": "he got a papercut",
-          "correct": true
+          "text": "he got a small bruise"
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"

@@ -18,7 +18,7 @@ type BrainCheckState =
   | { type: "correct"; message: string }
   | { type: "wrong"; message: string };
 
-export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
+export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = "normal", childId = "demo" }: StoryPhaseProps) {
   const questions = storyData.comprehension_questions;
   const [qi, setQi] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -53,7 +53,7 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
 
     // Record attempt
     const attempt: ActivityAttempt = {
-      child_id: "demo",
+      child_id: childId,
       story_id: storyData.id,
       activity_type: "comprehension",
       question_index: qi,

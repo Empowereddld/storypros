@@ -80,14 +80,14 @@
         },
         {
           "id": "b",
-          "label": "A store",
-          "emoji": "\ud83c\udfea"
-        },
-        {
-          "id": "c",
           "label": "He walked toward a table in the lunchroom",
           "emoji": "\ud83c\udfe0",
           "correct": true
+        },
+        {
+          "id": "c",
+          "label": "A store",
+          "emoji": "\ud83c\udfea"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -100,19 +100,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A kid told Dan he could not sit there because they were s...",
-          "emoji": "\ud83d\udcc4",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "He fell down",
           "emoji": "\ud83e\udd15"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "She lost her shoe",
           "emoji": "\ud83d\udc5f"
+        },
+        {
+          "id": "c",
+          "label": "A kid told Dan he could not sit there because they were s...",
+          "emoji": "\ud83d\udcc4",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -150,14 +150,14 @@
       "options": [
         {
           "id": "a",
-          "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
-        },
-        {
-          "id": "b",
           "label": "Dan found a different spot and sat by himself",
           "emoji": "\u2708\ufe0f",
           "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Ate lunch",
+          "emoji": "\ud83c\udf7d\ufe0f"
         },
         {
           "id": "c",
@@ -175,19 +175,19 @@
       "options": [
         {
           "id": "a",
-          "label": "After school, Dan told his mom what happened at lunch",
-          "emoji": "\ud83d\ude34",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Went to sleep",
           "emoji": "\ud83d\ude34"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Went home",
           "emoji": "\ud83c\udfe0"
+        },
+        {
+          "id": "c",
+          "label": "After school, Dan told his mom what happened at lunch",
+          "emoji": "\ud83d\ude34",
+          "correct": true
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -218,13 +218,13 @@
             },
             {
               "id": "b",
-              "text": "eat it",
-              "correct": false
+              "text": "object",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "object",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             }
           ]
         },
@@ -281,13 +281,13 @@
             },
             {
               "id": "b",
-              "text": "raised edges",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "eat it",
-              "correct": false
+              "text": "raised edges",
+              "correct": true
             }
           ]
         },
@@ -397,13 +397,13 @@
             },
             {
               "id": "b",
-              "text": "eat it",
-              "correct": false
+              "text": "place or furniture",
+              "correct": true
             },
             {
               "id": "c",
-              "text": "place or furniture",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             }
           ]
         },
@@ -455,13 +455,13 @@
           "options": [
             {
               "id": "a",
-              "text": "back and legs",
-              "correct": true
+              "text": "eat it",
+              "correct": false
             },
             {
               "id": "b",
-              "text": "eat it",
-              "correct": false
+              "text": "back and legs",
+              "correct": true
             },
             {
               "id": "c",
@@ -476,13 +476,13 @@
           "options": [
             {
               "id": "a",
-              "text": "bathtub",
-              "correct": false
+              "text": "lunchroom",
+              "correct": true
             },
             {
               "id": "b",
-              "text": "lunchroom",
-              "correct": true
+              "text": "bathtub",
+              "correct": false
             },
             {
               "id": "c",
@@ -502,13 +502,13 @@
             },
             {
               "id": "b",
-              "text": "Dan looked for a seat in the lunchroom",
-              "correct": true
+              "text": "The seat flew over a rainbow",
+              "correct": false
             },
             {
               "id": "c",
-              "text": "The seat flew over a rainbow",
-              "correct": false
+              "text": "Dan looked for a seat in the lunchroom",
+              "correct": true
             }
           ]
         }
@@ -570,13 +570,13 @@
           "prompt": "What group does 'embarrassed' belong to?",
           "options": [
             {
-              "text": "Feelings / emotions",
-              "correct": true,
+              "text": "Foods",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "Foods",
-              "correct": false,
+              "text": "Feelings / emotions",
+              "correct": true,
               "id": "b"
             },
             {
@@ -591,18 +591,18 @@
           "prompt": "When do you feel embarrassed?",
           "options": [
             {
-              "text": "When you score a goal",
-              "correct": false,
+              "text": "When something awkward happens and people notice",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When you take a nap",
+              "text": "When you score a goal",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "When something awkward happens and people notice",
-              "correct": true,
+              "text": "When you take a nap",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -617,13 +617,13 @@
               "id": "a"
             },
             {
-              "text": "Red cheeks, looks away, wants to hide",
-              "correct": true,
+              "text": "Eyes closed and snoring",
+              "correct": false,
               "id": "b"
             },
             {
-              "text": "Eyes closed and snoring",
-              "correct": false,
+              "text": "Red cheeks, looks away, wants to hide",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -638,13 +638,13 @@
               "id": "a"
             },
             {
-              "text": "Your face gets hot and you want to disappear",
-              "correct": true,
+              "text": "You feel very hungry",
+              "correct": false,
               "id": "b"
             },
             {
-              "text": "You feel very hungry",
-              "correct": false,
+              "text": "Your face gets hot and you want to disappear",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -675,13 +675,13 @@
           "prompt": "Which sentence uses 'embarrassed' correctly?",
           "options": [
             {
-              "text": "Dan felt embarrassed when the kid laughed at him",
-              "correct": true,
+              "text": "The embarrassed drove a car",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "The embarrassed drove a car",
-              "correct": false,
+              "text": "Dan felt embarrassed when the kid laughed at him",
+              "correct": true,
               "id": "b"
             },
             {
@@ -705,12 +705,12 @@
         },
         {
           "id": "b",
-          "text": "a kid said he could not sit there",
-          "correct": true
+          "text": "he spilled his milk"
         },
         {
           "id": "c",
-          "text": "he spilled his milk"
+          "text": "a kid said he could not sit there",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Does your ending tell why?"
@@ -741,12 +741,12 @@
       "choices": [
         {
           "id": "a",
-          "text": "he lost his lunchbox"
+          "text": "he wanted to talk about what happened",
+          "correct": true
         },
         {
           "id": "b",
-          "text": "he wanted to talk about what happened",
-          "correct": true
+          "text": "he lost his lunchbox"
         },
         {
           "id": "c",
