@@ -33,25 +33,29 @@ function AuthenticatedLayout() {
   const path = location.pathname;
   const role = profile?.role;
   const isSlpRole = role === "slp" || role === "teacher";
+  const isAdmin = role === "admin";
 
-  // SLPs/teachers go to /slp; redirect them off parent-only paths
-  if (
-    isSlpRole &&
-    !path.startsWith("/slp") &&
-    !path.startsWith("/settings") &&
-    !path.startsWith("/dashboard")
-  ) {
-    return <Navigate to="/slp" />;
-  }
+  // Admins bypass all role / onboarding gating — free to browse any page
+  if (!isAdmin) {
+    // SLPs/teachers go to /slp; redirect them off parent-only paths
+    if (
+      isSlpRole &&
+      !path.startsWith("/slp") &&
+      !path.startsWith("/settings") &&
+      !path.startsWith("/dashboard")
+    ) {
+      return <Navigate to="/slp" />;
+    }
 
-  // Parents who haven't onboarded must finish onboarding first
-  if (
-    !isSlpRole &&
-    profile &&
-    !profile.onboarded &&
-    !path.startsWith("/onboarding")
-  ) {
-    return <Navigate to="/onboarding/profile" />;
+    // Parents who haven't onboarded must finish onboarding first
+    if (
+      !isSlpRole &&
+      profile &&
+      !profile.onboarded &&
+      !path.startsWith("/onboarding")
+    ) {
+      return <Navigate to="/onboarding/profile" />;
+    }
   }
 
   return (
