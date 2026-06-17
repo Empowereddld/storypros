@@ -1,5 +1,5 @@
-/* Shared progress bar + close/quit header used across all phases */
-import { cn } from "@/lib/utils";
+/* Shared progress bar + quit header used across all phases */
+import { StoryProsLogo } from "../StoryProsBrand";
 
 interface ProgressHeaderProps {
   progress: number; // 0–100
@@ -10,22 +10,28 @@ interface ProgressHeaderProps {
 export function ProgressHeader({ progress, label, onClose }: ProgressHeaderProps) {
   return (
     <div className="px-5 pt-3">
-      <div className="relative h-6 w-full rounded-full bg-cream-deep overflow-hidden">
-        <div
-          className="absolute inset-y-0 left-0 rounded-full bg-primary transition-all duration-500"
-          style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
-        />
-      </div>
-      <div className="mt-2 flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <button
           onClick={onClose}
-          className="text-sm font-semibold text-ink-soft hover:text-primary transition-colors"
+          aria-label="Quit"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft transition-colors hover:bg-accent/60 active:scale-95"
         >
-          Quit
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+            <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
-        {label && (
-          <span className="text-sm font-bold text-primary">{label}</span>
+        <StoryProsLogo layout="row" size="sm" />
+        {label ? (
+          <span className="min-w-[3.5rem] text-right text-sm font-bold text-primary">{label}</span>
+        ) : (
+          <span className="w-9" />
         )}
+      </div>
+      <div className="relative mt-2 h-4 w-full overflow-hidden rounded-full bg-cream-deep">
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-primary transition-all duration-500"
+          style={{ width: Math.min(100, Math.max(0, progress)) + "%" }}
+        />
       </div>
     </div>
   );
