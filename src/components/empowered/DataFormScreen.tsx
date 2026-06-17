@@ -1,12 +1,14 @@
 /* ─────────────────────────────────────────────
- * Data Form Screen (Onboarding)
- * Collects child name + age after account creation.
- * Parent info already captured at sign-up.
+ * Data Form Screen (Onboarding) — Child Profile
+ * Rebuilt from the "Child Profile Creation" mockup.
+ * Collects child name + age. Parent info captured
+ * at sign-up.
  * ───────────────────────────────────────────── */
 
 import { useState } from "react";
 import { TactileButton } from "./TactileButton";
 import { cn } from "@/lib/utils";
+import { AuthBackdrop, StoryProsLogo, IconInput, UserIcon } from "./StoryProsBrand";
 
 export interface OnboardingFormValues {
   childName: string;
@@ -25,84 +27,78 @@ export function DataFormScreen({ onSubmit }: DataFormScreenProps) {
     childAge: null,
   });
 
-  const isValid =
-    values.childName.trim().length > 0 && values.childAge !== null;
+  const isValid = values.childName.trim().length > 0 && values.childAge !== null;
 
   return (
-    <div className="flex h-full flex-col px-6 pb-6 pt-4 bg-cream">
-      {/* Progress dots */}
-      <div className="flex items-center justify-center gap-2">
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className={cn(
-              "h-2.5 rounded-full transition-all",
-              i === 0 ? "w-8 bg-secondary-deep" : "w-2.5 bg-cream-deep",
-            )}
-          />
-        ))}
-      </div>
+    <div className="relative flex h-full flex-col bg-cream">
+      <AuthBackdrop />
 
-      <h1 className="mt-5 text-center font-display text-2xl font-bold leading-tight text-ink-soft">
-        Tell us about<br />your child
-      </h1>
+      <div className="relative z-10 flex h-full flex-col px-6 pb-6 pt-6">
+        <StoryProsLogo layout="row" size="sm" className="mx-auto" />
 
-      <div className="mt-5 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
-        <FieldCard label="What's your child's first name?">
-          <input
-            type="text"
-            value={values.childName}
-            onChange={(e) => setValues((v) => ({ ...v, childName: e.target.value }))}
-            placeholder="Enter child's name"
-            className="w-full bg-transparent text-base text-ink placeholder:text-ink-soft/60 focus:outline-none"
-          />
-        </FieldCard>
+        {/* Progress dots */}
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {[0, 1, 2].map((i) => (
+            <span key={i} className={cn("h-2.5 rounded-full transition-all", i === 0 ? "w-7 bg-primary" : "w-2.5 bg-accent")} />
+          ))}
+        </div>
 
-        <FieldCard label="How old is your child?">
-          <div className="flex flex-wrap gap-2 pt-1">
-            {AGES.map((age) => {
-              const selected = values.childAge === age;
-              return (
-                <button
-                  key={age}
-                  type="button"
-                  onClick={() => setValues((v) => ({ ...v, childAge: age }))}
-                  className={cn(
-                    "h-11 w-11 rounded-2xl text-base font-bold transition-all",
-                    selected
-                      ? "bg-primary text-primary-foreground shadow-[0_3px_0_0_var(--primary-deep)] -translate-y-0.5"
-                      : "bg-cream-deep text-ink hover:bg-sky/60",
-                  )}
-                >
-                  {age}
-                </button>
-              );
-            })}
+        <h1 className="mt-5 text-center font-display text-[26px] font-extrabold leading-tight text-primary">
+          Create Child Profile
+        </h1>
+        <p className="mt-1 text-center text-sm font-medium text-ink-soft">
+          Tell us a little about your child to personalize their stories.
+        </p>
+
+        <div className="mt-6 flex-1 space-y-4 overflow-y-auto no-scrollbar pb-2">
+          <div>
+            <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-ink-soft">
+              Child's first name
+            </label>
+            <IconInput
+              icon={<UserIcon />}
+              value={values.childName}
+              onChange={(v) => setValues((p) => ({ ...p, childName: v }))}
+              placeholder="Enter child's name"
+              autoComplete="off"
+            />
           </div>
-        </FieldCard>
-      </div>
 
-      <p className="mt-2 text-center text-xs text-ink-soft">
-        We never share your child&rsquo;s information.
-      </p>
+          <div>
+            <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-ink-soft">
+              How old is your child?
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {AGES.map((age) => {
+                const selected = values.childAge === age;
+                return (
+                  <button
+                    key={age}
+                    type="button"
+                    onClick={() => setValues((v) => ({ ...v, childAge: age }))}
+                    className={cn(
+                      "h-12 w-12 rounded-2xl text-base font-extrabold transition-all",
+                      selected
+                        ? "bg-primary text-primary-foreground shadow-[0_3px_0_0_var(--primary-deep)] -translate-y-0.5"
+                        : "border-2 border-accent bg-card text-ink hover:border-primary/40",
+                    )}
+                  >
+                    {age}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
 
-      <div className="mt-3">
-        <TactileButton
-          disabled={!isValid}
-          onClick={() => isValid && onSubmit(values)}
-        >
+        <p className="mt-2 text-center text-xs text-ink-soft">
+          We only collect a first name and age — never shared.
+        </p>
+
+        <TactileButton className="mt-3" disabled={!isValid} onClick={() => isValid && onSubmit(values)}>
           Continue
         </TactileButton>
       </div>
     </div>
-  );
-}
-
-function FieldCard({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="block rounded-3xl bg-card p-4 shadow-card">
-      <span className="block text-base font-semibold text-ink">{label}</span>
-      <div className="mt-1.5">{children}</div>
-    </label>
   );
 }
