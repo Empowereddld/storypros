@@ -1,7 +1,8 @@
 /* ─────────────────────────────────────────────
  * Parent Settings Screen
- * Child profiles, TTS prefs, level override,
- * account settings, sign out.
+ * Rebuilt to the "Account Settings" mockup. Child
+ * profiles, TTS, level override, subscriptions, SLP
+ * invite codes, sign out — all logic preserved.
  * ───────────────────────────────────────────── */
 
 import { useState } from "react";
@@ -17,6 +18,7 @@ import {
   type ChildSubscription,
 } from "@/services/subscription";
 import { createInviteCode } from "@/services/slp";
+import { StoryProsLogo } from "./StoryProsBrand";
 
 interface SettingsScreenProps {
   onClose: () => void;
@@ -123,100 +125,114 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
 
   // ── Main settings ──
   return (
-    <div className="flex h-full flex-col bg-cream">
-      <Header title="Settings" onBack={onClose} />
+    <div className="relative flex h-full flex-col bg-background">
+      <header className="sticky top-0 z-30 flex items-center justify-between gap-2 bg-card/95 px-4 py-3 backdrop-blur">
+        <button
+          onClick={onClose}
+          aria-label="Back"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft transition-colors hover:bg-accent/60 active:scale-95"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </button>
+        <StoryProsLogo layout="row" size="sm" />
+        <span className="w-9" />
+      </header>
 
-      <div className="flex-1 overflow-y-auto px-5 pt-4 pb-5 space-y-5 no-scrollbar">
-        {/* Account */}
-        <SettingsGroup title="Account">
-          <SettingsRow label="Name" value={profile?.displayName ?? "—"} />
-          <SettingsRow label="Email" value={profile?.email ?? "—"} />
-        </SettingsGroup>
+      <div className="flex-1 overflow-y-auto px-4 pb-8 pt-2 no-scrollbar">
+        <h1 className="text-2xl font-extrabold text-primary">Account Settings</h1>
+        <p className="mt-0.5 text-sm text-ink-soft">Manage your account and your child's experience.</p>
 
-        {/* Children */}
-        <SettingsGroup title="Children">
-          {children.map((child) => {
-            const isActive = activeChild?.id === child.id;
-            return (
-              <button
-                key={child.id}
-                onClick={() => handleEditChild(child)}
-                className="flex w-full items-center justify-between rounded-2xl p-3 hover:bg-cream-deep/60 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={cn(
-                      "flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold",
-                      isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-cream-deep text-ink-soft",
-                    )}
-                  >
-                    {child.name.charAt(0).toUpperCase()}
-                  </span>
-                  <div className="text-left">
-                    <p className="text-sm font-bold text-primary">
-                      {child.name}
-                      {isActive && (
-                        <span className="ml-2 text-xs font-semibold text-success">Active</span>
+        {/* Parent profile card */}
+        <div className="mt-4 flex items-center gap-3 rounded-3xl border border-accent/50 bg-card p-4 shadow-card">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-extrabold text-primary-foreground">
+            {(profile?.displayName ?? "?").charAt(0).toUpperCase()}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="truncate font-extrabold text-primary">{profile?.displayName ?? "—"}</p>
+            <p className="truncate text-xs text-ink-soft">{profile?.email ?? "—"}</p>
+          </div>
+          <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase text-primary">
+            {profile?.role ?? "parent"}
+          </span>
+        </div>
+
+        <div className="mt-5 space-y-5">
+          {/* Children */}
+          <SettingsGroup title="Child profiles">
+            {children.map((child) => {
+              const isActive = activeChild?.id === child.id;
+              return (
+                <button
+                  key={child.id}
+                  onClick={() => handleEditChild(child)}
+                  className="flex w-full items-center justify-between rounded-2xl p-3 transition-colors hover:bg-accent/40"
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={cn(
+                        "flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold",
+                        isActive ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
                       )}
-                    </p>
-                    <p className="text-xs text-ink-soft">
-                      Age {child.age ?? "—"} · Level {child.currentLevel}
-                    </p>
+                    >
+                      {child.name.charAt(0).toUpperCase()}
+                    </span>
+                    <div className="text-left">
+                      <p className="text-sm font-bold text-primary">
+                        {child.name}
+                        {isActive && <span className="ml-2 text-xs font-semibold text-success">Active</span>}
+                      </p>
+                      <p className="text-xs text-ink-soft">Age {child.age ?? "—"} · Level {child.currentLevel}</p>
+                    </div>
                   </div>
-                </div>
-                <span className="text-ink-soft text-sm">›</span>
-              </button>
-            );
-          })}
-          <button
-            onClick={() => setSection("add-child")}
-            className="flex w-full items-center gap-3 rounded-2xl p-3 hover:bg-cream-deep/60 transition-colors"
-          >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/30 text-lg">
-              +
-            </span>
-            <span className="text-sm font-bold text-primary">Add another child</span>
-          </button>
-        </SettingsGroup>
+                  <span className="text-sm text-ink-soft">›</span>
+                </button>
+              );
+            })}
+            <button
+              onClick={() => setSection("add-child")}
+              className="flex w-full items-center gap-3 rounded-2xl p-3 transition-colors hover:bg-accent/40"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/30 text-lg">+</span>
+              <span className="text-sm font-bold text-primary">Add another child</span>
+            </button>
+          </SettingsGroup>
 
-        {/* Subscriptions per child */}
-        <SettingsGroup title="Subscriptions">
-          {children.map((child) => {
-            const sub = getChildSubscription(child.id);
-            const hasPremium = isPremium(child.id);
-            return (
-              <SubscriptionRow
-                key={child.id}
-                child={child}
-                subscription={sub}
-                hasPremium={hasPremium}
-                onNavigatePaywall={() => {
-                  // Let parent component handle paywall navigation
-                  onClose();
-                }}
-              />
-            );
-          })}
-        </SettingsGroup>
+          {/* Subscriptions per child */}
+          <SettingsGroup title="Subscription">
+            {children.map((child) => {
+              const sub = getChildSubscription(child.id);
+              const hasPremium = isPremium(child.id);
+              return (
+                <SubscriptionRow
+                  key={child.id}
+                  child={child}
+                  subscription={sub}
+                  hasPremium={hasPremium}
+                  onNavigatePaywall={() => {
+                    onClose();
+                  }}
+                />
+              );
+            })}
+          </SettingsGroup>
 
-        {/* Share with SLP */}
-        <SettingsGroup title="Share with your SLP">
-          <p className="px-4 pt-3 text-xs leading-relaxed text-ink-soft">
-            Working with a speech-language pathologist? Generate a code and they
-            can follow your child's progress. Codes expire after 7 days.
-          </p>
-          {children.map((child) => (
-            <SlpShareRow key={child.id} child={child} />
-          ))}
-        </SettingsGroup>
+          {/* Share with SLP */}
+          <SettingsGroup title="School or therapist access">
+            <p className="px-4 pt-3 text-xs leading-relaxed text-ink-soft">
+              Working with a speech-language pathologist? Generate a code and they
+              can follow your child's progress. Codes expire after 7 days.
+            </p>
+            {children.map((child) => (
+              <SlpShareRow key={child.id} child={child} />
+            ))}
+          </SettingsGroup>
 
-        {/* Sign out */}
-        <div className="pt-2">
-          <TactileButton variant="ghost" onClick={handleSignOut}>
-            Sign out
-          </TactileButton>
+          {/* Sign out */}
+          <div className="pt-1">
+            <TactileButton variant="ghost" onClick={handleSignOut}>
+              Log out
+            </TactileButton>
+          </div>
         </div>
       </div>
     </div>
@@ -506,7 +522,7 @@ function SettingsGroup({ title, children }: { title: string; children: React.Rea
   return (
     <div>
       <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-ink-soft">{title}</h3>
-      <div className="rounded-3xl bg-card shadow-card divide-y divide-cream-deep">
+      <div className="rounded-3xl border border-accent/50 bg-card shadow-card divide-y divide-accent/40">
         {children}
       </div>
     </div>
