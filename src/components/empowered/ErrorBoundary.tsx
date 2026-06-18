@@ -5,7 +5,7 @@
  * ───────────────────────────────────────────── */
 
 import { Component, type ReactNode } from "react";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import dariaAndFriend from "@/assets/dan-daria-thinking.webp";
 import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
 
 interface ErrorBoundaryProps {

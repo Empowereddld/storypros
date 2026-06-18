@@ -7,6 +7,7 @@
 import { type ReactNode } from "react";
 import { TactileButton } from "./TactileButton";
 import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import danDariaThinking from "@/assets/dan-daria-thinking.webp";
 import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
 
 /* ───────── Loading ───────── */
@@ -89,7 +90,7 @@ function StateShell({ title, message, children }: { title: ReactNode; message: s
       <AuthBackdrop />
       <div className="relative z-10 flex flex-col items-center">
         <Star className="h-6 w-6 text-secondary" />
-        <img src={dariaAndFriend} alt="" className="mt-2 h-32 w-auto object-contain" />
+        <img src={danDariaThinking} alt="" className="mt-2 h-32 w-auto object-contain" />
         <h1 className="mt-3 font-display text-[26px] font-extrabold leading-tight">{title}</h1>
         <p className="mt-1.5 max-w-[18rem] text-sm font-medium text-ink-soft">{message}</p>
         {children}

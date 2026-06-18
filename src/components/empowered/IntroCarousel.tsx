@@ -11,6 +11,8 @@ import { useState, type ReactNode } from "react";
 import { TactileButton } from "./TactileButton";
 import { cn } from "@/lib/utils";
 import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
+import danDariaReading from "@/assets/dan-daria-reading.webp";
 import dariaSolo from "@/assets/daria-solo.png";
 import childAvatar from "@/assets/child-avatar.png";
 import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
@@ -109,7 +111,7 @@ function SlideRewards() {
         Complete stories and challenges to unlock fun rewards.
       </p>
 
-      <img src={dariaAndFriend} alt="" className="mx-auto mt-3 h-28 w-auto object-contain" />
+      <img src={danDariaCelebrate} alt="" className="mx-auto mt-3 h-28 w-auto object-contain" />
 
       <div className="mt-3 rounded-3xl border border-accent/60 bg-card p-4 shadow-card">
         <div className="flex items-center justify-between">
@@ -140,7 +142,7 @@ function SlideRewards() {
 function SlideModes() {
   return (
     <div className="flex flex-1 flex-col justify-center">
-      <img src={dariaAndFriend} alt="" className="mx-auto h-36 w-auto object-contain" />
+      <img src={danDariaReading} alt="" className="mx-auto h-36 w-auto object-contain" />
       <h2 className="mt-3 text-center font-display text-3xl font-extrabold leading-tight text-primary">
         Read, Watch, <span className="text-secondary">&amp; Listen</span>
       </h2>

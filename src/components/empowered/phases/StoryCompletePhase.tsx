@@ -16,7 +16,7 @@ import {
   type SkillDomain,
 } from "@/services/scoring";
 import { cn } from "@/lib/utils";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import dariaAndFriend from "@/assets/dan-daria-celebrate.webp";
 
 interface StoryCompleteData {
   phaseResults: PhaseResult[];

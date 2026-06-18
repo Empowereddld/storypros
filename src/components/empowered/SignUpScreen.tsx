@@ -9,7 +9,7 @@
 import { useState } from "react";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import dariaAndFriend from "@/assets/dan-daria-highfive.webp";
 import {
   AuthBackdrop,
   StoryProsLogo,
