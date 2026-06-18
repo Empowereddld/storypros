@@ -151,7 +151,7 @@ export function AchievementGalleryScreen({ childName, onClose, onNavigate }: Ach
         {/* Coach bubble */}
         <section className="mt-4 flex items-end gap-2">
           <div className="h-14 w-14 shrink-0 overflow-hidden rounded-2xl bg-coral/30">
-            <img src={msLopez} alt="" className="h-full w-full object-cover object-top scale-[1.4] -translate-y-1" />
+            <img src={msLopez} alt="" className="h-full w-full object-cover object-center" />
           </div>
           <div className="relative flex-1 rounded-2xl rounded-bl-sm bg-sky p-3 shadow-card">
             <p className="text-sm font-semibold leading-snug text-primary">{coachMessage}</p>
