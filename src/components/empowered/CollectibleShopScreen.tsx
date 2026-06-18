@@ -19,7 +19,8 @@ import {
   type Collectible,
 } from "@/services/shop";
 import { cn } from "@/lib/utils";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import dariaAndFriend from "@/assets/dan-daria-airplane.webp";
+import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
 import { StoryProsLogo, CurrencyBadge } from "./StoryProsBrand";
 
 interface CollectibleShopScreenProps {
@@ -180,6 +181,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
           <div className="mx-6 w-full max-w-xs rounded-[28px] bg-card p-6 text-center shadow-soft animate-pop-in">
             <p className="text-sm font-extrabold uppercase tracking-wider text-secondary-foreground">Reward Unlocked!</p>
+            <img src={danDariaSurprised} alt="" className="mx-auto mt-2 h-24 w-auto object-contain" />
             <span className="mt-3 block text-6xl">{justPurchased.icon}</span>
             <h3 className="mt-2 font-display text-xl font-extrabold text-primary">{justPurchased.name}</h3>
             <p className="mt-1 text-sm text-ink-soft">It's yours — find it in My Collection.</p>

@@ -9,7 +9,7 @@
 import { useState, useMemo } from "react";
 import { TactileButton } from "./TactileButton";
 import msLopez from "@/assets/ms-lopez.png";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import dariaAndFriend from "@/assets/dan-daria-thumbsup.webp";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import {

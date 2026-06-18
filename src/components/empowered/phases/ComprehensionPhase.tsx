@@ -11,7 +11,7 @@ import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
-import dariaSolo from "@/assets/daria-solo.png";
+import dariaSolo from "@/assets/daria-pointing.webp";
 
 type BrainCheckState =
   | { type: "none" }
