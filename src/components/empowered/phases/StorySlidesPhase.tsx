@@ -10,6 +10,7 @@ import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, PhaseResult, StorySlide } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
+import { resolveStoryImage } from "@/services/storyImages";
 import { speak, stop, isSpeaking, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 
 const ELEMENT_ICONS: Record<string, string> = {
@@ -60,6 +61,7 @@ export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "n
     setSpeaking(false);
   }
   const current = slides[page];
+  const slideImg = resolveStoryImage(storyData.id, current.image);
   const isLast = page === slides.length - 1;
   const progress = ((page + 1) / slides.length) * 100;
 
@@ -84,15 +86,21 @@ export function StorySlidesPhase({ storyData, onComplete, onClose, ttsSpeed = "n
         onClose={onClose}
       />
 
-      {/* Illustration placeholder */}
+      {/* Illustration (real art when available, else element placeholder) */}
       <div key={page} className="mx-5 mt-3 overflow-hidden rounded-3xl bg-card shadow-card animate-pop-in">
-        <div className="aspect-[5/4] w-full bg-gradient-to-b from-sky/40 to-cream-deep/30 flex items-center justify-center">
-          <div className="text-center">
-            <span className="text-6xl">{ELEMENT_ICONS[current.story_element]}</span>
-            <p className="mt-2 text-xs font-bold uppercase tracking-wider text-ink-soft/70">
-              {ELEMENT_LABELS[current.story_element]}
-            </p>
-          </div>
+        <div className="aspect-[5/4] w-full">
+          {slideImg ? (
+            <img src={slideImg} alt="" className="h-full w-full object-cover" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-b from-sky/40 to-cream-deep/30 text-center">
+              <div>
+                <span className="text-6xl">{ELEMENT_ICONS[current.story_element]}</span>
+                <p className="mt-2 text-xs font-bold uppercase tracking-wider text-ink-soft/70">
+                  {ELEMENT_LABELS[current.story_element]}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
