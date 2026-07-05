@@ -9,37 +9,37 @@
       "position": 1,
       "text": "After lunch, Daria built a puzzle with her friend.",
       "story_element": "character",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "position": 2,
       "text": "They sat at the table.",
       "story_element": "place",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "position": 3,
       "text": "They both wanted the same puzzle piece.",
       "story_element": "problem",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "position": 4,
       "text": "Daria felt upset.",
       "story_element": "emotion",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "position": 5,
       "text": "Daria took a breath and let her friend use the piece.",
       "story_element": "action",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "position": 6,
       "text": "They finished the puzzle together.",
       "story_element": "result",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "comprehension_questions": [
@@ -760,32 +760,32 @@
     {
       "correct_position": 1,
       "caption": "After lunch, Daria built a puzzle with her friend.",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "correct_position": 2,
       "caption": "They sat at the table.",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "correct_position": 3,
       "caption": "They both wanted the same puzzle piece.",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "correct_position": 4,
       "caption": "Daria felt upset.",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "correct_position": 5,
       "caption": "Daria took a breath and let her friend use the piece.",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
       "caption": "They finished the puzzle together.",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "phonological_items": [

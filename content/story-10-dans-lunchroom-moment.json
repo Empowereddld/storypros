@@ -9,37 +9,37 @@
       "position": 1,
       "text": "On Tuesday, Dan picked up his tray and looked for his friends.",
       "story_element": "character",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "position": 2,
       "text": "He walked toward a table in the lunchroom.",
       "story_element": "place",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "position": 3,
       "text": "A kid told Dan he could not sit there because they were saving the seat for someone else.",
       "story_element": "problem",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "position": 4,
       "text": "Dan felt embarrassed.",
       "story_element": "emotion",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "position": 5,
       "text": "Dan found a different spot and sat by himself.",
       "story_element": "action",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "position": 6,
       "text": "After school, Dan told his mom what happened at lunch.",
       "story_element": "result",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "comprehension_questions": [
@@ -760,32 +760,32 @@
     {
       "correct_position": 1,
       "caption": "On Tuesday, Dan picked up his tray and looked for his friends",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "correct_position": 2,
       "caption": "He walked toward a table in the lunchroom.",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "correct_position": 3,
       "caption": "A kid told Dan he could not sit there because they were saving the ...",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "correct_position": 4,
       "caption": "Dan felt embarrassed.",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "correct_position": 5,
       "caption": "Dan found a different spot and sat by himself.",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
       "caption": "After school, Dan told his mom what happened at lunch.",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "phonological_items": [

@@ -9,37 +9,37 @@
       "position": 1,
       "text": "During break time, Dan watched the kids play soccer.",
       "story_element": "character",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "position": 2,
       "text": "They were playing on the field.",
       "story_element": "place",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "position": 3,
       "text": "The game had already started.",
       "story_element": "problem",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "position": 4,
       "text": "Dan felt lonely.",
       "story_element": "emotion",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "position": 5,
       "text": "Dan smiled and asked Daria and Jack if he could play.",
       "story_element": "action",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "position": 6,
       "text": "Daria invited Dan to join the game.",
       "story_element": "result",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "comprehension_questions": [
@@ -760,32 +760,32 @@
     {
       "correct_position": 1,
       "caption": "During break time, Dan watched the kids play soccer.",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "correct_position": 2,
       "caption": "They were playing on the field.",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "correct_position": 3,
       "caption": "The game had already started.",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "correct_position": 4,
       "caption": "Dan felt lonely.",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "correct_position": 5,
       "caption": "Dan smiled and asked Daria and Jack if he could play.",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
       "caption": "Daria invited Dan to join the game.",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "phonological_items": [

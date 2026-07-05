@@ -9,37 +9,37 @@
       "position": 1,
       "text": "Daria worked with her group during science class.",
       "story_element": "character",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "position": 2,
       "text": "They were at a table near the window.",
       "story_element": "place",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "position": 3,
       "text": "Daria missed one part of the instructions.",
       "story_element": "problem",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "position": 4,
       "text": "Daria felt confused.",
       "story_element": "emotion",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "position": 5,
       "text": "Daria asked her partner to explain the next step.",
       "story_element": "action",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "position": 6,
       "text": "Her partner showed her the page, and Daria knew what to do next.",
       "story_element": "result",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "comprehension_questions": [
@@ -760,32 +760,32 @@
     {
       "correct_position": 1,
       "caption": "Daria worked with her group during science class.",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "correct_position": 2,
       "caption": "They were at a table near the window.",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "correct_position": 3,
       "caption": "Daria missed one part of the instructions.",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "correct_position": 4,
       "caption": "Daria felt confused.",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "correct_position": 5,
       "caption": "Daria asked her partner to explain the next step.",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
       "caption": "Her partner showed her the page, and Daria knew what to do next",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "phonological_items": [

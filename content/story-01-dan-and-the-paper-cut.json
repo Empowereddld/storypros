@@ -9,37 +9,37 @@
       "position": 1,
       "text": "On Friday, Dan and his mom went on a walk.",
       "story_element": "character",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "position": 2,
       "text": "They walked all the way to Daria\u2019s house.",
       "story_element": "place",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "position": 3,
       "text": "When Dan was folding his paper airplane, he got a papercut that started to bleed.",
       "story_element": "problem",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "position": 4,
       "text": "Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
       "story_element": "emotion",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "position": 5,
       "text": "Dan asked Daria\u2019s dad for a bandage.",
       "story_element": "action",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "position": 6,
       "text": "He put the bandage on Dan\u2019s finger so he could keep making paper airplanes.",
       "story_element": "result",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "comprehension_questions": [
@@ -760,32 +760,32 @@
     {
       "correct_position": 1,
       "caption": "On Friday, Dan and his mom went on a walk.",
-      "image": "slide-01.png"
+      "image": "slide-01.webp"
     },
     {
       "correct_position": 2,
       "caption": "They walked all the way to Daria\u2019s house.",
-      "image": "slide-02.png"
+      "image": "slide-02.webp"
     },
     {
       "correct_position": 3,
       "caption": "When Dan was folding his paper airplane, he got a papercut that sta...",
-      "image": "slide-03.png"
+      "image": "slide-03.webp"
     },
     {
       "correct_position": 4,
       "caption": "Dan felt scared when he saw the blood so he took a deep breath to f...",
-      "image": "slide-04.png"
+      "image": "slide-04.webp"
     },
     {
       "correct_position": 5,
       "caption": "Dan asked Daria\u2019s dad for a bandage.",
-      "image": "slide-05.png"
+      "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
       "caption": "He put the bandage on Dan\u2019s finger so he could keep making paper ai...",
-      "image": "slide-06.png"
+      "image": "slide-06.webp"
     }
   ],
   "phonological_items": [
