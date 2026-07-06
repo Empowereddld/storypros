@@ -198,7 +198,7 @@
     {
       "word": "ticket",
       "type": "noun",
-      "image": "vocab-ticket.png",
+      "image": "vocab-ticket.webp",
       "sfa": {
         "category": "It belongs to the object for entering group.",
         "function": "You use it to show it to go into a place or event.",
@@ -377,7 +377,7 @@
     {
       "word": "entrance",
       "type": "noun",
-      "image": "vocab-entrance.png",
+      "image": "vocab-entrance.webp",
       "sfa": {
         "category": "It belongs to the place group.",
         "function": "You use it to where people go in.",
@@ -556,7 +556,7 @@
     {
       "word": "worried",
       "type": "emotion",
-      "image": "vocab-worried.png",
+      "image": "vocab-worried.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "ticket",
     "meaning_1": {
       "text": "Something you show to enter a place or event",
-      "image": "joke-ticket-1.png"
+      "image": "joke-ticket-1.webp"
     },
     "meaning_2": {
       "text": "A note from an officer for breaking a rule",
-      "image": "joke-ticket-2.png"
+      "image": "joke-ticket-2.webp"
     },
     "joke_text": "Why did the car go to the carnival? Because it already had a ticket!"
   },

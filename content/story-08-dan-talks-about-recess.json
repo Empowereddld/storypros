@@ -198,7 +198,7 @@
     {
       "word": "basketball court",
       "type": "noun",
-      "image": "vocab-basketball-court.png",
+      "image": "vocab-basketball-court.webp",
       "sfa": {
         "category": "It belongs to the place group.",
         "function": "You use it to play basketball or other games there.",
@@ -377,7 +377,7 @@
     {
       "word": "teacher",
       "type": "noun",
-      "image": "vocab-teacher.png",
+      "image": "vocab-teacher.webp",
       "sfa": {
         "category": "It belongs to the person word group.",
         "function": "You use it to helps students learn and solve problems.",
@@ -556,7 +556,7 @@
     {
       "word": "embarrassed",
       "type": "emotion",
-      "image": "vocab-embarrassed.png",
+      "image": "vocab-embarrassed.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It tells how Dan felt when the kid laughed at him.",
@@ -815,11 +815,11 @@
     "word": "court",
     "meaning_1": {
       "text": "A place to play basketball or tennis",
-      "image": "joke-court-1.png"
+      "image": "joke-court-1.webp"
     },
     "meaning_2": {
       "text": "A place where a judge works",
-      "image": "joke-court-2.png"
+      "image": "joke-court-2.webp"
     },
     "joke_text": "Why did the basketball go to see the judge? Because it was already at court!"
   },

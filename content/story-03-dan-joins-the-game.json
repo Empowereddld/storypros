@@ -198,7 +198,7 @@
     {
       "word": "game",
       "type": "noun",
-      "image": "vocab-game.png",
+      "image": "vocab-game.webp",
       "sfa": {
         "category": "It belongs to the activity group.",
         "function": "You use it to play it with rules or turns.",
@@ -377,7 +377,7 @@
     {
       "word": "field",
       "type": "noun",
-      "image": "vocab-field.png",
+      "image": "vocab-field.webp",
       "sfa": {
         "category": "It belongs to the place group.",
         "function": "You use it to a large open space for playing or sports.",
@@ -556,7 +556,7 @@
     {
       "word": "lonely",
       "type": "emotion",
-      "image": "vocab-lonely.png",
+      "image": "vocab-lonely.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "field",
     "meaning_1": {
       "text": "A place to play sports like soccer",
-      "image": "joke-field-1.png"
+      "image": "joke-field-1.webp"
     },
     "meaning_2": {
       "text": "A large area of grass or crops",
-      "image": "joke-field-2.png"
+      "image": "joke-field-2.webp"
     },
     "joke_text": "Why did the soccer player bring a tractor? Because they heard it was a great field!"
   },

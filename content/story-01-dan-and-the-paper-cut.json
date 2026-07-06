@@ -198,7 +198,7 @@
     {
       "word": "bandage",
       "type": "noun",
-      "image": "vocab-bandage.png",
+      "image": "vocab-bandage.webp",
       "sfa": {
         "category": "It belongs to the first aid item group.",
         "function": "You use it to cover a cut and help stop bleeding.",
@@ -377,7 +377,7 @@
     {
       "word": "paper airplane",
       "type": "noun",
-      "image": "vocab-paper-airplane.png",
+      "image": "vocab-paper-airplane.webp",
       "sfa": {
         "category": "It belongs to the toy group.",
         "function": "You use it to throw it so it can fly.",
@@ -556,7 +556,7 @@
     {
       "word": "calm",
       "type": "emotion",
-      "image": "vocab-calm.png",
+      "image": "vocab-calm.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "stick",
     "meaning_1": {
       "text": "To attach or fasten something",
-      "image": "joke-stick-1.png"
+      "image": "joke-stick-1.webp"
     },
     "meaning_2": {
       "text": "To stay with someone or stay close",
-      "image": "joke-stick-2.png"
+      "image": "joke-stick-2.webp"
     },
     "joke_text": "What did the bandage say to Dan's finger? I'm going to stick with you!"
   },

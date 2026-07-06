@@ -198,7 +198,7 @@
     {
       "word": "tray",
       "type": "noun",
-      "image": "vocab-tray.png",
+      "image": "vocab-tray.webp",
       "sfa": {
         "category": "It belongs to the object group.",
         "function": "You use it to carry food and drinks.",
@@ -377,7 +377,7 @@
     {
       "word": "seat",
       "type": "noun",
-      "image": "vocab-seat.png",
+      "image": "vocab-seat.webp",
       "sfa": {
         "category": "It belongs to the place/furniture group.",
         "function": "You use it to a place to sit down.",
@@ -556,7 +556,7 @@
     {
       "word": "embarrassed",
       "type": "emotion",
-      "image": "vocab-embarrassed.png",
+      "image": "vocab-embarrassed.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "spot",
     "meaning_1": {
       "text": "A place to sit or stand",
-      "image": "joke-spot-1.png"
+      "image": "joke-spot-1.webp"
     },
     "meaning_2": {
       "text": "A mark or dot on something",
-      "image": "joke-spot-2.png"
+      "image": "joke-spot-2.webp"
     },
     "joke_text": "Why did the dalmatian sit in the lunchroom? Because it needed a spot!"
   },

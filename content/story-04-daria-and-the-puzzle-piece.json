@@ -198,7 +198,7 @@
     {
       "word": "puzzle",
       "type": "noun",
-      "image": "vocab-puzzle.png",
+      "image": "vocab-puzzle.webp",
       "sfa": {
         "category": "It belongs to the activity or toy group.",
         "function": "You use it to put pieces together to make a picture.",
@@ -377,7 +377,7 @@
     {
       "word": "piece",
       "type": "noun",
-      "image": "vocab-piece.png",
+      "image": "vocab-piece.webp",
       "sfa": {
         "category": "It belongs to the part of something group.",
         "function": "You use it to fits with other parts.",
@@ -556,7 +556,7 @@
     {
       "word": "upset",
       "type": "emotion",
-      "image": "vocab-upset.png",
+      "image": "vocab-upset.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "piece",
     "meaning_1": {
       "text": "One part of a puzzle or whole",
-      "image": "joke-piece-1.png"
+      "image": "joke-piece-1.webp"
     },
     "meaning_2": {
       "text": "A portion of food, like a piece of cake",
-      "image": "joke-piece-2.png"
+      "image": "joke-piece-2.webp"
     },
     "joke_text": "Why did the puzzle go to the party? Because it wanted a piece of cake!"
   },

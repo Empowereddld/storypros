@@ -198,7 +198,7 @@
     {
       "word": "kite",
       "type": "noun",
-      "image": "vocab-kite.png",
+      "image": "vocab-kite.webp",
       "sfa": {
         "category": "It belongs to the toy group.",
         "function": "You use it to fly it in the air with wind and string.",
@@ -377,7 +377,7 @@
     {
       "word": "ladder",
       "type": "noun",
-      "image": "vocab-ladder.png",
+      "image": "vocab-ladder.webp",
       "sfa": {
         "category": "It belongs to the tool group.",
         "function": "You use it to climb up to reach something high.",
@@ -556,7 +556,7 @@
     {
       "word": "frustrated",
       "type": "emotion",
-      "image": "vocab-frustrated.png",
+      "image": "vocab-frustrated.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "fly",
     "meaning_1": {
       "text": "To move through the air",
-      "image": "joke-fly-1.png"
+      "image": "joke-fly-1.webp"
     },
     "meaning_2": {
       "text": "A small insect with wings",
-      "image": "joke-fly-2.png"
+      "image": "joke-fly-2.webp"
     },
     "joke_text": "What did the kite say when the bug landed on it? Let's fly, Fly!"
   },

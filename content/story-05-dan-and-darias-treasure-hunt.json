@@ -198,7 +198,7 @@
     {
       "word": "flashlight",
       "type": "noun",
-      "image": "vocab-flashlight.png",
+      "image": "vocab-flashlight.webp",
       "sfa": {
         "category": "It belongs to the tool group.",
         "function": "You use it to helps you see in the dark.",
@@ -377,7 +377,7 @@
     {
       "word": "battery",
       "type": "noun",
-      "image": "vocab-battery.png",
+      "image": "vocab-battery.webp",
       "sfa": {
         "category": "It belongs to the power source group.",
         "function": "You use it to gives power to things.",
@@ -556,7 +556,7 @@
     {
       "word": "worried",
       "type": "emotion",
-      "image": "vocab-worried.png",
+      "image": "vocab-worried.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "light",
     "meaning_1": {
       "text": "Brightness \u2014 what helps you see",
-      "image": "joke-light-1.png"
+      "image": "joke-light-1.webp"
     },
     "meaning_2": {
       "text": "Not heavy \u2014 the opposite of heavy",
-      "image": "joke-light-2.png"
+      "image": "joke-light-2.webp"
     },
     "joke_text": "Why did the flashlight like the feather? Because it was so light!"
   },

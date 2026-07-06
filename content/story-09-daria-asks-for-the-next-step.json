@@ -198,7 +198,7 @@
     {
       "word": "table",
       "type": "noun",
-      "image": "vocab-table.png",
+      "image": "vocab-table.webp",
       "sfa": {
         "category": "It belongs to the furniture group.",
         "function": "You use it to gives people a place to work, eat, or build.",
@@ -377,7 +377,7 @@
     {
       "word": "instruction page",
       "type": "noun",
-      "image": "vocab-instruction-page.png",
+      "image": "vocab-instruction-page.webp",
       "sfa": {
         "category": "It belongs to the object with directions group.",
         "function": "You use it to shows the steps for what to do.",
@@ -556,7 +556,7 @@
     {
       "word": "confused",
       "type": "emotion",
-      "image": "vocab-confused.png",
+      "image": "vocab-confused.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It tells how Daria felt when she missed the instructions.",
@@ -815,11 +815,11 @@
     "word": "table",
     "meaning_1": {
       "text": "Furniture where people eat, work, or play",
-      "image": "joke-table-1.png"
+      "image": "joke-table-1.webp"
     },
     "meaning_2": {
       "text": "A chart that organizes information",
-      "image": "joke-table-2.png"
+      "image": "joke-table-2.webp"
     },
     "joke_text": "Why did the math book sit on the furniture? Because it needed a table!"
   },

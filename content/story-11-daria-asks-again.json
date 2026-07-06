@@ -198,7 +198,7 @@
     {
       "word": "instructions",
       "type": "noun",
-      "image": "vocab-instructions.png",
+      "image": "vocab-instructions.webp",
       "sfa": {
         "category": "It belongs to the information/directions group.",
         "function": "You use it to tell you what to do step by step.",
@@ -377,7 +377,7 @@
     {
       "word": "whiteboard",
       "type": "noun",
-      "image": "vocab-whiteboard.png",
+      "image": "vocab-whiteboard.webp",
       "sfa": {
         "category": "It belongs to the classroom tool group.",
         "function": "You use it to write or draw on to show information.",
@@ -556,7 +556,7 @@
     {
       "word": "confused",
       "type": "emotion",
-      "image": "vocab-confused.png",
+      "image": "vocab-confused.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "step",
     "meaning_1": {
       "text": "A part of instructions \u2014 what to do next",
-      "image": "joke-step-1.png"
+      "image": "joke-step-1.webp"
     },
     "meaning_2": {
       "text": "Moving your foot forward to walk",
-      "image": "joke-step-2.png"
+      "image": "joke-step-2.webp"
     },
     "joke_text": "Why did the instructions go for a walk? Because they had so many steps!"
   },

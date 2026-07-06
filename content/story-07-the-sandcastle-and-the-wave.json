@@ -198,7 +198,7 @@
     {
       "word": "sandcastle",
       "type": "noun",
-      "image": "vocab-sandcastle.png",
+      "image": "vocab-sandcastle.webp",
       "sfa": {
         "category": "It belongs to the something you build group.",
         "function": "You use it to make it for fun at the beach.",
@@ -377,7 +377,7 @@
     {
       "word": "wave",
       "type": "noun",
-      "image": "vocab-wave.png",
+      "image": "vocab-wave.webp",
       "sfa": {
         "category": "It belongs to the part of water or ocean group.",
         "function": "You use it to moves water toward shore.",
@@ -556,7 +556,7 @@
     {
       "word": "disappointed",
       "type": "emotion",
-      "image": "vocab-disappointed.png",
+      "image": "vocab-disappointed.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
@@ -815,11 +815,11 @@
     "word": "wave",
     "meaning_1": {
       "text": "Ocean water that moves toward the shore",
-      "image": "joke-wave-1.png"
+      "image": "joke-wave-1.webp"
     },
     "meaning_2": {
       "text": "Moving your hand to say hello or goodbye",
-      "image": "joke-wave-2.png"
+      "image": "joke-wave-2.webp"
     },
     "joke_text": "Why did Dan greet the ocean? Because he liked to wave at waves!"
   },
