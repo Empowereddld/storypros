@@ -1,6 +1,7 @@
 import { useState } from "react";
 import danDariaThinking from "@/assets/dan-daria-thinking.webp";
 import { useAuth } from "@/contexts/AuthContext";
+import { AuthStatusCard } from "./AuthStatusCard";
 import { TactileButton } from "./TactileButton";
 import { AuthBackdrop, LockIcon, MailIcon, MiniPlane, StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon } from "./StoryProsUi";
@@ -13,6 +14,7 @@ export function ForgotPasswordScreen({ onBack }: ForgotPasswordScreenProps) {
   const { resetPassword } = useAuth();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -20,8 +22,13 @@ export function ForgotPasswordScreen({ onBack }: ForgotPasswordScreenProps) {
     if (!email.trim()) return;
 
     setLoading(true);
-    await resetPassword(email.trim());
+    setError("");
+    const result = await resetPassword(email.trim());
     setLoading(false);
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
     setSent(true);
   }
 
@@ -62,15 +69,39 @@ export function ForgotPasswordScreen({ onBack }: ForgotPasswordScreenProps) {
           </h1>
           <p className="mx-auto mt-2 max-w-[20rem] text-base font-semibold leading-relaxed text-ink-soft">
             {sent
-              ? `If an account exists for ${email}, we sent a reset link.`
+              ? "Use the link in your inbox to choose a new password."
               : "Enter your email and we'll send a secure reset link."}
           </p>
         </div>
 
         <img src={danDariaThinking} alt="" className="mx-auto mt-6 h-44 w-auto object-contain" />
 
+        {(loading || error) && (
+          <div className="mt-7 space-y-4">
+            {loading && (
+              <AuthStatusCard
+                tone="loading"
+                title="Sending secure link"
+                message="One paper plane is heading to your inbox."
+              />
+            )}
+            {error && (
+              <AuthStatusCard
+                tone="error"
+                title="Let's try that again"
+                message={error}
+              />
+            )}
+          </div>
+        )}
+
         {sent ? (
-          <div className="mt-7">
+          <div className="mt-5 space-y-4">
+            <AuthStatusCard
+              tone="success"
+              title="Reset link sent"
+              message={`If an account exists for ${email}, the link will arrive shortly.`}
+            />
             <TactileButton onClick={onBack} leadingIcon={<PaperPlaneIcon className="h-6 w-6" />}>
               Back to Log In
             </TactileButton>

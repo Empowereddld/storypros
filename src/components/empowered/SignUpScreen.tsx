@@ -7,6 +7,7 @@
  * ───────────────────────────────────────────── */
 
 import { useState } from "react";
+import { AuthStatusCard } from "./AuthStatusCard";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
 import dariaAndFriend from "@/assets/dan-daria-highfive.webp";
@@ -134,9 +135,19 @@ export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
           />
 
           {error && (
-            <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-3">
-              <p className="text-sm font-semibold text-destructive">{error}</p>
-            </div>
+            <AuthStatusCard
+              tone="error"
+              title="Almost there"
+              message={error}
+            />
+          )}
+
+          {(loading || oauthLoading) && (
+            <AuthStatusCard
+              tone="loading"
+              title={oauthLoading ? "Opening secure sign-up" : "Creating your account"}
+              message="We are setting up your grown-up account."
+            />
           )}
 
           <TactileButton

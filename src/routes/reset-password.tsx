@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import danDariaThinking from "@/assets/dan-daria-thinking.webp";
+import { AuthStatusCard } from "@/components/empowered/AuthStatusCard";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { AuthBackdrop, LockIcon, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { PaperPlaneIcon } from "@/components/empowered/StoryProsUi";
@@ -61,8 +62,12 @@ function ResetPasswordPage() {
           <img src={danDariaThinking} alt="" className="mx-auto mt-7 h-44 w-auto object-contain" />
 
           {done ? (
-            <div className="mt-7 rounded-3xl border border-accent/60 bg-card p-4 text-center shadow-card">
-              <p className="text-sm font-extrabold text-primary">Redirecting...</p>
+            <div className="mt-7">
+              <AuthStatusCard
+                tone="success"
+                title="Password updated"
+                message="You're all set. We'll send you back to Story Pros."
+              />
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-7 space-y-4">
@@ -79,10 +84,22 @@ function ResetPasswordPage() {
                   className="w-full rounded-2xl border-2 border-accent/70 bg-card py-3.5 pl-12 pr-4 text-base font-semibold text-ink placeholder:font-medium placeholder:text-ink-soft/50 transition-colors focus:border-primary focus:outline-none"
                 />
               </div>
+              {password.length > 0 && password.length < 6 && (
+                <AuthStatusCard
+                  tone="info"
+                  title="A little longer"
+                  message="Use at least 6 characters for your new password."
+                />
+              )}
               {error && (
-                <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-3">
-                  <p className="text-sm font-semibold text-destructive">{error}</p>
-                </div>
+                <AuthStatusCard tone="error" title="Almost there" message={error} />
+              )}
+              {loading && (
+                <AuthStatusCard
+                  tone="loading"
+                  title="Saving your password"
+                  message="Keeping your Story Pros account secure."
+                />
               )}
               <TactileButton
                 type="submit"

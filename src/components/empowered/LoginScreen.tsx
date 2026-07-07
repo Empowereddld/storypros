@@ -7,6 +7,7 @@
  * ───────────────────────────────────────────── */
 
 import { useState } from "react";
+import { AuthStatusCard } from "./AuthStatusCard";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Profile } from "@/contexts/AuthContext";
@@ -98,9 +99,19 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess }: LoginScre
           />
 
           {error && (
-            <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-3">
-              <p className="text-sm font-semibold text-destructive">{error}</p>
-            </div>
+            <AuthStatusCard
+              tone="error"
+              title="Let's try that again"
+              message={error}
+            />
+          )}
+
+          {(loading || oauthLoading) && (
+            <AuthStatusCard
+              tone="loading"
+              title={oauthLoading ? "Opening secure sign-in" : "Checking your account"}
+              message="Story Pros is making sure everything is ready."
+            />
           )}
 
           <TactileButton type="submit" disabled={loading || !email.trim() || !password}>
