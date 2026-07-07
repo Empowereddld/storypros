@@ -1,30 +1,19 @@
-/* ─────────────────────────────────────────────
- * Onboarding Assessment
- * After signup, the child plays through a full
- * Level 1 story. Performance determines placement:
- *   90%+ first-attempt across all domains → Level 2
- *   Otherwise → Level 1
- *
- * Shows placement result to parent with
- * explanation and manual override option.
- * ───────────────────────────────────────────── */
-
-import { useState } from "react";
-import { StoryEngine } from "./phases";
-import { getStory } from "@/services/stories";
-import { getProgress } from "@/services/progress";
+import { useState, type ReactNode } from "react";
+import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
+import danDariaThinking from "@/assets/dan-daria-thinking.webp";
+import { cn } from "@/lib/utils";
+import { getProgress, setCurrentLevel } from "@/services/progress";
 import {
-  calculateDomainScores,
-  calculateOverallScore,
   qualifiesForLevel2,
   scoreToLabel,
   labelToDisplayText,
   type SkillDomain,
 } from "@/services/scoring";
-import { setCurrentLevel } from "@/services/progress";
+import { getStory } from "@/services/stories";
+import { resolveStoryImage } from "@/services/storyImages";
+import { AuthBackdrop, MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
 import { TactileButton } from "./TactileButton";
-import { cn } from "@/lib/utils";
-import type { StoryData } from "@/types/story";
+import { StoryEngine } from "./phases";
 
 interface OnboardingAssessmentProps {
   childName: string;
@@ -33,48 +22,43 @@ interface OnboardingAssessmentProps {
 
 type Phase = "intro" | "playing" | "result";
 
-const DOMAIN_ICONS: Record<SkillDomain, string> = {
-  listening: "👂",
-  story_structure: "📖",
-  vocabulary: "📝",
-  grammar: "✏️",
-  retell: "🗣️",
-  phonological: "🔊",
-};
+const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
 
 const DOMAIN_LABELS: Record<SkillDomain, string> = {
   listening: "Listening",
-  story_structure: "Story Structure",
+  story_structure: "Story structure",
   vocabulary: "Vocabulary",
-  grammar: "Grammar",
+  grammar: "Sentence building",
   retell: "Retelling",
   phonological: "Sounds",
 };
 
-const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
+const DOMAIN_TONES: Record<SkillDomain, string> = {
+  listening: "bg-primary text-primary-foreground",
+  story_structure: "bg-secondary text-secondary-foreground",
+  vocabulary: "bg-success text-success-foreground",
+  grammar: "bg-coral text-coral-foreground",
+  retell: "bg-primary text-primary-foreground",
+  phonological: "bg-secondary text-secondary-foreground",
+};
 
 export function OnboardingAssessment({ childName, onComplete }: OnboardingAssessmentProps) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [placedLevel, setPlacedLevel] = useState(1);
   const [domainScores, setDomainScores] = useState<Record<SkillDomain, number> | null>(null);
-  const [overallScore, setOverallScore] = useState(0);
 
   const story = getStory("dan-and-the-paper-cut");
+  const firstName = (childName || "Story Pro").trim().split(/\s+/)[0];
 
   function handleStoryFinish() {
-    // After story completion, check the progress service for results
     const progress = getProgress();
     const lastCompletion = progress.completions[progress.completions.length - 1];
 
     if (lastCompletion) {
       const scores = lastCompletion.domainScores;
-      const overall = lastCompletion.overallScore;
-      const level2 = qualifiesForLevel2(scores);
+      const recommended = qualifiesForLevel2(scores) ? 2 : 1;
 
       setDomainScores(scores);
-      setOverallScore(overall);
-
-      const recommended = level2 ? 2 : 1;
       setPlacedLevel(recommended);
       setCurrentLevel(recommended);
     }
@@ -88,142 +72,309 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
   }
 
   if (!story) {
-    // Fallback if story not loaded
     return (
-      <div className="flex h-full flex-col items-center justify-center px-5">
-        <p className="text-lg font-semibold text-primary">Loading assessment...</p>
-      </div>
-    );
-  }
-
-  if (phase === "intro") {
-    return (
-      <div className="flex h-full flex-col items-center justify-center px-5 bg-cream">
-        <div className="text-center animate-pop-in">
-          <span className="text-6xl mb-4 block">🎯</span>
-          <h2 className="font-display text-[28px] font-extrabold text-primary mb-3">
-            Let's see where {childName || "you"} should start!
-          </h2>
-          <p className="text-base font-semibold text-ink-soft mb-2">
-            {childName || "Your child"} will play through one story. We'll use how they do to pick the right level.
-          </p>
-          <p className="text-sm text-ink-soft/70 mt-2">
-            This takes about 10–15 minutes. Stay nearby to help if needed!
-          </p>
-        </div>
-        <div className="w-full mt-8 px-2">
-          <TactileButton onClick={() => setPhase("playing")}>
-            Start assessment
-          </TactileButton>
-        </div>
+      <div className="relative flex h-full flex-col items-center justify-center overflow-hidden bg-background px-6 text-center">
+        <AuthBackdrop />
+        <StoryProsLogo layout="stacked" size="lg" className="relative z-10 animate-pop-in" />
+        <p className="relative z-10 mt-6 text-lg font-extrabold text-primary">
+          Loading your story check...
+        </p>
       </div>
     );
   }
 
   if (phase === "playing") {
+    return <StoryEngine storyData={story} onFinish={handleStoryFinish} />;
+  }
+
+  if (phase === "intro") {
+    const cover = resolveStoryImage(story.id, story.slides[0]?.image || "slide-01.webp");
+
     return (
-      <StoryEngine
-        storyData={story}
-        onFinish={handleStoryFinish}
-      />
+      <div className="relative flex h-full flex-col overflow-hidden bg-background">
+        <AuthBackdrop />
+        <MiniPlane className="absolute right-8 top-24 z-10 h-10 w-10 rotate-12 text-secondary drop-shadow-lg animate-float" />
+        <Star className="absolute left-8 top-36 z-10 h-4 w-4 text-secondary animate-sparkle" />
+        <Star className="absolute right-12 bottom-28 z-10 h-5 w-5 text-primary/40 animate-sparkle" />
+
+        <div className="relative z-20 flex h-full flex-col px-5 pb-5 pt-4">
+          <StoryProsLogo layout="row" size="md" className="mx-auto animate-pop-in" />
+
+          <div className="mt-4 text-center animate-slide-up">
+            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-secondary-deep">
+              Story starter check
+            </p>
+            <h1 className="mt-2 font-display text-[31px] font-extrabold leading-[0.98] text-primary">
+              Let's find a just-right start
+            </h1>
+            <p className="mx-auto mt-2 max-w-[315px] text-sm font-medium leading-snug text-ink-soft">
+              {firstName} will play one friendly story so Story Pros can choose the best starting
+              level.
+            </p>
+          </div>
+
+          <div className="relative mt-4 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up">
+            <div className="relative h-44 overflow-hidden rounded-[24px] bg-accent">
+              {cover ? (
+                <img src={cover} alt="" className="h-full w-full object-cover" />
+              ) : (
+                <img src={danDariaThinking} alt="" className="h-full w-full object-cover" />
+              )}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/80 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
+                  Level placement story
+                </span>
+                <h2 className="mt-2 text-xl font-extrabold leading-tight text-white drop-shadow">
+                  {story.title}
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-2.5 stagger-in">
+            <FeatureChip label="Listen" icon={<HeadphonesIcon />} />
+            <FeatureChip label="Choose" icon={<CheckIcon />} />
+            <FeatureChip label="Build" icon={<BlocksIcon />} />
+            <FeatureChip label="Retell" icon={<BookIcon />} />
+          </div>
+
+          <div className="mt-auto space-y-3 pt-4">
+            <div className="rounded-[24px] bg-card/90 p-3 text-center shadow-card">
+              <p className="text-[13px] font-semibold leading-snug text-ink-soft">
+                No pressure, no grades. A grown-up can change the level anytime.
+              </p>
+            </div>
+            <TactileButton onClick={() => setPhase("playing")}>
+              Start Story Check <ArrowRightIcon />
+            </TactileButton>
+          </div>
+        </div>
+      </div>
     );
   }
 
-  // Result phase
   return (
-    <div className="flex h-full flex-col bg-cream">
-      {/* Header */}
-      <div className="bg-gradient-to-b from-primary/10 to-transparent px-5 pt-6 pb-4 text-center">
-        <span className="text-5xl block animate-pop-in">
-          {placedLevel >= 2 ? "🌟" : "🎉"}
-        </span>
-        <h1 className="mt-2 font-display text-[28px] font-extrabold text-primary animate-slide-up">
-          {placedLevel >= 2 ? "Wow, great start!" : "Great job!"}
-        </h1>
-        <p className="mt-1 text-base font-semibold text-ink-soft">
-          {childName || "Your child"} has been placed in <span className="text-primary font-bold">Level {placedLevel}</span>
-        </p>
-      </div>
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <AuthBackdrop />
+      <Star className="absolute left-9 top-24 z-10 h-5 w-5 text-secondary animate-sparkle" />
+      <Star className="absolute right-10 top-36 z-10 h-4 w-4 text-primary/40 animate-sparkle" />
 
-      <div className="flex-1 overflow-y-auto no-scrollbar px-5 pb-4">
-        {/* Explanation */}
-        <div className="mt-4 rounded-3xl bg-card p-5 shadow-card">
-          <p className="text-sm font-semibold text-ink-soft leading-relaxed">
+      <div className="relative z-20 flex h-full flex-col px-5 pb-5 pt-4">
+        <StoryProsLogo layout="row" size="sm" className="mx-auto" />
+
+        <div className="mt-3 text-center animate-slide-up">
+          <img
+            src={danDariaCelebrate}
+            alt=""
+            className="mx-auto h-40 w-56 object-contain drop-shadow-xl animate-bounce-in"
+          />
+          <h1 className="font-display text-[32px] font-extrabold leading-tight text-primary">
+            {placedLevel >= 2 ? "Ready for Level 2!" : "Level 1 is a great fit!"}
+          </h1>
+          <p className="mx-auto mt-2 max-w-[310px] text-[15px] font-medium leading-snug text-ink-soft">
             {placedLevel >= 2
-              ? `${childName || "Your child"} answered most questions correctly on the first try! Level 2 stories have slightly more complex language and longer sentences.`
-              : `Level 1 is perfect for building a strong foundation. ${childName || "Your child"} will practice with shorter stories and simpler sentences, building confidence with each one.`}
+              ? `${firstName} is ready for longer sentences and bigger story moments.`
+              : `${firstName} can build confidence with short, friendly stories first.`}
           </p>
         </div>
 
-        {/* Domain scores */}
-        {domainScores && (
-          <div className="mt-4 space-y-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-ink-soft px-1">
-              Assessment Results
-            </h3>
-            {V1_DOMAINS.map((domain) => {
-              const score = domainScores[domain];
-              const label = scoreToLabel(score);
-              const barColor =
-                label === "strength" ? "bg-success"
-                : label === "growing" ? "bg-primary"
-                : label === "budding" ? "bg-secondary"
-                : "bg-coral";
+        <div className="mt-5 rounded-[28px] border border-border/70 bg-card/95 p-4 shadow-soft animate-slide-up">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-ink-soft">
+                Recommended start
+              </p>
+              <p className="mt-1 text-3xl font-extrabold text-primary">Level {placedLevel}</p>
+            </div>
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-secondary text-3xl font-extrabold text-secondary-foreground shadow-card">
+              {placedLevel}
+            </div>
+          </div>
+        </div>
 
-              return (
-                <div key={domain} className="rounded-2xl bg-card p-3 shadow-card flex items-center gap-3">
-                  <span className="text-lg">{DOMAIN_ICONS[domain]}</span>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-bold text-primary">{DOMAIN_LABELS[domain]}</span>
-                      <span className="text-xs font-bold text-ink-soft">{Math.round(score)}%</span>
-                    </div>
-                    <div className="h-2 w-full rounded-full bg-cream-deep overflow-hidden">
-                      <div
-                        className={cn("h-full rounded-full transition-all duration-700", barColor)}
-                        style={{ width: `${Math.max(5, score)}%` }}
-                      />
-                    </div>
+        {domainScores && (
+          <div className="mt-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-base font-extrabold text-ink">Skill snapshot</h2>
+              <span className="text-xs font-bold text-primary">Parent view</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {V1_DOMAINS.map((domain) => {
+                const score = domainScores[domain];
+                const label = scoreToLabel(score);
+                return (
+                  <div
+                    key={domain}
+                    className="rounded-[22px] border border-border/70 bg-card p-3 shadow-card"
+                  >
+                    <span
+                      className={cn(
+                        "inline-flex h-9 w-9 items-center justify-center rounded-2xl",
+                        DOMAIN_TONES[domain],
+                      )}
+                    >
+                      <DomainIcon domain={domain} />
+                    </span>
+                    <p className="mt-2 text-sm font-extrabold leading-tight text-primary">
+                      {DOMAIN_LABELS[domain]}
+                    </p>
+                    <p className="mt-1 text-xs font-semibold text-ink-soft">
+                      {labelToDisplayText(label)}
+                    </p>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         )}
 
-        {/* Parent override */}
-        <div className="mt-5 rounded-3xl bg-sky/50 p-4">
-          <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
-            Parent override
-          </p>
-          <p className="text-sm text-ink-soft mb-3">
-            You know your child best. You can change the level anytime.
-          </p>
-          <div className="flex gap-2">
-            {[1, 2].map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => handleOverride(lvl)}
-                className={cn(
-                  "flex-1 rounded-2xl border-2 p-3 text-center font-bold transition-all",
-                  placedLevel === lvl
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-transparent bg-card text-ink-soft hover:border-primary/30",
-                )}
-              >
-                Level {lvl}
-              </button>
-            ))}
+        <div className="mt-auto space-y-4 pt-5">
+          <div className="rounded-[24px] bg-accent/70 p-4">
+            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-primary">
+              Parent override
+            </p>
+            <p className="mt-1 text-xs font-medium leading-snug text-ink-soft">
+              You know your child best. You can change the level now or later in Settings.
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {[1, 2].map((level) => (
+                <button
+                  key={level}
+                  type="button"
+                  onClick={() => handleOverride(level)}
+                  className={cn(
+                    "press-pop rounded-2xl border-2 px-3 py-3 text-sm font-extrabold transition-colors",
+                    placedLevel === level
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-transparent bg-card text-primary",
+                  )}
+                >
+                  Level {level}
+                </button>
+              ))}
+            </div>
           </div>
+
+          <TactileButton onClick={onComplete}>
+            Start Adventuring <ArrowRightIcon />
+          </TactileButton>
         </div>
       </div>
-
-      {/* Continue button */}
-      <div className="px-5 pb-5">
-        <TactileButton onClick={onComplete}>
-          Start adventuring!
-        </TactileButton>
-      </div>
     </div>
+  );
+}
+
+function FeatureChip({ icon, label }: { icon: ReactNode; label: string }) {
+  return (
+    <div className="flex min-h-14 items-center gap-2 rounded-[22px] border border-border/70 bg-card/95 p-2.5 shadow-card">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
+        {icon}
+      </span>
+      <span className="text-sm font-extrabold text-primary">{label}</span>
+    </div>
+  );
+}
+
+function DomainIcon({ domain }: { domain: SkillDomain }) {
+  if (domain === "listening") return <HeadphonesIcon />;
+  if (domain === "story_structure") return <BookIcon />;
+  if (domain === "vocabulary") return <LettersIcon />;
+  return <BlocksIcon />;
+}
+
+function HeadphonesIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M4 13a8 8 0 0116 0" strokeLinecap="round" />
+      <rect x="3" y="13" width="5" height="7" rx="2" />
+      <rect x="16" y="13" width="5" height="7" rx="2" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M5 12.5l4 4L19 6.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function BlocksIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <rect x="4" y="4" width="7" height="7" rx="2" />
+      <rect x="13" y="4" width="7" height="7" rx="2" />
+      <rect x="8.5" y="13" width="7" height="7" rx="2" />
+    </svg>
+  );
+}
+
+function BookIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M5 5.5A3.5 3.5 0 018.5 2H20v17H8.5A3.5 3.5 0 005 22V5.5z" />
+      <path d="M5 5.5A3.5 3.5 0 018.5 2H20" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function LettersIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.1"
+      aria-hidden
+    >
+      <path d="M5 18l4.5-12L14 18M7 13h5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 10.5h3M17.5 9v6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6 text-secondary"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M4 12h15M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

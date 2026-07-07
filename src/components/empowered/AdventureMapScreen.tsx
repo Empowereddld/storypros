@@ -520,4 +520,7 @@ function ChartIcon() {
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <rect x="3" y="12" width="4" height="9" rx="1" />
       <rect x="10" y="8" width="4" height="13" rx="1" />
-      <rect x="17" y="4" width="4" height="17" rx="1" /
+      <rect x="17" y="4" width="4" height="17" rx="1" />
+    </svg>
+  );
+}
