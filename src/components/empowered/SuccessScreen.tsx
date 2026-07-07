@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { PaperPlaneIcon } from "./StoryProsUi";
 
 interface SuccessScreenProps {
   childName: string;
@@ -57,14 +58,16 @@ export function SuccessScreen({ childName, onContinue }: SuccessScreenProps) {
       </div>
 
       <div className="relative z-10 animate-pop-in">
-        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-secondary text-5xl shadow-[0_8px_0_0_var(--secondary-deep)]">
-          ✨
+        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-[0_8px_0_0_var(--secondary-deep)]">
+          <PaperPlaneIcon className="h-14 w-14" />
         </div>
         <h1 className="font-display text-[32px] font-extrabold leading-tight text-primary">
           All set, {childName || "friend"}!
         </h1>
         <p className="mt-3 text-base text-ink-soft">
-          Your adventure is ready.<br />Let&rsquo;s go meet the map.
+          Your adventure is ready.
+          <br />
+          Let&rsquo;s go meet the map.
         </p>
       </div>
     </div>

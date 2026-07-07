@@ -1,7 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import danDariaThinking from "@/assets/dan-daria-thinking.webp";
+import { PhoneFrame } from "@/components/empowered/PhoneFrame";
+import { AuthBackdrop, LockIcon, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
+import { PaperPlaneIcon } from "@/components/empowered/StoryProsUi";
 import { TactileButton } from "@/components/empowered/TactileButton";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/reset-password")({
   component: ResetPasswordPage,
@@ -33,32 +37,64 @@ function ResetPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-6">
-      <div className="w-full max-w-sm">
-        <h1 className="font-display text-2xl font-extrabold text-primary mb-4 text-center">
-          Set a new password
-        </h1>
-        {done ? (
-          <p className="text-center text-sm text-ink-soft">Password updated. Redirecting…</p>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="New password"
-              autoComplete="new-password"
-              className="w-full rounded-2xl border-2 border-muted bg-card p-4 text-base font-semibold text-primary placeholder:text-ink-soft/40 focus:border-primary focus:outline-none"
-            />
-            {error && (
-              <p className="text-sm font-semibold text-destructive">{error}</p>
-            )}
-            <TactileButton onClick={() => {}} disabled={loading || password.length < 6}>
-              {loading ? "Saving…" : "Update password"}
-            </TactileButton>
-          </form>
-        )}
+    <PhoneFrame>
+      <div className="relative flex h-full flex-col overflow-hidden bg-cream">
+        <AuthBackdrop />
+
+        <div className="relative z-10 flex flex-1 flex-col px-6 pb-7 pt-8">
+          <StoryProsLogo layout="row" size="md" className="mx-auto scale-90" />
+
+          <div className="mt-10 text-center">
+            <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-secondary/25 text-secondary-foreground shadow-card">
+              {done ? <PaperPlaneIcon className="h-11 w-11" /> : <LockIcon className="h-10 w-10" />}
+            </span>
+            <h1 className="mt-5 font-display text-[34px] font-extrabold leading-tight text-primary">
+              {done ? "Password updated" : "Set a new password"}
+            </h1>
+            <p className="mx-auto mt-2 max-w-[19rem] text-base font-semibold leading-relaxed text-ink-soft">
+              {done
+                ? "You're all set. We'll send you back to Story Pros."
+                : "Choose a secure password so you can get back to the stories."}
+            </p>
+          </div>
+
+          <img src={danDariaThinking} alt="" className="mx-auto mt-7 h-44 w-auto object-contain" />
+
+          {done ? (
+            <div className="mt-7 rounded-3xl border border-accent/60 bg-card p-4 text-center shadow-card">
+              <p className="text-sm font-extrabold text-primary">Redirecting...</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+              <div className="relative">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-primary/60">
+                  <LockIcon />
+                </span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="New password"
+                  autoComplete="new-password"
+                  className="w-full rounded-2xl border-2 border-accent/70 bg-card py-3.5 pl-12 pr-4 text-base font-semibold text-ink placeholder:font-medium placeholder:text-ink-soft/50 transition-colors focus:border-primary focus:outline-none"
+                />
+              </div>
+              {error && (
+                <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-3">
+                  <p className="text-sm font-semibold text-destructive">{error}</p>
+                </div>
+              )}
+              <TactileButton
+                type="submit"
+                disabled={loading || password.length < 6}
+                leadingIcon={<PaperPlaneIcon className="h-6 w-6" />}
+              >
+                {loading ? "Saving..." : "Update Password"}
+              </TactileButton>
+            </form>
+          )}
+        </div>
       </div>
-    </div>
+    </PhoneFrame>
   );
 }
