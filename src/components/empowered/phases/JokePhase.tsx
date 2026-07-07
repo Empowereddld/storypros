@@ -1,137 +1,140 @@
-/* ─────────────────────────────────────────────
- * Joke Phase — Multiple Meaning Word
- * Shows two meanings of a word, then the joke.
- * Engagement only — not scored.
- * ───────────────────────────────────────────── */
-
 import { useState } from "react";
-import { TactileButton } from "../TactileButton";
-import { ProgressHeader } from "./ProgressHeader";
+import { resolveStoryImage } from "@/services/storyImages";
 import type { StoryPhaseProps } from "@/types/story";
-import { cn } from "@/lib/utils";
+import { TactileButton } from "../TactileButton";
+import { MiniPlane, Star } from "../StoryProsBrand";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ProgressHeader } from "./ProgressHeader";
 
 type Step = "intro" | "meaning1" | "meaning2" | "joke";
+
+const PROGRESS: Record<Step, number> = {
+  intro: 0,
+  meaning1: 33,
+  meaning2: 66,
+  joke: 90,
+};
 
 export function JokePhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
   const [step, setStep] = useState<Step>("intro");
   const joke = storyData.joke;
-
-  const progressMap: Record<Step, number> = {
-    intro: 0,
-    meaning1: 25,
-    meaning2: 50,
-    joke: 75,
-  };
+  const meaningOneImage = resolveStoryImage(storyData.id, joke.meaning_1.image);
+  const meaningTwoImage = resolveStoryImage(storyData.id, joke.meaning_2.image);
 
   function handleNext() {
-    switch (step) {
-      case "intro":
-        setStep("meaning1");
-        break;
-      case "meaning1":
-        setStep("meaning2");
-        break;
-      case "meaning2":
-        setStep("joke");
-        break;
-      case "joke":
-        onComplete({
-          phase: "joke",
-          attempts: [],
-          first_attempt_accuracy: 1,
-          completed: true,
-        });
-        break;
+    if (step === "intro") setStep("meaning1");
+    if (step === "meaning1") setStep("meaning2");
+    if (step === "meaning2") setStep("joke");
+    if (step === "joke") {
+      onComplete({
+        phase: "joke",
+        attempts: [],
+        first_attempt_accuracy: 1,
+        completed: true,
+      });
     }
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <ProgressHeader
-        progress={progressMap[step]}
-        label="Word Play"
-        onClose={onClose}
-      />
-
-      <div className="flex flex-1 flex-col items-center justify-center px-5">
-        {step === "intro" && (
-          <div className="text-center animate-pop-in">
-            <span className="text-6xl mb-4 block">🤔</span>
-            <h2 className="font-display text-[28px] font-extrabold text-primary mb-3">
-              Did you know?
-            </h2>
-            <p className="text-lg font-semibold text-ink-soft mb-2">
-              Some words mean TWO different things!
-            </p>
-            <div className="mt-4 rounded-3xl bg-card p-5 shadow-card">
-              <p className="font-display text-[32px] font-extrabold text-primary capitalize">
-                {joke.word}
-              </p>
-              <p className="mt-1 text-sm font-semibold text-ink-soft">
-                This word has two meanings!
-              </p>
-            </div>
-          </div>
-        )}
-
-        {step === "meaning1" && (
-          <div key="m1" className="w-full animate-slide-up">
-            <div className="rounded-3xl bg-card p-5 shadow-card">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">1</span>
-                <span className="text-sm font-bold uppercase tracking-wider text-primary">
-                  Meaning One
-                </span>
-              </div>
-              <div className="aspect-[3/2] w-full rounded-2xl bg-gradient-to-b from-sky/40 to-cream-deep/30 flex items-center justify-center mb-3">
-                <span className="text-5xl">🌡️</span>
-              </div>
-              <p className="font-display text-[20px] font-semibold text-primary leading-snug">
-                <span className="font-extrabold capitalize">{joke.word}</span> — {joke.meaning_1.text}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {step === "meaning2" && (
-          <div key="m2" className="w-full animate-slide-up">
-            <div className="rounded-3xl bg-card p-5 shadow-card">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground text-sm font-bold">2</span>
-                <span className="text-sm font-bold uppercase tracking-wider text-primary">
-                  Meaning Two
-                </span>
-              </div>
-              <div className="aspect-[3/2] w-full rounded-2xl bg-gradient-to-b from-sky/40 to-cream-deep/30 flex items-center justify-center mb-3">
-                <span className="text-5xl">😎</span>
-              </div>
-              <p className="font-display text-[20px] font-semibold text-primary leading-snug">
-                <span className="font-extrabold capitalize">{joke.word}</span> — {joke.meaning_2.text}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {step === "joke" && (
-          <div key="joke" className="w-full text-center animate-pop-in">
-            <span className="text-7xl mb-4 block">😂</span>
-            <div className="rounded-3xl bg-secondary/10 border-2 border-secondary p-6 shadow-card">
-              <p className="font-display text-[22px] font-extrabold text-primary leading-snug">
-                {joke.joke_text}
-              </p>
-            </div>
-            <p className="mt-4 text-sm font-semibold text-ink-soft">
-              Get it? Both meanings of "{joke.word}"!
-            </p>
-          </div>
-        )}
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+        <Star className="absolute left-8 top-32 h-4 w-4 text-secondary animate-sparkle" />
+        <Star className="absolute right-9 top-48 h-5 w-5 text-primary/30 animate-sparkle" />
+        <MiniPlane className="absolute right-12 bottom-24 h-9 w-9 rotate-12 text-secondary animate-float" />
       </div>
 
-      <div className="mx-5 mb-5">
-        <TactileButton onClick={handleNext}>
-          {step === "joke" ? "Keep going!" : "Next"}
+      <div className="relative z-10">
+        <ProgressHeader progress={PROGRESS[step]} label="Word Play" onClose={onClose} />
+      </div>
+
+      <div className="relative z-10 flex flex-1 flex-col px-5 pb-5 pt-4">
+        <section className="flex flex-1 flex-col justify-center rounded-[34px] bg-card p-5 text-center shadow-soft animate-pop-in">
+          {step === "intro" && (
+            <>
+              <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-secondary text-secondary-foreground shadow-card">
+                <PaperPlaneIcon className="h-10 w-10" />
+              </span>
+              <h1 className="mt-5 text-[34px] font-extrabold leading-tight text-primary">
+                Words Can Have Two Meanings
+              </h1>
+              <p className="mt-3 text-base font-semibold leading-snug text-ink-soft">
+                Today&apos;s word is{" "}
+                <span className="font-extrabold capitalize text-primary">{joke.word}</span>.
+              </p>
+            </>
+          )}
+
+          {step === "meaning1" && (
+            <MeaningCard
+              number={1}
+              word={joke.word}
+              text={joke.meaning_1.text}
+              image={meaningOneImage}
+            />
+          )}
+
+          {step === "meaning2" && (
+            <MeaningCard
+              number={2}
+              word={joke.word}
+              text={joke.meaning_2.text}
+              image={meaningTwoImage}
+            />
+          )}
+
+          {step === "joke" && (
+            <>
+              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-[24px] bg-secondary text-secondary-foreground shadow-card">
+                <Star className="h-9 w-9" />
+              </span>
+              <p className="mt-5 text-[28px] font-extrabold leading-tight text-primary">
+                {joke.joke_text}
+              </p>
+              <p className="mt-4 text-sm font-semibold text-ink-soft">
+                Both meanings of &quot;{joke.word}&quot; make the joke work.
+              </p>
+            </>
+          )}
+        </section>
+
+        <TactileButton className="mt-4" onClick={handleNext}>
+          {step === "joke" ? "Keep Going" : "Next"}
+          <ChevronRightIcon className="h-5 w-5 text-secondary" />
         </TactileButton>
       </div>
     </div>
+  );
+}
+
+function MeaningCard({
+  number,
+  word,
+  text,
+  image,
+}: {
+  number: number;
+  word: string;
+  text: string;
+  image: string | null;
+}) {
+  return (
+    <>
+      <span className="mx-auto rounded-full bg-primary px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-primary-foreground">
+        Meaning {number}
+      </span>
+      <div className="mt-4 h-48 overflow-hidden rounded-[28px] bg-accent shadow-card">
+        {image ? (
+          <img src={image} alt="" className="h-full w-full object-cover" />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-primary">
+            <PaperPlaneIcon className="h-14 w-14" />
+          </div>
+        )}
+      </div>
+      <p className="mt-5 text-[24px] font-extrabold leading-snug text-primary">
+        <span className="capitalize">{word}</span>: {text}
+      </p>
+    </>
   );
 }

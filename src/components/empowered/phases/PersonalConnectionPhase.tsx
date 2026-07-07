@@ -1,14 +1,9 @@
-/* ─────────────────────────────────────────────
- * Personal Connection Phase
- * Open-ended prompt relating story to child's life.
- * Not scored — engagement only.
- * ───────────────────────────────────────────── */
-
 import { useState } from "react";
-import { TactileButton } from "../TactileButton";
-import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps } from "@/types/story";
-import dariaSolo from "@/assets/daria-solo.png";
+import { TactileButton } from "../TactileButton";
+import { MiniPlane, Star } from "../StoryProsBrand";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ProgressHeader } from "./ProgressHeader";
 
 export function PersonalConnectionPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
   const [started, setStarted] = useState(false);
@@ -24,57 +19,55 @@ export function PersonalConnectionPhase({ storyData, onComplete, onClose }: Stor
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <ProgressHeader
-        progress={started ? 50 : 0}
-        label="Your turn!"
-        onClose={onClose}
-      />
-
-      <div className="flex flex-1 flex-col items-center justify-center px-5">
-        {!started ? (
-          <div className="text-center animate-pop-in">
-            <span className="text-6xl mb-4 block">💬</span>
-            <h2 className="font-display text-[28px] font-extrabold text-primary mb-3">
-              What about you?
-            </h2>
-            <p className="text-base font-semibold text-ink-soft">
-              Let's talk about YOUR story!
-            </p>
-          </div>
-        ) : (
-          <div className="w-full animate-slide-up">
-            <div className="flex items-start gap-3">
-              <img src={dariaSolo} alt="" className="h-16 w-auto object-contain" />
-              <div className="flex-1">
-                <div className="rounded-2xl rounded-bl-sm bg-sky p-4 shadow-card">
-                  <p className="text-base font-semibold leading-snug text-primary">
-                    {prompt}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 rounded-3xl bg-card p-5 shadow-card border-2 border-dashed border-primary/20">
-              <p className="text-center text-ink-soft font-semibold">
-                Tell someone near you your answer!
-              </p>
-              <p className="mt-2 text-center text-sm text-ink-soft/60">
-                (Or just think about it in your head)
-              </p>
-            </div>
-          </div>
-        )}
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+        <Star className="absolute left-8 top-32 h-4 w-4 text-secondary animate-sparkle" />
+        <Star className="absolute right-9 top-48 h-5 w-5 text-primary/30 animate-sparkle" />
+        <MiniPlane className="absolute right-12 bottom-24 h-9 w-9 rotate-12 text-secondary animate-float" />
       </div>
 
-      <div className="mx-5 mb-5">
+      <div className="relative z-10">
+        <ProgressHeader progress={started ? 60 : 0} label="Your Turn" onClose={onClose} />
+      </div>
+
+      <div className="relative z-10 flex flex-1 flex-col px-5 pb-5 pt-4">
         {!started ? (
-          <TactileButton onClick={() => setStarted(true)}>
-            Let's talk!
+          <section className="flex flex-1 flex-col items-center justify-center rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
+            <span className="flex h-20 w-20 items-center justify-center rounded-[28px] bg-accent text-primary shadow-card">
+              <PaperPlaneIcon className="h-11 w-11" />
+            </span>
+            <h1 className="mt-5 text-[36px] font-extrabold leading-tight text-primary">
+              What About You?
+            </h1>
+            <p className="mt-3 max-w-[280px] text-base font-semibold leading-snug text-ink-soft">
+              Connect the story to something from your own life.
+            </p>
+          </section>
+        ) : (
+          <section className="flex flex-1 flex-col justify-center rounded-[34px] bg-card p-5 shadow-soft animate-slide-up">
+            <span className="mb-4 inline-flex w-fit rounded-full bg-secondary/25 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
+              Think and Share
+            </span>
+            <h1 className="text-[30px] font-extrabold leading-tight text-primary">{prompt}</h1>
+            <div className="mt-6 rounded-[28px] border-2 border-dashed border-primary/25 bg-accent/40 p-5 text-center">
+              <p className="text-base font-extrabold text-primary">
+                Tell someone near you, or think about your answer quietly.
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+                There is no wrong answer here. This part is about making the story yours.
+              </p>
+            </div>
+          </section>
+        )}
+
+        {!started ? (
+          <TactileButton className="mt-4" onClick={() => setStarted(true)}>
+            Start Reflection <ChevronRightIcon className="h-5 w-5 text-secondary" />
           </TactileButton>
         ) : (
-          <TactileButton onClick={handleDone}>
-            I shared my story!
+          <TactileButton className="mt-4" onClick={handleDone}>
+            I Shared My Story <ChevronRightIcon className="h-5 w-5 text-secondary" />
           </TactileButton>
         )}
       </div>
