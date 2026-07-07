@@ -1,14 +1,29 @@
-import { useState, useMemo, useEffect } from "react";
-import dariaSolo from "@/assets/daria-solo.png";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import childAvatar from "@/assets/child-avatar.png";
+import dariaSolo from "@/assets/daria-solo.png";
 import { cn } from "@/lib/utils";
 import { getStoriesByLevel } from "@/services/stories";
-import { getCompletedStoryIds, getPaperPlanes, getCurrentLevel, getProgress, getStarRating } from "@/services/progress";
+import { getCompletedStoryIds, getCurrentLevel, getPaperPlanes } from "@/services/progress";
 import { canAccessStory } from "@/services/subscription";
+import { resolveStoryImage } from "@/services/storyImages";
 import { useAuth } from "@/contexts/AuthContext";
+import { prettifyTheme } from "@/services/continueStory";
+import { MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
+import {
+  AppBottomNav,
+  BookCheckIcon,
+  ChevronRightIcon,
+  CurrencyBadge,
+  PaperPlaneIcon,
+} from "./StoryProsUi";
 
-
-export type MapDestination = "story" | "achievements" | "settings" | "shop" | "dashboard" | "library";
+export type MapDestination =
+  | "story"
+  | "achievements"
+  | "settings"
+  | "shop"
+  | "dashboard"
+  | "library";
 
 interface AdventureMapScreenProps {
   childName: string;
@@ -17,37 +32,29 @@ interface AdventureMapScreenProps {
 }
 
 type PinStatus = "active" | "completed" | "locked";
+
 interface Pin {
   id: string;
   storyId: string;
   label: string;
+  theme: string;
+  cover: string;
   status: PinStatus;
-  stars: number; // 0-3 based on first-attempt accuracy
-  /** horizontal offset in px from the centerline (positive = right) */
   offset: number;
-  /** vertical position in px down the canvas */
   y: number;
-  /** true if this story requires a premium subscription */
-  isPremium?: boolean;
-  /** 1-based story number for display */
+  isPremium: boolean;
   storyNum: number;
-  /** Story pair number (stories 1&2 = pair 1, 3&4 = pair 2, etc.) */
-  pairNum: number;
 }
 
-/** Map alternating offsets for visual winding path */
-const PIN_OFFSETS = [0, 70, -80, 50, -60, 70, -40, 80, -70, 60, -50];
-const PIN_Y_START = 80;
-const PIN_Y_SPACING = 240;
-
-/** Story pair index (0-based) — stories alternate Dan/Daria */
-const PAIR_EMOJIS = ["📄", "🎪", "⚽", "🧩", "🗺️", "🪁", "🏖️", "🏫", "📐", "🍽️", "🔁"];
+const PIN_OFFSETS = [-50, 52, -34, 48, -54, 44, -36, 52, -46, 40, -50];
+const PIN_Y_START = 470;
+const PIN_Y_SPACING = 158;
 
 function buildPins(level: number, completedIds: string[], childId: string): Pin[] {
   const stories = getStoriesByLevel(level);
-
   let foundActive = false;
-  return stories.map((story, i) => {
+
+  return stories.map((story, index) => {
     const isCompleted = completedIds.includes(story.id);
     let status: PinStatus;
 
@@ -60,54 +67,46 @@ function buildPins(level: number, completedIds: string[], childId: string): Pin[
       status = "locked";
     }
 
-    const stars = isCompleted ? getStarRating(story.id) : 0;
-    const isPremium = !canAccessStory(childId, story.id);
-
     return {
-      id: `p${i + 1}`,
+      id: `pin-${story.id}`,
       storyId: story.id,
       label: story.title,
+      theme: story.theme,
+      cover: resolveStoryImage(story.id, story.slides[0]?.image || "slide-01.webp"),
       status,
-      stars,
-      offset: PIN_OFFSETS[i % PIN_OFFSETS.length],
-      y: PIN_Y_START + i * PIN_Y_SPACING,
-      isPremium,
-      storyNum: i + 1,
-      pairNum: Math.ceil((i + 1) / 2),
+      offset: PIN_OFFSETS[index % PIN_OFFSETS.length],
+      y: PIN_Y_START + index * PIN_Y_SPACING,
+      isPremium: !canAccessStory(childId, story.id),
+      storyNum: index + 1,
     };
   });
 }
 
-/** Build a smooth SVG cubic bezier path that winds through all pins */
-function buildWindingPath(pins: Pin[], height: number): string {
+function buildRoadPath(pins: Pin[], height: number): string {
   if (pins.length === 0) return "";
-  // Convert pin positions to SVG-space x,y (center = 200, offset applied)
-  const points = pins.map((p) => ({ x: 200 + p.offset, y: p.y + 20 }));
+  const points = pins.map((pin) => ({ x: 200 + pin.offset, y: pin.y + 28 }));
 
-  let d = `M ${points[0].x} ${points[0].y - 40}`;
-  for (let i = 0; i < points.length - 1; i++) {
-    const curr = points[i];
-    const next = points[i + 1];
-    const midY = (curr.y + next.y) / 2;
-    // Control points swing opposite to create S-curves
-    const cpx1 = curr.x + (next.x > curr.x ? 60 : -60);
-    const cpx2 = next.x + (curr.x > next.x ? 60 : -60);
-    d += ` C ${cpx1} ${midY}, ${cpx2} ${midY}, ${next.x} ${next.y}`;
+  let d = `M ${points[0].x} ${Math.max(360, points[0].y - 170)}`;
+  for (let index = 0; index < points.length - 1; index++) {
+    const current = points[index];
+    const next = points[index + 1];
+    const midY = (current.y + next.y) / 2;
+    const pull = next.x > current.x ? 88 : -88;
+    d += ` C ${current.x + pull} ${midY - 40}, ${next.x - pull} ${midY + 40}, ${next.x} ${next.y}`;
   }
-  // Tail below last pin
+
   const last = points[points.length - 1];
-  d += ` L ${last.x} ${Math.min(last.y + 80, height - 20)}`;
+  d += ` C ${last.x + 52} ${last.y + 78}, ${last.x - 60} ${Math.min(height - 70, last.y + 130)}, ${last.x} ${Math.min(height - 24, last.y + 170)}`;
   return d;
 }
 
-export function AdventureMapScreen({ childName, onReset, onNavigate }: AdventureMapScreenProps) {
+export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreenProps) {
   const { children, activeChild } = useAuth();
   const [openPin, setOpenPin] = useState<Pin | null>(null);
   const [, setProgressVersion] = useState(0);
 
-  // Re-render when cloud hydration refreshes the progress cache
   useEffect(() => {
-    const onUpdate = () => setProgressVersion((v) => v + 1);
+    const onUpdate = () => setProgressVersion((version) => version + 1);
     window.addEventListener("storypros:progress-updated", onUpdate);
     return () => window.removeEventListener("storypros:progress-updated", onUpdate);
   }, []);
@@ -115,305 +114,293 @@ export function AdventureMapScreen({ childName, onReset, onNavigate }: Adventure
   const level = getCurrentLevel();
   const completedIds = getCompletedStoryIds();
   const paperPlanes = getPaperPlanes();
-  const progress = getProgress();
   const childId = activeChild?.id ?? children[0]?.id ?? "";
+  const firstName = (childName || activeChild?.name || "Story Pro").trim().split(/\s+/)[0];
 
   const pins = useMemo(
     () => buildPins(level, completedIds, childId),
     [level, completedIds, childId],
   );
-
-  // Dynamic canvas height based on number of pins
-  const canvasHeight = pins.length > 0
-    ? PIN_Y_START + (pins.length - 1) * PIN_Y_SPACING + 200
-    : 1020;
+  const activePin = pins.find((pin) => pin.status === "active") ?? pins[pins.length - 1];
+  const completedCount = pins.filter((pin) => pin.status === "completed").length;
+  const canvasHeight = Math.max(
+    1420,
+    PIN_Y_START + Math.max(0, pins.length - 1) * PIN_Y_SPACING + 330,
+  );
+  const progressPercent = pins.length > 0 ? Math.round((completedCount / pins.length) * 100) : 0;
 
   function activate(pin: Pin) {
     if (pin.status === "locked") {
       setOpenPin(pin);
-    } else {
-      // Play the specific story this pin represents
-      onNavigate("story", pin.storyId);
+      return;
     }
+    onNavigate("story", pin.storyId);
+  }
+
+  function continueJourney() {
+    if (!activePin) return;
+    activate(activePin);
   }
 
   return (
-    <div className="relative flex h-full flex-col bg-background">
-      {/* Top app bar */}
-      <header className="sticky top-0 z-30 flex items-center justify-between gap-2 bg-card/95 backdrop-blur px-4 py-3 rounded-b-2xl border-b-4 border-accent/60 shadow-card">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => onNavigate("home")}
-            aria-label="Back to home"
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft hover:bg-accent/60 transition-colors active:scale-95"
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-              <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <div className="h-9 w-9 overflow-hidden rounded-full bg-accent border-2 border-primary">
-            <img src={childAvatar} alt="" className="h-full w-full object-cover object-top scale-[1.6] translate-y-1" />
-          </div>
-          <span className="font-extrabold italic tracking-tight text-primary leading-none text-lg">
-            Story<br />Pros
-          </span>
-        </div>
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+        <div className="absolute -left-12 top-28 h-28 w-44 rounded-full bg-sky/55 blur-2xl" />
+        <div className="absolute -right-14 top-48 h-32 w-48 rounded-full bg-accent/60 blur-2xl" />
+        <div className="absolute -left-12 bottom-28 h-36 w-52 rounded-full bg-success/15 blur-3xl" />
+        <Star className="absolute left-9 top-40 h-4 w-4 text-secondary animate-sparkle" />
+        <Star className="absolute right-14 top-56 h-6 w-6 text-secondary animate-sparkle" />
+        <Star className="absolute left-12 bottom-40 h-4 w-4 text-primary/30 animate-sparkle" />
+        <MiniPlane className="absolute right-20 top-9 h-8 w-8 rotate-[18deg] text-secondary drop-shadow-md animate-float" />
+      </div>
 
-        <div className="flex items-center gap-2">
-          <Chip tone="primary" icon={<StarIcon />}>Lv. {level}</Chip>
-          <button onClick={() => onNavigate("shop")} className="active:scale-95 transition-transform">
-            <Chip tone="secondary" icon={<PlaneIcon />}>{paperPlanes}</Chip>
-          </button>
-          <button
-            onClick={() => onNavigate("dashboard")}
-            aria-label="Progress Dashboard"
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft hover:bg-accent/60 transition-colors active:scale-95"
-          >
-            <ChartIcon />
-          </button>
-          <button
-            onClick={() => onNavigate("settings")}
-            aria-label="Settings"
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft hover:bg-accent/60 transition-colors active:scale-95"
-          >
-            <SettingsIcon />
-          </button>
-        </div>
+      <header className="relative z-30 flex items-center justify-between gap-2 px-4 pb-1 pt-3">
+        <button
+          onClick={() => onNavigate("home")}
+          aria-label="Back to home"
+          className="press-pop flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card"
+        >
+          <BackIcon />
+        </button>
+        <StoryProsLogo layout="row" size="sm" className="scale-95" />
+        <CurrencyBadge
+          count={paperPlanes}
+          onClick={() => onNavigate("shop")}
+          className="bg-card shadow-card"
+        />
       </header>
 
-      {/* Map canvas (scrolls inside phone frame) */}
-      <div className="relative flex-1 overflow-y-auto no-scrollbar">
-        {/* Soft background glows */}
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <div className="absolute top-24 -left-12 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
-          <div className="absolute bottom-40 -right-12 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" />
-        </div>
-
-        <div className="relative z-10 mx-auto" style={{ height: canvasHeight, width: "100%" }}>
-          {/* Dotted winding path connecting all pins */}
-          <svg
-            className="absolute inset-0 h-full w-full pointer-events-none"
-            viewBox={`0 0 400 ${canvasHeight}`}
-            preserveAspectRatio="none"
-          >
-            <path
-              d={buildWindingPath(pins, canvasHeight)}
-              fill="none"
-              stroke="oklch(0.86 0.018 305)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              strokeDasharray="4 14"
-            />
-          </svg>
-
-          {/* Pins */}
-          {pins.map((pin) => (
-            <PinNode key={pin.id} pin={pin} onClick={() => activate(pin)} />
-          ))}
-        </div>
-
-        {/* Bottom spacer so nav + daily card don't cover content */}
-        <div className="h-56" />
-      </div>
-
-      {/* Daily challenge / streak */}
-      <div className="absolute bottom-24 left-4 right-4 z-30">
-        <div className="rounded-3xl bg-card/95 backdrop-blur p-4 shadow-soft border-2 border-accent/50">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-secondary text-secondary-foreground">
-              <SparkleIcon />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                {progress.streak > 0 ? `${progress.streak} Story Streak!` : "Daily Challenge"}
-              </p>
-              <p className="text-sm text-ink-soft leading-snug">
-                {completedIds.length === 0
-                  ? "Complete your first story to start earning Paper Planes!"
-                  : `${completedIds.length} ${completedIds.length === 1 ? "story" : "stories"} completed — keep going!`}
-              </p>
-            </div>
-          </div>
-          <div className="h-2.5 w-full rounded-full bg-accent/60 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-success transition-all duration-500"
-              style={{ width: `${Math.min(100, (completedIds.length / Math.max(1, pins.filter(p => p.storyId).length)) * 100)}%` }}
-            />
-          </div>
-          <div className="mt-1.5 flex justify-between text-[10px] font-bold tracking-wider">
-            <span className="text-ink-soft/70">{completedIds.length}/{pins.filter(p => p.storyId).length} STORIES</span>
-            <span className="text-primary">LEVEL {level}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Play FAB */}
-      <button
-        onClick={() => {
-          const activePin = pins.find((p) => p.status === "active");
-          onNavigate("story", activePin?.storyId);
-        }}
-        aria-label="Play active adventure"
-        className="absolute bottom-24 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground btn-tactile translate-y-[-72px]"
-      >
-        <PlayIcon />
-      </button>
-
-      {/* Bottom nav */}
-      <nav className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-around px-3 pt-2 pb-3 bg-card/95 backdrop-blur rounded-t-3xl border-t-4 border-accent/60 shadow-[0_-8px_30px_-10px_oklch(0.36_0.18_305/0.18)]">
-        <NavItem icon={<BookIcon />} label="Library" onClick={() => onNavigate("library")} />
-        <NavItem icon={<MapIcon />} label="Adventures" active />
-        <NavItem icon={<MicIcon />} label="Speak" onClick={() => setOpenPin({ id: "soon", storyId: "", label: "Speak", status: "locked", stars: 0, offset: 0, y: 0, storyNum: 0, pairNum: 0 })} />
-        <NavItem icon={<MedalIcon />} label="Rewards" onClick={() => onNavigate("achievements")} />
-      </nav>
-
-      {openPin && <ComingSoonSheet pin={openPin} onClose={() => setOpenPin(null)} />}
-    </div>
-  );
-}
-
-/* ───────── Pins ───────── */
-
-function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
-  const isActive = pin.status === "active";
-  const isCompleted = pin.status === "completed";
-  const isLocked = pin.status === "locked";
-
-  return (
-    <div
-      className="absolute left-1/2 flex flex-col items-center"
-      style={{ top: pin.y, transform: `translate(calc(-50% + ${pin.offset}px), 0)` }}
-    >
-      <div className="relative">
-        {isActive && (
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar pb-44">
+        <section className="relative min-h-[365px] px-4 pt-5 text-center">
+          <img
+            src={childAvatar}
+            alt=""
+            className="pointer-events-none absolute -left-3 top-20 z-10 h-52 w-auto object-contain drop-shadow-[0_18px_24px_rgba(63,38,140,0.18)]"
+          />
           <img
             src={dariaSolo}
             alt=""
-            className="absolute -top-14 -right-20 w-24 h-auto object-contain animate-float drop-shadow-[0_8px_12px_oklch(0.36_0.18_305/0.25)] pointer-events-none"
+            className="pointer-events-none absolute -right-3 top-28 z-10 h-48 w-auto object-contain drop-shadow-[0_18px_24px_rgba(63,38,140,0.18)]"
           />
-        )}
+
+          <div className="relative z-20 mx-auto max-w-[184px]">
+            <h1 className="font-display text-[27px] font-extrabold leading-[0.96] text-primary">
+              <span className="block">Your</span>
+              <span className="block">Adventure</span>
+              <span className="block">Map</span>
+            </h1>
+            <p className="mt-2 text-[13px] font-semibold leading-snug text-ink-soft">
+              Keep going, {firstName}. Every story builds your skills.
+            </p>
+          </div>
+
+          <div className="relative z-20 mx-auto mt-11 grid max-w-[262px] grid-cols-3 overflow-hidden rounded-[26px] border border-accent/50 bg-card/92 shadow-soft backdrop-blur">
+            <HeroStat
+              icon={<BookCheckIcon className="h-7 w-7" />}
+              value={completedCount}
+              label={completedCount === 1 ? "Story Done" : "Stories Done"}
+              tone="primary"
+            />
+            <HeroStat
+              icon={<PaperPlaneIcon className="h-7 w-7" />}
+              value={paperPlanes}
+              label="Paper Planes"
+              tone="secondary"
+            />
+            <HeroStat
+              icon={<MapPinIcon />}
+              value={`${progressPercent}%`}
+              label="Path"
+              tone="primary"
+            />
+          </div>
+        </section>
+
+        <section className="relative mx-auto -mt-2 w-full" style={{ height: canvasHeight }}>
+          <svg
+            className="pointer-events-none absolute inset-0 h-full w-full"
+            viewBox={`0 0 400 ${canvasHeight}`}
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            <path
+              d={buildRoadPath(pins, canvasHeight)}
+              fill="none"
+              stroke="oklch(0.83 0.08 305 / 0.65)"
+              strokeWidth="62"
+              strokeLinecap="round"
+            />
+            <path
+              d={buildRoadPath(pins, canvasHeight)}
+              fill="none"
+              stroke="oklch(0.69 0.17 305)"
+              strokeWidth="46"
+              strokeLinecap="round"
+            />
+            <path
+              d={buildRoadPath(pins, canvasHeight)}
+              fill="none"
+              stroke="white"
+              strokeWidth="4"
+              strokeDasharray="18 18"
+              strokeLinecap="round"
+              opacity="0.72"
+            />
+          </svg>
+
+          <span
+            className="absolute left-7 top-[635px] h-9 w-14 rounded-[60%] bg-success/25 blur-sm"
+            aria-hidden
+          />
+          <span
+            className="absolute right-5 top-[990px] h-12 w-20 rounded-[60%] bg-success/25 blur-sm"
+            aria-hidden
+          />
+          <span
+            className="absolute left-8 bottom-16 h-10 w-20 rounded-[60%] bg-success/20 blur-sm"
+            aria-hidden
+          />
+
+          {pins.map((pin) => (
+            <PinNode key={pin.id} pin={pin} onClick={() => activate(pin)} />
+          ))}
+        </section>
+      </div>
+
+      <div className="absolute bottom-[78px] left-5 right-5 z-40">
         <button
-          onClick={onClick}
-          className={cn(
-            "relative flex items-center justify-center rounded-full border-4 border-card transition-all active:translate-y-1",
-            isActive && "h-20 w-20 bg-secondary text-secondary-foreground shadow-[0_5px_0_0_var(--secondary-deep)] hover:scale-105 animate-pulse-glow",
-            isCompleted && "h-18 w-18 bg-success text-success-foreground shadow-[0_4px_0_0_oklch(0.45_0.15_155)] hover:scale-105",
-            isLocked && "h-16 w-16 bg-muted text-muted-foreground shadow-[0_4px_0_0_oklch(0.86_0.018_305)] opacity-80",
-          )}
+          onClick={continueJourney}
+          className="press-pop flex h-[76px] w-full items-center justify-between rounded-full border-[6px] border-card bg-primary px-7 text-primary-foreground shadow-[0_18px_28px_rgba(73,32,191,0.22)]"
         >
-          {isCompleted ? (
-            <svg viewBox="0 0 24 24" className="h-8 w-8" stroke="currentColor" strokeWidth="3" fill="none">
-              <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          ) : isActive ? (
-            <PlayIcon />
-          ) : (
-            <span className="text-base font-extrabold">{pin.storyNum}</span>
-          )}
-          {/* Story number badge */}
-          {(isActive || isCompleted) && (
-            <span className="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-card text-[10px] font-extrabold text-primary shadow-card border border-accent/60">
-              {pin.storyNum}
-            </span>
-          )}
+          <span className="flex items-center gap-3 text-[25px] font-extrabold leading-none">
+            <PaperPlaneIcon className="h-9 w-9 text-secondary" />
+            Continue Journey
+          </span>
+          <ChevronRightIcon className="h-7 w-7 text-primary-foreground" />
         </button>
       </div>
 
-      {isActive ? (
-        <div className="mt-3 bg-card px-5 py-3 rounded-2xl shadow-card border-b-4 border-accent/60 flex flex-col items-center min-w-[220px] max-w-[260px]">
-          <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-ink-soft/70">
-            Adventure {pin.pairNum} — Story {pin.storyNum % 2 === 1 ? "A" : "B"}
-          </span>
-          <h3 className="text-base font-bold text-primary leading-tight text-center mt-0.5">
-            {pin.label}
-          </h3>
-          {pin.isPremium && (
-            <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-secondary/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-secondary-foreground">
-              <CrownIcon /> Premium
-            </span>
-          )}
-        </div>
-      ) : isCompleted ? (
-        <div className="mt-3 bg-card px-4 py-2.5 rounded-2xl shadow-card border-b-4 border-success/40 flex flex-col items-center min-w-[180px] max-w-[240px]">
-          <h3 className="text-sm font-bold text-primary leading-tight text-center">
-            {pin.label}
-          </h3>
-          <div className="mt-1.5 flex gap-0.5 text-secondary">
-            {[1, 2, 3].map((n) => (
-              <StarIcon key={n} filled={n <= pin.stars} />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className="mt-3 bg-card/60 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-accent/40 max-w-[220px]">
-          <div className="flex items-center gap-1.5">
-            <h3 className="text-xs font-medium text-ink-soft text-center leading-tight">{pin.label}</h3>
-            {pin.isPremium && <CrownIcon />}
-          </div>
-        </div>
-      )}
+      <AppBottomNav active="map" onNavigate={(destination) => onNavigate(destination)} />
+
+      {openPin && <LockedStorySheet pin={openPin} onClose={() => setOpenPin(null)} />}
     </div>
   );
 }
 
-/* ───────── Top-bar chips ───────── */
-
-function Chip({
+function HeroStat({
   icon,
-  children,
+  value,
+  label,
   tone,
 }: {
-  icon: React.ReactNode;
-  children: React.ReactNode;
+  icon: ReactNode;
+  value: ReactNode;
+  label: string;
   tone: "primary" | "secondary";
 }) {
   return (
-    <div
-      className={cn(
-        "flex items-center gap-1.5 px-2.5 py-1 rounded-full border-2 text-xs font-bold leading-none",
-        tone === "primary"
-          ? "bg-accent/60 border-accent text-primary"
-          : "bg-secondary/25 border-secondary/60 text-secondary-foreground",
-      )}
-    >
-      {icon}
-      <span>{children}</span>
+    <div className="flex min-h-[112px] flex-col items-center justify-center border-r border-accent/50 px-2 last:border-r-0">
+      <span
+        className={cn(
+          "mb-2 flex h-12 w-12 items-center justify-center rounded-full shadow-card",
+          tone === "primary"
+            ? "bg-primary text-primary-foreground"
+            : "bg-secondary text-secondary-foreground",
+        )}
+      >
+        {icon}
+      </span>
+      <span
+        className={cn(
+          "text-[23px] font-extrabold leading-none",
+          tone === "primary" ? "text-primary" : "text-secondary",
+        )}
+      >
+        {value}
+      </span>
+      <span className="mt-1 text-center text-[11px] font-bold leading-tight text-ink-soft">
+        {label}
+      </span>
     </div>
   );
 }
 
-/* ───────── Bottom nav ───────── */
+function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
+  const isCompleted = pin.status === "completed";
+  const isActive = pin.status === "active";
+  const isLocked = pin.status === "locked";
+  const placeCardRight = pin.offset <= 0;
 
-function NavItem({
-  icon,
-  label,
-  active,
-  onClick,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  active?: boolean;
-  onClick?: () => void;
-}) {
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "flex flex-col items-center justify-center gap-0.5 rounded-2xl px-3 py-1.5 transition-all active:translate-y-0.5",
-        active
-          ? "bg-secondary text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)]"
-          : "text-ink-soft/70 hover:bg-accent/40",
-      )}
+    <div
+      className="absolute left-1/2 z-20 flex items-center"
+      style={{ top: pin.y, transform: `translate(calc(-50% + ${pin.offset}px), 0)` }}
     >
-      {icon}
-      <span className="text-[11px] font-bold">{label}</span>
-    </button>
+      <button
+        onClick={onClick}
+        className={cn(
+          "relative z-20 flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-[6px] border-card transition-all active:translate-y-1",
+          isCompleted &&
+            "bg-success text-success-foreground shadow-[0_6px_0_0_oklch(0.45_0.15_155)]",
+          isActive &&
+            "bg-primary text-primary-foreground shadow-[0_7px_0_0_oklch(0.3_0.18_305)] animate-pulse-glow",
+          isLocked && "bg-muted text-ink-soft shadow-[0_6px_0_0_oklch(0.78_0.02_305)]",
+        )}
+        aria-label={`${pin.label} ${pin.status}`}
+      >
+        {isCompleted ? (
+          <CheckIcon />
+        ) : isLocked ? (
+          <LockIcon />
+        ) : (
+          <span className="text-[34px] font-extrabold">{pin.storyNum}</span>
+        )}
+        {isActive && (
+          <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-secondary px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-secondary-foreground shadow-card">
+            Next
+          </span>
+        )}
+      </button>
+
+      <button
+        onClick={onClick}
+        className={cn(
+          "absolute top-1/2 z-10 flex min-h-[96px] w-[188px] -translate-y-1/2 items-center gap-2.5 rounded-[22px] border border-accent/60 bg-card/95 p-2.5 text-left shadow-card backdrop-blur transition-transform active:scale-[0.98]",
+          placeCardRight ? "left-14 pl-8" : "right-14 flex-row-reverse pr-8 text-right",
+          isLocked && "opacity-82",
+        )}
+      >
+        <span className="h-14 w-14 shrink-0 overflow-hidden rounded-[18px] bg-accent">
+          {pin.cover ? (
+            <img
+              src={pin.cover}
+              alt=""
+              className={cn("h-full w-full object-cover", isLocked && "grayscale")}
+            />
+          ) : (
+            <span className="flex h-full w-full items-center justify-center text-primary">
+              <PaperPlaneIcon className="h-8 w-8" />
+            </span>
+          )}
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-[11px] font-extrabold uppercase tracking-wide text-primary">
+            Story {pin.storyNum}
+          </span>
+          <span className="mt-1 block text-[13px] font-extrabold leading-[1.05] text-ink">
+            {pin.label}
+          </span>
+          <span className="mt-1.5 inline-flex items-center rounded-full bg-accent/70 px-2.5 py-1 text-[10px] font-bold text-primary">
+            {isLocked ? (pin.isPremium ? "Premium" : "Locked") : prettifyTheme(pin.theme)}
+          </span>
+        </span>
+      </button>
+    </div>
   );
 }
 
-/* ───────── Modal ───────── */
-
-function ComingSoonSheet({ pin, onClose }: { pin: Pin; onClose: () => void }) {
+function LockedStorySheet({ pin, onClose }: { pin: Pin; onClose: () => void }) {
   return (
     <div
       className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm"
@@ -421,20 +408,24 @@ function ComingSoonSheet({ pin, onClose }: { pin: Pin; onClose: () => void }) {
     >
       <div
         className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
       >
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
-        <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary text-xl">
-            🔒
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-primary">Coming soon</p>
-            <p className="text-lg font-extrabold text-ink leading-tight">{pin.label}</p>
+        <div className="flex items-center gap-4">
+          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-accent text-primary">
+            {pin.isPremium ? <PaperPlaneIcon className="h-9 w-9 text-secondary" /> : <LockIcon />}
+          </span>
+          <div className="min-w-0">
+            <p className="text-xs font-bold uppercase tracking-wider text-primary">
+              {pin.isPremium ? "Premium story" : "Keep progressing"}
+            </p>
+            <h2 className="text-xl font-extrabold leading-tight text-ink">{pin.label}</h2>
           </div>
         </div>
-        <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-          Finish today's adventure to unlock this stop on your map.
+        <p className="mt-4 text-sm font-medium leading-relaxed text-ink-soft">
+          {pin.isPremium
+            ? "This story is part of the full Story Pros adventure."
+            : "Finish the next story on your path to unlock this stop."}
         </p>
         <button
           onClick={onClose}
@@ -447,80 +438,64 @@ function ComingSoonSheet({ pin, onClose }: { pin: Pin; onClose: () => void }) {
   );
 }
 
-/* ───────── Icons ───────── */
+function BackIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
-function StarIcon({ filled }: { filled?: boolean }) {
+function CheckIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" aria-hidden>
-      <path strokeLinejoin="round" d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L3 9.4l6.1-.9L12 3z" />
+    <svg
+      viewBox="0 0 24 24"
+      className="h-9 w-9"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3.2"
+      aria-hidden
+    >
+      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function PlaneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
-      <path d="M21 3L3 10.5l7 2.5 2.5 7L21 3z" />
-    </svg>
-  );
-}
-function SettingsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <circle cx="12" cy="12" r="3" />
-      <path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1A2 2 0 113.3 17l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H2a2 2 0 110-4h.1A1.7 1.7 0 003.6 9a1.7 1.7 0 00-.3-1.8l-.1-.1A2 2 0 116 4.3l.1.1a1.7 1.7 0 001.8.3H8a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z" />
-    </svg>
-  );
-}
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
-      <path d="M8 5l12 7-12 7z" />
-    </svg>
-  );
-}
-function SparkleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-      <path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7L12 2zM18 14l.8 2.4L21 17l-2.2.6L18 20l-.8-2.4L15 17l2.2-.6L18 14z" />
-    </svg>
-  );
-}
+
 function LockIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <rect x="5" y="11" width="14" height="10" rx="2" />
-      <path d="M8 11V8a4 4 0 018 0v3" strokeLinecap="round" />
+    <svg
+      viewBox="0 0 24 24"
+      className="h-8 w-8"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      aria-hidden
+    >
+      <rect x="5" y="10" width="14" height="11" rx="3" />
+      <path d="M8 10V8a4 4 0 018 0v2" strokeLinecap="round" />
     </svg>
   );
 }
-function BookIcon() {
+
+function MapPinIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <path d="M4 5h7v15H6a2 2 0 01-2-2V5zM20 5h-7v15h5a2 2 0 002-2V5z" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function MapIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-      <path d="M4 5l5-2 6 2 5-2v16l-5 2-6-2-5 2V5z" />
-    </svg>
-  );
-}
-function MicIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <rect x="9" y="3" width="6" height="12" rx="3" />
-      <path d="M5 11a7 7 0 0014 0M12 18v3" strokeLinecap="round" />
-    </svg>
-  );
-}
-function ChartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <rect x="3" y="12" width="4" height="9" rx="1" />
-      <rect x="10" y="8" width="4" height="13" rx="1" />
-      <rect x="17" y="4" width="4" height="17" rx="1" />
+    <svg
+      viewBox="0 0 24 24"
+      className="h-7 w-7"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      aria-hidden
+    >
+      <path d="M12 21s7-5.1 7-11a7 7 0 10-14 0c0 5.9 7 11 7 11z" />
+      <circle cx="12" cy="10" r="2.5" />
     </svg>
   );
 }
