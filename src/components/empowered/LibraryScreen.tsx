@@ -147,7 +147,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
             </p>
           </div>
         ) : (
-          <div className="mt-3 grid grid-cols-2 gap-3">
+          <div className="mt-3 grid grid-cols-2 gap-3 stagger-in">
             {filtered.map((s) => (
               <StoryCard key={s.id} story={s} onOpen={() => onNavigate("story", s.id)} />
             ))}
@@ -164,7 +164,7 @@ function StoryCard({ story, onOpen }: { story: CardStory; onOpen: () => void }) 
   return (
     <button
       onClick={onOpen}
-      className="flex flex-col overflow-hidden rounded-3xl border border-accent/50 bg-card text-left shadow-card transition-transform active:scale-[0.98]"
+      className="hover-lift flex flex-col overflow-hidden rounded-3xl border border-accent/50 bg-card text-left shadow-card active:scale-[0.98]"
     >
       <div className={cn("relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br", story.cover)}>
         <span className="text-4xl drop-shadow-sm">{story.emoji}</span>

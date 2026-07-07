@@ -16,7 +16,7 @@ interface TactileButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const TactileButton = forwardRef<HTMLButtonElement, TactileButtonProps>(
   ({ className, variant = "primary", fullWidth = true, leadingIcon, children, disabled, ...props }, ref) => {
     const base =
-      "relative inline-flex items-center justify-center gap-3 rounded-3xl px-7 text-lg font-semibold tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-cream focus-visible:ring-primary/60 disabled:opacity-60 disabled:cursor-not-allowed";
+      "press-pop relative inline-flex items-center justify-center gap-3 rounded-3xl px-7 text-lg font-semibold tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-cream focus-visible:ring-primary/60 disabled:opacity-60 disabled:cursor-not-allowed";
 
     const variants: Record<Variant, string> = {
       primary: "btn-tactile bg-primary text-primary-foreground hover:bg-primary/95",

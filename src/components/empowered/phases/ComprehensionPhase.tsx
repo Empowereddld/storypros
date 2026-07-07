@@ -129,7 +129,7 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
               <div className="flex-1">
                 <div className={cn(
                   "rounded-2xl rounded-bl-sm p-4 shadow-card",
-                  brainCheck.type === "correct" ? "bg-success/10 border-2 border-success" : "bg-sky",
+                  brainCheck.type === "correct" ? "bg-success/10 border-2 border-success animate-tada" : "bg-sky animate-shake",
                 )}>
                   <p className="text-base font-semibold leading-snug text-primary">
                     {brainCheck.message}

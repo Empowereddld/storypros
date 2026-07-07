@@ -205,7 +205,7 @@ export function AchievementGalleryScreen({ childName, onClose, onNavigate }: Ach
 
         {/* Badges */}
         <SectionHeader icon="✨" title="My Badges" />
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 stagger-in">
           {badges.map((b) => (
             <BadgeCard key={b.id} badge={b} />
           ))}
@@ -242,7 +242,7 @@ const RARITY_TONE: Record<string, string> = {
 function BadgeCard({ badge }: { badge: Collectible & { unlocked: boolean } }) {
   const toneBg = RARITY_TONE[badge.rarity] ?? "bg-sky";
   return (
-    <div className={cn("rounded-3xl p-4 text-center transition-all", badge.unlocked ? "bg-card shadow-card" : "border-2 border-dashed border-cream-deep bg-cream/40")}>
+    <div className={cn("rounded-3xl p-4 text-center transition-all hover-lift", badge.unlocked ? "bg-card shadow-card" : "border-2 border-dashed border-cream-deep bg-cream/40")}>
       <div className={cn("relative mx-auto flex h-16 w-16 items-center justify-center rounded-full text-3xl", badge.unlocked ? toneBg : "bg-cream-deep")}>
         <span className={cn(badge.unlocked ? "" : "opacity-30")}>{badge.icon}</span>
         {!badge.unlocked && (

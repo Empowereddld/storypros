@@ -103,7 +103,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
         {/* Continue card */}
         {cont && (
-          <article className="mt-4 overflow-hidden rounded-[28px] border border-accent/50 bg-card shadow-card">
+          <article className="mt-4 overflow-hidden rounded-[28px] border border-accent/50 bg-card shadow-card animate-slide-up hover-lift">
             {/* Hero */}
             <div className="relative h-44 w-full overflow-hidden bg-accent/40">
               <img src={storyHero} alt="" className="h-full w-full object-cover" />
@@ -154,7 +154,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
         {/* Browse-more path → Adventure Map */}
         <button
           onClick={() => onNavigate("map")}
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-transparent py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/5 active:translate-y-0.5"
+          className="press-pop mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-transparent py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/5"
         >
           <MapIcon className="h-4 w-4" />
           Explore the Adventure Map
@@ -162,7 +162,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
         </button>
 
         {/* Stat cards */}
-        <div className="mt-4 flex gap-3">
+        <div className="mt-4 flex gap-3 stagger-in">
           <StatCardLite
             tone="primary"
             icon={<BookCheckIcon />}

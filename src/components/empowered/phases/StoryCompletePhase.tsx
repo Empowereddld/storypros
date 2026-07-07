@@ -79,11 +79,11 @@ export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPh
           <img
             src={dariaAndFriend}
             alt=""
-            className={cn("mx-auto h-40 w-auto object-contain", !celebrationDone && "animate-pop-in")}
+            className={cn("mx-auto h-40 w-auto object-contain", !celebrationDone && "animate-bounce-in")}
           />
           {/* big check badge */}
           <div className="relative -mt-6 flex justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-card bg-secondary text-secondary-foreground shadow-soft animate-pop-in">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-card bg-secondary text-secondary-foreground shadow-soft animate-star-pop">
               <svg viewBox="0 0 24 24" className="h-8 w-8" stroke="currentColor" strokeWidth="3" fill="none">
                 <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -103,7 +103,8 @@ export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPh
               <svg
                 key={n}
                 viewBox="0 0 24 24"
-                className={cn("h-9 w-9", n <= stars ? "text-secondary" : "text-accent")}
+                style={n <= stars ? { animationDelay: `${0.2 + 0.15 * n}s` } : undefined}
+                className={cn("h-9 w-9", n <= stars ? "text-secondary animate-star-pop" : "text-accent")}
                 fill="currentColor"
                 aria-hidden
               >

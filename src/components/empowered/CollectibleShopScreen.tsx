@@ -123,7 +123,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
         )}
 
         {/* Item grid */}
-        <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in">
           {items.map((item, i) => {
             const owned = isOwned(childId, item.id);
             return (
@@ -133,7 +133,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
                 disabled={owned}
                 className={cn(
                   "relative flex flex-col items-center overflow-hidden rounded-3xl border border-accent/50 bg-card text-center shadow-card transition-all",
-                  owned ? "opacity-80" : "active:scale-[0.98]",
+                  owned ? "opacity-80" : "hover-lift active:scale-[0.98]",
                 )}
               >
                 <span className={cn("absolute right-2 top-2 rounded-full px-2 py-0.5 text-[9px] font-extrabold uppercase", RARITY_COLORS[item.rarity])}>
@@ -179,7 +179,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
       {/* Reward unlocked celebration */}
       {justPurchased && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
-          <div className="mx-6 w-full max-w-xs rounded-[28px] bg-card p-6 text-center shadow-soft animate-pop-in">
+          <div className="mx-6 w-full max-w-xs rounded-[28px] bg-card p-6 text-center shadow-soft animate-bounce-in">
             <p className="text-sm font-extrabold uppercase tracking-wider text-secondary-foreground">Reward Unlocked!</p>
             <img src={danDariaSurprised} alt="" className="mx-auto mt-2 h-24 w-auto object-contain" />
             <span className="mt-3 block text-6xl">{justPurchased.icon}</span>
