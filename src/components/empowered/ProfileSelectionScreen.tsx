@@ -8,7 +8,7 @@ import { useState } from "react";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
-import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
+import { AuthBackdrop, StoryProsLogo } from "./StoryProsBrand";
 
 interface ProfileSelectionScreenProps {
   onSelected: () => void;
@@ -19,7 +19,9 @@ const AVATAR_TINTS = ["bg-accent", "bg-sky", "bg-secondary/30", "bg-success/25",
 
 export function ProfileSelectionScreen({ onSelected, onAddChild }: ProfileSelectionScreenProps) {
   const { children, activeChild, setActiveChild } = useAuth();
-  const [selectedId, setSelectedId] = useState<string | null>(activeChild?.id ?? children[0]?.id ?? null);
+  const [selectedId, setSelectedId] = useState<string | null>(
+    activeChild?.id ?? children[0]?.id ?? null,
+  );
 
   function handleContinue() {
     const child = children.find((c) => c.id === selectedId);
@@ -37,7 +39,9 @@ export function ProfileSelectionScreen({ onSelected, onAddChild }: ProfileSelect
         <h1 className="mt-5 text-center font-display text-2xl font-extrabold text-primary">
           Who's Reading Today?
         </h1>
-        <p className="mt-1 text-center text-sm font-medium text-ink-soft">Pick a profile to get started.</p>
+        <p className="mt-1 text-center text-sm font-medium text-ink-soft">
+          Pick a profile to get started.
+        </p>
 
         <div className="mt-6 flex-1 overflow-y-auto no-scrollbar">
           <div className="grid grid-cols-2 gap-3">
@@ -52,12 +56,17 @@ export function ProfileSelectionScreen({ onSelected, onAddChild }: ProfileSelect
                     selected ? "border-primary -translate-y-0.5" : "border-transparent",
                   )}
                 >
-                  <span className={cn("flex h-20 w-20 items-center justify-center rounded-full text-3xl font-extrabold text-primary", AVATAR_TINTS[i % AVATAR_TINTS.length])}>
+                  <span
+                    className={cn(
+                      "flex h-20 w-20 items-center justify-center rounded-full text-3xl font-extrabold text-primary",
+                      AVATAR_TINTS[i % AVATAR_TINTS.length],
+                    )}
+                  >
                     {child.name.charAt(0).toUpperCase()}
                   </span>
                   <span className="flex items-center gap-1 font-extrabold text-primary">
                     {child.name}
-                    {selected && <Star className="h-4 w-4 text-secondary" />}
+                    {selected && <CheckIcon className="h-4 w-4 text-secondary" />}
                   </span>
                 </button>
               );
@@ -67,7 +76,9 @@ export function ProfileSelectionScreen({ onSelected, onAddChild }: ProfileSelect
               onClick={onAddChild}
               className="flex flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-primary/40 bg-card/50 p-5 text-primary transition-colors hover:bg-card"
             >
-              <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent/60 text-3xl">+</span>
+              <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent/60 text-3xl">
+                +
+              </span>
               <span className="text-sm font-bold">Add Profile</span>
             </button>
           </div>
@@ -78,5 +89,20 @@ export function ProfileSelectionScreen({ onSelected, onAddChild }: ProfileSelect
         </TactileButton>
       </div>
     </div>
+  );
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      aria-hidden
+    >
+      <path d="M5 12.5l4.2 4.2L19 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

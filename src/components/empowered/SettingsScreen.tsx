@@ -1,24 +1,19 @@
-/* ─────────────────────────────────────────────
- * Parent Settings Screen
- * Rebuilt to the "Account Settings" mockup. Child
- * profiles, TTS, level override, subscriptions, SLP
- * invite codes, sign out — all logic preserved.
- * ───────────────────────────────────────────── */
-
-import { useState } from "react";
-import { TactileButton } from "./TactileButton";
+import { useState, type ReactNode } from "react";
 import { useAuth, type Child } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
+import { getPaperPlanes } from "@/services/progress";
 import {
+  cancelSubscription,
   getChildSubscription,
   isPremium,
-  cancelSubscription,
-  reactivateSubscription,
   PREMIUM_PRICE_DISPLAY,
+  reactivateSubscription,
   type ChildSubscription,
 } from "@/services/subscription";
 import { createInviteCode } from "@/services/slp";
-import { StoryProsLogo } from "./StoryProsBrand";
+import { TactileButton } from "./TactileButton";
+import { LockIcon, MiniPlane, StoryProsLogo } from "./StoryProsBrand";
+import { ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
 
 interface SettingsScreenProps {
   onClose: () => void;
@@ -27,22 +22,14 @@ interface SettingsScreenProps {
 type Section = "main" | "add-child" | "edit-child";
 
 export function SettingsScreen({ onClose }: SettingsScreenProps) {
-  const {
-    profile,
-    children,
-    activeChild,
-    setActiveChild,
-    updateChild,
-    addChild,
-    signOut,
-  } = useAuth();
+  const { profile, children, activeChild, setActiveChild, updateChild, addChild, signOut } =
+    useAuth();
 
   const [section, setSection] = useState<Section>("main");
   const [editingChild, setEditingChild] = useState<Child | null>(null);
-
-  // Add child form state
   const [newName, setNewName] = useState("");
   const [newAge, setNewAge] = useState<number | null>(null);
+  const paperPlanes = getPaperPlanes();
 
   function handleAddChild() {
     if (!newName.trim()) return;
@@ -62,20 +49,20 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
     onClose();
   }
 
-  // ── Add child form ──
   if (section === "add-child") {
     return (
-      <div className="flex h-full flex-col bg-cream">
+      <div className="relative flex h-full flex-col overflow-hidden bg-cream">
+        <SettingsBackdrop />
         <Header title="Add a child" onBack={() => setSection("main")} />
 
-        <div className="flex-1 px-5 pt-4 space-y-4">
+        <div className="relative z-10 flex-1 px-5 pt-4 space-y-4">
           <FieldCard label="Child's name">
             <input
               type="text"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               placeholder="Enter name"
-              className="w-full bg-transparent text-base text-ink placeholder:text-ink-soft/60 focus:outline-none"
+              className="w-full bg-transparent text-base font-semibold text-ink placeholder:text-ink-soft/60 focus:outline-none"
             />
           </FieldCard>
 
@@ -90,7 +77,7 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
                     "h-11 w-11 rounded-2xl text-base font-bold transition-all",
                     newAge === age
                       ? "bg-primary text-primary-foreground shadow-[0_3px_0_0_var(--primary-deep)] -translate-y-0.5"
-                      : "bg-cream-deep text-ink hover:bg-sky/60",
+                      : "bg-card text-ink shadow-card hover:bg-sky/30",
                   )}
                 >
                   {age}
@@ -100,16 +87,15 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
           </FieldCard>
         </div>
 
-        <div className="px-5 pb-5">
+        <div className="relative z-10 px-5 pb-5">
           <TactileButton onClick={handleAddChild} disabled={!newName.trim()}>
-            Add child
+            Add Child
           </TactileButton>
         </div>
       </div>
     );
   }
 
-  // ── Edit child form ──
   if (section === "edit-child" && editingChild) {
     return (
       <EditChildSection
@@ -123,114 +109,137 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
     );
   }
 
-  // ── Main settings ──
   return (
-    <div className="relative flex h-full flex-col bg-background">
-      <header className="sticky top-0 z-30 flex items-center justify-between gap-2 bg-card/95 px-4 py-3 backdrop-blur">
+    <div className="relative flex h-full flex-col overflow-hidden bg-cream">
+      <SettingsBackdrop />
+
+      <header className="relative z-30 flex items-center justify-between gap-2 px-5 pt-5">
         <button
           onClick={onClose}
           aria-label="Back"
-          className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-soft transition-colors hover:bg-accent/60 active:scale-95"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card transition-transform active:scale-95"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.7"
+            aria-hidden
+          >
+            <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
-        <StoryProsLogo layout="row" size="sm" />
-        <span className="w-9" />
+        <StoryProsLogo layout="row" size="md" className="scale-90" />
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
+          <LockIcon className="h-5 w-5" />
+        </span>
       </header>
 
-      <div className="flex-1 overflow-y-auto px-4 pb-8 pt-2 no-scrollbar">
-        <h1 className="text-2xl font-extrabold text-primary">Account Settings</h1>
-        <p className="mt-0.5 text-sm text-ink-soft">Manage your account and your child's experience.</p>
+      <div className="relative z-10 flex-1 overflow-y-auto px-5 pb-8 pt-6 no-scrollbar">
+        <h1 className="font-display text-[38px] font-extrabold leading-none text-primary">
+          Account Settings
+        </h1>
+        <p className="mt-3 max-w-[19rem] text-base font-semibold leading-relaxed text-ink-soft">
+          Manage your account, preferences, and your child's experience.
+        </p>
 
-        {/* Parent profile card */}
-        <div className="mt-4 flex items-center gap-3 rounded-3xl border border-accent/50 bg-card p-4 shadow-card">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-extrabold text-primary-foreground">
+        <div className="mt-6 flex items-center gap-4 rounded-[1.75rem] border border-accent/60 bg-card/95 p-4 shadow-card">
+          <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] bg-accent/70 text-3xl font-extrabold text-primary">
             {(profile?.displayName ?? "?").charAt(0).toUpperCase()}
           </span>
           <div className="min-w-0 flex-1">
-            <p className="truncate font-extrabold text-primary">{profile?.displayName ?? "—"}</p>
-            <p className="truncate text-xs text-ink-soft">{profile?.email ?? "—"}</p>
+            <p className="truncate text-xl font-extrabold text-primary">
+              {profile?.displayName ?? "-"}
+            </p>
+            <p className="truncate text-sm font-semibold text-ink-soft">{profile?.email ?? "-"}</p>
+            <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-primary">
+              <LockIcon className="h-3.5 w-3.5" />
+              {accountLabel(profile?.role)}
+            </span>
           </div>
-          <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase text-primary">
-            {profile?.role ?? "parent"}
-          </span>
+          <ChevronRightIcon className="h-6 w-6 shrink-0 text-primary" />
         </div>
 
         <div className="mt-5 space-y-5">
-          {/* Children */}
-          <SettingsGroup title="Child profiles">
+          <SettingsGroup title="Child Profiles">
             {children.map((child) => {
               const isActive = activeChild?.id === child.id;
               return (
                 <button
                   key={child.id}
                   onClick={() => handleEditChild(child)}
-                  className="flex w-full items-center justify-between rounded-2xl p-3 transition-colors hover:bg-accent/40"
+                  className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-accent/30"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex min-w-0 items-center gap-3">
                     <span
                       className={cn(
-                        "flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold",
+                        "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg font-bold",
                         isActive ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
                       )}
                     >
                       {child.name.charAt(0).toUpperCase()}
                     </span>
-                    <div className="text-left">
-                      <p className="text-sm font-bold text-primary">
+                    <div className="min-w-0 text-left">
+                      <p className="truncate text-base font-extrabold text-primary">
                         {child.name}
-                        {isActive && <span className="ml-2 text-xs font-semibold text-success">Active</span>}
+                        {isActive && (
+                          <span className="ml-2 text-xs font-semibold text-success">Active</span>
+                        )}
                       </p>
-                      <p className="text-xs text-ink-soft">Age {child.age ?? "—"} · Level {child.currentLevel}</p>
+                      <p className="text-xs font-semibold text-ink-soft">
+                        Age {child.age ?? "-"} · Level {child.currentLevel}
+                      </p>
                     </div>
                   </div>
-                  <span className="text-sm text-ink-soft">›</span>
+                  <div className="flex shrink-0 items-center gap-3">
+                    {isActive && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-secondary/20 px-2.5 py-1 text-sm font-extrabold text-secondary-foreground">
+                        <PaperPlaneIcon className="h-4 w-4" />
+                        {paperPlanes}
+                      </span>
+                    )}
+                    <ChevronRightIcon className="h-5 w-5 text-ink-soft" />
+                  </div>
                 </button>
               );
             })}
             <button
               onClick={() => setSection("add-child")}
-              className="flex w-full items-center gap-3 rounded-2xl p-3 transition-colors hover:bg-accent/40"
+              className="flex w-full items-center gap-3 p-4 transition-colors hover:bg-accent/30"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/30 text-lg">+</span>
-              <span className="text-sm font-bold text-primary">Add another child</span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/25 text-2xl font-extrabold text-secondary-foreground">
+                +
+              </span>
+              <span className="text-sm font-extrabold text-primary">Add another child</span>
             </button>
           </SettingsGroup>
 
-          {/* Subscriptions per child */}
           <SettingsGroup title="Subscription">
-            {children.map((child) => {
-              const sub = getChildSubscription(child.id);
-              const hasPremium = isPremium(child.id);
-              return (
-                <SubscriptionRow
-                  key={child.id}
-                  child={child}
-                  subscription={sub}
-                  hasPremium={hasPremium}
-                  onNavigatePaywall={() => {
-                    onClose();
-                  }}
-                />
-              );
-            })}
+            {children.map((child) => (
+              <SubscriptionRow
+                key={child.id}
+                child={child}
+                subscription={getChildSubscription(child.id)}
+                hasPremium={isPremium(child.id)}
+                onNavigatePaywall={onClose}
+              />
+            ))}
           </SettingsGroup>
 
-          {/* Share with SLP */}
-          <SettingsGroup title="School or therapist access">
-            <p className="px-4 pt-3 text-xs leading-relaxed text-ink-soft">
-              Working with a speech-language pathologist? Generate a code and they
-              can follow your child's progress. Codes expire after 7 days.
+          <SettingsGroup title="School Or Therapist Access">
+            <p className="px-4 pt-4 text-xs font-semibold leading-relaxed text-ink-soft">
+              Generate a code so a speech-language pathologist or teacher can follow progress. Codes
+              expire after 7 days.
             </p>
             {children.map((child) => (
               <SlpShareRow key={child.id} child={child} />
             ))}
           </SettingsGroup>
 
-          {/* Sign out */}
           <div className="pt-1">
             <TactileButton variant="ghost" onClick={handleSignOut}>
-              Log out
+              Log Out
             </TactileButton>
           </div>
         </div>
@@ -238,8 +247,6 @@ export function SettingsScreen({ onClose }: SettingsScreenProps) {
     </div>
   );
 }
-
-// ── Edit child sub-screen ──
 
 function EditChildSection({
   child,
@@ -269,30 +276,28 @@ function EditChildSection({
   const isActive = activeChild?.id === child.id;
 
   return (
-    <div className="flex h-full flex-col bg-cream">
+    <div className="relative flex h-full flex-col overflow-hidden bg-cream">
+      <SettingsBackdrop />
       <Header title={child.name} onBack={onBack} />
 
-      <div className="flex-1 overflow-y-auto px-5 pt-4 pb-5 space-y-5 no-scrollbar">
-        {/* Switch active child */}
+      <div className="relative z-10 flex-1 overflow-y-auto px-5 pt-4 pb-5 space-y-5 no-scrollbar">
         {!isActive && (
           <button
             onClick={() => setActiveChild(child)}
-            className="w-full rounded-2xl bg-primary/10 p-3 text-center text-sm font-bold text-primary"
+            className="w-full rounded-3xl bg-primary/10 p-4 text-center text-sm font-extrabold text-primary shadow-card"
           >
             Switch to {child.name}
           </button>
         )}
 
-        {/* Info */}
         <SettingsGroup title="Profile">
           <SettingsRow label="Name" value={child.name} />
-          <SettingsRow label="Age" value={child.age ? String(child.age) : "—"} />
+          <SettingsRow label="Age" value={child.age ? String(child.age) : "-"} />
           <SettingsRow label="Current level" value={String(child.currentLevel)} />
         </SettingsGroup>
 
-        {/* TTS Speed */}
-        <SettingsGroup title="Read-to-me speed">
-          <div className="flex gap-2 p-2">
+        <SettingsGroup title="Read-To-Me Speed">
+          <div className="flex gap-2 p-3">
             {(["slow", "normal", "fast"] as const).map((speed) => (
               <button
                 key={speed}
@@ -301,7 +306,7 @@ function EditChildSection({
                   "flex-1 rounded-2xl py-3 text-sm font-bold capitalize transition-all",
                   ttsSpeed === speed
                     ? "bg-primary text-primary-foreground shadow-[0_3px_0_0_var(--primary-deep)] -translate-y-0.5"
-                    : "bg-cream-deep text-ink hover:bg-sky/60",
+                    : "bg-accent/45 text-ink hover:bg-sky/40",
                 )}
               >
                 {speed}
@@ -310,19 +315,16 @@ function EditChildSection({
           </div>
         </SettingsGroup>
 
-        {/* Level override */}
-        <SettingsGroup title="Level placement">
-          <div className="p-3 space-y-3">
-            <label className="flex items-center gap-3 cursor-pointer">
+        <SettingsGroup title="Level Placement">
+          <div className="p-4 space-y-3">
+            <label className="flex cursor-pointer items-center gap-3">
               <input
                 type="checkbox"
                 checked={levelOverride}
                 onChange={(e) => setLevelOverride(e.target.checked)}
                 className="h-5 w-5 rounded accent-primary"
               />
-              <span className="text-sm font-semibold text-ink">
-                Override auto-placement
-              </span>
+              <span className="text-sm font-semibold text-ink">Override auto-placement</span>
             </label>
             {levelOverride && (
               <div className="flex gap-2 animate-slide-up">
@@ -334,7 +336,7 @@ function EditChildSection({
                       "flex-1 rounded-2xl py-3 text-sm font-bold transition-all",
                       overrideLevel === lvl
                         ? "bg-secondary text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] -translate-y-0.5"
-                        : "bg-cream-deep text-ink hover:bg-sky/60",
+                        : "bg-accent/45 text-ink hover:bg-sky/40",
                     )}
                   >
                     Level {lvl}
@@ -346,14 +348,12 @@ function EditChildSection({
         </SettingsGroup>
       </div>
 
-      <div className="px-5 pb-5">
-        <TactileButton onClick={handleSave}>Save changes</TactileButton>
+      <div className="relative z-10 px-5 pb-5">
+        <TactileButton onClick={handleSave}>Save Changes</TactileButton>
       </div>
     </div>
   );
 }
-
-// ── Subscription row ──
 
 function SubscriptionRow({
   child,
@@ -393,61 +393,42 @@ function SubscriptionRow({
 
   return (
     <div className="px-4 py-3">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-bold text-ink">{child.name}</p>
-          <p className="text-xs text-ink-soft">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="truncate text-sm font-extrabold text-ink">{child.name}</p>
+          <p className="mt-0.5 text-xs font-semibold leading-relaxed text-ink-soft">
             {hasPremium ? (
               <>
-                <span className="text-success font-semibold">Premium</span>
+                <span className="font-bold text-success">Premium</span>
                 {" · "}
                 {PREMIUM_PRICE_DISPLAY}
                 {subscription.cancelAtPeriodEnd && periodEnd && (
                   <span className="text-destructive"> · Cancels {periodEnd}</span>
                 )}
-                {!subscription.cancelAtPeriodEnd && periodEnd && (
-                  <span> · Renews {periodEnd}</span>
-                )}
+                {!subscription.cancelAtPeriodEnd && periodEnd && <span> · Renews {periodEnd}</span>}
               </>
             ) : (
-              <span className="text-ink-soft">Free tier</span>
+              <span>Free forever · 1 full story</span>
             )}
           </p>
         </div>
-        <div>
-          {hasPremium ? (
-            subscription.cancelAtPeriodEnd ? (
-              <button
-                onClick={handleReactivate}
-                disabled={actionLoading}
-                className="rounded-xl bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
-              >
-                {actionLoading ? "..." : "Reactivate"}
-              </button>
-            ) : (
-              <button
-                onClick={handleCancel}
-                disabled={actionLoading}
-                className="rounded-xl bg-destructive/10 px-3 py-1.5 text-xs font-bold text-destructive transition-colors hover:bg-destructive/20"
-              >
-                {actionLoading ? "..." : "Cancel"}
-              </button>
-            )
+        {hasPremium ? (
+          subscription.cancelAtPeriodEnd ? (
+            <SmallActionButton onClick={handleReactivate} disabled={actionLoading}>
+              {actionLoading ? "..." : "Reactivate"}
+            </SmallActionButton>
           ) : (
-            <button
-              onClick={onNavigatePaywall}
-              className="rounded-xl bg-secondary/20 px-3 py-1.5 text-xs font-bold text-secondary-foreground transition-colors hover:bg-secondary/30"
-            >
-              Upgrade
-            </button>
-          )}
-        </div>
+            <SmallActionButton tone="danger" onClick={handleCancel} disabled={actionLoading}>
+              {actionLoading ? "..." : "Cancel"}
+            </SmallActionButton>
+          )
+        ) : (
+          <SmallActionButton onClick={onNavigatePaywall}>Upgrade</SmallActionButton>
+        )}
       </div>
     </div>
   );
 }
-
-// ── SLP share row ──
 
 function SlpShareRow({ child }: { child: Child }) {
   const [code, setCode] = useState<string | null>(null);
@@ -470,29 +451,27 @@ function SlpShareRow({ child }: { child: Child }) {
       await navigator.clipboard.writeText(code);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch { /* clipboard unavailable */ }
+    } catch {
+      // Clipboard may be unavailable in embedded previews.
+    }
   }
 
   return (
     <div className="px-4 py-3">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-sm font-bold text-ink">{child.name}</p>
+        <p className="text-sm font-extrabold text-ink">{child.name}</p>
         {code ? (
           <button
             onClick={handleCopy}
-            className="rounded-xl bg-primary/10 px-3 py-1.5 font-mono text-sm font-extrabold tracking-[0.2em] text-primary transition-colors hover:bg-primary/20"
+            className="rounded-2xl bg-primary/10 px-3 py-2 font-mono text-sm font-extrabold tracking-[0.2em] text-primary transition-colors hover:bg-primary/20"
             title="Tap to copy"
           >
-            {copied ? "Copied!" : code}
+            {copied ? "Copied" : code}
           </button>
         ) : (
-          <button
-            onClick={handleGenerate}
-            disabled={busy}
-            className="rounded-xl bg-secondary/20 px-3 py-1.5 text-xs font-bold text-secondary-foreground transition-colors hover:bg-secondary/30 disabled:opacity-50"
-          >
-            {busy ? "..." : "Get code"}
-          </button>
+          <SmallActionButton onClick={handleGenerate} disabled={busy}>
+            {busy ? "..." : "Get Code"}
+          </SmallActionButton>
         )}
       </div>
       {error && <p className="mt-1 text-xs font-semibold text-destructive">{error}</p>}
@@ -500,32 +479,40 @@ function SlpShareRow({ child }: { child: Child }) {
   );
 }
 
-// ── Shared UI pieces ──
-
 function Header({ title, onBack }: { title: string; onBack: () => void }) {
   return (
-    <div className="flex items-center gap-3 px-5 pt-4 pb-2">
+    <div className="relative z-10 flex items-center gap-3 px-5 pt-5 pb-2">
       <button
         onClick={onBack}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-card shadow-card text-primary"
+        aria-label="Back"
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card"
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <svg
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.7"
+          aria-hidden
+        >
           <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      <h2 className="font-display text-xl font-extrabold text-primary">{title}</h2>
+      <h2 className="font-display text-2xl font-extrabold text-primary">{title}</h2>
     </div>
   );
 }
 
-function SettingsGroup({ title, children }: { title: string; children: React.ReactNode }) {
+function SettingsGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div>
-      <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-ink-soft">{title}</h3>
-      <div className="rounded-3xl border border-accent/50 bg-card shadow-card divide-y divide-accent/40">
+    <section>
+      <h3 className="mb-2 pl-1 text-xs font-extrabold uppercase tracking-wider text-ink-soft">
+        {title}
+      </h3>
+      <div className="overflow-hidden rounded-[1.75rem] border border-accent/60 bg-card/95 shadow-card divide-y divide-accent/45">
         {children}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -533,18 +520,62 @@ function SettingsRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between px-4 py-3">
       <span className="text-sm font-semibold text-ink">{label}</span>
-      <span className="text-sm text-ink-soft">{value}</span>
+      <span className="text-sm font-semibold text-ink-soft">{value}</span>
     </div>
   );
 }
 
-function FieldCard({ label, children }: { label: string; children: React.ReactNode }) {
+function FieldCard({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="rounded-3xl bg-card p-4 shadow-card">
-      <div className="text-xs font-bold uppercase tracking-wider text-ink-soft mb-2">
+    <div className="rounded-[1.75rem] border border-accent/60 bg-card/95 p-4 shadow-card">
+      <div className="mb-2 text-xs font-extrabold uppercase tracking-wider text-ink-soft">
         {label}
       </div>
       {children}
     </div>
   );
+}
+
+function SmallActionButton({
+  children,
+  disabled,
+  onClick,
+  tone = "primary",
+}: {
+  children: ReactNode;
+  disabled?: boolean;
+  onClick: () => void;
+  tone?: "primary" | "danger";
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        "shrink-0 rounded-2xl px-3 py-2 text-xs font-extrabold transition-colors disabled:opacity-50",
+        tone === "danger"
+          ? "bg-destructive/10 text-destructive hover:bg-destructive/20"
+          : "bg-secondary/25 text-secondary-foreground hover:bg-secondary/35",
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SettingsBackdrop() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+      <MiniPlane className="absolute right-8 top-32 h-9 w-9 rotate-12 text-secondary/75" />
+      <span className="absolute -right-16 top-44 h-40 w-40 rounded-full bg-accent/60 blur-2xl" />
+      <span className="absolute -left-20 bottom-12 h-44 w-44 rounded-full bg-accent/45 blur-3xl" />
+    </div>
+  );
+}
+
+function accountLabel(role: string | undefined) {
+  if (role === "slp") return "SLP Account";
+  if (role === "teacher") return "Teacher Account";
+  return "Parent Account";
 }
