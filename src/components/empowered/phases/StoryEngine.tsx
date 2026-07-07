@@ -1,10 +1,10 @@
-/* ─────────────────────────────────────────────
- * Story Engine — Phase Machine
+/* ---------------------------------------------
+ * Story Engine - Phase Machine
  * Orchestrates the full story flow:
- *   Slides → Comprehension → Sequencing →
- *   Immediate Retell → Vocab Intro → Vocab Quiz →
- *   Sentence Builder → Delayed Retell →
- *   Phonological → Joke → Personal Connection →
+ *   Slides -> Comprehension -> Sequencing ->
+ *   Immediate Retell -> Vocab Intro -> Vocab Quiz ->
+ *   Sentence Builder -> Delayed Retell ->
+ *   Phonological -> Joke -> Personal Connection ->
  *   Story Complete
  *
  * Each phase reports its result; the engine
@@ -13,7 +13,7 @@
  * Pause/resume: a checkpoint is saved after every
  * completed phase. Re-entering a story with a
  * checkpoint offers "Keep going" or "Start over".
- * ───────────────────────────────────────────── */
+ * --------------------------------------------- */
 
 import { useState, useCallback } from "react";
 import type { StoryData, StoryPhase, PhaseResult } from "@/types/story";
@@ -21,6 +21,9 @@ import { recordPhaseAttempts, recordStoryCompletion, getPaperPlanes } from "@/se
 import { saveCheckpoint, getCheckpoint, clearCheckpoint } from "@/services/checkpoint";
 import { useAuth } from "@/contexts/AuthContext";
 import { TactileButton } from "../TactileButton";
+import { AuthBackdrop, MiniPlane, Star, StoryProsLogo } from "../StoryProsBrand";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { resolveStoryImage } from "@/services/storyImages";
 
 // Phase components
 import { StorySlidesPhase } from "./StorySlidesPhase";
@@ -52,7 +55,7 @@ const PHASE_ORDER: StoryPhase[] = [
   "story-complete",
 ];
 
-/** Kid-friendly names for the resume prompt */
+/** Human-readable labels for resume prompts. */
 const PHASE_LABELS: Partial<Record<StoryPhase, string>> = {
   slides: "the story",
   comprehension: "story questions",
@@ -125,10 +128,10 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
         const earned = newTotal - totalPaperPlanes;
         setPaperPlanesEarned(earned);
         setTotalPaperPlanes(newTotal);
-        // Story finished — the checkpoint has served its purpose
+        // Story finished - the checkpoint has served its purpose
         clearCheckpoint(childId, storyData.id);
       } else {
-        // Mid-story — save where we are so an interrupted
+        // Mid-story - save where we are so an interrupted
         // session resumes at the start of the next phase
         saveCheckpoint(childId, storyData.id, nextIdx, updated);
       }
@@ -139,7 +142,7 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
   );
 
   const handleClose = useCallback(() => {
-    // Quit early — checkpoint from the last completed phase
+    // Quit early - checkpoint from the last completed phase
     // is already saved, so the child can pick up later
     onFinish();
   }, [onFinish]);
@@ -193,47 +196,89 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
     }
   }
 
-  // ── Resume prompt ──
+  // -- Resume prompt --
   if (showResumePrompt && checkpoint) {
     const nextPhase = PHASE_ORDER[Math.min(checkpoint.phaseIndex, PHASE_ORDER.length - 1)];
     const nextLabel = PHASE_LABELS[nextPhase] ?? "where you left off";
     const done = checkpoint.phaseIndex;
     const total = PHASE_ORDER.length - 1; // story-complete isn't a playable step
+    const percent = Math.round((done / total) * 100);
+    const cover = resolveStoryImage(storyData.id, storyData.slides[0]?.image);
 
     return (
-      <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-cream px-8">
-        <span className="text-5xl animate-float" aria-hidden>📖</span>
-        <h2 className="mt-4 text-center text-xl font-extrabold text-ink">
-          Welcome back!
-        </h2>
-        <p className="mt-2 text-center text-base font-medium text-ink-soft">
-          You were partway through{" "}
-          <span className="font-bold text-primary">{storyData.title}</span>.
-          Next up: {nextLabel}.
-        </p>
+      <div className="relative flex h-full w-full flex-col overflow-hidden bg-cream px-5">
+        <AuthBackdrop />
+        <Star className="absolute left-8 top-28 z-10 h-4 w-4 text-secondary animate-sparkle" />
+        <Star className="absolute right-8 top-44 z-10 h-4 w-4 text-primary/35 animate-sparkle" />
+        <MiniPlane className="absolute right-10 top-24 z-10 h-7 w-7 rotate-[18deg] text-secondary animate-float" />
 
-        {/* Progress dots */}
-        <div className="mt-5 flex gap-1.5" aria-label={`${done} of ${total} parts done`}>
-          {Array.from({ length: total }).map((_, i) => (
-            <span
-              key={i}
-              className={
-                i < done
-                  ? "h-2.5 w-2.5 rounded-full bg-primary"
-                  : "h-2.5 w-2.5 rounded-full bg-cream-deep"
-              }
-            />
-          ))}
+        <div className="relative z-10 flex items-center justify-between pt-5">
+          <StoryProsLogo layout="row" size="sm" />
+          <div className="flex items-center gap-1.5 rounded-full border-2 border-secondary/50 bg-card/90 px-3 py-1.5 text-sm font-extrabold text-primary shadow-card">
+            <PaperPlaneIcon className="h-4 w-4 text-secondary" />
+            Pick up
+          </div>
         </div>
 
-        <div className="mt-8 w-full space-y-3">
-          <TactileButton onClick={handleResume}>Keep going!</TactileButton>
+        <div className="relative z-10 mt-7 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-pop-in">
+          {cover ? (
+            <img src={cover} alt="" className="h-[230px] w-full object-cover" />
+          ) : (
+            <div className="flex h-[230px] items-center justify-center bg-accent/50">
+              <PaperPlaneIcon className="h-16 w-16 text-secondary" />
+            </div>
+          )}
+          <div className="p-5">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
+              Welcome back
+            </p>
+            <h2 className="mt-1 font-display text-[30px] font-extrabold leading-none text-primary">
+              Keep going?
+            </h2>
+            <p className="mt-2 text-[15px] font-semibold leading-snug text-ink-soft">
+              You were partway through <span className="font-extrabold text-ink">{storyData.title}</span>.
+              Next up: <span className="font-extrabold text-primary">{nextLabel}</span>.
+            </p>
+
+            <div className="mt-5">
+              <div className="mb-2 flex items-center justify-between text-xs font-extrabold text-primary">
+                <span>{done} of {total} parts done</span>
+                <span>{percent}%</span>
+              </div>
+              <div className="h-3 overflow-hidden rounded-full bg-accent/60">
+                <div
+                  className="h-full rounded-full bg-primary transition-all"
+                  style={{ width: `${percent}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-6 gap-1.5" aria-label={`${done} of ${total} parts done`}>
+              {Array.from({ length: total }).map((_, i) => (
+                <span
+                  key={i}
+                  className={
+                    i < done
+                      ? "h-2.5 rounded-full bg-secondary shadow-[0_2px_0_var(--secondary-deep)]"
+                      : "h-2.5 rounded-full bg-accent/70"
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-auto space-y-3 pb-6">
+          <TactileButton onClick={handleResume} leadingIcon={<ChevronRightIcon />}>
+            Keep going
+          </TactileButton>
           <TactileButton variant="ghost" onClick={handleStartOver}>
             Start over
           </TactileButton>
         </div>
       </div>
     );
+
   }
 
   return (

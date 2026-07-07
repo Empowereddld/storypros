@@ -1,9 +1,9 @@
-/* ─────────────────────────────────────────────
- * Story Complete Phase — Celebration!
+/* ---------------------------------------------
+ * Story Complete Phase - Celebration!
  * Rebuilt from the "You did it!" mockup: big check
  * badge, characters, star rating + Paper Planes
  * earned, with an optional skill breakdown.
- * ───────────────────────────────────────────── */
+ * --------------------------------------------- */
 
 import { useState, useEffect } from "react";
 import { TactileButton } from "../TactileButton";
@@ -17,22 +17,14 @@ import {
 } from "@/services/scoring";
 import { cn } from "@/lib/utils";
 import dariaAndFriend from "@/assets/dan-daria-celebrate.webp";
-import { PaperPlaneIcon } from "../StoryProsUi";
+import { AuthBackdrop, MiniPlane, Star } from "../StoryProsBrand";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 
 interface StoryCompleteData {
   phaseResults: PhaseResult[];
   paperPlanesEarned: number;
   totalPaperPlanes: number;
 }
-
-const DOMAIN_ICONS: Record<SkillDomain, string> = {
-  listening: "👂",
-  story_structure: "📖",
-  vocabulary: "📝",
-  grammar: "✏️",
-  retell: "🗣️",
-  phonological: "🔊",
-};
 
 const DOMAIN_LABELS: Record<SkillDomain, string> = {
   listening: "Listening",
@@ -77,21 +69,29 @@ export function StoryCompletePhase({
   }
 
   return (
-    <div className="relative flex h-full flex-col bg-background">
-      <div className="flex-1 overflow-y-auto no-scrollbar px-5 pb-4">
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <AuthBackdrop />
+      <Star className="pointer-events-none absolute left-8 top-12 z-0 h-5 w-5 text-secondary animate-sparkle" />
+      <Star className="pointer-events-none absolute right-10 top-40 z-0 h-4 w-4 text-primary/35 animate-sparkle" />
+      <MiniPlane className="pointer-events-none absolute right-8 top-20 z-0 h-7 w-7 rotate-[18deg] text-secondary/55 animate-float" />
+
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4">
         {/* Celebration */}
-        <div className="relative pt-8 text-center">
-          <img
-            src={dariaAndFriend}
-            alt=""
-            className={cn(
-              "mx-auto h-40 w-auto object-contain",
-              !celebrationDone && "animate-bounce-in",
-            )}
-          />
+        <div className="relative pt-7 text-center">
+          <div className="relative mx-auto h-48 max-w-[320px]">
+            <div className="absolute inset-x-6 bottom-2 h-20 rounded-full bg-secondary/12 blur-xl" />
+            <img
+              src={dariaAndFriend}
+              alt=""
+              className={cn(
+                "relative z-10 mx-auto h-44 w-auto object-contain",
+                !celebrationDone && "animate-bounce-in",
+              )}
+            />
+          </div>
           {/* big check badge */}
-          <div className="relative -mt-6 flex justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-card bg-secondary text-secondary-foreground shadow-soft animate-star-pop">
+          <div className="relative -mt-10 flex justify-center">
+            <span className="flex h-20 w-20 items-center justify-center rounded-full border-[6px] border-card bg-secondary text-secondary-foreground shadow-soft animate-star-pop">
               <svg
                 viewBox="0 0 24 24"
                 className="h-8 w-8"
@@ -104,15 +104,15 @@ export function StoryCompletePhase({
             </span>
           </div>
 
-          <h1 className="mt-3 font-display text-[34px] font-extrabold text-primary animate-slide-up">
+          <h1 className="mt-3 font-display text-[38px] font-extrabold leading-none text-primary animate-slide-up">
             You did it!
           </h1>
-          <p className="mx-auto mt-1 max-w-[18rem] text-base font-semibold text-ink-soft">
+          <p className="mx-auto mt-2 max-w-[19rem] text-base font-semibold leading-snug text-ink-soft">
             Amazing work! You finished "{storyData.title}" and leveled up your skills.
           </p>
 
           {/* Star rating */}
-          <div className="mt-4 flex justify-center gap-2">
+          <div className="mt-4 flex justify-center gap-2" aria-label={`${stars} star performance rating`}>
             {[1, 2, 3].map((n) => (
               <svg
                 key={n}
@@ -132,20 +132,23 @@ export function StoryCompletePhase({
         </div>
 
         {/* Paper Planes earned */}
-        <div className="mt-5 flex items-center justify-between rounded-3xl border-2 border-secondary bg-secondary/10 p-4 shadow-card animate-pop-in">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-ink-soft">
-              Paper Planes earned
-            </p>
-            <p className="font-display text-[32px] font-extrabold leading-none text-primary">
-              +{paperPlanesEarned}
-            </p>
-          </div>
-          <div className="flex flex-col items-end text-right">
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-secondary-foreground shadow-card">
-              <PaperPlaneIcon className="h-8 w-8" />
+        <div className="mt-5 overflow-hidden rounded-[30px] border-2 border-secondary/80 bg-card shadow-card animate-pop-in">
+          <div className="flex items-center justify-between gap-4 bg-secondary/12 p-4">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
+                Paper Planes earned
+              </p>
+              <p className="font-display text-[38px] font-extrabold leading-none text-primary">
+                +{paperPlanesEarned}
+              </p>
+            </div>
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-secondary text-secondary-foreground shadow-[0_5px_0_var(--secondary-deep)]">
+              <PaperPlaneIcon className="h-9 w-9" />
             </span>
-            <p className="mt-1 text-xs font-bold text-ink-soft">{totalPaperPlanes} total</p>
+          </div>
+          <div className="flex items-center justify-between px-4 py-3 text-sm font-bold text-ink-soft">
+            <span>Total Paper Planes</span>
+            <span className="font-extrabold text-primary">{totalPaperPlanes}</span>
           </div>
         </div>
 
@@ -153,15 +156,26 @@ export function StoryCompletePhase({
         {!showScores ? (
           <button
             onClick={() => setShowScores(true)}
-            className="mt-4 w-full rounded-2xl border-2 border-transparent bg-card p-4 text-center shadow-card transition-all hover:border-primary/20"
+            className="mt-4 flex w-full items-center justify-between rounded-[24px] border-2 border-accent/70 bg-card p-4 text-left shadow-card transition-all hover:border-primary/30"
           >
-            <span className="text-sm font-bold text-primary">See how you did in each area →</span>
+            <span>
+              <span className="block text-sm font-extrabold text-primary">See skill details</span>
+              <span className="block text-xs font-semibold text-ink-soft">Listening, story structure, words, and grammar</span>
+            </span>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <ChevronRightIcon className="h-5 w-5" />
+            </span>
           </button>
         ) : (
           <div className="mt-4 space-y-3 animate-slide-up">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-ink-soft">
-              Your skills
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-extrabold uppercase tracking-wider text-primary">
+                Your skills
+              </h3>
+              <span className="rounded-full bg-card px-3 py-1 text-xs font-extrabold text-ink-soft shadow-card">
+                {overallScore}%
+              </span>
+            </div>
             {V1_DOMAINS.map((domain) => {
               const score = domainScores[domain];
               const label = scoreToLabel(score);
@@ -176,9 +190,11 @@ export function StoryCompletePhase({
                       : "bg-coral";
 
               return (
-                <div key={domain} className="rounded-2xl bg-card p-4 shadow-card">
+                <div key={domain} className="rounded-[24px] border-2 border-accent/60 bg-card p-4 shadow-card">
                   <div className="mb-2 flex items-center gap-2">
-                    <span className="text-lg">{DOMAIN_ICONS[domain]}</span>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-sky text-primary">
+                      <SkillIcon domain={domain} />
+                    </span>
                     <span className="flex-1 text-sm font-bold text-primary">
                       {DOMAIN_LABELS[domain]}
                     </span>
@@ -212,11 +228,74 @@ export function StoryCompletePhase({
       </div>
 
       {/* Continue */}
-      <div className="mx-5 mb-5 mt-2">
-        <TactileButton variant="secondary" onClick={handleFinish}>
+      <div className="relative z-10 mx-5 mb-5 mt-2">
+        <TactileButton variant="secondary" onClick={handleFinish} leadingIcon={<ChevronRightIcon className="h-5 w-5" />}>
           Continue
         </TactileButton>
       </div>
     </div>
   );
+}
+
+function SkillIcon({ domain }: { domain: SkillDomain }) {
+  const common = {
+    className: "h-5 w-5",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2.4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  switch (domain) {
+    case "listening":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden {...common}>
+          <path d="M6 10a6 6 0 0 1 12 0" />
+          <path d="M6 10v3a3 3 0 0 0 3 3h1" />
+          <path d="M18 10v3a3 3 0 0 1-3 3h-1" />
+        </svg>
+      );
+    case "story_structure":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden {...common}>
+          <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H19v18H8.5A3.5 3.5 0 0 0 5 23V5.5Z" />
+          <path d="M9 6h6" />
+          <path d="M9 10h5" />
+        </svg>
+      );
+    case "vocabulary":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden {...common}>
+          <path d="M4 17 9 5l5 12" />
+          <path d="M6 13h6" />
+          <path d="M16 9v8" />
+          <path d="M16 13h4" />
+        </svg>
+      );
+    case "grammar":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden {...common}>
+          <path d="M4 19h16" />
+          <path d="m6 16 9.5-9.5 2 2L8 18l-3 .8.8-2.8Z" />
+        </svg>
+      );
+    case "retell":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden {...common}>
+          <path d="M7 8h7" />
+          <path d="M7 12h10" />
+          <path d="M7 16h5" />
+          <path d="M5 4h14v14H9l-4 3V4Z" />
+        </svg>
+      );
+    case "phonological":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden {...common}>
+          <path d="M4 10v4h3l5 4V6L7 10H4Z" />
+          <path d="M16 9a4 4 0 0 1 0 6" />
+          <path d="M19 6a8 8 0 0 1 0 12" />
+        </svg>
+      );
+  }
 }
