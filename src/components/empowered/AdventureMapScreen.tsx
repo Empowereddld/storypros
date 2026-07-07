@@ -9,6 +9,7 @@ import { resolveStoryImage } from "@/services/storyImages";
 import { useAuth } from "@/contexts/AuthContext";
 import { prettifyTheme } from "@/services/continueStory";
 import { MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
+import { TactileButton } from "./TactileButton";
 import {
   AppBottomNav,
   BookCheckIcon,
@@ -23,7 +24,8 @@ export type MapDestination =
   | "settings"
   | "shop"
   | "dashboard"
-  | "library";
+  | "library"
+  | "paywall";
 
 interface AdventureMapScreenProps {
   childName: string;
@@ -47,7 +49,7 @@ interface Pin {
 }
 
 const PIN_OFFSETS = [-50, 52, -34, 48, -54, 44, -36, 52, -46, 40, -50];
-const PIN_Y_START = 470;
+const PIN_Y_START = 132;
 const PIN_Y_SPACING = 158;
 
 function buildPins(level: number, completedIds: string[], childId: string): Pin[] {
@@ -56,10 +58,13 @@ function buildPins(level: number, completedIds: string[], childId: string): Pin[
 
   return stories.map((story, index) => {
     const isCompleted = completedIds.includes(story.id);
+    const isPremium = !canAccessStory(childId, story.id);
     let status: PinStatus;
 
     if (isCompleted) {
       status = "completed";
+    } else if (isPremium) {
+      status = "locked";
     } else if (!foundActive) {
       status = "active";
       foundActive = true;
@@ -76,7 +81,7 @@ function buildPins(level: number, completedIds: string[], childId: string): Pin[
       status,
       offset: PIN_OFFSETS[index % PIN_OFFSETS.length],
       y: PIN_Y_START + index * PIN_Y_SPACING,
-      isPremium: !canAccessStory(childId, story.id),
+      isPremium,
       storyNum: index + 1,
     };
   });
@@ -86,7 +91,7 @@ function buildRoadPath(pins: Pin[], height: number): string {
   if (pins.length === 0) return "";
   const points = pins.map((pin) => ({ x: 200 + pin.offset, y: pin.y + 28 }));
 
-  let d = `M ${points[0].x} ${Math.max(360, points[0].y - 170)}`;
+  let d = `M ${points[0].x} ${Math.max(44, points[0].y - 118)}`;
   for (let index = 0; index < points.length - 1; index++) {
     const current = points[index];
     const next = points[index + 1];
@@ -145,10 +150,9 @@ export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreen
   return (
     <div className="relative flex h-full flex-col overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
-        <div className="absolute -left-12 top-28 h-28 w-44 rounded-full bg-sky/55 blur-2xl" />
-        <div className="absolute -right-14 top-48 h-32 w-48 rounded-full bg-accent/60 blur-2xl" />
-        <div className="absolute -left-12 bottom-28 h-36 w-52 rounded-full bg-success/15 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#fff_0%,oklch(0.98_0.02_305)_42%,oklch(0.94_0.04_305)_100%)]" />
+        <div className="absolute inset-x-0 top-[78px] h-px bg-primary/10" />
+        <div className="absolute inset-x-8 top-[308px] h-px bg-primary/10" />
         <Star className="absolute left-9 top-40 h-4 w-4 text-secondary animate-sparkle" />
         <Star className="absolute right-14 top-56 h-6 w-6 text-secondary animate-sparkle" />
         <Star className="absolute left-12 bottom-40 h-4 w-4 text-primary/30 animate-sparkle" />
@@ -283,7 +287,16 @@ export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreen
 
       <AppBottomNav active="map" onNavigate={(destination) => onNavigate(destination)} />
 
-      {openPin && <LockedStorySheet pin={openPin} onClose={() => setOpenPin(null)} />}
+      {openPin && (
+        <LockedStorySheet
+          pin={openPin}
+          onClose={() => setOpenPin(null)}
+          onUpgrade={() => {
+            setOpenPin(null);
+            onNavigate("paywall");
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -345,7 +358,10 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
             "bg-success text-success-foreground shadow-[0_6px_0_0_oklch(0.45_0.15_155)]",
           isActive &&
             "bg-primary text-primary-foreground shadow-[0_7px_0_0_oklch(0.3_0.18_305)] animate-pulse-glow",
-          isLocked && "bg-muted text-ink-soft shadow-[0_6px_0_0_oklch(0.78_0.02_305)]",
+          isLocked &&
+            (pin.isPremium
+              ? "bg-card text-primary shadow-[0_6px_0_0_oklch(0.78_0.05_305)]"
+              : "bg-muted text-ink-soft shadow-[0_6px_0_0_oklch(0.78_0.02_305)]"),
         )}
         aria-label={`${pin.label} ${pin.status}`}
       >
@@ -361,6 +377,11 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
             Next
           </span>
         )}
+        {isLocked && pin.isPremium && (
+          <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-secondary px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wide text-secondary-foreground shadow-card">
+            Premium
+          </span>
+        )}
       </button>
 
       <button
@@ -368,19 +389,24 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
         className={cn(
           "absolute top-1/2 z-10 flex min-h-[96px] w-[188px] -translate-y-1/2 items-center gap-2.5 rounded-[22px] border border-accent/60 bg-card/95 p-2.5 text-left shadow-card backdrop-blur transition-transform active:scale-[0.98]",
           placeCardRight ? "left-14 pl-8" : "right-14 flex-row-reverse pr-8 text-right",
-          isLocked && "opacity-82",
+          isLocked && "border-primary/15 bg-card/88",
         )}
       >
-        <span className="h-14 w-14 shrink-0 overflow-hidden rounded-[18px] bg-accent">
+        <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[18px] bg-accent">
           {pin.cover ? (
             <img
               src={pin.cover}
               alt=""
-              className={cn("h-full w-full object-cover", isLocked && "grayscale")}
+              className={cn("h-full w-full object-cover", isLocked && "grayscale-[0.25]")}
             />
           ) : (
             <span className="flex h-full w-full items-center justify-center text-primary">
               <PaperPlaneIcon className="h-8 w-8" />
+            </span>
+          )}
+          {isLocked && (
+            <span className="absolute inset-0 flex items-center justify-center bg-ink/28 text-white">
+              <LockIcon />
             </span>
           )}
         </span>
@@ -400,39 +426,94 @@ function PinNode({ pin, onClick }: { pin: Pin; onClick: () => void }) {
   );
 }
 
-function LockedStorySheet({ pin, onClose }: { pin: Pin; onClose: () => void }) {
+function LockedStorySheet({
+  pin,
+  onClose,
+  onUpgrade,
+}: {
+  pin: Pin;
+  onClose: () => void;
+  onUpgrade: () => void;
+}) {
   return (
     <div
       className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up"
+        className="w-full rounded-t-[32px] bg-card p-5 pb-7 shadow-soft animate-slide-up"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
-        <div className="flex items-center gap-4">
-          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-accent text-primary">
-            {pin.isPremium ? <PaperPlaneIcon className="h-9 w-9 text-secondary" /> : <LockIcon />}
+        <div className="relative overflow-hidden rounded-[28px] bg-accent shadow-card">
+          <img
+            src={pin.cover}
+            alt=""
+            className="h-40 w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/72 via-ink/10 to-transparent" />
+          <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-wide text-primary shadow-card">
+            <LockIcon />
+            {pin.isPremium ? "Premium story" : "Locked story"}
           </span>
-          <div className="min-w-0">
-            <p className="text-xs font-bold uppercase tracking-wider text-primary">
-              {pin.isPremium ? "Premium story" : "Keep progressing"}
+          <div className="absolute bottom-4 left-4 right-4">
+            <p className="text-xs font-extrabold uppercase tracking-wide text-secondary">
+              Story {pin.storyNum} • {prettifyTheme(pin.theme)}
             </p>
-            <h2 className="text-xl font-extrabold leading-tight text-ink">{pin.label}</h2>
+            <h2 className="mt-1 text-2xl font-extrabold leading-tight text-white drop-shadow">
+              {pin.label}
+            </h2>
           </div>
         </div>
-        <p className="mt-4 text-sm font-medium leading-relaxed text-ink-soft">
-          {pin.isPremium
-            ? "This story is part of the full Story Pros adventure."
-            : "Finish the next story on your path to unlock this stop."}
-        </p>
-        <button
-          onClick={onClose}
-          className="mt-5 h-12 w-full rounded-2xl bg-primary text-primary-foreground font-bold btn-tactile"
-        >
-          Got it
-        </button>
+
+        {pin.isPremium ? (
+          <>
+            <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/35 p-4">
+              <p className="text-[15px] font-extrabold leading-snug text-ink">
+                Unlock the full adventure
+              </p>
+              <p className="mt-1 text-[13px] font-semibold leading-relaxed text-ink-soft">
+                Free forever includes one complete story. Premium opens all 11 Story Pros
+                stories, parent progress, and rewards for each child.
+              </p>
+              <div className="mt-3 flex items-center justify-between rounded-2xl bg-card px-4 py-3 shadow-card">
+                <span className="text-[12px] font-bold uppercase tracking-wide text-primary">
+                  Early adopter
+                </span>
+                <span className="text-lg font-extrabold text-primary">
+                  $7.99/mo
+                  <span className="ml-2 text-xs font-bold text-ink-soft line-through">$9.99/mo</span>
+                </span>
+              </div>
+            </div>
+            <div className="mt-5 grid grid-cols-[1fr_auto] gap-3">
+              <TactileButton
+                variant="secondary"
+                onClick={onUpgrade}
+                className="text-base"
+                leadingIcon={<PaperPlaneIcon className="h-6 w-6" />}
+              >
+                Unlock Premium
+              </TactileButton>
+              <button
+                onClick={onClose}
+                aria-label="Close premium story"
+                className="press-pop flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary/15 bg-card text-primary shadow-card"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="mt-4 text-sm font-semibold leading-relaxed text-ink-soft">
+              Finish the next story on your path to unlock this stop.
+            </p>
+            <TactileButton onClick={onClose} className="mt-5">
+              Got it
+            </TactileButton>
+          </>
+        )}
       </div>
     </div>
   );
@@ -472,7 +553,7 @@ function LockIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-8 w-8"
+      className="h-7 w-7"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.4"
@@ -480,6 +561,21 @@ function LockIcon() {
     >
       <rect x="5" y="10" width="14" height="11" rx="3" />
       <path d="M8 10V8a4 4 0 018 0v2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M7 7l10 10M17 7L7 17" strokeLinecap="round" />
     </svg>
   );
 }

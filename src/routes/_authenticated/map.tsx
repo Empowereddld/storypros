@@ -41,6 +41,9 @@ function MapPage() {
           case "library":
             navigate({ to: "/library" });
             break;
+          case "paywall":
+            navigate({ to: "/paywall" });
+            break;
         }
       }}
     />
