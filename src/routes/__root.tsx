@@ -1,14 +1,8 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute, HeadContent, Scripts, useNavigate } from "@tanstack/react-router";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { seedDemoAccount } from "@/services/demoSeed";
-import danDariaThinking from "@/assets/dan-daria-thinking.webp";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
-import {
-  AuthBackdrop,
-  MiniPlane,
-  StoryProsLogo,
-  Star,
-} from "@/components/empowered/StoryProsBrand";
+import { NotFoundState } from "@/components/empowered/StateScreens";
 
 // Seed demo data before React renders (browser only — uses localStorage)
 if (typeof window !== "undefined") {
@@ -18,45 +12,11 @@ if (typeof window !== "undefined") {
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
+  const navigate = useNavigate();
+
   return (
     <PhoneFrame>
-      <div className="relative flex h-full flex-col overflow-hidden bg-cream px-5 text-center">
-        <AuthBackdrop />
-        <Star className="absolute left-9 top-28 z-10 h-5 w-5 text-secondary animate-sparkle" />
-        <Star className="absolute right-10 top-40 z-10 h-4 w-4 text-primary/35 animate-sparkle" />
-        <MiniPlane className="absolute right-12 top-20 z-10 h-8 w-8 rotate-[18deg] text-secondary animate-float" />
-
-        <div className="relative z-10 flex h-full flex-col items-center justify-center pb-8">
-          <StoryProsLogo layout="row" size="md" className="scale-95" />
-          <div className="mt-8 flex h-20 w-20 items-center justify-center rounded-full border-[6px] border-card bg-secondary text-secondary-foreground shadow-card animate-bounce-in">
-            <Star className="h-11 w-11" />
-          </div>
-          <h1 className="mt-5 font-display text-[58px] font-extrabold leading-none text-primary">
-            404
-          </h1>
-          <h2 className="mt-1 font-display text-[30px] font-extrabold leading-tight text-ink">
-            Page not found
-          </h2>
-          <p className="mt-2 max-w-[300px] text-[15px] font-semibold leading-snug text-ink-soft">
-            This path is not part of the Story Pros adventure.
-          </p>
-
-          <div className="mt-6 w-full overflow-hidden rounded-[28px] border-[6px] border-card bg-card shadow-soft">
-            <img
-              src={danDariaThinking}
-              alt=""
-              className="h-[220px] w-full object-cover object-center"
-            />
-          </div>
-
-          <Link
-            to="/"
-            className="btn-tactile mt-7 flex h-14 w-full items-center justify-center rounded-2xl bg-primary px-5 text-lg font-extrabold text-primary-foreground"
-          >
-            Go Home
-          </Link>
-        </div>
-      </div>
+      <NotFoundState onHome={() => navigate({ to: "/" })} />
     </PhoneFrame>
   );
 }
