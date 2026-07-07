@@ -17,6 +17,7 @@ import {
 } from "@/services/scoring";
 import { cn } from "@/lib/utils";
 import dariaAndFriend from "@/assets/dan-daria-celebrate.webp";
+import { PaperPlaneIcon } from "../StoryProsUi";
 
 interface StoryCompleteData {
   phaseResults: PhaseResult[];
@@ -44,7 +45,11 @@ const DOMAIN_LABELS: Record<SkillDomain, string> = {
 
 const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
 
-export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPhaseProps<StoryCompleteData>) {
+export function StoryCompletePhase({
+  storyData,
+  phaseData,
+  onComplete,
+}: StoryPhaseProps<StoryCompleteData>) {
   const [showScores, setShowScores] = useState(false);
   const [celebrationDone, setCelebrationDone] = useState(false);
 
@@ -79,12 +84,21 @@ export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPh
           <img
             src={dariaAndFriend}
             alt=""
-            className={cn("mx-auto h-40 w-auto object-contain", !celebrationDone && "animate-bounce-in")}
+            className={cn(
+              "mx-auto h-40 w-auto object-contain",
+              !celebrationDone && "animate-bounce-in",
+            )}
           />
           {/* big check badge */}
           <div className="relative -mt-6 flex justify-center">
             <span className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-card bg-secondary text-secondary-foreground shadow-soft animate-star-pop">
-              <svg viewBox="0 0 24 24" className="h-8 w-8" stroke="currentColor" strokeWidth="3" fill="none">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-8 w-8"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="none"
+              >
                 <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
@@ -104,7 +118,10 @@ export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPh
                 key={n}
                 viewBox="0 0 24 24"
                 style={n <= stars ? { animationDelay: `${0.2 + 0.15 * n}s` } : undefined}
-                className={cn("h-9 w-9", n <= stars ? "text-secondary animate-star-pop" : "text-accent")}
+                className={cn(
+                  "h-9 w-9",
+                  n <= stars ? "text-secondary animate-star-pop" : "text-accent",
+                )}
                 fill="currentColor"
                 aria-hidden
               >
@@ -117,13 +134,17 @@ export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPh
         {/* Paper Planes earned */}
         <div className="mt-5 flex items-center justify-between rounded-3xl border-2 border-secondary bg-secondary/10 p-4 shadow-card animate-pop-in">
           <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-ink-soft">Paper Planes earned</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-ink-soft">
+              Paper Planes earned
+            </p>
             <p className="font-display text-[32px] font-extrabold leading-none text-primary">
               +{paperPlanesEarned}
             </p>
           </div>
-          <div className="text-right">
-            <span className="text-4xl">✈️</span>
+          <div className="flex flex-col items-end text-right">
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-secondary-foreground shadow-card">
+              <PaperPlaneIcon className="h-8 w-8" />
+            </span>
             <p className="mt-1 text-xs font-bold text-ink-soft">{totalPaperPlanes} total</p>
           </div>
         </div>
@@ -138,29 +159,38 @@ export function StoryCompletePhase({ storyData, phaseData, onComplete }: StoryPh
           </button>
         ) : (
           <div className="mt-4 space-y-3 animate-slide-up">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-ink-soft">Your skills</h3>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-ink-soft">
+              Your skills
+            </h3>
             {V1_DOMAINS.map((domain) => {
               const score = domainScores[domain];
               const label = scoreToLabel(score);
               const displayText = labelToDisplayText(label);
               const barColor =
-                label === "strength" ? "bg-success"
-                : label === "growing" ? "bg-primary"
-                : label === "budding" ? "bg-secondary"
-                : "bg-coral";
+                label === "strength"
+                  ? "bg-success"
+                  : label === "growing"
+                    ? "bg-primary"
+                    : label === "budding"
+                      ? "bg-secondary"
+                      : "bg-coral";
 
               return (
                 <div key={domain} className="rounded-2xl bg-card p-4 shadow-card">
                   <div className="mb-2 flex items-center gap-2">
                     <span className="text-lg">{DOMAIN_ICONS[domain]}</span>
-                    <span className="flex-1 text-sm font-bold text-primary">{DOMAIN_LABELS[domain]}</span>
-                    <span className={cn(
-                      "rounded-full px-2 py-0.5 text-xs font-bold",
-                      label === "strength" && "bg-success/10 text-success",
-                      label === "growing" && "bg-primary/10 text-primary",
-                      label === "budding" && "bg-secondary/10 text-secondary-foreground",
-                      label === "needs_support" && "bg-coral/10 text-coral",
-                    )}>
+                    <span className="flex-1 text-sm font-bold text-primary">
+                      {DOMAIN_LABELS[domain]}
+                    </span>
+                    <span
+                      className={cn(
+                        "rounded-full px-2 py-0.5 text-xs font-bold",
+                        label === "strength" && "bg-success/10 text-success",
+                        label === "growing" && "bg-primary/10 text-primary",
+                        label === "budding" && "bg-secondary/10 text-secondary-foreground",
+                        label === "needs_support" && "bg-coral/10 text-coral",
+                      )}
+                    >
                       {displayText}
                     </span>
                   </div>
