@@ -1,55 +1,71 @@
-/* ─────────────────────────────────────────────
- * SLP / Teacher Dashboard
- * Clinical view for speech-language pathologists
- * and teachers to monitor their caseload.
- *
- * Sections:
- *  1. Caseload overview (all linked children)
- *  2. Child detail (scores, domains, progress)
- *  3. Story assignments
- *  4. Session notes
- *  5. Link-parent flow
- * ───────────────────────────────────────────── */
-
-import { useState, useMemo, useEffect } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import {
-  getCaseload,
-  getAssignments,
-  getNotes,
-  redeemInviteCode,
-  assignStory,
-  updateAssignment,
   addNote,
+  assignStory,
   deleteNote,
-  seedDemoCaseload,
+  getAssignments,
+  getCaseload,
+  getNotes,
   hydrateSlpFromCloud,
+  redeemInviteCode,
+  seedDemoCaseload,
+  updateAssignment,
   type CaseloadChild,
-  type StoryAssignment,
   type SessionNote,
+  type StoryAssignment,
 } from "@/services/slp";
 import { getStoriesByLevel } from "@/services/stories";
-import {
-  scoreToLabel,
-  labelToDisplayText,
-} from "@/services/scoring";
+import { labelToDisplayText, scoreToLabel } from "@/services/scoring";
 import type { SkillDomain } from "@/types/story";
-
-// ── Domain display config (same as parent dashboard) ──
-
-const DOMAIN_META: Record<string, { label: string; icon: string; color: string }> = {
-  listening: { label: "Listening", icon: "👂", color: "bg-blue-500" },
-  story_structure: { label: "Story Structure", icon: "📖", color: "bg-purple-500" },
-  vocabulary: { label: "Vocabulary", icon: "💬", color: "bg-green-500" },
-  grammar: { label: "Grammar", icon: "✏️", color: "bg-amber-500" },
-  retell: { label: "Retell", icon: "🗣️", color: "bg-pink-500" },
-  phonological: { label: "Phonological", icon: "🔤", color: "bg-teal-500" },
-};
+import { MiniPlane, Star, StoryProsLogo, UserIcon } from "./StoryProsBrand";
+import { BookCheckIcon, BookIcon, ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
+import { TactileButton } from "./TactileButton";
 
 const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
 
-// ── Props ──
+const DOMAIN_META: Record<
+  SkillDomain,
+  { label: string; icon: ReactNode; color: string; softColor: string }
+> = {
+  listening: {
+    label: "Listening",
+    icon: <EarIcon />,
+    color: "bg-primary",
+    softColor: "bg-accent text-primary",
+  },
+  story_structure: {
+    label: "Story Structure",
+    icon: <BookIcon className="h-5 w-5" />,
+    color: "bg-secondary",
+    softColor: "bg-secondary/25 text-secondary-foreground",
+  },
+  vocabulary: {
+    label: "Vocabulary",
+    icon: <TextIcon />,
+    color: "bg-success",
+    softColor: "bg-success/15 text-success",
+  },
+  grammar: {
+    label: "Grammar",
+    icon: <PencilIcon />,
+    color: "bg-coral",
+    softColor: "bg-coral/15 text-coral",
+  },
+  retell: {
+    label: "Retell",
+    icon: <RetellIcon />,
+    color: "bg-primary",
+    softColor: "bg-accent text-primary",
+  },
+  phonological: {
+    label: "Sounds",
+    icon: <SoundIcon />,
+    color: "bg-sky",
+    softColor: "bg-sky/30 text-primary",
+  },
+};
 
 interface SlpDashboardScreenProps {
   onClose: () => void;
@@ -60,7 +76,6 @@ export function SlpDashboardScreen({ onClose }: SlpDashboardScreenProps) {
   const slpId = user?.id ?? "";
   const roleLabel = profile?.role === "slp" ? "SLP" : "Teacher";
 
-  // State
   const [view, setView] = useState<"caseload" | "child-detail">("caseload");
   const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
   const [showLinkForm, setShowLinkForm] = useState(false);
@@ -68,24 +83,22 @@ export function SlpDashboardScreen({ onClose }: SlpDashboardScreenProps) {
 
   const refresh = () => setRefreshKey((k) => k + 1);
 
-  // Hydrate real caseload from the cloud (demo SLPs get seeded data instead)
   useEffect(() => {
     if (!slpId) return;
-    seedDemoCaseload(slpId); // no-op for cloud accounts
+    seedDemoCaseload(slpId);
     void hydrateSlpFromCloud(slpId);
   }, [slpId]);
 
-  // Re-read the cache when background hydration lands
   useEffect(() => {
     const onUpdate = () => refresh();
     window.addEventListener("storypros:slp-updated", onUpdate);
     return () => window.removeEventListener("storypros:slp-updated", onUpdate);
   }, []);
 
-  const caseload = useMemo(() => getCaseload(slpId), [slpId, refreshKey]);
-  const allAssignments = useMemo(() => getAssignments(slpId), [slpId, refreshKey]);
-  const allNotes = useMemo(() => getNotes(slpId), [slpId, refreshKey]);
-
+  void refreshKey;
+  const caseload = getCaseload(slpId);
+  const allAssignments = getAssignments(slpId);
+  const allNotes = getNotes(slpId);
   const selectedChild = caseload.find((c) => c.childId === selectedChildId) ?? null;
 
   function openChild(childId: string) {
@@ -93,35 +106,27 @@ export function SlpDashboardScreen({ onClose }: SlpDashboardScreenProps) {
     setView("child-detail");
   }
 
+  const isDetail = view === "child-detail";
+
   return (
-    <div className="relative flex h-full flex-col bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-30 flex items-center justify-between gap-2 bg-card/95 backdrop-blur px-4 py-3 rounded-b-2xl border-b-4 border-accent/60 shadow-card">
-        <div className="flex items-center gap-2">
-          {view === "child-detail" ? (
-            <button
-              onClick={() => setView("caseload")}
-              className="text-sm font-bold text-primary hover:text-primary/80 transition-colors"
-            >
-              ← Caseload
-            </button>
-          ) : (
-            <button
-              onClick={onClose}
-              className="text-sm font-bold text-primary hover:text-primary/80 transition-colors"
-            >
-              ← Back
-            </button>
-          )}
-        </div>
-        <h1 className="font-extrabold italic tracking-tight text-primary text-base">
-          {roleLabel} Dashboard
-        </h1>
-        <div className="w-16" /> {/* spacer for centering */}
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <DashboardBackdrop />
+
+      <header className="relative z-30 flex items-center justify-between gap-2 px-5 pb-2 pt-4">
+        <button
+          onClick={isDetail ? () => setView("caseload") : onClose}
+          aria-label={isDetail ? "Back to caseload" : "Back"}
+          className="press-pop flex h-11 w-11 items-center justify-center rounded-full bg-card text-primary shadow-card"
+        >
+          <ChevronLeftIcon />
+        </button>
+        <StoryProsLogo layout="row" size="md" className="scale-90" />
+        <span className="rounded-full bg-card px-3 py-2 text-xs font-extrabold text-primary shadow-card">
+          {roleLabel}
+        </span>
       </header>
 
-      {/* Body */}
-      <div className="flex-1 overflow-y-auto no-scrollbar">
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-8 pt-2">
         {view === "caseload" && (
           <CaseloadView
             caseload={caseload}
@@ -144,21 +149,19 @@ export function SlpDashboardScreen({ onClose }: SlpDashboardScreenProps) {
         )}
       </div>
 
-      {/* Link parent modal */}
       {showLinkForm && (
         <LinkParentModal
           slpId={slpId}
           onClose={() => setShowLinkForm(false)}
-          onLinked={() => { setShowLinkForm(false); refresh(); }}
+          onLinked={() => {
+            setShowLinkForm(false);
+            refresh();
+          }}
         />
       )}
     </div>
   );
 }
-
-/* ═══════════════════════════════════════════
- * CASELOAD OVERVIEW
- * ═══════════════════════════════════════════ */
 
 function CaseloadView({
   caseload,
@@ -175,11 +178,12 @@ function CaseloadView({
   onShowLink: () => void;
   roleLabel: string;
 }) {
-  // Quick stats
   const totalChildren = caseload.length;
   const activeAssignments = assignments.filter((a) => a.status !== "completed").length;
   const completedThisWeek = assignments.filter(
-    (a) => a.status === "completed" && a.completedAt &&
+    (a) =>
+      a.status === "completed" &&
+      a.completedAt &&
       Date.now() - new Date(a.completedAt).getTime() < 7 * 86400000,
   ).length;
   const recentNotes = notes.filter(
@@ -187,93 +191,122 @@ function CaseloadView({
   ).length;
 
   return (
-    <div className="px-4 py-4 space-y-5">
-      {/* Greeting */}
-      <div>
-        <h2 className="text-xl font-extrabold text-ink">My Caseload</h2>
-        <p className="text-sm text-ink-soft mt-0.5">
-          {totalChildren} {totalChildren === 1 ? "child" : "children"} linked
+    <div className="space-y-5">
+      <section className="animate-slide-up">
+        <h1 className="text-[38px] font-extrabold leading-none text-primary">Caseload Overview</h1>
+        <p className="mt-2 text-base font-medium leading-snug text-ink-soft">
+          Plan story practice, review progress, and keep families connected.
         </p>
-      </div>
+      </section>
 
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-2">
-        <StatCard value={totalChildren} label="Children" icon="👧" />
-        <StatCard value={activeAssignments} label="Active" icon="📋" />
-        <StatCard value={completedThisWeek} label="Done (7d)" icon="✅" />
-      </div>
+      <section className="rounded-[30px] bg-card p-4 shadow-soft animate-slide-up">
+        <div className="flex items-center gap-4">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-secondary/25 text-secondary-foreground">
+            <BriefcaseIcon />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-extrabold uppercase tracking-wide text-primary">
+              {roleLabel} workspace
+            </p>
+            <h2 className="mt-1 text-[24px] font-extrabold leading-tight text-ink">
+              {totalChildren} linked {totalChildren === 1 ? "child" : "children"}
+            </h2>
+            <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
+              {activeAssignments} active story{" "}
+              {activeAssignments === 1 ? "assignment" : "assignments"}
+            </p>
+          </div>
+        </div>
+        <TactileButton
+          variant="secondary"
+          className="mt-4"
+          leadingIcon={<PlusIcon />}
+          onClick={onShowLink}
+        >
+          Link Parent Account
+        </TactileButton>
+      </section>
 
-      {/* Children list */}
-      <div className="space-y-2">
+      <section className="grid grid-cols-2 gap-3 stagger-in">
+        <MetricCard
+          icon={<UserIcon className="h-6 w-6" />}
+          value={totalChildren}
+          label="Children"
+        />
+        <MetricCard
+          icon={<ClipboardIcon />}
+          value={activeAssignments}
+          label="Active"
+          tone="secondary"
+        />
+        <MetricCard icon={<BookCheckIcon />} value={completedThisWeek} label="Done This Week" />
+        <MetricCard icon={<NoteIcon />} value={recentNotes} label="Recent Notes" tone="secondary" />
+      </section>
+
+      <section className="space-y-3 animate-slide-up">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-extrabold text-primary">Children</h2>
+          <span className="text-sm font-extrabold text-ink-soft">{totalChildren} total</span>
+        </div>
+
         {caseload.map((child) => {
           const childAssignments = assignments.filter((a) => a.childId === child.childId);
           const pending = childAssignments.filter((a) => a.status === "assigned").length;
           const completed = childAssignments.filter((a) => a.status === "completed").length;
           const childNotes = notes.filter((n) => n.childId === child.childId);
-          const lastNote = childNotes.length > 0
-            ? childNotes.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
-            : null;
+          const lastNote =
+            childNotes.length > 0
+              ? childNotes.sort(
+                  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+                )[0]
+              : null;
 
           return (
             <button
               key={child.childId}
               onClick={() => onSelectChild(child.childId)}
-              className="w-full rounded-2xl bg-card p-4 border-2 border-accent/40 shadow-card text-left transition-all hover:border-primary/40 active:scale-[0.98]"
+              className="press-pop w-full rounded-[26px] border border-accent/60 bg-card p-4 text-left shadow-card"
             >
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-lg">
-                  {child.childName.charAt(0).toUpperCase()}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-ink text-base truncate">{child.childName}</p>
-                  <p className="text-xs text-ink-soft">
-                    {child.tag && <span className="text-primary font-semibold">{child.tag} · </span>}
-                    {pending} assigned · {completed} completed
+                <ChildAvatar name={child.childName} />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-lg font-extrabold text-ink">{child.childName}</p>
+                  <p className="text-xs font-semibold text-ink-soft">
+                    {child.tag && <span className="text-primary">{child.tag} - </span>}
+                    {pending} assigned - {completed} completed
                   </p>
                 </div>
-                <svg viewBox="0 0 24 24" className="h-4 w-4 text-ink-soft/50 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-primary">
+                  <ChevronRightIcon />
+                </span>
               </div>
               {lastNote && (
-                <div className="mt-2 pt-2 border-t border-accent/30">
-                  <p className="text-xs text-ink-soft line-clamp-1">
-                    <span className="font-semibold">Last note:</span> {lastNote.content}
+                <div className="mt-3 rounded-2xl bg-background/70 px-3 py-2">
+                  <p className="line-clamp-1 text-xs font-semibold text-ink-soft">
+                    <span className="font-extrabold text-primary">Last note:</span>{" "}
+                    {lastNote.content}
                   </p>
                 </div>
               )}
             </button>
           );
         })}
-      </div>
 
-      {/* Add child button */}
-      <button
-        onClick={onShowLink}
-        className="w-full rounded-2xl border-2 border-dashed border-primary/30 p-4 text-center text-sm font-bold text-primary hover:bg-primary/5 transition-colors active:scale-[0.98]"
-      >
-        + Link a parent account
-      </button>
-
-      {/* Empty state */}
-      {caseload.length === 0 && (
-        <div className="text-center py-8">
-          <p className="text-4xl mb-3">📋</p>
-          <p className="font-bold text-ink text-lg">No children linked yet</p>
-          <p className="text-sm text-ink-soft mt-1 leading-relaxed">
-            Link a parent's account to start tracking<br />their child's progress.
-          </p>
-        </div>
-      )}
-
-      <div className="h-8" />
+        {caseload.length === 0 && (
+          <div className="rounded-[28px] bg-card p-6 text-center shadow-card">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-accent text-primary">
+              <ClipboardIcon className="h-10 w-10" />
+            </div>
+            <h3 className="mt-4 text-xl font-extrabold text-primary">No children linked yet</h3>
+            <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+              Link a parent's account to start tracking a child's progress.
+            </p>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
-
-/* ═══════════════════════════════════════════
- * CHILD DETAIL VIEW
- * ═══════════════════════════════════════════ */
 
 function ChildDetailView({
   slpId,
@@ -291,40 +324,41 @@ function ChildDetailView({
   const [tab, setTab] = useState<"progress" | "assignments" | "notes">("progress");
 
   return (
-    <div className="px-4 py-4 space-y-4">
-      {/* Child header */}
-      <div className="flex items-center gap-3">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl font-bold text-primary">
-          {child.childName.charAt(0).toUpperCase()}
+    <div className="space-y-4">
+      <section className="rounded-[30px] bg-card p-4 shadow-soft animate-slide-up">
+        <div className="flex items-center gap-4">
+          <ChildAvatar name={child.childName} size="lg" />
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate text-[30px] font-extrabold leading-none text-primary">
+              {child.childName}
+            </h1>
+            <p className="mt-2 text-sm font-semibold text-ink-soft">
+              {child.tag && <span className="text-primary">{child.tag} - </span>}
+              Linked {new Date(child.linkedAt).toLocaleDateString()}
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-xl font-extrabold text-ink">{child.childName}</h2>
-          <p className="text-xs text-ink-soft">
-            {child.tag && <span className="text-primary font-semibold">{child.tag} · </span>}
-            Linked {new Date(child.linkedAt).toLocaleDateString()}
-          </p>
-        </div>
-      </div>
+      </section>
 
-      {/* Tab bar */}
-      <div className="flex gap-1 rounded-2xl bg-accent/40 p-1">
-        {(["progress", "assignments", "notes"] as const).map((t) => (
+      <div className="grid grid-cols-3 gap-1 rounded-[22px] bg-accent/50 p-1 shadow-card">
+        {(["progress", "assignments", "notes"] as const).map((item) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={item}
+            onClick={() => setTab(item)}
             className={cn(
-              "flex-1 rounded-xl py-2 text-xs font-bold transition-all capitalize",
-              tab === t
-                ? "bg-card text-primary shadow-card"
-                : "text-ink-soft hover:text-ink",
+              "rounded-[18px] px-2 py-3 text-[11px] font-extrabold capitalize transition-all",
+              tab === item ? "bg-card text-primary shadow-card" : "text-ink-soft",
             )}
           >
-            {t === "assignments" ? `Assigned (${assignments.length})` : t === "notes" ? `Notes (${notes.length})` : t}
+            {item === "assignments"
+              ? `Assigned (${assignments.length})`
+              : item === "notes"
+                ? `Notes (${notes.length})`
+                : item}
           </button>
         ))}
       </div>
 
-      {/* Tab content */}
       {tab === "progress" && <ProgressTab childId={child.childId} />}
       {tab === "assignments" && (
         <AssignmentsTab
@@ -335,93 +369,101 @@ function ChildDetailView({
         />
       )}
       {tab === "notes" && (
-        <NotesTab
-          slpId={slpId}
-          childId={child.childId}
-          notes={notes}
-          onRefresh={onRefresh}
-        />
+        <NotesTab slpId={slpId} childId={child.childId} notes={notes} onRefresh={onRefresh} />
       )}
-
-      <div className="h-8" />
     </div>
   );
 }
 
-/* ── Progress tab ── */
-
-function ProgressTab({ childId }: { childId: string }) {
-  // In real implementation, this would fetch from Supabase
-  // using the child's ID. For now, show demo domain scores.
-  const demoScores: Record<string, number> = {
+function ProgressTab({ childId: _childId }: { childId: string }) {
+  const demoScores: Record<SkillDomain, number> = {
     listening: 78,
     story_structure: 65,
     vocabulary: 82,
     grammar: 58,
+    retell: 0,
+    phonological: 0,
   };
 
   const overallScore = Math.round(
-    Object.values(demoScores).reduce((a, b) => a + b, 0) / Object.keys(demoScores).length,
+    V1_DOMAINS.reduce((sum, domain) => sum + (demoScores[domain] ?? 0), 0) / V1_DOMAINS.length,
   );
 
   return (
     <div className="space-y-4 animate-slide-up">
-      {/* Overall score */}
-      <div className="rounded-2xl bg-card p-4 border-2 border-accent/40 shadow-card text-center">
-        <p className="text-xs font-bold uppercase tracking-wider text-ink-soft">Overall Score</p>
-        <p className="text-4xl font-extrabold text-primary mt-1">{overallScore}%</p>
-        <ScoreLabel score={overallScore} />
-      </div>
-
-      {/* Domain breakdown */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-ink-soft">Skill Domains</h3>
-        {V1_DOMAINS.map((domain) => {
-          const score = demoScores[domain] ?? 0;
-          const meta = DOMAIN_META[domain];
-          return (
-            <div key={domain} className="rounded-2xl bg-card p-3 border border-accent/30">
-              <div className="flex items-center justify-between mb-1.5">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">{meta?.icon}</span>
-                  <span className="text-sm font-bold text-ink">{meta?.label}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-extrabold text-primary">{score}%</span>
-                  <ScoreLabel score={score} size="sm" />
-                </div>
-              </div>
-              <div className="h-2 w-full rounded-full bg-accent/60 overflow-hidden">
-                <div
-                  className={cn("h-full rounded-full transition-all", meta?.color ?? "bg-primary")}
-                  style={{ width: `${score}%` }}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Mastery criteria progress */}
-      <div className="rounded-2xl bg-card p-4 border-2 border-accent/40 shadow-card">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-ink-soft mb-3">
-          Level 1 → 2 Mastery
-        </h3>
-        <p className="text-xs text-ink-soft leading-relaxed">
-          Needs 80%+ across 5 stories to advance. Currently tracking progress across completed stories.
-        </p>
-        <div className="mt-3 flex items-center gap-2">
-          <div className="flex-1 h-2.5 rounded-full bg-accent/60 overflow-hidden">
-            <div className="h-full rounded-full bg-secondary transition-all" style={{ width: "20%" }} />
+      <section className="rounded-[30px] bg-card p-5 shadow-soft">
+        <div className="grid grid-cols-[126px_1fr] items-center gap-4">
+          <ProgressRing value={overallScore} />
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-wide text-primary">
+              Overall score
+            </p>
+            <h2 className="mt-1 text-[24px] font-extrabold leading-tight text-ink">
+              {labelToDisplayText(scoreToLabel(overallScore))}
+            </h2>
+            <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+              Review strengths and supports before assigning the next story.
+            </p>
           </div>
-          <span className="text-xs font-bold text-ink-soft">1/5</span>
         </div>
-      </div>
+      </section>
+
+      <section className="rounded-[28px] bg-card p-4 shadow-card">
+        <h2 className="text-xl font-extrabold text-primary">Skill Domains</h2>
+        <div className="mt-4 space-y-3">
+          {V1_DOMAINS.map((domain) => {
+            const score = demoScores[domain] ?? 0;
+            const meta = DOMAIN_META[domain];
+            return (
+              <div key={domain} className="rounded-[22px] bg-background/70 p-3">
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span
+                      className={cn(
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl",
+                        meta.softColor,
+                      )}
+                    >
+                      {meta.icon}
+                    </span>
+                    <span className="truncate text-sm font-extrabold text-ink">{meta.label}</span>
+                  </div>
+                  <ScoreLabel score={score} />
+                </div>
+                <div className="h-3 overflow-hidden rounded-full bg-accent/70">
+                  <div
+                    className={cn("h-full rounded-full transition-all", meta.color)}
+                    style={{ width: `${score}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="rounded-[28px] bg-card p-4 shadow-card">
+        <div className="flex items-center gap-3">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[22px] bg-secondary/25 text-secondary-foreground">
+            <PaperPlaneIcon className="h-7 w-7" />
+          </span>
+          <div>
+            <h2 className="text-lg font-extrabold text-primary">Level 1 to 2 Mastery</h2>
+            <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
+              Needs 80%+ across 5 stories to advance. Currently tracking completed stories.
+            </p>
+          </div>
+        </div>
+        <div className="mt-4 flex items-center gap-2">
+          <div className="h-3 flex-1 overflow-hidden rounded-full bg-accent/70">
+            <div className="h-full w-[20%] rounded-full bg-secondary" />
+          </div>
+          <span className="text-xs font-extrabold text-primary">1/5</span>
+        </div>
+      </section>
     </div>
   );
 }
-
-/* ── Assignments tab ── */
 
 function AssignmentsTab({
   slpId,
@@ -458,23 +500,22 @@ function AssignmentsTab({
 
   return (
     <div className="space-y-3 animate-slide-up">
-      {sorted.map((a) => (
-        <div key={a.id} className="rounded-2xl bg-card p-3 border border-accent/30">
+      {sorted.map((assignment) => (
+        <div key={assignment.id} className="rounded-[24px] bg-card p-4 shadow-card">
           <div className="flex items-center gap-3">
-            <span className="text-lg">
-              {a.status === "completed" ? "✅" : a.status === "in_progress" ? "📖" : "📋"}
-            </span>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-ink truncate">{a.storyTitle}</p>
-              <p className="text-xs text-ink-soft">
-                Assigned {new Date(a.assignedAt).toLocaleDateString()}
-                {a.completedAt && ` · Completed ${new Date(a.completedAt).toLocaleDateString()}`}
+            <AssignmentStatusIcon status={assignment.status} />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-base font-extrabold text-ink">{assignment.storyTitle}</p>
+              <p className="text-xs font-semibold text-ink-soft">
+                Assigned {new Date(assignment.assignedAt).toLocaleDateString()}
+                {assignment.completedAt &&
+                  ` - Completed ${new Date(assignment.completedAt).toLocaleDateString()}`}
               </p>
             </div>
-            {a.status !== "completed" && (
+            {assignment.status !== "completed" && (
               <button
-                onClick={() => handleMarkComplete(a.id)}
-                className="text-xs font-bold text-success bg-success/10 px-2.5 py-1 rounded-full hover:bg-success/20 transition-colors"
+                onClick={() => handleMarkComplete(assignment.id)}
+                className="press-pop rounded-full bg-success/15 px-3 py-2 text-xs font-extrabold text-success"
               >
                 Done
               </button>
@@ -484,37 +525,47 @@ function AssignmentsTab({
       ))}
 
       {assignments.length === 0 && !showAssignForm && (
-        <div className="text-center py-6">
-          <p className="text-3xl mb-2">📋</p>
-          <p className="text-sm text-ink-soft">No stories assigned yet</p>
+        <div className="rounded-[28px] bg-card p-6 text-center shadow-card">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-primary">
+            <ClipboardIcon className="h-8 w-8" />
+          </div>
+          <p className="mt-3 text-sm font-extrabold text-ink-soft">No stories assigned yet</p>
         </div>
       )}
 
       {showAssignForm ? (
-        <div className="rounded-2xl bg-card p-4 border-2 border-primary/30 shadow-card space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wider text-ink-soft">Assign a story</p>
-          {stories.map((s) => {
-            const alreadyAssigned = assignments.some((a) => a.storyId === s.id && a.status !== "completed");
-            return (
-              <button
-                key={s.id}
-                onClick={() => !alreadyAssigned && handleAssign(s.id, s.title)}
-                disabled={alreadyAssigned}
-                className={cn(
-                  "w-full text-left rounded-xl p-3 border transition-all",
-                  alreadyAssigned
-                    ? "border-accent/20 bg-accent/10 opacity-50 cursor-not-allowed"
-                    : "border-accent/40 bg-card hover:border-primary/40 active:scale-[0.98]",
-                )}
-              >
-                <p className="text-sm font-bold text-ink">{s.title}</p>
-                {alreadyAssigned && <p className="text-xs text-ink-soft">Already assigned</p>}
-              </button>
-            );
-          })}
+        <div className="rounded-[28px] border-2 border-primary/30 bg-card p-4 shadow-soft">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-primary">
+            Assign a story
+          </p>
+          <div className="mt-3 space-y-2">
+            {stories.map((story) => {
+              const alreadyAssigned = assignments.some(
+                (a) => a.storyId === story.id && a.status !== "completed",
+              );
+              return (
+                <button
+                  key={story.id}
+                  onClick={() => !alreadyAssigned && handleAssign(story.id, story.title)}
+                  disabled={alreadyAssigned}
+                  className={cn(
+                    "w-full rounded-[20px] border p-3 text-left transition-all",
+                    alreadyAssigned
+                      ? "cursor-not-allowed border-accent/30 bg-accent/20 opacity-55"
+                      : "press-pop border-accent/60 bg-background/70",
+                  )}
+                >
+                  <p className="text-sm font-extrabold text-ink">{story.title}</p>
+                  <p className="mt-1 text-xs font-semibold text-ink-soft">
+                    {alreadyAssigned ? "Already assigned" : `Level ${story.level} - ${story.theme}`}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
           <button
             onClick={() => setShowAssignForm(false)}
-            className="w-full text-center text-xs font-semibold text-ink-soft py-2"
+            className="mt-3 w-full py-2 text-center text-sm font-extrabold text-ink-soft"
           >
             Cancel
           </button>
@@ -522,16 +573,14 @@ function AssignmentsTab({
       ) : (
         <button
           onClick={() => setShowAssignForm(true)}
-          className="w-full rounded-2xl border-2 border-dashed border-primary/30 p-3 text-center text-sm font-bold text-primary hover:bg-primary/5 transition-colors active:scale-[0.98]"
+          className="press-pop w-full rounded-[24px] border-2 border-dashed border-primary/35 bg-card p-4 text-center text-sm font-extrabold text-primary shadow-card"
         >
-          + Assign a story
+          Add Story Assignment
         </button>
       )}
     </div>
   );
 }
-
-/* ── Notes tab ── */
 
 function NotesTab({
   slpId,
@@ -550,7 +599,10 @@ function NotesTab({
 
   function handleSave() {
     if (!noteText.trim()) return;
-    const tagList = tags.split(",").map((t) => t.trim()).filter(Boolean);
+    const tagList = tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
     addNote(slpId, childId, noteText.trim(), { tags: tagList });
     setNoteText("");
     setTags("");
@@ -563,41 +615,45 @@ function NotesTab({
     onRefresh();
   }
 
-  const sorted = [...notes].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+  const sorted = [...notes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="space-y-3 animate-slide-up">
-      {/* New note form */}
       {showForm ? (
-        <div className="rounded-2xl bg-card p-4 border-2 border-primary/30 shadow-card space-y-3">
-          <p className="text-xs font-bold uppercase tracking-wider text-ink-soft">New session note</p>
+        <div className="rounded-[28px] border-2 border-primary/30 bg-card p-4 shadow-soft">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-primary">
+            New session note
+          </p>
           <textarea
             value={noteText}
             onChange={(e) => setNoteText(e.target.value)}
             placeholder="Observations, goals, progress notes..."
             rows={4}
-            className="w-full rounded-xl border-2 border-muted bg-background p-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-primary focus:outline-none resize-none transition-colors"
+            className="mt-3 w-full resize-none rounded-[20px] border-2 border-accent/70 bg-background/80 p-3 text-sm font-semibold text-ink placeholder:text-ink-soft/45 focus:border-primary focus:outline-none"
           />
           <input
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             placeholder="Tags (comma separated)"
-            className="w-full rounded-xl border-2 border-muted bg-background p-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-primary focus:outline-none transition-colors"
+            className="mt-3 w-full rounded-[20px] border-2 border-accent/70 bg-background/80 p-3 text-sm font-semibold text-ink placeholder:text-ink-soft/45 focus:border-primary focus:outline-none"
           />
-          <div className="flex gap-2">
-            <button
-              onClick={handleSave}
+          <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
+            <TactileButton
+              variant="primary"
               disabled={!noteText.trim()}
-              className="flex-1 rounded-xl bg-primary text-primary-foreground py-2.5 text-sm font-bold disabled:opacity-40 transition-opacity active:scale-[0.98]"
+              className="h-12 rounded-2xl text-base"
+              onClick={handleSave}
             >
-              Save note
-            </button>
+              Save Note
+            </TactileButton>
             <button
-              onClick={() => { setShowForm(false); setNoteText(""); setTags(""); }}
-              className="rounded-xl bg-accent/60 text-ink-soft px-4 py-2.5 text-sm font-bold active:scale-[0.98]"
+              onClick={() => {
+                setShowForm(false);
+                setNoteText("");
+                setTags("");
+              }}
+              className="rounded-2xl bg-accent px-4 text-sm font-extrabold text-primary"
             >
               Cancel
             </button>
@@ -606,31 +662,37 @@ function NotesTab({
       ) : (
         <button
           onClick={() => setShowForm(true)}
-          className="w-full rounded-2xl border-2 border-dashed border-primary/30 p-3 text-center text-sm font-bold text-primary hover:bg-primary/5 transition-colors active:scale-[0.98]"
+          className="press-pop w-full rounded-[24px] border-2 border-dashed border-primary/35 bg-card p-4 text-center text-sm font-extrabold text-primary shadow-card"
         >
-          + Add session note
+          Add Session Note
         </button>
       )}
 
-      {/* Notes list */}
       {sorted.map((note) => (
-        <div key={note.id} className="rounded-2xl bg-card p-4 border border-accent/30">
+        <div key={note.id} className="rounded-[24px] bg-card p-4 shadow-card">
           <div className="flex items-start justify-between gap-2">
-            <p className="text-xs font-bold text-ink-soft">
-              {new Date(note.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            <p className="text-xs font-extrabold text-primary">
+              {new Date(note.date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
             </p>
             <button
               onClick={() => handleDelete(note.id)}
-              className="text-xs text-ink-soft/50 hover:text-destructive transition-colors"
+              className="text-xs font-extrabold text-ink-soft/60 transition-colors hover:text-destructive"
             >
               Remove
             </button>
           </div>
-          <p className="text-sm text-ink mt-1.5 leading-relaxed">{note.content}</p>
+          <p className="mt-2 text-sm font-semibold leading-relaxed text-ink">{note.content}</p>
           {note.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-2">
+            <div className="mt-3 flex flex-wrap gap-1">
               {note.tags.map((tag) => (
-                <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">
+                <span
+                  key={tag}
+                  className="rounded-full bg-accent px-2.5 py-1 text-[10px] font-extrabold text-primary"
+                >
                   {tag}
                 </span>
               ))}
@@ -640,18 +702,16 @@ function NotesTab({
       ))}
 
       {notes.length === 0 && !showForm && (
-        <div className="text-center py-6">
-          <p className="text-3xl mb-2">📝</p>
-          <p className="text-sm text-ink-soft">No session notes yet</p>
+        <div className="rounded-[28px] bg-card p-6 text-center shadow-card">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-primary">
+            <NoteIcon className="h-8 w-8" />
+          </div>
+          <p className="mt-3 text-sm font-extrabold text-ink-soft">No session notes yet</p>
         </div>
       )}
     </div>
   );
 }
-
-/* ═══════════════════════════════════════════
- * LINK PARENT MODAL
- * ═══════════════════════════════════════════ */
 
 function LinkParentModal({
   slpId,
@@ -667,7 +727,7 @@ function LinkParentModal({
   const [busy, setBusy] = useState(false);
   const [linkedName, setLinkedName] = useState<string | null>(null);
 
-  async function handleLink(e: React.FormEvent) {
+  async function handleLink(e: FormEvent) {
     e.preventDefault();
     if (code.trim().length < 6 || busy) return;
     setBusy(true);
@@ -686,72 +746,65 @@ function LinkParentModal({
 
   return (
     <div
-      className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm"
+      className="absolute inset-0 z-50 flex items-end justify-center bg-ink/45 px-3 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up"
+        className="w-full rounded-t-[34px] bg-card p-5 pb-7 shadow-soft animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
+        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
 
         {linkedName ? (
-          <div className="text-center py-4">
-            <p className="text-4xl mb-2">🎉</p>
-            <h3 className="text-lg font-extrabold text-ink mb-1">
+          <div className="py-4 text-center">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-secondary/25 text-secondary-foreground">
+              <Star className="h-11 w-11" />
+            </div>
+            <h3 className="mt-4 text-xl font-extrabold text-primary">
               {linkedName} joined your caseload
             </h3>
-            <p className="text-sm text-ink-soft mb-5">
+            <p className="mt-2 text-sm font-semibold text-ink-soft">
               You can now see their progress and assign stories.
             </p>
-            <button
-              onClick={onClose}
-              className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-bold transition-opacity active:scale-[0.98]"
-            >
+            <TactileButton className="mt-5" onClick={onClose}>
               Done
-            </button>
+            </TactileButton>
           </div>
         ) : (
           <>
-            <h3 className="text-lg font-extrabold text-ink mb-1">Add a child with an invite code</h3>
-            <p className="text-sm text-ink-soft mb-4 leading-relaxed">
-              Ask the parent to open Story Pros → Settings → "Share with your SLP"
-              and send you the 6-character code. Codes expire after 7 days.
+            <h3 className="text-2xl font-extrabold leading-tight text-primary">
+              Add a child with an invite code
+            </h3>
+            <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+              Ask the parent to open Settings, choose Share with your SLP, and send the 6-character
+              code. Codes expire after 7 days.
             </p>
 
-            <form onSubmit={handleLink} className="space-y-3">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1">
-                  Invite code
-                </label>
-                <input
-                  type="text"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value.toUpperCase())}
-                  placeholder="e.g. K7M2QX"
-                  maxLength={6}
-                  autoCapitalize="characters"
-                  autoCorrect="off"
-                  spellCheck={false}
-                  className="w-full rounded-2xl border-2 border-muted bg-background p-3 text-center text-xl font-extrabold tracking-[0.3em] text-ink placeholder:text-ink-soft/40 placeholder:tracking-normal placeholder:text-sm focus:border-primary focus:outline-none transition-colors"
-                />
-              </div>
+            <form onSubmit={handleLink} className="mt-4 space-y-3">
+              <label className="block text-xs font-extrabold uppercase tracking-wide text-primary">
+                Invite code
+              </label>
+              <input
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value.toUpperCase())}
+                placeholder="K7M2QX"
+                maxLength={6}
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck={false}
+                className="w-full rounded-[22px] border-2 border-accent bg-background p-4 text-center text-2xl font-extrabold tracking-[0.28em] text-ink placeholder:text-ink-soft/35 focus:border-primary focus:outline-none"
+              />
 
-              {error && (
-                <p className="text-sm font-semibold text-destructive">{error}</p>
-              )}
+              {error && <p className="text-sm font-extrabold text-destructive">{error}</p>}
 
-              <button
-                type="submit"
-                disabled={code.trim().length < 6 || busy}
-                className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-bold disabled:opacity-40 transition-opacity active:scale-[0.98]"
-              >
-                {busy ? "Checking code…" : "Link child"}
-              </button>
+              <TactileButton type="submit" disabled={code.trim().length < 6 || busy}>
+                {busy ? "Checking Code..." : "Link Child"}
+              </TactileButton>
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full text-center text-sm font-semibold text-ink-soft py-2"
+                className="w-full py-2 text-center text-sm font-extrabold text-ink-soft"
               >
                 Cancel
               </button>
@@ -763,40 +816,282 @@ function LinkParentModal({
   );
 }
 
-/* ═══════════════════════════════════════════
- * SMALL COMPONENTS
- * ═══════════════════════════════════════════ */
-
-function StatCard({ value, label, icon }: { value: number; label: string; icon: string }) {
+function DashboardBackdrop() {
   return (
-    <div className="rounded-2xl bg-card p-3 border border-accent/30 text-center">
-      <p className="text-lg mb-0.5">{icon}</p>
-      <p className="text-xl font-extrabold text-primary">{value}</p>
-      <p className="text-[10px] font-bold uppercase tracking-wider text-ink-soft">{label}</p>
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/30" />
+      <div className="absolute -right-16 top-32 h-56 w-60 rounded-full bg-accent/60 blur-3xl" />
+      <div className="absolute -left-20 bottom-20 h-56 w-64 rounded-full bg-sky/45 blur-3xl" />
+      <Star className="absolute left-10 top-32 h-4 w-4 text-secondary animate-sparkle" />
+      <Star className="absolute right-12 top-44 h-5 w-5 text-secondary animate-sparkle" />
+      <MiniPlane className="absolute right-16 top-24 h-10 w-10 rotate-12 text-secondary animate-float" />
     </div>
   );
 }
 
-function ScoreLabel({ score, size = "md" }: { score: number; size?: "sm" | "md" }) {
+function MetricCard({
+  icon,
+  value,
+  label,
+  tone = "primary",
+}: {
+  icon: ReactNode;
+  value: ReactNode;
+  label: string;
+  tone?: "primary" | "secondary";
+}) {
+  return (
+    <div className="rounded-[24px] bg-card p-3.5 shadow-card">
+      <span
+        className={cn(
+          "flex h-12 w-12 items-center justify-center rounded-[20px]",
+          tone === "primary"
+            ? "bg-accent text-primary"
+            : "bg-secondary/25 text-secondary-foreground",
+        )}
+      >
+        {icon}
+      </span>
+      <p className="mt-3 text-2xl font-extrabold leading-none text-ink">{value}</p>
+      <p className="mt-1 text-sm font-extrabold leading-tight text-primary">{label}</p>
+    </div>
+  );
+}
+
+function ChildAvatar({ name, size = "md" }: { name: string; size?: "md" | "lg" }) {
+  return (
+    <span
+      className={cn(
+        "flex shrink-0 items-center justify-center rounded-full bg-accent text-primary shadow-card",
+        size === "lg" ? "h-16 w-16 text-2xl" : "h-13 w-13 text-xl",
+      )}
+    >
+      <span className="font-extrabold">{name.charAt(0).toUpperCase()}</span>
+    </span>
+  );
+}
+
+function ProgressRing({ value }: { value: number }) {
+  return (
+    <div
+      className="relative flex h-[126px] w-[126px] items-center justify-center rounded-full"
+      style={{
+        background: `conic-gradient(var(--primary) ${value * 3.6}deg, oklch(0.9 0.05 300) 0deg)`,
+      }}
+    >
+      <div className="flex h-[102px] w-[102px] flex-col items-center justify-center rounded-full bg-card text-center shadow-inner">
+        <span className="text-[30px] font-extrabold leading-none text-primary">{value}%</span>
+        <span className="mt-1 text-[11px] font-extrabold leading-tight text-ink">Overall</span>
+      </div>
+    </div>
+  );
+}
+
+function ScoreLabel({ score }: { score: number }) {
   const label = scoreToLabel(score);
   const display = labelToDisplayText(label);
 
   const colorMap: Record<string, string> = {
     strength: "bg-success/15 text-success",
-    growing: "bg-blue-500/15 text-blue-600",
-    budding: "bg-amber-500/15 text-amber-600",
+    growing: "bg-primary/15 text-primary",
+    budding: "bg-secondary/25 text-secondary-foreground",
     needs_support: "bg-destructive/15 text-destructive",
   };
 
   return (
+    <span className={cn("rounded-full px-2.5 py-1 text-[10px] font-extrabold", colorMap[label])}>
+      {score}% - {display}
+    </span>
+  );
+}
+
+function AssignmentStatusIcon({ status }: { status: StoryAssignment["status"] }) {
+  const done = status === "completed";
+  const inProgress = status === "in_progress";
+  return (
     <span
       className={cn(
-        "inline-block rounded-full font-bold",
-        colorMap[label] ?? "bg-accent text-ink-soft",
-        size === "sm" ? "px-2 py-0.5 text-[10px]" : "px-3 py-1 text-xs mt-1",
+        "flex h-12 w-12 shrink-0 items-center justify-center rounded-[20px]",
+        done
+          ? "bg-success/15 text-success"
+          : inProgress
+            ? "bg-accent text-primary"
+            : "bg-secondary/25 text-secondary-foreground",
       )}
     >
-      {display}
+      {done ? <CheckIcon /> : inProgress ? <BookIcon className="h-6 w-6" /> : <ClipboardIcon />}
     </span>
+  );
+}
+
+function ChevronLeftIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      aria-hidden
+    >
+      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ClipboardIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M9 4h6l1 2h3v14H5V6h3l1-2z" strokeLinejoin="round" />
+      <path d="M9 11h6M9 15h5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BriefcaseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-11 w-11"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M9 7V5h6v2M4 8h16v11H4V8z" strokeLinejoin="round" />
+      <path d="M4 12h16M10 12v2h4v-2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function NoteIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M5 4h14v16H5V4z" strokeLinejoin="round" />
+      <path d="M8 9h8M8 13h8M8 17h5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function EarIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M7 10a5 5 0 1110 0c0 4-4 4-4 7a3 3 0 01-6 0" strokeLinecap="round" />
+      <path d="M10 10a2 2 0 114 0" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function TextIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M4 7h16M8 7v10M16 7v10M7 17h4M13 17h4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function PencilIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M4 20l4-1 11-11-3-3L5 16l-1 4z" strokeLinejoin="round" />
+      <path d="M14 7l3 3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function RetellIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M5 7h10a4 4 0 010 8H8" strokeLinecap="round" />
+      <path d="M9 11l-4 4 4 4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SoundIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M4 14h4l5 4V6L8 10H4v4z" strokeLinejoin="round" />
+      <path d="M17 9c1 1 1 5 0 6M20 7c2 3 2 7 0 10" strokeLinecap="round" />
+    </svg>
   );
 }
