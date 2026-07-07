@@ -1,24 +1,25 @@
-/* ─────────────────────────────────────────────
- * Sentence Builder Phase — Must-Complete
- * Child selects the correct ending for sentence frames.
- * Brain check: "Does your ending tell why?"
- * ───────────────────────────────────────────── */
-
-import { useState, useRef, useEffect } from "react";
-import { TactileButton } from "../TactileButton";
-import { ProgressHeader } from "./ProgressHeader";
-import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
-import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
-import dariaSolo from "@/assets/daria-solo.png";
+import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
+import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
+import { TactileButton } from "../TactileButton";
+import { MiniPlane, Star } from "../StoryProsBrand";
+import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
+import { ProgressHeader } from "./ProgressHeader";
 
 type FeedbackState =
   | { type: "none" }
   | { type: "correct"; brainCheck: string }
   | { type: "wrong"; brainCheck: string };
 
-export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed = "normal", childId = "demo" }: StoryPhaseProps) {
+export function SentenceBuilderPhase({
+  storyData,
+  onComplete,
+  onClose,
+  ttsSpeed = "normal",
+  childId = "demo",
+}: StoryPhaseProps) {
   const frames = storyData.sentence_frames;
   const [frameIdx, setFrameIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -29,26 +30,47 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
   const [speaking, setSpeaking] = useState(false);
   const startTime = useRef(Date.now());
 
-  useEffect(() => { preloadVoices(); }, []);
-  useEffect(() => { return () => { stop(); setSpeaking(false); }; }, [frameIdx]);
+  useEffect(() => {
+    preloadVoices();
+  }, []);
 
-  async function handleListenFrame() {
-    if (speaking) { stop(); setSpeaking(false); return; }
-    setSpeaking(true);
-    try { await speak(frame.frame_text.replace("___", "blank"), { rate: speedToRate(ttsSpeed) }); } catch {}
-    setSpeaking(false);
-  }
+  useEffect(() => {
+    return () => {
+      stop();
+      setSpeaking(false);
+    };
+  }, [frameIdx]);
 
   const frame = frames[frameIdx];
   const progress = (frameIdx / frames.length) * 100;
+  const [beforeBlank] = frame.frame_text.split("___");
+  const selectedChoice = frame.choices.find((choice) => choice.id === selected);
+  const showingFeedback = feedback.type !== "none";
+
+  async function handleListenFrame() {
+    if (speaking) {
+      stop();
+      setSpeaking(false);
+      return;
+    }
+
+    setSpeaking(true);
+    try {
+      await speak(frame.frame_text.replace("___", "blank"), {
+        rate: speedToRate(ttsSpeed),
+      });
+    } catch {
+      // Ignore browser TTS errors.
+    }
+    setSpeaking(false);
+  }
 
   function handleCheck() {
     if (!selected) return;
 
     const elapsed = Date.now() - startTime.current;
-    const choice = frame.choices.find((c) => c.id === selected)!;
-    const isCorrect = choice.correct;
-
+    const choice = frame.choices.find((item) => item.id === selected);
+    const isCorrect = !!choice?.correct;
     const attempt: ActivityAttempt = {
       child_id: childId,
       story_id: storyData.id,
@@ -66,17 +88,16 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
       setFeedback({ type: "wrong", brainCheck: frame.brain_check_prompt });
-      setCurrentAttempt((a) => a + 1);
+      setCurrentAttempt((attemptNumber) => attemptNumber + 1);
     }
   }
 
   function handleContinue() {
     if (feedback.type === "correct") {
       if (frameIdx + 1 >= frames.length) {
-        const firstAttempts = attempts.filter((a) => a.attempt_number === 1);
-        const correctFirst = firstAttempts.filter((a) => a.is_correct).length;
+        const firstAttempts = attempts.filter((attempt) => attempt.attempt_number === 1);
+        const correctFirst = firstAttempts.filter((attempt) => attempt.is_correct).length;
         const accuracy = frames.length > 0 ? correctFirst / frames.length : 0;
-
         onComplete({
           phase: "sentence-builder",
           attempts: [...attempts],
@@ -85,159 +106,175 @@ export function SentenceBuilderPhase({ storyData, onComplete, onClose, ttsSpeed 
         });
         return;
       }
+
       setFrameIdx(frameIdx + 1);
       setSelected(null);
       setFeedback({ type: "none" });
       setCurrentAttempt(1);
       setWrongIds(new Set());
       startTime.current = Date.now();
-    } else {
-      setSelected(null);
-      setFeedback({ type: "none" });
+      return;
     }
+
+    setSelected(null);
+    setFeedback({ type: "none" });
   }
 
-  const showingFeedback = feedback.type !== "none";
-
-  // Split the frame text at the blank
-  const [beforeBlank] = frame.frame_text.split("___");
-  const selectedChoice = frame.choices.find((c) => c.id === selected);
-
   return (
-    <div className="flex h-full flex-col">
-      <ProgressHeader
-        progress={progress}
-        label={`Sentence ${frameIdx + 1} of ${frames.length}`}
-        onClose={onClose}
-      />
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+        <Star className="absolute left-8 top-32 h-4 w-4 text-secondary animate-sparkle" />
+        <Star className="absolute right-8 top-48 h-5 w-5 text-primary/30 animate-sparkle" />
+        <MiniPlane className="absolute right-12 bottom-24 h-9 w-9 rotate-12 text-secondary animate-float" />
+      </div>
 
-      {/* Feedback overlay */}
+      <div className="relative z-10">
+        <ProgressHeader
+          progress={progress}
+          label={`${frameIdx + 1}/${frames.length}`}
+          onClose={onClose}
+        />
+      </div>
+
       {showingFeedback && (
-        <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm animate-slide-up">
-          <div className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft" onClick={(e) => e.stopPropagation()}>
-            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
-
-            <div className="flex items-start gap-3">
-              <img src={dariaSolo} alt="" className="h-16 w-auto object-contain" />
-              <div className="flex-1">
-                <div className={cn(
-                  "rounded-2xl rounded-bl-sm p-4 shadow-card",
-                  feedback.type === "correct" ? "bg-success/10 border-2 border-success" : "bg-sky",
-                )}>
-                  <p className="text-base font-semibold leading-snug text-primary">
-                    {feedback.type === "correct"
-                      ? `Yes! ${feedback.brainCheck} Your ending makes sense!`
-                      : `${feedback.brainCheck} Think about the story again.`}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 flex items-center justify-center gap-2">
-              {feedback.type === "correct" ? (
-                <>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-success text-success-foreground">
-                    <svg viewBox="0 0 24 24" className="h-5 w-5" stroke="currentColor" strokeWidth="3" fill="none">
-                      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <span className="text-lg font-bold text-success">Great sentence!</span>
-                </>
-              ) : (
-                <>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-destructive text-destructive-foreground">
-                    <svg viewBox="0 0 24 24" className="h-5 w-5" stroke="currentColor" strokeWidth="3" fill="none">
-                      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-                    </svg>
-                  </span>
-                  <span className="text-lg font-bold text-destructive">Let's try again!</span>
-                </>
+        <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm">
+          <div className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up">
+            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
+            <div
+              className={cn(
+                "rounded-[24px] p-4 text-center shadow-card",
+                feedback.type === "correct"
+                  ? "border-2 border-success bg-success/10 animate-tada"
+                  : "bg-sky animate-shake",
               )}
+            >
+              <p className="text-xl font-extrabold text-primary">
+                {feedback.type === "correct" ? "Great sentence!" : "Try again"}
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+                {feedback.type === "correct"
+                  ? `Yes. ${feedback.brainCheck}`
+                  : `${feedback.brainCheck} Think about the story again.`}
+              </p>
             </div>
-
             <div className="mt-5">
               <TactileButton
                 variant={feedback.type === "correct" ? "primary" : "secondary"}
                 onClick={handleContinue}
               >
-                {feedback.type === "correct"
-                  ? frameIdx + 1 >= frames.length
-                    ? "See results"
-                    : "Next sentence"
-                  : "Try again"}
+                {feedback.type === "correct" ? "Next" : "Try Again"}
               </TactileButton>
             </div>
           </div>
         </div>
       )}
 
-      {/* Sentence frame display — connective highlighted */}
-      <div key={`frame-${frameIdx}`} className="mx-5 mt-5 animate-slide-up">
-        <div className="rounded-3xl bg-card p-5 shadow-card">
-          <p className="font-display text-[22px] leading-snug font-semibold text-primary">
-            {highlightConnective(beforeBlank, storyData.target_connective)}
-            <span className={cn(
-              "inline-block min-w-[120px] border-b-3 mx-1 pb-0.5 text-center transition-all",
-              selected ? "border-primary text-primary" : "border-ink-soft/30 text-ink-soft/50",
-            )}>
-              {selectedChoice ? selectedChoice.text : "___"}
+      <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
+        <section className="rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
+          <div className="flex items-center gap-3">
+            <span className="flex h-14 w-14 items-center justify-center rounded-[22px] bg-accent text-primary">
+              <BookCheckIcon className="h-8 w-8" />
             </span>
-          </p>
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
+                Sentence Builder
+              </p>
+              <h1 className="text-[28px] font-extrabold leading-tight text-primary">
+                Finish the idea
+              </h1>
+            </div>
+          </div>
+
+          <div className="mt-5 rounded-[24px] bg-accent/60 p-4">
+            <p className="text-[22px] font-extrabold leading-snug text-primary">
+              {highlightConnective(beforeBlank, storyData.target_connective)}
+              <span
+                className={cn(
+                  "mx-1 inline-block min-w-[112px] rounded-2xl border-2 px-2 py-1 text-center transition-all",
+                  selected
+                    ? "border-primary bg-card text-primary"
+                    : "border-primary/20 bg-card/70 text-ink-soft/60",
+                )}
+              >
+                {selectedChoice ? selectedChoice.text : "..."}
+              </span>
+            </p>
+          </div>
+
+          <div className="mt-3 flex items-center justify-between gap-2">
+            <span className="rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
+              Word: {storyData.target_connective}
+            </span>
+            {isSupported() && (
+              <button
+                onClick={handleListenFrame}
+                className="press-pop inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-extrabold text-primary-foreground"
+              >
+                {speaking ? "Stop" : "Listen"}
+                <SpeakerIcon playing={speaking} />
+              </button>
+            )}
+          </div>
+        </section>
+
+        <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
+          {frame.choices.map((choice, index) => {
+            const isSelected = selected === choice.id;
+            const isDisabled = wrongIds.has(choice.id);
+            return (
+              <button
+                key={choice.id}
+                onClick={() => !isDisabled && setSelected(choice.id)}
+                disabled={isDisabled}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
+                  isSelected && "border-primary bg-primary/5 -translate-y-0.5",
+                  !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
+                  isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
+                )}
+              >
+                <span
+                  className={cn(
+                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
+                    isSelected ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
+                  )}
+                >
+                  {String.fromCharCode(65 + index)}
+                </span>
+                <span
+                  className={cn(
+                    "flex-1 text-base font-extrabold leading-snug",
+                    isDisabled ? "text-ink-soft line-through" : "text-ink",
+                  )}
+                >
+                  {choice.text}
+                </span>
+              </button>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Connective hint — dynamic based on target connective */}
-      <div className="mx-5 mt-3 flex items-center gap-2">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground text-xs font-bold">
-          🔗
-        </span>
-        <span className="text-sm font-semibold text-ink-soft">
-          Use <span className="rounded bg-secondary/25 px-1 font-bold text-secondary-foreground">{storyData.target_connective}</span> to tell <span className="text-primary font-bold">why</span>
-        </span>
-      </div>
-
-      {/* Support: Listen Again */}
-      {isSupported() && (
-        <div className="mx-5 mt-2">
-          <button
-            onClick={handleListenFrame}
-            className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary btn-tactile"
-          >
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-            {speaking ? "Stop" : "Listen again"}
-          </button>
-        </div>
-      )}
-
-      {/* Choice chips */}
-      <div className="mx-5 mt-4 space-y-3 flex-1 overflow-y-auto no-scrollbar pb-2">
-        {frame.choices.map((choice) => {
-          const isSelected = selected === choice.id;
-          const isDisabled = wrongIds.has(choice.id);
-          return (
-            <button
-              key={choice.id}
-              onClick={() => !isDisabled && setSelected(choice.id)}
-              disabled={isDisabled}
-              className={cn(
-                "w-full rounded-3xl border-2 bg-card p-4 text-left text-base font-semibold shadow-card transition-all btn-tactile",
-                isSelected
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-transparent text-ink",
-                isDisabled && "opacity-40 line-through",
-              )}
-            >
-              {choice.text}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="mx-5 mb-4 mt-3">
-        <TactileButton onClick={handleCheck} disabled={!selected}>
-          Check
+        <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
+          Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
         </TactileButton>
       </div>
     </div>
+  );
+}
+
+function SpeakerIcon({ playing }: { playing: boolean }) {
+  if (playing) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
+        <rect x="6" y="6" width="12" height="12" rx="2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
+      <path d="M8 5v14l11-7z" />
+    </svg>
   );
 }
