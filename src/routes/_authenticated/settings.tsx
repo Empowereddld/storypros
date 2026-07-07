@@ -12,10 +12,18 @@ function SettingsPage() {
   const { profile } = useAuth();
   const isClinician = profile?.role === "slp" || profile?.role === "teacher";
   const home = isClinician ? "/slp" : "/home";
+  const handleSettingsNavigate = (destination: string) => {
+    if (destination === "paywall") navigate({ to: "/paywall" });
+  };
 
   // SLP/teacher accounts are adult-only — no gate needed
   if (isClinician) {
-    return <SettingsScreen onClose={() => navigate({ to: home })} />;
+    return (
+      <SettingsScreen
+        onClose={() => navigate({ to: home })}
+        onNavigate={handleSettingsNavigate}
+      />
+    );
   }
 
   return (
@@ -23,7 +31,10 @@ function SettingsPage() {
       message="Settings is for parents and caregivers."
       onCancel={() => navigate({ to: home })}
     >
-      <SettingsScreen onClose={() => navigate({ to: home })} />
+      <SettingsScreen
+        onClose={() => navigate({ to: home })}
+        onNavigate={handleSettingsNavigate}
+      />
     </ParentGate>
   );
 }
