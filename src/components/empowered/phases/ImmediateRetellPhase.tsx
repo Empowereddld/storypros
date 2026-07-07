@@ -6,6 +6,7 @@ import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { ListenButton, useListen } from "./ListenButton";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Who",
@@ -25,10 +26,17 @@ const ELEMENT_HELPERS: Record<StoryElement, string> = {
   result: "Finish with what changed.",
 };
 
-export function ImmediateRetellPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function ImmediateRetellPhase({
+  storyData,
+  onComplete,
+  onClose,
+  ttsSpeed = "normal",
+}: StoryPhaseProps) {
   const elements = storyData.retell_prompts.story_elements;
   const [tapped, setTapped] = useState<Set<StoryElement>>(new Set());
   const progress = elements.length > 0 ? (tapped.size / elements.length) * 100 : 0;
+  const immediatePrompt = storyData.retell_prompts.immediate;
+  const { supported, isPlaying, toggle } = useListen(ttsSpeed);
 
   function handleTap(element: StoryElement) {
     setTapped((prev) => {
@@ -76,10 +84,18 @@ export function ImmediateRetellPhase({ storyData, onComplete, onClose }: StoryPh
             </div>
           </div>
 
-          <div className="mt-5 rounded-[24px] bg-accent/60 p-4">
-            <p className="text-xl font-extrabold leading-snug text-primary">
+          <div className="mt-5 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
+            <p className="flex-1 text-xl font-extrabold leading-snug text-primary">
               Can you retell {storyData.title} from beginning to end?
             </p>
+            {supported && (
+              <ListenButton
+                playing={isPlaying("immediate")}
+                onClick={() => toggle(immediatePrompt, "immediate")}
+                className="h-11 w-11"
+                ariaLabel="Hear the retell prompt"
+              />
+            )}
           </div>
         </section>
 

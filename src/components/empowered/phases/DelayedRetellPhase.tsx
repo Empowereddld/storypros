@@ -5,11 +5,12 @@
  * Placed AFTER vocab + grammar activities.
  * ───────────────────────────────────────────── */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
+import { ListenButton, useListen } from "./ListenButton";
 
 const ELEMENT_ICONS: Record<StoryElement, string> = {
   character: "👤",
@@ -29,10 +30,20 @@ const ELEMENT_LABELS: Record<StoryElement, string> = {
   result: "Result",
 };
 
-export function DelayedRetellPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function DelayedRetellPhase({
+  storyData,
+  onComplete,
+  onClose,
+  ttsSpeed = "normal",
+}: StoryPhaseProps) {
   const elements = storyData.retell_prompts.story_elements;
   const [tapped, setTapped] = useState<Set<number>>(new Set());
   const [started, setStarted] = useState(false);
+  const delayedPrompt = storyData.retell_prompts.delayed;
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
+
+  // Stop narration once the child starts tapping story parts.
+  useEffect(() => cancel, [started, cancel]);
 
   const progress = started ? ((tapped.size / elements.length) * 80 + 20) : 0;
 
@@ -64,8 +75,16 @@ export function DelayedRetellPhase({ storyData, onComplete, onClose }: StoryPhas
             Remember the story?
           </h2>
           <p className="text-base font-semibold text-ink-soft text-center mb-2">
-            {storyData.retell_prompts.delayed}
+            {delayedPrompt}
           </p>
+          {supported && (
+            <ListenButton
+              playing={isPlaying("delayed")}
+              onClick={() => toggle(delayedPrompt, "delayed")}
+              className="mb-3 h-12 w-12"
+              ariaLabel="Hear the retell prompt"
+            />
+          )}
           <p className="text-sm text-ink-soft/70 text-center">
             Tap each story part as you talk about it.
           </p>

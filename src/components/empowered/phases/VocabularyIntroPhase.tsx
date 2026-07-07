@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { SFATeachingSlide, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
-import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { ListenButton, useListen } from "./ListenButton";
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
 
@@ -28,43 +28,22 @@ export function VocabularyIntroPhase({
   const [wordIdx, setWordIdx] = useState(0);
   const [featureIdx, setFeatureIdx] = useState(-1);
   const [revealed, setRevealed] = useState<Set<number>>(new Set());
-  const [speaking, setSpeaking] = useState(false);
+  // Vocab narration is clamped to at most "normal" speed for clarity.
+  const { supported, isPlaying, toggle, cancel } = useListen(
+    ttsSpeed === "fast" ? "normal" : ttsSpeed,
+  );
 
-  useEffect(() => {
-    preloadVoices();
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      stop();
-      setSpeaking(false);
-    };
-  }, [wordIdx]);
+  // Stop narration when the word or feature changes.
+  useEffect(() => cancel, [wordIdx, featureIdx, cancel]);
 
   const word = words[wordIdx];
   const wordImage = resolveStoryImage(storyData.id, word.image);
+  const introNarration = word.sfa_teaching?.intro_narration;
   const totalSteps = words.length * (SFA_KEYS.length + 1);
   const currentStep = wordIdx * (SFA_KEYS.length + 1) + (featureIdx + 1);
   const progress = (currentStep / totalSteps) * 100;
   const isOnTitleCard = featureIdx === -1;
   const allRevealed = !isOnTitleCard && revealed.size >= 1;
-
-  async function handlePronounce() {
-    if (speaking) {
-      stop();
-      setSpeaking(false);
-      return;
-    }
-
-    setSpeaking(true);
-    const vocabSpeed = ttsSpeed === "fast" ? "normal" : ttsSpeed;
-    try {
-      await speak(word.word, { rate: speedToRate(vocabSpeed) });
-    } catch {
-      // Ignore browser TTS errors.
-    }
-    setSpeaking(false);
-  }
 
   function handleNext() {
     if (featureIdx < SFA_KEYS.length - 1) {
@@ -126,24 +105,35 @@ export function VocabularyIntroPhase({
               {word.word}
             </h1>
 
-            {isSupported() && (
+            {supported && (
               <button
-                onClick={handlePronounce}
+                onClick={() => toggle(word.word, "word")}
                 className={cn(
                   "press-pop mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold shadow-card",
-                  speaking
+                  isPlaying("word")
                     ? "bg-destructive text-destructive-foreground animate-pulse-glow"
                     : "bg-primary text-primary-foreground",
                 )}
               >
-                {speaking ? "Stop" : "Hear It"}
-                <SpeakerIcon playing={speaking} />
+                {isPlaying("word") ? "Stop" : "Hear It"}
+                <SpeakerIcon playing={isPlaying("word")} />
               </button>
             )}
 
             <p className="mt-5 max-w-[285px] text-base font-semibold leading-relaxed text-ink-soft">
               {word.sfa_teaching?.intro_text ?? "Let's learn what this word means."}
             </p>
+
+            {supported && introNarration && (
+              <div className="mt-4 flex justify-center">
+                <ListenButton
+                  playing={isPlaying("intro")}
+                  onClick={() => toggle(introNarration, "intro")}
+                  className="h-12 w-12"
+                  ariaLabel="Hear about this word"
+                />
+              </div>
+            )}
           </section>
 
           <TactileButton className="mt-4" onClick={() => setFeatureIdx(0)}>
@@ -179,10 +169,11 @@ export function VocabularyIntroPhase({
               );
               const displayPrompt = teachingSlide?.prompt;
               const displayText = teachingSlide?.teaching_text || word.sfa[key];
+              const narration = teachingSlide?.narration;
 
               return (
+                <div key={key}>
                 <button
-                  key={key}
                   onClick={() => isActive && setRevealed((prev) => new Set(prev).add(index))}
                   disabled={!isActive}
                   className={cn(
@@ -219,6 +210,17 @@ export function VocabularyIntroPhase({
                     </div>
                   </div>
                 </button>
+                {isActive && isRevealed && supported && narration && (
+                  <div className="mt-2 flex justify-center">
+                    <ListenButton
+                      playing={isPlaying(`feat-${index}`)}
+                      onClick={() => toggle(narration, `feat-${index}`)}
+                      className="h-11 w-11"
+                      ariaLabel="Hear this feature"
+                    />
+                  </div>
+                )}
+                </div>
               );
             })}
           </div>

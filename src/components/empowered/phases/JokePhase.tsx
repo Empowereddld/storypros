@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { resolveStoryImage } from "@/services/storyImages";
 import type { StoryPhaseProps } from "@/types/story";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { ListenButton, useListen } from "./ListenButton";
 
 type Step = "intro" | "meaning1" | "meaning2" | "joke";
 
@@ -15,9 +16,13 @@ const PROGRESS: Record<Step, number> = {
   joke: 90,
 };
 
-export function JokePhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function JokePhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const [step, setStep] = useState<Step>("intro");
   const joke = storyData.joke;
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
+
+  // Stop narration when the child moves to another step.
+  useEffect(() => cancel, [step, cancel]);
   const meaningOneImage = resolveStoryImage(storyData.id, joke.meaning_1.image);
   const meaningTwoImage = resolveStoryImage(storyData.id, joke.meaning_2.image);
 
@@ -91,6 +96,16 @@ export function JokePhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
               <p className="mt-5 text-[28px] font-extrabold leading-tight text-primary">
                 {joke.joke_text}
               </p>
+              {supported && (
+                <div className="mt-4 flex justify-center">
+                  <ListenButton
+                    playing={isPlaying("joke")}
+                    onClick={() => toggle(joke.joke_text, "joke")}
+                    className="h-12 w-12"
+                    ariaLabel="Hear the joke"
+                  />
+                </div>
+              )}
               <p className="mt-4 text-sm font-semibold text-ink-soft">
                 Both meanings of &quot;{joke.word}&quot; make the joke work.
               </p>

@@ -21,6 +21,9 @@ dist-ssr
 .dev.vars
 .qa/
 
+# Secrets
+.env.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

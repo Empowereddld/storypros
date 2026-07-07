@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
-import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
+import { speak, speedToRate } from "@/services/tts";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { ListenButton, useListen } from "./ListenButton";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -24,16 +25,10 @@ export function PhonologicalPhase({
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const startTime = useRef(Date.now());
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
 
-  useEffect(() => {
-    preloadVoices();
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      stop();
-    };
-  }, [questionIndex]);
+  // Stop narration when the question changes.
+  useEffect(() => cancel, [questionIndex, cancel]);
 
   const item = items[questionIndex];
   const progress = (questionIndex / items.length) * 100;
@@ -41,7 +36,8 @@ export function PhonologicalPhase({
   const typeLabel = item.type === "rhyme" ? "Rhyme Time" : "Sound Detective";
 
   function pronounceOption(text: string) {
-    stop();
+    // Reset any playing prompt clip, then read the answer option aloud.
+    cancel();
     const phonSpeed = ttsSpeed === "fast" ? "normal" : ttsSpeed;
     speak(text, { rate: speedToRate(phonSpeed) }).catch(() => {});
   }
@@ -166,6 +162,16 @@ export function PhonologicalPhase({
           <h1 className="mt-3 text-[28px] font-extrabold leading-tight text-primary">
             {item.prompt}
           </h1>
+          {supported && (
+            <div className="mt-3 flex justify-center">
+              <ListenButton
+                playing={isPlaying("prompt")}
+                onClick={() => toggle(item.prompt, "prompt")}
+                className="h-12 w-12"
+                ariaLabel="Hear the question"
+              />
+            </div>
+          )}
         </section>
 
         <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
@@ -202,7 +208,7 @@ export function PhonologicalPhase({
                     {label}
                   </span>
                 </button>
-                {isSupported() && !isDisabled && (
+                {supported && !isDisabled && (
                   <button
                     onClick={() => pronounceOption(label)}
                     className="press-pop flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card"

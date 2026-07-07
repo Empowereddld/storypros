@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { ListenButton, useListen } from "./ListenButton";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -12,8 +13,10 @@ export function VocabularyQuizPhase({
   storyData,
   onComplete,
   onClose,
+  ttsSpeed = "normal",
   childId = "demo",
 }: StoryPhaseProps) {
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
   const words = storyData.vocabulary_words;
   const [wordIdx, setWordIdx] = useState(0);
   const [qIdx, setQIdx] = useState(0);
@@ -33,6 +36,9 @@ export function VocabularyQuizPhase({
     words.slice(0, wordIdx).reduce((sum, item) => sum + item.quiz_questions.length, 0) + qIdx;
   const progress = (questionsCompleted / totalQuestions) * 100;
   const showingFeedback = feedback.type !== "none";
+
+  // Stop narration when the question changes.
+  useEffect(() => cancel, [wordIdx, qIdx, cancel]);
 
   function handleCheck() {
     if (!selected) return;
@@ -158,6 +164,16 @@ export function VocabularyQuizPhase({
           <p className="mt-4 text-[23px] font-extrabold leading-tight text-ink">
             {question.prompt}
           </p>
+          {supported && (
+            <div className="mt-3 flex justify-center">
+              <ListenButton
+                playing={isPlaying("prompt")}
+                onClick={() => toggle(question.prompt, "prompt")}
+                className="h-12 w-12"
+                ariaLabel="Hear the question"
+              />
+            </div>
+          )}
         </section>
 
         {!optionsRevealed ? (

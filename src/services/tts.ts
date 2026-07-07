@@ -1,8 +1,10 @@
 /* ─────────────────────────────────────────────
  * Text-to-Speech Service
- * Uses the Web Speech API (SpeechSynthesis).
+ * Plays a pre-generated ElevenLabs narrator clip when one exists for the
+ * given line; otherwise falls back to the Web Speech API (SpeechSynthesis).
  * Provides speak/stop/isSpeaking functions.
  * ───────────────────────────────────────────── */
+import { getClipUrl } from "./storyAudio";
 
 export interface TTSOptions {
   rate: number;   // 0.6 = slow, 0.85 = normal, 1.1 = fast
@@ -16,6 +18,8 @@ const SPEED_MAP: Record<string, number> = {
 };
 
 let currentUtterance: SpeechSynthesisUtterance | null = null;
+let currentAudio: HTMLAudioElement | null = null;
+let currentAudioFinish: (() => void) | null = null;
 
 /** Check if browser supports speech synthesis */
 export function isSupported(): boolean {
@@ -51,16 +55,60 @@ function getPreferredVoice(): SpeechSynthesisVoice | null {
   return female ?? english[0] ?? voices[0] ?? null;
 }
 
-/** Speak text aloud */
-export function speak(text: string, options: TTSOptions): Promise<void> {
+/** Speak text aloud: plays the generated narrator clip if one exists, else Web Speech */
+export async function speak(text: string, options: TTSOptions): Promise<void> {
+  stop();
+
+  const clipUrl = await getClipUrl(text).catch(() => null);
+  if (clipUrl) {
+    try {
+      await playClip(clipUrl, options);
+      return;
+    } catch {
+      // Clip failed to load/play — fall back to browser TTS below.
+    }
+  }
+
+  await speakWithBrowserTts(text, options);
+}
+
+/** Play a pre-generated narrator clip */
+function playClip(url: string, options: TTSOptions): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const audio = new Audio(url);
+    audio.playbackRate = options.rate;
+
+    const finish = () => {
+      currentAudio = null;
+      currentAudioFinish = null;
+      resolve();
+    };
+
+    audio.onended = finish;
+    currentAudioFinish = finish;
+
+    audio.onerror = () => {
+      currentAudio = null;
+      currentAudioFinish = null;
+      reject(new Error("Audio clip playback failed"));
+    };
+
+    currentAudio = audio;
+    audio.play().catch((err) => {
+      currentAudio = null;
+      currentAudioFinish = null;
+      reject(err);
+    });
+  });
+}
+
+/** Speak text aloud via the Web Speech API */
+function speakWithBrowserTts(text: string, options: TTSOptions): Promise<void> {
   return new Promise((resolve, reject) => {
     if (!isSupported()) {
       resolve();
       return;
     }
-
-    // Stop any current speech
-    stop();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = options.rate;
@@ -96,6 +144,16 @@ export function speedToRate(speed: "slow" | "normal" | "fast"): number {
 
 /** Stop any current speech */
 export function stop(): void {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+  if (currentAudioFinish) {
+    const finish = currentAudioFinish;
+    currentAudioFinish = null;
+    finish();
+  }
   if (isSupported()) {
     window.speechSynthesis.cancel();
   }
@@ -104,6 +162,7 @@ export function stop(): void {
 
 /** Check if currently speaking */
 export function isSpeaking(): boolean {
+  if (currentAudio && !currentAudio.paused) return true;
   if (!isSupported()) return false;
   return window.speechSynthesis.speaking;
 }

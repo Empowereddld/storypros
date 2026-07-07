@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { StoryPhaseProps } from "@/types/story";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { ListenButton, useListen } from "./ListenButton";
 
-export function PersonalConnectionPhase({ storyData, onComplete, onClose }: StoryPhaseProps) {
+export function PersonalConnectionPhase({
+  storyData,
+  onComplete,
+  onClose,
+  ttsSpeed = "normal",
+}: StoryPhaseProps) {
   const [started, setStarted] = useState(false);
   const prompt = storyData.personal_connection.prompt;
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
+
+  // Stop narration when leaving the prompt view.
+  useEffect(() => cancel, [started, cancel]);
 
   function handleDone() {
     onComplete({
@@ -49,7 +59,17 @@ export function PersonalConnectionPhase({ storyData, onComplete, onClose }: Stor
             <span className="mb-4 inline-flex w-fit rounded-full bg-secondary/25 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
               Think and Share
             </span>
-            <h1 className="text-[30px] font-extrabold leading-tight text-primary">{prompt}</h1>
+            <div className="flex items-start gap-3">
+              <h1 className="flex-1 text-[30px] font-extrabold leading-tight text-primary">{prompt}</h1>
+              {supported && (
+                <ListenButton
+                  playing={isPlaying("prompt")}
+                  onClick={() => toggle(prompt, "prompt")}
+                  className="mt-1 h-12 w-12"
+                  ariaLabel="Hear the question"
+                />
+              )}
+            </div>
             <div className="mt-6 rounded-[28px] border-2 border-dashed border-primary/25 bg-accent/40 p-5 text-center">
               <p className="text-base font-extrabold text-primary">
                 Tell someone near you, or think about your answer quietly.
