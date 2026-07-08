@@ -1,7 +1,7 @@
 /* ---------------------------------------------
  * Story Complete Phase - Celebration!
  * Rebuilt from the "You did it!" mockup: big check
- * badge, characters, star rating + Paper Planes
+ * badge, characters, star rating + Coins
  * earned, with an optional skill breakdown.
  * --------------------------------------------- */
 
@@ -12,13 +12,12 @@ import {
   calculateDomainScores,
   calculateOverallScore,
   scoreToLabel,
-  labelToDisplayText,
   type SkillDomain,
 } from "@/services/scoring";
 import { cn } from "@/lib/utils";
 import dariaAndFriend from "@/assets/dan-daria-celebrate.webp";
 import { AuthBackdrop, MiniPlane, Star } from "../StoryProsBrand";
-import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ChevronRightIcon, CoinIcon } from "../StoryProsUi";
 
 interface StoryCompleteData {
   phaseResults: PhaseResult[];
@@ -36,6 +35,27 @@ const DOMAIN_LABELS: Record<SkillDomain, string> = {
 };
 
 const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
+
+/** Child-facing encouragement — never a grade, always something to feel good about. */
+function childEncouragement(label: ReturnType<typeof scoreToLabel>): string {
+  switch (label) {
+    case "strength":
+      return "Shining bright!";
+    case "growing":
+      return "Growing fast!";
+    case "budding":
+      return "Getting there!";
+    case "needs_support":
+      return "Keep practicing!";
+  }
+}
+
+const OVERALL_ENCOURAGEMENT: Record<ReturnType<typeof scoreToLabel>, string> = {
+  strength: "You're a Story Pro!",
+  growing: "Great effort today!",
+  budding: "Nice work today!",
+  needs_support: "You tried your best — try again anytime!",
+};
 
 export function StoryCompletePhase({
   storyData,
@@ -131,23 +151,23 @@ export function StoryCompletePhase({
           </div>
         </div>
 
-        {/* Paper Planes earned */}
+        {/* Coins earned */}
         <div className="mt-5 overflow-hidden rounded-[30px] border-2 border-secondary/80 bg-card shadow-card animate-pop-in">
           <div className="flex items-center justify-between gap-4 bg-secondary/12 p-4">
             <div>
               <p className="text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
-                Paper Planes earned
+                Coins earned
               </p>
               <p className="font-display text-[38px] font-extrabold leading-none text-primary">
                 +{paperPlanesEarned}
               </p>
             </div>
             <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-secondary text-secondary-foreground shadow-[0_5px_0_var(--secondary-deep)]">
-              <PaperPlaneIcon className="h-9 w-9" />
+              <CoinIcon className="h-9 w-9" />
             </span>
           </div>
           <div className="flex items-center justify-between px-4 py-3 text-sm font-bold text-ink-soft">
-            <span>Total Paper Planes</span>
+            <span>Total Coins</span>
             <span className="font-extrabold text-primary">{totalPaperPlanes}</span>
           </div>
         </div>
@@ -172,14 +192,14 @@ export function StoryCompletePhase({
               <h3 className="text-sm font-extrabold uppercase tracking-wider text-primary">
                 Your skills
               </h3>
-              <span className="rounded-full bg-card px-3 py-1 text-xs font-extrabold text-ink-soft shadow-card">
-                {overallScore}%
+              <span className="rounded-full bg-card px-3 py-1 text-xs font-extrabold text-primary shadow-card">
+                {OVERALL_ENCOURAGEMENT[scoreToLabel(overallScore)]}
               </span>
             </div>
             {V1_DOMAINS.map((domain) => {
               const score = domainScores[domain];
               const label = scoreToLabel(score);
-              const displayText = labelToDisplayText(label);
+              const displayText = childEncouragement(label);
               const barColor =
                 label === "strength"
                   ? "bg-success"

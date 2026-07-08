@@ -2,7 +2,7 @@
  * Intro / Onboarding Carousel
  * Rebuilt from the selected onboarding mockups:
  *   1. Learn Through Stories  (what you'll practice)
- *   2. Earn Paper Planes      (motivation)
+ *   2. Earn Coins             (motivation)
  *   3. Read, Watch & Listen   (how stories work)
  *   4. Meet Dan & Daria       (the characters)
  * ───────────────────────────────────────────── */
@@ -16,7 +16,7 @@ import danDariaReading from "@/assets/dan-daria-reading.webp";
 import dariaSolo from "@/assets/daria-solo.png";
 import childAvatar from "@/assets/child-avatar.png";
 import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
-import { PaperPlaneIcon } from "./StoryProsUi";
+import { CoinIcon } from "./StoryProsUi";
 
 interface IntroCarouselProps {
   onComplete: () => void;
@@ -120,16 +120,16 @@ function SlideLearn() {
   );
 }
 
-/* Slide 2: Earn Paper Planes */
+/* Slide 2: Earn Coins */
 
 function SlideRewards() {
   return (
     <div className="flex flex-1 flex-col justify-center">
       <h2 className="text-center font-display text-3xl font-extrabold leading-tight text-primary">
-        Earn Paper Planes <span className="text-secondary">&amp; Rewards</span>
+        Earn Coins <span className="text-secondary">&amp; Rewards</span>
       </h2>
       <p className="mx-auto mt-1.5 max-w-[18rem] text-center text-sm font-medium text-ink-soft">
-        Complete stories, collect Paper Planes, and unlock rewards.
+        Complete stories, collect Coins, and unlock rewards.
       </p>
 
       <img src={danDariaCelebrate} alt="" className="mx-auto mt-3 h-28 w-auto object-contain" />
@@ -137,7 +137,7 @@ function SlideRewards() {
       <div className="mt-3 rounded-3xl border border-accent/60 bg-card p-4 shadow-card">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2 font-bold text-primary">
-            <PaperPlaneIcon className="h-5 w-5 text-secondary" /> Paper Planes
+            <CoinIcon className="h-5 w-5 text-secondary" /> Coins
           </span>
           <span className="text-xl font-extrabold text-ink">120</span>
         </div>
@@ -153,7 +153,7 @@ function SlideRewards() {
         <div className="mt-3 flex justify-center gap-2 text-xs font-bold text-ink-soft">
           <Pill>Badges</Pill>
           <Pill>Wallpapers</Pill>
-          <Pill>Paper Planes</Pill>
+          <Pill>Planes</Pill>
         </div>
       </div>
     </div>

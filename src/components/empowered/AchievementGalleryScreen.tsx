@@ -15,9 +15,9 @@ import {
   AppBottomNav,
   BookCheckIcon,
   ChevronRightIcon,
+  CoinIcon,
   CurrencyBadge,
   MedalIcon,
-  PaperPlaneIcon,
 } from "./StoryProsUi";
 
 interface AchievementGalleryScreenProps {
@@ -147,14 +147,14 @@ export function AchievementGalleryScreen({
           >
             <div className="flex items-center gap-3">
               <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-secondary-foreground">
-                <PaperPlaneIcon className="h-8 w-8" />
+                <CoinIcon className="h-8 w-8" />
               </span>
               <div>
                 <p className="text-[30px] font-extrabold leading-none text-primary">
                   {paperPlanes}
                 </p>
                 <p className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
-                  Paper Planes
+                  Coins
                 </p>
               </div>
             </div>

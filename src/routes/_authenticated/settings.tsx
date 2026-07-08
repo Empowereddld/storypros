@@ -16,15 +16,13 @@ function SettingsPage() {
     if (destination === "paywall") navigate({ to: "/paywall" });
     if (destination === "home") navigate({ to: "/home" });
     if (destination === "slp") navigate({ to: "/slp" });
+    if (destination === "retell-library") navigate({ to: "/retell-library" });
   };
 
   // SLP/teacher accounts are adult-only — no gate needed
   if (isClinician) {
     return (
-      <SettingsScreen
-        onClose={() => navigate({ to: home })}
-        onNavigate={handleSettingsNavigate}
-      />
+      <SettingsScreen onClose={() => navigate({ to: home })} onNavigate={handleSettingsNavigate} />
     );
   }
 
@@ -33,10 +31,7 @@ function SettingsPage() {
       message="Settings is for parents and caregivers."
       onCancel={() => navigate({ to: home })}
     >
-      <SettingsScreen
-        onClose={() => navigate({ to: home })}
-        onNavigate={handleSettingsNavigate}
-      />
+      <SettingsScreen onClose={() => navigate({ to: home })} onNavigate={handleSettingsNavigate} />
     </ParentGate>
   );
 }

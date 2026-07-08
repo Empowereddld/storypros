@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         },
         {
           "id": "b",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         },
         {
           "id": "c",
           "label": "Daria",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         }
       ],
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         },
         {
           "id": "b",
           "label": "They sat at the table",
-          "emoji": "\ud83c\udfe0",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,17 +101,17 @@
         {
           "id": "a",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "c",
           "label": "They both wanted the same puzzle piece",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         }
       ],
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         },
         {
           "id": "b",
           "label": "Upset",
-          "emoji": "\ud83d\ude20",
+          "emoji": "😠",
           "correct": true
         },
         {
           "id": "c",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Daria took a breath and let her friend use the piece",
-          "emoji": "\u2708\ufe0f",
+          "emoji": "✈️",
           "correct": true
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "They finished the puzzle together",
-          "emoji": "\ud83d\ude34",
+          "emoji": "😴",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -369,7 +369,7 @@
             "narration": "You might find or use puzzle in table, classroom, or home. You might use a puzzle when you want to build a picture or solve something with pieces."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a puzzle.",
+        "transition_text": "Now let’s show what you know about a puzzle.",
         "connection_text": "Daria and her friend were building a puzzle together.",
         "connection_narration": "In this story, Daria and her friend were building a puzzle together."
       }
@@ -548,7 +548,7 @@
             "narration": "You might find or use piece in puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a piece.",
+        "transition_text": "Now let’s show what you know about a piece.",
         "connection_text": "Daria and her friend both wanted the same puzzle piece.",
         "connection_narration": "In this story, Daria and her friend both wanted the same puzzle piece."
       }
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "upset: feeling word. Daria felt upset.",
+        "intro_narration": "Listen for this word in the story: upset. Daria felt upset.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is upset in? Listen and look.",
+            "teaching_text": "upset is a feeling word.",
+            "narration": "upset is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel upset? Listen and look.",
+            "teaching_text": "Upset means something didn't go the way you wanted, and it doesn't feel good.",
+            "narration": "Upset means something didn't go the way you wanted, and it doesn't feel good."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does upset look like? Listen and look.",
+            "teaching_text": "upset looks like a frown and eyes that might tear up.",
+            "narration": "upset looks like a frown and eyes that might tear up."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show upset? Listen and look.",
+            "teaching_text": "Upset shows up in your face, your voice, and your body.",
+            "narration": "Upset shows up in your face, your voice, and your body."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel upset? Listen and look.",
+            "teaching_text": "You might feel upset when something doesn't go your way.",
+            "narration": "You might feel upset when something doesn't go your way."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling upset.",
+        "connection_text": "Daria felt upset.",
+        "connection_narration": "In this story, Daria felt upset."
+      }
     }
   ],
   "sentence_frames": [

@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         },
         {
           "id": "c",
           "label": "Dan",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         }
       ],
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         },
         {
           "id": "b",
           "label": "the basketball court",
-          "emoji": "\ud83c\udfe0",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "b",
           "label": "One kid laughed when Dan paused before answering",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Embarrassed",
-          "emoji": "\ud83d\ude33",
+          "emoji": "😳",
           "correct": true
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         },
         {
           "id": "c",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Dan told his mom what happened",
-          "emoji": "\u2708\ufe0f",
+          "emoji": "✈️",
           "correct": true
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,17 +176,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         },
         {
           "id": "c",
           "label": "His mom listened and said they would talk to his teacher ...",
-          "emoji": "\ud83d\ude34",
+          "emoji": "😴",
           "correct": true
         }
       ],
@@ -369,7 +369,7 @@
             "narration": "You might see or use basketball court in school, park, gym, recreation centre."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a basketball court.",
+        "transition_text": "Now let’s show what you know about a basketball court.",
         "connection_text": "Dan was near the basketball court when he tried to join the group.",
         "connection_narration": "Dan was near the basketball court when he tried to join the group."
       }
@@ -548,7 +548,7 @@
             "narration": "You might see or use teacher in school, classroom, hallway, online class."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a teacher.",
+        "transition_text": "Now let’s show what you know about a teacher.",
         "connection_text": "Dan's mom said they would talk to his teacher together.",
         "connection_narration": "Dan's mom said they would talk to his teacher together."
       }
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "embarrassed: feeling word. Dan felt embarrassed.",
+        "intro_narration": "Listen for this word in the story: embarrassed. Dan felt embarrassed.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is embarrassed in? Listen and look.",
+            "teaching_text": "embarrassed is a feeling word.",
+            "narration": "embarrassed is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel embarrassed? Listen and look.",
+            "teaching_text": "Embarrassed means you feel shy or uncomfortable because others noticed something.",
+            "narration": "Embarrassed means you feel shy or uncomfortable because others noticed something."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does embarrassed look like? Listen and look.",
+            "teaching_text": "embarrassed looks like red cheeks and eyes that look away.",
+            "narration": "embarrassed looks like red cheeks and eyes that look away."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show embarrassed? Listen and look.",
+            "teaching_text": "Embarrassed shows up in your face, your cheeks, and your posture.",
+            "narration": "Embarrassed shows up in your face, your cheeks, and your posture."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel embarrassed? Listen and look.",
+            "teaching_text": "You might feel embarrassed when people notice a mistake.",
+            "narration": "You might feel embarrassed when people notice a mistake."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling embarrassed.",
+        "connection_text": "Dan felt embarrassed.",
+        "connection_narration": "In this story, Dan felt embarrassed."
+      }
     }
   ],
   "sentence_frames": [

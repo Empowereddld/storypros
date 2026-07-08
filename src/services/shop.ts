@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────
- * Paper Planes Collectible Shop Service
+ * Coins Collectible Shop Service
  * In-memory store for V1. Supabase later.
  *
  * Five categories (per April 25 decisions):
@@ -172,7 +172,7 @@ export function purchaseItem(
   const item = CATALOG.find((c) => c.id === collectibleId);
   if (!item) return { success: false, error: "Item not found" };
   if (isOwned(childId, collectibleId)) return { success: false, error: "Already owned" };
-  if (item.price > currentPlanes) return { success: false, error: "Not enough Paper Planes" };
+  if (item.price > currentPlanes) return { success: false, error: "Not enough Coins" };
 
   getOwned(childId).add(collectibleId);
   saveOwnedItems();

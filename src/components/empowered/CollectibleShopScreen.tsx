@@ -1,9 +1,9 @@
 /* ---------------------------------------------
- * Paper Planes Collectible Shop
+ * Coins Collectible Shop
  * Rebuilt from the "Shop" mockup: logo + currency
  * header, category chips, pastel item cards, and a
  * product-detail purchase sheet. Catalog / purchase /
- * ownership logic and Paper Planes spend preserved.
+ * ownership logic and Coins spend preserved.
  * --------------------------------------------- */
 
 import { useState, type ReactNode } from "react";
@@ -21,18 +21,18 @@ import { cn } from "@/lib/utils";
 import dariaAndFriend from "@/assets/dan-daria-airplane.webp";
 import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
 import { MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
-import { ChevronRightIcon, CurrencyBadge, PaperPlaneIcon } from "./StoryProsUi";
+import { ChevronRightIcon, CoinIcon, CurrencyBadge, PaperPlaneIcon } from "./StoryProsUi";
 
 interface CollectibleShopScreenProps {
   onClose: () => void;
 }
 
+// Lore cards and airplane tricks are parked for now -- keep them out of the
+// catalog UI without deleting the underlying data/types.
 const CATEGORIES: CollectibleCategory[] = [
   "airplane_design",
   "badge",
   "wallpaper",
-  "lore_card",
-  "airplane_trick",
 ];
 
 const RARITY_COLORS: Record<string, string> = {
@@ -143,12 +143,12 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
             </p>
             <h1 className="mt-1 text-[46px] font-extrabold leading-none text-primary">Shop</h1>
             <p className="mt-3 max-w-[164px] text-base font-semibold leading-snug text-ink-soft">
-              Spend Paper Planes on V1 collectibles for your story world.
+              Spend Coins on V1 collectibles for your story world.
             </p>
           </div>
           <div className="absolute bottom-4 left-5 z-10 flex items-center gap-2 rounded-full bg-secondary/20 px-3 py-1.5 text-xs font-extrabold text-secondary-foreground">
-            <PaperPlaneIcon className="h-4 w-4" />
-            Paper Planes only
+            <CoinIcon className="h-4 w-4" />
+            Coins only
           </div>
           <img
             src={dariaAndFriend}
@@ -246,7 +246,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1 rounded-full bg-secondary/20 px-2.5 py-1 text-xs font-extrabold text-secondary-foreground">
-                        <PaperPlaneIcon className="h-3.5 w-3.5" /> {item.price}
+                        <CoinIcon className="h-3.5 w-3.5" /> {item.price}
                       </span>
                     )}
                   </div>
@@ -346,7 +346,7 @@ function PurchaseModal({
             </div>
             {showPrice ? (
               <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-secondary/25 px-3 py-2 text-lg font-extrabold text-secondary-foreground">
-                <PaperPlaneIcon className="h-5 w-5" />
+                <CoinIcon className="h-5 w-5" />
                 {item.price}
               </span>
             ) : owned ? (
@@ -361,21 +361,21 @@ function PurchaseModal({
 
           <div className="mt-4 grid grid-cols-3 gap-2">
             <FeatureChip icon={<CategoryIcon category={item.category} className="h-4 w-4" />} label={CATEGORY_TREATMENT[item.category].shortLabel} />
-            <FeatureChip icon={<PaperPlaneIcon className="h-4 w-4" />} label={item.price === 0 ? "Earned" : "Unlock"} />
+            <FeatureChip icon={<CoinIcon className="h-4 w-4" />} label={item.price === 0 ? "Earned" : "Unlock"} />
             <FeatureChip icon={<CheckIcon />} label="Story-ready" />
           </div>
 
           <div className="mt-4 flex items-center justify-between rounded-[22px] bg-accent/35 px-4 py-3">
             <span className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">Your balance</span>
             <span className="inline-flex items-center gap-1 text-sm font-extrabold text-primary">
-              <PaperPlaneIcon className="h-4 w-4 text-secondary" />
+              <CoinIcon className="h-4 w-4 text-secondary" />
               {planes}
             </span>
           </div>
 
           {!owned && !isEarnedReward && !canAfford && (
             <p className="mt-3 rounded-2xl bg-destructive/10 p-3 text-center text-sm font-semibold text-destructive">
-              You need {item.price - planes} more Paper Planes!
+              You need {item.price - planes} more Coins!
             </p>
           )}
 
@@ -399,7 +399,7 @@ function PurchaseModal({
                 ? "Got it"
                 : canAfford
                   ? `Unlock for ${item.price}`
-                  : "Not enough Paper Planes"}
+                  : "Not enough Coins"}
           </TactileButton>
           <TactileButton variant="ghost" onClick={onClose}>
             Maybe later
@@ -462,58 +462,97 @@ function CategoryIcon({
   }
 }
 
+// Per-item gradient stops for the plane fuselage. Falls back to the primary-purple pair.
+const PLANE_GRADIENTS: Record<string, [string, string]> = {
+  "plane-classic": ["#ffffff", "#dfe3ee"],
+  "plane-sunset": ["#ff9a6c", "#ff5f8f"],
+  "plane-ocean": ["#7fd4ff", "#2a7fd6"],
+  "plane-star": ["#c9b8ff", "#6c4bd6"],
+  "plane-rainbow": ["#ff6b6b", "#8e6bff"],
+  "plane-golden": ["#ffe28a", "#e0a52a"],
+};
+
+// Per-badge rim gradient + centerpiece glyph, keyed by rarity story (flight, streak, mastery, etc).
+const BADGE_GRADIENTS: Record<string, [string, string]> = {
+  "badge-first-story": ["#bfe3ff", "#4fa9e8"],
+  "badge-3-stories": ["#ffd9a0", "#f0a93a"],
+  "badge-perfect": ["#d6c8ff", "#8a5cf0"],
+  "badge-5-streak": ["#ffb199", "#ef5a3c"],
+  "badge-all-elements": ["#ffe9a8", "#e8b93a"],
+  "badge-level-2": ["#b6f0d1", "#33b871"],
+  "badge-all-stories": ["#ffc4e0", "#e8579f"],
+};
+
 function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | "xl" }) {
   const sizeClass = size === "xl" ? "h-36 w-36" : size === "lg" ? "h-24 w-24" : "h-20 w-20";
-  const planeTone =
-    item.id.includes("ocean")
-      ? "text-sky"
-      : item.id.includes("golden")
-        ? "text-secondary"
-        : item.id.includes("rainbow")
-          ? "text-coral"
-          : "text-primary";
+  const gid = (label: string) => `${label}-${item.id}`;
 
   if (item.category === "airplane_design") {
+    const [from, to] = PLANE_GRADIENTS[item.id] ?? ["#e7defb", "#6c4bd6"];
     return (
-      <div className={cn("relative flex items-center justify-center", sizeClass, planeTone)}>
+      <div className={cn("relative flex items-center justify-center", sizeClass)}>
         <svg viewBox="0 0 120 120" className="h-full w-full drop-shadow-lg" fill="none" aria-hidden>
-          <path d="M104 16 18 53l34 12 15 39 37-88Z" fill="currentColor" opacity="0.96" />
-          <path d="M52 65 104 16 67 104" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" opacity="0.7" />
-          <path d="M18 53 52 65 42 80" fill="white" opacity="0.28" />
-          {item.id.includes("ocean") && (
+          <defs>
+            <linearGradient id={gid("plane")} x1="18" y1="16" x2="104" y2="104" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor={from} />
+              <stop offset="1" stopColor={to} />
+            </linearGradient>
+          </defs>
+          <path d="M104 16 18 53l34 12 15 39 37-88Z" fill={`url(#${gid("plane")})`} />
+          <path d="M52 65 104 16 67 104" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" opacity="0.75" />
+          <path d="M18 53 52 65 42 80" fill="white" opacity="0.3" />
+          {item.id === "plane-ocean" && (
             <>
               <path d="M36 54c7-7 13 7 21 0s14 7 22-1" stroke="white" strokeWidth="4" strokeLinecap="round" opacity="0.9" />
               <path d="M51 72c6-5 12 5 18 0s11 5 17-1" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
             </>
           )}
-          {item.id.includes("star") || item.id.includes("golden") ? (
+          {(item.id === "plane-star" || item.id === "plane-golden") && (
             <>
               <path d="m49 42 2 4.5 5 .7-3.6 3.4.9 4.9-4.3-2.3-4.3 2.3.9-4.9-3.6-3.4 5-.7L49 42Z" fill="white" />
               <path d="m74 52 1.6 3.4 3.7.5-2.6 2.6.6 3.7-3.3-1.8-3.3 1.8.6-3.7-2.6-2.6 3.7-.5L74 52Z" fill="white" />
             </>
-          ) : null}
+          )}
+          {item.id === "plane-rainbow" && (
+            <>
+              <path d="M28 66c5-9 9 3 14-2s9 5 14 0" stroke="#ffd23f" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+              <path d="M35 78c5-8 9 3 14-1s9 4 13-1" stroke="#3fd6ff" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+            </>
+          )}
+          {item.id === "plane-sunset" && (
+            <circle cx="46" cy="46" r="9" fill="#fff4d6" opacity="0.65" />
+          )}
         </svg>
       </div>
     );
   }
 
   if (item.category === "badge") {
+    const [from, to] = BADGE_GRADIENTS[item.id] ?? ["#ffe0a3", "#f0a93a"];
     return (
       <div className={cn("relative flex items-center justify-center", sizeClass)}>
-        <div className="absolute inset-2 rounded-full bg-secondary shadow-[0_6px_0_var(--secondary-deep)]" />
-        <div className="absolute inset-5 rounded-full bg-card/75" />
-        <Star className="relative h-10 w-10 text-primary" />
+        <svg viewBox="0 0 100 100" className="h-full w-full drop-shadow-lg" aria-hidden>
+          <defs>
+            <linearGradient id={gid("badge")} x1="15" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor={from} />
+              <stop offset="1" stopColor={to} />
+            </linearGradient>
+          </defs>
+          <path d="M32 58 20 92l30-12 30 12-12-34" fill={to} opacity="0.9" />
+          <circle cx="50" cy="42" r="34" fill={`url(#${gid("badge")})`} stroke="white" strokeWidth="4" />
+          <circle cx="50" cy="42" r="24" fill="white" opacity="0.22" />
+          <BadgeGlyph itemId={item.id} />
+        </svg>
       </div>
     );
   }
 
   if (item.category === "wallpaper") {
     return (
-      <div className={cn("relative", sizeClass)}>
-        <div className="absolute left-5 top-4 h-20 w-16 rotate-[-10deg] rounded-2xl bg-sky shadow-card" />
-        <div className="absolute left-9 top-2 h-20 w-16 rotate-[8deg] rounded-2xl bg-success/70 shadow-card" />
-        <div className="absolute left-2 top-9 h-20 w-16 rotate-[-2deg] rounded-2xl bg-secondary/65 shadow-card" />
-        <MiniPlane className="absolute left-9 top-12 h-8 w-8 text-primary" />
+      <div className={cn("relative overflow-hidden rounded-2xl shadow-card", sizeClass)}>
+        <svg viewBox="0 0 100 100" className="h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
+          <WallpaperScene itemId={item.id} gid={gid} />
+        </svg>
       </div>
     );
   }
@@ -537,6 +576,112 @@ function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | 
       </svg>
     </div>
   );
+}
+
+// Centerpiece glyph inside each badge medallion, matching its name/story.
+function BadgeGlyph({ itemId }: { itemId: string }) {
+  const stroke = { stroke: "white", strokeWidth: 3.4, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+  switch (itemId) {
+    case "badge-first-story": // First Flight — single wing path
+      return <path d="M34 50c8-14 24-14 32 0M50 32v28M42 60l8 8 8-8" {...stroke} />;
+    case "badge-3-stories": // Frequent Flyer — three chevrons
+      return <path d="M34 34 50 46 66 34M34 46 50 58 66 46M34 58 50 70 66 58" {...stroke} />;
+    case "badge-perfect": // Perfect Landing — gem
+      return <path d="M36 38h28l8 12-22 24-22-24 8-12Z M36 38l8 12 6-12M64 38l-8 12-6-12M44 50h12" {...stroke} />;
+    case "badge-5-streak": // Five Day Streak — flame
+      return <path d="M50 28c-4 8-14 12-14 24a14 14 0 0 0 28 0c0-6-3-9-5-12 1 5-2 8-5 8-4 0-5-4-4-8-3 2-5 6-5 10" {...stroke} fill="white" fillOpacity="0.25" />;
+    case "badge-all-elements": // Story Master — crown
+      return <path d="M32 58 28 40l12 10 10-16 10 16 12-10-4 18Z" {...stroke} fill="white" fillOpacity="0.25" />;
+    case "badge-level-2": // Level Up — rocket
+      return <path d="M50 28c8 6 10 16 8 28l-8 8-8-8c-2-12 0-22 8-28Z M42 56l-6 10M58 56l6 10M46 46h8" {...stroke} />;
+    case "badge-all-stories": // Story Explorer — compass
+      return <path d="M50 30a20 20 0 1 0 .1 0Z M56 38l-10 8-4 14 10-8Z" {...stroke} fill="white" fillOpacity="0.25" />;
+    default:
+      return <path d="m50 32 5 11 12 1.5-9 8.5 2.5 12L50 58l-10.5 6.5L42 52.5 33 44l12-1.5Z" fill="white" />;
+  }
+}
+
+// Small scenic illustration per wallpaper item, framed to the card.
+function WallpaperScene({ itemId, gid }: { itemId: string; gid: (label: string) => string }) {
+  switch (itemId) {
+    case "wall-meadow":
+      return (
+        <>
+          <defs>
+            <linearGradient id={gid("sky")} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#bdeaff" />
+              <stop offset="1" stopColor="#eaffd6" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" fill={`url(#${gid("sky")})`} />
+          <circle cx="76" cy="22" r="12" fill="#ffe28a" />
+          <path d="M0 68c14-10 26-10 40 0s26 10 40 0 16-8 20-6V100H0Z" fill="#7ec850" />
+          <circle cx="30" cy="80" r="6" fill="#ff8fb3" />
+          <circle cx="52" cy="86" r="5" fill="#ffd23f" />
+          <circle cx="70" cy="80" r="6" fill="#ff8fb3" />
+        </>
+      );
+    case "wall-night":
+      return (
+        <>
+          <defs>
+            <linearGradient id={gid("sky")} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#221a4a" />
+              <stop offset="1" stopColor="#4a3a8a" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" fill={`url(#${gid("sky")})`} />
+          <circle cx="70" cy="28" r="14" fill="#ffe9a8" />
+          <circle cx="65" cy="24" r="12" fill="#4a3a8a" />
+          {[[20, 20], [40, 15], [15, 45], [85, 55], [30, 60], [60, 65]].map(([cx, cy], i) => (
+            <circle key={i} cx={cx} cy={cy} r={i % 2 ? 1.4 : 2.2} fill="white" />
+          ))}
+          <path d="M0 82c16-8 30-8 46 0s30 8 54 0V100H0Z" fill="#2a2258" />
+        </>
+      );
+    case "wall-underwater":
+      return (
+        <>
+          <defs>
+            <linearGradient id={gid("sky")} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#7fe0ff" />
+              <stop offset="1" stopColor="#0d6fb8" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" fill={`url(#${gid("sky")})`} />
+          <path d="M0 76c14-8 26 8 40 0s26 8 40 0 14-6 20-4V100H0Z" fill="#0a4f8a" opacity="0.7" />
+          <ellipse cx="34" cy="40" rx="12" ry="8" fill="#ff9a4a" />
+          <path d="M22 40 12 34v12Z" fill="#ff9a4a" />
+          <ellipse cx="68" cy="60" rx="9" ry="6" fill="#ffd23f" />
+          <path d="M77 60 86 55v10Z" fill="#ffd23f" />
+          {[[16, 20], [50, 15], [80, 26]].map(([cx, cy], i) => (
+            <circle key={i} cx={cx} cy={cy} r="2" fill="white" opacity="0.7" />
+          ))}
+        </>
+      );
+    case "wall-castle":
+      return (
+        <>
+          <defs>
+            <linearGradient id={gid("sky")} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#ffd9ec" />
+              <stop offset="1" stopColor="#c9b8ff" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" fill={`url(#${gid("sky")})`} />
+          <path d="M0 88c30-14 70-14 100 0V100H0Z" fill="#d8cdfc" />
+          <rect x="30" y="52" width="40" height="36" fill="#f2eaff" />
+          <rect x="22" y="40" width="14" height="48" fill="#e4d6ff" />
+          <rect x="64" y="40" width="14" height="48" fill="#e4d6ff" />
+          <path d="M22 40 29 28 36 40Z M64 40 71 28 78 40Z" fill="#b89bff" />
+          <rect x="44" y="66" width="12" height="22" fill="#b89bff" />
+          <rect x="27" y="20" width="4" height="10" fill="#8a6be0" />
+          <path d="M29 20 36 24 29 28Z" fill="#ff6b9f" />
+        </>
+      );
+    default:
+      return <rect width="100" height="100" fill="#e7defb" />;
+  }
 }
 
 function CheckIcon() {

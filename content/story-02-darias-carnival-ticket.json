@@ -13,7 +13,7 @@
     },
     {
       "position": 2,
-      "text": "They walked to the entrance with Daria\u2019s dad.",
+      "text": "They walked to the entrance with Daria’s dad.",
       "story_element": "place",
       "image": "slide-02.webp"
     },
@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Dan and Daria",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         },
         {
           "id": "b",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         },
         {
           "id": "c",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         },
         {
           "id": "b",
-          "label": "They walked to the entrance with Daria\u2019s dad",
-          "emoji": "\ud83c\udfe0",
+          "label": "They walked to the entrance with Daria’s dad",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,17 +101,17 @@
         {
           "id": "a",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "c",
           "label": "Daria spilled juice on her ticket",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         }
       ],
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Worried",
-          "emoji": "\ud83d\ude1f",
+          "emoji": "😟",
           "correct": true
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         },
         {
           "id": "c",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "b",
           "label": "Daria asked her dad for help",
-          "emoji": "\u2708\ufe0f",
+          "emoji": "✈️",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,17 +176,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         },
         {
           "id": "c",
           "label": "Her dad dried the ticket so they could go into the carnival",
-          "emoji": "\ud83d\ude34",
+          "emoji": "😴",
           "correct": true
         }
       ],
@@ -369,7 +369,7 @@
             "narration": "You might find or use ticket in entrance, carnival, theatre, bus, or event. You might use a ticket when you go to a carnival, movie, show, bus, or train."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a ticket.",
+        "transition_text": "Now let’s show what you know about a ticket.",
         "connection_text": "Daria spilled juice on her ticket before entering the carnival.",
         "connection_narration": "In this story, Daria spilled juice on her ticket before entering the carnival."
       }
@@ -548,7 +548,7 @@
             "narration": "You might find or use entrance in carnival, school, store, library, house, or park. An entrance is the place where people go in."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about an entrance.",
+        "transition_text": "Now let’s show what you know about an entrance.",
         "connection_text": "Dan and Daria needed to show the ticket at the entrance.",
         "connection_narration": "In this story, Dan and Daria needed to show the ticket at the entrance."
       }
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "worried: feeling word. Daria felt worried.",
+        "intro_narration": "Listen for this word in the story: worried. Daria felt worried.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is worried in? Listen and look.",
+            "teaching_text": "worried is a feeling word.",
+            "narration": "worried is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel worried? Listen and look.",
+            "teaching_text": "Worried means you feel nervous about something that might happen.",
+            "narration": "Worried means you feel nervous about something that might happen."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does worried look like? Listen and look.",
+            "teaching_text": "worried looks like a tense face and eyes that dart around.",
+            "narration": "worried looks like a tense face and eyes that dart around."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show worried? Listen and look.",
+            "teaching_text": "Worried shows up in your face, your stomach, and your thoughts.",
+            "narration": "Worried shows up in your face, your stomach, and your thoughts."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel worried? Listen and look.",
+            "teaching_text": "You might feel worried before something new or uncertain happens.",
+            "narration": "You might feel worried before something new or uncertain happens."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling worried.",
+        "connection_text": "Daria felt worried.",
+        "connection_narration": "In this story, Daria felt worried."
+      }
     }
   ],
   "sentence_frames": [
@@ -764,7 +803,7 @@
     },
     {
       "correct_position": 2,
-      "caption": "They walked to the entrance with Daria\u2019s dad.",
+      "caption": "They walked to the entrance with Daria’s dad.",
       "image": "slide-02.webp"
     },
     {

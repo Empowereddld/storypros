@@ -14,6 +14,7 @@ import {
   AppBottomNav,
   BookCheckIcon,
   ChevronRightIcon,
+  CoinIcon,
   CurrencyBadge,
   PaperPlaneIcon,
 } from "./StoryProsUi";
@@ -207,9 +208,9 @@ export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreen
               tone="primary"
             />
             <HeroStat
-              icon={<PaperPlaneIcon className="h-7 w-7" />}
+              icon={<CoinIcon className="h-7 w-7" />}
               value={paperPlanes}
-              label="Paper Planes"
+              label="Coins"
               tone="secondary"
             />
             <HeroStat

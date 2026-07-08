@@ -253,8 +253,8 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
                     isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
                   )}
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-sky text-primary">
-                    <OptionGlyph />
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-sky text-2xl text-primary" aria-hidden>
+                    {opt.emoji || <OptionGlyph />}
                   </span>
                   <span className={cn(
                     "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold shadow-[0_2px_0_rgba(0,0,0,0.08)]",

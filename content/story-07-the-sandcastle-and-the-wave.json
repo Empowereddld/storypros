@@ -7,7 +7,7 @@
   "slides": [
     {
       "position": 1,
-      "text": "In the summer, Dan and Daria\u2019s families met up.",
+      "text": "In the summer, Dan and Daria’s families met up.",
       "story_element": "character",
       "image": "slide-01.webp"
     },
@@ -31,7 +31,7 @@
     },
     {
       "position": 5,
-      "text": "Daria said, \u201cLet\u2019s move further away from the ocean.\u201d",
+      "text": "Daria said, “Let’s move further away from the ocean.”",
       "story_element": "action",
       "image": "slide-05.webp"
     },
@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         },
         {
           "id": "b",
           "label": "Dan and Daria",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         },
         {
           "id": "c",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         },
         {
           "id": "b",
           "label": "They went to a sandy beach",
-          "emoji": "\ud83c\udfe0",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "A wave crashed in and destroyed their sandcastle",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         },
         {
           "id": "c",
           "label": "Disappointed",
-          "emoji": "\ud83d\ude1e",
+          "emoji": "😞",
           "correct": true
         }
       ],
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "c",
-          "label": "Daria said, \u201cLet\u2019s move further away from the ocean\u201d",
-          "emoji": "\u2708\ufe0f",
+          "label": "Daria said, “Let’s move further away from the ocean”",
+          "emoji": "✈️",
           "correct": true
         }
       ],
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "They built a new sandcastle farther from the water and it...",
-          "emoji": "\ud83d\ude34",
+          "emoji": "😴",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -369,7 +369,7 @@
             "narration": "You might find or use sandcastle in beach or sandbox. You might make a sandcastle when you have sand and time to build."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a sandcastle.",
+        "transition_text": "Now let’s show what you know about a sandcastle.",
         "connection_text": "Dan and Daria built a sandcastle near the water.",
         "connection_narration": "In this story, Dan and Daria built a sandcastle near the water."
       }
@@ -548,7 +548,7 @@
             "narration": "You might find or use wave in ocean, beach, lake, or pool with waves. You might watch waves when you are at the beach."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a wave.",
+        "transition_text": "Now let’s show what you know about a wave.",
         "connection_text": "A wave crashed into the sandcastle and knocked it down.",
         "connection_narration": "In this story, A wave crashed into the sandcastle and knocked it down."
       }
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "disappointed: feeling word. Dan and Daria felt disappointed.",
+        "intro_narration": "Listen for this word in the story: disappointed. Dan and Daria felt disappointed.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is disappointed in? Listen and look.",
+            "teaching_text": "disappointed is a feeling word.",
+            "narration": "disappointed is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel disappointed? Listen and look.",
+            "teaching_text": "Disappointed means you hoped for something, and it didn't happen the way you wanted.",
+            "narration": "Disappointed means you hoped for something, and it didn't happen the way you wanted."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does disappointed look like? Listen and look.",
+            "teaching_text": "disappointed looks like a sad face and slumped shoulders.",
+            "narration": "disappointed looks like a sad face and slumped shoulders."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show disappointed? Listen and look.",
+            "teaching_text": "Disappointed shows up in your face, your shoulders, and your voice.",
+            "narration": "Disappointed shows up in your face, your shoulders, and your voice."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel disappointed? Listen and look.",
+            "teaching_text": "You might feel disappointed when a plan changes or falls through.",
+            "narration": "You might feel disappointed when a plan changes or falls through."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling disappointed.",
+        "connection_text": "Dan and Daria felt disappointed.",
+        "connection_narration": "In this story, Dan and Daria felt disappointed."
+      }
     }
   ],
   "sentence_frames": [
@@ -759,7 +798,7 @@
   "sequencing_frames": [
     {
       "correct_position": 1,
-      "caption": "In the summer, Dan and Daria\u2019s families met up.",
+      "caption": "In the summer, Dan and Daria’s families met up.",
       "image": "slide-01.webp"
     },
     {
@@ -779,7 +818,7 @@
     },
     {
       "correct_position": 5,
-      "caption": "Daria said, \u201cLet\u2019s move further away from the ocean.\u201d",
+      "caption": "Daria said, “Let’s move further away from the ocean.”",
       "image": "slide-05.webp"
     },
     {

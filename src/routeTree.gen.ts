@@ -14,17 +14,19 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IntroRouteImport } from './routes/intro'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as DemoRouteImport } from './routes/demo'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as AuthenticatedSlpRouteImport } from './routes/_authenticated/slp'
 import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedSelectChildRouteImport } from './routes/_authenticated/select-child'
+import { Route as AuthenticatedRetellLibraryRouteImport } from './routes/_authenticated/retell-library'
 import { Route as AuthenticatedPaywallRouteImport } from './routes/_authenticated/paywall'
+import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
 import { Route as AuthenticatedLibraryRouteImport } from './routes/_authenticated/library'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
-import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
-import { Route as AuthenticatedSelectChildRouteImport } from './routes/_authenticated/select-child'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedStoryStoryIdRouteImport } from './routes/_authenticated/story.$storyId'
@@ -57,6 +59,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
@@ -86,9 +93,26 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedSelectChildRoute =
+  AuthenticatedSelectChildRouteImport.update({
+    id: '/select-child',
+    path: '/select-child',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedRetellLibraryRoute =
+  AuthenticatedRetellLibraryRouteImport.update({
+    id: '/retell-library',
+    path: '/retell-library',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedPaywallRoute = AuthenticatedPaywallRouteImport.update({
   id: '/paywall',
   path: '/paywall',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
+  id: '/map',
+  path: '/map',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedLibraryRoute = AuthenticatedLibraryRouteImport.update({
@@ -99,16 +123,6 @@ const AuthenticatedLibraryRoute = AuthenticatedLibraryRouteImport.update({
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
-  id: '/map',
-  path: '/map',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedSelectChildRoute = AuthenticatedSelectChildRouteImport.update({
-  id: '/select-child',
-  path: '/select-child',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -149,6 +163,7 @@ const AuthenticatedOnboardingAssessmentRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/demo': typeof DemoRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/intro': typeof IntroRoute
   '/login': typeof LoginRoute
@@ -157,10 +172,11 @@ export interface FileRoutesByFullPath {
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/map': typeof AuthenticatedMapRoute
-  '/select-child': typeof AuthenticatedSelectChildRoute
   '/library': typeof AuthenticatedLibraryRoute
+  '/map': typeof AuthenticatedMapRoute
   '/paywall': typeof AuthenticatedPaywallRoute
+  '/retell-library': typeof AuthenticatedRetellLibraryRoute
+  '/select-child': typeof AuthenticatedSelectChildRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/shop': typeof AuthenticatedShopRoute
   '/slp': typeof AuthenticatedSlpRoute
@@ -172,6 +188,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/demo': typeof DemoRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/intro': typeof IntroRoute
   '/login': typeof LoginRoute
@@ -180,10 +197,11 @@ export interface FileRoutesByTo {
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/map': typeof AuthenticatedMapRoute
-  '/select-child': typeof AuthenticatedSelectChildRoute
   '/library': typeof AuthenticatedLibraryRoute
+  '/map': typeof AuthenticatedMapRoute
   '/paywall': typeof AuthenticatedPaywallRoute
+  '/retell-library': typeof AuthenticatedRetellLibraryRoute
+  '/select-child': typeof AuthenticatedSelectChildRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/shop': typeof AuthenticatedShopRoute
   '/slp': typeof AuthenticatedSlpRoute
@@ -197,6 +215,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/demo': typeof DemoRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/intro': typeof IntroRoute
   '/login': typeof LoginRoute
@@ -205,10 +224,11 @@ export interface FileRoutesById {
   '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
-  '/_authenticated/map': typeof AuthenticatedMapRoute
-  '/_authenticated/select-child': typeof AuthenticatedSelectChildRoute
   '/_authenticated/library': typeof AuthenticatedLibraryRoute
+  '/_authenticated/map': typeof AuthenticatedMapRoute
   '/_authenticated/paywall': typeof AuthenticatedPaywallRoute
+  '/_authenticated/retell-library': typeof AuthenticatedRetellLibraryRoute
+  '/_authenticated/select-child': typeof AuthenticatedSelectChildRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/shop': typeof AuthenticatedShopRoute
   '/_authenticated/slp': typeof AuthenticatedSlpRoute
@@ -222,6 +242,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/demo'
     | '/forgot-password'
     | '/intro'
     | '/login'
@@ -230,10 +251,11 @@ export interface FileRouteTypes {
     | '/achievements'
     | '/dashboard'
     | '/home'
-    | '/map'
-    | '/select-child'
     | '/library'
+    | '/map'
     | '/paywall'
+    | '/retell-library'
+    | '/select-child'
     | '/settings'
     | '/shop'
     | '/slp'
@@ -245,6 +267,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/demo'
     | '/forgot-password'
     | '/intro'
     | '/login'
@@ -253,10 +276,11 @@ export interface FileRouteTypes {
     | '/achievements'
     | '/dashboard'
     | '/home'
-    | '/map'
-    | '/select-child'
     | '/library'
+    | '/map'
     | '/paywall'
+    | '/retell-library'
+    | '/select-child'
     | '/settings'
     | '/shop'
     | '/slp'
@@ -269,6 +293,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/demo'
     | '/forgot-password'
     | '/intro'
     | '/login'
@@ -277,10 +302,11 @@ export interface FileRouteTypes {
     | '/_authenticated/achievements'
     | '/_authenticated/dashboard'
     | '/_authenticated/home'
-    | '/_authenticated/map'
-    | '/_authenticated/select-child'
     | '/_authenticated/library'
+    | '/_authenticated/map'
     | '/_authenticated/paywall'
+    | '/_authenticated/retell-library'
+    | '/_authenticated/select-child'
     | '/_authenticated/settings'
     | '/_authenticated/shop'
     | '/_authenticated/slp'
@@ -294,6 +320,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  DemoRoute: typeof DemoRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   IntroRoute: typeof IntroRoute
   LoginRoute: typeof LoginRoute
@@ -339,6 +366,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -381,11 +415,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/select-child': {
+      id: '/_authenticated/select-child'
+      path: '/select-child'
+      fullPath: '/select-child'
+      preLoaderRoute: typeof AuthenticatedSelectChildRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/retell-library': {
+      id: '/_authenticated/retell-library'
+      path: '/retell-library'
+      fullPath: '/retell-library'
+      preLoaderRoute: typeof AuthenticatedRetellLibraryRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/paywall': {
       id: '/_authenticated/paywall'
       path: '/paywall'
       fullPath: '/paywall'
       preLoaderRoute: typeof AuthenticatedPaywallRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/map': {
+      id: '/_authenticated/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof AuthenticatedMapRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/library': {
@@ -400,20 +455,6 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof AuthenticatedHomeRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/map': {
-      id: '/_authenticated/map'
-      path: '/map'
-      fullPath: '/map'
-      preLoaderRoute: typeof AuthenticatedMapRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/select-child': {
-      id: '/_authenticated/select-child'
-      path: '/select-child'
-      fullPath: '/select-child'
-      preLoaderRoute: typeof AuthenticatedSelectChildRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/dashboard': {
@@ -465,10 +506,11 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
-  AuthenticatedMapRoute: typeof AuthenticatedMapRoute
-  AuthenticatedSelectChildRoute: typeof AuthenticatedSelectChildRoute
   AuthenticatedLibraryRoute: typeof AuthenticatedLibraryRoute
+  AuthenticatedMapRoute: typeof AuthenticatedMapRoute
   AuthenticatedPaywallRoute: typeof AuthenticatedPaywallRoute
+  AuthenticatedRetellLibraryRoute: typeof AuthenticatedRetellLibraryRoute
+  AuthenticatedSelectChildRoute: typeof AuthenticatedSelectChildRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedShopRoute: typeof AuthenticatedShopRoute
   AuthenticatedSlpRoute: typeof AuthenticatedSlpRoute
@@ -482,10 +524,11 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
-  AuthenticatedMapRoute: AuthenticatedMapRoute,
-  AuthenticatedSelectChildRoute: AuthenticatedSelectChildRoute,
   AuthenticatedLibraryRoute: AuthenticatedLibraryRoute,
+  AuthenticatedMapRoute: AuthenticatedMapRoute,
   AuthenticatedPaywallRoute: AuthenticatedPaywallRoute,
+  AuthenticatedRetellLibraryRoute: AuthenticatedRetellLibraryRoute,
+  AuthenticatedSelectChildRoute: AuthenticatedSelectChildRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedShopRoute: AuthenticatedShopRoute,
   AuthenticatedSlpRoute: AuthenticatedSlpRoute,
@@ -503,6 +546,7 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  DemoRoute: DemoRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   IntroRoute: IntroRoute,
   LoginRoute: LoginRoute,

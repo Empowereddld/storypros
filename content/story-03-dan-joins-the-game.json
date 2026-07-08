@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         },
         {
           "id": "b",
           "label": "Dan",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         },
         {
           "id": "c",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         },
         {
           "id": "b",
           "label": "They were playing on the field",
-          "emoji": "\ud83c\udfe0",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,17 +101,17 @@
         {
           "id": "a",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "b",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         },
         {
           "id": "c",
           "label": "The game had already started",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         }
       ],
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Lonely",
-          "emoji": "\ud83d\ude14",
+          "emoji": "😔",
           "correct": true
         },
         {
           "id": "b",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         },
         {
           "id": "c",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "c",
           "label": "Dan smiled and asked Daria and Jack if he could play",
-          "emoji": "\u2708\ufe0f",
+          "emoji": "✈️",
           "correct": true
         }
       ],
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Daria invited Dan to join the game",
-          "emoji": "\ud83d\ude34",
+          "emoji": "😴",
           "correct": true
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -369,7 +369,7 @@
             "narration": "You might find or use game in field, playground, classroom, or home. A game can be played with friends, classmates, family, or teammates."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a game.",
+        "transition_text": "Now let’s show what you know about a game.",
         "connection_text": "Dan wanted to join the soccer game with his friends.",
         "connection_narration": "In this story, Dan wanted to join the soccer game with his friends."
       }
@@ -548,7 +548,7 @@
             "narration": "You might find or use field in school, park, or sports area. You might use a field for soccer, running, games, or gym class."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a field.",
+        "transition_text": "Now let’s show what you know about a field.",
         "connection_text": "The kids were playing soccer on the field.",
         "connection_narration": "In this story, The kids were playing soccer on the field."
       }
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "lonely: feeling word. Dan felt lonely.",
+        "intro_narration": "Listen for this word in the story: lonely. Dan felt lonely.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is lonely in? Listen and look.",
+            "teaching_text": "lonely is a feeling word.",
+            "narration": "lonely is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel lonely? Listen and look.",
+            "teaching_text": "Lonely means you feel sad because you want company or a friend.",
+            "narration": "Lonely means you feel sad because you want company or a friend."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does lonely look like? Listen and look.",
+            "teaching_text": "lonely looks like a quiet face and shoulders that droop a little.",
+            "narration": "lonely looks like a quiet face and shoulders that droop a little."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show lonely? Listen and look.",
+            "teaching_text": "Lonely shows up in your face, your body, and your thoughts.",
+            "narration": "Lonely shows up in your face, your body, and your thoughts."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel lonely? Listen and look.",
+            "teaching_text": "You might feel lonely when you're left out or by yourself.",
+            "narration": "You might feel lonely when you're left out or by yourself."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling lonely.",
+        "connection_text": "Dan felt lonely.",
+        "connection_narration": "In this story, Dan felt lonely."
+      }
     }
   ],
   "sentence_frames": [

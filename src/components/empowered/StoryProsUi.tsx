@@ -13,7 +13,7 @@
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/* ───────── Currency badge (Paper Planes) ───────── */
+/* ───────── Currency badge (Coins) ───────── */
 
 export function CurrencyBadge({
   count,
@@ -31,7 +31,7 @@ export function CurrencyBadge({
         className,
       )}
     >
-      <PaperPlaneIcon className="h-4 w-4" />
+      <CoinIcon className="h-4 w-4" />
       {count}
     </span>
   );
@@ -39,7 +39,7 @@ export function CurrencyBadge({
   return (
     <button
       onClick={onClick}
-      aria-label={`${count} Paper Planes — open shop`}
+      aria-label={`${count} Coins — open shop`}
       className="active:scale-95 transition-transform"
     >
       {content}
@@ -145,6 +145,20 @@ export function PaperPlaneIcon({ className = "h-4 w-4" }: { className?: string }
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
       <path d="M21 3L3 10.5l7 2.5 2.5 7L21 3z" />
+    </svg>
+  );
+}
+
+export function CoinIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <circle cx="12" cy="12" r="9.5" fill="currentColor" />
+      <circle cx="12" cy="12" r="6.75" fill="none" stroke="#000" strokeOpacity="0.14" strokeWidth="1.4" />
+      <path
+        d="M12 7.2l1.15 3.05 3.25.2-2.55 2.05.9 3.15-2.75-1.85-2.75 1.85.9-3.15-2.55-2.05 3.25-.2L12 7.2z"
+        fill="#000"
+        fillOpacity="0.18"
+      />
     </svg>
   );
 }

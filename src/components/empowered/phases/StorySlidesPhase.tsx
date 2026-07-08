@@ -94,7 +94,7 @@ export function StorySlidesPhase({
           key={page}
           className="flex flex-1 flex-col overflow-hidden rounded-[34px] bg-card shadow-soft animate-pop-in"
         >
-          <div className="relative h-[300px] overflow-hidden bg-accent">
+          <div className="relative aspect-video w-full overflow-hidden bg-accent">
             {slideImg ? (
               <img src={slideImg} alt="" className="h-full w-full object-cover" />
             ) : (

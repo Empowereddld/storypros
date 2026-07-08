@@ -291,7 +291,7 @@ export function recordStoryCompletion(
   // Keep both scores on replay (Jinean's decision: show both, don't replace)
   currentProgress.completions.push(completion);
 
-  // Award Paper Planes based on performance
+  // Award Coins based on performance
   const planesEarned = calculatePaperPlanes(overallScore, !!existing);
   currentProgress.paperPlanes += planesEarned;
 
@@ -371,7 +371,7 @@ async function syncCompletionToCloud(
       if (error) logSyncError("upsert story_progress")(error);
     });
 
-  // 3. Paper Planes ledger (append-only)
+  // 3. Coins ledger (append-only)
   if (planesEarned > 0) {
     db.from("coins_ledger")
       .insert({
@@ -444,7 +444,7 @@ async function syncCompletionToCloud(
   }
 }
 
-/** Calculate Paper Planes earned */
+/** Calculate Coins earned */
 function calculatePaperPlanes(
   overallScore: number,
   isReplay: boolean,
@@ -481,12 +481,12 @@ export function getProgress(): ChildProgress {
   return { ...currentProgress };
 }
 
-/** Get total Paper Planes */
+/** Get total Coins */
 export function getPaperPlanes(): number {
   return currentProgress.paperPlanes;
 }
 
-/** Spend Paper Planes (shop purchases) */
+/** Spend Coins (shop purchases) */
 export function spendPaperPlanes(amount: number, reason = "shop_purchase"): boolean {
   if (amount > currentProgress.paperPlanes) return false;
   currentProgress.paperPlanes -= amount;

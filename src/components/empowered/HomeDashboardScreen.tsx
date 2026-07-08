@@ -10,6 +10,7 @@ import {
   AppBottomNav,
   BookCheckIcon,
   ChevronRightIcon,
+  CoinIcon,
   CurrencyBadge,
   MapIcon,
   MenuIcon,
@@ -184,9 +185,9 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           />
           <StatCardLite
             tone="secondary"
-            icon={<PaperPlaneIcon className="h-5 w-5" />}
+            icon={<CoinIcon className="h-5 w-5" />}
             value={paperPlanes}
-            label="Paper Planes"
+            label="Coins"
             subtitle="Spend them in the Shop!"
             onClick={() => onNavigate("shop")}
           />

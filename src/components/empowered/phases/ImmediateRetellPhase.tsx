@@ -7,6 +7,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { RetellRecorder } from "../RetellRecorder";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Who",
@@ -31,6 +32,7 @@ export function ImmediateRetellPhase({
   onComplete,
   onClose,
   ttsSpeed = "normal",
+  childId,
 }: StoryPhaseProps) {
   const elements = storyData.retell_prompts.story_elements;
   const [tapped, setTapped] = useState<Set<StoryElement>>(new Set());
@@ -97,6 +99,8 @@ export function ImmediateRetellPhase({
               />
             )}
           </div>
+
+          <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
         </section>
 
         <section className="mt-5">

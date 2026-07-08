@@ -1,6 +1,7 @@
 import { useMemo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import {
   getCompletedStoryIds,
   getCurrentLevel,
@@ -15,9 +16,9 @@ import {
   BookCheckIcon,
   BookIcon,
   ChevronRightIcon,
+  CoinIcon,
   CurrencyBadge,
   MedalIcon,
-  PaperPlaneIcon,
 } from "./StoryProsUi";
 
 interface ParentDashboardScreenProps {
@@ -138,13 +139,23 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
       </header>
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-8 pt-3">
-        <section>
-          <h1 className="text-[38px] font-extrabold leading-none text-primary">
-            Child Progress Overview
-          </h1>
-          <p className="mt-2 text-base font-medium text-ink-soft">
-            Track growth. Celebrate wins. Keep building confidence.
-          </p>
+        <section className="relative min-h-[172px] overflow-hidden rounded-[32px] border border-accent/60 bg-card/92 p-5 shadow-soft">
+          <div className="relative z-10 max-w-[190px]">
+            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-primary">
+              Family progress
+            </p>
+            <h1 className="mt-2 font-display text-[32px] font-extrabold leading-none text-primary">
+              Child Progress
+            </h1>
+            <p className="mt-3 text-sm font-semibold leading-snug text-ink-soft">
+              Track growth. Celebrate wins. Keep building confidence.
+            </p>
+          </div>
+          <img
+            src={danDariaThumbsUp}
+            alt=""
+            className="pointer-events-none absolute -bottom-3 -right-6 h-40 w-auto object-contain drop-shadow-[0_14px_22px_rgba(63,38,140,0.16)]"
+          />
         </section>
 
         <section className={cn("mt-4 grid gap-3", displayedChildren.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
@@ -212,9 +223,9 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
             <StatTile value={progress.streak} label="Day Streak" tone="secondary" />
             <StatTile value={`${overall}%`} label="Average Score" tone="primary" />
             <StatTile
-              icon={<PaperPlaneIcon className="h-6 w-6" />}
+              icon={<CoinIcon className="h-6 w-6" />}
               value={paperPlanes}
-              label="Paper Planes"
+              label="Coins"
               tone="secondary"
             />
           </div>

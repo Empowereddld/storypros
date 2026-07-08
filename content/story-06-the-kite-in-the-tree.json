@@ -19,7 +19,7 @@
     },
     {
       "position": 3,
-      "text": "The wind pushed Dan\u2019s kite into a tree and it got stuck.",
+      "text": "The wind pushed Dan’s kite into a tree and it got stuck.",
       "story_element": "problem",
       "image": "slide-03.webp"
     },
@@ -51,17 +51,17 @@
         {
           "id": "a",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         },
         {
           "id": "b",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         },
         {
           "id": "c",
           "label": "Dan and Daria",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         }
       ],
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "They went to the park",
-          "emoji": "\ud83c\udfe0",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "b",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,17 +101,17 @@
         {
           "id": "a",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "c",
-          "label": "The wind pushed Dan\u2019s kite into a tree and it got stuck",
-          "emoji": "\ud83d\udcc4",
+          "label": "The wind pushed Dan’s kite into a tree and it got stuck",
+          "emoji": "📄",
           "correct": true
         }
       ],
@@ -126,18 +126,18 @@
         {
           "id": "a",
           "label": "Frustrated",
-          "emoji": "\ud83d\ude24",
+          "emoji": "😤",
           "correct": true
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         },
         {
           "id": "c",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,18 +151,18 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "Daria asked a grown up for a ladder",
-          "emoji": "\u2708\ufe0f",
+          "emoji": "✈️",
           "correct": true
         },
         {
           "id": "c",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "The grown up used the ladder to get the kite down",
-          "emoji": "\ud83d\ude34",
+          "emoji": "😴",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -335,8 +335,8 @@
         }
       ],
       "sfa_teaching": {
-        "intro_text": "kite: toy. Dan\u2019s kite got stuck in a tree.",
-        "intro_narration": "Listen for this word in the story: kite. Dan\u2019s kite got stuck in a tree.",
+        "intro_text": "kite: toy. Dan’s kite got stuck in a tree.",
+        "intro_narration": "Listen for this word in the story: kite. Dan’s kite got stuck in a tree.",
         "slides": [
           {
             "feature": "category",
@@ -369,9 +369,9 @@
             "narration": "You might find or use kite in park, beach, or big open space. You might use a kite on a windy day at the park or beach."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a kite.",
-        "connection_text": "Dan\u2019s kite got stuck in a tree.",
-        "connection_narration": "In this story, Dan\u2019s kite got stuck in a tree."
+        "transition_text": "Now let’s show what you know about a kite.",
+        "connection_text": "Dan’s kite got stuck in a tree.",
+        "connection_narration": "In this story, Dan’s kite got stuck in a tree."
       }
     },
     {
@@ -514,8 +514,8 @@
         }
       ],
       "sfa_teaching": {
-        "intro_text": "ladder: tool. A grown up used a ladder to get Dan\u2019s kite down.",
-        "intro_narration": "Listen for this word in the story: ladder. A grown up used a ladder to get Dan\u2019s kite down.",
+        "intro_text": "ladder: tool. A grown up used a ladder to get Dan’s kite down.",
+        "intro_narration": "Listen for this word in the story: ladder. A grown up used a ladder to get Dan’s kite down.",
         "slides": [
           {
             "feature": "category",
@@ -548,9 +548,9 @@
             "narration": "You might find or use ladder in garage, home, outside, or work area. You might use a ladder when something is up high, like a shelf, roof, or kite in a tree."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a ladder.",
-        "connection_text": "A grown up used a ladder to get Dan\u2019s kite down.",
-        "connection_narration": "In this story, A grown up used a ladder to get Dan\u2019s kite down."
+        "transition_text": "Now let’s show what you know about a ladder.",
+        "connection_text": "A grown up used a ladder to get Dan’s kite down.",
+        "connection_narration": "In this story, A grown up used a ladder to get Dan’s kite down."
       }
     },
     {
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "frustrated: feeling word. Dan felt frustrated.",
+        "intro_narration": "Listen for this word in the story: frustrated. Dan felt frustrated.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is frustrated in? Listen and look.",
+            "teaching_text": "frustrated is a feeling word.",
+            "narration": "frustrated is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel frustrated? Listen and look.",
+            "teaching_text": "Frustrated means something is hard or not working, and it's bothering you.",
+            "narration": "Frustrated means something is hard or not working, and it's bothering you."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does frustrated look like? Listen and look.",
+            "teaching_text": "frustrated looks like a tight face and clenched hands.",
+            "narration": "frustrated looks like a tight face and clenched hands."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show frustrated? Listen and look.",
+            "teaching_text": "Frustrated shows up in your face, your hands, and your voice.",
+            "narration": "Frustrated shows up in your face, your hands, and your voice."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel frustrated? Listen and look.",
+            "teaching_text": "You might feel frustrated when something is tricky or keeps going wrong.",
+            "narration": "You might feel frustrated when something is tricky or keeps going wrong."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling frustrated.",
+        "connection_text": "Dan felt frustrated.",
+        "connection_narration": "In this story, Dan felt frustrated."
+      }
     }
   ],
   "sentence_frames": [
@@ -769,7 +808,7 @@
     },
     {
       "correct_position": 3,
-      "caption": "The wind pushed Dan\u2019s kite into a tree and it got stuck.",
+      "caption": "The wind pushed Dan’s kite into a tree and it got stuck.",
       "image": "slide-03.webp"
     },
     {

@@ -3,7 +3,7 @@ import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import { PREMIUM_PRICE_DISPLAY, startPremiumSubscription } from "@/services/subscription";
 import { TactileButton } from "./TactileButton";
 import { LockIcon, MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
-import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
+import { BookIcon, ChevronRightIcon, CoinIcon, PaperPlaneIcon } from "./StoryProsUi";
 
 interface PaywallScreenProps {
   childId: string;
@@ -35,8 +35,8 @@ const COMPARISON_ROWS = [
     premium: true,
   },
   {
-    title: "Paper Planes",
-    detail: "Earn and spend Paper Planes in the rewards shop.",
+    title: "Coins",
+    detail: "Earn and spend Coins in the rewards shop.",
     free: true,
     premium: true,
   },
@@ -47,7 +47,7 @@ const PREMIUM_DISPLAY_BENEFITS = [
   "Full parent progress dashboard",
   "Vocabulary, sequencing, and reflection activities",
   "Story-element retell practice",
-  "Paper Planes rewards shop access",
+  "Coins rewards shop access",
 ];
 
 export function PaywallScreen({
@@ -205,8 +205,8 @@ export function PaywallScreen({
             >
               <div className="flex items-start gap-3">
                 <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-accent/60 text-primary">
-                  {row.title === "Paper Planes" ? (
-                    <PaperPlaneIcon className="h-5 w-5" />
+                  {row.title === "Coins" ? (
+                    <CoinIcon className="h-5 w-5" />
                   ) : (
                     <BookIcon className="h-5 w-5" />
                   )}

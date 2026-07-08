@@ -281,8 +281,28 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
 
   }
 
+  const overallProgress = Math.min(
+    100,
+    (phaseIndex / (PHASE_ORDER.length - 1)) * 100,
+  );
+
   return (
     <div className="relative h-full w-full overflow-hidden bg-cream">
+      {currentPhase !== "story-complete" && (
+        <div
+          className="absolute inset-x-0 top-0 z-40 h-1 bg-accent/40"
+          role="progressbar"
+          aria-label="Whole story progress"
+          aria-valuenow={Math.round(overallProgress)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        >
+          <div
+            className="h-full bg-primary transition-all duration-500"
+            style={{ width: `${overallProgress}%` }}
+          />
+        </div>
+      )}
       {renderPhase()}
     </div>
   );

@@ -33,8 +33,16 @@ const DEMO_ROLE_OPTIONS: { role: DemoRole; label: string }[] = [
 ];
 
 export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
-  const { profile, children, activeChild, setActiveChild, updateChild, addChild, signOut, setDemoRole } =
-    useAuth();
+  const {
+    profile,
+    children,
+    activeChild,
+    setActiveChild,
+    updateChild,
+    addChild,
+    signOut,
+    setDemoRole,
+  } = useAuth();
 
   const [section, setSection] = useState<Section>("main");
   const [editingChild, setEditingChild] = useState<Child | null>(null);
@@ -85,35 +93,35 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
           </section>
 
           <div className="mt-5 space-y-4">
-          <FieldCard label="Child's name">
-            <input
-              type="text"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-              placeholder="Enter name"
-              className="w-full bg-transparent text-base font-semibold text-ink placeholder:text-ink-soft/60 focus:outline-none"
-            />
-          </FieldCard>
+            <FieldCard label="Child's name">
+              <input
+                type="text"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                placeholder="Enter name"
+                className="w-full bg-transparent text-base font-semibold text-ink placeholder:text-ink-soft/60 focus:outline-none"
+              />
+            </FieldCard>
 
-          <FieldCard label="Age">
-            <div className="grid grid-cols-7 gap-1.5 pt-1">
-              {[4, 5, 6, 7, 8, 9, 10].map((age) => (
-                <button
-                  key={age}
-                  type="button"
-                  onClick={() => setNewAge(age)}
-                  className={cn(
-                    "h-10 rounded-2xl text-sm font-extrabold transition-all",
-                    newAge === age
-                      ? "bg-primary text-primary-foreground shadow-[0_3px_0_0_var(--primary-deep)] -translate-y-0.5"
-                      : "bg-card text-ink shadow-card hover:bg-sky/30",
-                  )}
-                >
-                  {age}
-                </button>
-              ))}
-            </div>
-          </FieldCard>
+            <FieldCard label="Age">
+              <div className="grid grid-cols-7 gap-1.5 pt-1">
+                {[4, 5, 6, 7, 8, 9, 10].map((age) => (
+                  <button
+                    key={age}
+                    type="button"
+                    onClick={() => setNewAge(age)}
+                    className={cn(
+                      "h-10 rounded-2xl text-sm font-extrabold transition-all",
+                      newAge === age
+                        ? "bg-primary text-primary-foreground shadow-[0_3px_0_0_var(--primary-deep)] -translate-y-0.5"
+                        : "bg-card text-ink shadow-card hover:bg-sky/30",
+                    )}
+                  >
+                    {age}
+                  </button>
+                ))}
+              </div>
+            </FieldCard>
 
             <div className="flex items-center gap-3 rounded-[24px] border border-accent/70 bg-accent/35 p-4 shadow-card">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-card text-primary shadow-card">
@@ -122,7 +130,7 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
               <div>
                 <p className="text-sm font-extrabold text-primary">Safe and separate</p>
                 <p className="mt-1 text-xs font-semibold leading-snug text-ink-soft">
-                  Each child keeps their own level, settings, Paper Planes, and progress.
+                  Each child keeps their own level, settings, Coins, and progress.
                 </p>
               </div>
             </div>
@@ -332,6 +340,24 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
             {children.map((child) => (
               <SlpShareRow key={child.id} child={child} />
             ))}
+          </SettingsGroup>
+
+          <SettingsGroup title="Retell Library">
+            <button
+              onClick={() => onNavigate?.("retell-library")}
+              className="flex w-full items-center gap-3 p-4 transition-colors hover:bg-accent/30"
+            >
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
+                <RetellLibraryIcon />
+              </span>
+              <span className="min-w-0 flex-1 text-left">
+                <p className="text-sm font-extrabold text-primary">Listen to saved retells</p>
+                <p className="mt-0.5 text-xs font-semibold text-ink-soft">
+                  Every recording your child has saved while retelling a story.
+                </p>
+              </span>
+              <ChevronRightIcon className="h-5 w-5 text-ink-soft" />
+            </button>
           </SettingsGroup>
 
           <div className="pt-1">
@@ -721,6 +747,22 @@ function SchoolIcon() {
       <path d="M3 9l9-5 9 5-9 5-9-5z" strokeLinejoin="round" />
       <path d="M7 11.5v4.2c1.5 1.3 3.1 1.9 5 1.9s3.5-.6 5-1.9v-4.2" />
       <path d="M21 9v6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function RetellLibraryIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <rect x="9" y="3" width="6" height="12" rx="3" />
+      <path d="M5 11a7 7 0 0 0 14 0M12 18v3" strokeLinecap="round" />
     </svg>
   );
 }

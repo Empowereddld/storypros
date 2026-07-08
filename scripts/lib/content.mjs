@@ -33,6 +33,8 @@ export function collectLines(contentDir, scope) {
       }
 
       story.vocabulary_words?.forEach((word, wi) => {
+        // Matches VocabularyIntroPhase's "Hear It" button: speak(word.word, ...).
+        push(word.word, `${storyId}/vocab-${wi + 1}/word`);
         const teach = word.sfa_teaching;
         if (teach) {
           push(teach.intro_narration, `${storyId}/vocab-${wi + 1}/intro_narration`);

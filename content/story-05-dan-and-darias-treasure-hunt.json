@@ -13,7 +13,7 @@
     },
     {
       "position": 2,
-      "text": "They were in Dan\u2019s backyard for a treasure hunt.",
+      "text": "They were in Dan’s backyard for a treasure hunt.",
       "story_element": "place",
       "image": "slide-02.webp"
     },
@@ -31,13 +31,13 @@
     },
     {
       "position": 5,
-      "text": "Daria asked Dan\u2019s mom for a battery.",
+      "text": "Daria asked Dan’s mom for a battery.",
       "story_element": "action",
       "image": "slide-05.webp"
     },
     {
       "position": 6,
-      "text": "Dan\u2019s mom put the battery in the flashlight so they could see and find the treasure.",
+      "text": "Dan’s mom put the battery in the flashlight so they could see and find the treasure.",
       "story_element": "result",
       "image": "slide-06.webp"
     }
@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Daria",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         },
         {
           "id": "c",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         },
         {
           "id": "b",
-          "label": "They were in Dan\u2019s backyard for a treasure hunt",
-          "emoji": "\ud83c\udfe0",
+          "label": "They were in Dan’s backyard for a treasure hunt",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "It got dark and the flashlight would not turn on",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         },
         {
           "id": "b",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         },
         {
           "id": "c",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         },
         {
           "id": "c",
           "label": "Worried",
-          "emoji": "\ud83d\ude1f",
+          "emoji": "😟",
           "correct": true
         }
       ],
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "b",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "c",
-          "label": "Daria asked Dan\u2019s mom for a battery",
-          "emoji": "\u2708\ufe0f",
+          "label": "Daria asked Dan’s mom for a battery",
+          "emoji": "✈️",
           "correct": true
         }
       ],
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
-          "label": "Dan\u2019s mom put the battery in the flashlight so they could...",
-          "emoji": "\ud83d\ude34",
+          "label": "Dan’s mom put the battery in the flashlight so they could...",
+          "emoji": "😴",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -369,7 +369,7 @@
             "narration": "You might find or use flashlight in home, outside, camping, or a dark place. You might use a flashlight when the power goes out, when you go camping, or when you look for something in a dark place."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a flashlight.",
+        "transition_text": "Now let’s show what you know about a flashlight.",
         "connection_text": "Dan and Daria needed the flashlight to see the treasure map.",
         "connection_narration": "In this story, Dan and Daria needed the flashlight to see the treasure map."
       }
@@ -514,8 +514,8 @@
         }
       ],
       "sfa_teaching": {
-        "intro_text": "battery: power source. Dan\u2019s mom put a battery in the flashlight so it would turn on.",
-        "intro_narration": "Listen for this word in the story: battery. Dan\u2019s mom put a battery in the flashlight so it would turn on.",
+        "intro_text": "battery: power source. Dan’s mom put a battery in the flashlight so it would turn on.",
+        "intro_narration": "Listen for this word in the story: battery. Dan’s mom put a battery in the flashlight so it would turn on.",
         "slides": [
           {
             "feature": "category",
@@ -548,9 +548,9 @@
             "narration": "You might find or use battery in flashlights, toys, remotes, or devices. You might use a battery when something will not turn on and it needs power."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a battery.",
-        "connection_text": "Dan\u2019s mom put a battery in the flashlight so it would turn on.",
-        "connection_narration": "In this story, Dan\u2019s mom put a battery in the flashlight so it would turn on."
+        "transition_text": "Now let’s show what you know about a battery.",
+        "connection_text": "Dan’s mom put a battery in the flashlight so it would turn on.",
+        "connection_narration": "In this story, Dan’s mom put a battery in the flashlight so it would turn on."
       }
     },
     {
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "worried: feeling word. Dan and Daria felt worried.",
+        "intro_narration": "Listen for this word in the story: worried. Dan and Daria felt worried.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is worried in? Listen and look.",
+            "teaching_text": "worried is a feeling word.",
+            "narration": "worried is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel worried? Listen and look.",
+            "teaching_text": "Worried means you feel nervous about something that might happen.",
+            "narration": "Worried means you feel nervous about something that might happen."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does worried look like? Listen and look.",
+            "teaching_text": "worried looks like a tense face and eyes that dart around.",
+            "narration": "worried looks like a tense face and eyes that dart around."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show worried? Listen and look.",
+            "teaching_text": "Worried shows up in your face, your stomach, and your thoughts.",
+            "narration": "Worried shows up in your face, your stomach, and your thoughts."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel worried? Listen and look.",
+            "teaching_text": "You might feel worried before something new or uncertain happens.",
+            "narration": "You might feel worried before something new or uncertain happens."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling worried.",
+        "connection_text": "Dan and Daria felt worried.",
+        "connection_narration": "In this story, Dan and Daria felt worried."
+      }
     }
   ],
   "sentence_frames": [
@@ -764,7 +803,7 @@
     },
     {
       "correct_position": 2,
-      "caption": "They were in Dan\u2019s backyard for a treasure hunt.",
+      "caption": "They were in Dan’s backyard for a treasure hunt.",
       "image": "slide-02.webp"
     },
     {
@@ -779,12 +818,12 @@
     },
     {
       "correct_position": 5,
-      "caption": "Daria asked Dan\u2019s mom for a battery.",
+      "caption": "Daria asked Dan’s mom for a battery.",
       "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
-      "caption": "Dan\u2019s mom put the battery in the flashlight so they could see and f...",
+      "caption": "Dan’s mom put the battery in the flashlight so they could see and f...",
       "image": "slide-06.webp"
     }
   ],
@@ -814,11 +853,11 @@
   "joke": {
     "word": "light",
     "meaning_1": {
-      "text": "Brightness \u2014 what helps you see",
+      "text": "Brightness — what helps you see",
       "image": "joke-light-1.webp"
     },
     "meaning_2": {
-      "text": "Not heavy \u2014 the opposite of heavy",
+      "text": "Not heavy — the opposite of heavy",
       "image": "joke-light-2.webp"
     },
     "joke_text": "Why did the flashlight like the feather? Because it was so light!"

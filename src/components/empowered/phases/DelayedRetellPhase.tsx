@@ -8,24 +8,19 @@
 import { useEffect, useState } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
+import { MiniPlane, Star } from "../StoryProsBrand";
+import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { resolveStoryImage } from "@/services/storyImages";
 import type { StoryPhaseProps, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { ListenButton, useListen } from "./ListenButton";
-
-const ELEMENT_ICONS: Record<StoryElement, string> = {
-  character: "👤",
-  place: "📍",
-  problem: "❗",
-  emotion: "💛",
-  action: "➡️",
-  result: "💡",
-};
+import { RetellRecorder } from "../RetellRecorder";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Who",
   place: "Where",
   problem: "Problem",
-  emotion: "Emotion",
+  emotion: "Feeling",
   action: "What happened",
   result: "Result",
 };
@@ -35,6 +30,7 @@ export function DelayedRetellPhase({
   onComplete,
   onClose,
   ttsSpeed = "normal",
+  childId,
 }: StoryPhaseProps) {
   const elements = storyData.retell_prompts.story_elements;
   const [tapped, setTapped] = useState<Set<number>>(new Set());
@@ -45,7 +41,7 @@ export function DelayedRetellPhase({
   // Stop narration once the child starts tapping story parts.
   useEffect(() => cancel, [started, cancel]);
 
-  const progress = started ? ((tapped.size / elements.length) * 80 + 20) : 0;
+  const progress = started ? (tapped.size / elements.length) * 80 + 20 : 0;
 
   function handleTap(idx: number) {
     setTapped((prev) => new Set(prev).add(idx));
@@ -61,89 +57,163 @@ export function DelayedRetellPhase({
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <ProgressHeader
-        progress={progress}
-        label="Tell it again!"
-        onClose={onClose}
-      />
+    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+        <Star className="absolute right-8 top-28 h-5 w-5 text-secondary animate-sparkle" />
+        <Star className="absolute left-8 bottom-32 h-4 w-4 text-primary/30 animate-sparkle" />
+        <MiniPlane className="absolute right-10 bottom-24 h-9 w-9 rotate-12 text-secondary/70 animate-float" />
+      </div>
+
+      <div className="relative z-10">
+        <ProgressHeader progress={progress} label="Tell it again!" onClose={onClose} />
+      </div>
 
       {!started ? (
-        <div className="flex flex-1 flex-col items-center justify-center px-5 animate-pop-in">
-          <span className="text-6xl mb-4">🧠</span>
-          <h2 className="font-display text-[28px] font-extrabold text-primary text-center mb-3">
-            Remember the story?
-          </h2>
-          <p className="text-base font-semibold text-ink-soft text-center mb-2">
-            {delayedPrompt}
-          </p>
-          {supported && (
-            <ListenButton
-              playing={isPlaying("delayed")}
-              onClick={() => toggle(delayedPrompt, "delayed")}
-              className="mb-3 h-12 w-12"
-              ariaLabel="Hear the retell prompt"
-            />
-          )}
-          <p className="text-sm text-ink-soft/70 text-center">
-            Tap each story part as you talk about it.
-          </p>
+        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
+          <section className="rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
+            <div className="flex items-start gap-4">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-accent text-primary">
+                <BrainIcon className="h-9 w-9" />
+              </div>
+              <div>
+                <h1 className="text-[30px] font-extrabold leading-tight text-primary">
+                  Remember the Story?
+                </h1>
+                <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
+                  Tap each story part as you talk about it.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
+              <p className="flex-1 text-xl font-extrabold leading-snug text-primary">
+                {delayedPrompt}
+              </p>
+              {supported && (
+                <ListenButton
+                  playing={isPlaying("delayed")}
+                  onClick={() => toggle(delayedPrompt, "delayed")}
+                  className="h-11 w-11"
+                  ariaLabel="Hear the retell prompt"
+                />
+              )}
+            </div>
+
+            <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" />
+          </section>
         </div>
       ) : (
-        <div className="flex flex-1 flex-col px-5 mt-4 animate-slide-up">
-          <h2 className="font-display text-[22px] font-extrabold text-primary mb-4">
-            Tap each part as you tell it
-          </h2>
-          <div className="space-y-3 flex-1">
-            {elements.map((el, idx) => {
-              const isTapped = tapped.has(idx);
-              return (
-                <button
-                  key={el}
-                  onClick={() => handleTap(idx)}
-                  className={cn(
-                    "flex w-full items-center gap-4 rounded-2xl border-2 bg-card p-4 shadow-card transition-all",
-                    isTapped && "border-success bg-success/5 scale-[0.98]",
-                    !isTapped && "border-transparent hover:border-primary/40",
-                  )}
-                >
-                  <span className={cn(
-                    "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-2xl transition-all",
-                    isTapped ? "bg-success/20" : "bg-sky",
-                  )}>
-                    {ELEMENT_ICONS[el]}
-                  </span>
-                  <span className={cn(
-                    "flex-1 text-lg font-bold text-left",
-                    isTapped ? "text-success" : "text-primary",
-                  )}>
-                    {ELEMENT_LABELS[el]}
-                  </span>
-                  {isTapped && (
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-success text-success-foreground">
-                      <svg viewBox="0 0 24 24" className="h-4 w-4" stroke="currentColor" strokeWidth="3" fill="none">
-                        <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
+          <section>
+            <div className="flex items-center gap-2">
+              <BookIcon className="h-5 w-5 text-primary" />
+              <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              {elements.map((element, index) => {
+                const selected = tapped.has(index);
+                const slide = storyData.slides.find((item) => item.story_element === element);
+                const image = slide ? resolveStoryImage(storyData.id, slide.image) : null;
+
+                return (
+                  <button
+                    key={`${element}-${index}`}
+                    onClick={() => handleTap(index)}
+                    className={cn(
+                      "hover-lift min-h-[204px] overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                      selected ? "border-success bg-success/5" : "border-accent/60",
+                    )}
+                  >
+                    <div className="relative h-28 overflow-hidden bg-accent">
+                      {image ? (
+                        <img src={image} alt="" className="h-full w-full object-cover" />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-primary">
+                          <PaperPlaneIcon className="h-10 w-10" />
+                        </div>
+                      )}
+                      <span
+                        className={cn(
+                          "absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full text-sm font-extrabold shadow-card",
+                          selected
+                            ? "bg-success text-success-foreground"
+                            : "bg-primary text-primary-foreground",
+                        )}
+                      >
+                        {index + 1}
+                      </span>
+                      {selected && (
+                        <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-card text-success shadow-card">
+                          <CheckIcon />
+                        </span>
+                      )}
+                    </div>
+                    <div className="p-3">
+                      <p className="text-base font-extrabold leading-tight text-primary">
+                        {ELEMENT_LABELS[element]}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
         </div>
       )}
 
-      <div className="mx-5 mb-5">
+      <div className="relative z-10 mx-5 mb-5">
         {!started ? (
           <TactileButton onClick={() => setStarted(true)}>
-            Let's go!
+            Let's go! <ChevronRightIcon className="h-5 w-5 text-secondary" />
           </TactileButton>
         ) : (
           <TactileButton onClick={handleDone} disabled={tapped.size < elements.length}>
-            I told the whole story!
+            I Told the Whole Story! <ChevronRightIcon className="h-5 w-5 text-secondary" />
           </TactileButton>
         )}
       </div>
     </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      aria-hidden
+    >
+      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function BrainIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path
+        d="M9 4a3 3 0 0 0-3 3v.3A3 3 0 0 0 4 10v1a3 3 0 0 0 1.5 2.6A3 3 0 0 0 8 18h1v-2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 4a3 3 0 0 1 3 3v.3A3 3 0 0 1 20 10v1a3 3 0 0 1-1.5 2.6A3 3 0 0 1 16 18h-1v-2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M9 4h6v11.5a2.5 2.5 0 0 1-5 0" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

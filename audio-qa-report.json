@@ -1,17 +1,27 @@
 {
   "threshold": 0.2,
-  "checked": 457,
-  "flagged": 0,
+  "checked": 536,
+  "flagged": 2,
   "results": [
     {
-      "id": "baca5a9fba1ebfd8",
+      "id": "a08689140788fce0",
       "sources": [
-        "story-06-the-kite-in-the-tree/sentence-1/frame_text"
+        "story-10-dans-lunchroom-moment/vocab-1/word"
       ],
-      "source_text": "Dan felt frustrated because blank",
-      "transcript": "Dan felt frustrated because (blank)",
-      "wer": 0.2,
-      "flagged": false
+      "source_text": "tray",
+      "transcript": "Trey.",
+      "wer": 1,
+      "flagged": true
+    },
+    {
+      "id": "b0a94b3de01d89a0",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-2/word"
+      ],
+      "source_text": "piece",
+      "transcript": "Peace.",
+      "wer": 1,
+      "flagged": true
     },
     {
       "id": "04947d657314f249",
@@ -64,22 +74,22 @@
       "flagged": false
     },
     {
+      "id": "baca5a9fba1ebfd8",
+      "sources": [
+        "story-06-the-kite-in-the-tree/sentence-1/frame_text"
+      ],
+      "source_text": "Dan felt frustrated because blank",
+      "transcript": "Dan felt frustrated because (blank)",
+      "wer": 0.2,
+      "flagged": false
+    },
+    {
       "id": "dcce961930ddbaaa",
       "sources": [
         "story-10-dans-lunchroom-moment/vocab-1/quiz-1/prompt"
       ],
       "source_text": "What category is tray in?",
       "transcript": "What category is Trey in?",
-      "wer": 0.2,
-      "flagged": false
-    },
-    {
-      "id": "e2bf1b37f1cdc5ce",
-      "sources": [
-        "story-01-dan-and-the-paper-cut/vocab-2/intro_narration"
-      ],
-      "source_text": "Listen for this word in the story: paper airplane. Dan was making a paper airplane when he got a papercut.",
-      "transcript": "Listen for this word in the story, paper airplane. Dan was making a paper airplane when he got a paper cut. (gentle music)",
       "wer": 0.2,
       "flagged": false
     },
@@ -109,7 +119,7 @@
         "story-06-the-kite-in-the-tree/vocab-2/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of ladder include steps, side rails, and feet.",
-      "transcript": "Parts or features of ladder include steps, side rails and feet. (gentle music)",
+      "transcript": "Parts or features of ladder include steps, side rails, and feet. (light music)",
       "wer": 0.18181818181818182,
       "flagged": false
     },
@@ -144,6 +154,26 @@
       "flagged": false
     },
     {
+      "id": "cbacd2451222e21c",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-2/intro_narration"
+      ],
+      "source_text": "teacher: person word. Dan's mom said they would talk to his teacher together.",
+      "transcript": "Teacher: (person word). Dan's mom said they would talk to his teacher together.",
+      "wer": 0.15384615384615385,
+      "flagged": false
+    },
+    {
+      "id": "2cd3ce7c7997cad8",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/joke/joke_text"
+      ],
+      "source_text": "Why did the math book sit on the furniture? Because it needed a table!",
+      "transcript": "Why did the math book sit on the furniture? Because it needed a table. (light music)",
+      "wer": 0.14285714285714285,
+      "flagged": false
+    },
+    {
       "id": "409fdb0d9a1f155d",
       "sources": [
         "story-10-dans-lunchroom-moment/vocab-1/quiz-5/prompt"
@@ -174,23 +204,13 @@
       "flagged": false
     },
     {
-      "id": "a8e43efdaa07ca3e",
+      "id": "ec1264c56870693f",
       "sources": [
-        "story-05-dan-and-darias-treasure-hunt/sentence-2/frame_text"
+        "story-08-dan-talks-about-recess/joke/joke_text"
       ],
-      "source_text": "Daria asked Dan's mom for help because blank",
-      "transcript": "Darya asked Dan's mom for help because blank.",
-      "wer": 0.125,
-      "flagged": false
-    },
-    {
-      "id": "0c2ae9570113e1e8",
-      "sources": [
-        "story-08-dan-talks-about-recess/slide-3/text"
-      ],
-      "source_text": "One kid laughed when Dan paused before answering.",
-      "transcript": "One kid laughed when Dan paused before answering, \"Um...\"",
-      "wer": 0.125,
+      "source_text": "Why did the basketball go to see the judge? Because it was already at court!",
+      "transcript": "(soft laughter) Why did the basketball go to see the judge? Because it was already at court.",
+      "wer": 0.13333333333333333,
       "flagged": false
     },
     {
@@ -210,6 +230,16 @@
       ],
       "source_text": "What is a part or feature of tray?",
       "transcript": "What is a part or feature of Trey?",
+      "wer": 0.125,
+      "flagged": false
+    },
+    {
+      "id": "a8e43efdaa07ca3e",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/sentence-2/frame_text"
+      ],
+      "source_text": "Daria asked Dan's mom for help because blank",
+      "transcript": "Darya asked Dan's mom for help because blank.",
       "wer": 0.125,
       "flagged": false
     },
@@ -259,8 +289,28 @@
         "story-07-the-sandcastle-and-the-wave/vocab-2/intro_narration"
       ],
       "source_text": "Listen for this word in the story: wave. A wave crashed into the sandcastle and knocked it down.",
-      "transcript": "Listen for this word in the story: wave. A wave crashed into the sand castle and knocked it down.",
+      "transcript": "Listen for this word in the story, wave. A wave crashed into the sand castle and knocked it down.",
       "wer": 0.1111111111111111,
+      "flagged": false
+    },
+    {
+      "id": "e2bf1b37f1cdc5ce",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-2/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: paper airplane. Dan was making a paper airplane when he got a papercut.",
+      "transcript": "Listen for this word in the story, paper airplane. Dan was making a paper airplane when he got a paper cut.",
+      "wer": 0.1,
+      "flagged": false
+    },
+    {
+      "id": "1129c2525bddc695",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/joke/joke_text"
+      ],
+      "source_text": "Why did the flashlight like the feather? Because it was so light!",
+      "transcript": "Why did the flashlight like the feather? Because it was so light (laughs).",
+      "wer": 0.08333333333333333,
       "flagged": false
     },
     {
@@ -281,16 +331,6 @@
       "source_text": "You use or think about teacher to helps students learn and solve problems.",
       "transcript": "You use or think about teacher to help students learn and solve problems.",
       "wer": 0.07692307692307693,
-      "flagged": false
-    },
-    {
-      "id": "2cd3ce7c7997cad8",
-      "sources": [
-        "story-09-daria-asks-for-the-next-step/joke/joke_text"
-      ],
-      "source_text": "Why did the math book sit on the furniture? Because it needed a table!",
-      "transcript": "Why did the math book sit on the furniture? Because it needed a table. (laughs)",
-      "wer": 0.07142857142857142,
       "flagged": false
     },
     {
@@ -324,32 +364,12 @@
       "flagged": false
     },
     {
-      "id": "88ffb60291506365",
-      "sources": [
-        "story-01-dan-and-the-paper-cut/vocab-2/teach-slide-5/narration"
-      ],
-      "source_text": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends.",
-      "transcript": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends. (lively music)",
-      "wer": 0.06666666666666667,
-      "flagged": false
-    },
-    {
       "id": "a09522a4dd03096e",
       "sources": [
         "story-04-daria-and-the-puzzle-piece/joke/joke_text"
       ],
       "source_text": "Why did the puzzle go to the party? Because it wanted a piece of cake!",
       "transcript": "Why did the puzzle go to the party? Because it wanted a piece of cake (laughs).",
-      "wer": 0.06666666666666667,
-      "flagged": false
-    },
-    {
-      "id": "ec1264c56870693f",
-      "sources": [
-        "story-08-dan-talks-about-recess/joke/joke_text"
-      ],
-      "source_text": "Why did the basketball go to see the judge? Because it was already at court!",
-      "transcript": "Why did the basketball go to see the judge? Because it was already at court (laugh).",
       "wer": 0.06666666666666667,
       "flagged": false
     },
@@ -374,305 +394,32 @@
       "flagged": false
     },
     {
-      "id": "31487f4acf8c8f9c",
+      "id": "9690760ea22f6f94",
       "sources": [
-        "story-08-dan-talks-about-recess/phonological/prompt"
+        "story-04-daria-and-the-puzzle-piece/vocab-2/teach-slide-5/narration"
       ],
-      "source_text": "Which word rhymes with court?",
-      "transcript": "Which word rhymes with court?",
+      "source_text": "You might find or use piece in puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set.",
+      "transcript": "You might find or use piece and puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set.",
+      "wer": 0.037037037037037035,
+      "flagged": false
+    },
+    {
+      "id": "ac814ccccbf983c2",
+      "sources": [
+        "story-10-dans-lunchroom-moment/vocab-2/word"
+      ],
+      "source_text": "seat",
+      "transcript": "Seat.",
       "wer": 0,
       "flagged": false
     },
     {
-      "id": "30c1774697abee70",
+      "id": "fca8e6e0c284c58f",
       "sources": [
-        "story-09-daria-asks-for-the-next-step/sentence-2/frame_text"
+        "story-07-the-sandcastle-and-the-wave/vocab-1/word"
       ],
-      "source_text": "Daria asked her partner because blank",
-      "transcript": "Daria asked her partner because blank?",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "0a5ac7ec72434a5f",
-      "sources": [
-        "story-06-the-kite-in-the-tree/vocab-1/teach-slide-1/narration"
-      ],
-      "source_text": "kite is a toy.",
-      "transcript": "kite is a toy.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "11ced8390201b6aa",
-      "sources": [
-        "story-08-dan-talks-about-recess/sentence-3/frame_text"
-      ],
-      "source_text": "His mom said they would talk to the teacher because blank",
-      "transcript": "His mom said they would talk to the teacher because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "15aefe465eb9aea8",
-      "sources": [
-        "story-03-dan-joins-the-game/sentence-3/frame_text"
-      ],
-      "source_text": "Daria invited Dan because blank",
-      "transcript": "Daria invited Dan because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "2cd7dfbfcfa750f7",
-      "sources": [
-        "story-08-dan-talks-about-recess/sentence-1/frame_text",
-        "story-10-dans-lunchroom-moment/sentence-1/frame_text"
-      ],
-      "source_text": "Dan felt embarrassed because blank",
-      "transcript": "Dan felt embarrassed because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "3b65d50661dc32c4",
-      "sources": [
-        "story-02-darias-carnival-ticket/sentence-3/frame_text"
-      ],
-      "source_text": "They could go into the carnival because blank",
-      "transcript": "They could go into the carnival because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "4021369457a0f289",
-      "sources": [
-        "story-07-the-sandcastle-and-the-wave/sentence-1/frame_text"
-      ],
-      "source_text": "Dan and Daria felt disappointed because blank",
-      "transcript": "Dan and Daria felt disappointed because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "59fa9eb46b822195",
-      "sources": [
-        "story-02-darias-carnival-ticket/sentence-1/frame_text"
-      ],
-      "source_text": "Daria felt worried because blank",
-      "transcript": "Daria felt worried because, blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "5c6cf49c64684e55",
-      "sources": [
-        "story-07-the-sandcastle-and-the-wave/sentence-3/frame_text"
-      ],
-      "source_text": "Their new sandcastle stayed safe because blank",
-      "transcript": "Their new sandcastle stayed safe because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "5c9b73dd422c5992",
-      "sources": [
-        "story-04-daria-and-the-puzzle-piece/sentence-1/frame_text"
-      ],
-      "source_text": "Daria felt upset because blank",
-      "transcript": "Daria felt upset because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "92e80ce41cdab8f7",
-      "sources": [
-        "story-01-dan-and-the-paper-cut/sentence-2/frame_text"
-      ],
-      "source_text": "Daria's dad helped Dan because blank",
-      "transcript": "Daria's dad helped Dan because, blank?",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "9d5feb4b33783669",
-      "sources": [
-        "story-09-daria-asks-for-the-next-step/sentence-1/frame_text",
-        "story-11-daria-asks-again/sentence-1/frame_text"
-      ],
-      "source_text": "Daria felt confused because blank",
-      "transcript": "Daria felt confused because, blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "a7791150902070d1",
-      "sources": [
-        "story-06-the-kite-in-the-tree/sentence-3/frame_text"
-      ],
-      "source_text": "They got the kite down because blank",
-      "transcript": "They got the kite down because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "aa92f06aeadc9c49",
-      "sources": [
-        "story-09-daria-asks-for-the-next-step/sentence-3/frame_text"
-      ],
-      "source_text": "Daria knew what to do next because blank",
-      "transcript": "Daria knew what to do next because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "b73758f62ff7f164",
-      "sources": [
-        "story-11-daria-asks-again/sentence-3/frame_text"
-      ],
-      "source_text": "Daria could try again because blank",
-      "transcript": "\"Daria could try again because blank.\"",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "b7d3e1d46f0b3787",
-      "sources": [
-        "story-07-the-sandcastle-and-the-wave/sentence-2/frame_text"
-      ],
-      "source_text": "Daria said they should move because blank",
-      "transcript": "Daria said they should move because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "b8bc2b1476474d61",
-      "sources": [
-        "story-04-daria-and-the-puzzle-piece/sentence-3/frame_text"
-      ],
-      "source_text": "They finished the puzzle because blank",
-      "transcript": "They finished the puzzle because, blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "cbbddef6fae56cf4",
-      "sources": [
-        "story-11-daria-asks-again/sentence-2/frame_text"
-      ],
-      "source_text": "Daria raised her hand because blank",
-      "transcript": "Daria raised her hand because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "d146750c658261dc",
-      "sources": [
-        "story-05-dan-and-darias-treasure-hunt/sentence-3/frame_text"
-      ],
-      "source_text": "They could find the treasure because blank",
-      "transcript": "They could find the treasure because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "d6b5e87a0fa92807",
-      "sources": [
-        "story-03-dan-joins-the-game/sentence-2/frame_text"
-      ],
-      "source_text": "Dan asked to play because blank",
-      "transcript": "Dan asked to play because blank?",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "da04facca98523ef",
-      "sources": [
-        "story-01-dan-and-the-paper-cut/sentence-3/frame_text"
-      ],
-      "source_text": "Dan felt calm because blank",
-      "transcript": "Dan felt calm because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "daf812458fd1b9dc",
-      "sources": [
-        "story-01-dan-and-the-paper-cut/sentence-1/frame_text"
-      ],
-      "source_text": "Dan asked for a bandage because blank",
-      "transcript": "Dan asked for a bandage because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "db7d15cbd5ef7260",
-      "sources": [
-        "story-04-daria-and-the-puzzle-piece/sentence-2/frame_text"
-      ],
-      "source_text": "Daria let her friend use the piece because blank",
-      "transcript": "Daria let her friend use the piece because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "e44c1578a06d146c",
-      "sources": [
-        "story-02-darias-carnival-ticket/sentence-2/frame_text"
-      ],
-      "source_text": "Daria asked her dad for help because blank",
-      "transcript": "Daria asked her dad for help because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "e74cbd230655d332",
-      "sources": [
-        "story-06-the-kite-in-the-tree/sentence-2/frame_text"
-      ],
-      "source_text": "Daria asked a grown up for a ladder because blank",
-      "transcript": "Daria asked a grown-up for a ladder because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "efd3ccaf7dd48d03",
-      "sources": [
-        "story-10-dans-lunchroom-moment/sentence-2/frame_text"
-      ],
-      "source_text": "Dan sat by himself because blank",
-      "transcript": "Dan sat by himself because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "f72ccc581ac41294",
-      "sources": [
-        "story-08-dan-talks-about-recess/sentence-2/frame_text",
-        "story-10-dans-lunchroom-moment/sentence-3/frame_text"
-      ],
-      "source_text": "Dan told his mom because blank",
-      "transcript": "Dan told his mom because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "f785a57ab7594834",
-      "sources": [
-        "story-05-dan-and-darias-treasure-hunt/sentence-1/frame_text"
-      ],
-      "source_text": "Dan and Daria felt worried because blank",
-      "transcript": "Dan and Daria felt worried because blank.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
-      "id": "f9104f09c2038c19",
-      "sources": [
-        "story-03-dan-joins-the-game/sentence-1/frame_text"
-      ],
-      "source_text": "Dan felt lonely because blank",
-      "transcript": "\"Dan felt lonely because blank.\"",
+      "source_text": "sandcastle",
+      "transcript": "Sandcastle.",
       "wer": 0,
       "flagged": false
     },
@@ -683,6 +430,16 @@
       ],
       "source_text": "Where or when might you see a piece?",
       "transcript": "Where or when might you see a piece?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "01fd20585ed717ca",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Upset means something didn't go the way you wanted, and it doesn't feel good.",
+      "transcript": "Upset means something didn't go the way you wanted and it doesn't feel good.",
       "wer": 0,
       "flagged": false
     },
@@ -768,6 +525,27 @@
       "flagged": false
     },
     {
+      "id": "0675993adc37aa2e",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/teach-slide-2/narration",
+        "story-10-dans-lunchroom-moment/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Embarrassed means you feel shy or uncomfortable because others noticed something.",
+      "transcript": "Embarrassed means you feel shy or uncomfortable because others noticed something.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "06ce3204b8fb9977",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel frustrated when something is tricky or keeps going wrong.",
+      "transcript": "You might feel frustrated when something is tricky or keeps going wrong.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "06de2c8ab49943a9",
       "sources": [
         "story-03-dan-joins-the-game/slide-5/text"
@@ -838,6 +616,36 @@
       "flagged": false
     },
     {
+      "id": "0a5ac7ec72434a5f",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-1/teach-slide-1/narration"
+      ],
+      "source_text": "kite is a toy.",
+      "transcript": "Kite is a toy.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "0c2ae9570113e1e8",
+      "sources": [
+        "story-08-dan-talks-about-recess/slide-3/text"
+      ],
+      "source_text": "One kid laughed when Dan paused before answering.",
+      "transcript": "One kid laughed when Dan paused before answering.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "0c3ddcfc0b1dc616",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-2/word"
+      ],
+      "source_text": "ladder",
+      "transcript": "Ladder.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "0cd07cf1ec91d72c",
       "sources": [
         "story-06-the-kite-in-the-tree/vocab-2/teach-slide-1/narration"
@@ -898,12 +706,22 @@
       "flagged": false
     },
     {
-      "id": "1129c2525bddc695",
+      "id": "11ced8390201b6aa",
       "sources": [
-        "story-05-dan-and-darias-treasure-hunt/joke/joke_text"
+        "story-08-dan-talks-about-recess/sentence-3/frame_text"
       ],
-      "source_text": "Why did the flashlight like the feather? Because it was so light!",
-      "transcript": "Why did the flashlight like the feather? Because it was so light.",
+      "source_text": "His mom said they would talk to the teacher because blank",
+      "transcript": "His mom said they would talk to the teacher because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "121bf6465ffd9158",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: disappointed. Dan and Daria felt disappointed.",
+      "transcript": "Listen for this word in the story: disappointed. Dan and Daria felt disappointed.",
       "wer": 0,
       "flagged": false
     },
@@ -999,6 +817,16 @@
       "flagged": false
     },
     {
+      "id": "15aefe465eb9aea8",
+      "sources": [
+        "story-03-dan-joins-the-game/sentence-3/frame_text"
+      ],
+      "source_text": "Daria invited Dan because blank",
+      "transcript": "Daria invited Dan because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "165918e987c7caa3",
       "sources": [
         "story-11-daria-asks-again/vocab-1/quiz-3/prompt"
@@ -1019,6 +847,16 @@
       "flagged": false
     },
     {
+      "id": "16896b09e7473183",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel calm after taking a deep breath or resting.",
+      "transcript": "You might feel calm after taking a deep breath or resting.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "17431037b89b9adf",
       "sources": [
         "story-03-dan-joins-the-game/vocab-3/quiz-2/prompt"
@@ -1034,7 +872,17 @@
         "story-03-dan-joins-the-game/vocab-2/intro_narration"
       ],
       "source_text": "Listen for this word in the story: field. The kids were playing soccer on the field.",
-      "transcript": "Listen for this word in the story, field. The kids were playing soccer on the field.",
+      "transcript": "Listen for this word in the story: field. The kids were playing soccer on the field.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "17fe4f4f03006662",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Upset shows up in your face, your voice, and your body.",
+      "transcript": "Upset shows up in your face, your voice, and your body.",
       "wer": 0,
       "flagged": false
     },
@@ -1125,6 +973,16 @@
       ],
       "source_text": "Have you ever built something and then it broke or got ruined? How did you feel? What did you do?",
       "transcript": "Have you ever built something and then it broke or got ruined? How did you feel? What did you do?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "1bbe95c63e501c54",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-2/word"
+      ],
+      "source_text": "instruction page",
+      "transcript": "Instruction page.",
       "wer": 0,
       "flagged": false
     },
@@ -1230,6 +1088,26 @@
       "flagged": false
     },
     {
+      "id": "207bbf75dff879af",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Frustrated shows up in your face, your hands, and your voice.",
+      "transcript": "Frustrated shows up in your face, your hands and your voice.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "210ff27742509908",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-1/word"
+      ],
+      "source_text": "bandage",
+      "transcript": "Bandage.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "232cde61f671056f",
       "sources": [
         "story-11-daria-asks-again/vocab-2/teach-slide-5/narration"
@@ -1290,6 +1168,37 @@
       "flagged": false
     },
     {
+      "id": "267e352920c37cdd",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel disappointed when a plan changes or falls through.",
+      "transcript": "You might feel disappointed when a plan changes or falls through.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "2689a5aa7f3f3526",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/word"
+      ],
+      "source_text": "lonely",
+      "transcript": "Lonely.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "28ca2532db3f9de4",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/teach-slide-2/narration",
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Worried means you feel nervous about something that might happen.",
+      "transcript": "Worried means you feel nervous about something that might happen.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "2949ec29bf7573df",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-3/quiz-5/prompt"
@@ -1306,6 +1215,17 @@
       ],
       "source_text": "Where or when might you see a puzzle?",
       "transcript": "Where or when might you see a puzzle?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "29e9e05a20917e82",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/intro_narration",
+        "story-10-dans-lunchroom-moment/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: embarrassed. Dan felt embarrassed.",
+      "transcript": "Listen for this word in the story, embarrassed. Dan felt embarrassed.",
       "wer": 0,
       "flagged": false
     },
@@ -1330,6 +1250,27 @@
       "flagged": false
     },
     {
+      "id": "2cd7dfbfcfa750f7",
+      "sources": [
+        "story-08-dan-talks-about-recess/sentence-1/frame_text",
+        "story-10-dans-lunchroom-moment/sentence-1/frame_text"
+      ],
+      "source_text": "Dan felt embarrassed because blank",
+      "transcript": "Dan felt embarrassed because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "2d1701b712b8f19e",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: worried. Dan and Daria felt worried.",
+      "transcript": "Listen for this word in the story: worried. Dan and Daria felt worried.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "2d40861a3a027180",
       "sources": [
         "story-08-dan-talks-about-recess/slide-6/text"
@@ -1345,7 +1286,27 @@
         "story-09-daria-asks-for-the-next-step/vocab-3/quiz-1/prompt"
       ],
       "source_text": "Is 'confused' a feeling, an animal, or a place?",
-      "transcript": "Is confused a feeling, an animal, or a place?",
+      "transcript": "Is confused a feeling, an animal or a place?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "2da0b68df8841752",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-2/word"
+      ],
+      "source_text": "field",
+      "transcript": "Field.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "2ec3d0c752de172c",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/word"
+      ],
+      "source_text": "calm",
+      "transcript": "Calm.",
       "wer": 0,
       "flagged": false
     },
@@ -1390,12 +1351,63 @@
       "flagged": false
     },
     {
+      "id": "3024ed6de6c6fcbf",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/teach-slide-2/narration",
+        "story-11-daria-asks-again/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Confused means you're not sure what to do or what's happening.",
+      "transcript": "Confused means you're not sure what to do or what's happening.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "30c1774697abee70",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/sentence-2/frame_text"
+      ],
+      "source_text": "Daria asked her partner because blank",
+      "transcript": "Daria asked her partner because blank?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "30cb9be96ee31d64",
       "sources": [
         "story-02-darias-carnival-ticket/vocab-1/quiz-1/prompt"
       ],
       "source_text": "What category is ticket in?",
       "transcript": "What category is ticket in?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "311c592ef09a0dfb",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "upset looks like a frown and eyes that might tear up.",
+      "transcript": "Upset looks like a frown and eyes that might tear up.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "31487f4acf8c8f9c",
+      "sources": [
+        "story-08-dan-talks-about-recess/phonological/prompt"
+      ],
+      "source_text": "Which word rhymes with court?",
+      "transcript": "Which word rhymes with court?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "31a80866005645cc",
+      "sources": [
+        "story-11-daria-asks-again/vocab-1/word"
+      ],
+      "source_text": "instructions",
+      "transcript": "Instructions.",
       "wer": 0,
       "flagged": false
     },
@@ -1420,6 +1432,16 @@
       "flagged": false
     },
     {
+      "id": "346d34a0f0d96dda",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-1/word"
+      ],
+      "source_text": "ticket",
+      "transcript": "Ticket.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "3495eab83b414bb8",
       "sources": [
         "story-02-darias-carnival-ticket/personal_connection/prompt"
@@ -1430,12 +1452,32 @@
       "flagged": false
     },
     {
+      "id": "34e1c7876de92195",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-1/word"
+      ],
+      "source_text": "kite",
+      "transcript": "Kite.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "36308e173f8a2ccd",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-3/quiz-2/prompt"
       ],
       "source_text": "How did Daria feel when she missed one part of the instructions?",
       "transcript": "How did Daria feel when she missed one part of the instructions?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "366d7f19d969bcc4",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Disappointed shows up in your face, your shoulders, and your voice.",
+      "transcript": "Disappointed shows up in your face, your shoulders and your voice.",
       "wer": 0,
       "flagged": false
     },
@@ -1511,12 +1553,22 @@
       "flagged": false
     },
     {
+      "id": "3b65d50661dc32c4",
+      "sources": [
+        "story-02-darias-carnival-ticket/sentence-3/frame_text"
+      ],
+      "source_text": "They could go into the carnival because blank",
+      "transcript": "They could go into the carnival because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "3c2c25c5dd88da21",
       "sources": [
         "story-03-dan-joins-the-game/vocab-1/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of game include players, rules, turns, score, and equipment.",
-      "transcript": "Parts or features of game include players, rules, turns, score, and equipment.",
+      "transcript": "Parts or features of game include players, rules, turns, score and equipment.",
       "wer": 0,
       "flagged": false
     },
@@ -1527,6 +1579,16 @@
       ],
       "source_text": "Where or when might you see a ticket?",
       "transcript": "Where or when might you see a ticket?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "3cb9c38036cb3886",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: worried. Daria felt worried.",
+      "transcript": "Listen for this word in the story. Worried. Daria felt worried.",
       "wer": 0,
       "flagged": false
     },
@@ -1571,6 +1633,16 @@
       "flagged": false
     },
     {
+      "id": "3f3c58ae42b9b422",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/vocab-2/word"
+      ],
+      "source_text": "battery",
+      "transcript": "Battery.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "3f5b5460bed40236",
       "sources": [
         "story-08-dan-talks-about-recess/vocab-3/quiz-5/prompt"
@@ -1587,6 +1659,16 @@
       ],
       "source_text": "teacher is a person word.",
       "transcript": "Teacher is a person word.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "4021369457a0f289",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/sentence-1/frame_text"
+      ],
+      "source_text": "Dan and Daria felt disappointed because blank",
+      "transcript": "Dan and Daria felt disappointed because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -1671,6 +1753,17 @@
       "flagged": false
     },
     {
+      "id": "464b4612af9d9410",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/teach-slide-4/narration",
+        "story-11-daria-asks-again/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Confused shows up in your face, your eyebrows, and your voice.",
+      "transcript": "Confused shows up in your face, your eyebrows, and your voice.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "469dac22dc16f7dd",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-1/quiz-4/prompt"
@@ -1696,7 +1789,7 @@
         "story-01-dan-and-the-paper-cut/vocab-2/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of paper airplane include wings, nose, and middle fold.",
-      "transcript": "Parts or features of paper airplane include wings, nose, and middle fold.",
+      "transcript": "Parts or features of paper airplane include wings, nose and middle fold.",
       "wer": 0,
       "flagged": false
     },
@@ -1717,6 +1810,26 @@
       ],
       "source_text": "He walked toward a table in the lunchroom.",
       "transcript": "He walked toward a table in the lunchroom.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "4a82cb6db537ef6c",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-2/word"
+      ],
+      "source_text": "teacher",
+      "transcript": "Teacher?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "4b3a659dc15a1429",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-1/word"
+      ],
+      "source_text": "basketball court",
+      "transcript": "Basketball court.",
       "wer": 0,
       "flagged": false
     },
@@ -1758,6 +1871,16 @@
       ],
       "source_text": "What does table look like?",
       "transcript": "What does table look like?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "4ccd6ba6043687ef",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Calm means your body and mind feel relaxed and peaceful.",
+      "transcript": "Calm means your body and mind feel relaxed and peaceful.",
       "wer": 0,
       "flagged": false
     },
@@ -1953,12 +2076,22 @@
       "flagged": false
     },
     {
+      "id": "561929172c4e489a",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel upset when something doesn't go your way.",
+      "transcript": "You might feel upset when something doesn't go your way.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "56a5b135103010f0",
       "sources": [
         "story-10-dans-lunchroom-moment/vocab-2/intro_narration"
       ],
       "source_text": "Listen for this word in the story: seat. The kids said they were saving the seat for someone else.",
-      "transcript": "Listen for this word in the story: \"seat\". The kids said they were saving the seat for someone else.",
+      "transcript": "Listen for this word in the story, seat. The kids said they were saving the seat for someone else.",
       "wer": 0,
       "flagged": false
     },
@@ -1983,6 +2116,26 @@
       "flagged": false
     },
     {
+      "id": "589ceff369dc67f6",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/word"
+      ],
+      "source_text": "upset",
+      "transcript": "Upset.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "5920aabbf5ebf84c",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: lonely. Dan felt lonely.",
+      "transcript": "Listen for this word in the story. Lonely. Dan felt lonely.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "5924f6c0d7db3422",
       "sources": [
         "story-08-dan-talks-about-recess/slide-5/text"
@@ -1999,6 +2152,16 @@
       ],
       "source_text": "When do you feel calm?",
       "transcript": "When do you feel calm?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "59fa9eb46b822195",
+      "sources": [
+        "story-02-darias-carnival-ticket/sentence-1/frame_text"
+      ],
+      "source_text": "Daria felt worried because blank",
+      "transcript": "Daria felt worried because, blank.",
       "wer": 0,
       "flagged": false
     },
@@ -2044,6 +2207,26 @@
       "flagged": false
     },
     {
+      "id": "5c6cf49c64684e55",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/sentence-3/frame_text"
+      ],
+      "source_text": "Their new sandcastle stayed safe because blank",
+      "transcript": "Their new sandcastle stayed safe because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "5c9b73dd422c5992",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/sentence-1/frame_text"
+      ],
+      "source_text": "Daria felt upset because blank",
+      "transcript": "Daria felt upset because, blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "5d09fb9d9e688f32",
       "sources": [
         "story-11-daria-asks-again/slide-2/text"
@@ -2070,6 +2253,16 @@
       ],
       "source_text": "What category is teacher in?",
       "transcript": "what category is teacher in?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "6117ab08abf60668",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Lonely shows up in your face, your body, and your thoughts.",
+      "transcript": "Lonely shows up in your face, your body and your thoughts.",
       "wer": 0,
       "flagged": false
     },
@@ -2109,7 +2302,18 @@
         "story-06-the-kite-in-the-tree/phonological/prompt"
       ],
       "source_text": "Which word starts with the same sound as kite?",
-      "transcript": "Which word starts with the same sound as kite?",
+      "transcript": "Which word starts with the same sound as \"kite\"?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "637c10d0f1cc9299",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/teach-slide-3/narration",
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "worried looks like a tense face and eyes that dart around.",
+      "transcript": "'Worried' looks like a tense face and eyes that dart around.",
       "wer": 0,
       "flagged": false
     },
@@ -2120,6 +2324,17 @@
       ],
       "source_text": "table is a furniture.",
       "transcript": "Table is a furniture.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "64703838118ef5ea",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/intro_narration",
+        "story-11-daria-asks-again/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: confused. Daria felt confused.",
+      "transcript": "Listen for this word in the story. Confused. Daria felt confused.",
       "wer": 0,
       "flagged": false
     },
@@ -2259,7 +2474,7 @@
         "story-02-darias-carnival-ticket/vocab-2/teach-slide-3/narration"
       ],
       "source_text": "entrance looks like door, gate, opening, or front area.",
-      "transcript": "Entrance looks like door, gate opening or front area.",
+      "transcript": "\"Entrance\" looks like door, gate, opening, or front area.",
       "wer": 0,
       "flagged": false
     },
@@ -2404,6 +2619,16 @@
       "flagged": false
     },
     {
+      "id": "74699616123fb641",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/word"
+      ],
+      "source_text": "disappointed",
+      "transcript": "Disappointed.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "75757969733a41f1",
       "sources": [
         "story-07-the-sandcastle-and-the-wave/joke/joke_text"
@@ -2439,7 +2664,7 @@
         "story-07-the-sandcastle-and-the-wave/vocab-2/quiz-1/prompt"
       ],
       "source_text": "What category is wave in?",
-      "transcript": "What category is WAVE in?",
+      "transcript": "What category is wave in?",
       "wer": 0,
       "flagged": false
     },
@@ -2459,7 +2684,7 @@
         "story-04-daria-and-the-puzzle-piece/vocab-2/intro_narration"
       ],
       "source_text": "Listen for this word in the story: piece. Daria and her friend both wanted the same puzzle piece.",
-      "transcript": "Listen for this word in the story, piece. Daria and her friend both wanted the same puzzle piece.",
+      "transcript": "Listen for this word in the story piece. Daria and her friend both wanted the same puzzle piece.",
       "wer": 0,
       "flagged": false
     },
@@ -2500,6 +2725,17 @@
       ],
       "source_text": "On Saturday, Daria went to see Dan.",
       "transcript": "On Saturday, Daria went to see Dan.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "79e9291d7df6b609",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/teach-slide-3/narration",
+        "story-10-dans-lunchroom-moment/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "embarrassed looks like red cheeks and eyes that look away.",
+      "transcript": "Embarrassed looks like red cheeks and eyes that look away.",
       "wer": 0,
       "flagged": false
     },
@@ -2570,6 +2806,27 @@
       ],
       "source_text": "What group does 'upset' belong to?",
       "transcript": "What group does upset belong to?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "7c3dc3889b6f5348",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/word",
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/word"
+      ],
+      "source_text": "worried",
+      "transcript": "Worried.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "7c7a898924608115",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel lonely when you're left out or by yourself.",
+      "transcript": "You might feel lonely when you're left out or by yourself.",
       "wer": 0,
       "flagged": false
     },
@@ -2664,6 +2921,16 @@
       "flagged": false
     },
     {
+      "id": "84f16fb3bb4002e8",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "disappointed looks like a sad face and slumped shoulders.",
+      "transcript": "Disappointed looks like a sad face and slumped shoulders.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "8619a7214b74a87d",
       "sources": [
         "story-06-the-kite-in-the-tree/slide-4/text"
@@ -2735,6 +3002,16 @@
       "flagged": false
     },
     {
+      "id": "88ffb60291506365",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-2/teach-slide-5/narration"
+      ],
+      "source_text": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends.",
+      "transcript": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "8929403f5b69601e",
       "sources": [
         "story-03-dan-joins-the-game/vocab-2/quiz-3/prompt"
@@ -2751,6 +3028,17 @@
       ],
       "source_text": "battery looks like a small tube or small flat block.",
       "transcript": "Battery looks like a small tube or small flat block.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "8954b211ed350b4e",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/teach-slide-5/narration",
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel worried before something new or uncertain happens.",
+      "transcript": "You might feel worried before something new or uncertain happens.",
       "wer": 0,
       "flagged": false
     },
@@ -2790,7 +3078,7 @@
         "story-02-darias-carnival-ticket/vocab-2/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of entrance include door or gate, sign, line, and helper.",
-      "transcript": "Parts or features of entrance include door or gate, sign, line and helper.",
+      "transcript": "Parts or features of entrance include door or gate, sign, line, and helper.",
       "wer": 0,
       "flagged": false
     },
@@ -2801,6 +3089,17 @@
       ],
       "source_text": "They both wanted the same puzzle piece.",
       "transcript": "They both wanted the same puzzle piece.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "8dac40e6bb47370c",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/teach-slide-1/narration",
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "worried is a feeling word.",
+      "transcript": "'Worried' is a feeling word.",
       "wer": 0,
       "flagged": false
     },
@@ -2880,7 +3179,17 @@
         "story-10-dans-lunchroom-moment/vocab-1/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of tray include flat bottom, raised edges, and sometimes handles.",
-      "transcript": "Parts or features of tray include flat bottom, raised edges and sometimes handles.",
+      "transcript": "Parts or features of tray include flat bottom, raised edges, and sometimes handles.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "92e80ce41cdab8f7",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/sentence-2/frame_text"
+      ],
+      "source_text": "Daria's dad helped Dan because blank",
+      "transcript": "Daria's dad helped Dan because, blank?",
       "wer": 0,
       "flagged": false
     },
@@ -2905,22 +3214,22 @@
       "flagged": false
     },
     {
-      "id": "9690760ea22f6f94",
-      "sources": [
-        "story-04-daria-and-the-puzzle-piece/vocab-2/teach-slide-5/narration"
-      ],
-      "source_text": "You might find or use piece in puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set.",
-      "transcript": "You might find or use piece in puzzle box, table, game, or toy set. A piece can be one part of a puzzle, toy, game, or set.",
-      "wer": 0,
-      "flagged": false
-    },
-    {
       "id": "985d37fae7f57301",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-1/quiz-6/prompt"
       ],
       "source_text": "Which sentence uses 'table' correctly?",
       "transcript": "Which sentence uses table correctly?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "98890104853d0650",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "disappointed is a feeling word.",
+      "transcript": "Disappointed is a feeling word.",
       "wer": 0,
       "flagged": false
     },
@@ -2945,6 +3254,16 @@
       "flagged": false
     },
     {
+      "id": "99cffeabba2060d1",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "frustrated looks like a tight face and clenched hands.",
+      "transcript": "Frustrated looks like a tight face and clenched hands.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "9bc9e1f832a78560",
       "sources": [
         "story-07-the-sandcastle-and-the-wave/vocab-2/teach-slide-3/narration"
@@ -2955,12 +3274,43 @@
       "flagged": false
     },
     {
+      "id": "9bcaa08fdf3a9ce0",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/word"
+      ],
+      "source_text": "frustrated",
+      "transcript": "Frustrated.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "9beca09e83933c06",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Frustrated means something is hard or not working, and it's bothering you.",
+      "transcript": "\"frustrated\" means something is hard or not working and it's bothering you.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "9c282926c1477792",
       "sources": [
         "story-01-dan-and-the-paper-cut/vocab-2/quiz-6/prompt"
       ],
       "source_text": "Which sentence uses 'paper airplane' correctly?",
       "transcript": "Which sentence uses paper airplane correctly?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "9d5feb4b33783669",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/sentence-1/frame_text",
+        "story-11-daria-asks-again/sentence-1/frame_text"
+      ],
+      "source_text": "Daria felt confused because blank",
+      "transcript": "Daria felt confused because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -2991,6 +3341,17 @@
       ],
       "source_text": "basketball court is a place.",
       "transcript": "Basketball court is a place.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "a008ad6a9c5b07f4",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-3/teach-slide-4/narration",
+        "story-05-dan-and-darias-treasure-hunt/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Worried shows up in your face, your stomach, and your thoughts.",
+      "transcript": "Worried shows up in your face, your stomach and your thoughts.",
       "wer": 0,
       "flagged": false
     },
@@ -3050,7 +3411,7 @@
         "story-11-daria-asks-again/vocab-1/intro_narration"
       ],
       "source_text": "Listen for this word in the story: instructions. Daria's teacher started giving instructions for a project.",
-      "transcript": "Listen for this word in the story: instructions. Daria's teacher started giving instructions for a project.",
+      "transcript": "Listen for this word in the story, instructions. Daria's teacher started giving instructions for a project.",
       "wer": 0,
       "flagged": false
     },
@@ -3081,6 +3442,16 @@
       ],
       "source_text": "What does someone look like when they are confused?",
       "transcript": "What does someone look like when they are confused?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "a5af70b77e1bed0e",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "calm is a feeling word.",
+      "transcript": "Calm is a feeling word.",
       "wer": 0,
       "flagged": false
     },
@@ -3125,6 +3496,16 @@
       "flagged": false
     },
     {
+      "id": "a7791150902070d1",
+      "sources": [
+        "story-06-the-kite-in-the-tree/sentence-3/frame_text"
+      ],
+      "source_text": "They got the kite down because blank",
+      "transcript": "They got the kite down because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "a896b1cc7c336485",
       "sources": [
         "story-07-the-sandcastle-and-the-wave/vocab-2/quiz-5/prompt"
@@ -3141,6 +3522,26 @@
       ],
       "source_text": "What does ladder look like?",
       "transcript": "What does ladder look like?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "aa92f06aeadc9c49",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/sentence-3/frame_text"
+      ],
+      "source_text": "Daria knew what to do next because blank",
+      "transcript": "Daria knew what to do next because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "aaf9805c3b47bc2a",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: frustrated. Dan felt frustrated.",
+      "transcript": "Listen for this word in the story: frustrated. Dan felt frustrated.",
       "wer": 0,
       "flagged": false
     },
@@ -3305,6 +3706,26 @@
       "flagged": false
     },
     {
+      "id": "b73758f62ff7f164",
+      "sources": [
+        "story-11-daria-asks-again/sentence-3/frame_text"
+      ],
+      "source_text": "Daria could try again because blank",
+      "transcript": "Daria could try again because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "b7d3e1d46f0b3787",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/sentence-2/frame_text"
+      ],
+      "source_text": "Daria said they should move because blank",
+      "transcript": "Daria said they should move because, blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "b7e5a8ed088f45f1",
       "sources": [
         "story-07-the-sandcastle-and-the-wave/vocab-2/teach-slide-4/narration"
@@ -3341,6 +3762,16 @@
       ],
       "source_text": "Parts or features of flashlight include button, light bulb, and handle.",
       "transcript": "Parts or features of flashlight include button, light bulb and handle.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "b8bc2b1476474d61",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/sentence-3/frame_text"
+      ],
+      "source_text": "They finished the puzzle because blank",
+      "transcript": "They finished the puzzle because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -3391,6 +3822,17 @@
       ],
       "source_text": "You might find or use entrance in carnival, school, store, library, house, or park. An entrance is the place where people go in.",
       "transcript": "You might find or use entrance in carnival, school, store, library, house, or park. An entrance is the place where people go in.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "bc622619b81b3a7b",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/word",
+        "story-11-daria-asks-again/vocab-3/word"
+      ],
+      "source_text": "confused",
+      "transcript": "Confused.",
       "wer": 0,
       "flagged": false
     },
@@ -3451,7 +3893,18 @@
         "story-02-darias-carnival-ticket/vocab-2/intro_narration"
       ],
       "source_text": "Listen for this word in the story: entrance. Dan and Daria needed to show the ticket at the entrance.",
-      "transcript": "Listen for this word in the story. Entrance. Dan and Daria needed to show the ticket at the entrance.",
+      "transcript": "Listen for this word in the story, entrance. Dan and Daria needed to show the ticket at the entrance.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "bedbac604f4fe2bb",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/teach-slide-3/narration",
+        "story-11-daria-asks-again/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "confused looks like a tilted head and a wrinkled forehead.",
+      "transcript": "Confused looks like a tilted head and a wrinkled forehead.",
       "wer": 0,
       "flagged": false
     },
@@ -3516,6 +3969,16 @@
       "flagged": false
     },
     {
+      "id": "c229210c03ec42af",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: upset. Daria felt upset.",
+      "transcript": "Listen for this word in the story: upset. Daria felt upset.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "c2292bba26f44c40",
       "sources": [
         "story-01-dan-and-the-paper-cut/vocab-2/teach-slide-3/narration"
@@ -3542,6 +4005,26 @@
       ],
       "source_text": "They walked to the entrance with Daria’s dad.",
       "transcript": "They walked to the entrance with Daria's dad.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "c3d7f5301f5788d2",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "calm looks like a relaxed face and slow, easy breathing.",
+      "transcript": "Calm looks like a relaxed face and slow, easy breathing.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "c3ee137d4f22eb06",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-1/word"
+      ],
+      "source_text": "table",
+      "transcript": "Table.",
       "wer": 0,
       "flagged": false
     },
@@ -3636,12 +4119,22 @@
       "flagged": false
     },
     {
-      "id": "cbacd2451222e21c",
+      "id": "cb7d4f1fbcef3450",
       "sources": [
-        "story-08-dan-talks-about-recess/vocab-2/intro_narration"
+        "story-01-dan-and-the-paper-cut/vocab-2/word"
       ],
-      "source_text": "teacher: person word. Dan's mom said they would talk to his teacher together.",
-      "transcript": "Teacher. Person word. Dan's mom said they would talk to his teacher together.",
+      "source_text": "paper airplane",
+      "transcript": "Paper airplane.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "cbbddef6fae56cf4",
+      "sources": [
+        "story-11-daria-asks-again/sentence-2/frame_text"
+      ],
+      "source_text": "Daria raised her hand because blank",
+      "transcript": "Daria raised her hand because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -3661,7 +4154,7 @@
         "story-08-dan-talks-about-recess/vocab-2/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of teacher include classroom, lesson, questions, support.",
-      "transcript": "Parts or features of Teacher include classroom, lesson, questions, support.",
+      "transcript": "Parts or features of Teacher include: classroom, lesson, questions, support.",
       "wer": 0,
       "flagged": false
     },
@@ -3686,12 +4179,32 @@
       "flagged": false
     },
     {
+      "id": "cda051c901386f0e",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-1/word"
+      ],
+      "source_text": "game",
+      "transcript": "game.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "ce87a27758f228aa",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-1/quiz-5/prompt"
       ],
       "source_text": "Where or when might you see a table?",
       "transcript": "Where or when might you see a table?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "ceec982f65405b0e",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/teach-slide-3/narration"
+      ],
+      "source_text": "lonely looks like a quiet face and shoulders that droop a little.",
+      "transcript": "Lonely looks like a quiet face and shoulders that droop a little.",
       "wer": 0,
       "flagged": false
     },
@@ -3722,6 +4235,16 @@
       ],
       "source_text": "What group does 'lonely' belong to?",
       "transcript": "What group does lonely belong to?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "d146750c658261dc",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/sentence-3/frame_text"
+      ],
+      "source_text": "They could find the treasure because blank",
+      "transcript": "They could find the treasure because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -3831,7 +4354,7 @@
         "story-06-the-kite-in-the-tree/joke/joke_text"
       ],
       "source_text": "What did the kite say when the bug landed on it? Let's fly, Fly!",
-      "transcript": "What did the kite say when the bug landed on it? Let's fly, fly.",
+      "transcript": "What did the kite say when the bug landed on it? Let's fly, fly!",
       "wer": 0,
       "flagged": false
     },
@@ -3866,6 +4389,26 @@
       "flagged": false
     },
     {
+      "id": "d6b5e87a0fa92807",
+      "sources": [
+        "story-03-dan-joins-the-game/sentence-2/frame_text"
+      ],
+      "source_text": "Dan asked to play because blank",
+      "transcript": "Dan asked to play because, blank?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "d70ea575012f340f",
+      "sources": [
+        "story-11-daria-asks-again/vocab-2/word"
+      ],
+      "source_text": "whiteboard",
+      "transcript": "Whiteboard.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "d72e74e5441a1757",
       "sources": [
         "story-06-the-kite-in-the-tree/vocab-1/quiz-3/prompt"
@@ -3876,12 +4419,32 @@
       "flagged": false
     },
     {
+      "id": "d735146035a8b450",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Calm shows up in your face, your body, and your breathing.",
+      "transcript": "Calm shows up in your face, your body and your breathing.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "d74d4287afc65b25",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-2/intro_narration"
       ],
       "source_text": "instruction page: object with directions. Daria's partner showed her the instruction page so she knew what to do next.",
       "transcript": "Instruction page: object with directions. Daria's partner showed her the instruction page so she knew what to do next.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "d7ce74466d54133c",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-2/word"
+      ],
+      "source_text": "wave",
+      "transcript": "Wave.",
       "wer": 0,
       "flagged": false
     },
@@ -3906,12 +4469,32 @@
       "flagged": false
     },
     {
+      "id": "d9132b32f791379e",
+      "sources": [
+        "story-06-the-kite-in-the-tree/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "frustrated is a feeling word.",
+      "transcript": "Frustrated is a feeling word.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "d94d620a77079fba",
       "sources": [
         "story-02-darias-carnival-ticket/vocab-2/quiz-1/prompt"
       ],
       "source_text": "What category is entrance in?",
       "transcript": "What category is entrance in?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "da04facca98523ef",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/sentence-3/frame_text"
+      ],
+      "source_text": "Dan felt calm because blank",
+      "transcript": "Dan felt calm because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -3936,12 +4519,52 @@
       "flagged": false
     },
     {
+      "id": "daf812458fd1b9dc",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/sentence-1/frame_text"
+      ],
+      "source_text": "Dan asked for a bandage because blank",
+      "transcript": "Dan asked for a bandage because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "db6d21091734cb99",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "lonely is a feeling word.",
+      "transcript": "lonely is a feeling word.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "db75d5cdf2ee8f64",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "upset is a feeling word.",
+      "transcript": "Upset is a feeling word.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "db7d15cbd5ef7260",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/sentence-2/frame_text"
+      ],
+      "source_text": "Daria let her friend use the piece because blank",
+      "transcript": "Daria let her friend use the piece because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "dbc58c04f746731d",
       "sources": [
         "story-06-the-kite-in-the-tree/vocab-1/intro_narration"
       ],
       "source_text": "Listen for this word in the story: kite. Dan’s kite got stuck in a tree.",
-      "transcript": "Listen for this word in the story, kite. Dan's kite got stuck in a tree.",
+      "transcript": "Listen for this word in the story: kite. Dan's kite got stuck in a tree.",
       "wer": 0,
       "flagged": false
     },
@@ -3956,12 +4579,44 @@
       "flagged": false
     },
     {
+      "id": "dc73038a014e13dc",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/teach-slide-4/narration",
+        "story-10-dans-lunchroom-moment/vocab-3/teach-slide-4/narration"
+      ],
+      "source_text": "Embarrassed shows up in your face, your cheeks, and your posture.",
+      "transcript": "Embarrassed shows up in your face, your cheeks and your posture.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "dda7eabc32443284",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/teach-slide-5/narration",
+        "story-11-daria-asks-again/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel confused when you don't know what to do next.",
+      "transcript": "You might feel confused when you don't know what to do next.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "ddc738c4b661e3a4",
       "sources": [
         "story-03-dan-joins-the-game/vocab-2/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of field include lines, grass, goals, and space.",
       "transcript": "Parts or features of field include lines, grass goals and space.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "ddcb4be46283a088",
+      "sources": [
+        "story-04-daria-and-the-puzzle-piece/vocab-1/word"
+      ],
+      "source_text": "puzzle",
+      "transcript": "Puzzle.",
       "wer": 0,
       "flagged": false
     },
@@ -3991,7 +4646,7 @@
         "story-04-daria-and-the-puzzle-piece/vocab-1/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of puzzle include pieces, picture, edges, and corners.",
-      "transcript": "Parts or features of puzzle include pieces, picture, edges, and corners.",
+      "transcript": "Parts or features of puzzle include pieces, picture, edges and corners.",
       "wer": 0,
       "flagged": false
     },
@@ -4002,6 +4657,16 @@
       ],
       "source_text": "You might find or use ladder in garage, home, outside, or work area. You might use a ladder when something is up high, like a shelf, roof, or kite in a tree.",
       "transcript": "You might find or use ladder in garage, home, outside, or work area. You might use a ladder when something is up high like a shelf, roof, or kite in a tree.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "df33994d15593333",
+      "sources": [
+        "story-02-darias-carnival-ticket/vocab-2/word"
+      ],
+      "source_text": "entrance",
+      "transcript": "Entrance.",
       "wer": 0,
       "flagged": false
     },
@@ -4156,12 +4821,22 @@
       "flagged": false
     },
     {
+      "id": "e44c1578a06d146c",
+      "sources": [
+        "story-02-darias-carnival-ticket/sentence-2/frame_text"
+      ],
+      "source_text": "Daria asked her dad for help because blank",
+      "transcript": "Daria asked her dad for help because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "e46f27ba1733c263",
       "sources": [
         "story-09-daria-asks-for-the-next-step/slide-6/text"
       ],
       "source_text": "Her partner showed her the page, and Daria knew what to do next.",
-      "transcript": "Her partner showed her the page, and Daria knew what to do next.",
+      "transcript": "Her partner showed her the page and Daria knew what to do next.",
       "wer": 0,
       "flagged": false
     },
@@ -4226,6 +4901,17 @@
       "flagged": false
     },
     {
+      "id": "e5e29cde036e1c4a",
+      "sources": [
+        "story-09-daria-asks-for-the-next-step/vocab-3/teach-slide-1/narration",
+        "story-11-daria-asks-again/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "confused is a feeling word.",
+      "transcript": "Confused is a feeling word.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "e611e5658f449654",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-2/teach-slide-5/narration"
@@ -4247,6 +4933,16 @@
       "flagged": false
     },
     {
+      "id": "e74cbd230655d332",
+      "sources": [
+        "story-06-the-kite-in-the-tree/sentence-2/frame_text"
+      ],
+      "source_text": "Daria asked a grown up for a ladder because blank",
+      "transcript": "Daria asked a grown-up for a ladder because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "e8a11b9f7037df16",
       "sources": [
         "story-08-dan-talks-about-recess/vocab-3/quiz-3/prompt"
@@ -4263,6 +4959,17 @@
       ],
       "source_text": "puzzle is a activity or toy.",
       "transcript": "Puzzle is a activity or toy.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "e8fd5c5787907f63",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/teach-slide-1/narration",
+        "story-10-dans-lunchroom-moment/vocab-3/teach-slide-1/narration"
+      ],
+      "source_text": "embarrassed is a feeling word.",
+      "transcript": "\"Embarrassed\" is a feeling word.",
       "wer": 0,
       "flagged": false
     },
@@ -4297,6 +5004,16 @@
       "flagged": false
     },
     {
+      "id": "eb40cd09ff896ae3",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/vocab-1/word"
+      ],
+      "source_text": "flashlight",
+      "transcript": "Flashlight.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "eb71c11b37334e1d",
       "sources": [
         "story-09-daria-asks-for-the-next-step/vocab-2/teach-slide-2/narration"
@@ -4327,6 +5044,17 @@
       "flagged": false
     },
     {
+      "id": "ecc16fe25180b1c6",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/word",
+        "story-10-dans-lunchroom-moment/vocab-3/word"
+      ],
+      "source_text": "embarrassed",
+      "transcript": "Embarrassed.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "ed4f6d41763fab1b",
       "sources": [
         "story-01-dan-and-the-paper-cut/vocab-1/teach-slide-2/narration"
@@ -4353,6 +5081,16 @@
       ],
       "source_text": "Who is in the story?",
       "transcript": "Who is in the story?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "efd3ccaf7dd48d03",
+      "sources": [
+        "story-10-dans-lunchroom-moment/sentence-2/frame_text"
+      ],
+      "source_text": "Dan sat by himself because blank",
+      "transcript": "Dan sat by himself because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -4392,7 +5130,7 @@
         "story-04-daria-and-the-puzzle-piece/vocab-2/teach-slide-4/narration"
       ],
       "source_text": "Parts or features of piece include edges, shape, and picture part.",
-      "transcript": "Parts or features of piece include edges, shape and picture part.",
+      "transcript": "Parts or features of piece include edges, shape, and picture part.",
       "wer": 0,
       "flagged": false
     },
@@ -4462,7 +5200,7 @@
         "story-06-the-kite-in-the-tree/vocab-2/intro_narration"
       ],
       "source_text": "Listen for this word in the story: ladder. A grown up used a ladder to get Dan’s kite down.",
-      "transcript": "Listen for this word in the story: ladder. A grown-up used a ladder to get Dan's kite down.",
+      "transcript": "Listen for this word in the story, ladder. A grown-up used a ladder to get Dan's kite down.",
       "wer": 0,
       "flagged": false
     },
@@ -4477,12 +5215,43 @@
       "flagged": false
     },
     {
+      "id": "f72ccc581ac41294",
+      "sources": [
+        "story-08-dan-talks-about-recess/sentence-2/frame_text",
+        "story-10-dans-lunchroom-moment/sentence-3/frame_text"
+      ],
+      "source_text": "Dan told his mom because blank",
+      "transcript": "Dan told his mom because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "f77b8471e77d97a8",
       "sources": [
         "story-01-dan-and-the-paper-cut/vocab-1/teach-slide-1/narration"
       ],
       "source_text": "bandage is a first aid item.",
       "transcript": "Bandage is a first aid item.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "f785a57ab7594834",
+      "sources": [
+        "story-05-dan-and-darias-treasure-hunt/sentence-1/frame_text"
+      ],
+      "source_text": "Dan and Daria felt worried because blank",
+      "transcript": "Dan and Daria felt worried because blank.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "f78a2db521d63cfc",
+      "sources": [
+        "story-07-the-sandcastle-and-the-wave/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Disappointed means you hoped for something, and it didn't happen the way you wanted.",
+      "transcript": "Disappointed means you hoped for something and it didn't happen the way you wanted.",
       "wer": 0,
       "flagged": false
     },
@@ -4522,7 +5291,7 @@
         "story-01-dan-and-the-paper-cut/vocab-2/quiz-2/prompt"
       ],
       "source_text": "What do you do with paper airplane?",
-      "transcript": "What do you do with paper airplane?",
+      "transcript": "What do you do with paper Airplane?",
       "wer": 0,
       "flagged": false
     },
@@ -4533,6 +5302,16 @@
       ],
       "source_text": "entrance is a place.",
       "transcript": "Entrance is a place.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "f9104f09c2038c19",
+      "sources": [
+        "story-03-dan-joins-the-game/sentence-1/frame_text"
+      ],
+      "source_text": "Dan felt lonely because blank",
+      "transcript": "Dan felt lonely because blank.",
       "wer": 0,
       "flagged": false
     },
@@ -4597,6 +5376,27 @@
       "flagged": false
     },
     {
+      "id": "fbb83950b21fc8d3",
+      "sources": [
+        "story-01-dan-and-the-paper-cut/vocab-3/intro_narration"
+      ],
+      "source_text": "Listen for this word in the story: calm. Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
+      "transcript": "Listen for this word in the story, calm. Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "fcf98f4c63ed04b2",
+      "sources": [
+        "story-08-dan-talks-about-recess/vocab-3/teach-slide-5/narration",
+        "story-10-dans-lunchroom-moment/vocab-3/teach-slide-5/narration"
+      ],
+      "source_text": "You might feel embarrassed when people notice a mistake.",
+      "transcript": "You might feel embarrassed when people notice a mistake.",
+      "wer": 0,
+      "flagged": false
+    },
+    {
       "id": "fd7de04207326df3",
       "sources": [
         "story-01-dan-and-the-paper-cut/retell/immediate",
@@ -4613,6 +5413,16 @@
       ],
       "source_text": "Can you tell me what happened in the story?",
       "transcript": "Can you tell me what happened in the story?",
+      "wer": 0,
+      "flagged": false
+    },
+    {
+      "id": "fdb7dbcf6b44eb97",
+      "sources": [
+        "story-03-dan-joins-the-game/vocab-3/teach-slide-2/narration"
+      ],
+      "source_text": "Lonely means you feel sad because you want company or a friend.",
+      "transcript": "\"Lonely\" means you feel sad because you want company or a friend.",
       "wer": 0,
       "flagged": false
     },

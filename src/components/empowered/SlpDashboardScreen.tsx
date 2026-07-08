@@ -17,11 +17,13 @@ import {
   type StoryAssignment,
 } from "@/services/slp";
 import { getStoriesByLevel } from "@/services/stories";
+import { getRetellRecordings } from "@/services/retell";
 import { labelToDisplayText, scoreToLabel } from "@/services/scoring";
 import type { SkillDomain } from "@/types/story";
 import { MiniPlane, Star, StoryProsLogo, UserIcon } from "./StoryProsBrand";
 import { BookCheckIcon, BookIcon, ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
 import { TactileButton } from "./TactileButton";
+import danDariaHighFive from "@/assets/dan-daria-highfive.webp";
 
 const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
 
@@ -192,11 +194,23 @@ function CaseloadView({
 
   return (
     <div className="space-y-5">
-      <section className="animate-slide-up">
-        <h1 className="text-[38px] font-extrabold leading-none text-primary">Caseload Overview</h1>
-        <p className="mt-2 text-base font-medium leading-snug text-ink-soft">
-          Plan story practice, review progress, and keep families connected.
-        </p>
+      <section className="relative min-h-[172px] overflow-hidden rounded-[32px] border border-accent/60 bg-card/92 p-5 shadow-soft animate-slide-up">
+        <div className="relative z-10 max-w-[190px]">
+          <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-primary">
+            {roleLabel} workspace
+          </p>
+          <h1 className="mt-2 font-display text-[32px] font-extrabold leading-none text-primary">
+            Caseload Overview
+          </h1>
+          <p className="mt-3 text-sm font-semibold leading-snug text-ink-soft">
+            Plan story practice, review progress, and keep families connected.
+          </p>
+        </div>
+        <img
+          src={danDariaHighFive}
+          alt=""
+          className="pointer-events-none absolute -bottom-3 -right-6 h-40 w-auto object-contain drop-shadow-[0_14px_22px_rgba(63,38,140,0.16)]"
+        />
       </section>
 
       <section className="rounded-[30px] bg-card p-4 shadow-soft animate-slide-up">
@@ -321,7 +335,7 @@ function ChildDetailView({
   notes: SessionNote[];
   onRefresh: () => void;
 }) {
-  const [tab, setTab] = useState<"progress" | "assignments" | "notes">("progress");
+  const [tab, setTab] = useState<"progress" | "assignments" | "notes" | "recordings">("progress");
 
   return (
     <div className="space-y-4">
@@ -340,13 +354,13 @@ function ChildDetailView({
         </div>
       </section>
 
-      <div className="grid grid-cols-3 gap-1 rounded-[22px] bg-accent/50 p-1 shadow-card">
-        {(["progress", "assignments", "notes"] as const).map((item) => (
+      <div className="grid grid-cols-4 gap-1 rounded-[22px] bg-accent/50 p-1 shadow-card">
+        {(["progress", "assignments", "notes", "recordings"] as const).map((item) => (
           <button
             key={item}
             onClick={() => setTab(item)}
             className={cn(
-              "rounded-[18px] px-2 py-3 text-[11px] font-extrabold capitalize transition-all",
+              "rounded-[18px] px-1.5 py-3 text-[10px] font-extrabold capitalize transition-all",
               tab === item ? "bg-card text-primary shadow-card" : "text-ink-soft",
             )}
           >
@@ -354,7 +368,9 @@ function ChildDetailView({
               ? `Assigned (${assignments.length})`
               : item === "notes"
                 ? `Notes (${notes.length})`
-                : item}
+                : item === "recordings"
+                  ? "Retells"
+                  : item}
           </button>
         ))}
       </div>
@@ -371,6 +387,59 @@ function ChildDetailView({
       {tab === "notes" && (
         <NotesTab slpId={slpId} childId={child.childId} notes={notes} onRefresh={onRefresh} />
       )}
+      {tab === "recordings" && <RetellRecordingsTab childId={child.childId} />}
+    </div>
+  );
+}
+
+function RetellRecordingsTab({ childId }: { childId: string }) {
+  const [recordings, setRecordings] = useState<Awaited<
+    ReturnType<typeof getRetellRecordings>
+  > | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    getRetellRecordings(childId).then((rows) => {
+      if (!cancelled) setRecordings(rows);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [childId]);
+
+  if (recordings === null) {
+    return <p className="p-4 text-sm font-semibold text-ink-soft">Loading recordings...</p>;
+  }
+
+  if (recordings.length === 0) {
+    return (
+      <div className="rounded-[24px] bg-card p-5 text-center shadow-card">
+        <p className="text-sm font-semibold text-ink-soft">
+          No saved retells yet. They'll show up here once this child records one during a story.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      {recordings.map((recording) => (
+        <div key={recording.id} className="rounded-[22px] bg-card p-4 shadow-card">
+          <div className="flex items-center justify-between gap-2">
+            <p className="truncate text-sm font-extrabold text-primary">{recording.storyTitle}</p>
+            <span className="shrink-0 rounded-full bg-accent/50 px-2 py-0.5 text-[10px] font-extrabold uppercase text-ink-soft">
+              {recording.phase}
+            </span>
+          </div>
+          <p className="mt-0.5 text-xs font-semibold text-ink-soft">
+            {new Date(recording.createdAt).toLocaleDateString(undefined, {
+              month: "short",
+              day: "numeric",
+            })}
+          </p>
+          <audio className="mt-2 w-full" controls preload="none" src={recording.url} />
+        </div>
+      ))}
     </div>
   );
 }

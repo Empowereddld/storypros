@@ -13,7 +13,7 @@
     },
     {
       "position": 2,
-      "text": "They walked all the way to Daria\u2019s house.",
+      "text": "They walked all the way to Daria’s house.",
       "story_element": "place",
       "image": "slide-02.webp"
     },
@@ -31,13 +31,13 @@
     },
     {
       "position": 5,
-      "text": "Dan asked Daria\u2019s dad for a bandage.",
+      "text": "Dan asked Daria’s dad for a bandage.",
       "story_element": "action",
       "image": "slide-05.webp"
     },
     {
       "position": 6,
-      "text": "He put the bandage on Dan\u2019s finger so he could keep making paper airplanes.",
+      "text": "He put the bandage on Dan’s finger so he could keep making paper airplanes.",
       "story_element": "result",
       "image": "slide-06.webp"
     }
@@ -51,18 +51,18 @@
         {
           "id": "a",
           "label": "Dan",
-          "emoji": "\ud83e\uddd2",
+          "emoji": "🧒",
           "correct": true
         },
         {
           "id": "b",
           "label": "A robot",
-          "emoji": "\ud83e\udd16"
+          "emoji": "🤖"
         },
         {
           "id": "c",
           "label": "A cat",
-          "emoji": "\ud83d\udc31"
+          "emoji": "🐱"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,18 +76,18 @@
         {
           "id": "a",
           "label": "The moon",
-          "emoji": "\ud83c\udf19"
+          "emoji": "🌙"
         },
         {
           "id": "b",
-          "label": "They walked all the way to Daria\u2019s house",
-          "emoji": "\ud83c\udfe0",
+          "label": "They walked all the way to Daria’s house",
+          "emoji": "🏠",
           "correct": true
         },
         {
           "id": "c",
           "label": "A store",
-          "emoji": "\ud83c\udfea"
+          "emoji": "🏪"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,18 +101,18 @@
         {
           "id": "a",
           "label": "When Dan was folding his paper airplane, he got a papercu...",
-          "emoji": "\ud83d\udcc4",
+          "emoji": "📄",
           "correct": true
         },
         {
           "id": "b",
           "label": "She lost her shoe",
-          "emoji": "\ud83d\udc5f"
+          "emoji": "👟"
         },
         {
           "id": "c",
           "label": "He fell down",
-          "emoji": "\ud83e\udd15"
+          "emoji": "🤕"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,17 +126,17 @@
         {
           "id": "a",
           "label": "Happy",
-          "emoji": "\ud83d\ude0a"
+          "emoji": "😊"
         },
         {
           "id": "b",
           "label": "Angry",
-          "emoji": "\ud83d\ude20"
+          "emoji": "😠"
         },
         {
           "id": "c",
           "label": "Calm",
-          "emoji": "\ud83d\ude0c",
+          "emoji": "😌",
           "correct": true
         }
       ],
@@ -151,17 +151,17 @@
         {
           "id": "a",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         },
         {
           "id": "b",
           "label": "Ate lunch",
-          "emoji": "\ud83c\udf7d\ufe0f"
+          "emoji": "🍽️"
         },
         {
           "id": "c",
-          "label": "Dan asked Daria\u2019s dad for a bandage",
-          "emoji": "\u2708\ufe0f",
+          "label": "Dan asked Daria’s dad for a bandage",
+          "emoji": "✈️",
           "correct": true
         }
       ],
@@ -176,18 +176,18 @@
         {
           "id": "a",
           "label": "Went home",
-          "emoji": "\ud83c\udfe0"
+          "emoji": "🏠"
         },
         {
           "id": "b",
-          "label": "He put the bandage on Dan\u2019s finger so he could keep makin...",
-          "emoji": "\ud83d\ude34",
+          "label": "He put the bandage on Dan’s finger so he could keep makin...",
+          "emoji": "😴",
           "correct": true
         },
         {
           "id": "c",
           "label": "Went to sleep",
-          "emoji": "\ud83d\ude34"
+          "emoji": "😴"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
@@ -369,7 +369,7 @@
             "narration": "You might find or use bandage in first aid kit, home, school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a bandage.",
+        "transition_text": "Now let’s show what you know about a bandage.",
         "connection_text": "Dan needed a bandage after he got a papercut.",
         "connection_narration": "In this story, Dan needed a bandage after he got a papercut."
       }
@@ -548,7 +548,7 @@
             "narration": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends."
           }
         ],
-        "transition_text": "Now let\u2019s show what you know about a paper airplane.",
+        "transition_text": "Now let’s show what you know about a paper airplane.",
         "connection_text": "Dan was making a paper airplane when he got a papercut.",
         "connection_narration": "In this story, Dan was making a paper airplane when he got a papercut."
       }
@@ -691,7 +691,46 @@
             }
           ]
         }
-      ]
+      ],
+      "sfa_teaching": {
+        "intro_text": "calm: feeling word. Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
+        "intro_narration": "Listen for this word in the story: calm. Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
+        "slides": [
+          {
+            "feature": "category",
+            "prompt": "What group is calm in? Listen and look.",
+            "teaching_text": "calm is a feeling word.",
+            "narration": "calm is a feeling word."
+          },
+          {
+            "feature": "function",
+            "prompt": "What does it mean to feel calm? Listen and look.",
+            "teaching_text": "Calm means your body and mind feel relaxed and peaceful.",
+            "narration": "Calm means your body and mind feel relaxed and peaceful."
+          },
+          {
+            "feature": "appearance",
+            "prompt": "What does calm look like? Listen and look.",
+            "teaching_text": "calm looks like a relaxed face and slow, easy breathing.",
+            "narration": "calm looks like a relaxed face and slow, easy breathing."
+          },
+          {
+            "feature": "parts",
+            "prompt": "What parts show calm? Listen and look.",
+            "teaching_text": "Calm shows up in your face, your body, and your breathing.",
+            "narration": "Calm shows up in your face, your body, and your breathing."
+          },
+          {
+            "feature": "location",
+            "prompt": "When might you feel calm? Listen and look.",
+            "teaching_text": "You might feel calm after taking a deep breath or resting.",
+            "narration": "You might feel calm after taking a deep breath or resting."
+          }
+        ],
+        "transition_text": "Now let's show what you know about feeling calm.",
+        "connection_text": "Dan felt scared when he saw the blood so he took a deep breath to feel calm.",
+        "connection_narration": "In this story, Dan felt scared when he saw the blood so he took a deep breath to feel calm."
+      }
     }
   ],
   "sentence_frames": [
@@ -764,7 +803,7 @@
     },
     {
       "correct_position": 2,
-      "caption": "They walked all the way to Daria\u2019s house.",
+      "caption": "They walked all the way to Daria’s house.",
       "image": "slide-02.webp"
     },
     {
@@ -779,12 +818,12 @@
     },
     {
       "correct_position": 5,
-      "caption": "Dan asked Daria\u2019s dad for a bandage.",
+      "caption": "Dan asked Daria’s dad for a bandage.",
       "image": "slide-05.webp"
     },
     {
       "correct_position": 6,
-      "caption": "He put the bandage on Dan\u2019s finger so he could keep making paper ai...",
+      "caption": "He put the bandage on Dan’s finger so he could keep making paper ai...",
       "image": "slide-06.webp"
     }
   ],

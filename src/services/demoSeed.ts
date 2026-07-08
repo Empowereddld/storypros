@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────
  * Demo Seed — Pre-populated account for Rovonn
  * Creates a demo parent account with a child "Ava"
- * who has 4 completed stories, badges, paper planes,
+ * who has 4 completed stories, badges, coins,
  * and a premium subscription. Run once on first load
  * so every screen has real data to showcase.
  * ───────────────────────────────────────────── */
