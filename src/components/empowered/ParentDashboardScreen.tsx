@@ -99,6 +99,7 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
 
   const overall = Math.max(0, Math.min(100, data.avgScore));
   const selectedChildren = children.slice(0, 2);
+  const displayedChildren = selectedChildren.length ? selectedChildren : [child];
 
   return (
     <div className="relative flex h-full flex-col overflow-hidden bg-background">
@@ -146,8 +147,8 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
           </p>
         </section>
 
-        <section className="mt-4 grid grid-cols-2 gap-3">
-          {(selectedChildren.length ? selectedChildren : [child]).map((item, index) => {
+        <section className={cn("mt-4 grid gap-3", displayedChildren.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
+          {displayedChildren.map((item, index) => {
             const selected = item?.id === child?.id || (!child && index === 0);
             return (
               <div

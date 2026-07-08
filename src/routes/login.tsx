@@ -21,6 +21,7 @@ function LoginPage() {
               navigate({ to: "/home" });
             }
           }}
+          onDemo={() => navigate({ to: "/demo" })}
         />
       </div>
     </PhoneFrame>

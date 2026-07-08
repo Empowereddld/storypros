@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { setActiveProgressChild } from "@/services/progress";
 import { hydrateOwnedFromCloud } from "@/services/shop";
 import { hydrateSubscriptionsFromCloud } from "@/services/subscription";
+import { getDemoPersona, seedDemoPersonaData, type DemoRole } from "@/services/demoAccounts";
 
 // ── Types ──
 
@@ -16,6 +17,8 @@ export interface Profile {
   displayName: string;
   role: "parent" | "slp" | "teacher" | "admin";
   onboarded: boolean;
+  /** True for canned demo personas — grants full navigation regardless of `role` (see _authenticated.tsx). */
+  isDemo?: boolean;
 }
 
 export interface Child {
@@ -46,6 +49,10 @@ interface AuthContextType {
   updateChild: (childId: string, updates: Partial<Child>) => Promise<void>;
   addChild: (name: string, age: number | null) => Promise<Child>;
   markOnboarded: () => Promise<void>;
+  /** Start a canned demo persona's session (no Supabase auth involved). */
+  startDemoSession: (personaId: string) => void;
+  /** Switch which role a demo session previews (parent/child, SLP, teacher). No-op outside demo mode. */
+  setDemoRole: (role: DemoRole) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -101,6 +108,47 @@ function mapChild(row: ChildRow): Child {
 }
 
 const ACTIVE_CHILD_KEY = "storypros_active_child";
+const DEMO_SESSION_KEY = "storypros_demo_session";
+
+interface DemoSession {
+  personaId: string;
+  role: DemoRole;
+}
+
+function loadDemoSession(): DemoSession | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(DEMO_SESSION_KEY);
+    return raw ? (JSON.parse(raw) as DemoSession) : null;
+  } catch {
+    return null;
+  }
+}
+
+function buildDemoAuthState(session: DemoSession) {
+  const persona = getDemoPersona(session.personaId);
+  if (!persona) return null;
+  const user = { id: persona.id, email: persona.email };
+  const profile: Profile = {
+    id: persona.id,
+    email: persona.email,
+    displayName: persona.displayName,
+    role: session.role,
+    onboarded: true,
+    isDemo: true,
+  };
+  const child: Child = {
+    id: persona.childId,
+    profileId: persona.id,
+    name: persona.childName,
+    age: 6,
+    currentLevel: 1,
+    levelOverride: false,
+    ttsSpeed: "normal",
+    ttsAutoplay: false,
+  };
+  return { user, profile, child };
+}
 
 // ── Provider ──
 
@@ -174,6 +222,20 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
   // Initial session + listener
   useEffect(() => {
     let mounted = true;
+
+    // Restore a persisted demo session before touching Supabase at all.
+    const demoSession = loadDemoSession();
+    if (demoSession) {
+      const restored = buildDemoAuthState(demoSession);
+      if (restored) {
+        setUser(restored.user);
+        setProfile(restored.profile);
+        setChildProfiles([restored.child]);
+        setActiveChildState(restored.child);
+        setLoading(false);
+        return () => { mounted = false; };
+      }
+    }
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!mounted) return;
@@ -265,7 +327,41 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
-    if (typeof window !== "undefined") localStorage.removeItem(ACTIVE_CHILD_KEY);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(ACTIVE_CHILD_KEY);
+      localStorage.removeItem(DEMO_SESSION_KEY);
+    }
+    setUser(null);
+    setProfile(null);
+    setChildProfiles([]);
+    setActiveChildState(null);
+  }, []);
+
+  const startDemoSession = useCallback((personaId: string) => {
+    const persona = getDemoPersona(personaId);
+    if (!persona) return;
+    seedDemoPersonaData(persona);
+    const session: DemoSession = { personaId, role: "parent" };
+    const built = buildDemoAuthState(session);
+    if (!built) return;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(DEMO_SESSION_KEY, JSON.stringify(session));
+    }
+    setUser(built.user);
+    setProfile(built.profile);
+    setChildProfiles([built.child]);
+    setActiveChildState(built.child);
+  }, []);
+
+  const setDemoRole = useCallback((role: DemoRole) => {
+    setProfile((prev) => {
+      if (!prev?.isDemo) return prev;
+      const session = loadDemoSession();
+      if (session && typeof window !== "undefined") {
+        localStorage.setItem(DEMO_SESSION_KEY, JSON.stringify({ ...session, role }));
+      }
+      return { ...prev, role };
+    });
   }, []);
 
   const resetPassword = useCallback(async (email: string) => {
@@ -365,6 +461,8 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
         updateChild,
         addChild,
         markOnboarded,
+        startDemoSession,
+        setDemoRole,
       }}
     >
       {childrenNodes}

@@ -32,9 +32,11 @@ function AuthenticatedLayout() {
   const path = location.pathname;
   const role = profile?.role;
   const isSlpRole = role === "slp" || role === "teacher";
-  const isAdmin = role === "admin";
+  // Demo accounts bypass gating the same way admins do, regardless of which
+  // role they're currently previewing (see AuthContext's setDemoRole).
+  const isAdmin = role === "admin" || profile?.isDemo === true;
 
-  // Admins bypass all role / onboarding gating — free to browse any page
+  // Admins (and demo accounts) bypass all role / onboarding gating — free to browse any page
   if (!isAdmin) {
     // SLPs/teachers go to /slp; redirect them off parent-only paths
     if (

@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 interface SignUpScreenProps {
   onContinue: (role?: "parent" | "slp" | "teacher") => void;
   onSignIn: () => void;
+  onDemo?: () => void;
 }
 
 type AccountRole = "parent" | "slp" | "teacher";
@@ -36,7 +37,7 @@ const ROLES: { role: AccountRole; label: string }[] = [
   { role: "teacher", label: "Teacher" },
 ];
 
-export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
+export function SignUpScreen({ onContinue, onSignIn, onDemo }: SignUpScreenProps) {
   const { signUp, signInWithGoogle, signInWithApple } = useAuth();
   const [accountRole, setAccountRole] = useState<AccountRole>("parent");
   const [displayName, setDisplayName] = useState("");
@@ -165,6 +166,16 @@ export function SignUpScreen({ onContinue, onSignIn }: SignUpScreenProps) {
         >
           Already have an account? <span className="font-bold text-primary">Log in</span>
         </button>
+
+        {onDemo && (
+          <button
+            type="button"
+            onClick={onDemo}
+            className="mt-2 w-full text-center text-sm font-bold text-primary hover:text-primary/80 transition-colors"
+          >
+            Just exploring? Try a Demo Account
+          </button>
+        )}
 
         {/* Divider */}
         <div className="mt-4 flex items-center gap-3">

@@ -14,6 +14,8 @@ function SettingsPage() {
   const home = isClinician ? "/slp" : "/home";
   const handleSettingsNavigate = (destination: string) => {
     if (destination === "paywall") navigate({ to: "/paywall" });
+    if (destination === "home") navigate({ to: "/home" });
+    if (destination === "slp") navigate({ to: "/slp" });
   };
 
   // SLP/teacher accounts are adult-only — no gate needed

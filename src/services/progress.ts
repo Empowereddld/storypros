@@ -64,8 +64,14 @@ function loadProgress(): ChildProgress {
     const raw = localStorage.getItem(progressKey());
     if (raw) return JSON.parse(raw);
 
-    // One-time migration: adopt legacy single-child data for the first
+    // One-time migration: adopt legacy single-child data for the first real
     // child that loads, then remove it so other children don't inherit it.
+    // Skipped for the "demo" placeholder — that's the id this module starts
+    // with before AuthContext resolves the real child, and migrating under
+    // it would orphan the legacy data away from whichever child actually
+    // owns it once auth catches up.
+    if (activeChildId === "demo") return emptyProgress();
+
     const legacy = localStorage.getItem(LEGACY_PROGRESS_KEY);
     if (legacy) {
       localStorage.setItem(progressKey(), legacy);

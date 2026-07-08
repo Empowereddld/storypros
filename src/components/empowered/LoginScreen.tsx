@@ -26,9 +26,10 @@ interface LoginScreenProps {
   onSignUp: () => void;
   onForgotPassword: () => void;
   onSuccess: (role?: Profile["role"]) => void;
+  onDemo?: () => void;
 }
 
-export function LoginScreen({ onSignUp, onForgotPassword, onSuccess }: LoginScreenProps) {
+export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: LoginScreenProps) {
   const { signIn, signInWithGoogle, signInWithApple } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -161,6 +162,16 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess }: LoginScre
         <TactileButton variant="ghost" className="mt-6" onClick={onSignUp}>
           Create an Account
         </TactileButton>
+
+        {onDemo && (
+          <button
+            type="button"
+            onClick={onDemo}
+            className="mt-3 w-full text-center text-sm font-bold text-primary hover:text-primary/80 transition-colors"
+          >
+            Just exploring? Try a Demo Account
+          </button>
+        )}
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ function SignUpPage() {
             }
           }}
           onSignIn={() => navigate({ to: "/login" })}
+          onDemo={() => navigate({ to: "/demo" })}
         />
       </div>
     </PhoneFrame>

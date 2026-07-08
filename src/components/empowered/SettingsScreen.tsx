@@ -3,6 +3,7 @@ import childAvatar from "@/assets/child-avatar.png";
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import dariaSolo from "@/assets/daria-solo.png";
 import { useAuth, type Child } from "@/contexts/AuthContext";
+import type { DemoRole } from "@/services/demoAccounts";
 import { cn } from "@/lib/utils";
 import { getPaperPlanes } from "@/services/progress";
 import {
@@ -25,8 +26,14 @@ interface SettingsScreenProps {
 
 type Section = "main" | "add-child" | "edit-child";
 
+const DEMO_ROLE_OPTIONS: { role: DemoRole; label: string }[] = [
+  { role: "parent", label: "Parent/Child" },
+  { role: "slp", label: "SLP" },
+  { role: "teacher", label: "Teacher" },
+];
+
 export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
-  const { profile, children, activeChild, setActiveChild, updateChild, addChild, signOut } =
+  const { profile, children, activeChild, setActiveChild, updateChild, addChild, signOut, setDemoRole } =
     useAuth();
 
   const [section, setSection] = useState<Section>("main");
@@ -51,6 +58,11 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
   async function handleSignOut() {
     await signOut();
     onClose();
+  }
+
+  function handleDemoRoleSwitch(role: DemoRole) {
+    setDemoRole(role);
+    onNavigate?.(role === "parent" ? "home" : "slp");
   }
 
   if (section === "add-child") {
@@ -280,6 +292,32 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
               />
             ))}
           </SettingsGroup>
+
+          {profile?.isDemo && (
+            <SettingsGroup title="Demo Mode">
+              <div className="p-4">
+                <p className="mb-3 text-xs font-semibold leading-relaxed text-ink-soft">
+                  Switch how you're viewing Story Pros to see each experience.
+                </p>
+                <div className="flex gap-2 rounded-2xl bg-accent/40 p-1">
+                  {DEMO_ROLE_OPTIONS.map((option) => (
+                    <button
+                      key={option.role}
+                      onClick={() => handleDemoRoleSwitch(option.role)}
+                      className={cn(
+                        "flex-1 rounded-xl py-2 text-xs font-bold transition-all",
+                        profile.role === option.role
+                          ? "bg-card text-primary shadow-card"
+                          : "text-ink-soft hover:text-primary",
+                      )}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </SettingsGroup>
+          )}
 
           <SettingsGroup title="School Or Therapist Access">
             <div className="flex items-start gap-3 px-4 pt-4">
