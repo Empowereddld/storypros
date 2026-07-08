@@ -12,6 +12,15 @@ import { getStory } from "./stories";
 
 const BUCKET = "retell-recordings";
 
+// Safari records audio/mp4 or audio/aac instead of webm; keep the storage
+// file extension honest so downloads/players get the right hint.
+function extensionForMimeType(mimeType: string): string {
+  if (mimeType.includes("mp4")) return "m4a";
+  if (mimeType.includes("aac")) return "aac";
+  if (mimeType.includes("ogg")) return "ogg";
+  return "webm";
+}
+
 export type RetellPhase = "immediate" | "delayed";
 
 export interface RetellRecording {
@@ -38,10 +47,11 @@ export async function uploadRetellRecording(
   }
 
   const storyTitle = getStory(storyId)?.title ?? storyId;
-  const path = `${childId}/${crypto.randomUUID()}.webm`;
+  const contentType = blob.type || "audio/webm";
+  const path = `${childId}/${crypto.randomUUID()}.${extensionForMimeType(contentType)}`;
 
   const { error: uploadError } = await db.storage.from(BUCKET).upload(path, blob, {
-    contentType: blob.type || "audio/webm",
+    contentType,
   });
   if (uploadError) {
     logSyncError("upload retell recording")(uploadError);

@@ -29,11 +29,7 @@ interface CollectibleShopScreenProps {
 
 // Lore cards and airplane tricks are parked for now -- keep them out of the
 // catalog UI without deleting the underlying data/types.
-const CATEGORIES: CollectibleCategory[] = [
-  "airplane_design",
-  "badge",
-  "wallpaper",
-];
+const CATEGORIES: CollectibleCategory[] = ["airplane_design", "badge", "wallpaper"];
 
 const RARITY_COLORS: Record<string, string> = {
   common: "bg-ink-soft/20 text-ink-soft",
@@ -89,7 +85,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
   const [planes, setPlanes] = useState(getPaperPlanes());
   const [justPurchased, setJustPurchased] = useState<Collectible | null>(null);
 
-  const items = getCatalogByCategory(activeTab).filter((item) => item.id !== "badge-5-streak");
+  const items = getCatalogByCategory(activeTab);
 
   function handlePurchase(item: Collectible) {
     const result = purchaseItem(childId, item.id, planes);
@@ -194,7 +190,9 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
         >
           <div>
             <p className="text-xs font-extrabold uppercase tracking-wider opacity-75">Collection</p>
-            <h2 className="mt-1 text-xl font-extrabold leading-tight">{CATEGORY_TREATMENT[activeTab].label}</h2>
+            <h2 className="mt-1 text-xl font-extrabold leading-tight">
+              {CATEGORY_TREATMENT[activeTab].label}
+            </h2>
             <p className="mt-1 max-w-[190px] text-xs font-semibold leading-snug text-ink-soft">
               {CATEGORY_TREATMENT[activeTab].description}
             </p>
@@ -342,7 +340,9 @@ function PurchaseModal({
               >
                 {item.rarity}
               </span>
-              <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight text-primary">{item.name}</h3>
+              <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight text-primary">
+                {item.name}
+              </h3>
             </div>
             {showPrice ? (
               <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-secondary/25 px-3 py-2 text-lg font-extrabold text-secondary-foreground">
@@ -357,16 +357,26 @@ function PurchaseModal({
             ) : null}
           </div>
 
-          <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">{item.description}</p>
+          <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+            {item.description}
+          </p>
 
           <div className="mt-4 grid grid-cols-3 gap-2">
-            <FeatureChip icon={<CategoryIcon category={item.category} className="h-4 w-4" />} label={CATEGORY_TREATMENT[item.category].shortLabel} />
-            <FeatureChip icon={<CoinIcon className="h-4 w-4" />} label={item.price === 0 ? "Earned" : "Unlock"} />
+            <FeatureChip
+              icon={<CategoryIcon category={item.category} className="h-4 w-4" />}
+              label={CATEGORY_TREATMENT[item.category].shortLabel}
+            />
+            <FeatureChip
+              icon={<CoinIcon className="h-4 w-4" />}
+              label={item.price === 0 ? "Earned" : "Unlock"}
+            />
             <FeatureChip icon={<CheckIcon />} label="Story-ready" />
           </div>
 
           <div className="mt-4 flex items-center justify-between rounded-[22px] bg-accent/35 px-4 py-3">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">Your balance</span>
+            <span className="text-xs font-extrabold uppercase tracking-wider text-ink-soft">
+              Your balance
+            </span>
             <span className="inline-flex items-center gap-1 text-sm font-extrabold text-primary">
               <CoinIcon className="h-4 w-4 text-secondary" />
               {planes}
@@ -431,7 +441,14 @@ function CategoryIcon({
       return <PaperPlaneIcon className={className} />;
     case "badge":
       return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+        <svg
+          viewBox="0 0 24 24"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          aria-hidden
+        >
           <circle cx="12" cy="14" r="5" />
           <path d="M8 3l4 6 4-6" strokeLinejoin="round" />
           <path d="m10.5 14 1 1 2.5-2.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -439,7 +456,14 @@ function CategoryIcon({
       );
     case "wallpaper":
       return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+        <svg
+          viewBox="0 0 24 24"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          aria-hidden
+        >
           <rect x="4" y="5" width="16" height="14" rx="3" />
           <path d="m7 16 3.5-4 2.5 3 2-2 2 3" strokeLinecap="round" strokeLinejoin="round" />
           <circle cx="15.5" cy="9.5" r="1" fill="currentColor" stroke="none" />
@@ -447,14 +471,28 @@ function CategoryIcon({
       );
     case "lore_card":
       return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+        <svg
+          viewBox="0 0 24 24"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          aria-hidden
+        >
           <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H19v18H8.5A3.5 3.5 0 0 0 5 23V5.5Z" />
           <path d="M9 7h6M9 11h5" strokeLinecap="round" />
         </svg>
       );
     case "airplane_trick":
       return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+        <svg
+          viewBox="0 0 24 24"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          aria-hidden
+        >
           <path d="M4 14c4-6 10 4 16-2" strokeLinecap="round" />
           <path d="M15 7l5 5-6 3" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -493,30 +531,74 @@ function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | 
       <div className={cn("relative flex items-center justify-center", sizeClass)}>
         <svg viewBox="0 0 120 120" className="h-full w-full drop-shadow-lg" fill="none" aria-hidden>
           <defs>
-            <linearGradient id={gid("plane")} x1="18" y1="16" x2="104" y2="104" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id={gid("plane")}
+              x1="18"
+              y1="16"
+              x2="104"
+              y2="104"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0" stopColor={from} />
               <stop offset="1" stopColor={to} />
             </linearGradient>
           </defs>
           <path d="M104 16 18 53l34 12 15 39 37-88Z" fill={`url(#${gid("plane")})`} />
-          <path d="M52 65 104 16 67 104" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" opacity="0.75" />
+          <path
+            d="M52 65 104 16 67 104"
+            stroke="white"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.75"
+          />
           <path d="M18 53 52 65 42 80" fill="white" opacity="0.3" />
           {item.id === "plane-ocean" && (
             <>
-              <path d="M36 54c7-7 13 7 21 0s14 7 22-1" stroke="white" strokeWidth="4" strokeLinecap="round" opacity="0.9" />
-              <path d="M51 72c6-5 12 5 18 0s11 5 17-1" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+              <path
+                d="M36 54c7-7 13 7 21 0s14 7 22-1"
+                stroke="white"
+                strokeWidth="4"
+                strokeLinecap="round"
+                opacity="0.9"
+              />
+              <path
+                d="M51 72c6-5 12 5 18 0s11 5 17-1"
+                stroke="white"
+                strokeWidth="3"
+                strokeLinecap="round"
+                opacity="0.9"
+              />
             </>
           )}
           {(item.id === "plane-star" || item.id === "plane-golden") && (
             <>
-              <path d="m49 42 2 4.5 5 .7-3.6 3.4.9 4.9-4.3-2.3-4.3 2.3.9-4.9-3.6-3.4 5-.7L49 42Z" fill="white" />
-              <path d="m74 52 1.6 3.4 3.7.5-2.6 2.6.6 3.7-3.3-1.8-3.3 1.8.6-3.7-2.6-2.6 3.7-.5L74 52Z" fill="white" />
+              <path
+                d="m49 42 2 4.5 5 .7-3.6 3.4.9 4.9-4.3-2.3-4.3 2.3.9-4.9-3.6-3.4 5-.7L49 42Z"
+                fill="white"
+              />
+              <path
+                d="m74 52 1.6 3.4 3.7.5-2.6 2.6.6 3.7-3.3-1.8-3.3 1.8.6-3.7-2.6-2.6 3.7-.5L74 52Z"
+                fill="white"
+              />
             </>
           )}
           {item.id === "plane-rainbow" && (
             <>
-              <path d="M28 66c5-9 9 3 14-2s9 5 14 0" stroke="#ffd23f" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
-              <path d="M35 78c5-8 9 3 14-1s9 4 13-1" stroke="#3fd6ff" strokeWidth="3" strokeLinecap="round" opacity="0.85" />
+              <path
+                d="M28 66c5-9 9 3 14-2s9 5 14 0"
+                stroke="#ffd23f"
+                strokeWidth="3"
+                strokeLinecap="round"
+                opacity="0.85"
+              />
+              <path
+                d="M35 78c5-8 9 3 14-1s9 4 13-1"
+                stroke="#3fd6ff"
+                strokeWidth="3"
+                strokeLinecap="round"
+                opacity="0.85"
+              />
             </>
           )}
           {item.id === "plane-sunset" && (
@@ -533,13 +615,27 @@ function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | 
       <div className={cn("relative flex items-center justify-center", sizeClass)}>
         <svg viewBox="0 0 100 100" className="h-full w-full drop-shadow-lg" aria-hidden>
           <defs>
-            <linearGradient id={gid("badge")} x1="15" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id={gid("badge")}
+              x1="15"
+              y1="10"
+              x2="85"
+              y2="90"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0" stopColor={from} />
               <stop offset="1" stopColor={to} />
             </linearGradient>
           </defs>
           <path d="M32 58 20 92l30-12 30 12-12-34" fill={to} opacity="0.9" />
-          <circle cx="50" cy="42" r="34" fill={`url(#${gid("badge")})`} stroke="white" strokeWidth="4" />
+          <circle
+            cx="50"
+            cy="42"
+            r="34"
+            fill={`url(#${gid("badge")})`}
+            stroke="white"
+            strokeWidth="4"
+          />
           <circle cx="50" cy="42" r="24" fill="white" opacity="0.22" />
           <BadgeGlyph itemId={item.id} />
         </svg>
@@ -550,7 +646,12 @@ function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | 
   if (item.category === "wallpaper") {
     return (
       <div className={cn("relative overflow-hidden rounded-2xl shadow-card", sizeClass)}>
-        <svg viewBox="0 0 100 100" className="h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
+        <svg
+          viewBox="0 0 100 100"
+          className="h-full w-full"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden
+        >
           <WallpaperScene itemId={item.id} gid={gid} />
         </svg>
       </div>
@@ -569,10 +670,25 @@ function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | 
 
   return (
     <div className={cn("relative flex items-center justify-center", sizeClass)}>
-      <svg viewBox="0 0 120 120" className="h-full w-full text-coral drop-shadow-lg" fill="none" aria-hidden>
-        <path d="M22 70c18-30 46 14 76-18" stroke="currentColor" strokeWidth="10" strokeLinecap="round" />
+      <svg
+        viewBox="0 0 120 120"
+        className="h-full w-full text-coral drop-shadow-lg"
+        fill="none"
+        aria-hidden
+      >
+        <path
+          d="M22 70c18-30 46 14 76-18"
+          stroke="currentColor"
+          strokeWidth="10"
+          strokeLinecap="round"
+        />
         <path d="M73 34 99 52 70 67" fill="currentColor" />
-        <path d="M32 88c10-8 19 8 30-2" stroke="var(--secondary)" strokeWidth="8" strokeLinecap="round" />
+        <path
+          d="M32 88c10-8 19 8 30-2"
+          stroke="var(--secondary)"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
       </svg>
     </div>
   );
@@ -580,24 +696,66 @@ function ProductVisual({ item, size }: { item: Collectible; size: "sm" | "lg" | 
 
 // Centerpiece glyph inside each badge medallion, matching its name/story.
 function BadgeGlyph({ itemId }: { itemId: string }) {
-  const stroke = { stroke: "white", strokeWidth: 3.4, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+  const stroke = {
+    stroke: "white",
+    strokeWidth: 3.4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    fill: "none",
+  };
   switch (itemId) {
     case "badge-first-story": // First Flight — single wing path
       return <path d="M34 50c8-14 24-14 32 0M50 32v28M42 60l8 8 8-8" {...stroke} />;
     case "badge-3-stories": // Frequent Flyer — three chevrons
       return <path d="M34 34 50 46 66 34M34 46 50 58 66 46M34 58 50 70 66 58" {...stroke} />;
     case "badge-perfect": // Perfect Landing — gem
-      return <path d="M36 38h28l8 12-22 24-22-24 8-12Z M36 38l8 12 6-12M64 38l-8 12-6-12M44 50h12" {...stroke} />;
+      return (
+        <path
+          d="M36 38h28l8 12-22 24-22-24 8-12Z M36 38l8 12 6-12M64 38l-8 12-6-12M44 50h12"
+          {...stroke}
+        />
+      );
     case "badge-5-streak": // Five Day Streak — flame
-      return <path d="M50 28c-4 8-14 12-14 24a14 14 0 0 0 28 0c0-6-3-9-5-12 1 5-2 8-5 8-4 0-5-4-4-8-3 2-5 6-5 10" {...stroke} fill="white" fillOpacity="0.25" />;
+      return (
+        <path
+          d="M50 28c-4 8-14 12-14 24a14 14 0 0 0 28 0c0-6-3-9-5-12 1 5-2 8-5 8-4 0-5-4-4-8-3 2-5 6-5 10"
+          {...stroke}
+          fill="white"
+          fillOpacity="0.25"
+        />
+      );
     case "badge-all-elements": // Story Master — crown
-      return <path d="M32 58 28 40l12 10 10-16 10 16 12-10-4 18Z" {...stroke} fill="white" fillOpacity="0.25" />;
+      return (
+        <path
+          d="M32 58 28 40l12 10 10-16 10 16 12-10-4 18Z"
+          {...stroke}
+          fill="white"
+          fillOpacity="0.25"
+        />
+      );
     case "badge-level-2": // Level Up — rocket
-      return <path d="M50 28c8 6 10 16 8 28l-8 8-8-8c-2-12 0-22 8-28Z M42 56l-6 10M58 56l6 10M46 46h8" {...stroke} />;
+      return (
+        <path
+          d="M50 28c8 6 10 16 8 28l-8 8-8-8c-2-12 0-22 8-28Z M42 56l-6 10M58 56l6 10M46 46h8"
+          {...stroke}
+        />
+      );
     case "badge-all-stories": // Story Explorer — compass
-      return <path d="M50 30a20 20 0 1 0 .1 0Z M56 38l-10 8-4 14 10-8Z" {...stroke} fill="white" fillOpacity="0.25" />;
+      return (
+        <path
+          d="M50 30a20 20 0 1 0 .1 0Z M56 38l-10 8-4 14 10-8Z"
+          {...stroke}
+          fill="white"
+          fillOpacity="0.25"
+        />
+      );
     default:
-      return <path d="m50 32 5 11 12 1.5-9 8.5 2.5 12L50 58l-10.5 6.5L42 52.5 33 44l12-1.5Z" fill="white" />;
+      return (
+        <path
+          d="m50 32 5 11 12 1.5-9 8.5 2.5 12L50 58l-10.5 6.5L42 52.5 33 44l12-1.5Z"
+          fill="white"
+        />
+      );
   }
 }
 
@@ -633,7 +791,14 @@ function WallpaperScene({ itemId, gid }: { itemId: string; gid: (label: string) 
           <rect width="100" height="100" fill={`url(#${gid("sky")})`} />
           <circle cx="70" cy="28" r="14" fill="#ffe9a8" />
           <circle cx="65" cy="24" r="12" fill="#4a3a8a" />
-          {[[20, 20], [40, 15], [15, 45], [85, 55], [30, 60], [60, 65]].map(([cx, cy], i) => (
+          {[
+            [20, 20],
+            [40, 15],
+            [15, 45],
+            [85, 55],
+            [30, 60],
+            [60, 65],
+          ].map(([cx, cy], i) => (
             <circle key={i} cx={cx} cy={cy} r={i % 2 ? 1.4 : 2.2} fill="white" />
           ))}
           <path d="M0 82c16-8 30-8 46 0s30 8 54 0V100H0Z" fill="#2a2258" />
@@ -654,7 +819,11 @@ function WallpaperScene({ itemId, gid }: { itemId: string; gid: (label: string) 
           <path d="M22 40 12 34v12Z" fill="#ff9a4a" />
           <ellipse cx="68" cy="60" rx="9" ry="6" fill="#ffd23f" />
           <path d="M77 60 86 55v10Z" fill="#ffd23f" />
-          {[[16, 20], [50, 15], [80, 26]].map(([cx, cy], i) => (
+          {[
+            [16, 20],
+            [50, 15],
+            [80, 26],
+          ].map(([cx, cy], i) => (
             <circle key={i} cx={cx} cy={cy} r="2" fill="white" opacity="0.7" />
           ))}
         </>

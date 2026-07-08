@@ -36,11 +36,12 @@ export function RetellRecorder({ childId, storyId, phase }: RetellRecorderProps)
   }, []);
 
   if (!childId || !isCloudId(childId)) return null;
+  if (typeof MediaRecorder === "undefined") return null; // e.g. older Safari
 
   async function handleStart() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
+      const recorder = new MediaRecorder(stream, pickRecorderOptions());
       chunksRef.current = [];
       recorder.ondataavailable = (e) => {
         if (e.data.size > 0) chunksRef.current.push(e.data);
@@ -125,6 +126,14 @@ export function RetellRecorder({ childId, storyId, phase }: RetellRecorderProps)
       </p>
     </div>
   );
+}
+
+// Safari (incl. iOS) doesn't support audio/webm; fall back through the types
+// it actually records, so the mic still works there instead of throwing.
+function pickRecorderOptions(): MediaRecorderOptions {
+  const candidates = ["audio/webm", "audio/mp4", "audio/aac", "audio/ogg"];
+  const mimeType = candidates.find((type) => MediaRecorder.isTypeSupported?.(type));
+  return mimeType ? { mimeType } : {};
 }
 
 function formatTime(totalSeconds: number): string {
