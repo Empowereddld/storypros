@@ -1,7 +1,7 @@
-import { createFileRoute, useNavigate, Navigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
-import { SplashScreen } from "@/components/empowered/SplashScreen";
+import { LandingPage } from "@/components/empowered/LandingPage";
 import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -25,7 +25,8 @@ function Index() {
     }
   }, [loading, user, profile, children, navigate]);
 
-  if (loading) {
+  if (loading || user) {
+    // Signed in (or still checking) — the effect routes to the right place
     return (
       <PhoneFrame>
         <LoadingScreen />
@@ -33,20 +34,12 @@ function Index() {
     );
   }
 
-  if (user) {
-    // Signed in — the effect routes to the right place; show loading meanwhile
-    return (
-      <PhoneFrame>
-        <LoadingScreen />
-      </PhoneFrame>
-    );
-  }
-
+  // Signed out — the public front door
   return (
-    <PhoneFrame>
-      <div className="h-full animate-slide-up">
-        <SplashScreen onContinue={() => navigate({ to: "/intro" })} />
-      </div>
-    </PhoneFrame>
+    <LandingPage
+      onGetStarted={() => navigate({ to: "/signup" })}
+      onLogin={() => navigate({ to: "/login" })}
+      onDemo={() => navigate({ to: "/demo" })}
+    />
   );
 }

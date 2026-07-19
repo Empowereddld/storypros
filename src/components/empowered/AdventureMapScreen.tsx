@@ -222,7 +222,8 @@ export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreen
           </div>
         </section>
 
-        <section className="relative mx-auto -mt-2 w-full" style={{ height: canvasHeight }}>
+        {/* Map canvas keeps its designed 400px proportions; centers on wider screens */}
+        <section className="relative mx-auto -mt-2 w-full max-w-[430px]" style={{ height: canvasHeight }}>
           <svg
             className="pointer-events-none absolute inset-0 h-full w-full"
             viewBox={`0 0 400 ${canvasHeight}`}

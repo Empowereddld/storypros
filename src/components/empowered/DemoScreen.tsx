@@ -12,15 +12,25 @@ import { ChevronRightIcon } from "./StoryProsUi";
 
 interface DemoScreenProps {
   onSelect: () => void;
+  /** Chosen when the visitor wants the full first-run experience */
+  onSelectOnboarding: () => void;
   onBack: () => void;
 }
 
-export function DemoScreen({ onSelect, onBack }: DemoScreenProps) {
+export function DemoScreen({ onSelect, onSelectOnboarding, onBack }: DemoScreenProps) {
   const { startDemoSession } = useAuth();
 
   function handlePick(personaId: string) {
     startDemoSession(personaId);
     onSelect();
+  }
+
+  function handleOnboardingWalkthrough() {
+    // Admin persona, but starting from zero: intro carousel →
+    // child profile setup → placement quiz → home, exactly as a
+    // brand-new family experiences it.
+    startDemoSession("demo-enerds-admin", { onboarding: true });
+    onSelectOnboarding();
   }
 
   return (
@@ -60,6 +70,32 @@ export function DemoScreen({ onSelect, onBack }: DemoScreenProps) {
             </button>
           ))}
         </div>
+
+        <div className="mt-6 flex items-center gap-3" aria-hidden>
+          <span className="h-px flex-1 bg-accent" />
+          <span className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+            Or start from the very beginning
+          </span>
+          <span className="h-px flex-1 bg-accent" />
+        </div>
+
+        <button
+          onClick={handleOnboardingWalkthrough}
+          className="press-pop hover-lift mt-4 flex w-full items-center gap-3 rounded-[24px] border-2 border-primary/50 bg-primary/5 p-4 text-left shadow-card transition-all"
+        >
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-2xl text-primary-foreground shadow-card">
+            ✨
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-lg font-extrabold text-primary">Walk through onboarding</p>
+            <p className="text-xs font-semibold text-ink-soft">
+              The full first-run experience: intro, child setup, placement quiz, then home
+            </p>
+          </div>
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
+            <ChevronRightIcon className="h-5 w-5" />
+          </span>
+        </button>
 
         <div className="flex-1" />
 

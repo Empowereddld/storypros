@@ -13,7 +13,8 @@ function DemoPage() {
       <div className="h-full animate-slide-up">
         <DemoScreen
           onSelect={() => navigate({ to: "/home" })}
-          onBack={() => navigate({ to: "/login" })}
+          onSelectOnboarding={() => navigate({ to: "/intro" })}
+          onBack={() => navigate({ to: "/" })}
         />
       </div>
     </PhoneFrame>
