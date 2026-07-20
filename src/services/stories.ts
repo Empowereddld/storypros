@@ -20,13 +20,20 @@ import story11 from "../../content/story-11-daria-asks-again.json";
 
 // In-memory story cache (local JSON for now, Supabase later)
 const ALL_STORIES = [
-  story01, story02, story03, story04, story05, story06,
-  story07, story08, story09, story10, story11,
+  story01,
+  story02,
+  story03,
+  story04,
+  story05,
+  story06,
+  story07,
+  story08,
+  story09,
+  story10,
+  story11,
 ] as unknown as StoryData[];
 
-const STORIES: Record<string, StoryData> = Object.fromEntries(
-  ALL_STORIES.map((s) => [s.id, s]),
-);
+const STORIES: Record<string, StoryData> = Object.fromEntries(ALL_STORIES.map((s) => [s.id, s]));
 
 /** Get a story by ID */
 export function getStory(storyId: string): StoryData | null {
@@ -49,10 +56,7 @@ export function getStoryIds(level: number): string[] {
 }
 
 /** Check if all stories at a level are completed */
-export function isLevelComplete(
-  level: number,
-  completedStoryIds: string[],
-): boolean {
+export function isLevelComplete(level: number, completedStoryIds: string[]): boolean {
   const levelStoryIds = getStoryIds(level);
   return levelStoryIds.every((id) => completedStoryIds.includes(id));
 }

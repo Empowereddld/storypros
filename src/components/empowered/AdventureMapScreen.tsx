@@ -454,11 +454,7 @@ function LockedStorySheet({
       >
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
         <div className="relative overflow-hidden rounded-[28px] bg-accent shadow-card">
-          <img
-            src={pin.cover ?? undefined}
-            alt=""
-            className="h-40 w-full object-cover"
-          />
+          <img src={pin.cover ?? undefined} alt="" className="h-40 w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/72 via-ink/10 to-transparent" />
           <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-wide text-primary shadow-card">
             <LockIcon />
@@ -481,8 +477,8 @@ function LockedStorySheet({
                 Unlock the full adventure
               </p>
               <p className="mt-1 text-[13px] font-semibold leading-relaxed text-ink-soft">
-                Free forever includes one complete story. Premium opens all 11 Story Pros
-                stories, parent progress, and rewards for each child.
+                Free forever includes one complete story. Premium opens all 11 Story Pros stories,
+                parent progress, and rewards for each child.
               </p>
               <div className="mt-3 flex items-center justify-between rounded-2xl bg-card px-4 py-3 shadow-card">
                 <span className="text-[12px] font-bold uppercase tracking-wide text-primary">
@@ -490,7 +486,9 @@ function LockedStorySheet({
                 </span>
                 <span className="text-lg font-extrabold text-primary">
                   $7.99/mo
-                  <span className="ml-2 text-xs font-bold text-ink-soft line-through">$9.99/mo</span>
+                  <span className="ml-2 text-xs font-bold text-ink-soft line-through">
+                    $9.99/mo
+                  </span>
                 </span>
               </div>
             </div>

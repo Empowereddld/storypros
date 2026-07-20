@@ -97,109 +97,111 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
         {/* Laptop: story hero on the left, quick actions on the right */}
         <div className="lg:mt-6 lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-6">
-        <div className="min-w-0">
-        {cont && (
-          <article className="mt-4 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up hover-lift">
-            <div className="relative h-[214px] w-full overflow-hidden rounded-[25px] bg-accent/40">
-              {cover ? (
-                <img src={cover} alt="" className="h-full w-full object-cover" />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-accent text-primary">
-                  <PaperPlaneIcon className="h-16 w-16" />
+          <div className="min-w-0">
+            {cont && (
+              <article className="mt-4 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up hover-lift">
+                <div className="relative h-[214px] w-full overflow-hidden rounded-[25px] bg-accent/40">
+                  {cover ? (
+                    <img src={cover} alt="" className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-accent text-primary">
+                      <PaperPlaneIcon className="h-16 w-16" />
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
+                  <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-primary-foreground shadow-card">
+                    <BookCheckIcon className="h-4 w-4" />
+                    {cont.status === "in-progress"
+                      ? "Continue Story"
+                      : cont.status === "replay"
+                        ? "Replay Story"
+                        : "Next Story"}
+                  </span>
                 </div>
-              )}
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
-              <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-primary-foreground shadow-card">
-                <BookCheckIcon className="h-4 w-4" />
-                {cont.status === "in-progress"
-                  ? "Continue Story"
-                  : cont.status === "replay"
-                    ? "Replay Story"
-                    : "Next Story"}
-              </span>
-            </div>
 
-            <div className="relative -mt-10 rounded-t-[32px] bg-card px-4 pb-4 pt-4">
-              <div className="absolute -top-10 left-0 right-0 h-14 bg-card [clip-path:ellipse(62%_58%_at_50%_100%)]" />
-              <div className="relative flex items-start gap-4">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[20px] bg-secondary/20 text-secondary shadow-card">
-                  <PaperPlaneIcon className="h-8 w-8" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <h2 className="text-[23px] font-extrabold leading-[0.98] text-primary">
-                      {cont.story.title}
-                    </h2>
-                    <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-[10px] font-extrabold text-primary">
-                      {prettifyTheme(cont.story.theme)}
+                <div className="relative -mt-10 rounded-t-[32px] bg-card px-4 pb-4 pt-4">
+                  <div className="absolute -top-10 left-0 right-0 h-14 bg-card [clip-path:ellipse(62%_58%_at_50%_100%)]" />
+                  <div className="relative flex items-start gap-4">
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[20px] bg-secondary/20 text-secondary shadow-card">
+                      <PaperPlaneIcon className="h-8 w-8" />
                     </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h2 className="text-[23px] font-extrabold leading-[0.98] text-primary">
+                          {cont.story.title}
+                        </h2>
+                        <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-[10px] font-extrabold text-primary">
+                          {prettifyTheme(cont.story.theme)}
+                        </span>
+                      </div>
+                      <p className="mt-1.5 text-[13px] font-medium leading-snug text-ink-soft">
+                        Level {cont.story.level} story for practicing{" "}
+                        {prettifyTheme(cont.story.theme).toLowerCase()}.
+                      </p>
+                    </div>
                   </div>
-                  <p className="mt-1.5 text-[13px] font-medium leading-snug text-ink-soft">
-                    Level {cont.story.level} story for practicing{" "}
-                    {prettifyTheme(cont.story.theme).toLowerCase()}.
-                  </p>
+
+                  <div className="mt-3 flex items-center justify-between text-xs font-extrabold">
+                    <span className="text-ink-soft">
+                      {cont.status === "in-progress"
+                        ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
+                        : "Not started yet"}
+                    </span>
+                    <span className="text-primary">{cont.percent}% complete</span>
+                  </div>
+                  <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-accent/70">
+                    <div
+                      className="h-full rounded-full bg-primary transition-all duration-500"
+                      style={{
+                        width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
+                      }}
+                    />
+                  </div>
+
+                  <TactileButton className="mt-4" onClick={openContinue}>
+                    {cont.status === "in-progress"
+                      ? "Continue Reading"
+                      : cont.status === "replay"
+                        ? "Read Again"
+                        : "Start Story"}{" "}
+                    <ChevronRightIcon className="h-5 w-5 text-secondary" />
+                  </TactileButton>
                 </div>
-              </div>
+              </article>
+            )}
+          </div>
 
-              <div className="mt-3 flex items-center justify-between text-xs font-extrabold">
-                <span className="text-ink-soft">
-                  {cont.status === "in-progress"
-                    ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
-                    : "Not started yet"}
-                </span>
-                <span className="text-primary">{cont.percent}% complete</span>
-              </div>
-              <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-accent/70">
-                <div
-                  className="h-full rounded-full bg-primary transition-all duration-500"
-                  style={{
-                    width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
-                  }}
-                />
-              </div>
+          {/* Right rail on laptop; flows underneath on phones/tablets */}
+          <aside className="lg:sticky lg:top-2">
+            <button
+              onClick={() => onNavigate("map")}
+              className="press-pop mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-card/70 py-2.5 text-sm font-bold text-primary shadow-card transition-colors hover:bg-card lg:mt-0 lg:py-3.5"
+            >
+              <MapIcon className="h-4 w-4" />
+              Explore the Adventure Map
+              <ChevronRightIcon />
+            </button>
 
-              <TactileButton className="mt-4" onClick={openContinue}>
-                {cont.status === "in-progress"
-                  ? "Continue Reading"
-                  : cont.status === "replay"
-                    ? "Read Again"
-                    : "Start Story"}{" "}
-                <ChevronRightIcon className="h-5 w-5 text-secondary" />
-              </TactileButton>
+            <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-1">
+              <StatCardLite
+                tone="primary"
+                icon={<BookCheckIcon />}
+                value={completedCount}
+                label={completedCount === 1 ? "Story Completed" : "Stories Completed"}
+                subtitle={
+                  completedCount === 0 ? "Finish one to start!" : "You're a real Story Pro!"
+                }
+              />
+              <StatCardLite
+                tone="secondary"
+                icon={<CoinIcon className="h-5 w-5" />}
+                value={paperPlanes}
+                label="Coins"
+                subtitle="Spend them in the Shop!"
+                onClick={() => onNavigate("shop")}
+              />
             </div>
-          </article>
-        )}
-        </div>
-
-        {/* Right rail on laptop; flows underneath on phones/tablets */}
-        <aside className="lg:sticky lg:top-2">
-        <button
-          onClick={() => onNavigate("map")}
-          className="press-pop mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-card/70 py-2.5 text-sm font-bold text-primary shadow-card transition-colors hover:bg-card lg:mt-0 lg:py-3.5"
-        >
-          <MapIcon className="h-4 w-4" />
-          Explore the Adventure Map
-          <ChevronRightIcon />
-        </button>
-
-        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-1">
-          <StatCardLite
-            tone="primary"
-            icon={<BookCheckIcon />}
-            value={completedCount}
-            label={completedCount === 1 ? "Story Completed" : "Stories Completed"}
-            subtitle={completedCount === 0 ? "Finish one to start!" : "You're a real Story Pro!"}
-          />
-          <StatCardLite
-            tone="secondary"
-            icon={<CoinIcon className="h-5 w-5" />}
-            value={paperPlanes}
-            label="Coins"
-            subtitle="Spend them in the Shop!"
-            onClick={() => onNavigate("shop")}
-          />
-        </div>
-        </aside>
+          </aside>
         </div>
       </div>
 

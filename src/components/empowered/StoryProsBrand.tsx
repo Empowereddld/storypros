@@ -67,18 +67,35 @@ export function BookPlaneMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 56" className={className} fill="none" aria-hidden>
       {/* dotted swoosh trail */}
-      <path d="M14 30 C 22 14, 34 12, 46 8" stroke="var(--secondary-deep)" strokeWidth="2.4"
-            strokeLinecap="round" strokeDasharray="1 5" opacity="0.7" />
+      <path
+        d="M14 30 C 22 14, 34 12, 46 8"
+        stroke="var(--secondary-deep)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeDasharray="1 5"
+        opacity="0.7"
+      />
       {/* paper airplane */}
-      <path d="M40 6 L60 2 L48 20 Z" fill="var(--secondary)" stroke="var(--secondary-deep)" strokeWidth="2" strokeLinejoin="round" />
+      <path
+        d="M40 6 L60 2 L48 20 Z"
+        fill="var(--secondary)"
+        stroke="var(--secondary-deep)"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
       <path d="M48 20 L46 12 L60 2 Z" fill="var(--secondary-deep)" />
       {/* sparkle */}
-      <path d="M20 6 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6 Z" fill="var(--secondary)" />
+      <path
+        d="M20 6 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6 Z"
+        fill="var(--secondary)"
+      />
       {/* open book */}
-      <path d="M6 34 C 16 28, 26 28, 32 34 L32 52 C 26 46, 16 46, 6 52 Z"
-            fill="var(--primary)" />
-      <path d="M58 34 C 48 28, 38 28, 32 34 L32 52 C 38 46, 48 46, 58 52 Z"
-            fill="var(--primary)" opacity="0.82" />
+      <path d="M6 34 C 16 28, 26 28, 32 34 L32 52 C 26 46, 16 46, 6 52 Z" fill="var(--primary)" />
+      <path
+        d="M58 34 C 48 28, 38 28, 32 34 L32 52 C 38 46, 48 46, 58 52 Z"
+        fill="var(--primary)"
+        opacity="0.82"
+      />
       <path d="M32 34 L32 52" stroke="white" strokeWidth="1.6" opacity="0.6" />
     </svg>
   );
@@ -88,7 +105,10 @@ export function BookPlaneMark({ className }: { className?: string }) {
 
 export function AuthBackdrop({ className }: { className?: string }) {
   return (
-    <div className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)} aria-hidden>
+    <div
+      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      aria-hidden
+    >
       {/* base wash */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/20 to-accent/45" />
       {/* soft cloud blobs */}
@@ -185,7 +205,14 @@ export function IconInput({
 
 export function MailIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <rect x="3" y="5" width="18" height="14" rx="3" />
       <path d="M3.5 7.5l8.5 6 8.5-6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -193,7 +220,14 @@ export function MailIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 export function LockIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <rect x="5" y="11" width="14" height="9" rx="2.5" />
       <path d="M8 11V8a4 4 0 018 0v3" strokeLinecap="round" />
     </svg>
@@ -201,7 +235,14 @@ export function LockIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 export function UserIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <circle cx="12" cy="8" r="4" />
       <path d="M4 20c0-3.5 3.6-6 8-6s8 2.5 8 6" strokeLinecap="round" />
     </svg>
@@ -209,7 +250,14 @@ export function UserIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 export function SmileIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <circle cx="12" cy="12" r="9" />
       <path d="M8.5 14c.9 1.2 2.1 1.8 3.5 1.8s2.6-.6 3.5-1.8" strokeLinecap="round" />
       <circle cx="9" cy="10" r="0.6" fill="currentColor" />
@@ -219,7 +267,14 @@ export function SmileIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 function EyeIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" strokeLinejoin="round" />
       <circle cx="12" cy="12" r="3" />
     </svg>
@@ -227,9 +282,20 @@ function EyeIcon() {
 }
 function EyeOffIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
       <path d="M3 3l18 18" strokeLinecap="round" />
-      <path d="M10.6 6.2A9.7 9.7 0 0112 6c6.5 0 10 7 10 7a17 17 0 01-3.3 4M6.1 8.1A17 17 0 002 13s3.5 7 10 7a9.6 9.6 0 004.2-1" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M10.6 6.2A9.7 9.7 0 0112 6c6.5 0 10 7 10 7a17 17 0 01-3.3 4M6.1 8.1A17 17 0 002 13s3.5 7 10 7a9.6 9.6 0 004.2-1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -239,10 +305,19 @@ function EyeOffIcon() {
 export function GoogleMark({ className = "h-5 w-5" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden>
-      <path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4c-.2 1.3-1 2.4-2 3.1v2.6h3.3c1.9-1.8 3-4.4 3-7.5z" fill="#4285F4" />
-      <path d="M12 22c2.7 0 5-.9 6.7-2.4l-3.3-2.6c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3v2.6C4.7 19.9 8.1 22 12 22z" fill="#34A853" />
+      <path
+        d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4c-.2 1.3-1 2.4-2 3.1v2.6h3.3c1.9-1.8 3-4.4 3-7.5z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 22c2.7 0 5-.9 6.7-2.4l-3.3-2.6c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3v2.6C4.7 19.9 8.1 22 12 22z"
+        fill="#34A853"
+      />
       <path d="M6.4 13.9a6 6 0 010-3.8V7.5H3a10 10 0 000 9l3.4-2.6z" fill="#FBBC05" />
-      <path d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.9-2.9C17 3 14.7 2 12 2 8.1 2 4.7 4.1 3 7.5l3.4 2.6C7.2 7.9 9.4 6.1 12 6.1z" fill="#EA4335" />
+      <path
+        d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.9-2.9C17 3 14.7 2 12 2 8.1 2 4.7 4.1 3 7.5l3.4 2.6C7.2 7.9 9.4 6.1 12 6.1z"
+        fill="#EA4335"
+      />
     </svg>
   );
 }

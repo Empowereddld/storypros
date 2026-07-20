@@ -132,7 +132,10 @@ export function StoryCompletePhase({
           </p>
 
           {/* Star rating */}
-          <div className="mt-4 flex justify-center gap-2" aria-label={`${stars} star performance rating`}>
+          <div
+            className="mt-4 flex justify-center gap-2"
+            aria-label={`${stars} star performance rating`}
+          >
             {[1, 2, 3].map((n) => (
               <svg
                 key={n}
@@ -180,7 +183,9 @@ export function StoryCompletePhase({
           >
             <span>
               <span className="block text-sm font-extrabold text-primary">See skill details</span>
-              <span className="block text-xs font-semibold text-ink-soft">Listening, story structure, words, and grammar</span>
+              <span className="block text-xs font-semibold text-ink-soft">
+                Listening, story structure, words, and grammar
+              </span>
             </span>
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <ChevronRightIcon className="h-5 w-5" />
@@ -210,7 +215,10 @@ export function StoryCompletePhase({
                       : "bg-coral";
 
               return (
-                <div key={domain} className="rounded-[24px] border-2 border-accent/60 bg-card p-4 shadow-card">
+                <div
+                  key={domain}
+                  className="rounded-[24px] border-2 border-accent/60 bg-card p-4 shadow-card"
+                >
                   <div className="mb-2 flex items-center gap-2">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-sky text-primary">
                       <SkillIcon domain={domain} />
@@ -249,7 +257,11 @@ export function StoryCompletePhase({
 
       {/* Continue */}
       <div className="relative z-10 mx-5 mb-5 mt-2">
-        <TactileButton variant="secondary" onClick={handleFinish} leadingIcon={<ChevronRightIcon className="h-5 w-5" />}>
+        <TactileButton
+          variant="secondary"
+          onClick={handleFinish}
+          leadingIcon={<ChevronRightIcon className="h-5 w-5" />}
+        >
           Continue
         </TactileButton>
       </div>

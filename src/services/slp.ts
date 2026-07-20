@@ -62,7 +62,9 @@ function loadCaseload(slpId: string): CaseloadChild[] {
   try {
     const raw = localStorage.getItem(`${CASELOAD_KEY}_${slpId}`);
     return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function saveCaseload(slpId: string, data: CaseloadChild[]) {
@@ -73,7 +75,9 @@ function loadAssignments(slpId: string): StoryAssignment[] {
   try {
     const raw = localStorage.getItem(`${ASSIGNMENTS_KEY}_${slpId}`);
     return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function saveAssignments(slpId: string, data: StoryAssignment[]) {
@@ -84,7 +88,9 @@ function loadNotes(slpId: string): SessionNote[] {
   try {
     const raw = localStorage.getItem(`${NOTES_KEY}_${slpId}`);
     return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function saveNotes(slpId: string, data: SessionNote[]) {
@@ -131,7 +137,9 @@ export async function hydrateSlpFromCloud(slpId: string): Promise<void> {
     const [caseloadRes, assignmentsRes, notesRes] = await Promise.all([
       db
         .from("slp_caseload")
-        .select("child_id, child_name, tag, linked_at, children:child_id(profiles:profile_id(email))")
+        .select(
+          "child_id, child_name, tag, linked_at, children:child_id(profiles:profile_id(email))",
+        )
         .eq("slp_id", slpId)
         .order("linked_at", { ascending: true }),
       db
@@ -303,7 +311,11 @@ export function removeChildFromCaseload(slpId: string, childId: string) {
   }
 }
 
-export function updateCaseloadChild(slpId: string, childId: string, updates: Partial<CaseloadChild>) {
+export function updateCaseloadChild(
+  slpId: string,
+  childId: string,
+  updates: Partial<CaseloadChild>,
+) {
   const caseload = loadCaseload(slpId).map((c) =>
     c.childId === childId ? { ...c, ...updates } : c,
   );
@@ -373,7 +385,11 @@ export function assignStory(
   return assignment;
 }
 
-export function updateAssignment(slpId: string, assignmentId: string, updates: Partial<StoryAssignment>) {
+export function updateAssignment(
+  slpId: string,
+  assignmentId: string,
+  updates: Partial<StoryAssignment>,
+) {
   const assignments = loadAssignments(slpId).map((a) =>
     a.id === assignmentId ? { ...a, ...updates } : a,
   );
@@ -457,9 +473,7 @@ export function addNote(
 }
 
 export function updateNote(slpId: string, noteId: string, updates: Partial<SessionNote>) {
-  const notes = loadNotes(slpId).map((n) =>
-    n.id === noteId ? { ...n, ...updates } : n,
-  );
+  const notes = loadNotes(slpId).map((n) => (n.id === noteId ? { ...n, ...updates } : n));
   saveNotes(slpId, notes);
 
   if (isCloudId(slpId)) {
@@ -564,7 +578,8 @@ export function seedDemoCaseload(slpId: string) {
       id: crypto.randomUUID(),
       childId: "demo-child-1",
       date: new Date(Date.now() - 5 * 86400000).toISOString(),
-      content: "Maya completed Dan's Paper Cut with strong comprehension. Used 'because' correctly in 2/3 sentence frames. Needs more support with sequencing — got frames 4 and 5 reversed.",
+      content:
+        "Maya completed Dan's Paper Cut with strong comprehension. Used 'because' correctly in 2/3 sentence frames. Needs more support with sequencing — got frames 4 and 5 reversed.",
       storyId: "dan-and-the-paper-cut",
       tags: ["comprehension", "sequencing"],
     },
@@ -572,7 +587,8 @@ export function seedDemoCaseload(slpId: string) {
       id: crypto.randomUUID(),
       childId: "demo-child-2",
       date: new Date(Date.now() - 3 * 86400000).toISOString(),
-      content: "Liam started Dan's Paper Cut today. Good engagement with story slides. Needed 3 replays on slide 4. Vocabulary recall strong for 'bandage' but struggled with 'papercut'.",
+      content:
+        "Liam started Dan's Paper Cut today. Good engagement with story slides. Needed 3 replays on slide 4. Vocabulary recall strong for 'bandage' but struggled with 'papercut'.",
       storyId: "dan-and-the-paper-cut",
       tags: ["vocabulary", "engagement"],
     },

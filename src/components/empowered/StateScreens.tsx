@@ -117,7 +117,12 @@ export function EmptyState({
                 : "top-16 h-28 w-24 rounded-[28px]",
             )}
           >
-            {icon ?? (tone === "search" ? <SearchIcon className="h-14 w-14" /> : <BookIcon className="h-11 w-11" />)}
+            {icon ??
+              (tone === "search" ? (
+                <SearchIcon className="h-14 w-14" />
+              ) : (
+                <BookIcon className="h-11 w-11" />
+              ))}
           </span>
           <MiniPlane className="absolute right-5 top-16 h-9 w-9 rotate-12 text-secondary animate-float" />
           <Star className="absolute left-5 top-24 h-5 w-5 text-secondary animate-sparkle" />
@@ -127,7 +132,13 @@ export function EmptyState({
           <div className="mt-5 w-full max-w-[20rem]">
             <TactileButton
               onClick={onAction}
-              leadingIcon={tone === "search" ? <SearchIcon className="h-6 w-6" /> : <BookIcon className="h-6 w-6" />}
+              leadingIcon={
+                tone === "search" ? (
+                  <SearchIcon className="h-6 w-6" />
+                ) : (
+                  <BookIcon className="h-6 w-6" />
+                )
+              }
             >
               {actionLabel}
             </TactileButton>
@@ -207,7 +218,11 @@ export function ErrorState({
     >
       <div className="mt-6 w-full max-w-[20rem] space-y-3">
         {onRetry && (
-          <TactileButton variant="secondary" onClick={onRetry} leadingIcon={<RefreshIcon className="h-6 w-6" />}>
+          <TactileButton
+            variant="secondary"
+            onClick={onRetry}
+            leadingIcon={<RefreshIcon className="h-6 w-6" />}
+          >
             Try Again
           </TactileButton>
         )}

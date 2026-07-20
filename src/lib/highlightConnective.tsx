@@ -22,7 +22,10 @@ export function highlightConnective(text: string, connective: string): ReactNode
   if (parts.length === 1) return text;
   return parts.map((part, i) =>
     part.toLowerCase() === connective.toLowerCase() ? (
-      <span key={i} className="inline-block rounded-lg bg-secondary/25 px-1 font-extrabold text-secondary-foreground">
+      <span
+        key={i}
+        className="inline-block rounded-lg bg-secondary/25 px-1 font-extrabold text-secondary-foreground"
+      >
         {part}
       </span>
     ) : (

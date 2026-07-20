@@ -36,13 +36,15 @@ export const SCREEN_CATALOG: CatalogCategory[] = [
       {
         key: "landing",
         label: "Landing page",
-        description: "The public front door at the main link: hero, five skills, how it works, pricing, demo button.",
+        description:
+          "The public front door at the main link: hero, five skills, how it works, pricing, demo button.",
         route: "/",
       },
       {
         key: "demo-picker",
         label: "Demo picker",
-        description: "Choice between exploring the app with sample data or walking through onboarding.",
+        description:
+          "Choice between exploring the app with sample data or walking through onboarding.",
         route: "/demo",
       },
     ],
@@ -127,14 +129,16 @@ export const SCREEN_CATALOG: CatalogCategory[] = [
       {
         key: "home-dashboard",
         label: "Home",
-        description: "The child's home: greeting, next story card, adventure map link, quick stats, bottom tabs (tablet) or top nav (laptop).",
+        description:
+          "The child's home: greeting, next story card, adventure map link, quick stats, bottom tabs (tablet) or top nav (laptop).",
         route: "/home",
         needsAuth: true,
       },
       {
         key: "adventure-map",
         label: "Adventure Map",
-        description: "The winding story road with pins for every story: completed, active, and locked.",
+        description:
+          "The winding story road with pins for every story: completed, active, and locked.",
         route: "/map",
         needsAuth: true,
       },
@@ -299,7 +303,8 @@ export const SCREEN_CATALOG: CatalogCategory[] = [
       {
         key: "settings",
         label: "Settings",
-        description: "Children, read-aloud speed, level placement, subscription, retell library, log out.",
+        description:
+          "Children, read-aloud speed, level placement, subscription, retell library, log out.",
         route: "/settings",
         needsAuth: true,
       },

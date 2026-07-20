@@ -42,8 +42,8 @@ export function DemoScreen({ onSelect, onSelectOnboarding, onBack }: DemoScreenP
           Try Story Pros
         </h1>
         <p className="mt-2 text-center text-sm font-medium text-ink-soft">
-          No sign-up needed. Explore every screen freely, or experience the app
-          exactly the way a new family does.
+          No sign-up needed. Explore every screen freely, or experience the app exactly the way a
+          new family does.
         </p>
 
         <div className="mt-6 space-y-3">

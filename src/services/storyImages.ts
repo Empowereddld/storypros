@@ -9,10 +9,11 @@
  * resolve returns null and screens show their placeholder.
  * ───────────────────────────────────────────── */
 
-const modules = import.meta.glob(
-  "../assets/stories/**/*.{png,webp,jpg,jpeg}",
-  { eager: true, query: "?url", import: "default" },
-) as Record<string, string>;
+const modules = import.meta.glob("../assets/stories/**/*.{png,webp,jpg,jpeg}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
 
 // Key by "<storyId>/<filename>"
 const byKey: Record<string, string> = {};

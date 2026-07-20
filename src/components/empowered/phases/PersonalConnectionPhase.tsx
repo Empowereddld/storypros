@@ -60,7 +60,9 @@ export function PersonalConnectionPhase({
               Think and Share
             </span>
             <div className="flex items-start gap-3">
-              <h1 className="flex-1 text-[30px] font-extrabold leading-tight text-primary">{prompt}</h1>
+              <h1 className="flex-1 text-[30px] font-extrabold leading-tight text-primary">
+                {prompt}
+              </h1>
               {supported && (
                 <ListenButton
                   playing={isPlaying("prompt")}

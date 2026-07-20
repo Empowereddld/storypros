@@ -25,10 +25,7 @@ export const db = supabase as unknown as SupabaseClient<any, "public", any>;
 
 /** True when an id is a real cloud UUID (demo children use slugs like "demo-child-ava") */
 export function isCloudId(id: string | null | undefined): boolean {
-  return (
-    !!id &&
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
-  );
+  return !!id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
 }
 
 /** Fire-and-forget error handler for background cloud writes */

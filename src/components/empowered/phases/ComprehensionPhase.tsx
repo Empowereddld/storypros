@@ -20,7 +20,13 @@ type BrainCheckState =
   | { type: "correct"; message: string }
   | { type: "wrong"; message: string };
 
-export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = "normal", childId = "demo" }: StoryPhaseProps) {
+export function ComprehensionPhase({
+  storyData,
+  onComplete,
+  onClose,
+  ttsSpeed = "normal",
+  childId = "demo",
+}: StoryPhaseProps) {
   const questions = storyData.comprehension_questions;
   const [qi, setQi] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -33,13 +39,28 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
   const [speaking, setSpeaking] = useState(false);
   const startTime = useRef(Date.now());
 
-  useEffect(() => { preloadVoices(); }, []);
-  useEffect(() => { return () => { stop(); setSpeaking(false); }; }, [qi]);
+  useEffect(() => {
+    preloadVoices();
+  }, []);
+  useEffect(() => {
+    return () => {
+      stop();
+      setSpeaking(false);
+    };
+  }, [qi]);
 
   async function handleListen() {
-    if (speaking) { stop(); setSpeaking(false); return; }
+    if (speaking) {
+      stop();
+      setSpeaking(false);
+      return;
+    }
     setSpeaking(true);
-    try { await speak(q.prompt, { rate: speedToRate(ttsSpeed) }); } catch {}
+    try {
+      await speak(q.prompt, { rate: speedToRate(ttsSpeed) });
+    } catch {
+      /* TTS unavailable — the child can still read the prompt */
+    }
     setSpeaking(false);
   }
 
@@ -108,9 +129,7 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
 
   const showingBrainCheck = brainCheck.type !== "none";
 
-  const hintSlide = storyData.slides.find(
-    (s) => s.story_element === q.story_element,
-  );
+  const hintSlide = storyData.slides.find((s) => s.story_element === q.story_element);
   const hintImage = resolveStoryImage(storyData.id, hintSlide?.image);
 
   return (
@@ -126,16 +145,23 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
       {/* Brain check overlay */}
       {showingBrainCheck && (
         <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm animate-slide-up">
-          <div className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
 
             <div className="flex items-start gap-3">
               <img src={dariaSolo} alt="" className="h-16 w-auto object-contain" />
               <div className="flex-1">
-                <div className={cn(
-                  "rounded-2xl rounded-bl-sm p-4 shadow-card",
-                  brainCheck.type === "correct" ? "bg-success/10 border-2 border-success animate-tada" : "bg-sky animate-shake",
-                )}>
+                <div
+                  className={cn(
+                    "rounded-2xl rounded-bl-sm p-4 shadow-card",
+                    brainCheck.type === "correct"
+                      ? "bg-success/10 border-2 border-success animate-tada"
+                      : "bg-sky animate-shake",
+                  )}
+                >
                   <p className="text-base font-semibold leading-snug text-primary">
                     {brainCheck.message}
                   </p>
@@ -204,14 +230,20 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
                 onClick={handleListen}
                 className={cn(
                   "mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full btn-tactile transition-all",
-                  speaking ? "bg-destructive text-destructive-foreground animate-pulse-glow" : "bg-secondary text-secondary-foreground",
+                  speaking
+                    ? "bg-destructive text-destructive-foreground animate-pulse-glow"
+                    : "bg-secondary text-secondary-foreground",
                 )}
                 aria-label={speaking ? "Stop audio" : "Hear question"}
               >
                 {speaking ? (
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                    <rect x="6" y="6" width="12" height="12" rx="2" />
+                  </svg>
                 ) : (
-                  <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                  <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
                 )}
               </button>
             )}
@@ -229,7 +261,12 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
             <p className="mx-auto mb-4 max-w-[16rem] text-base font-bold leading-snug text-primary">
               Think about the story first. Then choose your answer.
             </p>
-            <TactileButton onClick={() => { setOptionsRevealed(true); startTime.current = Date.now(); }}>
+            <TactileButton
+              onClick={() => {
+                setOptionsRevealed(true);
+                startTime.current = Date.now();
+              }}
+            >
               Show answers
             </TactileButton>
           </div>
@@ -253,19 +290,26 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
                     isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
                   )}
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-sky text-2xl text-primary" aria-hidden>
+                  <span
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-sky text-2xl text-primary"
+                    aria-hidden
+                  >
                     {opt.emoji || <OptionGlyph />}
                   </span>
-                  <span className={cn(
-                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold shadow-[0_2px_0_rgba(0,0,0,0.08)]",
-                    isSelected ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
-                  )}>
+                  <span
+                    className={cn(
+                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold shadow-[0_2px_0_rgba(0,0,0,0.08)]",
+                      isSelected ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
+                    )}
+                  >
                     {letter}
                   </span>
-                  <span className={cn(
-                    "flex-1 text-base font-bold",
-                    isDisabled ? "text-ink-soft line-through" : "text-ink",
-                  )}>
+                  <span
+                    className={cn(
+                      "flex-1 text-base font-bold",
+                      isDisabled ? "text-ink-soft line-through" : "text-ink",
+                    )}
+                  >
                     {opt.label || opt.text}
                   </span>
                   {isSelected && <SelectedCheck />}
@@ -282,7 +326,9 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
                 onClick={handleListen}
                 className="flex items-center gap-1.5 rounded-full bg-card px-3 py-1.5 text-xs font-bold text-primary shadow-card btn-tactile"
               >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
                 Listen again
               </button>
             )}
@@ -294,7 +340,9 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
                   showHint ? "bg-sky text-primary" : "bg-card text-primary",
                 )}
               >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
+                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                </svg>
                 {showHint ? "Hide hint" : "Look again"}
               </button>
             )}
@@ -318,7 +366,15 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
               onClick={handleCheck}
               disabled={!selected || showingBrainCheck}
               leadingIcon={
-                <svg viewBox="0 0 24 24" className="h-5 w-5" stroke="currentColor" strokeWidth="3" fill="none"><path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                >
+                  <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               }
             >
               Check Answer
@@ -332,7 +388,14 @@ export function ComprehensionPhase({ storyData, onComplete, onClose, ttsSpeed = 
 
 function ThoughtIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className="h-8 w-8"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      aria-hidden
+    >
       <path d="M9 18h6" strokeLinecap="round" />
       <path d="M10 22h4" strokeLinecap="round" />
       <path
@@ -345,7 +408,14 @@ function ThoughtIcon() {
 
 function OptionGlyph() {
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className="h-7 w-7"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      aria-hidden
+    >
       <path d="M5 12h12" strokeLinecap="round" />
       <path d="M13 7l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -355,7 +425,13 @@ function OptionGlyph() {
 function SelectedCheck() {
   return (
     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-      <svg viewBox="0 0 24 24" className="h-4 w-4" stroke="currentColor" strokeWidth="3" fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        stroke="currentColor"
+        strokeWidth="3"
+        fill="none"
+      >
         <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </span>
@@ -365,7 +441,13 @@ function SelectedCheck() {
 function CheckBadge() {
   return (
     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-success text-success-foreground">
-      <svg viewBox="0 0 24 24" className="h-5 w-5" stroke="currentColor" strokeWidth="3" fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-5 w-5"
+        stroke="currentColor"
+        strokeWidth="3"
+        fill="none"
+      >
         <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </span>
@@ -375,7 +457,13 @@ function CheckBadge() {
 function CrossBadge() {
   return (
     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-destructive text-destructive-foreground">
-      <svg viewBox="0 0 24 24" className="h-5 w-5" stroke="currentColor" strokeWidth="3" fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-5 w-5"
+        stroke="currentColor"
+        strokeWidth="3"
+        fill="none"
+      >
         <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
       </svg>
     </span>

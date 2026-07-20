@@ -91,9 +91,7 @@ function ResetPasswordPage() {
                   message="Use at least 6 characters for your new password."
                 />
               )}
-              {error && (
-                <AuthStatusCard tone="error" title="Almost there" message={error} />
-              )}
+              {error && <AuthStatusCard tone="error" title="Almost there" message={error} />}
               {loading && (
                 <AuthStatusCard
                   tone="loading"

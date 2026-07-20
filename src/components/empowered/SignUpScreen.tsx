@@ -139,13 +139,7 @@ export function SignUpScreen({ onContinue, onSignIn, onDemo }: SignUpScreenProps
             autoComplete="new-password"
           />
 
-          {error && (
-            <AuthStatusCard
-              tone="error"
-              title="Almost there"
-              message={error}
-            />
-          )}
+          {error && <AuthStatusCard tone="error" title="Almost there" message={error} />}
 
           {(loading || oauthLoading) && (
             <AuthStatusCard

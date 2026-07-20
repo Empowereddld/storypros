@@ -35,12 +35,7 @@ const DOMAIN_WEIGHTS: Record<SkillDomain, number> = {
 };
 
 // In V1, retell is dormant — redistribute its weight
-const V1_ACTIVE_DOMAINS: SkillDomain[] = [
-  "listening",
-  "story_structure",
-  "vocabulary",
-  "grammar",
-];
+const V1_ACTIVE_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
 
 /** Calculate first-attempt accuracy from a list of attempts */
 export function firstAttemptAccuracy(attempts: ActivityAttempt[]): number {
@@ -52,9 +47,7 @@ export function firstAttemptAccuracy(attempts: ActivityAttempt[]): number {
 }
 
 /** Calculate domain score from phase results */
-export function calculateDomainScores(
-  phaseResults: PhaseResult[],
-): Record<SkillDomain, number> {
+export function calculateDomainScores(phaseResults: PhaseResult[]): Record<SkillDomain, number> {
   const scores: Record<SkillDomain, number> = {
     listening: 0,
     story_structure: 0,
@@ -71,35 +64,23 @@ export function calculateDomainScores(
   // must-complete steps with no real signal, so weighting them granted every
   // child an automatic 50-point Listening floor and inflated parent reports.
   const compResult = phaseResults.find((r) => r.phase === "comprehension");
-  scores.listening = compResult
-    ? compResult.first_attempt_accuracy * 100
-    : 0;
+  scores.listening = compResult ? compResult.first_attempt_accuracy * 100 : 0;
 
   // Sequencing → Story Structure
   const seqResult = phaseResults.find((r) => r.phase === "sequencing");
-  scores.story_structure = seqResult
-    ? seqResult.first_attempt_accuracy * 100
-    : 0;
+  scores.story_structure = seqResult ? seqResult.first_attempt_accuracy * 100 : 0;
 
   // Vocab quiz → Vocabulary (100% in V1, SFA intro not scored)
   const vocabResult = phaseResults.find((r) => r.phase === "vocab-quiz");
-  scores.vocabulary = vocabResult
-    ? vocabResult.first_attempt_accuracy * 100
-    : 0;
+  scores.vocabulary = vocabResult ? vocabResult.first_attempt_accuracy * 100 : 0;
 
   // Sentence builder → Grammar (100% in V1)
-  const grammarResult = phaseResults.find(
-    (r) => r.phase === "sentence-builder",
-  );
-  scores.grammar = grammarResult
-    ? grammarResult.first_attempt_accuracy * 100
-    : 0;
+  const grammarResult = phaseResults.find((r) => r.phase === "sentence-builder");
+  scores.grammar = grammarResult ? grammarResult.first_attempt_accuracy * 100 : 0;
 
   // Phonological — tracked separately
   const phonoResult = phaseResults.find((r) => r.phase === "phonological");
-  scores.phonological = phonoResult
-    ? phonoResult.first_attempt_accuracy * 100
-    : 0;
+  scores.phonological = phonoResult ? phonoResult.first_attempt_accuracy * 100 : 0;
 
   // Retell — dormant in V1
   scores.retell = 0;
@@ -108,13 +89,8 @@ export function calculateDomainScores(
 }
 
 /** Calculate overall composite score (V1 — retell dormant) */
-export function calculateOverallScore(
-  domainScores: Record<SkillDomain, number>,
-): number {
-  const totalWeight = V1_ACTIVE_DOMAINS.reduce(
-    (sum, d) => sum + DOMAIN_WEIGHTS[d],
-    0,
-  );
+export function calculateOverallScore(domainScores: Record<SkillDomain, number>): number {
+  const totalWeight = V1_ACTIVE_DOMAINS.reduce((sum, d) => sum + DOMAIN_WEIGHTS[d], 0);
   const weightedSum = V1_ACTIVE_DOMAINS.reduce(
     (sum, d) => sum + domainScores[d] * DOMAIN_WEIGHTS[d],
     0,
@@ -123,9 +99,7 @@ export function calculateOverallScore(
 }
 
 /** Convert a numeric score (0–100) to parent-facing label */
-export function scoreToLabel(
-  score: number,
-): "strength" | "growing" | "budding" | "needs_support" {
+export function scoreToLabel(score: number): "strength" | "growing" | "budding" | "needs_support" {
   if (score >= 85) return "strength";
   if (score >= 65) return "growing";
   if (score >= 40) return "budding";
@@ -133,9 +107,7 @@ export function scoreToLabel(
 }
 
 /** Parent-facing display text for a label */
-export function labelToDisplayText(
-  label: ReturnType<typeof scoreToLabel>,
-): string {
+export function labelToDisplayText(label: ReturnType<typeof scoreToLabel>): string {
   switch (label) {
     case "strength":
       return "Strength";
@@ -149,8 +121,6 @@ export function labelToDisplayText(
 }
 
 /** Check if onboarding assessment qualifies for Level 2 (90%+ first-attempt) */
-export function qualifiesForLevel2(
-  domainScores: Record<SkillDomain, number>,
-): boolean {
+export function qualifiesForLevel2(domainScores: Record<SkillDomain, number>): boolean {
   return V1_ACTIVE_DOMAINS.every((d) => domainScores[d] >= 90);
 }

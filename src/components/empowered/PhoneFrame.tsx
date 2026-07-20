@@ -22,10 +22,10 @@ export function PhoneFrame({ children, className, variant = "focus" }: PhoneFram
   if (variant === "app") {
     // Full-bleed website canvas
     return (
-      <div className={cn("relative flex h-dvh w-full flex-col overflow-hidden bg-cream", className)}>
-        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar">
-          {children}
-        </div>
+      <div
+        className={cn("relative flex h-dvh w-full flex-col overflow-hidden bg-cream", className)}
+      >
+        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar">{children}</div>
       </div>
     );
   }
@@ -41,9 +41,7 @@ export function PhoneFrame({ children, className, variant = "focus" }: PhoneFram
           className,
         )}
       >
-        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar">
-          {children}
-        </div>
+        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar">{children}</div>
       </div>
     </div>
   );

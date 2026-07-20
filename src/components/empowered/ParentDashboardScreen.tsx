@@ -158,7 +158,12 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
           />
         </section>
 
-        <section className={cn("mt-4 grid gap-3", displayedChildren.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
+        <section
+          className={cn(
+            "mt-4 grid gap-3",
+            displayedChildren.length > 1 ? "grid-cols-2" : "grid-cols-1",
+          )}
+        >
           {displayedChildren.map((item, index) => {
             const selected = item?.id === child?.id || (!child && index === 0);
             return (

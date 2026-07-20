@@ -85,13 +85,7 @@ export function ForgotPasswordScreen({ onBack }: ForgotPasswordScreenProps) {
                 message="One paper plane is heading to your inbox."
               />
             )}
-            {error && (
-              <AuthStatusCard
-                tone="error"
-                title="Let's try that again"
-                message={error}
-              />
-            )}
+            {error && <AuthStatusCard tone="error" title="Let's try that again" message={error} />}
           </div>
         )}
 

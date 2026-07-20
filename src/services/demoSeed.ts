@@ -49,7 +49,6 @@ export function seedDemoAccount(): void {
   promoteExistingRovonnDemo();
   if (isDemoSeeded()) return;
 
-
   const userId = DEMO_USER_ID;
   const childId = "demo-child-ava";
   const now = new Date();
@@ -188,9 +187,9 @@ export function seedDemoAccount(): void {
 
   const ownedItems: Record<string, string[]> = {
     [childId]: [
-      "plane-classic",        // default
-      "badge-first-story",    // completed 1 story
-      "badge-3-stories",      // completed 3 stories
+      "plane-classic", // default
+      "badge-first-story", // completed 1 story
+      "badge-3-stories", // completed 3 stories
     ],
   };
 

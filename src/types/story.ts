@@ -4,13 +4,7 @@
  * ───────────────────────────────────────────── */
 
 // ── Story element icons used across all stories ──
-export type StoryElement =
-  | "character"
-  | "place"
-  | "problem"
-  | "emotion"
-  | "action"
-  | "result";
+export type StoryElement = "character" | "place" | "problem" | "emotion" | "action" | "result";
 
 // ── Phase identifiers ──
 export type StoryPhase =
@@ -73,18 +67,18 @@ export interface VocabQuizQuestion {
 /** Per-feature teaching slide data from SFA Slide Details */
 export interface SFATeachingSlide {
   feature: keyof SFAFeatures;
-  prompt: string;        // screen prompt ("What group is a bandage in?")
-  teaching_text: string;  // on-screen text ("bandage is a first aid item.")
-  narration: string;      // TTS audio text
+  prompt: string; // screen prompt ("What group is a bandage in?")
+  teaching_text: string; // on-screen text ("bandage is a first aid item.")
+  narration: string; // TTS audio text
 }
 
 /** Optional enriched SFA teaching flow (from Excel SFA Slide Details) */
 export interface SFATeaching {
-  intro_text: string;       // word intro definition + context
-  intro_narration: string;  // TTS for intro
+  intro_text: string; // word intro definition + context
+  intro_narration: string; // TTS for intro
   slides: SFATeachingSlide[];
-  transition_text: string;  // "Now let's show what you know about..."
-  connection_text: string;  // "How does [word] connect to the story?"
+  transition_text: string; // "Now let's show what you know about..."
+  connection_text: string; // "How does [word] connect to the story?"
   connection_narration: string;
 }
 

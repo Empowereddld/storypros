@@ -14,11 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { db, logSyncError } from "@/services/cloud";
 import { DEMO_PERSONA_ID } from "@/services/demoAccounts";
-import {
-  SCREEN_CATALOG,
-  TOTAL_SCREENS,
-  type CatalogScreen,
-} from "@/data/screenCatalog";
+import { SCREEN_CATALOG, TOTAL_SCREENS, type CatalogScreen } from "@/data/screenCatalog";
 import { StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { ChevronRightIcon } from "@/components/empowered/StoryProsUi";
 import { cn } from "@/lib/utils";
@@ -80,13 +76,8 @@ function ReviewPage() {
 
   async function toggleStatus(row: FeedbackRow) {
     const next = row.status === "open" ? "done" : "open";
-    setFeedback((prev) =>
-      prev.map((f) => (f.id === row.id ? { ...f, status: next } : f)),
-    );
-    const { error } = await db
-      .from("screen_feedback")
-      .update({ status: next })
-      .eq("id", row.id);
+    setFeedback((prev) => prev.map((f) => (f.id === row.id ? { ...f, status: next } : f)));
+    const { error } = await db.from("screen_feedback").update({ status: next }).eq("id", row.id);
     if (error) {
       logSyncError("toggle feedback")(error);
       void loadFeedback();
@@ -119,14 +110,11 @@ function ReviewPage() {
       </header>
 
       <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6">
-        <h1 className="font-display text-3xl font-extrabold text-primary">
-          Design Review
-        </h1>
+        <h1 className="font-display text-3xl font-extrabold text-primary">Design Review</h1>
         <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-ink-soft">
-          Every screen in Story Pros, organized by area. Open a category, pick a
-          screen, jump into the live app to look at it, then write what you'd
-          like changed. Everything submitted here lands in one list the team
-          works from.
+          Every screen in Story Pros, organized by area. Open a category, pick a screen, jump into
+          the live app to look at it, then write what you'd like changed. Everything submitted here
+          lands in one list the team works from.
         </p>
 
         {/* Categories accordion */}
@@ -134,7 +122,8 @@ function ReviewPage() {
           {SCREEN_CATALOG.map((category) => {
             const isOpen = openCategory === category.key;
             const categoryFeedback = category.screens.reduce(
-              (sum, s) => sum + (byScreen.get(s.key)?.filter((f) => f.status === "open").length ?? 0),
+              (sum, s) =>
+                sum + (byScreen.get(s.key)?.filter((f) => f.status === "open").length ?? 0),
               0,
             );
             const visibleScreens = filterOpenOnly
@@ -156,7 +145,9 @@ function ReviewPage() {
                   }}
                   className="flex w-full items-center gap-3 px-5 py-4 text-left transition-colors hover:bg-accent/20"
                 >
-                  <span className="text-2xl" aria-hidden>{category.icon}</span>
+                  <span className="text-2xl" aria-hidden>
+                    {category.icon}
+                  </span>
                   <span className="flex-1">
                     <span className="block text-lg font-extrabold text-primary">
                       {category.label}
@@ -198,9 +189,7 @@ function ReviewPage() {
         </div>
 
         {!loaded && (
-          <p className="mt-6 text-center text-sm font-semibold text-ink-soft">
-            Loading requests…
-          </p>
+          <p className="mt-6 text-center text-sm font-semibold text-ink-soft">Loading requests…</p>
         )}
 
         <footer className="mt-10 pb-8 text-center text-xs font-semibold text-ink-soft">
@@ -262,18 +251,13 @@ function ScreenRow({
           )}
         </span>
         <ChevronRightIcon
-          className={cn(
-            "h-4 w-4 text-ink-soft transition-transform",
-            expanded && "rotate-90",
-          )}
+          className={cn("h-4 w-4 text-ink-soft transition-transform", expanded && "rotate-90")}
         />
       </button>
 
       {expanded && (
         <div className="space-y-4 bg-cream/60 px-5 py-4">
-          <p className="text-sm font-medium leading-relaxed text-ink-soft">
-            {screen.description}
-          </p>
+          <p className="text-sm font-medium leading-relaxed text-ink-soft">{screen.description}</p>
 
           <div className="flex flex-wrap items-center gap-2">
             {screen.route && (
@@ -286,9 +270,7 @@ function ScreenRow({
               </button>
             )}
             {screen.howToReach && (
-              <span className="text-[11px] font-semibold text-ink-soft">
-                {screen.howToReach}
-              </span>
+              <span className="text-[11px] font-semibold text-ink-soft">{screen.howToReach}</span>
             )}
           </div>
 
@@ -377,7 +359,9 @@ function FeedbackForm({
     setError("");
     try {
       localStorage.setItem(AUTHOR_KEY, author.trim());
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
 
     const { error: insertError } = await db.from("screen_feedback").insert({
       screen_key: screen.key,

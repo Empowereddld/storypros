@@ -189,7 +189,9 @@ export function getAllSubscriptions(): ChildSubscription[] {
 export function getActivePremiumCount(): number {
   const state = loadState();
   return Object.values(state.children).filter(
-    (sub) => sub.tier === "premium" && (!sub.currentPeriodEnd || new Date(sub.currentPeriodEnd) >= new Date()),
+    (sub) =>
+      sub.tier === "premium" &&
+      (!sub.currentPeriodEnd || new Date(sub.currentPeriodEnd) >= new Date()),
   ).length;
 }
 

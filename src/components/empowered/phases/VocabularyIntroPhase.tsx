@@ -173,53 +173,53 @@ export function VocabularyIntroPhase({
 
               return (
                 <div key={key}>
-                <button
-                  onClick={() => isActive && setRevealed((prev) => new Set(prev).add(index))}
-                  disabled={!isActive}
-                  className={cn(
-                    "w-full rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
-                    isActive && !isRevealed && "border-primary bg-primary/5 animate-pulse-glow",
-                    isActive && isRevealed && "border-primary bg-primary/5",
-                    isPast && "border-success/40 bg-success/5",
-                    isFuture && "border-transparent opacity-45",
-                  )}
-                >
-                  <div className="flex items-start gap-3">
-                    <span
-                      className={cn(
-                        "flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] text-sm font-extrabold",
-                        isPast ? "bg-success text-success-foreground" : "bg-accent text-primary",
-                      )}
-                    >
-                      {index + 1}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-extrabold uppercase tracking-wide text-primary">
-                        {SFA_LABELS[key]}
-                      </p>
-                      {isActive && !isRevealed && displayPrompt && (
-                        <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
-                          {displayPrompt}
+                  <button
+                    onClick={() => isActive && setRevealed((prev) => new Set(prev).add(index))}
+                    disabled={!isActive}
+                    className={cn(
+                      "w-full rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
+                      isActive && !isRevealed && "border-primary bg-primary/5 animate-pulse-glow",
+                      isActive && isRevealed && "border-primary bg-primary/5",
+                      isPast && "border-success/40 bg-success/5",
+                      isFuture && "border-transparent opacity-45",
+                    )}
+                  >
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={cn(
+                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] text-sm font-extrabold",
+                          isPast ? "bg-success text-success-foreground" : "bg-accent text-primary",
+                        )}
+                      >
+                        {index + 1}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-extrabold uppercase tracking-wide text-primary">
+                          {SFA_LABELS[key]}
                         </p>
-                      )}
-                      {isRevealed && (
-                        <p className="mt-1 text-base font-semibold leading-snug text-ink">
-                          {displayText}
-                        </p>
-                      )}
+                        {isActive && !isRevealed && displayPrompt && (
+                          <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
+                            {displayPrompt}
+                          </p>
+                        )}
+                        {isRevealed && (
+                          <p className="mt-1 text-base font-semibold leading-snug text-ink">
+                            {displayText}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </button>
-                {isActive && isRevealed && supported && narration && (
-                  <div className="mt-2 flex justify-center">
-                    <ListenButton
-                      playing={isPlaying(`feat-${index}`)}
-                      onClick={() => toggle(narration, `feat-${index}`)}
-                      className="h-11 w-11"
-                      ariaLabel="Hear this feature"
-                    />
-                  </div>
-                )}
+                  </button>
+                  {isActive && isRevealed && supported && narration && (
+                    <div className="mt-2 flex justify-center">
+                      <ListenButton
+                        playing={isPlaying(`feat-${index}`)}
+                        onClick={() => toggle(narration, `feat-${index}`)}
+                        className="h-11 w-11"
+                        ariaLabel="Hear this feature"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })}

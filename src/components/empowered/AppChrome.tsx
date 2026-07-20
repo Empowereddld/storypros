@@ -14,13 +14,7 @@
 import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { StoryProsLogo } from "./StoryProsBrand";
-import {
-  HomeIcon,
-  BookIcon,
-  MapIcon,
-  MedalIcon,
-  PaperPlaneIcon,
-} from "./StoryProsUi";
+import { HomeIcon, BookIcon, MapIcon, MedalIcon, PaperPlaneIcon } from "./StoryProsUi";
 import { getPaperPlanes } from "@/services/progress";
 import { cn } from "@/lib/utils";
 
@@ -35,8 +29,19 @@ const NAV_ITEMS = [
 
 function FeedbackIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
-      <path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.3 0-2.6-.3-3.7-.8L3 21l1.8-5.8A8.5 8.5 0 1121 11.5z" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path
+        d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.3 0-2.6-.3-3.7-.8L3 21l1.8-5.8A8.5 8.5 0 1121 11.5z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       <path d="M8 10h8M8 13.5h5" strokeLinecap="round" />
     </svg>
   );
@@ -117,9 +122,7 @@ export function DemoBanner() {
 
   return (
     <div className="relative z-40 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-secondary px-3 py-1.5 text-secondary-foreground">
-      <span className="text-xs font-extrabold uppercase tracking-wide">
-        Demo mode
-      </span>
+      <span className="text-xs font-extrabold uppercase tracking-wide">Demo mode</span>
       <button
         onClick={restartOnboarding}
         className="rounded-full bg-secondary-foreground/10 px-3 py-1 text-xs font-bold transition-colors hover:bg-secondary-foreground/20"

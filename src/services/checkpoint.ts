@@ -48,14 +48,13 @@ export function saveCheckpoint(
       savedAt: new Date().toISOString(),
     };
     localStorage.setItem(key(childId, storyId), JSON.stringify(checkpoint));
-  } catch { /* storage full or unavailable — resume is best-effort */ }
+  } catch {
+    /* storage full or unavailable — resume is best-effort */
+  }
 }
 
 /** Get a valid (non-expired, mid-story) checkpoint, or null */
-export function getCheckpoint(
-  childId: string,
-  storyId: string,
-): StoryCheckpoint | null {
+export function getCheckpoint(childId: string, storyId: string): StoryCheckpoint | null {
   try {
     const raw = localStorage.getItem(key(childId, storyId));
     if (!raw) return null;
@@ -81,5 +80,7 @@ export function getCheckpoint(
 export function clearCheckpoint(childId: string, storyId: string): void {
   try {
     localStorage.removeItem(key(childId, storyId));
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 }

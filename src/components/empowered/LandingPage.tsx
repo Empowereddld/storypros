@@ -57,10 +57,16 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <StoryProsLogo layout="row" size="sm" />
           <nav className="hidden items-center gap-6 text-sm font-bold text-ink-soft md:flex">
-            <a href="#how-it-works" className="transition-colors hover:text-primary">How it works</a>
-            <a href="#families" className="transition-colors hover:text-primary">For families</a>
+            <a href="#how-it-works" className="transition-colors hover:text-primary">
+              How it works
+            </a>
+            <a href="#families" className="transition-colors hover:text-primary">
+              For families
+            </a>
             {FEATURES.slp && (
-              <a href="#clinicians" className="transition-colors hover:text-primary">For SLPs</a>
+              <a href="#clinicians" className="transition-colors hover:text-primary">
+                For SLPs
+              </a>
             )}
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
@@ -103,14 +109,12 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               Story time that builds language skills
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-lg font-medium leading-relaxed text-ink-soft lg:mx-0">
-              The Story Pros App helps children understand stories, retell them in
-              their own words, put events in order, grow their vocabulary, and
-              connect stories to their own lives.
+              The Story Pros App helps children understand stories, retell them in their own words,
+              put events in order, grow their vocabulary, and connect stories to their own lives.
             </p>
             <p className="mx-auto mt-3 max-w-xl text-sm font-semibold text-ink-soft/80 lg:mx-0">
-              Designed for children ages 4 to 10 with DLD, ADHD, autism, dyslexia,
-              late talkers, and every child who benefits from a stronger foundation
-              in language.
+              Designed for children ages 4 to 10 with DLD, ADHD, autism, dyslexia, late talkers, and
+              every child who benefits from a stronger foundation in language.
             </p>
 
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
@@ -134,7 +138,10 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           </div>
 
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <span className="absolute inset-x-8 bottom-4 h-40 rounded-full bg-primary/10 blur-2xl" aria-hidden />
+            <span
+              className="absolute inset-x-8 bottom-4 h-40 rounded-full bg-primary/10 blur-2xl"
+              aria-hidden
+            />
             <img
               src={danDariaAirplane}
               alt="Dan and Daria flying a paper airplane"
@@ -148,9 +155,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       <section className="border-y border-accent/40 bg-card/70">
         <div className="mx-auto w-full max-w-6xl px-4 py-8 text-center sm:px-6">
           <p className="mx-auto max-w-3xl text-base font-semibold leading-relaxed text-ink">
-            Built in collaboration with speech-language pathologists and educators,
-            Story Pros uses evidence-based strategies to give every child the
-            language skills and confidence they need to express themselves.
+            Built in collaboration with speech-language pathologists and educators, Story Pros uses
+            evidence-based strategies to give every child the language skills and confidence they
+            need to express themselves.
           </p>
           <p className="mt-3 text-sm font-bold text-primary">
             Camesha Russell, educator · Jinean Cheng, speech-language pathologist
@@ -188,11 +195,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 key={step.title}
                 className="hover-lift rounded-[28px] border border-accent/60 bg-card p-6 text-center shadow-card transition-all"
               >
-                <img
-                  src={step.image}
-                  alt=""
-                  className="mx-auto h-32 w-auto object-contain"
-                />
+                <img src={step.image} alt="" className="mx-auto h-32 w-auto object-contain" />
                 <p className="mt-4 text-xs font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/70">
                   Step {index + 1}
                 </p>
@@ -214,7 +217,10 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             : "mx-auto grid w-full max-w-6xl gap-6 px-4 py-16 sm:px-6"
         }
       >
-        <div id="families" className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card">
+        <div
+          id="families"
+          className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card"
+        >
           <div className="flex items-start justify-between gap-4">
             <h3 className="font-display text-2xl font-extrabold text-primary">For families</h3>
             {!FEATURES.slp && (
@@ -222,21 +228,41 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             )}
           </div>
           <ul className="mt-4 space-y-3 text-[15px] font-medium leading-relaxed text-ink-soft">
-            <li>A clear dashboard shows how your child is growing across listening, story structure, vocabulary, grammar, and sounds.</li>
-            <li>Every instruction is read aloud, so children who struggle with reading are never stuck.</li>
-            <li>Progress saves automatically. Close the tab mid-story and pick up right where you left off.</li>
+            <li>
+              A clear dashboard shows how your child is growing across listening, story structure,
+              vocabulary, grammar, and sounds.
+            </li>
+            <li>
+              Every instruction is read aloud, so children who struggle with reading are never
+              stuck.
+            </li>
+            <li>
+              Progress saves automatically. Close the tab mid-story and pick up right where you left
+              off.
+            </li>
             <li>Works right in the browser on laptops and tablets. Nothing to install.</li>
           </ul>
         </div>
         {FEATURES.slp && (
-          <div id="clinicians" className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card">
+          <div
+            id="clinicians"
+            className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card"
+          >
             <div className="flex items-start justify-between gap-4">
-              <h3 className="font-display text-2xl font-extrabold text-primary">For SLPs and teachers</h3>
+              <h3 className="font-display text-2xl font-extrabold text-primary">
+                For SLPs and teachers
+              </h3>
               <img src={dariaPointing} alt="" className="h-16 w-auto object-contain" />
             </div>
             <ul className="mt-4 space-y-3 text-[15px] font-medium leading-relaxed text-ink-soft">
-              <li>A caseload dashboard with real progress data for every child a family shares with you.</li>
-              <li>Families stay in control: children join your caseload only through a parent-generated invite code.</li>
+              <li>
+                A caseload dashboard with real progress data for every child a family shares with
+                you.
+              </li>
+              <li>
+                Families stay in control: children join your caseload only through a
+                parent-generated invite code.
+              </li>
               <li>Assign stories, track completion, and keep session notes in one place.</li>
             </ul>
           </div>
@@ -250,8 +276,8 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             Start free. Grow when you're ready.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base font-medium text-ink-soft">
-            The first story is free for every family. Premium unlocks the full
-            story library and detailed skill tracking for $9.99 a month per child.
+            The first story is free for every family. Premium unlocks the full story library and
+            detailed skill tracking for $9.99 a month per child.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <button
@@ -275,8 +301,8 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-3 px-4 py-8 text-center sm:px-6 md:flex-row md:justify-between md:text-left">
           <StoryProsLogo layout="row" size="sm" className="opacity-90" />
           <p className="text-xs font-semibold text-ink-soft">
-            © {new Date().getFullYear()} Empowered DLD · Made with care for children
-            finding their voice
+            © {new Date().getFullYear()} Empowered DLD · Made with care for children finding their
+            voice
           </p>
         </div>
       </footer>

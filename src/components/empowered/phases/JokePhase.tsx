@@ -16,7 +16,12 @@ const PROGRESS: Record<Step, number> = {
   joke: 90,
 };
 
-export function JokePhase({ storyData, onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
+export function JokePhase({
+  storyData,
+  onComplete,
+  onClose,
+  ttsSpeed = "normal",
+}: StoryPhaseProps) {
   const [step, setStep] = useState<Step>("intro");
   const joke = storyData.joke;
   const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);

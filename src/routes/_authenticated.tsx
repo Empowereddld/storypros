@@ -50,12 +50,7 @@ function AuthenticatedLayout() {
     }
 
     // Parents who haven't onboarded must finish onboarding first
-    if (
-      !isSlpRole &&
-      profile &&
-      !profile.onboarded &&
-      !path.startsWith("/onboarding")
-    ) {
+    if (!isSlpRole && profile && !profile.onboarded && !path.startsWith("/onboarding")) {
       return <Navigate to="/onboarding/profile" />;
     }
   }

@@ -7,7 +7,7 @@
 import { getClipUrl } from "./storyAudio";
 
 export interface TTSOptions {
-  rate: number;   // 0.6 = slow, 0.85 = normal, 1.1 = fast
+  rate: number; // 0.6 = slow, 0.85 = normal, 1.1 = fast
   pitch?: number; // 1.0 default
 }
 
@@ -38,8 +38,12 @@ function getPreferredVoice(): SpeechSynthesisVoice | null {
 
   // Look for specific good voices
   const preferred = [
-    "Samantha", "Victoria", "Karen", "Moira", // macOS/iOS
-    "Microsoft Zira", "Microsoft Jenny", // Windows
+    "Samantha",
+    "Victoria",
+    "Karen",
+    "Moira", // macOS/iOS
+    "Microsoft Zira",
+    "Microsoft Jenny", // Windows
     "Google US English", // Chrome
   ];
 
@@ -49,9 +53,7 @@ function getPreferredVoice(): SpeechSynthesisVoice | null {
   }
 
   // Fall back to first female-sounding English voice, or just first English
-  const female = english.find((v) =>
-    /female|woman|girl/i.test(v.name),
-  );
+  const female = english.find((v) => /female|woman|girl/i.test(v.name));
   return female ?? english[0] ?? voices[0] ?? null;
 }
 

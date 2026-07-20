@@ -2,7 +2,15 @@
  * Auth Context — backed by Supabase
  * ───────────────────────────────────────────── */
 
-import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  type ReactNode,
+} from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { setActiveProgressChild } from "@/services/progress";
 import { hydrateOwnedFromCloud } from "@/services/shop";
@@ -39,7 +47,12 @@ interface AuthContextType {
   activeChild: Child | null;
   setActiveChild: (child: Child) => void;
   loading: boolean;
-  signUp: (email: string, password: string, displayName: string, role?: Profile["role"]) => Promise<{ error?: string }>;
+  signUp: (
+    email: string,
+    password: string,
+    displayName: string,
+    role?: Profile["role"],
+  ) => Promise<{ error?: string }>;
   signIn: (email: string, password: string) => Promise<{ error?: string; role?: Profile["role"] }>;
   signInWithGoogle: () => Promise<{ error?: string }>;
   signInWithApple: () => Promise<{ error?: string }>;
@@ -170,7 +183,11 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
   const loadProfileAndChildren = useCallback(async (userId: string, email: string) => {
     const [{ data: profileRow }, { data: childRows }] = await Promise.all([
       supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
-      supabase.from("children").select("*").eq("profile_id", userId).order("created_at", { ascending: true }),
+      supabase
+        .from("children")
+        .select("*")
+        .eq("profile_id", userId)
+        .order("created_at", { ascending: true }),
     ]);
 
     let p: Profile | null = profileRow ? mapProfile(profileRow as ProfileRow) : null;
@@ -240,11 +257,15 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
         setChildProfiles(restored.child ? [restored.child] : []);
         setActiveChildState(restored.child);
         setLoading(false);
-        return () => { mounted = false; };
+        return () => {
+          mounted = false;
+        };
       }
     }
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!mounted) return;
       if (session?.user) {
         const u = { id: session.user.id, email: session.user.email ?? "" };
@@ -278,29 +299,36 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
     };
   }, [loadProfileAndChildren]);
 
-  const signUp = useCallback<AuthContextType["signUp"]>(async (email, password, displayName, role = "parent") => {
-    pendingSignUpMetaRef.current = { displayName, role };
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/`,
-        data: { display_name: displayName, role },
-      },
-    });
-    if (error) {
-      pendingSignUpMetaRef.current = null;
-      return { error: error.message };
-    }
-    return {};
-  }, []);
+  const signUp = useCallback<AuthContextType["signUp"]>(
+    async (email, password, displayName, role = "parent") => {
+      pendingSignUpMetaRef.current = { displayName, role };
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+          data: { display_name: displayName, role },
+        },
+      });
+      if (error) {
+        pendingSignUpMetaRef.current = null;
+        return { error: error.message };
+      }
+      return {};
+    },
+    [],
+  );
 
   const signIn = useCallback<AuthContextType["signIn"]>(async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) return { error: error.message };
     // Profile load will be triggered by onAuthStateChange. Try to read role quickly:
     if (data.user) {
-      const { data: row } = await supabase.from("profiles").select("role").eq("id", data.user.id).maybeSingle();
+      const { data: row } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", data.user.id)
+        .maybeSingle();
       return { role: (row?.role as Profile["role"]) ?? "parent" };
     }
     return {};
@@ -312,7 +340,10 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
       const result = await lovable.auth.signInWithOAuth("google", {
         redirect_uri: window.location.origin,
       });
-      if (result.error) return { error: result.error instanceof Error ? result.error.message : String(result.error) };
+      if (result.error)
+        return {
+          error: result.error instanceof Error ? result.error.message : String(result.error),
+        };
       return {};
     } catch (e) {
       return { error: e instanceof Error ? e.message : String(e) };
@@ -325,7 +356,10 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
       const result = await lovable.auth.signInWithOAuth("apple", {
         redirect_uri: window.location.origin,
       });
-      if (result.error) return { error: result.error instanceof Error ? result.error.message : String(result.error) };
+      if (result.error)
+        return {
+          error: result.error instanceof Error ? result.error.message : String(result.error),
+        };
       return {};
     } catch (e) {
       return { error: e instanceof Error ? e.message : String(e) };
@@ -344,27 +378,24 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
     setActiveChildState(null);
   }, []);
 
-  const startDemoSession = useCallback(
-    (personaId: string, options?: { onboarding?: boolean }) => {
-      const persona = getDemoPersona(personaId);
-      if (!persona) return;
-      const onboarding = options?.onboarding === true;
-      if (!onboarding) {
-        seedDemoPersonaData(persona);
-      }
-      const session: DemoSession = { personaId, role: "parent", onboarding };
-      const built = buildDemoAuthState(session);
-      if (!built) return;
-      if (typeof window !== "undefined") {
-        localStorage.setItem(DEMO_SESSION_KEY, JSON.stringify(session));
-      }
-      setUser(built.user);
-      setProfile(built.profile);
-      setChildProfiles(built.child ? [built.child] : []);
-      setActiveChildState(built.child);
-    },
-    [],
-  );
+  const startDemoSession = useCallback((personaId: string, options?: { onboarding?: boolean }) => {
+    const persona = getDemoPersona(personaId);
+    if (!persona) return;
+    const onboarding = options?.onboarding === true;
+    if (!onboarding) {
+      seedDemoPersonaData(persona);
+    }
+    const session: DemoSession = { personaId, role: "parent", onboarding };
+    const built = buildDemoAuthState(session);
+    if (!built) return;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(DEMO_SESSION_KEY, JSON.stringify(session));
+    }
+    setUser(built.user);
+    setProfile(built.profile);
+    setChildProfiles(built.child ? [built.child] : []);
+    setActiveChildState(built.child);
+  }, []);
 
   const setDemoRole = useCallback((role: DemoRole) => {
     setProfile((prev) => {
@@ -385,87 +416,108 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
     return {};
   }, []);
 
-  const updateProfile = useCallback(async (updates: Partial<Profile>) => {
-    if (!user) return;
-    // Demo sessions live entirely in memory/localStorage — no Supabase writes
-    if (profile?.isDemo) {
-      setProfile((prev) => (prev ? { ...prev, ...updates } : prev));
-      return;
-    }
-    const payload: {
-      display_name?: string;
-      role?: string;
-      onboarded?: boolean;
-    } = {};
-    if (updates.displayName !== undefined) payload.display_name = updates.displayName;
-    if (updates.role !== undefined) payload.role = updates.role;
-    if (updates.onboarded !== undefined) payload.onboarded = updates.onboarded;
-    if (Object.keys(payload).length === 0) return;
-    const { data } = await supabase.from("profiles").update(payload).eq("id", user.id).select().maybeSingle();
-    if (data) setProfile(mapProfile(data as ProfileRow));
-  }, [user, profile?.isDemo]);
+  const updateProfile = useCallback(
+    async (updates: Partial<Profile>) => {
+      if (!user) return;
+      // Demo sessions live entirely in memory/localStorage — no Supabase writes
+      if (profile?.isDemo) {
+        setProfile((prev) => (prev ? { ...prev, ...updates } : prev));
+        return;
+      }
+      const payload: {
+        display_name?: string;
+        role?: string;
+        onboarded?: boolean;
+      } = {};
+      if (updates.displayName !== undefined) payload.display_name = updates.displayName;
+      if (updates.role !== undefined) payload.role = updates.role;
+      if (updates.onboarded !== undefined) payload.onboarded = updates.onboarded;
+      if (Object.keys(payload).length === 0) return;
+      const { data } = await supabase
+        .from("profiles")
+        .update(payload)
+        .eq("id", user.id)
+        .select()
+        .maybeSingle();
+      if (data) setProfile(mapProfile(data as ProfileRow));
+    },
+    [user, profile?.isDemo],
+  );
 
-  const updateChild = useCallback(async (childId: string, updates: Partial<Child>) => {
-    // Demo sessions live entirely in memory/localStorage — no Supabase writes
-    if (profile?.isDemo) {
-      setChildProfiles((prev) => prev.map((c) => (c.id === childId ? { ...c, ...updates } : c)));
-      setActiveChildState((prev) => (prev && prev.id === childId ? { ...prev, ...updates } : prev));
-      return;
-    }
-    const payload: {
-      name?: string;
-      age?: number | null;
-      current_level?: number;
-      level_override?: boolean;
-      tts_speed?: string;
-      tts_autoplay?: boolean;
-    } = {};
-    if (updates.name !== undefined) payload.name = updates.name;
-    if (updates.age !== undefined) payload.age = updates.age;
-    if (updates.currentLevel !== undefined) payload.current_level = updates.currentLevel;
-    if (updates.levelOverride !== undefined) payload.level_override = updates.levelOverride;
-    if (updates.ttsSpeed !== undefined) payload.tts_speed = updates.ttsSpeed;
-    if (updates.ttsAutoplay !== undefined) payload.tts_autoplay = updates.ttsAutoplay;
-    if (Object.keys(payload).length === 0) return;
-    const { data } = await supabase.from("children").update(payload).eq("id", childId).select().maybeSingle();
-    if (data) {
+  const updateChild = useCallback(
+    async (childId: string, updates: Partial<Child>) => {
+      // Demo sessions live entirely in memory/localStorage — no Supabase writes
+      if (profile?.isDemo) {
+        setChildProfiles((prev) => prev.map((c) => (c.id === childId ? { ...c, ...updates } : c)));
+        setActiveChildState((prev) =>
+          prev && prev.id === childId ? { ...prev, ...updates } : prev,
+        );
+        return;
+      }
+      const payload: {
+        name?: string;
+        age?: number | null;
+        current_level?: number;
+        level_override?: boolean;
+        tts_speed?: string;
+        tts_autoplay?: boolean;
+      } = {};
+      if (updates.name !== undefined) payload.name = updates.name;
+      if (updates.age !== undefined) payload.age = updates.age;
+      if (updates.currentLevel !== undefined) payload.current_level = updates.currentLevel;
+      if (updates.levelOverride !== undefined) payload.level_override = updates.levelOverride;
+      if (updates.ttsSpeed !== undefined) payload.tts_speed = updates.ttsSpeed;
+      if (updates.ttsAutoplay !== undefined) payload.tts_autoplay = updates.ttsAutoplay;
+      if (Object.keys(payload).length === 0) return;
+      const { data } = await supabase
+        .from("children")
+        .update(payload)
+        .eq("id", childId)
+        .select()
+        .maybeSingle();
+      if (data) {
+        const mapped = mapChild(data as ChildRow);
+        setChildProfiles((prev) => prev.map((c) => (c.id === childId ? mapped : c)));
+        setActiveChildState((prev) => (prev && prev.id === childId ? mapped : prev));
+      }
+    },
+    [profile?.isDemo],
+  );
+
+  const addChild = useCallback(
+    async (name: string, age: number | null): Promise<Child> => {
+      if (!user) throw new Error("Not signed in");
+      // Demo sessions create children locally — no Supabase writes
+      if (profile?.isDemo) {
+        const child: Child = {
+          id: `demo-child-${Date.now().toString(36)}`,
+          profileId: user.id,
+          name,
+          age,
+          currentLevel: 1,
+          levelOverride: false,
+          ttsSpeed: "normal",
+          ttsAutoplay: false,
+        };
+        setChildProfiles((prev) => [...prev, child]);
+        setActiveChildState(child);
+        if (typeof window !== "undefined") localStorage.setItem(ACTIVE_CHILD_KEY, child.id);
+        return child;
+      }
+      const { data, error } = await supabase
+        .from("children")
+        .insert({ profile_id: user.id, name, age })
+        .select()
+        .single();
+      if (error || !data) throw new Error(error?.message ?? "Failed to add child");
       const mapped = mapChild(data as ChildRow);
-      setChildProfiles((prev) => prev.map((c) => (c.id === childId ? mapped : c)));
-      setActiveChildState((prev) => (prev && prev.id === childId ? mapped : prev));
-    }
-  }, [profile?.isDemo]);
-
-  const addChild = useCallback(async (name: string, age: number | null): Promise<Child> => {
-    if (!user) throw new Error("Not signed in");
-    // Demo sessions create children locally — no Supabase writes
-    if (profile?.isDemo) {
-      const child: Child = {
-        id: `demo-child-${Date.now().toString(36)}`,
-        profileId: user.id,
-        name,
-        age,
-        currentLevel: 1,
-        levelOverride: false,
-        ttsSpeed: "normal",
-        ttsAutoplay: false,
-      };
-      setChildProfiles((prev) => [...prev, child]);
-      setActiveChildState(child);
-      if (typeof window !== "undefined") localStorage.setItem(ACTIVE_CHILD_KEY, child.id);
-      return child;
-    }
-    const { data, error } = await supabase
-      .from("children")
-      .insert({ profile_id: user.id, name, age })
-      .select()
-      .single();
-    if (error || !data) throw new Error(error?.message ?? "Failed to add child");
-    const mapped = mapChild(data as ChildRow);
-    setChildProfiles((prev) => [...prev, mapped]);
-    setActiveChildState(mapped);
-    if (typeof window !== "undefined") localStorage.setItem(ACTIVE_CHILD_KEY, mapped.id);
-    return mapped;
-  }, [user, profile?.isDemo]);
+      setChildProfiles((prev) => [...prev, mapped]);
+      setActiveChildState(mapped);
+      if (typeof window !== "undefined") localStorage.setItem(ACTIVE_CHILD_KEY, mapped.id);
+      return mapped;
+    },
+    [user, profile?.isDemo],
+  );
 
   const setActiveChild = useCallback((child: Child) => {
     setActiveChildState(child);
@@ -479,10 +531,7 @@ export function AuthProvider({ children: childrenNodes }: { children: ReactNode 
       setProfile((prev) => (prev ? { ...prev, onboarded: true } : prev));
       const session = loadDemoSession();
       if (session && typeof window !== "undefined") {
-        localStorage.setItem(
-          DEMO_SESSION_KEY,
-          JSON.stringify({ ...session, onboarding: false }),
-        );
+        localStorage.setItem(DEMO_SESSION_KEY, JSON.stringify({ ...session, onboarding: false }));
       }
       return;
     }

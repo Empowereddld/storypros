@@ -14,7 +14,10 @@ const clipModules = import.meta.glob<string>("../assets/audio/*.mp3", {
 
 const clipsById = new Map<string, string>();
 for (const [filePath, url] of Object.entries(clipModules)) {
-  const id = filePath.split("/").pop()?.replace(/\.mp3$/, "");
+  const id = filePath
+    .split("/")
+    .pop()
+    ?.replace(/\.mp3$/, "");
   if (id) clipsById.set(id, url);
 }
 

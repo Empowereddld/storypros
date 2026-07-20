@@ -72,14 +72,20 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
       <div className="relative z-10 flex h-full flex-col overflow-y-auto no-scrollbar px-6 pb-8">
         {/* Header: characters + logo */}
         <div className="flex items-start justify-between pt-6">
-          <img src={dariaAndFriend} alt="Dan and Daria" className="h-24 w-auto object-contain drop-shadow-[0_10px_18px_rgba(28,28,21,0.14)]" />
+          <img
+            src={dariaAndFriend}
+            alt="Dan and Daria"
+            className="h-24 w-auto object-contain drop-shadow-[0_10px_18px_rgba(28,28,21,0.14)]"
+          />
           <StoryProsLogo layout="row" size="sm" className="pt-2" />
         </div>
 
         {/* curved divider */}
         <div className="mt-1 h-1 rounded-full bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
-        <h1 className="mt-5 text-center font-display text-3xl font-extrabold text-primary">Log In</h1>
+        <h1 className="mt-5 text-center font-display text-3xl font-extrabold text-primary">
+          Log In
+        </h1>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-3">
           <IconInput
@@ -99,13 +105,7 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
             autoComplete="current-password"
           />
 
-          {error && (
-            <AuthStatusCard
-              tone="error"
-              title="Let's try that again"
-              message={error}
-            />
-          )}
+          {error && <AuthStatusCard tone="error" title="Let's try that again" message={error} />}
 
           {(loading || oauthLoading) && (
             <AuthStatusCard

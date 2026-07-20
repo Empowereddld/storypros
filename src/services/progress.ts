@@ -9,11 +9,7 @@
  * ───────────────────────────────────────────── */
 
 import type { ActivityAttempt, PhaseResult } from "@/types/story";
-import {
-  calculateDomainScores,
-  calculateOverallScore,
-  type SkillDomain,
-} from "./scoring";
+import { calculateDomainScores, calculateOverallScore, type SkillDomain } from "./scoring";
 import { awardBadge } from "./shop";
 import { db, isCloudId, logSyncError, emitDataUpdated } from "./cloud";
 
@@ -78,14 +74,18 @@ function loadProgress(): ChildProgress {
       localStorage.removeItem(LEGACY_PROGRESS_KEY);
       return JSON.parse(legacy);
     }
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   return emptyProgress();
 }
 
 function saveProgress(): void {
   try {
     localStorage.setItem(progressKey(), JSON.stringify(currentProgress));
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 }
 
 // Singleton store — now hydrated from localStorage on load
@@ -135,7 +135,9 @@ export async function hydrateProgressFromCloud(childId: string): Promise<void> {
     const [completionsRes, planesRes, streaksRes, childRes] = await Promise.all([
       db
         .from("story_completions")
-        .select("story_id, completed_at, first_attempt_accuracy, replay_count, domain_scores, overall_score")
+        .select(
+          "story_id, completed_at, first_attempt_accuracy, replay_count, domain_scores, overall_score",
+        )
         .eq("child_id", childId)
         .order("completed_at", { ascending: true }),
       db.rpc("get_paper_planes", { p_child_id: childId }),
@@ -150,16 +152,16 @@ export async function hydrateProgressFromCloud(childId: string): Promise<void> {
 
     if (completionsRes.error) throw completionsRes.error;
 
-    const completions: StoryCompletion[] = (
-      (completionsRes.data ?? []) as CompletionRow[]
-    ).map((r) => ({
-      storyId: r.story_id,
-      completedAt: r.completed_at,
-      firstAttemptAccuracy: r.first_attempt_accuracy ?? 0,
-      replayCount: r.replay_count ?? 0,
-      domainScores: (r.domain_scores ?? {}) as Record<SkillDomain, number>,
-      overallScore: r.overall_score ?? 0,
-    }));
+    const completions: StoryCompletion[] = ((completionsRes.data ?? []) as CompletionRow[]).map(
+      (r) => ({
+        storyId: r.story_id,
+        completedAt: r.completed_at,
+        firstAttemptAccuracy: r.first_attempt_accuracy ?? 0,
+        replayCount: r.replay_count ?? 0,
+        domainScores: (r.domain_scores ?? {}) as Record<SkillDomain, number>,
+        overallScore: r.overall_score ?? 0,
+      }),
+    );
 
     // Reconstruct the current streak from daily_streaks rows
     const dates = ((streaksRes.data ?? []) as StreakRow[]).map((r) => r.streak_date);
@@ -206,9 +208,7 @@ function computeStreak(playedDates: string[]): {
 
   let streak = 1;
   for (let i = 1; i < days.length; i++) {
-    const expected = new Date(
-      new Date(days[i - 1] + "T00:00:00Z").getTime() - 86400000,
-    )
+    const expected = new Date(new Date(days[i - 1] + "T00:00:00Z").getTime() - 86400000)
       .toISOString()
       .slice(0, 10);
     if (days[i] === expected) streak++;
@@ -275,9 +275,7 @@ export function recordStoryCompletion(
   const overallScore = calculateOverallScore(domainScores);
 
   // Check for existing completion (replay)
-  const existing = currentProgress.completions.find(
-    (c) => c.storyId === storyId,
-  );
+  const existing = currentProgress.completions.find((c) => c.storyId === storyId);
 
   const completion: StoryCompletion = {
     storyId,
@@ -409,16 +407,13 @@ async function syncCompletionToCloud(
     });
 
   // 5. Rolling per-domain skill scores (first attempts only)
-  const firstAttempts = currentProgress.completions.filter(
-    (c) => c.replayCount === 0,
-  );
+  const firstAttempts = currentProgress.completions.filter((c) => c.replayCount === 0);
   const domains = Object.keys(completion.domainScores) as SkillDomain[];
   const scoreRows = domains.map((domain) => {
     const scores = firstAttempts
       .map((c) => c.domainScores[domain])
       .filter((s) => typeof s === "number");
-    const avg =
-      scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
+    const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
     return {
       child_id: childId,
       domain,
@@ -445,12 +440,10 @@ async function syncCompletionToCloud(
 }
 
 /** Calculate Coins earned */
-function calculatePaperPlanes(
-  overallScore: number,
-  isReplay: boolean,
-): number {
+function calculatePaperPlanes(overallScore: number, isReplay: boolean): number {
   let base = 10; // base award for completing a story
-  if (overallScore >= 90) base += 15; // mastery bonus
+  if (overallScore >= 90)
+    base += 15; // mastery bonus
   else if (overallScore >= 70) base += 10;
   else if (overallScore >= 50) base += 5;
 
@@ -466,9 +459,7 @@ function calculatePaperPlanes(
 
 /** Get list of completed story IDs */
 export function getCompletedStoryIds(): string[] {
-  return [
-    ...new Set(currentProgress.completions.map((c) => c.storyId)),
-  ];
+  return [...new Set(currentProgress.completions.map((c) => c.storyId))];
 }
 
 /** Get completion data for a specific story */
@@ -536,9 +527,7 @@ export function getAllCompletions(): StoryCompletion[] {
 function checkBadgeAwards(completion: StoryCompletion): void {
   const childId = activeChildId; // set by AuthContext via setActiveProgressChild
 
-  const distinctStories = new Set(
-    currentProgress.completions.map((c) => c.storyId),
-  ).size;
+  const distinctStories = new Set(currentProgress.completions.map((c) => c.storyId)).size;
 
   // First Flight — complete 1 story
   if (distinctStories >= 1) {
@@ -561,9 +550,7 @@ function checkBadgeAwards(completion: StoryCompletion): void {
   }
 
   // Story Master — all domains above 90% on this story
-  const allDomainsHigh = Object.values(completion.domainScores).every(
-    (score) => score >= 90,
-  );
+  const allDomainsHigh = Object.values(completion.domainScores).every((score) => score >= 90);
   if (allDomainsHigh) {
     awardBadge(childId, "badge-all-elements");
   }
@@ -609,9 +596,7 @@ function checkLevelPromotion(): boolean {
 
   // Check the most recent N stories
   const recent = firstAttempts.slice(-STORIES_REQUIRED);
-  const allMastered = recent.every(
-    (c) => c.overallScore >= MASTERY_THRESHOLD,
-  );
+  const allMastered = recent.every((c) => c.overallScore >= MASTERY_THRESHOLD);
 
   if (allMastered) {
     currentProgress.currentLevel = 2;
@@ -648,9 +633,7 @@ export function getMasteryProgress(): {
  * Star Rating — 0-3 stars based on best score
  * ───────────────────────────────────────────── */
 export function getStarRating(storyId: string): number {
-  const completions = currentProgress.completions.filter(
-    (c) => c.storyId === storyId,
-  );
+  const completions = currentProgress.completions.filter((c) => c.storyId === storyId);
   if (completions.length === 0) return 0;
   const best = Math.max(...completions.map((c) => c.overallScore));
   if (best >= 90) return 3;

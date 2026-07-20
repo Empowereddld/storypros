@@ -13,13 +13,7 @@ interface AuthStatusCardProps {
   className?: string;
 }
 
-export function AuthStatusCard({
-  tone,
-  title,
-  message,
-  action,
-  className,
-}: AuthStatusCardProps) {
+export function AuthStatusCard({ tone, title, message, action, className }: AuthStatusCardProps) {
   const isError = tone === "error";
   const isSuccess = tone === "success";
   const isLoading = tone === "loading";

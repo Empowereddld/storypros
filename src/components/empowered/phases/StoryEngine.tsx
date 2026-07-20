@@ -236,13 +236,16 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
               Keep going?
             </h2>
             <p className="mt-2 text-[15px] font-semibold leading-snug text-ink-soft">
-              You were partway through <span className="font-extrabold text-ink">{storyData.title}</span>.
-              Next up: <span className="font-extrabold text-primary">{nextLabel}</span>.
+              You were partway through{" "}
+              <span className="font-extrabold text-ink">{storyData.title}</span>. Next up:{" "}
+              <span className="font-extrabold text-primary">{nextLabel}</span>.
             </p>
 
             <div className="mt-5">
               <div className="mb-2 flex items-center justify-between text-xs font-extrabold text-primary">
-                <span>{done} of {total} parts done</span>
+                <span>
+                  {done} of {total} parts done
+                </span>
                 <span>{percent}%</span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-accent/60">
@@ -253,7 +256,10 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-6 gap-1.5" aria-label={`${done} of ${total} parts done`}>
+            <div
+              className="mt-4 grid grid-cols-6 gap-1.5"
+              aria-label={`${done} of ${total} parts done`}
+            >
               {Array.from({ length: total }).map((_, i) => (
                 <span
                   key={i}
@@ -278,13 +284,9 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
         </div>
       </div>
     );
-
   }
 
-  const overallProgress = Math.min(
-    100,
-    (phaseIndex / (PHASE_ORDER.length - 1)) * 100,
-  );
+  const overallProgress = Math.min(100, (phaseIndex / (PHASE_ORDER.length - 1)) * 100);
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-cream">
