@@ -583,7 +583,6 @@ export type Database = {
           child_name: string
           id: string
           linked_at: string
-          parent_email: string
           slp_id: string
           tag: string | null
         }
@@ -592,7 +591,6 @@ export type Database = {
           child_name: string
           id?: string
           linked_at?: string
-          parent_email: string
           slp_id: string
           tag?: string | null
         }
@@ -601,7 +599,6 @@ export type Database = {
           child_name?: string
           id?: string
           linked_at?: string
-          parent_email?: string
           slp_id?: string
           tag?: string | null
         }
