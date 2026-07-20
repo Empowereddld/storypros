@@ -131,7 +131,7 @@ export async function hydrateSlpFromCloud(slpId: string): Promise<void> {
     const [caseloadRes, assignmentsRes, notesRes] = await Promise.all([
       db
         .from("slp_caseload")
-        .select("child_id, child_name, parent_email, tag, linked_at")
+        .select("child_id, child_name, tag, linked_at, children:child_id(profiles:profile_id(email))")
         .eq("slp_id", slpId)
         .order("linked_at", { ascending: true }),
       db
@@ -154,7 +154,7 @@ export async function hydrateSlpFromCloud(slpId: string): Promise<void> {
       ((caseloadRes.data ?? []) as CaseloadRow[]).map((r) => ({
         childId: r.child_id,
         childName: r.child_name,
-        parentEmail: r.parent_email,
+        parentEmail: r.children?.profiles?.email ?? "",
         linkedAt: r.linked_at,
         tag: r.tag ?? undefined,
       })),
