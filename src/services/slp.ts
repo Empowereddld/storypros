@@ -312,7 +312,7 @@ export function updateCaseloadChild(slpId: string, childId: string, updates: Par
   if (shouldSync(slpId, childId)) {
     const payload: Record<string, unknown> = {};
     if (updates.childName !== undefined) payload.child_name = updates.childName;
-    if (updates.parentEmail !== undefined) payload.parent_email = updates.parentEmail;
+    // parentEmail is derived from profiles; no longer stored on caseload
     if (updates.tag !== undefined) payload.tag = updates.tag ?? null;
     if (Object.keys(payload).length === 0) return;
     void db
