@@ -10,6 +10,7 @@
 
 import { StoryProsLogo, Star, MiniPlane } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
+import { FEATURES } from "@/config/features";
 import danDariaAirplane from "@/assets/dan-daria-airplane.webp";
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
@@ -18,6 +19,7 @@ import dariaPointing from "@/assets/daria-pointing.webp";
 interface LandingPageProps {
   onGetStarted: () => void;
   onLogin: () => void;
+  /** One click, straight into the live demo */
   onDemo: () => void;
 }
 
@@ -57,9 +59,18 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           <nav className="hidden items-center gap-6 text-sm font-bold text-ink-soft md:flex">
             <a href="#how-it-works" className="transition-colors hover:text-primary">How it works</a>
             <a href="#families" className="transition-colors hover:text-primary">For families</a>
-            <a href="#clinicians" className="transition-colors hover:text-primary">For SLPs</a>
+            {FEATURES.slp && (
+              <a href="#clinicians" className="transition-colors hover:text-primary">For SLPs</a>
+            )}
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={onDemo}
+              className="press-pop inline-flex items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105"
+            >
+              <PaperPlaneIcon className="h-4 w-4" />
+              Demo
+            </button>
             <button
               onClick={onLogin}
               className="press-pop rounded-2xl px-4 py-2 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5"
@@ -195,28 +206,41 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-      {/* ── For families / For SLPs ── */}
-      <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-16 sm:px-6 lg:grid-cols-2">
+      {/* ── For families (+ SLPs when enabled) ── */}
+      <section
+        className={
+          FEATURES.slp
+            ? "mx-auto grid w-full max-w-6xl gap-6 px-4 py-16 sm:px-6 lg:grid-cols-2"
+            : "mx-auto grid w-full max-w-6xl gap-6 px-4 py-16 sm:px-6"
+        }
+      >
         <div id="families" className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card">
-          <h3 className="font-display text-2xl font-extrabold text-primary">For families</h3>
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="font-display text-2xl font-extrabold text-primary">For families</h3>
+            {!FEATURES.slp && (
+              <img src={dariaPointing} alt="" className="h-16 w-auto object-contain" />
+            )}
+          </div>
           <ul className="mt-4 space-y-3 text-[15px] font-medium leading-relaxed text-ink-soft">
             <li>A clear dashboard shows how your child is growing across listening, story structure, vocabulary, grammar, and sounds.</li>
             <li>Every instruction is read aloud, so children who struggle with reading are never stuck.</li>
             <li>Progress saves automatically. Close the tab mid-story and pick up right where you left off.</li>
-            <li>Purchases and settings stay behind a grown-up check.</li>
+            <li>Works right in the browser on laptops and tablets. Nothing to install.</li>
           </ul>
         </div>
-        <div id="clinicians" className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card">
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="font-display text-2xl font-extrabold text-primary">For SLPs and teachers</h3>
-            <img src={dariaPointing} alt="" className="h-16 w-auto object-contain" />
+        {FEATURES.slp && (
+          <div id="clinicians" className="rounded-[28px] border border-accent/60 bg-card p-8 shadow-card">
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="font-display text-2xl font-extrabold text-primary">For SLPs and teachers</h3>
+              <img src={dariaPointing} alt="" className="h-16 w-auto object-contain" />
+            </div>
+            <ul className="mt-4 space-y-3 text-[15px] font-medium leading-relaxed text-ink-soft">
+              <li>A caseload dashboard with real progress data for every child a family shares with you.</li>
+              <li>Families stay in control: children join your caseload only through a parent-generated invite code.</li>
+              <li>Assign stories, track completion, and keep session notes in one place.</li>
+            </ul>
           </div>
-          <ul className="mt-4 space-y-3 text-[15px] font-medium leading-relaxed text-ink-soft">
-            <li>A caseload dashboard with real progress data for every child a family shares with you.</li>
-            <li>Families stay in control: children join your caseload only through a parent-generated invite code.</li>
-            <li>Assign stories, track completion, and keep session notes in one place.</li>
-          </ul>
-        </div>
+        )}
       </section>
 
       {/* ── Pricing ── */}

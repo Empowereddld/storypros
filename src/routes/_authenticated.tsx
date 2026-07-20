@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, Navigate, useLocation } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
+import { DesktopNav, DemoBanner } from "@/components/empowered/AppChrome";
 import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { processExpiredSubscriptions } from "@/services/subscription";
@@ -59,11 +60,19 @@ function AuthenticatedLayout() {
     }
   }
 
+  // Website layout: full-bleed canvas. Laptop (lg+) gets a top nav;
+  // tablets/phones keep the screens' own bottom tabs + top-left menu.
   return (
-    <PhoneFrame>
-      <div key={path} className="h-full animate-slide-up">
-        <Outlet />
+    <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-cream">
+      <DemoBanner />
+      <DesktopNav />
+      <div className="relative flex-1 overflow-y-auto no-scrollbar">
+        <div className="relative mx-auto h-full w-full lg:max-w-5xl">
+          <div key={path} className="h-full animate-slide-up">
+            <Outlet />
+          </div>
+        </div>
       </div>
-    </PhoneFrame>
+    </div>
   );
 }

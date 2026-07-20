@@ -4,13 +4,14 @@ import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { LandingPage } from "@/components/empowered/LandingPage";
 import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
+import { DEMO_PERSONA_ID } from "@/services/demoAccounts";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  const { user, profile, children, loading } = useAuth();
+  const { user, profile, children, loading, startDemoSession } = useAuth();
   const navigate = useNavigate();
 
   // Auto-forward signed-in users
@@ -34,12 +35,19 @@ function Index() {
     );
   }
 
+  // One click, straight into the live demo (the in-app demo bar
+  // offers "Replay onboarding" and "Exit demo" from anywhere)
+  function startDemo() {
+    startDemoSession(DEMO_PERSONA_ID);
+    navigate({ to: "/home" });
+  }
+
   // Signed out — the public front door
   return (
     <LandingPage
       onGetStarted={() => navigate({ to: "/signup" })}
       onLogin={() => navigate({ to: "/login" })}
-      onDemo={() => navigate({ to: "/demo" })}
+      onDemo={startDemo}
     />
   );
 }

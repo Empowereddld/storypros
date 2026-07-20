@@ -118,7 +118,8 @@ export function AppBottomNav({
     { key: "achievements", label: "Rewards", dest: "achievements", icon: <MedalIcon /> },
   ];
   return (
-    <nav className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-around px-2 pt-2 pb-3 bg-card/95 backdrop-blur rounded-t-3xl border-t-4 border-accent/60 shadow-[0_-8px_30px_-10px_oklch(0.36_0.18_305/0.18)]">
+    // App-style tabs for phones/tablets; laptop uses the top DesktopNav instead
+    <nav className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-around px-2 pt-2 pb-3 bg-card/95 backdrop-blur rounded-t-3xl border-t-4 border-accent/60 shadow-[0_-8px_30px_-10px_oklch(0.36_0.18_305/0.18)] lg:hidden">
       {items.map((it) => (
         <button
           key={it.key}

@@ -18,27 +18,16 @@ export interface DemoPersona {
   childName: string;
 }
 
+/** The one demo account — one click in, full access to every screen. */
+export const DEMO_PERSONA_ID = "demo-explorer";
+
 export const DEMO_PERSONAS: DemoPersona[] = [
   {
-    id: "demo-camesha",
-    displayName: "Camesha",
-    email: "camesha@demo.storypros.app",
-    childId: "demo-camesha-child",
+    id: DEMO_PERSONA_ID,
+    displayName: "Story Pros Demo",
+    email: "demo@storypros.app",
+    childId: "demo-explorer-child",
     childName: "Ava",
-  },
-  {
-    id: "demo-jinean",
-    displayName: "Jinean",
-    email: "jinean@demo.storypros.app",
-    childId: "demo-jinean-child",
-    childName: "Micah",
-  },
-  {
-    id: "demo-enerds-admin",
-    displayName: "Enerds Admin",
-    email: "admin@demo.storypros.app",
-    childId: "demo-enerds-admin-child",
-    childName: "Story Pros Demo",
   },
 ];
 

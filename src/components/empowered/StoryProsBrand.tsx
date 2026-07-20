@@ -15,6 +15,7 @@
 
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { FEATURES } from "@/config/features";
 
 /* ───────── Logo ───────── */
 
@@ -108,6 +109,7 @@ export function AuthBackdrop({ className }: { className?: string }) {
 }
 
 export function Star({ className }: { className?: string }) {
+  if (!FEATURES.decorations) return null;
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
       <path d="M12 2l2.4 5.6L20 9l-4.6 3.8L17 19l-5-3-5 3 1.6-6.2L4 9l5.6-1.4L12 2z" />
@@ -116,6 +118,7 @@ export function Star({ className }: { className?: string }) {
 }
 
 export function MiniPlane({ className }: { className?: string }) {
+  if (!FEATURES.decorations) return null;
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
       <path d="M22 3L3 10.5l7 2.5 2.5 7L22 3z" />

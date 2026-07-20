@@ -18,6 +18,7 @@ import { createInviteCode } from "@/services/slp";
 import { TactileButton } from "./TactileButton";
 import { LockIcon, MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
+import { FEATURES } from "@/config/features";
 
 interface SettingsScreenProps {
   onClose: () => void;
@@ -301,7 +302,7 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
             ))}
           </SettingsGroup>
 
-          {profile?.isDemo && (
+          {FEATURES.slp && profile?.isDemo && (
             <SettingsGroup title="Demo Mode">
               <div className="p-4">
                 <p className="mb-3 text-xs font-semibold leading-relaxed text-ink-soft">
@@ -327,20 +328,22 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
             </SettingsGroup>
           )}
 
-          <SettingsGroup title="School Or Therapist Access">
-            <div className="flex items-start gap-3 px-4 pt-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
-                <SchoolIcon />
-              </span>
-              <p className="text-xs font-semibold leading-relaxed text-ink-soft">
-                Generate a code so a speech-language pathologist or teacher can follow progress.
-                Codes expire after 7 days.
-              </p>
-            </div>
-            {children.map((child) => (
-              <SlpShareRow key={child.id} child={child} />
-            ))}
-          </SettingsGroup>
+          {FEATURES.slp && (
+            <SettingsGroup title="School Or Therapist Access">
+              <div className="flex items-start gap-3 px-4 pt-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
+                  <SchoolIcon />
+                </span>
+                <p className="text-xs font-semibold leading-relaxed text-ink-soft">
+                  Generate a code so a speech-language pathologist or teacher can follow progress.
+                  Codes expire after 7 days.
+                </p>
+              </div>
+              {children.map((child) => (
+                <SlpShareRow key={child.id} child={child} />
+              ))}
+            </SettingsGroup>
+          )}
 
           <SettingsGroup title="Retell Library">
             <button

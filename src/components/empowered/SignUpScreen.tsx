@@ -22,6 +22,7 @@ import {
   AppleMark,
 } from "./StoryProsBrand";
 import { cn } from "@/lib/utils";
+import { FEATURES } from "@/config/features";
 
 interface SignUpScreenProps {
   onContinue: (role?: "parent" | "slp" | "teacher") => void;
@@ -91,24 +92,27 @@ export function SignUpScreen({ onContinue, onSignIn, onDemo }: SignUpScreenProps
           Start a learning journey filled with stories, growth, and fun.
         </p>
 
-        {/* Role selector */}
-        <div className="mt-4 flex gap-2 rounded-2xl bg-accent/40 p-1">
-          {ROLES.map((r) => (
-            <button
-              key={r.role}
-              type="button"
-              onClick={() => setAccountRole(r.role)}
-              className={cn(
-                "flex-1 rounded-xl py-2 text-sm font-bold transition-all",
-                accountRole === r.role
-                  ? "bg-card text-primary shadow-card"
-                  : "text-ink-soft hover:text-primary",
-              )}
-            >
-              {r.label}
-            </button>
-          ))}
-        </div>
+        {/* Role selector — hidden while SLP/teacher accounts are off;
+            every signup is a parent account */}
+        {FEATURES.slp && (
+          <div className="mt-4 flex gap-2 rounded-2xl bg-accent/40 p-1">
+            {ROLES.map((r) => (
+              <button
+                key={r.role}
+                type="button"
+                onClick={() => setAccountRole(r.role)}
+                className={cn(
+                  "flex-1 rounded-xl py-2 text-sm font-bold transition-all",
+                  accountRole === r.role
+                    ? "bg-card text-primary shadow-card"
+                    : "text-ink-soft hover:text-primary",
+                )}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           <IconInput

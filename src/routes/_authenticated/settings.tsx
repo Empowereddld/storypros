@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { SettingsScreen } from "@/components/empowered/SettingsScreen";
 import { ParentGate } from "@/components/empowered/ParentGate";
 import { useAuth } from "@/contexts/AuthContext";
+import { FEATURES } from "@/config/features";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   component: SettingsPage,
@@ -19,11 +20,14 @@ function SettingsPage() {
     if (destination === "retell-library") navigate({ to: "/retell-library" });
   };
 
-  // SLP/teacher accounts are adult-only — no gate needed
-  if (isClinician) {
-    return (
-      <SettingsScreen onClose={() => navigate({ to: home })} onNavigate={handleSettingsNavigate} />
-    );
+  const screen = (
+    <SettingsScreen onClose={() => navigate({ to: home })} onNavigate={handleSettingsNavigate} />
+  );
+
+  // Grown-Up Check is off for the web launch (FEATURES.parentGate);
+  // it returns for app-store Kids Category builds.
+  if (!FEATURES.parentGate || isClinician) {
+    return screen;
   }
 
   return (
@@ -31,7 +35,7 @@ function SettingsPage() {
       message="Settings is for parents and caregivers."
       onCancel={() => navigate({ to: home })}
     >
-      <SettingsScreen onClose={() => navigate({ to: home })} onNavigate={handleSettingsNavigate} />
+      {screen}
     </ParentGate>
   );
 }
