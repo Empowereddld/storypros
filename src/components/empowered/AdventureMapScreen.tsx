@@ -41,7 +41,7 @@ interface Pin {
   storyId: string;
   label: string;
   theme: string;
-  cover: string;
+  cover: string | null;
   status: PinStatus;
   offset: number;
   y: number;
