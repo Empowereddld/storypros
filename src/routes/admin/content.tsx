@@ -77,7 +77,7 @@ function validateStoryData(data: unknown): {
           message: "At least 2 options required",
         });
       } else {
-        const hasCorrect = question.options.some((option) => option.correct === true);
+        const hasCorrect = question.options.some((option: { correct?: boolean }) => option.correct === true);
         if (!hasCorrect) {
           errors.push({
             field: `comprehension_questions[${index}].options`,
