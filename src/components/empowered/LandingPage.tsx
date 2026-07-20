@@ -304,6 +304,15 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             © {new Date().getFullYear()} Empowered DLD · Made with care for children finding their
             voice
           </p>
+          <p className="text-xs font-bold">
+            <a href="/privacy" className="text-primary hover:underline">
+              Privacy Policy
+            </a>
+            <span className="mx-2 text-ink-soft">·</span>
+            <a href="/terms" className="text-primary hover:underline">
+              Terms of Service
+            </a>
+          </p>
         </div>
       </footer>
     </div>

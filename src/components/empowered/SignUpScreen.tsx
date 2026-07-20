@@ -155,6 +155,18 @@ export function SignUpScreen({ onContinue, onSignIn, onDemo }: SignUpScreenProps
           >
             {loading ? "Creating account…" : "Create Account"}
           </TactileButton>
+
+          <p className="pt-1 text-center text-[11px] font-semibold leading-snug text-ink-soft">
+            By creating an account you agree to our{" "}
+            <a href="/terms" target="_blank" rel="noopener" className="font-bold text-primary hover:underline">
+              Terms
+            </a>{" "}
+            and{" "}
+            <a href="/privacy" target="_blank" rel="noopener" className="font-bold text-primary hover:underline">
+              Privacy Policy
+            </a>
+            .
+          </p>
         </form>
 
         <button

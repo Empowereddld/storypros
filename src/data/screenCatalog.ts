@@ -47,6 +47,18 @@ export const SCREEN_CATALOG: CatalogCategory[] = [
           "Choice between exploring the app with sample data or walking through onboarding.",
         route: "/demo",
       },
+      {
+        key: "privacy",
+        label: "Privacy Policy",
+        description: "Plain-language privacy policy covering family and child data.",
+        route: "/privacy",
+      },
+      {
+        key: "terms",
+        label: "Terms of Service",
+        description: "Terms covering accounts, subscriptions, and the educational-tool disclaimer.",
+        route: "/terms",
+      },
     ],
   },
   {
