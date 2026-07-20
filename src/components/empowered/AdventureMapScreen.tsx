@@ -449,7 +449,7 @@ function LockedStorySheet({
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
         <div className="relative overflow-hidden rounded-[28px] bg-accent shadow-card">
           <img
-            src={pin.cover}
+            src={pin.cover ?? undefined}
             alt=""
             className="h-40 w-full object-cover"
           />
