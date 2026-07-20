@@ -105,7 +105,7 @@ export function DemoBanner() {
   }
 
   return (
-    <div className="relative z-40 flex items-center justify-center gap-3 bg-secondary px-3 py-1.5 text-secondary-foreground">
+    <div className="relative z-40 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-secondary px-3 py-1.5 text-secondary-foreground">
       <span className="text-xs font-extrabold uppercase tracking-wide">
         Demo mode
       </span>
@@ -114,6 +114,12 @@ export function DemoBanner() {
         className="rounded-full bg-secondary-foreground/10 px-3 py-1 text-xs font-bold transition-colors hover:bg-secondary-foreground/20"
       >
         Replay onboarding
+      </button>
+      <button
+        onClick={() => navigate({ to: "/review" })}
+        className="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground shadow-card transition-colors hover:bg-primary/90"
+      >
+        Give feedback
       </button>
       <button
         onClick={exitDemo}
