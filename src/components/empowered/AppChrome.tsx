@@ -29,7 +29,18 @@ const NAV_ITEMS = [
   { to: "/library", label: "Library", icon: <BookIcon className="h-4 w-4" /> },
   { to: "/map", label: "Adventure Map", icon: <MapIcon className="h-4 w-4" /> },
   { to: "/achievements", label: "Rewards", icon: <MedalIcon className="h-4 w-4" /> },
+  // Review-period tab — remove before public launch
+  { to: "/review", label: "Feedback", icon: <FeedbackIcon className="h-4 w-4" /> },
 ] as const;
+
+function FeedbackIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+      <path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.3 0-2.6-.3-3.7-.8L3 21l1.8-5.8A8.5 8.5 0 1121 11.5z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 10h8M8 13.5h5" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 /** Top navigation for laptop-size screens (hidden below lg) */
 export function DesktopNav() {
