@@ -96,9 +96,9 @@ function saveNotes(slpId: string, data: SessionNote[]) {
 interface CaseloadRow {
   child_id: string;
   child_name: string;
-  parent_email: string;
   tag: string | null;
   linked_at: string;
+  children?: { profiles?: { email: string | null } | null } | null;
 }
 
 interface AssignmentRow {
@@ -131,7 +131,7 @@ export async function hydrateSlpFromCloud(slpId: string): Promise<void> {
     const [caseloadRes, assignmentsRes, notesRes] = await Promise.all([
       db
         .from("slp_caseload")
-        .select("child_id, child_name, parent_email, tag, linked_at")
+        .select("child_id, child_name, tag, linked_at, children:child_id(profiles:profile_id(email))")
         .eq("slp_id", slpId)
         .order("linked_at", { ascending: true }),
       db
@@ -154,7 +154,7 @@ export async function hydrateSlpFromCloud(slpId: string): Promise<void> {
       ((caseloadRes.data ?? []) as CaseloadRow[]).map((r) => ({
         childId: r.child_id,
         childName: r.child_name,
-        parentEmail: r.parent_email,
+        parentEmail: r.children?.profiles?.email ?? "",
         linkedAt: r.linked_at,
         tag: r.tag ?? undefined,
       })),
@@ -275,7 +275,6 @@ export function addChildToCaseload(
           slp_id: slpId,
           child_id: child.childId,
           child_name: child.childName,
-          parent_email: child.parentEmail,
           tag: child.tag ?? null,
           linked_at: entry.linkedAt,
         },
@@ -313,7 +312,7 @@ export function updateCaseloadChild(slpId: string, childId: string, updates: Par
   if (shouldSync(slpId, childId)) {
     const payload: Record<string, unknown> = {};
     if (updates.childName !== undefined) payload.child_name = updates.childName;
-    if (updates.parentEmail !== undefined) payload.parent_email = updates.parentEmail;
+    // parentEmail is derived from profiles; no longer stored on caseload
     if (updates.tag !== undefined) payload.tag = updates.tag ?? null;
     if (Object.keys(payload).length === 0) return;
     void db
