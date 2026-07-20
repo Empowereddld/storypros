@@ -96,9 +96,9 @@ function saveNotes(slpId: string, data: SessionNote[]) {
 interface CaseloadRow {
   child_id: string;
   child_name: string;
-  parent_email: string;
   tag: string | null;
   linked_at: string;
+  children?: { profiles?: { email: string | null } | null } | null;
 }
 
 interface AssignmentRow {
