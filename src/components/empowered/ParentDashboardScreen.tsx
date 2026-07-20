@@ -138,7 +138,7 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
         />
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-8 pt-3">
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-8 pt-3 lg:px-8 lg:pb-10">
         <section className="relative min-h-[172px] overflow-hidden rounded-[32px] border border-accent/60 bg-card/92 p-5 shadow-soft">
           <div className="relative z-10 max-w-[190px]">
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-primary">

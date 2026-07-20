@@ -126,11 +126,11 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
             <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <StoryProsLogo layout="row" size="sm" className="min-w-0 shrink" />
+        <StoryProsLogo layout="row" size="sm" className="min-w-0 shrink lg:hidden" />
         <CurrencyBadge count={planes} className="bg-card px-2.5 shadow-card" />
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-6 pt-3">
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-6 pt-3 lg:px-8 lg:pb-10">
         {/* Intro */}
         <div className="relative min-h-[248px] overflow-hidden rounded-[34px] border-2 border-card bg-card p-5 shadow-soft animate-pop-in">
           <div className="relative z-10">
@@ -203,7 +203,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
         </div>
 
         {/* Item grid */}
-        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in">
+        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-4 lg:gap-4">
           {items.map((item, i) => {
             const owned = isOwned(childId, item.id);
             return (

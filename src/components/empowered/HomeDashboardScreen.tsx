@@ -64,7 +64,8 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
         <MiniPlane className="absolute right-16 top-9 h-8 w-8 rotate-[18deg] text-secondary drop-shadow-md animate-float" />
       </div>
 
-      <header className="relative z-30 flex items-center justify-between gap-2 px-5 pb-1 pt-3">
+      {/* App-style header for phones/tablets — laptop uses the top DesktopNav */}
+      <header className="relative z-30 flex items-center justify-between gap-2 px-5 pb-1 pt-3 lg:hidden">
         <button
           onClick={() => onNavigate("settings")}
           aria-label="Menu"
@@ -80,12 +81,12 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
         />
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0">
-        <div className="text-center">
-          <h1 className="text-[27px] font-extrabold leading-tight text-primary">
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-8">
+        <div className="text-center lg:text-left">
+          <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-4xl">
             Hi, {firstName}!
           </h1>
-          <p className="mt-1 text-[15px] font-medium text-ink-soft">
+          <p className="mt-1 text-[15px] font-medium text-ink-soft lg:text-lg">
             {cont?.status === "in-progress"
               ? "Ready to continue your adventure?"
               : cont?.status === "replay"
@@ -94,6 +95,9 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           </p>
         </div>
 
+        {/* Laptop: story hero on the left, quick actions on the right */}
+        <div className="lg:mt-6 lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-6">
+        <div className="min-w-0">
         {cont && (
           <article className="mt-4 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up hover-lift">
             <div className="relative h-[214px] w-full overflow-hidden rounded-[25px] bg-accent/40">
@@ -165,17 +169,20 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             </div>
           </article>
         )}
+        </div>
 
+        {/* Right rail on laptop; flows underneath on phones/tablets */}
+        <aside className="lg:sticky lg:top-2">
         <button
           onClick={() => onNavigate("map")}
-          className="press-pop mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-card/70 py-2.5 text-sm font-bold text-primary shadow-card transition-colors hover:bg-card"
+          className="press-pop mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-card/70 py-2.5 text-sm font-bold text-primary shadow-card transition-colors hover:bg-card lg:mt-0 lg:py-3.5"
         >
           <MapIcon className="h-4 w-4" />
           Explore the Adventure Map
           <ChevronRightIcon />
         </button>
 
-        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in">
+        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-1">
           <StatCardLite
             tone="primary"
             icon={<BookCheckIcon />}
@@ -191,6 +198,8 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             subtitle="Spend them in the Shop!"
             onClick={() => onNavigate("shop")}
           />
+        </div>
+        </aside>
         </div>
       </div>
 

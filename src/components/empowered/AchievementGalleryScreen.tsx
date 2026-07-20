@@ -118,15 +118,15 @@ export function AchievementGalleryScreen({
             <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <StoryProsLogo layout="row" size="md" className="scale-90" />
+        <StoryProsLogo layout="row" size="md" className="scale-90 lg:hidden" />
         <CurrencyBadge
           count={paperPlanes}
           onClick={() => onNavigate?.("shop")}
-          className="bg-card shadow-card"
+          className="bg-card shadow-card lg:hidden"
         />
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-3">
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-3 lg:px-8 lg:pb-10">
         <section className="relative min-h-[300px] overflow-hidden rounded-[34px] bg-card p-5 shadow-soft">
           <div className="relative z-10 max-w-[190px]">
             <h1 className="text-[43px] font-extrabold leading-[0.95] text-primary">Your Rewards</h1>
@@ -249,7 +249,7 @@ export function AchievementGalleryScreen({
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 stagger-in">
+          <div className="grid grid-cols-2 gap-3 stagger-in lg:grid-cols-3 lg:gap-4">
             {badges.map((badge) => (
               <BadgeCard key={badge.id} badge={badge} />
             ))}

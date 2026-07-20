@@ -111,7 +111,8 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
         <div className="absolute -right-8 top-44 h-20 w-32 rounded-[50%] border-2 border-dashed border-primary/15" />
       </div>
 
-      <header className="relative z-30 flex items-center justify-between px-5 pb-1 pt-4">
+      {/* App-style header for phones/tablets — laptop uses the top DesktopNav */}
+      <header className="relative z-30 flex items-center justify-between px-5 pb-1 pt-4 lg:hidden">
         <StoryProsLogo layout="row" size="md" />
         <div className="flex items-center gap-2">
           <CurrencyBadge
@@ -129,10 +130,10 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
         </div>
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-2">
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-2 lg:px-8 lg:pb-10 lg:pt-8">
         <section>
           <h1 className="text-[40px] font-extrabold leading-none text-primary">Story Library</h1>
-          <p className="mt-3 max-w-[250px] text-lg font-medium leading-snug text-ink-soft">
+          <p className="mt-3 max-w-[250px] text-lg font-medium leading-snug text-ink-soft lg:max-w-none">
             Stories that inspire imagination and build confidence.
           </p>
         </section>
@@ -235,7 +236,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
         {filtered.length === 0 ? (
           <EmptyLibraryState filter={filter} />
         ) : (
-          <div className="mt-3 grid grid-cols-2 gap-3 stagger-in">
+          <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-3 lg:gap-4">
             {filtered.map((story) => (
               <StoryCard
                 key={story.id}
