@@ -160,7 +160,8 @@ export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreen
         <MiniPlane className="absolute right-20 top-9 h-8 w-8 rotate-[18deg] text-secondary drop-shadow-md animate-float" />
       </div>
 
-      <header className="relative z-30 flex items-center justify-between gap-2 px-4 pb-1 pt-3">
+      {/* App-style header for phones/tablets — laptop uses the top DesktopNav */}
+      <header className="relative z-30 flex items-center justify-between gap-2 px-4 pb-1 pt-3 lg:hidden">
         <button
           onClick={() => onNavigate("home")}
           aria-label="Back to home"
@@ -223,7 +224,12 @@ export function AdventureMapScreen({ childName, onNavigate }: AdventureMapScreen
         </section>
 
         {/* Map canvas keeps its designed 400px proportions; centers on wider screens */}
-        <section className="relative mx-auto -mt-2 w-full max-w-[430px]" style={{ height: canvasHeight }}>
+        {/* Map canvas keeps its designed 400px coordinate system; on laptop the
+            whole canvas zooms up ~30% so road, pins, and covers stay in sync */}
+        <section
+          className="relative mx-auto -mt-2 w-full max-w-[430px] lg:[zoom:1.3]"
+          style={{ height: canvasHeight }}
+        >
           <svg
             className="pointer-events-none absolute inset-0 h-full w-full"
             viewBox={`0 0 400 ${canvasHeight}`}

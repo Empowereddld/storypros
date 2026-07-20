@@ -9,7 +9,7 @@
  * open/done toggle. Requests save to the cloud.
  * ───────────────────────────────────────────── */
 
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { db, logSyncError } from "@/services/cloud";
@@ -230,19 +230,21 @@ function ScreenRow({
   onSubmitted: () => Promise<void> | void;
   onToggleStatus: (row: FeedbackRow) => void;
 }) {
-  const navigate = useNavigate();
   const { startDemoSession } = useAuth();
   const openRows = rows.filter((r) => r.status === "open");
 
   function openLive() {
     if (!screen.route) return;
+    // Start the demo session first — it persists in localStorage,
+    // so the new tab picks it up automatically
     if (screen.needsAuth) {
       startDemoSession(
         DEMO_PERSONA_ID,
         screen.route.startsWith("/onboarding") ? { onboarding: true } : undefined,
       );
     }
-    navigate({ to: screen.route });
+    // Open in a new tab so the review page stays put for writing feedback
+    window.open(screen.route, "_blank", "noopener");
   }
 
   return (
