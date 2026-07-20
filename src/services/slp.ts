@@ -275,7 +275,6 @@ export function addChildToCaseload(
           slp_id: slpId,
           child_id: child.childId,
           child_name: child.childName,
-          parent_email: child.parentEmail,
           tag: child.tag ?? null,
           linked_at: entry.linkedAt,
         },
