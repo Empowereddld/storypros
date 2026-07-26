@@ -27,16 +27,20 @@ export const FOUNDING_SPOTS = 100;
 /* ── Hero ── */
 
 export const HERO = {
-  eyebrow: `Story-based language practice for ${AGE_RANGE}`,
-  heading: "Language learning through interactive stories",
+  eyebrow: "Story-based language learning for ages 5–12",
+  /** Split so the headline lands on two lines on desktop */
+  headingLine1: "Language learning through",
+  headingLine2: "interactive stories",
   subheading: "Learning that feels like a story, not a lesson.",
-  body: `Designed for ${AGE_RANGE}, Story Pros helps children with DLD and other language-based learning needs build vocabulary, understand and retell stories, and express their ideas through calm, guided practice.`,
-  checks: [
-    "Understand and remember story information",
-    "Organize and retell ideas",
-    "Connect stories to everyday life",
-  ],
+  body: "Story Pros helps children with DLD and other language-based learning needs build vocabulary, understand and retell stories, and express their ideas through calm, guided practice.",
 };
+
+/** The three benefits, introduced in the section after the hero */
+export const HERO_BENEFITS = [
+  "Understand and remember story information",
+  "Organize and retell ideas",
+  "Connect stories to everyday life",
+];
 
 /* ── Parent problem ── */
 

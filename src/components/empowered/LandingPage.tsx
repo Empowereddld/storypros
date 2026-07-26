@@ -22,6 +22,7 @@ import {
   PRICE,
   PRICE_PERIOD,
   HERO,
+  HERO_BENEFITS,
   PARENT_PROBLEM,
   WHY_STORIES,
   PATHWAY,
@@ -66,10 +67,9 @@ interface LandingPageProps {
 }
 
 const NAV_LINKS = [
-  { href: "#in-action", label: "See It" },
+  { href: "#in-action", label: "App Preview" },
   { href: "#how-it-works", label: "How It Works" },
   { href: "#community", label: "Community" },
-  { href: "#included", label: "What's Included" },
   { href: "#membership", label: "Membership" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -94,7 +94,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               className="press-pop inline-flex items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105"
             >
               <PaperPlaneIcon className="h-4 w-4" />
-              Demo
+              Watch Demo
             </button>
             <button
               onClick={onLogin}
@@ -114,65 +114,79 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </header>
 
-      {/* ── Hero ── */}
+      {/* ── Hero: one message, one explanation, two actions ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:pb-24 lg:pt-20">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-4 pb-12 pt-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,540px)] lg:gap-12 lg:pb-16 lg:pt-12">
+          {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-primary shadow-card">
+            <p className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-primary shadow-card">
               <PaperPlaneIcon className="h-4 w-4" />
               {HERO.eyebrow}
             </p>
-            <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] text-primary sm:text-5xl lg:text-[52px]">
-              {HERO.heading}
+
+            {/* Two lines on desktop, wraps naturally on smaller screens */}
+            <h1 className="mt-4 font-display text-[34px] font-extrabold leading-[1.08] text-primary sm:text-[42px] lg:text-[46px]">
+              <span className="block">{HERO.headingLine1}</span>
+              <span className="block">{HERO.headingLine2}</span>
             </h1>
-            <p className="mt-4 text-xl font-bold text-secondary-foreground/90">{HERO.subheading}</p>
-            <p className="mt-4 text-base font-medium leading-relaxed text-ink-soft">{HERO.body}</p>
 
-            <ul className="mx-auto mt-6 max-w-md space-y-2.5 text-left lg:mx-0">
-              {HERO.checks.map((check, i) => (
-                <li
-                  key={check}
-                  className="animate-pop-in flex items-center gap-3 rounded-[18px] bg-card px-4 py-2.5 shadow-card"
-                  style={{ animationDelay: `${i * 90}ms` }}
-                >
-                  <CheckMark />
-                  <span className="text-[15px] font-bold text-ink">{check}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="mt-3 text-lg font-bold text-secondary-foreground/90 sm:text-xl">
+              {HERO.subheading}
+            </p>
 
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            {/* Comfortable measure, roughly 520px */}
+            <p className="mx-auto mt-3 max-w-[540px] text-[15px] font-medium leading-relaxed text-ink-soft lg:mx-0">
+              {HERO.body}
+            </p>
+
+            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <a
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-14 w-full items-center justify-center gap-2 rounded-3xl bg-primary px-7 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105 sm:w-auto"
+                className="press-pop inline-flex h-13 w-full items-center justify-center gap-2 rounded-3xl bg-primary px-7 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105 sm:w-auto"
               >
                 Join the Story Pros Waitlist
                 <ChevronRightIcon className="h-5 w-5 text-secondary" />
               </a>
               <a
                 href="#how-it-works"
-                className="press-pop inline-flex h-14 w-full items-center justify-center rounded-3xl border-2 border-primary/70 bg-card px-7 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 sm:w-auto"
+                className="press-pop inline-flex h-13 w-full items-center justify-center rounded-3xl border-2 border-primary/70 bg-card px-7 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 sm:w-auto"
               >
                 See How It Works
               </a>
             </div>
 
-            <p className="mt-4 text-sm font-bold text-ink-soft">
+            <p className="mt-3 text-sm font-bold text-ink-soft">
               Start free with one story. Membership {PRICE}
               {PRICE_PERIOD}.
             </p>
           </div>
 
-          {/* A real story on a tablet, so the product is the visual */}
-          <div className="relative mx-auto w-full max-w-lg">
+          {/* The app preview does the visual talking */}
+          <div className="relative mx-auto w-full max-w-[540px]">
             <span
               className="pointer-events-none absolute inset-x-10 bottom-2 h-32 rounded-full bg-primary/10 blur-2xl"
               aria-hidden
             />
             <TabletMock className="animate-float" />
           </div>
+        </div>
+      </section>
+
+      {/* ── The three benefits, moved out of the hero ── */}
+      <section className="border-y border-accent/40 bg-card/60">
+        <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
+          <ul className="grid gap-3 sm:grid-cols-3">
+            {HERO_BENEFITS.map((benefit, i) => (
+              <Reveal key={benefit} delay={i * 90}>
+                <li className="flex h-full items-start gap-3 rounded-[22px] border border-accent/60 bg-card p-4 shadow-card">
+                  <CheckMark />
+                  <span className="text-sm font-bold leading-snug text-ink">{benefit}</span>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -830,7 +844,7 @@ function TabletMock({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative mx-auto w-full max-w-[440px] rounded-[28px] border-[10px] border-ink/85 bg-cream shadow-[0_28px_60px_-18px_rgba(28,28,21,0.45)]",
+        "relative mx-auto w-full max-w-[520px] rounded-[30px] border-[11px] border-ink/85 bg-cream shadow-[0_28px_60px_-18px_rgba(28,28,21,0.45)]",
         className,
       )}
     >

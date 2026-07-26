@@ -16,9 +16,17 @@
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { FEATURES } from "@/config/features";
+import logoLockup from "@/assets/story-pros-logo.png";
+import logoMark from "@/assets/story-pros-mark.png";
+import logoWordmark from "@/assets/story-pros-wordmark.png";
 
 /* ───────── Logo ───────── */
 
+/**
+ * The official Story Pros logo.
+ * `row` uses the full horizontal lockup; `stacked` uses the
+ * book-and-plane mark above the wordmark for narrow spaces.
+ */
 export function StoryProsLogo({
   layout = "row",
   size = "md",
@@ -30,21 +38,19 @@ export function StoryProsLogo({
   tagline?: boolean;
   className?: string;
 }) {
-  const iconSize = { sm: "h-7 w-9", md: "h-10 w-12", lg: "h-16 w-20" }[size];
-  const word = { sm: "text-lg", md: "text-2xl", lg: "text-5xl" }[size];
-
-  const wordmark = (
-    <span className={cn("font-display font-extrabold italic leading-[0.82] tracking-tight", word)}>
-      <span className="block text-primary">STORY</span>
-      <span className="block text-secondary">PROS</span>
-    </span>
-  );
+  const lockupHeight = { sm: "h-8", md: "h-11", lg: "h-16" }[size];
+  const markHeight = { sm: "h-9", md: "h-14", lg: "h-20" }[size];
+  const stackedWord = { sm: "h-5", md: "h-7", lg: "h-10" }[size];
 
   if (layout === "stacked") {
     return (
       <div className={cn("flex flex-col items-center text-center", className)}>
-        <BookPlaneMark className={cn(iconSize, "mb-1")} />
-        {wordmark}
+        <img src={logoMark} alt="" className={cn(markHeight, "w-auto object-contain")} />
+        <img
+          src={logoWordmark}
+          alt="Story Pros"
+          className={cn(stackedWord, "mt-1.5 w-auto object-contain")}
+        />
         {tagline && (
           <p className="mt-2 text-sm font-bold text-primary/80">
             Read. <span className="text-secondary">Imagine.</span> Grow.
@@ -55,10 +61,11 @@ export function StoryProsLogo({
   }
 
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <BookPlaneMark className={iconSize} />
-      {wordmark}
-    </div>
+    <img
+      src={logoLockup}
+      alt="Story Pros"
+      className={cn(lockupHeight, "w-auto object-contain", className)}
+    />
   );
 }
 
