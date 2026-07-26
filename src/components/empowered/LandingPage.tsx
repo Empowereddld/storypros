@@ -23,6 +23,11 @@ import {
   COMPARISON_ROWS,
   COMPARISON_NOTE,
   PRICING_FEATURES,
+  PRICING_HEADLINE,
+  PRICING_SUBHEAD,
+  FREE_TIER_NOTE,
+  WHY_STORIES,
+  WILL_LEARN,
   FAQS,
   type Cell,
 } from "@/data/landingContent";
@@ -40,7 +45,9 @@ interface LandingPageProps {
 }
 
 const NAV_LINKS = [
+  { href: "#why-stories", label: "Why Stories" },
   { href: "#how-it-works", label: "How It Works" },
+  { href: "#what-they-learn", label: "What They Learn" },
   { href: "#pricing", label: "Pricing" },
   { href: "#clinicians", label: "For Clinicians" },
   { href: "#faq", label: "FAQ" },
@@ -173,8 +180,43 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
+      {/* ── Why stories work (promoted from the FAQ) ── */}
+      <section id="why-stories" className="scroll-mt-20">
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">
+          <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+            {WHY_STORIES.eyebrow}
+          </p>
+          <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+            {WHY_STORIES.heading}
+          </h2>
+          <p className="mx-auto mt-4 max-w-3xl text-center text-lg font-medium leading-relaxed text-ink-soft">
+            {WHY_STORIES.lead}
+          </p>
+
+          {/* The six story parts, the framework every session repeats */}
+          <ul className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {WHY_STORIES.framework.map((part, i) => (
+              <li
+                key={part.label}
+                className="animate-pop-in flex flex-col items-center gap-2 rounded-[22px] border border-accent/60 bg-card px-3 py-5 text-center shadow-card"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <span className="text-3xl" aria-hidden>
+                  {part.icon}
+                </span>
+                <span className="text-sm font-extrabold text-primary">{part.label}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mx-auto mt-9 max-w-3xl rounded-[28px] border border-accent/60 bg-card p-6 text-center text-[15px] font-medium leading-relaxed text-ink-soft shadow-card">
+            {WHY_STORIES.close}
+          </p>
+        </div>
+      </section>
+
       {/* ── How it works ── */}
-      <section id="how-it-works" className="scroll-mt-20">
+      <section id="how-it-works" className="scroll-mt-20 bg-card/50">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             How It Works
@@ -249,8 +291,41 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
+      {/* ── What your child will learn (promoted from the FAQ) ── */}
+      <section id="what-they-learn" className="scroll-mt-20">
+        <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+          <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+            What Your Child Will Learn
+          </h2>
+          <p className="mt-2 text-center text-base font-medium text-ink-soft">
+            Six skills, built story by story.
+          </p>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {WILL_LEARN.map((item, i) => (
+              <article
+                key={item.skill}
+                className="hover-lift animate-slide-up rounded-[28px] border border-accent/60 bg-card p-6 shadow-card transition-all"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <span
+                  className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-accent text-2xl"
+                  aria-hidden
+                >
+                  {item.icon}
+                </span>
+                <h3 className="mt-4 text-lg font-extrabold text-primary">{item.skill}</h3>
+                <p className="mt-1.5 text-sm font-medium leading-relaxed text-ink-soft">
+                  {item.detail}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Perfect for children with ── */}
-      <section id="clinicians" className="scroll-mt-20">
+      <section id="clinicians" className="scroll-mt-20 bg-card/50">
         <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">
           <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             Perfect For Children With:
@@ -365,40 +440,73 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-      {/* ── Pricing ── */}
-      <section id="pricing" className="scroll-mt-20 bg-card/50">
+      {/* ── Pricing: what your child gets first, price as the payoff ── */}
+      <section id="pricing" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+          <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
             Pricing
+          </p>
+          <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+            {PRICING_HEADLINE}
           </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-base font-medium text-ink-soft">
+            {PRICING_SUBHEAD}
+          </p>
 
-          <div className="mx-auto mt-8 max-w-md rounded-[32px] border-2 border-primary/30 bg-card p-8 text-center shadow-soft">
-            <p className="font-display text-6xl font-extrabold leading-none text-primary">
+          {/* Feature cards, each framed by what the child gains */}
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {PRICING_FEATURES.map((feature, i) => (
+              <article
+                key={feature.title}
+                className="hover-lift animate-slide-up flex gap-4 rounded-[26px] border border-accent/60 bg-card p-5 shadow-card transition-all"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <span
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-accent text-xl"
+                  aria-hidden
+                >
+                  {feature.icon}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-[15px] font-extrabold text-primary">{feature.title}</h3>
+                  <p className="mt-1 text-sm font-medium leading-relaxed text-ink-soft">
+                    {feature.benefit}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* The price reveal */}
+          <div className="relative mx-auto mt-10 max-w-xl overflow-hidden rounded-[34px] border-2 border-primary/30 bg-card p-8 text-center shadow-soft">
+            <span
+              className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-secondary/20 blur-2xl"
+              aria-hidden
+            />
+            <p className="relative inline-flex rounded-full bg-secondary px-5 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)]">
+              Start with {TRIAL_DAYS} days free
+            </p>
+            <p className="relative mt-5 font-display text-7xl font-extrabold leading-none text-primary">
               {PRICE}
               <span className="text-2xl font-bold text-ink-soft">{PRICE_PERIOD}</span>
             </p>
-            <p className="mt-2 inline-flex rounded-full bg-secondary px-4 py-1.5 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)]">
-              {TRIAL_DAYS}-day free trial
+            <p className="relative mt-2 text-sm font-bold text-ink-soft">
+              per child, after your free trial
             </p>
-
-            <ul className="mt-6 space-y-2.5 text-left">
-              {PRICING_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-3">
-                  <CheckMark />
-                  <span className="text-[15px] font-bold text-ink">{feature}</span>
-                </li>
-              ))}
-            </ul>
 
             <button
               onClick={onGetStarted}
-              className="press-pop mt-7 inline-flex h-14 w-full items-center justify-center gap-2 rounded-3xl bg-primary px-8 text-lg font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
+              className="press-pop relative mt-7 inline-flex h-14 w-full items-center justify-center gap-2 rounded-3xl bg-primary px-8 text-lg font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
             >
               Start Your Free Trial
               <ChevronRightIcon className="h-5 w-5 text-secondary" />
             </button>
-            <p className="mt-3 text-xs font-bold text-ink-soft">
-              No credit card charge for {TRIAL_DAYS} days
+            <p className="relative mt-3 text-xs font-bold text-ink-soft">
+              No credit card charge for {TRIAL_DAYS} days • Cancel anytime
+            </p>
+
+            <p className="relative mt-5 border-t border-accent/50 pt-4 text-sm font-medium text-ink-soft">
+              {FREE_TIER_NOTE}
             </p>
           </div>
         </div>

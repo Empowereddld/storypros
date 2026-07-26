@@ -112,23 +112,99 @@ export const COMPARISON_ROWS: { feature: string; cells: Cell[] }[] = [
 export const COMPARISON_NOTE =
   "Speech Blubs and Otsimo are excellent apps for articulation and sound production. Story Pros focuses on language comprehension, vocabulary, and narrative skills—essential for children with DLD.";
 
-export const PRICING_FEATURES = [
-  "Unlimited stories",
-  "Progress tracking",
-  "Family dashboard with tips",
-  "Monthly Community Zoom Meet-ups",
-  "Cancel anytime",
+/* ── Why stories work (promoted from the FAQ into its own section) ── */
+
+export const WHY_STORIES = {
+  eyebrow: "Why stories?",
+  heading: "Why does it work?",
+  lead: "Stories are how children naturally learn language. For kids with DLD, stories provide a predictable framework that makes language easier to understand and remember.",
+  framework: [
+    { icon: "🧒", label: "Who" },
+    { icon: "📍", label: "Where" },
+    { icon: "❓", label: "Problem" },
+    { icon: "💜", label: "Feeling" },
+    { icon: "⚡", label: "Action" },
+    { icon: "✅", label: "Solution" },
+  ],
+  close:
+    "Research shows that narrative skills, understanding and telling stories, are the foundation for vocabulary, grammar, reading, and writing. Story Pros gives your child repeated practice with this framework in every session, building the language skills they need for school and life.",
+};
+
+/* ── What your child will learn (promoted from the FAQ) ── */
+
+export const WILL_LEARN = [
+  {
+    icon: "💬",
+    skill: "Vocabulary",
+    detail: "through deep word learning (Semantic Feature Analysis)",
+  },
+  {
+    icon: "👂",
+    skill: "Comprehension",
+    detail: "by answering who, where, what, and why questions",
+  },
+  {
+    icon: "✏️",
+    skill: "Grammar",
+    detail: 'by practicing sentence patterns with "because" and other connecting words',
+  },
+  {
+    icon: "📖",
+    skill: "Narrative skills",
+    detail: "by learning to organize and retell stories",
+  },
+  {
+    icon: "🔤",
+    skill: "Phonological awareness",
+    detail: "through rhyming and sound activities",
+  },
+  {
+    icon: "⭐",
+    skill: "Confidence",
+    detail: 'with self-monitoring "brain checks" that celebrate progress',
+  },
 ];
 
+/* ── Pricing, framed by what each feature gives the child ── */
+
+export const PRICING_FEATURES: { icon: string; title: string; benefit: string }[] = [
+  {
+    icon: "📚",
+    title: "Unlimited stories",
+    benefit:
+      "Every story is a full 13-part language session your child can play as often as they like.",
+  },
+  {
+    icon: "📈",
+    title: "Progress tracking",
+    benefit: "Watch listening, story structure, vocabulary, and grammar grow story by story.",
+  },
+  {
+    icon: "🏡",
+    title: "Family dashboard with tips",
+    benefit: "See what your child learned today, plus conversation starters for the dinner table.",
+  },
+  {
+    icon: "🎙️",
+    title: "Monthly Community Zoom Meet-ups",
+    benefit: "Bring your questions to Camesha and Jinean alongside other DLD families.",
+  },
+  {
+    icon: "🔓",
+    title: "Cancel anytime",
+    benefit: "No lock-in. Your child's progress stays saved if you come back.",
+  },
+];
+
+export const PRICING_HEADLINE = "Everything your child needs to find their words";
+export const PRICING_SUBHEAD =
+  "One plan. Every story, every activity, and the dashboard that shows you what is growing.";
+export const FREE_TIER_NOTE =
+  "Not ready for the trial? The free plan lets your child play the first story, no card needed.";
+
+/* Note: "Why stories? Why does it work?" and "What will my child learn?"
+   were promoted out of this list into their own sections above. */
 export const FAQS = [
-  {
-    q: "Why stories? Why does it work?",
-    a: "Stories are how children naturally learn language. For kids with DLD, stories provide a predictable framework (who, where, problem, feeling, action, solution) that makes language easier to understand and remember.\n\nResearch shows that narrative skills—understanding and telling stories—are the foundation for vocabulary, grammar, reading, and writing. Story Pros gives your child repeated practice with this framework in every session, building the language skills they need for school and life.",
-  },
-  {
-    q: "What will my child learn?",
-    a: 'Your child will build:\n\nVocabulary through deep word learning (Semantic Feature Analysis)\nComprehension by answering who, where, what, and why questions\nGrammar by practicing sentence patterns with "because" and other connecting words\nNarrative skills by learning to organize and retell stories\nPhonological awareness through rhyming and sound activities\nConfidence with self-monitoring "brain checks" that celebrate progress',
-  },
   {
     q: "What ages is Story Pros designed for?",
     a: "Story Pros is designed for children ages 5-12 with language-based learning differences, including DLD, language delays, ADHD, autism, and dyslexia.",
