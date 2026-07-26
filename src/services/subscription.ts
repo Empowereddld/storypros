@@ -4,7 +4,8 @@
  *
  * Pricing model:
  *   - Free tier: first story only (Dan's Paper Cut)
- *   - Premium: $9.99/mo per child, all stories unlocked
+ *   - Premium: $7.99/mo USD per child, all stories unlocked
+ *     (7-day free trial advertised on the landing page)
  *   - Per-account billing, but each child is a
  *     separate subscription slot
  *
@@ -44,8 +45,10 @@ export interface SubscriptionState {
 
 // ── Constants ──
 
-export const PREMIUM_PRICE = 9.99;
-export const PREMIUM_PRICE_DISPLAY = "$9.99/mo";
+export const PREMIUM_PRICE = 7.99;
+export const PREMIUM_PRICE_DISPLAY = "$7.99/mo";
+/** Free trial length advertised on the landing page */
+export const TRIAL_DAYS = 7;
 export const FREE_STORY_IDS = ["dan-and-the-paper-cut"]; // stories available on free tier
 
 export const PREMIUM_BENEFITS = [

@@ -15,7 +15,7 @@ export const LEGAL = {
   /** When these documents take effect */
   effectiveDate: "July 2026 (beta)",
   /** Monthly premium price shown in the terms */
-  premiumPrice: "$9.99/month per child",
+  premiumPrice: "$7.99 USD/month per child, after a 7-day free trial",
 } as const;
 
 /** True while any placeholder is unfilled — shows a subtle note on the pages */
