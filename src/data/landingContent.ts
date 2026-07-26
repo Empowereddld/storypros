@@ -285,6 +285,12 @@ export const MEMBERSHIP_FEATURES: { icon: string; title: string; benefit: string
   },
 ];
 
+export const INCLUDED = {
+  eyebrow: "What's included",
+  heading: "Everything in one membership",
+  lead: "One membership covers the whole Story Pros experience: the stories your child plays, the guidance you get at home, and the community you both join.",
+};
+
 export const PRICING_HEADLINE = "Everything your child needs to find their words";
 export const PRICING_SUBHEAD =
   "Start free with one story. Become a member when your family is ready.";

@@ -36,6 +36,7 @@ import {
   IN_ACTION,
   APP_COMPARISON,
   MEMBERSHIP_FEATURES,
+  INCLUDED,
   PRICING_HEADLINE,
   PRICING_SUBHEAD,
   FREE_TIER,
@@ -51,6 +52,9 @@ import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
 import dariaAndFriend from "@/assets/daria-and-friend.webp";
 import dariaPointing from "@/assets/daria-pointing.webp";
+// TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
+// when it lands — this is the only import that needs changing.
+import dariaLookingUp from "@/assets/daria-solo.png";
 import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
 import storyVocab from "@/assets/stories/dan-and-the-paper-cut/vocab-bandage.webp";
 
@@ -65,6 +69,7 @@ const NAV_LINKS = [
   { href: "#in-action", label: "See It" },
   { href: "#how-it-works", label: "How It Works" },
   { href: "#community", label: "Community" },
+  { href: "#included", label: "What's Included" },
   { href: "#membership", label: "Membership" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -534,6 +539,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
+      {/* ── What's included: Daria looks up at everything in the membership ── */}
+      <IncludedSection />
+
       {/* ── Membership ── */}
       <section id="membership" className="scroll-mt-20">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
@@ -547,29 +555,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             {PRICING_SUBHEAD}
           </p>
 
-          {/* What membership includes, framed by what the child gains */}
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {MEMBERSHIP_FEATURES.map((feature, i) => (
-              <Reveal key={feature.title} delay={i * 70}>
-                <article className="hover-lift flex h-full gap-4 rounded-[26px] border border-accent/60 bg-card p-5 shadow-card transition-all">
-                  <span
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-accent text-xl"
-                    aria-hidden
-                  >
-                    {feature.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="text-[15px] font-extrabold text-primary">{feature.title}</h3>
-                    <p className="mt-1 text-sm font-medium leading-relaxed text-ink-soft">
-                      {feature.benefit}
-                    </p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-
           {/* Free / membership / founding */}
+          <div className="mt-10" />
+
           <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
             {/* Free */}
             <Reveal className="flex">
@@ -768,6 +756,74 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 }
 
 /* ───────── pieces ───────── */
+
+/**
+ * What's Included — Daria sits at the lower left, chin in hand,
+ * looking up at the membership items as they float in above her.
+ */
+function IncludedSection() {
+  return (
+    <section id="included" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
+      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+        <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+          {INCLUDED.eyebrow}
+        </p>
+        <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+          {INCLUDED.heading}
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-center text-base font-medium text-ink-soft">
+          {INCLUDED.lead}
+        </p>
+
+        <div className="mt-12 grid items-end gap-8 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12">
+          {/* Daria, looking up at the list */}
+          <div className="relative mx-auto w-full max-w-[300px] lg:mx-0">
+            <span
+              className="pointer-events-none absolute inset-x-4 bottom-0 h-24 rounded-full bg-primary/10 blur-2xl"
+              aria-hidden
+            />
+            <img
+              src={dariaLookingUp}
+              alt="Daria looking up at everything included in a Story Pros membership"
+              loading="lazy"
+              className="relative z-10 mx-auto h-72 w-auto animate-bob object-contain object-bottom drop-shadow-[0_20px_32px_rgba(63,38,140,0.18)] lg:h-[380px]"
+            />
+          </div>
+
+          {/* The items she's looking up at, drifting in one by one */}
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {MEMBERSHIP_FEATURES.map((feature, i) => (
+              <Reveal key={feature.title} delay={i * 110}>
+                <li
+                  className={cn(
+                    "hover-lift flex h-full gap-3.5 rounded-[24px] border border-accent/60 bg-card p-4 shadow-card transition-all",
+                    // gentle staircase so they read as floating above her
+                    i % 2 === 0 ? "sm:-translate-y-2" : "sm:translate-y-2",
+                  )}
+                >
+                  <span
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] bg-accent text-lg"
+                    aria-hidden
+                  >
+                    {feature.icon}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[15px] font-extrabold leading-snug text-primary">
+                      {feature.title}
+                    </p>
+                    <p className="mt-1 text-xs font-medium leading-relaxed text-ink-soft">
+                      {feature.benefit}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /** A real Story Pros story shown on a tablet, so the product is the visual */
 function TabletMock({ className }: { className?: string }) {
