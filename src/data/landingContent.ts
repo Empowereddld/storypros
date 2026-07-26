@@ -1,118 +1,52 @@
 /* ─────────────────────────────────────────────
- * Landing page content — CLIENT-APPROVED COPY
+ * Landing page content
  *
- * Wording and section order come from the approved
- * preview page. Keep edits here (not in the layout)
- * so the copy stays reviewable in one place.
+ * Positioning follows the client review (July 2026):
+ * Story Pros is a story-based membership for children
+ * ages 5 to 12, combining guided language practice,
+ * family support, and monthly community.
+ *
+ * Keep copy edits here (not in the layout) so wording
+ * stays reviewable in one place.
+ *
+ * TODO (Camesha/Jinean): the Community Circle FAQ still
+ * needs confirmed answers on caregiver presence, age
+ * grouping, group size, recording, and time zones.
  * ───────────────────────────────────────────── */
+
+export const AGE_RANGE = "ages 5 to 12";
+
+/** Public waitlist page (founding member offer lives there) */
+export const WAITLIST_URL = "https://www.empowereddld.com/storypros";
 
 export const PRICE = "$7.99";
 export const PRICE_PERIOD = "/month";
-export const TRIAL_DAYS = 7;
+export const FOUNDING_PRICE = "$5.99";
+export const FOUNDING_SPOTS = 100;
 
-export const HOW_IT_WORKS = [
-  {
-    step: "01",
-    title: "Pick a Story",
-    body: "Choose from engaging stories designed by speech-language pathologists. Each story targets specific vocabulary and language skills.",
-  },
-  {
-    step: "02",
-    title: "Learn Through Repetition",
-    body: "Target words appear 36+ times per story, which is the amount research shows kids with DLD need to truly learn new language.",
-  },
-  {
-    step: "03",
-    title: "Track Progress Together",
-    body: "See exactly what your child learned today through your dashboard, with simple tips to practice at home.",
-  },
-];
+/* ── Hero ── */
 
-export const DIFFERENTIATORS = [
-  {
-    icon: "🧩",
-    title: "Builds Story Framework",
-    body: "Consistent icons for character, setting, problem, feeling, action, and solution help kids understand ANY story.",
-  },
-  {
-    icon: "💬",
-    title: "Vocabulary Learning",
-    body: "Semantic Feature Analysis teaches not just what words mean, but how they connect to other words.",
-  },
-  {
-    icon: "🧠",
-    title: "Metacognitive Checks",
-    body: "Built-in prompts teach kids to think about their thinking: 'Did you answer the WHO question with a PERSON?'",
-  },
-  {
-    icon: "📊",
-    title: "Family Dashboard",
-    body: "See exactly what your child learned today, with simple tips and conversation starters to practice at home.",
-  },
-];
+export const HERO = {
+  eyebrow: `Story-based language practice for ${AGE_RANGE}`,
+  heading: "Language learning through interactive stories",
+  subheading: "Learning that feels like a story, not a lesson.",
+  body: `Designed for ${AGE_RANGE}, Story Pros helps children with DLD and other language-based learning needs build vocabulary, understand and retell stories, and express their ideas through calm, guided practice.`,
+  checks: [
+    "Understand and remember story information",
+    "Organize and retell ideas",
+    "Connect stories to everyday life",
+  ],
+};
 
-export const PERFECT_FOR = [
-  "Developmental Language Disorder (DLD)",
-  "Language delays or difficulties",
-  "ADHD affecting comprehension",
-  "Autism with language challenges",
-  "Dyslexia (listening comprehension support)",
-  "Multi-language learners",
-  "English language learners (ELL)",
-  "Neurotypical children seeking language enrichment",
-  "Children with word-finding difficulties",
-  "Children seeking advanced language development",
-];
+/* ── Parent problem ── */
 
-export const TESTIMONIALS = [
-  {
-    quote:
-      "We've been on a waitlist for speech therapy for 6 months. Story Pros gave us something we could do NOW. My son actually asks to do his story every day.",
-    name: "Sarah M.",
-    role: "Mother of a 7-year-old with DLD",
-  },
-  {
-    quote:
-      "Finally, a language app that doesn't feel like a flashcard drill! The stories keep my daughter engaged, and I love seeing her progress in the parent dashboard.",
-    name: "Michael T.",
-    role: "Father of two",
-  },
-  {
-    quote:
-      "As a speech-language pathologist myself, I recommend Story Pros to all my clients' families. The evidence-based approach is exactly what these kids need.",
-    name: "Dr. Jennifer L.",
-    role: "Speech-Language Pathologist",
-  },
-  {
-    quote:
-      "My son has ADHD and struggles with comprehension. Story Pros breaks everything down in a way he can follow. We've seen real improvement in just a few weeks.",
-    name: "Rachel K.",
-    role: "Parent of an 8-year-old",
-  },
-];
+export const PARENT_PROBLEM = {
+  heading: "Your child has so much to say.",
+  lead: "Finding the words, organizing the details, and explaining an idea can take extra time and support.",
+  body: "You may hear “I don't know” when you ask about their day. Important details may come out in a jumble, or frustration may grow when language feels like too much. Story Pros gives children supportive, repeated practice with understanding, organizing, and sharing ideas, at a pace that respects how they learn.",
+};
 
-export type Cell = boolean | "partial" | "sometimes" | string;
-
-export const COMPARISON_COLUMNS = ["Private SLP", "Speech Blubs", "Otsimo", "Story Pros"];
-
-export const COMPARISON_ROWS: { feature: string; cells: Cell[] }[] = [
-  { feature: "Monthly Cost", cells: ["$600+", "$9.99", "$6.99", PRICE] },
-  { feature: "Unlimited daily practice", cells: [false, true, true, true] },
-  { feature: "Story grammar framework", cells: [true, false, "sometimes", true] },
-  { feature: "Deep vocabulary learning", cells: [true, false, false, true] },
-  { feature: "Narrative retelling practice", cells: [true, false, false, true] },
-  { feature: "Comprehension questions", cells: [true, false, false, true] },
-  { feature: "Sentence building & grammar", cells: [true, false, false, true] },
-  { feature: "Phonological awareness", cells: [true, true, true, true] },
-  { feature: "Designed specifically for DLD", cells: [true, false, false, true] },
-  { feature: "Monthly Community Zoom Meet-ups", cells: [false, false, false, true] },
-  { feature: "Created by SLPs & educators", cells: [true, "partial", "partial", true] },
-];
-
-export const COMPARISON_NOTE =
-  "Speech Blubs and Otsimo are excellent apps for articulation and sound production. Story Pros focuses on language comprehension, vocabulary, and narrative skills—essential for children with DLD.";
-
-/* ── Why stories work (promoted from the FAQ into its own section) ── */
+/* ── Why stories work ── */
 
 export const WHY_STORIES = {
   eyebrow: "Why stories?",
@@ -130,7 +64,39 @@ export const WHY_STORIES = {
     "Research shows that narrative skills, understanding and telling stories, are the foundation for vocabulary, grammar, reading, and writing. Story Pros gives your child repeated practice with this framework in every session, building the language skills they need for school and life.",
 };
 
-/* ── What your child will learn (promoted from the FAQ) ── */
+/* ── The four-part pathway ── */
+
+export const PATHWAY = [
+  {
+    step: "1",
+    icon: "🎧",
+    title: "Read & Listen",
+    body: "Children explore a short interactive story using clear visuals, spoken language, and manageable amounts of information.",
+  },
+  {
+    step: "2",
+    icon: "💡",
+    title: "Understand",
+    body: "They answer supported questions, learn vocabulary in context, and identify important story details.",
+  },
+  {
+    step: "3",
+    icon: "🗣️",
+    title: "Retell With Support",
+    body: "Visual cues, models, choices, and repetition help children organize and retell the story in their own words.",
+  },
+  {
+    step: "4",
+    icon: "💜",
+    title: "Connect to Real Life",
+    body: "Children connect the story to their own experiences, feelings, and ideas, helping language become more meaningful and useful.",
+  },
+];
+
+export const PATHWAY_NOTE =
+  "The same supportive sequence is used across stories, creating a predictable routine that children can become more confident using over time.";
+
+/* ── What your child will learn ── */
 
 export const WILL_LEARN = [
   {
@@ -148,11 +114,7 @@ export const WILL_LEARN = [
     skill: "Grammar",
     detail: 'by practicing sentence patterns with "because" and other connecting words',
   },
-  {
-    icon: "📖",
-    skill: "Narrative skills",
-    detail: "by learning to organize and retell stories",
-  },
+  { icon: "📖", skill: "Narrative skills", detail: "by learning to organize and retell stories" },
   {
     icon: "🔤",
     skill: "Phonological awareness",
@@ -165,29 +127,156 @@ export const WILL_LEARN = [
   },
 ];
 
-/* ── Pricing, framed by what each feature gives the child ── */
+/* ── What makes Story Pros different ── */
 
-export const PRICING_FEATURES: { icon: string; title: string; benefit: string }[] = [
+export const DIFFERENTIATORS = [
   {
-    icon: "📚",
-    title: "Unlimited stories",
-    benefit:
-      "Every story is a full 13-part language session your child can play as often as they like.",
+    icon: "📖",
+    title: "Understand and Retell Stories",
+    body: "Children practise identifying important information, organizing events, and sharing ideas in a meaningful order.",
   },
   {
-    icon: "📈",
-    title: "Progress tracking",
-    benefit: "Watch listening, story structure, vocabulary, and grammar grow story by story.",
+    icon: "💬",
+    title: "Vocabulary in Context",
+    body: "New words are introduced through stories and revisited to support understanding and use.",
+  },
+  {
+    icon: "🧩",
+    title: "Built-In Language Supports",
+    body: "Visual cues, repetition, models, choices, and extra processing time are included throughout.",
   },
   {
     icon: "🏡",
-    title: "Family dashboard with tips",
-    benefit: "See what your child learned today, plus conversation starters for the dinner table.",
+    title: "Guidance for Families",
+    body: "The family dashboard shows what the child has practised and offers simple ideas for supporting their next step.",
+  },
+];
+
+/* ── Monthly Community Circle ── */
+
+export const COMMUNITY = {
+  eyebrow: "Included with membership",
+  heading: "Learn, connect, and grow together",
+  lead: "More than an app: every Story Pros membership includes access to a live monthly Story Pros Global Community Circle on Zoom.",
+  body: "Children and families can join guided story activities, practise communication in a welcoming environment, and connect with others who understand language differences.",
+  checks: [
+    "Practise communication in a welcoming, low-pressure setting",
+    "Connect with other children and families who understand language differences",
+    "Build confidence, belonging, and self-advocacy",
+  ],
+  close: "Stories help children practise language. Community helps them feel understood.",
+};
+
+/* ── Family dashboard ── */
+
+export const DASHBOARD = {
+  eyebrow: "For grown-ups",
+  heading: "You see what they practised, and what to try next",
+  body: "The family dashboard shows what your child worked on today across understanding, vocabulary, retelling, and sounds, along with a simple next step you can practise together at home.",
+  points: [
+    "A clear picture of what grew this week",
+    "Conversation starters that fit the story they just finished",
+    "Progress that saves automatically across devices",
+  ],
+};
+
+/* ── Who it is designed for ── */
+
+export const DESIGNED_FOR = [
+  "Have DLD or other language-based learning needs",
+  "Find it difficult to understand or retell stories",
+  "Need extra time to process spoken language",
+  "Have ideas they cannot easily organize or explain",
+  "Benefit from visuals, repetition, models, and choices",
+  "Feel overwhelmed by language-heavy learning activities",
+  "Need support connecting stories to their own experiences",
+];
+
+export const DESIGNED_FOR_NOTE =
+  "Story Pros was created with children with DLD in mind. Children with related language and learning needs may also benefit from its calm, structured approach.";
+
+/* ── Created by ── */
+
+export const FOUNDERS = {
+  eyebrow: "Who made this",
+  heading: "Created with language development in mind",
+  body: "Story Pros is being developed by Jinean Whitley Cheng, a speech pathologist, and Camesha Russell, an experienced educator.",
+  close:
+    "Grounded in research and best practices, and shaped through collaboration with speech pathologists and educators, Story Pros brings together clinical knowledge, classroom experience, and meaningful storytelling.",
+  people: [
+    { name: "Jinean Whitley Cheng", role: "Speech-language pathologist" },
+    { name: "Camesha Russell", role: "Educator" },
+  ],
+};
+
+/* ── See Story Pros in action ── */
+
+export const IN_ACTION = {
+  eyebrow: "See Story Pros in action",
+  heading: "One story, start to finish",
+  storyTitle: "Dan and the Paper Cut",
+  steps: [
+    "The child reads or listens to the story.",
+    "Important vocabulary is introduced in context.",
+    "The child answers supported comprehension questions.",
+    "Visuals help them sequence and retell.",
+    "The child connects the story to something from their own life.",
+    "The family dashboard provides a helpful next step.",
+  ],
+};
+
+/* ── How Story Pros differs from typical learning apps ── */
+
+export const APP_COMPARISON: { typical: string; storyPros: string }[] = [
+  {
+    typical: "Practise isolated answers",
+    storyPros: "Builds language through connected stories",
+  },
+  {
+    typical: "Move quickly from question to question",
+    storyPros: "Allows time, repetition, and supported practice",
+  },
+  {
+    typical: "Focus mainly on right or wrong answers",
+    storyPros: "Helps children understand, organize, retell, and connect",
+  },
+  {
+    typical: "Provide limited support for families",
+    storyPros: "Includes a family dashboard and monthly Community Circle",
+  },
+  {
+    typical: "May feel busy or overstimulating",
+    storyPros: "Uses a calm, predictable, age-respectful experience",
+  },
+];
+
+/* ── Membership ── */
+
+export const MEMBERSHIP_FEATURES: { icon: string; title: string; benefit: string }[] = [
+  {
+    icon: "📚",
+    title: "Access to the interactive story library",
+    benefit: "Every story is a full guided session your child can play as often as they like.",
+  },
+  {
+    icon: "✨",
+    title: "New stories and activities as they are added",
+    benefit: "The library keeps growing, and your membership keeps up with it.",
+  },
+  {
+    icon: "📈",
+    title: "Family progress dashboard",
+    benefit: "See what your child practised across understanding, vocabulary, and retelling.",
+  },
+  {
+    icon: "🏡",
+    title: "Supportive next-step ideas for home",
+    benefit: "Simple things to try together after the story, no prep needed.",
   },
   {
     icon: "🎙️",
-    title: "Monthly Community Zoom Meet-ups",
-    benefit: "Bring your questions to Camesha and Jinean alongside other DLD families.",
+    title: "One live Community Circle each month",
+    benefit: "Guided story activities with other children and families around the world.",
   },
   {
     icon: "🔓",
@@ -198,20 +287,47 @@ export const PRICING_FEATURES: { icon: string; title: string; benefit: string }[
 
 export const PRICING_HEADLINE = "Everything your child needs to find their words";
 export const PRICING_SUBHEAD =
-  "One plan. Every story, every activity, and the dashboard that shows you what is growing.";
-export const FREE_TIER_NOTE =
-  "Not ready for the trial? The free plan lets your child play the first story, no card needed.";
+  "Start free with one story. Become a member when your family is ready.";
 
-/* Note: "Why stories? Why does it work?" and "What will my child learn?"
-   were promoted out of this list into their own sections above. */
+export const FREE_TIER = {
+  title: "Free",
+  price: "$0",
+  note: "Start here",
+  body: "Play the first story from beginning to end, no card needed.",
+  features: ["One complete story", "Every activity in that story", "Family dashboard preview"],
+};
+
+export const MEMBERSHIP_TIER = {
+  title: "Story Pros Membership",
+  note: "Full access",
+  body: "The whole library, the dashboard, and the monthly Community Circle.",
+};
+
+export const FOUNDING_OFFER = {
+  title: "Founding Membership",
+  heading: `${FOUNDING_PRICE} a month, locked in for life`,
+  body: `Join the waitlist to claim a founding rate. The first ${FOUNDING_SPOTS} founding members keep ${FOUNDING_PRICE} USD a month for as long as they stay members, even as the regular price rises.`,
+  cta: "Join the Founding Member Waitlist",
+};
+
+/* ── FAQ ── */
+
 export const FAQS = [
   {
     q: "What ages is Story Pros designed for?",
-    a: "Story Pros is designed for children ages 5-12 with language-based learning differences, including DLD, language delays, ADHD, autism, and dyslexia.",
+    a: `Story Pros is designed for children ${AGE_RANGE} with language-based learning differences, including DLD, language delays, ADHD, autism, and dyslexia.`,
   },
   {
     q: "Does my child need a formal diagnosis to use Story Pros?",
-    a: "No! Story Pros is helpful for any child who struggles with language, whether they have a formal diagnosis or not. Many children on waitlists for evaluation benefit from starting practice right away.",
+    a: "No. Story Pros is helpful for any child who struggles with language, whether they have a formal diagnosis or not. Many children on waitlists for evaluation benefit from starting practice right away.",
+  },
+  {
+    q: "Is there a free version?",
+    a: "Yes. The free plan lets your child play the first story from beginning to end, with every activity included and no card required. Membership unlocks the full library, new stories as they are added, and the monthly Community Circle.",
+  },
+  {
+    q: "What is the Story Pros Community Circle?",
+    a: "It is a live monthly gathering on Zoom for member families, with guided story activities and a chance to connect with others who understand language differences. It is educational and community-based rather than group speech therapy. Members receive the joining details, timing, and format before each session.",
   },
   {
     q: "How often should my child use the app?",
@@ -219,14 +335,14 @@ export const FAQS = [
   },
   {
     q: "Do I need to sit with my child while they use the app?",
-    a: "For younger children (ages 5-7) or children who need more support, we recommend parents stay nearby, especially at first. Older or more independent children can often complete stories on their own. The app includes an optional retell section where children can practice telling the story to you!",
+    a: "For younger children or children who need more support, we recommend parents stay nearby, especially at first. Older or more independent children can often complete stories on their own. The app includes an optional retell section where children can practise telling the story to you.",
   },
   {
     q: "How does this fit with my child's speech therapy or school support?",
-    a: "Story Pros is designed to complement professional therapy, not replace it. Think of it as daily practice between therapy sessions—like homework that's actually engaging. Many SLPs recommend our app to families.",
+    a: "Story Pros is designed to complement professional therapy, not replace it. Think of it as daily practice between therapy sessions, like homework that is actually engaging. Many SLPs recommend our app to families.",
   },
   {
-    q: "Why do you need my credit card for a free trial?",
-    a: "We require a credit card to start your free trial so that if you and your child love Story Pros, your access continues seamlessly after 7 days. You won't be charged during the trial period, and you can cancel anytime before Day 7. We'll send reminder emails on Day 5 and Day 6.",
+    q: "My child is multilingual. Is Story Pros right for us?",
+    a: "Being multilingual is not a language disorder. Story Pros may help when a multilingual child also has language-based learning needs, or when they benefit from structured story support for understanding, organizing, and retelling ideas.",
   },
 ];

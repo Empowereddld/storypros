@@ -330,7 +330,8 @@ export const SCREEN_CATALOG: CatalogCategory[] = [
       {
         key: "paywall",
         label: "Premium upgrade",
-        description: "The subscription screen: free tier vs premium, $7.99 USD per child.",
+        description:
+          "The subscription screen: free tier (one story) vs membership, $7.99 USD per child.",
         route: "/paywall",
         needsAuth: true,
       },

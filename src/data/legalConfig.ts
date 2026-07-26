@@ -15,10 +15,8 @@ export const LEGAL = {
   /** When these documents take effect */
   effectiveDate: "July 2026 (beta)",
   /** Monthly premium price shown in the terms */
-  premiumPrice: "$7.99 USD/month per child, after a 7-day free trial",
+  premiumPrice: "$7.99 USD/month per child (a free plan with one story is always available)",
 } as const;
 
 /** True while any placeholder is unfilled — shows a subtle note on the pages */
-export const LEGAL_HAS_PLACEHOLDERS = Object.values(LEGAL).some((value) =>
-  value.includes("["),
-);
+export const LEGAL_HAS_PLACEHOLDERS = Object.values(LEGAL).some((value) => value.includes("["));
