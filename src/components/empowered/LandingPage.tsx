@@ -126,7 +126,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             </p>
 
             {/* Three balanced lines on mobile, two lines on desktop */}
-            <h1 className="mt-3 font-display text-[22px] font-extrabold leading-[1.15] text-primary sm:mt-5 sm:text-[40px] sm:leading-[1.12] lg:mt-7 lg:text-[46px]">
+            <h1 className="mt-3 font-display text-[24px] font-extrabold leading-[1.12] text-primary sm:mt-5 sm:text-[40px] sm:leading-[1.12] lg:mt-7 lg:text-[46px]">
               <span className="block sm:hidden">Language learning</span>
               <span className="block sm:hidden">through interactive</span>
               <span className="block sm:hidden">stories</span>
