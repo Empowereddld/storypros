@@ -46,7 +46,7 @@ import {
   FOUNDING_OFFER,
   FAQS,
 } from "@/data/landingContent";
-import danDariaThinking from "@/assets/dan-daria-thinking.webp";
+
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
 import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
