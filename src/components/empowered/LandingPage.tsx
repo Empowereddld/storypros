@@ -68,7 +68,7 @@ interface LandingPageProps {
 }
 
 const NAV_LINKS = [
-  { href: "#in-action", label: "App Preview" },
+  { href: "#in-action", label: "See the App." },
   { href: "#how-it-works", label: "How It Works" },
   { href: "#community", label: "Community" },
   { href: "#membership", label: "Membership" },
@@ -81,7 +81,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       {/* ── Top nav ── */}
       <header className="sticky top-0 z-40 border-b border-accent/40 bg-cream/85 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          <StoryProsLogo layout="row" size="sm" />
+          <StoryProsLogo layout="row" size="sm" className="h-9" />
           <nav className="hidden items-center gap-6 text-sm font-bold text-ink-soft lg:flex">
             {NAV_LINKS.map((link) => (
               <a key={link.href} href={link.href} className="transition-colors hover:text-primary">
