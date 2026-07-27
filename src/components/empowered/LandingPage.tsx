@@ -120,8 +120,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card">
-              <PaperPlaneIcon className="h-4 w-4" />
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card">
               {HERO.eyebrow}
             </p>
 
@@ -141,28 +140,23 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-9 flex flex-col items-center gap-3.5 lg:items-start">
+            <div className="mt-12 flex flex-col items-center gap-3.5 lg:items-start">
               <a
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-14 w-full max-w-[340px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
+                className="press-pop inline-flex h-14 w-full max-w-[280px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
               >
                 Join the Story Pros Waitlist
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
               </a>
               <a
                 href="#how-it-works"
-                className="press-pop inline-flex h-14 w-full max-w-[340px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
+                className="press-pop inline-flex h-14 w-full max-w-[280px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
               >
                 See How It Works
               </a>
             </div>
-
-            <p className="mt-6 text-sm font-bold text-ink-soft">
-              Start free with one story. Membership {PRICE}
-              {PRICE_PERIOD}.
-            </p>
           </div>
 
           {/* The app preview does the visual talking */}
