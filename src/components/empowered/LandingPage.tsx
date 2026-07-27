@@ -68,7 +68,7 @@ interface LandingPageProps {
 }
 
 const NAV_LINKS = [
-  { href: "#in-action", label: "See the App." },
+  { href: "#in-action", label: "See the App" },
   { href: "#how-it-works", label: "How It Works" },
   { href: "#community", label: "Community" },
   { href: "#membership", label: "Membership" },
