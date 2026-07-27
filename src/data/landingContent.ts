@@ -74,28 +74,23 @@ export const PATHWAY = [
   {
     step: "1",
     icon: "🎧",
-    title: "Read & Listen",
-    body: "Children explore a short interactive story using clear visuals, spoken language, and manageable amounts of information.",
+    title: "Read & Understand",
+    body: "Children explore a short interactive story, learn vocabulary, and identify important details.",
   },
   {
     step: "2",
-    icon: "💡",
-    title: "Understand",
-    body: "They answer supported questions, learn vocabulary in context, and identify important story details.",
+    icon: "🗣️",
+    title: "Retell & Express",
+    body: "Visual supports, models, and choices help children organize the story and share it in their own words.",
   },
   {
     step: "3",
-    icon: "🗣️",
-    title: "Retell With Support",
-    body: "Visual cues, models, choices, and repetition help children organize and retell the story in their own words.",
-  },
-  {
-    step: "4",
     icon: "💜",
-    title: "Connect to Real Life",
-    body: "Children connect the story to their own experiences, feelings, and ideas, helping language become more meaningful and useful.",
+    title: "Connect & Grow",
+    body: "Children connect the story to their own experiences, feelings, and ideas, helping language become more meaningful.",
   },
 ];
+
 
 export const PATHWAY_NOTE =
   "The same supportive sequence is used across stories, creating a predictable routine that children can become more confident using over time.";
