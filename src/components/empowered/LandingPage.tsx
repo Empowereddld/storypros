@@ -139,7 +139,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             </p>
 
             {/* Comfortable measure, roughly 520px on desktop */}
-            <p className="mx-auto mt-2.5 max-w-[340px] text-[13px] font-medium leading-[1.65] text-ink-soft sm:mt-4 sm:max-w-[520px] sm:text-[15px] sm:leading-[1.75] lg:mx-0 lg:mt-5">
+            <p className="mx-auto mt-2.5 max-w-[320px] text-[13px] font-medium leading-[1.65] text-ink-soft sm:mt-4 sm:max-w-[520px] sm:text-[15px] sm:leading-[1.75] lg:mx-0 lg:mt-5">
               {HERO.body}
             </p>
 
