@@ -199,34 +199,6 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-      {/* ── See Story Pros in action ── */}
-      <section id="in-action" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
-        <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-            {IN_ACTION.eyebrow}
-          </p>
-          <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
-            {IN_ACTION.heading}
-          </h2>
-          <p className="mt-2 text-center text-base font-medium text-ink-soft">
-            Follow “{IN_ACTION.storyTitle}” from the first page to the family dashboard.
-          </p>
-
-          {/* Scroll-driven walkthrough: the tablet follows the steps */}
-          <ScrollStoryDemo />
-
-          <div className="mt-12 text-center">
-            <button
-              onClick={onDemo}
-              className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
-            >
-              Try it yourself
-              <ChevronRightIcon className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* ── Parent problem (two-column editorial) ── */}
       <section className="px-5 py-16 sm:py-24">
         <Reveal>
@@ -256,6 +228,34 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </Reveal>
       </section>
 
+
+      {/* ── See Story Pros in action ── */}
+      <section id="in-action" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
+        <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+          <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+            {IN_ACTION.eyebrow}
+          </p>
+          <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+            {IN_ACTION.heading}
+          </h2>
+          <p className="mt-2 text-center text-base font-medium text-ink-soft">
+            Follow “{IN_ACTION.storyTitle}” from the first page to the family dashboard.
+          </p>
+
+          {/* Scroll-driven walkthrough: the tablet follows the steps */}
+          <ScrollStoryDemo />
+
+          <div className="mt-12 text-center">
+            <button
+              onClick={onDemo}
+              className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
+            >
+              Try it yourself
+              <ChevronRightIcon className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* ── Why stories work (art left) ── */}
       <CharacterSection
