@@ -303,29 +303,22 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             what to do next.
           </p>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PATHWAY.map((step, i) => (
               <Reveal key={step.step} delay={i * 100}>
-                <article className="hover-lift h-full rounded-[28px] border border-accent/60 bg-card p-6 shadow-card transition-all">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-accent text-xl"
-                      aria-hidden
-                    >
-                      {step.icon}
-                    </span>
-                    <span className="font-display text-3xl font-extrabold text-secondary">
-                      {step.step}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-lg font-extrabold text-primary">{step.title}</h3>
-                  <p className="mt-2 text-sm font-medium leading-relaxed text-ink-soft">
+                <article className="hover-lift h-full rounded-[28px] border border-accent/60 bg-card p-8 shadow-card transition-all">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-accent font-display text-2xl font-extrabold text-primary">
+                    {step.step}
+                  </span>
+                  <h3 className="mt-5 text-xl font-extrabold text-primary">{step.title}</h3>
+                  <p className="mt-3 text-[15px] font-medium leading-relaxed text-ink-soft">
                     {step.body}
                   </p>
                 </article>
               </Reveal>
             ))}
           </div>
+
 
           <p className="mx-auto mt-8 max-w-3xl rounded-[24px] border border-accent/60 bg-card p-5 text-center text-[15px] font-medium leading-relaxed text-ink-soft shadow-card">
             {PATHWAY_NOTE}
