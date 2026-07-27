@@ -134,7 +134,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               <span className="hidden sm:block">{HERO.headingLine2}</span>
             </h1>
 
-            <p className="mx-auto mt-2.5 max-w-[280px] text-sm font-bold leading-snug text-secondary-foreground/90 sm:mt-4 sm:max-w-none sm:text-xl lg:mt-5">
+            <p className="mx-auto mt-2.5 max-w-[300px] text-sm font-bold leading-snug text-secondary-foreground/90 sm:mt-4 sm:max-w-none sm:text-xl lg:mt-5">
               {HERO.subheading}
             </p>
 
