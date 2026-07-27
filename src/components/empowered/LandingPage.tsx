@@ -15,6 +15,7 @@ import { useState } from "react";
 import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
 import { CharacterSection, Reveal } from "./CharacterSection";
+import { ScrollStoryDemo } from "./ScrollStoryDemo";
 import { cn } from "@/lib/utils";
 import {
   AGE_RANGE,
@@ -116,48 +117,49 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Hero: one message, one explanation, two actions ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-4 pb-12 pt-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,540px)] lg:gap-12 lg:pb-16 lg:pt-12">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-primary shadow-card">
+            <p className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card">
               <PaperPlaneIcon className="h-4 w-4" />
               {HERO.eyebrow}
             </p>
 
             {/* Two lines on desktop, wraps naturally on smaller screens */}
-            <h1 className="mt-4 font-display text-[34px] font-extrabold leading-[1.08] text-primary sm:text-[42px] lg:text-[46px]">
+            <h1 className="mt-7 font-display text-[34px] font-extrabold leading-[1.12] text-primary sm:text-[42px] lg:text-[46px]">
               <span className="block">{HERO.headingLine1}</span>
               <span className="block">{HERO.headingLine2}</span>
             </h1>
 
-            <p className="mt-3 text-lg font-bold text-secondary-foreground/90 sm:text-xl">
+            <p className="mt-5 text-lg font-bold leading-snug text-secondary-foreground/90 sm:text-xl">
               {HERO.subheading}
             </p>
 
             {/* Comfortable measure, roughly 520px */}
-            <p className="mx-auto mt-3 max-w-[540px] text-[15px] font-medium leading-relaxed text-ink-soft lg:mx-0">
+            <p className="mx-auto mt-5 max-w-[540px] text-[15px] font-medium leading-[1.75] text-ink-soft lg:mx-0">
               {HERO.body}
             </p>
 
-            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            {/* Stacked so neither label ever wraps onto a second line */}
+            <div className="mt-9 flex flex-col items-center gap-3.5 lg:items-start">
               <a
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-13 w-full items-center justify-center gap-2 rounded-3xl bg-primary px-7 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105 sm:w-auto"
+                className="press-pop inline-flex h-14 w-full max-w-[340px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
               >
                 Join the Story Pros Waitlist
-                <ChevronRightIcon className="h-5 w-5 text-secondary" />
+                <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
               </a>
               <a
                 href="#how-it-works"
-                className="press-pop inline-flex h-13 w-full items-center justify-center rounded-3xl border-2 border-primary/70 bg-card px-7 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 sm:w-auto"
+                className="press-pop inline-flex h-14 w-full max-w-[340px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
               >
                 See How It Works
               </a>
             </div>
 
-            <p className="mt-3 text-sm font-bold text-ink-soft">
+            <p className="mt-6 text-sm font-bold text-ink-soft">
               Start free with one story. Membership {PRICE}
               {PRICE_PERIOD}.
             </p>
@@ -203,28 +205,10 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             Follow “{IN_ACTION.storyTitle}” from the first page to the family dashboard.
           </p>
 
-          <div className="mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,420px)_1fr]">
-            <Reveal className="mx-auto w-full max-w-sm lg:max-w-none">
-              <TabletMock />
-            </Reveal>
+          {/* Scroll-driven walkthrough: the tablet follows the steps */}
+          <ScrollStoryDemo />
 
-            <ol className="space-y-3">
-              {IN_ACTION.steps.map((step, i) => (
-                <Reveal key={step} delay={i * 70}>
-                  <li className="flex items-start gap-4 rounded-[22px] border border-accent/60 bg-card p-4 shadow-card">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-extrabold text-primary-foreground">
-                      {i + 1}
-                    </span>
-                    <span className="pt-1 text-[15px] font-medium leading-relaxed text-ink">
-                      {step}
-                    </span>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <button
               onClick={onDemo}
               className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
