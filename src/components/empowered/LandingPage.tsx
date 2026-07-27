@@ -227,22 +227,35 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-      {/* ── Parent problem (art right) ── */}
-      <CharacterSection side="right" image={danDariaThinking} motion="bob">
-        <h2 className="font-display text-3xl font-extrabold leading-tight text-primary sm:text-4xl">
-          {PARENT_PROBLEM.heading}
-        </h2>
-        {PARENT_PROBLEM.lead && (
-          <p className="mt-4 text-xl font-bold leading-snug text-secondary-foreground/90">
-            {PARENT_PROBLEM.lead}
-          </p>
-        )}
-        {PARENT_PROBLEM.body.split("\n\n").map((paragraph) => (
-          <p key={paragraph.slice(0, 24)} className="mt-4 text-lg font-medium leading-relaxed text-ink-soft">
-            {paragraph}
-          </p>
-        ))}
-      </CharacterSection>
+      {/* ── Parent problem (two-column editorial) ── */}
+      <section className="px-5 py-16 sm:py-24">
+        <Reveal>
+          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_1.6fr] md:gap-16">
+            <h2 className="font-display text-3xl font-extrabold leading-tight text-primary sm:text-4xl md:text-5xl">
+              {PARENT_PROBLEM.heading}
+            </h2>
+            <div>
+              {PARENT_PROBLEM.lead && (
+                <p className="text-xl font-bold leading-snug text-secondary-foreground/90">
+                  {PARENT_PROBLEM.lead}
+                </p>
+              )}
+              {PARENT_PROBLEM.body.split("\n\n").map((paragraph, i) => (
+                <p
+                  key={paragraph.slice(0, 24)}
+                  className={cn(
+                    "text-lg font-medium leading-relaxed text-ink-soft",
+                    i > 0 || PARENT_PROBLEM.lead ? "mt-6" : "",
+                  )}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
 
       {/* ── Why stories work (art left) ── */}
       <CharacterSection
