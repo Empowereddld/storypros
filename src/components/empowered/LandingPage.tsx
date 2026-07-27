@@ -232,12 +232,16 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <h2 className="font-display text-3xl font-extrabold leading-tight text-primary sm:text-4xl">
           {PARENT_PROBLEM.heading}
         </h2>
-        <p className="mt-4 text-xl font-bold leading-snug text-secondary-foreground/90">
-          {PARENT_PROBLEM.lead}
-        </p>
-        <p className="mt-4 text-lg font-medium leading-relaxed text-ink-soft">
-          {PARENT_PROBLEM.body}
-        </p>
+        {PARENT_PROBLEM.lead && (
+          <p className="mt-4 text-xl font-bold leading-snug text-secondary-foreground/90">
+            {PARENT_PROBLEM.lead}
+          </p>
+        )}
+        {PARENT_PROBLEM.body.split("\n\n").map((paragraph) => (
+          <p key={paragraph.slice(0, 24)} className="mt-4 text-lg font-medium leading-relaxed text-ink-soft">
+            {paragraph}
+          </p>
+        ))}
       </CharacterSection>
 
       {/* ── Why stories work (art left) ── */}
