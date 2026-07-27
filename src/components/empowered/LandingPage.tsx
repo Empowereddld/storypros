@@ -120,34 +120,31 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:pb-16 sm:pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-center text-[9px] font-extrabold uppercase leading-tight tracking-[0.12em] text-primary shadow-card text-balance sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.14em]">
-              {HERO.eyebrow}
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-center text-[10px] font-extrabold uppercase leading-tight tracking-[0.12em] text-primary shadow-card text-balance sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.14em]">
+              <span className="sm:hidden">For children ages 5–12</span>
+              <span className="hidden sm:inline">{HERO.eyebrow}</span>
             </p>
 
-            {/* Two lines on desktop, wraps naturally on smaller screens */}
-            <h1 className="mt-4 font-display text-[26px] font-extrabold leading-[1.1] text-primary sm:mt-5 sm:text-[40px] sm:leading-[1.12] lg:mt-7 lg:text-[46px]">
-              <span className="block">{HERO.headingLine1}</span>
-              <span className="block">{HERO.headingLine2}</span>
+            {/* Three balanced lines on mobile, two lines on desktop */}
+            <h1 className="mt-3 font-display text-[22px] font-extrabold leading-[1.15] text-primary sm:mt-5 sm:text-[40px] sm:leading-[1.12] lg:mt-7 lg:text-[46px]">
+              <span className="block sm:hidden">Language learning</span>
+              <span className="block sm:hidden">through interactive</span>
+              <span className="block sm:hidden">stories</span>
+              <span className="hidden sm:block">{HERO.headingLine1}</span>
+              <span className="hidden sm:block">{HERO.headingLine2}</span>
             </h1>
 
-            <p className="mt-3 text-base font-bold leading-snug text-secondary-foreground/90 sm:mt-4 sm:text-xl lg:mt-5">
+            <p className="mx-auto mt-2.5 max-w-[280px] text-sm font-bold leading-snug text-secondary-foreground/90 sm:mt-4 sm:max-w-none sm:text-xl lg:mt-5">
               {HERO.subheading}
             </p>
 
-            {/* Comfortable measure, roughly 520px */}
-            <p className="mx-auto mt-3 max-w-[520px] text-[14px] font-medium leading-[1.7] text-ink-soft sm:mt-4 sm:text-[15px] sm:leading-[1.75] lg:mx-0 lg:mt-5">
+            {/* Comfortable measure, roughly 520px on desktop */}
+            <p className="mx-auto mt-2.5 max-w-[340px] text-[13px] font-medium leading-[1.65] text-ink-soft sm:mt-4 sm:max-w-[520px] sm:text-[15px] sm:leading-[1.75] lg:mx-0 lg:mt-5">
               {HERO.body}
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-6 flex flex-col items-center gap-3 sm:mt-10 sm:gap-3.5 lg:items-start">
-              <button
-                onClick={onDemo}
-                className="press-pop inline-flex h-12 w-full max-w-[260px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-secondary px-6 text-sm font-extrabold text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:hidden"
-              >
-                <PaperPlaneIcon className="h-4 w-4 shrink-0" />
-                Watch Demo
-              </button>
+            <div className="mt-5 flex flex-col items-center gap-3 sm:mt-10 sm:gap-3.5 lg:items-start">
               <a
                 href={WAITLIST_URL}
                 target="_blank"
