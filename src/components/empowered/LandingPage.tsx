@@ -120,7 +120,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:pb-16 sm:pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card sm:px-4 sm:py-1.5 sm:text-[11px]">
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-[9px] font-extrabold uppercase tracking-[0.12em] text-primary shadow-card sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.14em]">
               {HERO.eyebrow}
             </p>
 
