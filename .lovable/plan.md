@@ -1,34 +1,23 @@
 ## Goal
-Make the mobile landing page feel less crowded by simplifying the header and compacting the hero text/block, while keeping the Story Pros brand voice and the existing desktop layout intact.
+Restyle the "Your child has so much to say." section as a two-column editorial layout like the Conceive Health reference, with no character illustration and a wider, roomier paragraph column.
 
-## What we’ll change
+## Changes (all in `src/components/empowered/LandingPage.tsx`)
 
-### 1. Mobile header: give the logo room
-- On screens below `sm` (mobile), hide the desktop-style "Watch Demo" pill and the "Log in" text button.
-- Replace them with a single compact primary action: keep "Join the Waitlist" as a slim pill.
-- Move "Watch Demo" out of the header on mobile and into the hero body as a secondary link/button (so the action is still available without crowding the top bar).
-- Slightly reduce header horizontal padding on mobile so the logo and CTA don’t touch the edges.
+Replace the `<CharacterSection side="right" image={danDariaThinking} …>` wrapper for the parent-problem block with a plain `<section>`:
 
-### 2. Mobile hero: compact text-first stack
-- Reduce the headline font size one more step on mobile (e.g. from `text-[32px]` to `text-[28px]` or `text-[26px]`) and tighten line-height.
-- Reduce vertical spacing between eyebrow pill, headline, subheading, and body paragraph.
-- Slim the eyebrow pill padding on mobile so it reads as a label, not a button.
-- Shorten/left-align the body paragraph on mobile for easier scanning (centered multi-line paragraphs are harder to read on phones).
-- Reduce CTA button height from `h-14` to `h-12` on mobile and use a slightly smaller font so the pills feel lighter.
-- Keep the two CTAs stacked and centered, but cap their max-width a little lower so they don’t feel like they’re pressing against the screen edges.
+```text
+[ Your child has     ]   [ You may hear "I don't know"...            ]
+[ so much to say.    ]   [                                           ]
+                         [ Story Pros gives children calm, guided... ]
+```
 
-### 3. Bring the app preview closer
-- On mobile, reduce the top padding of the hero section so the tablet/app mockup appears sooner on first load.
-- Ensure the mockup scales down cleanly and doesn’t create horizontal overflow.
-
-### 4. Verification
-- Capture a mobile preview screenshot after the changes.
-- Check that the header no longer wraps or crowds, the hero fits comfortably in the first viewport, and the CTAs remain tappable.
-
-## Files to touch
-- `src/components/empowered/LandingPage.tsx` (header + hero section)
-- Possibly `src/data/landingContent.ts` only if we decide to shorten the hero body copy
+- Two-column grid on desktop with the text column noticeably wider than the heading — roughly 1fr / 1.6fr (about 38/62) — inside a wide container (`max-w-6xl`) with generous column gap.
+- Left: `PARENT_PROBLEM.heading` in the existing display font/primary purple, large and tight, top-aligned, allowed to wrap to two lines.
+- Right: the two paragraphs from `PARENT_PROBLEM.body` (split on blank line), relaxed line-height, roomy paragraph spacing, no narrow max-width clamp so lines run long and don't feel cramped.
+- Mobile: single stacked column, heading first, full width.
+- Keep the existing scroll-reveal animation by wrapping in `Reveal` (already imported).
+- Remove the Dan & Daria floating image from this section only; drop the `danDariaThinking` import only if it becomes unused.
 
 ## Out of scope
-- No changes to desktop layout, colors, fonts, or other sections below the hero.
-- No backend or routing changes.
+- No copy changes.
+- No changes to other sections or their character art.
