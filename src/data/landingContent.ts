@@ -46,8 +46,8 @@ export const HERO_BENEFITS = [
 
 export const PARENT_PROBLEM = {
   heading: "Your child has so much to say.",
-  lead: "Finding the words, organizing the details, and explaining an idea can take extra time and support.",
-  body: "You may hear “I don't know” when you ask about their day. Important details may come out in a jumble, or frustration may grow when language feels like too much. Story Pros gives children supportive, repeated practice with understanding, organizing, and sharing ideas, at a pace that respects how they learn.",
+  lead: "",
+  body: "You may hear “I don't know” when you ask about their day, even when you know there is more they want to share. The details may come out in pieces, or they may become frustrated as they try to explain.\n\nStory Pros gives children calm, guided practice understanding stories, organizing their thoughts, and sharing ideas in ways that feel manageable.",
 };
 
 /* ── Why stories work ── */
