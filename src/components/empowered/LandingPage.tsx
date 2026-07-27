@@ -189,7 +189,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           <ul className="grid gap-3 sm:grid-cols-3">
             {HERO_BENEFITS.map((benefit, i) => (
               <Reveal key={benefit} delay={i * 90}>
-                <li className="flex h-full items-start gap-3 rounded-[22px] border border-accent/60 bg-card p-4 shadow-card">
+                <li className="flex h-full min-h-[56px] items-center gap-3 rounded-[18px] border border-accent/60 bg-card p-3 shadow-card sm:min-h-[64px] sm:p-3.5">
                   <CheckMark />
                   <span className="text-sm font-bold leading-snug text-ink">{benefit}</span>
                 </li>
