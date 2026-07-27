@@ -37,7 +37,7 @@ export const HERO = {
 
 /** The three benefits, introduced in the section after the hero */
 export const HERO_BENEFITS = [
-  "Understand and remember key story information",
+  "Understand key story information.",
   "Organize and retell ideas",
   "Connect stories to everyday life",
 ];
