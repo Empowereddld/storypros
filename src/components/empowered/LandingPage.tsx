@@ -309,18 +309,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PATHWAY.map((step, i) => (
               <Reveal key={step.step} delay={i * 100}>
-                <article className="h-full rounded-2xl bg-muted p-8">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">
-                    Step {step.step}
-                  </p>
-                  <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
-                    {step.title}
-                  </h3>
-                  <p className="mt-4 text-[15px] font-medium leading-relaxed text-ink-soft">
-                    {step.body}
-                  </p>
+                <article className="h-full overflow-hidden rounded-2xl bg-muted">
+                  {/* Image placeholder — swap for a real story image later */}
+                  <div
+                    className="flex aspect-[4/3] w-full items-center justify-center bg-accent/50 text-4xl"
+                    aria-hidden
+                  >
+                    {step.icon}
+                  </div>
+                  <div className="p-8">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">
+                      Step {step.step}
+                    </p>
+                    <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
+                      {step.title}
+                    </h3>
+                    <p className="mt-4 text-[15px] font-medium leading-relaxed text-ink-soft">
+                      {step.body}
+                    </p>
+                  </div>
                 </article>
               </Reveal>
+
             ))}
           </div>
 
