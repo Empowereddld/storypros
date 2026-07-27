@@ -80,7 +80,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
       {/* ── Top nav ── */}
       <header className="sticky top-0 z-40 border-b border-accent/40 bg-cream/85 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-3 sm:gap-4 sm:px-6">
           <StoryProsLogo layout="row" size="sm" className="h-9" />
           <nav className="hidden items-center gap-6 text-sm font-bold text-ink-soft lg:flex">
             {NAV_LINKS.map((link) => (
@@ -92,7 +92,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={onDemo}
-              className="press-pop inline-flex items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105"
+              className="press-pop hidden items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:inline-flex"
             >
               <PaperPlaneIcon className="h-4 w-4" />
               Watch Demo
@@ -107,7 +107,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               href={WAITLIST_URL}
               target="_blank"
               rel="noopener"
-              className="press-pop rounded-2xl bg-primary px-4 py-2 text-sm font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95"
+              className="press-pop rounded-2xl bg-primary px-3 py-2 text-sm font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 sm:px-4"
             >
               Join the Waitlist
             </a>
@@ -117,42 +117,49 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Hero: one message, one explanation, two actions ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:pb-16 sm:pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card sm:py-2">
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-center text-[9px] font-extrabold uppercase leading-tight tracking-[0.12em] text-primary shadow-card text-balance sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.14em]">
               {HERO.eyebrow}
             </p>
 
             {/* Two lines on desktop, wraps naturally on smaller screens */}
-            <h1 className="mt-5 font-display text-[32px] font-extrabold leading-[1.12] text-primary sm:mt-7 sm:text-[42px] lg:text-[46px]">
+            <h1 className="mt-4 font-display text-[26px] font-extrabold leading-[1.1] text-primary sm:mt-5 sm:text-[40px] sm:leading-[1.12] lg:mt-7 lg:text-[46px]">
               <span className="block">{HERO.headingLine1}</span>
               <span className="block">{HERO.headingLine2}</span>
             </h1>
 
-            <p className="mt-4 text-lg font-bold leading-snug text-secondary-foreground/90 sm:mt-5 sm:text-xl">
+            <p className="mt-3 text-base font-bold leading-snug text-secondary-foreground/90 sm:mt-4 sm:text-xl lg:mt-5">
               {HERO.subheading}
             </p>
 
             {/* Comfortable measure, roughly 520px */}
-            <p className="mx-auto mt-4 max-w-[540px] text-[15px] font-medium leading-[1.75] text-ink-soft sm:mt-5 lg:mx-0">
+            <p className="mx-auto mt-3 max-w-[520px] text-[14px] font-medium leading-[1.7] text-ink-soft sm:mt-4 sm:text-[15px] sm:leading-[1.75] lg:mx-0 lg:mt-5">
               {HERO.body}
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-8 flex flex-col items-center gap-3.5 sm:mt-12 lg:items-start">
+            <div className="mt-6 flex flex-col items-center gap-3 sm:mt-10 sm:gap-3.5 lg:items-start">
+              <button
+                onClick={onDemo}
+                className="press-pop inline-flex h-12 w-full max-w-[260px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-secondary px-6 text-sm font-extrabold text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:hidden"
+              >
+                <PaperPlaneIcon className="h-4 w-4 shrink-0" />
+                Watch Demo
+              </button>
               <a
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-14 w-full max-w-[280px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
+                className="press-pop inline-flex h-12 w-full max-w-[260px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-6 text-sm font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 sm:h-14 sm:max-w-[280px] sm:px-8 sm:text-base"
               >
                 Join the Story Pros Waitlist
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
               </a>
               <a
                 href="#how-it-works"
-                className="press-pop inline-flex h-14 w-full max-w-[280px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
+                className="press-pop inline-flex h-12 w-full max-w-[260px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-6 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5 sm:h-14 sm:max-w-[280px] sm:px-8 sm:text-base"
               >
                 See How It Works
               </a>
@@ -160,7 +167,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           </div>
 
           {/* The app preview does the visual talking */}
-          <div className="relative mx-auto w-full max-w-[540px]">
+          <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[540px]">
             <span
               className="pointer-events-none absolute inset-x-10 bottom-2 h-32 rounded-full bg-primary/10 blur-2xl"
               aria-hidden
