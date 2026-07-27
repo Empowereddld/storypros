@@ -120,27 +120,27 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card">
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary shadow-card sm:py-2">
               {HERO.eyebrow}
             </p>
 
             {/* Two lines on desktop, wraps naturally on smaller screens */}
-            <h1 className="mt-7 font-display text-[34px] font-extrabold leading-[1.12] text-primary sm:text-[42px] lg:text-[46px]">
+            <h1 className="mt-5 font-display text-[32px] font-extrabold leading-[1.12] text-primary sm:mt-7 sm:text-[42px] lg:text-[46px]">
               <span className="block">{HERO.headingLine1}</span>
               <span className="block">{HERO.headingLine2}</span>
             </h1>
 
-            <p className="mt-5 text-lg font-bold leading-snug text-secondary-foreground/90 sm:text-xl">
+            <p className="mt-4 text-lg font-bold leading-snug text-secondary-foreground/90 sm:mt-5 sm:text-xl">
               {HERO.subheading}
             </p>
 
             {/* Comfortable measure, roughly 520px */}
-            <p className="mx-auto mt-5 max-w-[540px] text-[15px] font-medium leading-[1.75] text-ink-soft lg:mx-0">
+            <p className="mx-auto mt-4 max-w-[540px] text-[15px] font-medium leading-[1.75] text-ink-soft sm:mt-5 lg:mx-0">
               {HERO.body}
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-12 flex flex-col items-center gap-3.5 lg:items-start">
+            <div className="mt-8 flex flex-col items-center gap-3.5 sm:mt-12 lg:items-start">
               <a
                 href={WAITLIST_URL}
                 target="_blank"
