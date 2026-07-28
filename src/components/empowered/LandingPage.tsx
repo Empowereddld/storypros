@@ -267,10 +267,10 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       {/* ── How Story Pros works: the four-part pathway ── */}
       <section id="how-it-works" className="scroll-mt-20">
         <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">
+          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
             How it works
           </p>
-          <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+          <h2 className="mt-2 font-display text-3xl font-extrabold text-primary sm:text-4xl">
             How Story Pros Works
           </h2>
           <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-ink-soft">
@@ -281,7 +281,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PATHWAY.map((step, i) => (
               <Reveal key={step.step} delay={i * 100}>
-                <article className="h-full overflow-hidden rounded-2xl bg-muted">
+                <article className="h-full overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card">
                   {/* Image placeholder — swap for a real story image later */}
                   <div
                     className="flex aspect-[4/3] w-full items-center justify-center bg-accent/50 text-4xl"
@@ -289,27 +289,25 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                   >
                     {step.icon}
                   </div>
-                  <div className="p-8">
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">
+                  <div className="p-6">
+                    <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
                       Step {step.step}
                     </p>
-                    <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
+                    <h3 className="mt-3 font-display text-xl font-extrabold text-primary">
                       {step.title}
                     </h3>
-                    <p className="mt-4 text-[15px] font-medium leading-relaxed text-ink-soft">
+                    <p className="mt-2 text-[15px] font-medium leading-relaxed text-ink-soft">
                       {step.body}
                     </p>
                   </div>
                 </article>
               </Reveal>
-
             ))}
           </div>
 
           <p className="mt-10 max-w-3xl text-[15px] font-medium leading-relaxed text-ink-soft">
             {PATHWAY_NOTE}
           </p>
-
         </div>
       </section>
 
