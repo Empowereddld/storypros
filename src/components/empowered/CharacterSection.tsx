@@ -35,7 +35,7 @@ export function CharacterSection({
   children,
   id,
   className,
-  motion = "float",
+  motion = "none",
   imageSize = "md",
 }: CharacterSectionProps) {
   const { ref, revealed } = useScrollReveal<HTMLElement>();
