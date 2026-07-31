@@ -78,7 +78,7 @@ export function DataFormScreen({
           </p>
         </div>
 
-        <div className="mt-5 rounded-[24px] border border-border/70 bg-card/95 p-4 shadow-soft backdrop-blur animate-slide-up">
+        <div className="mt-8 rounded-[24px] border border-border/70 bg-card/95 p-4 shadow-soft backdrop-blur animate-slide-up">
           <label htmlFor="child-name" className="text-sm font-extrabold text-primary">
             Child's name
           </label>
