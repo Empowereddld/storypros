@@ -116,8 +116,6 @@ export function AuthBackdrop({ className }: { className?: string }) {
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
       aria-hidden
     >
-      {/* base wash */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/20 to-accent/45" />
       {/* soft cloud blobs */}
       <div className="absolute -top-6 -left-8 h-40 w-56 rounded-full bg-accent/40 blur-2xl" />
       <div className="absolute top-24 -right-10 h-36 w-52 rounded-full bg-sky/50 blur-2xl" />

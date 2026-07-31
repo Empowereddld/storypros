@@ -31,7 +31,7 @@ export function DataFormScreen({
   const isValid = values.childName.trim().length > 0 && values.childAge !== null;
 
   return (
-    <div className="relative flex min-h-full flex-col overflow-hidden bg-background">
+    <div className="relative flex min-h-full flex-col overflow-hidden">
       <AuthBackdrop />
       <MiniPlane
         className="absolute right-6 top-24 z-0 hidden h-10 w-10 rotate-[18deg] text-secondary/80 sm:block"
