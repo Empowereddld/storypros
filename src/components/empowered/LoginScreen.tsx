@@ -62,9 +62,20 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
     }
   }
 
+  const busy = loading || oauthLoading !== null;
   const labelClass = "block text-sm font-bold text-ink";
   const socialClass =
     "flex h-[52px] items-center justify-center gap-2 rounded-2xl border-2 px-4 text-sm font-bold transition-colors disabled:opacity-50";
+
+  function Spinner({ className = "" }: { className?: string }) {
+    return (
+      <span
+        aria-hidden
+        className={`h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent ${className}`}
+      />
+    );
+  }
+
 
   return (
     <div className="relative flex min-h-full flex-col bg-accent/25">
