@@ -133,8 +133,11 @@ export function DataFormScreen({
 
         <div className="mt-5 space-y-2.5">
           <TactileButton disabled={!isValid} onClick={() => isValid && onSubmit(values)}>
-            Continue <ArrowRightIcon />
+            <span className="inline-flex items-center gap-2">
+              Continue <ArrowRightIcon />
+            </span>
           </TactileButton>
+
           <p className="text-center text-xs font-medium text-ink-soft">
             You can always change this later in{" "}
             <span className="font-extrabold text-primary">Settings</span>.
