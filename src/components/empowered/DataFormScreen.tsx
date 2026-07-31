@@ -134,7 +134,7 @@ export function DataFormScreen({
           </p>
         </div>
 
-        <div className="mt-8 space-y-2.5">
+        <div className="mt-6 space-y-2.5">
           <TactileButton
             disabled={!isValid}
             onClick={() => isValid && onSubmit(values)}
