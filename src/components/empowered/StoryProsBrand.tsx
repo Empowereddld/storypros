@@ -186,16 +186,18 @@ export function IconInput({
         {icon}
       </span>
       <input
+        id={id}
         type={effectiveType}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         autoComplete={autoComplete}
         className={cn(
-          "w-full rounded-2xl border-2 border-accent/70 bg-card py-3.5 pl-12 text-base font-semibold text-ink placeholder:font-medium placeholder:text-ink-soft/50 focus:border-primary focus:outline-none transition-colors",
+          "w-full rounded-2xl border-2 border-primary/30 bg-card py-3.5 pl-12 text-base font-semibold text-ink placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus:outline-none transition-colors",
           revealable ? "pr-12" : "pr-4",
         )}
       />
+
       {revealable && (
         <button
           type="button"
