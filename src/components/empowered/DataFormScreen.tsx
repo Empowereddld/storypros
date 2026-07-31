@@ -92,7 +92,7 @@ export function DataFormScreen({
             autoComplete="off"
           />
 
-          <label htmlFor="child-age" className="mt-4 block text-sm font-extrabold text-primary">
+          <label htmlFor="child-age" className="mt-6 block text-sm font-extrabold text-primary">
             Age
           </label>
           <div className="relative mt-2">
