@@ -68,7 +68,6 @@ interface LandingPageProps {
 }
 
 const NAV_LINKS = [
-  { href: "#in-action", label: "See the App" },
   { href: "#how-it-works", label: "How It Works" },
   { href: "#community", label: "Community" },
   { href: "#membership", label: "Membership" },
@@ -95,7 +94,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               className="press-pop hidden items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:inline-flex"
             >
               <PaperPlaneIcon className="h-4 w-4" />
-              Watch Demo
+              Try the Demo
             </button>
             <button
               onClick={onLogin}
@@ -178,7 +177,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             className="press-pop mx-auto mt-6 inline-flex h-12 w-full max-w-[260px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-secondary px-6 text-sm font-extrabold text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:hidden"
           >
             <PaperPlaneIcon className="h-4 w-4 shrink-0" />
-            Watch Demo
+            Try the Demo
           </button>
         </div>
       </section>
