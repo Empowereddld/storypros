@@ -62,9 +62,20 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
     }
   }
 
+  const busy = loading || oauthLoading !== null;
   const labelClass = "block text-sm font-bold text-ink";
   const socialClass =
     "flex h-[52px] items-center justify-center gap-2 rounded-2xl border-2 px-4 text-sm font-bold transition-colors disabled:opacity-50";
+
+  function Spinner({ className = "" }: { className?: string }) {
+    return (
+      <span
+        aria-hidden
+        className={`h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent ${className}`}
+      />
+    );
+  }
+
 
   return (
     <div className="relative flex min-h-full flex-col bg-accent/25">
@@ -97,6 +108,7 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
                 onChange={setEmail}
                 placeholder="name@example.com"
                 autoComplete="email"
+                disabled={busy}
               />
             </div>
 
@@ -113,22 +125,18 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
                 onChange={setPassword}
                 placeholder="Enter your password"
                 autoComplete="current-password"
+                disabled={busy}
               />
             </div>
 
             {error && <AuthStatusCard tone="error" title="Let's try that again" message={error} />}
 
-            {(loading || oauthLoading) && (
-              <AuthStatusCard
-                tone="loading"
-                title={oauthLoading ? "Opening secure sign-in" : "Checking your account"}
-                message="Story Pros is making sure everything is ready."
-              />
-            )}
-
             <div className="pt-1">
-              <TactileButton type="submit" disabled={loading || !email.trim() || !password}>
-                {loading ? "Logging in…" : "Log in"}
+              <TactileButton type="submit" disabled={busy || !email.trim() || !password}>
+                <span className="inline-flex items-center justify-center gap-2">
+                  {loading && <Spinner />}
+                  {loading ? "Signing you in…" : "Log in"}
+                </span>
               </TactileButton>
             </div>
           </form>
@@ -153,22 +161,23 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
             <button
               type="button"
               onClick={() => handleOAuth("google")}
-              disabled={oauthLoading !== null}
+              disabled={busy}
               className={`${socialClass} border-primary/20 bg-card text-ink hover:border-primary/40`}
             >
-              <GoogleMark />
-              {oauthLoading === "google" ? "…" : "Google"}
+              {oauthLoading === "google" ? <Spinner className="text-primary" /> : <GoogleMark />}
+              Google
             </button>
             <button
               type="button"
               onClick={() => handleOAuth("apple")}
-              disabled={oauthLoading !== null}
+              disabled={busy}
               className={`${socialClass} border-ink bg-ink text-cream hover:bg-ink/90`}
             >
-              <AppleMark />
-              {oauthLoading === "apple" ? "…" : "Apple"}
+              {oauthLoading === "apple" ? <Spinner /> : <AppleMark />}
+              Apple
             </button>
           </div>
+
 
           {/* Account creation */}
           <div className="mt-8 text-center">

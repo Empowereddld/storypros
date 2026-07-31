@@ -162,6 +162,7 @@ export function IconInput({
   placeholder,
   autoComplete,
   revealable = false,
+  disabled = false,
   className,
 }: {
   id?: string;
@@ -173,6 +174,7 @@ export function IconInput({
   autoComplete?: string;
   /** show a password reveal eye toggle */
   revealable?: boolean;
+  disabled?: boolean;
   className?: string;
 }) {
   const [show, setShow] = useState(false);
@@ -190,8 +192,9 @@ export function IconInput({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        disabled={disabled}
         className={cn(
-          "h-[56px] w-full rounded-2xl border-2 border-primary/40 bg-card pl-12 text-base font-semibold text-ink placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition-colors",
+          "h-[56px] w-full rounded-2xl border-2 border-primary/40 bg-card pl-12 text-base font-semibold text-ink placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition-colors disabled:cursor-not-allowed disabled:bg-muted/40 disabled:text-ink/70",
           revealable ? "pr-12" : "pr-4",
         )}
       />
@@ -200,12 +203,14 @@ export function IconInput({
         <button
           type="button"
           onClick={() => setShow((s) => !s)}
+          disabled={disabled}
           aria-label={show ? "Hide password" : "Show password"}
-          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full text-primary/60 hover:bg-accent/50 transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full text-primary/60 hover:bg-accent/50 transition-colors disabled:opacity-50"
         >
           {show ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       )}
+
     </div>
   );
 }
