@@ -55,12 +55,12 @@ export function DataFormScreen({
             Step {step} of {totalSteps}
           </span>
         </div>
-        <div className="mx-auto flex w-full max-w-[560px] gap-1.5 px-4 pb-2.5" aria-hidden>
+        <div className="mx-auto flex w-full max-w-[480px] gap-1.5 px-4 pb-2.5" aria-hidden>
           {Array.from({ length: totalSteps }).map((_, i) => (
             <span
               key={i}
               className={cn(
-                "h-1.5 flex-1 rounded-full",
+                "h-1 flex-1 rounded-full",
                 i < step ? "bg-primary" : "bg-accent",
               )}
             />
@@ -78,7 +78,7 @@ export function DataFormScreen({
           </p>
         </div>
 
-        <div className="mt-5 rounded-[24px] border border-border/70 bg-card/95 p-4 shadow-soft backdrop-blur animate-slide-up">
+        <div className="mt-8 rounded-[24px] border border-border/70 bg-card/95 p-4 shadow-soft backdrop-blur animate-slide-up">
           <label htmlFor="child-name" className="text-sm font-extrabold text-primary">
             Child's name
           </label>
@@ -92,7 +92,7 @@ export function DataFormScreen({
             autoComplete="off"
           />
 
-          <label htmlFor="child-age" className="mt-4 block text-sm font-extrabold text-primary">
+          <label htmlFor="child-age" className="mt-6 block text-sm font-extrabold text-primary">
             Age
           </label>
           <div className="relative mt-2">
@@ -131,17 +131,16 @@ export function DataFormScreen({
           </p>
         </div>
 
-        <div className="mt-5 space-y-2.5">
-          <TactileButton disabled={!isValid} onClick={() => isValid && onSubmit(values)}>
+        <div className="mt-8 space-y-2.5">
+          <TactileButton
+            disabled={!isValid}
+            onClick={() => isValid && onSubmit(values)}
+            className="disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
+          >
             <span className="inline-flex items-center gap-2">
               Continue <ArrowRightIcon />
             </span>
           </TactileButton>
-
-          <p className="text-center text-xs font-medium text-ink-soft">
-            You can always change this later in{" "}
-            <span className="font-extrabold text-primary">Settings</span>.
-          </p>
         </div>
       </div>
     </div>
