@@ -15,6 +15,7 @@ import { Route as ReviewRouteImport } from './routes/review'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LandingpageRouteImport } from './routes/landingpage'
 import { Route as IntroRouteImport } from './routes/intro'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as DemoRouteImport } from './routes/demo'
@@ -65,6 +66,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LandingpageRoute = LandingpageRouteImport.update({
+  id: '/landingpage',
+  path: '/landingpage',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntroRoute = IntroRouteImport.update({
@@ -184,6 +190,7 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/intro': typeof IntroRoute
+  '/landingpage': typeof LandingpageRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -212,6 +219,7 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/intro': typeof IntroRoute
+  '/landingpage': typeof LandingpageRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -242,6 +250,7 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/intro': typeof IntroRoute
+  '/landingpage': typeof LandingpageRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -272,6 +281,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/forgot-password'
     | '/intro'
+    | '/landingpage'
     | '/login'
     | '/privacy'
     | '/reset-password'
@@ -300,6 +310,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/forgot-password'
     | '/intro'
+    | '/landingpage'
     | '/login'
     | '/privacy'
     | '/reset-password'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/forgot-password'
     | '/intro'
+    | '/landingpage'
     | '/login'
     | '/privacy'
     | '/reset-password'
@@ -359,6 +371,7 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   IntroRoute: typeof IntroRoute
+  LandingpageRoute: typeof LandingpageRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -410,6 +423,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/landingpage': {
+      id: '/landingpage'
+      path: '/landingpage'
+      fullPath: '/landingpage'
+      preLoaderRoute: typeof LandingpageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intro': {
@@ -609,6 +629,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   IntroRoute: IntroRoute,
+  LandingpageRoute: LandingpageRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
@@ -620,3 +641,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
