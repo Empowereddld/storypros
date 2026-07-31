@@ -156,6 +156,7 @@ export function MiniPlane({ className }: { className?: string }) {
 /* ───────── Icon input ───────── */
 
 export function IconInput({
+  id,
   icon,
   type = "text",
   value,
@@ -165,6 +166,7 @@ export function IconInput({
   revealable = false,
   className,
 }: {
+  id?: string;
   icon: ReactNode;
   type?: string;
   value: string;
