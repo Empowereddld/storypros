@@ -70,10 +70,7 @@ export function DataFormScreen({
 
       <div className="relative z-10 mx-auto flex w-full max-w-[540px] flex-1 flex-col px-5 pb-6 pt-6">
         <div className="text-center animate-slide-up">
-          <span className="inline-block rounded-full bg-accent px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.12em] text-primary">
-            Grown-Up Setup
-          </span>
-          <h1 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[30px]">
+          <h1 className="font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[30px]">
             Create your child's profile
           </h1>
           <p className="mx-auto mt-2.5 max-w-[340px] text-[15px] font-medium leading-snug text-ink-soft">
