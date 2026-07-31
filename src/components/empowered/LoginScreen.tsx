@@ -1,9 +1,7 @@
 /* ─────────────────────────────────────────────
  * Login Screen
- * Rebuilt from the "Colorful Kids App Login" mockup:
- * Story Pros header + Dan/Daria, icon inputs, and a
- * "Create an Account" path. Google/Apple sign-in is
- * preserved as a secondary option.
+ * Centred Story Pros logo + single focused login card.
+ * Google/Apple sign-in preserved as secondary options.
  * ───────────────────────────────────────────── */
 
 import { useState } from "react";
@@ -11,7 +9,6 @@ import { AuthStatusCard } from "./AuthStatusCard";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Profile } from "@/contexts/AuthContext";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
 import {
   AuthBackdrop,
   StoryProsLogo,
@@ -65,113 +62,132 @@ export function LoginScreen({ onSignUp, onForgotPassword, onSuccess, onDemo }: L
     }
   }
 
+  const labelClass = "block text-sm font-bold text-ink";
+  const socialClass =
+    "flex h-[52px] items-center justify-center gap-2 rounded-2xl border-2 px-4 text-sm font-bold transition-colors disabled:opacity-50";
+
   return (
-    <div className="relative flex h-full flex-col bg-cream">
+    <div className="relative flex min-h-full flex-col bg-accent/25">
       <AuthBackdrop />
 
-      <div className="relative z-10 flex h-full flex-col overflow-y-auto no-scrollbar px-6 pb-8">
-        {/* Header: characters + logo */}
-        <div className="flex items-start justify-between pt-6">
-          <img
-            src={dariaAndFriend}
-            alt="Dan and Daria"
-            className="h-24 w-auto object-contain drop-shadow-[0_10px_18px_rgba(28,28,21,0.14)]"
-          />
-          <StoryProsLogo layout="row" size="sm" className="pt-2" />
-        </div>
+      <div className="relative z-10 flex min-h-full flex-col items-center overflow-y-auto no-scrollbar px-5 py-8 sm:px-6">
+        {/* Centred logo */}
+        <StoryProsLogo layout="row" size="sm" />
 
-        {/* curved divider */}
-        <div className="mt-1 h-1 rounded-full bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        {/* Login card — 32px below the logo */}
+        <div className="mt-8 w-full max-w-[520px] rounded-3xl border border-primary/10 bg-card p-8 shadow-[0_18px_44px_-24px_rgba(82,29,153,0.28)] sm:p-10">
+          <h1 className="text-center font-display text-3xl font-extrabold text-primary">
+            Welcome back
+          </h1>
+          <p className="mt-2.5 text-center text-sm font-medium text-ink-soft">
+            Log in to continue your Story Pros journey.
+          </p>
 
-        <h1 className="mt-5 text-center font-display text-3xl font-extrabold text-primary">
-          Log In
-        </h1>
+          <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+            <div>
+              <label htmlFor="login-email" className={labelClass}>
+                Email
+              </label>
+              <IconInput
+                id="login-email"
+                className="mt-2"
+                icon={<MailIcon />}
+                type="email"
+                value={email}
+                onChange={setEmail}
+                placeholder="name@example.com"
+                autoComplete="email"
+              />
+            </div>
 
-        <form onSubmit={handleSubmit} className="mt-5 space-y-3">
-          <IconInput
-            icon={<MailIcon />}
-            type="email"
-            value={email}
-            onChange={setEmail}
-            placeholder="Email"
-            autoComplete="email"
-          />
-          <IconInput
-            icon={<LockIcon />}
-            revealable
-            value={password}
-            onChange={setPassword}
-            placeholder="Password"
-            autoComplete="current-password"
-          />
+            <div>
+              <label htmlFor="login-password" className={labelClass}>
+                Password
+              </label>
+              <IconInput
+                id="login-password"
+                className="mt-2"
+                icon={<LockIcon />}
+                revealable
+                value={password}
+                onChange={setPassword}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
+            </div>
 
-          {error && <AuthStatusCard tone="error" title="Let's try that again" message={error} />}
+            {error && <AuthStatusCard tone="error" title="Let's try that again" message={error} />}
 
-          {(loading || oauthLoading) && (
-            <AuthStatusCard
-              tone="loading"
-              title={oauthLoading ? "Opening secure sign-in" : "Checking your account"}
-              message="Story Pros is making sure everything is ready."
-            />
-          )}
+            {(loading || oauthLoading) && (
+              <AuthStatusCard
+                tone="loading"
+                title={oauthLoading ? "Opening secure sign-in" : "Checking your account"}
+                message="Story Pros is making sure everything is ready."
+              />
+            )}
 
-          <TactileButton type="submit" disabled={loading || !email.trim() || !password}>
-            {loading ? "Logging in…" : "Log In"}
-          </TactileButton>
-        </form>
+            <div className="pt-1">
+              <TactileButton type="submit" disabled={loading || !email.trim() || !password}>
+                {loading ? "Logging in…" : "Log in"}
+              </TactileButton>
+            </div>
+          </form>
 
-        <button
-          type="button"
-          onClick={onForgotPassword}
-          className="mt-3 w-full text-center text-sm font-bold text-primary hover:text-primary/80 transition-colors"
-        >
-          Forgot Password?
-        </button>
-
-        {/* Divider */}
-        <div className="mt-5 flex items-center gap-3">
-          <div className="h-px flex-1 bg-accent" />
-          <span className="text-xs font-bold uppercase tracking-wider text-ink-soft/70">or</span>
-          <div className="h-px flex-1 bg-accent" />
-        </div>
-
-        {/* OAuth */}
-        <div className="mt-4 grid grid-cols-2 gap-3">
           <button
             type="button"
-            onClick={() => handleOAuth("google")}
-            disabled={oauthLoading !== null}
-            className="flex items-center justify-center gap-2 rounded-2xl border-2 border-accent/80 bg-card py-3 text-sm font-bold text-ink hover:border-primary/50 transition-colors disabled:opacity-50"
+            onClick={onForgotPassword}
+            className="mt-3 w-full text-center text-sm font-bold text-primary transition-colors hover:text-primary/80"
           >
-            <GoogleMark />
-            {oauthLoading === "google" ? "…" : "Google"}
+            Forgot your password?
           </button>
-          <button
-            type="button"
-            onClick={() => handleOAuth("apple")}
-            disabled={oauthLoading !== null}
-            className="flex items-center justify-center gap-2 rounded-2xl border-2 border-ink bg-ink py-3 text-sm font-bold text-cream hover:bg-ink/90 transition-colors disabled:opacity-50"
-          >
-            <AppleMark />
-            {oauthLoading === "apple" ? "…" : "Apple"}
-          </button>
+
+          {/* Divider */}
+          <div className="my-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-primary/15" />
+            <span className="text-xs font-semibold text-ink-soft">or continue with</span>
+            <div className="h-px flex-1 bg-primary/15" />
+          </div>
+
+          {/* OAuth */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={() => handleOAuth("google")}
+              disabled={oauthLoading !== null}
+              className={`${socialClass} border-primary/20 bg-card text-ink hover:border-primary/40`}
+            >
+              <GoogleMark />
+              {oauthLoading === "google" ? "…" : "Google"}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleOAuth("apple")}
+              disabled={oauthLoading !== null}
+              className={`${socialClass} border-ink bg-ink text-cream hover:bg-ink/90`}
+            >
+              <AppleMark />
+              {oauthLoading === "apple" ? "…" : "Apple"}
+            </button>
+          </div>
+
+          {/* Account creation */}
+          <div className="mt-8 text-center">
+            <p className="text-sm font-medium text-ink-soft">New to Story Pros?</p>
+            <TactileButton variant="ghost" className="mt-3" onClick={onSignUp}>
+              Create an account
+            </TactileButton>
+
+            {onDemo && (
+              <button
+                type="button"
+                onClick={onDemo}
+                className="mt-4 w-full text-center text-xs font-semibold text-ink-soft underline underline-offset-4 transition-colors hover:text-primary"
+              >
+                Just exploring? Try the demo
+              </button>
+            )}
+          </div>
         </div>
-
-        <div className="flex-1" />
-
-        <TactileButton variant="ghost" className="mt-6" onClick={onSignUp}>
-          Create an Account
-        </TactileButton>
-
-        {onDemo && (
-          <button
-            type="button"
-            onClick={onDemo}
-            className="mt-3 w-full text-center text-sm font-bold text-primary hover:text-primary/80 transition-colors"
-          >
-            Just exploring? Try a Demo Account
-          </button>
-        )}
       </div>
     </div>
   );
