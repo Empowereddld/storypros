@@ -11,10 +11,14 @@ function OnboardingProfilePage() {
   const { addChild } = useAuth();
   return (
     <DataFormScreen
+      step={1}
+      totalSteps={3}
+      onBack={() => navigate({ to: "/intro" })}
       onSubmit={async (values) => {
         await addChild(values.childName, values.childAge);
         navigate({ to: "/onboarding/success" });
       }}
     />
+
   );
 }

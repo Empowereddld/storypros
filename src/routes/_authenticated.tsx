@@ -55,12 +55,16 @@ function AuthenticatedLayout() {
     }
   }
 
+  // Onboarding is a focused flow — hide the full app navigation there.
+  const isOnboarding = path.startsWith("/onboarding");
+
   // Website layout: full-bleed canvas. Laptop (lg+) gets a top nav;
   // tablets/phones keep the screens' own bottom tabs + top-left menu.
   return (
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-cream">
       <DemoBanner />
-      <DesktopNav />
+      {!isOnboarding && <DesktopNav />}
+
       <div className="relative flex-1 overflow-y-auto no-scrollbar">
         <div className="relative mx-auto h-full w-full lg:max-w-5xl">
           <div key={path} className="h-full animate-slide-up">
