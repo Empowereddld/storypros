@@ -55,12 +55,12 @@ export function DataFormScreen({
             Step {step} of {totalSteps}
           </span>
         </div>
-        <div className="mx-auto flex w-full max-w-[560px] gap-1.5 px-4 pb-2.5" aria-hidden>
+        <div className="mx-auto flex w-full max-w-[480px] gap-1.5 px-4 pb-2.5" aria-hidden>
           {Array.from({ length: totalSteps }).map((_, i) => (
             <span
               key={i}
               className={cn(
-                "h-1.5 flex-1 rounded-full",
+                "h-1 flex-1 rounded-full",
                 i < step ? "bg-primary" : "bg-accent",
               )}
             />
