@@ -110,7 +110,7 @@ export function DataFormScreen({
                 setValues((p) => ({ ...p, childAge: Number.isNaN(next) ? null : next }));
               }}
               className={cn(
-                "h-[52px] w-full appearance-none rounded-2xl border-2 border-primary/30 bg-card pl-12 pr-12 text-base font-semibold text-ink outline-none transition-colors focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                "h-[56px] w-full appearance-none rounded-2xl border-2 border-primary/30 bg-card pl-12 pr-12 text-base font-semibold text-ink outline-none transition-colors focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
                 values.childAge === null && "text-ink-soft",
               )}
             >
