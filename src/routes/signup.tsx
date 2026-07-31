@@ -16,7 +16,7 @@ function SignUpPage() {
             if (role === "slp" || role === "teacher") {
               navigate({ to: "/slp" });
             } else {
-              navigate({ to: "/onboarding/profile" });
+              navigate({ to: "/intro" });
             }
           }}
           onSignIn={() => navigate({ to: "/login" })}

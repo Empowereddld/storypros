@@ -5,6 +5,7 @@ import { DesktopNav, DemoBanner } from "@/components/empowered/AppChrome";
 import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { processExpiredSubscriptions } from "@/services/subscription";
+import { hasSeenIntro } from "@/lib/introSeen";
 
 export const Route = createFileRoute("/_authenticated")({
   component: AuthenticatedLayout,
@@ -49,9 +50,10 @@ function AuthenticatedLayout() {
       return <Navigate to="/slp" />;
     }
 
-    // Parents who haven't onboarded must finish onboarding first
+    // Parents who haven't onboarded must finish onboarding first —
+    // starting with the four child-friendly intro screens at /intro.
     if (!isSlpRole && profile && !profile.onboarded && !path.startsWith("/onboarding")) {
-      return <Navigate to="/onboarding/profile" />;
+      return <Navigate to={hasSeenIntro() ? "/onboarding/profile" : "/intro"} />;
     }
   }
 
