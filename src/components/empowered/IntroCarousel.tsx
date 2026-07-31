@@ -1,21 +1,19 @@
 /* ─────────────────────────────────────────────
  * Intro / Onboarding Carousel
- * Rebuilt from the selected onboarding mockups:
- *   1. Learn Through Stories  (what you'll practice)
- *   2. Earn Coins             (motivation)
- *   3. Read, Watch & Listen   (how stories work)
- *   4. Meet Dan & Daria       (the characters)
+ *   1. Read, Watch & Listen
+ *   2. Understand, Retell & Connect
+ *   3. Earn Coins & Rewards
+ *   4. Meet Dan & Daria
  * ───────────────────────────────────────────── */
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { TactileButton } from "./TactileButton";
 import { cn } from "@/lib/utils";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
 import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import dariaSolo from "@/assets/daria-solo.png";
 import childAvatar from "@/assets/child-avatar.png";
-import { AuthBackdrop, StoryProsLogo, Star } from "./StoryProsBrand";
+import { AuthBackdrop, StoryProsLogo } from "./StoryProsBrand";
 import { CoinIcon } from "./StoryProsUi";
 
 interface IntroCarouselProps {
@@ -27,35 +25,71 @@ const SLIDE_COUNT = 4;
 export function IntroCarousel({ onComplete }: IntroCarouselProps) {
   const [index, setIndex] = useState(0);
   const isLast = index === SLIDE_COUNT - 1;
+  const touchStartX = useRef<number | null>(null);
+
+  const go = (next: number) => setIndex(Math.min(SLIDE_COUNT - 1, Math.max(0, next)));
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") go(index + 1);
+      if (e.key === "ArrowLeft") go(index - 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index]);
 
   return (
-    <div className="relative flex h-full flex-col bg-cream">
+    <div
+      className="relative flex h-full flex-col"
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0]?.clientX ?? null;
+      }}
+      onTouchEnd={(e) => {
+        const start = touchStartX.current;
+        const end = e.changedTouches[0]?.clientX;
+        if (start == null || end == null) return;
+        const dx = end - start;
+        if (Math.abs(dx) > 48) go(dx < 0 ? index + 1 : index - 1);
+        touchStartX.current = null;
+      }}
+    >
       <AuthBackdrop />
 
-      <div className="relative z-10 flex h-full flex-col px-6 pb-7 pt-5">
-        {/* Top bar: logo + skip */}
-        <div className="flex items-center justify-between">
-          <StoryProsLogo layout="row" size="sm" />
-          {!isLast && (
-            <button
-              onClick={onComplete}
-              className="rounded-full border border-accent bg-card px-3.5 py-1.5 text-sm font-bold text-ink-soft hover:text-primary transition-colors"
-            >
-              Skip
-            </button>
-          )}
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[620px] flex-col px-5 pb-6 pt-4 sm:px-8">
+        {/* Header: logo + skip (Skip hidden on last slide, space preserved) */}
+        <div className="flex min-h-[44px] items-center justify-between">
+          <StoryProsLogo layout="row" size="sm" className="min-h-[44px] py-1" />
+          <button
+            onClick={onComplete}
+            aria-label="Skip introduction and go to profile setup"
+            className={cn(
+              "flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-accent bg-card px-4 text-sm font-bold text-ink-soft transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+              isLast && "invisible",
+            )}
+            tabIndex={isLast ? -1 : 0}
+            aria-hidden={isLast}
+          >
+            Skip
+          </button>
         </div>
 
         {/* Slide content */}
-        <div key={index} className="flex flex-1 flex-col animate-slide-up">
-          {index === 0 && <SlideLearn />}
-          {index === 1 && <SlideRewards />}
-          {index === 2 && <SlideModes />}
+        <div
+          key={index}
+          className="motion-safe:animate-slide-up flex flex-1 flex-col justify-center pb-5"
+        >
+          {index === 0 && <SlideModes />}
+          {index === 1 && <SlideLearn />}
+          {index === 2 && <SlideRewards />}
           {index === 3 && <SlideMeet />}
         </div>
 
-        {/* Dots */}
-        <div className="mt-4 flex items-center justify-center gap-2">
+        {/* Progress dots */}
+        <div
+          className="flex items-center justify-center gap-2"
+          role="group"
+          aria-label={`Step ${index + 1} of ${SLIDE_COUNT}`}
+        >
           {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
             <span
               key={i}
@@ -67,90 +101,112 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           ))}
         </div>
 
-        <TactileButton
-          className="mt-4"
-          onClick={() => (isLast ? onComplete() : setIndex(index + 1))}
-        >
-          {isLast ? "Get Started" : "Next"}
-        </TactileButton>
+        <div className="mt-5 flex justify-center pb-1">
+          <TactileButton
+            className="w-full sm:max-w-[560px]"
+            aria-label={isLast ? "Get started with profile setup" : "Next screen"}
+            onClick={() => (isLast ? onComplete() : go(index + 1))}
+          >
+            {isLast ? "Get Started" : "Next"}
+          </TactileButton>
+        </div>
       </div>
     </div>
   );
 }
 
-/* ───────── Slide 1: Learn Through Stories ───────── */
+/* ───────── Shared header pieces ───────── */
+
+function Heading({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="text-center font-display text-[28px] font-extrabold leading-tight text-primary sm:text-[34px]">
+      {children}
+    </h2>
+  );
+}
+
+function Support({ children }: { children: ReactNode }) {
+  return (
+    <p className="mx-auto mt-3 max-w-[430px] text-center text-base font-medium leading-snug text-ink-soft sm:text-[17px]">
+      {children}
+    </p>
+  );
+}
+
+/* ───────── Slide 1: Read, Watch & Listen ───────── */
+
+function SlideModes() {
+  return (
+    <div>
+      <img
+        src={danDariaReading}
+        alt=""
+        aria-hidden
+        className="mx-auto w-[130px] object-contain sm:w-[150px]"
+      />
+      <div className="mt-6">
+        <Heading>Read, Watch &amp; Listen</Heading>
+        <Support>Choose how you want to experience each story.</Support>
+      </div>
+
+      <CardRow>
+        <IconCard icon={<BookIcon />} label="Read Along" />
+        <IconCard icon={<HeadphonesIcon />} label="Listen" />
+        <IconCard icon={<PlayIcon />} label="Watch" />
+      </CardRow>
+    </div>
+  );
+}
+
+/* ───────── Slide 2: Understand, Retell & Connect ───────── */
 
 function SlideLearn() {
   return (
-    <div className="flex flex-1 flex-col justify-center">
-      <h2 className="text-center font-display text-3xl font-extrabold leading-tight text-primary">
-        Learn Through Stories
-      </h2>
-      <p className="mx-auto mt-1.5 max-w-[18rem] text-center text-sm font-medium text-ink-soft">
-        Every adventure helps you practice language, thinking, and confidence.
-      </p>
+    <div>
+      <Heading>Understand, Retell &amp; Connect</Heading>
+      <Support>
+        Understand what happened, tell it in your own words, and connect it to your life.
+      </Support>
 
-      <div className="mt-5 grid grid-cols-2 gap-3">
-        <FeatureTile
-          tone="primary"
-          icon={<HeadphonesIcon />}
-          title="Watch & Listen"
-          subtitle="Stories come to life"
-        />
-        <FeatureTile
-          tone="secondary"
-          icon={<QuestionIcon />}
-          title="Answer Questions"
-          subtitle="Think, choose, learn"
-        />
-        <FeatureTile
-          tone="primary"
-          icon={<HeartIcon />}
-          title="Check In on Feelings"
-          subtitle="Notice and build empathy"
-        />
-        <FeatureTile
-          tone="secondary"
-          icon={<RetellIcon />}
-          title="Retell the Story"
-          subtitle="Make it yours"
-        />
-      </div>
+      <CardRow>
+        <IconCard icon={<QuestionIcon />} label="Understand the Story" />
+        <IconCard icon={<SpeechIcon />} label="Retell in Your Words" />
+        <IconCard icon={<HeartIcon />} label="Connect to Your Life" />
+      </CardRow>
     </div>
   );
 }
 
-/* Slide 2: Earn Coins */
+/* ───────── Slide 3: Earn Coins & Rewards ───────── */
 
 function SlideRewards() {
   return (
-    <div className="flex flex-1 flex-col justify-center">
-      <h2 className="text-center font-display text-3xl font-extrabold leading-tight text-primary">
-        Earn Coins <span className="text-secondary">&amp; Rewards</span>
-      </h2>
-      <p className="mx-auto mt-1.5 max-w-[18rem] text-center text-sm font-medium text-ink-soft">
-        Complete stories, collect Coins, and unlock rewards.
-      </p>
+    <div>
+      <Heading>Earn Coins &amp; Rewards</Heading>
+      <Support>Complete stories, collect coins, and unlock rewards.</Support>
 
-      <img src={danDariaCelebrate} alt="" className="mx-auto mt-3 h-28 w-auto object-contain" />
+      <img
+        src={danDariaCelebrate}
+        alt=""
+        aria-hidden
+        className="mx-auto mt-5 h-[110px] w-auto object-contain"
+      />
 
-      <div className="mt-3 rounded-3xl border border-accent/60 bg-card p-4 shadow-card">
+      <div className="mt-5 rounded-3xl border border-accent/60 bg-card p-5 shadow-card">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2 font-bold text-primary">
             <CoinIcon className="h-5 w-5 text-secondary" /> Coins
           </span>
           <span className="text-xl font-extrabold text-ink">120</span>
         </div>
-        <div className="mt-3 flex items-center justify-between text-sm font-bold">
-          <span className="flex items-center gap-1.5 text-coral">
-            <BookMiniIcon /> 1 story completed
-          </span>
+        <div className="mt-4 flex items-center justify-between text-sm font-bold">
+          <span className="text-ink">Next reward</span>
           <span className="text-primary">75%</span>
         </div>
-        <div className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-accent/60">
+        <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-accent">
           <div className="h-full w-[75%] rounded-full bg-success" />
         </div>
-        <div className="mt-3 flex justify-center gap-2 text-xs font-bold text-ink-soft">
+        <div className="mt-4 grid grid-cols-3 gap-2 text-xs font-bold text-ink-soft">
           <Pill>Badges</Pill>
           <Pill>Wallpapers</Pill>
           <Pill>Planes</Pill>
@@ -160,46 +216,17 @@ function SlideRewards() {
   );
 }
 
-/* ───────── Slide 3: Read, Watch & Listen ───────── */
-
-function SlideModes() {
-  return (
-    <div className="flex flex-1 flex-col justify-center">
-      <img src={danDariaReading} alt="" className="mx-auto h-36 w-auto object-contain" />
-      <h2 className="mt-3 text-center font-display text-3xl font-extrabold leading-tight text-primary">
-        Read, Watch, <span className="text-secondary">&amp; Listen</span>
-      </h2>
-      <p className="mx-auto mt-1.5 max-w-[18rem] text-center text-sm font-medium text-ink-soft">
-        Enjoy story adventures with voice, visuals, and guided learning.
-      </p>
-
-      <div className="mt-5 grid grid-cols-3 gap-3">
-        <ModeTile tone="primary" icon={<BookIcon />} label="Read Along" />
-        <ModeTile tone="secondary" icon={<HeadphonesIcon />} label="Listen" />
-        <ModeTile tone="primary" icon={<PlayIcon />} label="Watch" />
-      </div>
-    </div>
-  );
-}
-
 /* ───────── Slide 4: Meet Dan & Daria ───────── */
 
 function SlideMeet() {
   return (
-    <div className="flex flex-1 flex-col justify-center">
-      <h2 className="text-center font-display text-3xl font-extrabold leading-tight">
-        <span className="text-ink">Meet </span>
-        <span className="text-primary">Dan</span>
-        <span className="text-ink"> &amp; </span>
-        <span className="text-secondary">Daria</span>
-      </h2>
-      <p className="mx-auto mt-1.5 max-w-[18rem] text-center text-sm font-medium text-ink-soft">
-        Two story friends who help kids explore, express, and grow.
-      </p>
+    <div>
+      <Heading>Meet Dan &amp; Daria</Heading>
+      <Support>Two story friends who help you explore, express yourself, and grow.</Support>
 
-      <div className="mt-5 grid grid-cols-2 gap-3">
-        <CharacterCard name="Dan" tone="primary" img={childAvatar} />
-        <CharacterCard name="Daria" tone="secondary" img={dariaSolo} />
+      <div className="mt-7 grid grid-cols-2 gap-4">
+        <CharacterCard name="Dan" img={childAvatar} />
+        <CharacterCard name="Daria" img={dariaSolo} />
       </div>
     </div>
   );
@@ -207,92 +234,44 @@ function SlideMeet() {
 
 /* ───────── Pieces ───────── */
 
-function FeatureTile({
-  tone,
-  icon,
-  title,
-  subtitle,
-}: {
-  tone: "primary" | "secondary";
-  icon: ReactNode;
-  title: string;
-  subtitle: string;
-}) {
+function CardRow({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-accent/60 bg-card p-3.5 shadow-card">
-      <span
-        className={cn(
-          "flex h-10 w-10 items-center justify-center rounded-xl",
-          tone === "primary"
-            ? "bg-accent text-primary"
-            : "bg-secondary/25 text-secondary-foreground",
-        )}
-      >
+    <div className="mt-7 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-4">{children}</div>
+  );
+}
+
+function IconCard({ icon, label }: { icon: ReactNode; label: string }) {
+  return (
+    <div className="flex min-h-[68px] items-center gap-3 rounded-2xl border border-accent/60 bg-card p-4 shadow-card sm:min-h-[150px] sm:flex-col sm:justify-center sm:gap-3 sm:p-5">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
         {icon}
       </span>
-      <p className="mt-2 text-sm font-extrabold leading-tight text-ink">{title}</p>
-      <p className="text-[11px] leading-snug text-ink-soft">{subtitle}</p>
+      <p className="text-sm font-extrabold leading-tight text-ink sm:text-center">{label}</p>
     </div>
   );
 }
 
-function ModeTile({
-  tone,
-  icon,
-  label,
-}: {
-  tone: "primary" | "secondary";
-  icon: ReactNode;
-  label: string;
-}) {
-  return (
-    <div className="flex flex-col items-center gap-2 rounded-2xl border border-accent/60 bg-card p-3 shadow-card">
-      <span
-        className={cn(
-          "flex h-11 w-11 items-center justify-center rounded-xl",
-          tone === "primary"
-            ? "bg-accent text-primary"
-            : "bg-secondary/25 text-secondary-foreground",
-        )}
-      >
-        {icon}
-      </span>
-      <span className="text-xs font-bold text-primary">{label}</span>
-    </div>
-  );
-}
-
-function CharacterCard({
-  name,
-  tone,
-  img,
-}: {
-  name: string;
-  tone: "primary" | "secondary";
-  img: string;
-}) {
+function CharacterCard({ name, img }: { name: string; img: string }) {
   return (
     <div className="overflow-hidden rounded-3xl border border-accent/60 bg-card shadow-card">
-      <div className="flex h-40 items-end justify-center bg-gradient-to-b from-accent/30 to-accent/60">
-        <img src={img} alt={name} className="h-36 w-auto object-contain object-bottom" />
+      <div className="flex h-44 items-end justify-center bg-gradient-to-b from-accent/30 to-accent/60">
+        <img
+          src={img}
+          alt={`${name}, a Story Pros character`}
+          className="h-40 w-auto object-contain object-bottom"
+        />
       </div>
-      <div className="flex items-center justify-between px-4 py-2.5">
+      <div className="px-5 py-3.5">
         <span className="font-extrabold text-primary">{name}</span>
-        <span
-          className={cn(
-            "flex h-7 w-7 items-center justify-center rounded-full text-white",
-            tone === "primary" ? "bg-primary" : "bg-secondary",
-          )}
-        >
-          <Star className="h-3.5 w-3.5" />
-        </span>
       </div>
     </div>
   );
 }
 
 function Pill({ children }: { children: ReactNode }) {
-  return <span className="rounded-full bg-accent/50 px-2.5 py-1">{children}</span>;
+  return (
+    <span className="rounded-full bg-accent/50 px-2.5 py-1.5 text-center">{children}</span>
+  );
 }
 
 /* ───────── Icons ───────── */
@@ -301,7 +280,7 @@ function HeadphonesIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-5 w-5"
+      className="h-6 w-6"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -317,7 +296,7 @@ function QuestionIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-5 w-5"
+      className="h-6 w-6"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -328,18 +307,11 @@ function QuestionIcon() {
     </svg>
   );
 }
-function HeartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-      <path d="M12 21s-7-4.5-9.5-9C1 8.5 2.5 5 6 5c2 0 3 1.2 6 4 3-2.8 4-4 6-4 3.5 0 5 3.5 3.5 7-2.5 4.5-9.5 9-9.5 9z" />
-    </svg>
-  );
-}
-function RetellIcon() {
+function SpeechIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-5 w-5"
+      className="h-6 w-6"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -350,11 +322,18 @@ function RetellIcon() {
     </svg>
   );
 }
+function HeartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+      <path d="M12 21s-7-4.5-9.5-9C1 8.5 2.5 5 6 5c2 0 3 1.2 6 4 3-2.8 4-4 6-4 3.5 0 5 3.5 3.5 7-2.5 4.5-9.5 9-9.5 9z" />
+    </svg>
+  );
+}
 function BookIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-5 w-5"
+      className="h-6 w-6"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -364,23 +343,9 @@ function BookIcon() {
     </svg>
   );
 }
-function BookMiniIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-4 w-4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      aria-hidden
-    >
-      <path d="M4 5h7v15H6a2 2 0 01-2-2V5zM20 5h-7v15h5a2 2 0 002-2V5z" strokeLinejoin="round" />
-    </svg>
-  );
-}
 function PlayIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
       <path d="M8 5l12 7-12 7z" />
     </svg>
   );
