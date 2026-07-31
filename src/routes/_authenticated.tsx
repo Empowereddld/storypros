@@ -61,7 +61,7 @@ function AuthenticatedLayout() {
   // Website layout: full-bleed canvas. Laptop (lg+) gets a top nav;
   // tablets/phones keep the screens' own bottom tabs + top-left menu.
   return (
-    <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-cream">
+    <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-gradient-to-b from-white via-accent/20 to-accent/45">
       <DemoBanner />
       {!isOnboarding && <DesktopNav />}
 
