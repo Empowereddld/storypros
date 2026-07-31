@@ -5,6 +5,7 @@ import { LandingPage } from "@/components/empowered/LandingPage";
 import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { DEMO_PERSONA_ID } from "@/services/demoAccounts";
+import { hasSeenIntro } from "@/lib/introSeen";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -20,7 +21,7 @@ function Index() {
     if (profile?.role === "slp" || profile?.role === "teacher") {
       navigate({ to: "/slp" });
     } else if (profile && !profile.onboarded) {
-      navigate({ to: "/onboarding/profile" });
+      navigate({ to: hasSeenIntro() ? "/onboarding/profile" : "/intro" });
     } else if (profile?.onboarded) {
       navigate({ to: children.length > 1 ? "/select-child" : "/home" });
     }
