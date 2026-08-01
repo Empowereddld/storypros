@@ -321,37 +321,6 @@ function PersonHeartIcon() {
   );
 }
 
-function HeadphonesIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <path d="M4 13a8 8 0 0116 0" strokeLinecap="round" />
-      <rect x="3" y="13" width="4" height="7" rx="2" />
-      <rect x="17" y="13" width="4" height="7" rx="2" />
-    </svg>
-  );
-}
-function QuestionIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M9.2 9.5a2.8 2.8 0 015.4 1c0 1.8-2.6 2.2-2.6 4M12 17.2h.01" strokeLinecap="round" />
-    </svg>
-  );
-}
 function SpeechIcon() {
   return (
     <svg
@@ -367,31 +336,19 @@ function SpeechIcon() {
     </svg>
   );
 }
-function HeartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-      <path d="M12 21s-7-4.5-9.5-9C1 8.5 2.5 5 6 5c2 0 3 1.2 6 4 3-2.8 4-4 6-4 3.5 0 5 3.5 3.5 7-2.5 4.5-9.5 9-9.5 9z" />
-    </svg>
-  );
-}
-function BookIcon() {
+
+function ChevronLeftIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
       className="h-6 w-6"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.8"
       aria-hidden
     >
-      <path d="M4 5h7v15H6a2 2 0 01-2-2V5zM20 5h-7v15h5a2 2 0 002-2V5z" strokeLinejoin="round" />
+      <path d="M15 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-      <path d="M8 5l12 7-12 7z" />
-    </svg>
-  );
-}
+
