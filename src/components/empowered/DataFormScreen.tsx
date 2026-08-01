@@ -208,7 +208,7 @@ export function DataFormScreen({
             <fieldset className="mt-5">
               <legend className="text-sm font-extrabold text-primary">
                 Does your child have a diagnosis?{" "}
-                <span className="font-bold text-coral">Required</span>
+                <RequiredStar />
               </legend>
               <p className="mt-1.5 text-xs font-semibold text-ink-soft">
                 Select all that apply.
