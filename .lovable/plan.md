@@ -29,7 +29,7 @@ Country, diagnoses, and the custom diagnosis are collected but never saved — o
 - One shared vertical layout across all three intro slides.
 - Back chevron in the intro header; dots become real, announced step controls.
 - Intro primary button width aligned with the rest of the flow (320px cap).
-- One-line descriptions on Dan and Daria, matched portrait crops.
+- Meet Dan & Daria slide untouched.
 - Honest step label and progress fill on the profile screen.
 - Remove the phantom empty paragraph.
 - Required markers, a hint line for the disabled state, and a real label on the custom diagnosis field.
