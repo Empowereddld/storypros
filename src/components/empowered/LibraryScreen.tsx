@@ -257,7 +257,7 @@ function StoryCard({ story, onOpen }: { story: CardStory; onOpen: () => void }) 
   return (
     <button
       onClick={onOpen}
-      className="hover-lift flex min-h-[240px] flex-col overflow-hidden rounded-[26px] border border-accent/50 bg-card text-left shadow-card active:scale-[0.98]"
+      className="hover-lift flex min-h-[215px] flex-col overflow-hidden rounded-[26px] border border-accent/50 bg-card text-left shadow-card active:scale-[0.98]"
     >
       <div className="relative h-[140px] overflow-hidden bg-accent">
         {story.image ? (
