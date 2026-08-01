@@ -53,9 +53,23 @@ export function DataFormScreen({
   const [values, setValues] = useState<OnboardingFormValues>({
     childName: "",
     childAge: null,
+    country: "",
+    diagnoses: [],
   });
 
-  const isValid = values.childName.trim().length > 0 && values.childAge !== null;
+  const toggleDiagnosis = (item: string) =>
+    setValues((p) => ({
+      ...p,
+      diagnoses: p.diagnoses.includes(item)
+        ? p.diagnoses.filter((d) => d !== item)
+        : [...p.diagnoses, item],
+    }));
+
+  const isValid =
+    values.childName.trim().length > 0 &&
+    values.childAge !== null &&
+    values.country.length > 0;
+
 
   return (
     <div className="relative flex min-h-full flex-col overflow-hidden">
