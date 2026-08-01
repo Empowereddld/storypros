@@ -97,6 +97,15 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
         <Star className="absolute left-8 top-36 z-10 h-4 w-4 text-secondary animate-sparkle" />
         <Star className="absolute right-12 bottom-28 z-10 h-5 w-5 text-primary/40 animate-sparkle" />
 
+        <button
+          type="button"
+          onClick={() => window.history.back()}
+          aria-label="Go back"
+          className="press-pop absolute left-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/80 text-primary shadow-card transition-colors hover:bg-accent"
+        >
+          <ArrowLeftIcon />
+        </button>
+
         <div className="relative z-20 flex h-full flex-col items-center justify-center px-5 py-6">
           <StoryProsLogo layout="row" size="md" className="animate-pop-in" />
 
@@ -109,14 +118,14 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
             </p>
           </div>
 
-          <div className="mt-7 w-full max-w-[420px] overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up">
+          <div className="mt-7 w-full max-w-[420px] overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-[0_18px_40px_-16px_color-mix(in_oklab,var(--primary)_45%,transparent)] ring-1 ring-primary/10 animate-slide-up">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-accent sm:aspect-[16/10]">
               <img
                 src={cover || danDariaThinking}
                 alt=""
-                className="h-full w-full object-cover object-[center_22%]"
+                className="h-full w-full object-cover object-[42%_22%]"
               />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/80 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary via-primary/70 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
                   Starting Story
@@ -128,19 +137,20 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
             </div>
           </div>
 
-          <p className="mt-6 text-center text-[13px] font-semibold leading-snug text-ink-soft">
+          <p className="mt-6 text-center text-[12px] font-medium leading-snug text-ink-soft/80">
             A grown-up can change the level any time.
           </p>
 
           <TactileButton
             onClick={() => setPhase("playing")}
-            className="mt-5 w-full max-w-[320px]"
+            className="mt-5 w-full max-w-[320px] whitespace-nowrap"
           >
-            <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap">
+            <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap leading-none">
               Start the Story <ArrowRightIcon />
             </span>
           </TactileButton>
         </div>
+
 
       </div>
     );
