@@ -188,20 +188,20 @@ export function CoinIcon({ className = "h-4 w-4" }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="6.75"
+        r="6.9"
         fill="none"
-        stroke="#000"
-        strokeOpacity="0.14"
-        strokeWidth="1.4"
+        stroke="var(--card)"
+        strokeOpacity="0.55"
+        strokeWidth="1.2"
       />
       <path
-        d="M12 7.2l1.15 3.05 3.25.2-2.55 2.05.9 3.15-2.75-1.85-2.75 1.85.9-3.15-2.55-2.05 3.25-.2L12 7.2z"
-        fill="#000"
-        fillOpacity="0.18"
+        d="M12 7.4l1.12 2.95 3.15.2-2.47 2 .87 3.05-2.67-1.8-2.67 1.8.87-3.05-2.47-2 3.15-.2L12 7.4z"
+        fill="var(--card)"
       />
     </svg>
   );
 }
+
 
 export function BookCheckIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
