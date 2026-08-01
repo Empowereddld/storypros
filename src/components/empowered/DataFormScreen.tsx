@@ -213,6 +213,7 @@ export function DataFormScreen({
                       <input
                         type="checkbox"
                         checked={checked}
+                        disabled={submitting}
                         onChange={() => toggleDiagnosis(item)}
                         className="h-5 w-5 shrink-0 accent-primary"
                       />
@@ -226,6 +227,7 @@ export function DataFormScreen({
                 id="other-diagnosis"
                 type="text"
                 value={values.otherDiagnosis}
+                disabled={submitting}
                 onChange={(event) =>
                   setValues((p) => ({ ...p, otherDiagnosis: event.target.value.slice(0, 80) }))
                 }
@@ -238,13 +240,29 @@ export function DataFormScreen({
         </div>
 
         <div className="mt-8 space-y-2.5">
+          {error ? (
+            <p
+              role="alert"
+              className="rounded-2xl border-2 border-coral/40 bg-coral/10 px-4 py-3 text-sm font-semibold text-coral"
+            >
+              {error}
+            </p>
+          ) : null}
           <TactileButton
-            disabled={!isValid}
-            onClick={() => isValid && onSubmit(values)}
+            disabled={!isValid || submitting}
+            onClick={() => isValid && !submitting && onSubmit(values)}
             className="h-12 disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
           >
             <span className="inline-flex items-center gap-2">
-              Continue <ArrowRightIcon />
+              {submitting ? (
+                <>
+                  <Spinner /> Setting things up…
+                </>
+              ) : (
+                <>
+                  Continue <ArrowRightIcon />
+                </>
+              )}
             </span>
           </TactileButton>
         </div>
