@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
 import danDariaThinking from "@/assets/dan-daria-thinking.webp";
 import { cn } from "@/lib/utils";
@@ -255,17 +255,6 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
   );
 }
 
-function FeatureChip({ icon, label }: { icon: ReactNode; label: string }) {
-  return (
-    <div className="flex min-h-14 items-center gap-2 rounded-[22px] border border-border/70 bg-card/95 p-2.5 shadow-card">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
-        {icon}
-      </span>
-      <span className="text-sm font-extrabold text-primary">{label}</span>
-    </div>
-  );
-}
-
 function DomainIcon({ domain }: { domain: SkillDomain }) {
   if (domain === "listening") return <HeadphonesIcon />;
   if (domain === "story_structure") return <BookIcon />;
@@ -286,21 +275,6 @@ function HeadphonesIcon() {
       <path d="M4 13a8 8 0 0116 0" strokeLinecap="round" />
       <rect x="3" y="13" width="5" height="7" rx="2" />
       <rect x="16" y="13" width="5" height="7" rx="2" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.6"
-      aria-hidden
-    >
-      <path d="M5 12.5l4 4L19 6.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
