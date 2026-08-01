@@ -233,8 +233,8 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       <TactileButton className="flex-1" onClick={openContinue}>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
-                      <SpeakButton text={ctaLabel} tone="soft" />
                     </div>
+
                   )}
                 </div>
               </article>
