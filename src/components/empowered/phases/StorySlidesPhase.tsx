@@ -132,6 +132,7 @@ export function StorySlidesPhase({
   const slideImg = resolveStoryImage(storyData.id, current.image);
   const ElementIcon = ELEMENT_ICONS[current.story_element] ?? User;
   const elementLabel = ELEMENT_LABELS[current.story_element];
+  const elementColors = ELEMENT_COLORS[current.story_element];
   const isLast = page === slides.length - 1;
   const progress = ((page + 1) / slides.length) * 100;
   const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
