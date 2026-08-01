@@ -117,8 +117,6 @@ export function ComprehensionPhase({
       setBrainCheck({ type: "none" });
       setCurrentAttempt(1);
       setWrongIds(new Set());
-      setOptionsRevealed(false);
-      setShowHint(false);
       startTime.current = Date.now();
     } else {
       setSelected(null);
