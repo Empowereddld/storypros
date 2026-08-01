@@ -66,7 +66,7 @@ export function StoryMetaPills({
       <span className="rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
         {settingLabel(story)}
       </span>
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/90 px-3 py-1 text-xs font-extrabold text-white">
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-extrabold text-gray-700">
         {skillLabel(story)}
       </span>
     </div>
