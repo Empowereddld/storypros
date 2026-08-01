@@ -119,7 +119,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto grid w-full max-w-[1240px] items-center gap-7 px-5 pb-8 pt-4 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-9 lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] lg:gap-[80px] lg:pb-[88px] lg:pt-[80px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex max-w-[30ch] items-center justify-center gap-2 rounded-full bg-primary/8 px-3 py-1 text-center text-[9px] font-bold uppercase leading-[1.35] tracking-[0.06em] text-primary text-balance sm:max-w-none sm:bg-card sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.1em] sm:shadow-card">
+            <p className="inline-flex max-w-[30ch] items-center justify-center gap-2 rounded-full bg-primary/8 px-3 py-1.5 text-center text-[9px] font-bold uppercase leading-[1.7] tracking-[0.04em] text-primary text-balance sm:max-w-none sm:bg-card sm:px-4 sm:py-2 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.07em] sm:shadow-card">
               {HERO.eyebrow}
             </p>
 
