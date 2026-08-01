@@ -116,8 +116,9 @@ export function DataFormScreen({
             <div className="space-y-6">
               <div>
                 <label htmlFor="child-name" className="block text-sm font-extrabold text-primary">
-                  Child's name
+                  Child's name <span className="font-bold text-coral">Required</span>
                 </label>
+
                 <IconInput
                   id="child-name"
                   className="mt-2"
