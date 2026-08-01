@@ -28,6 +28,48 @@ const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>>
   result: CheckCircle2,
 };
 
+const ELEMENT_COLORS: Record<
+  StoryElement,
+  { bg: string; text: string; iconBg: string; ring: string }
+> = {
+  character: {
+    bg: "bg-element-character",
+    text: "text-element-character-foreground",
+    iconBg: "bg-element-character-foreground/20",
+    ring: "ring-element-character-foreground/30",
+  },
+  place: {
+    bg: "bg-element-place",
+    text: "text-element-place-foreground",
+    iconBg: "bg-element-place-foreground/20",
+    ring: "ring-element-place-foreground/30",
+  },
+  problem: {
+    bg: "bg-element-problem",
+    text: "text-element-problem-foreground",
+    iconBg: "bg-element-problem-foreground/20",
+    ring: "ring-element-problem-foreground/30",
+  },
+  emotion: {
+    bg: "bg-element-emotion",
+    text: "text-element-emotion-foreground",
+    iconBg: "bg-element-emotion-foreground/20",
+    ring: "ring-element-emotion-foreground/30",
+  },
+  action: {
+    bg: "bg-element-action",
+    text: "text-element-action-foreground",
+    iconBg: "bg-element-action-foreground/20",
+    ring: "ring-element-action-foreground/30",
+  },
+  result: {
+    bg: "bg-element-result",
+    text: "text-element-result-foreground",
+    iconBg: "bg-element-result-foreground/20",
+    ring: "ring-element-result-foreground/30",
+  },
+};
+
 function SpeakerIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
     <svg
