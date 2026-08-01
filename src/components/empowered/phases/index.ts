@@ -14,3 +14,5 @@ export { PhonologicalPhase } from "./PhonologicalPhase";
 export { JokePhase } from "./JokePhase";
 export { PersonalConnectionPhase } from "./PersonalConnectionPhase";
 export { StoryCompletePhase } from "./StoryCompletePhase";
+
+export { SectionIntro } from "./SectionIntro";
