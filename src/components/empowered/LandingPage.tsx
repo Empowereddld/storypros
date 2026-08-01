@@ -14,7 +14,15 @@
 import { useState } from "react";
 import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
-import { Repeat } from "lucide-react";
+import {
+  Repeat,
+  MessageCircle,
+  Headphones,
+  AlignLeft,
+  BookOpen,
+  Volume2,
+  CheckCircle2,
+} from "lucide-react";
 import { CharacterSection, Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
