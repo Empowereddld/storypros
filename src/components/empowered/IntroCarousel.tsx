@@ -250,7 +250,7 @@ function CardRow({ children }: { children: ReactNode }) {
 
 function IconCard({ icon, label }: { icon: ReactNode; label: string }) {
   return (
-    <div className="flex min-h-[68px] items-center gap-3 rounded-2xl border border-accent/60 bg-card p-4 shadow-card sm:flex-col sm:justify-center sm:gap-4 sm:p-6">
+    <div className="flex h-[72px] items-center gap-3 rounded-2xl border border-accent/60 bg-card p-3 shadow-card sm:h-auto sm:min-h-[170px] sm:flex-col sm:justify-center sm:gap-4 sm:p-6">
       <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
         {icon}
       </span>
