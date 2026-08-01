@@ -335,7 +335,6 @@ function WeekStrip({
 
 function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => void }) {
   const goal = "Finish today's story to earn your first coins.";
-  const text = coins > 0 ? `You have ${coins} coins. Spend them in the shop.` : goal;
   return (
     <div className="relative overflow-hidden rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">
       <span aria-hidden className="absolute inset-y-2 left-0 w-1.5 rounded-full bg-secondary" />
@@ -350,8 +349,8 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
             <span className="text-sm font-extrabold text-ink">Coins</span>
           )}
         </span>
-        <SpeakButton text={text} tone="soft" size="sm" />
       </div>
+
       <p className="mt-1 text-[12px] font-bold leading-snug text-ink-soft">
         {coins > 0 ? "Spend them in the Shop!" : goal}
       </p>
