@@ -74,7 +74,7 @@ export function DataFormScreen({
             Create your child's profile
           </h1>
           <p className="mx-auto mt-4 max-w-[420px] text-[15px] font-medium leading-snug text-ink-soft">
-            Add a few details to personalize their Story Pros experience.
+            {"\n"}
           </p>
         </div>
 
