@@ -142,14 +142,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                     </div>
                   )}
                   <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
-                  <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wide text-primary-foreground shadow-card">
-                    <Play className="h-3.5 w-3.5 fill-current" />
-                    {cont.status === "in-progress"
-                      ? "Continue Story"
-                      : cont.status === "replay"
-                        ? "Replay Story"
-                        : "Next Story"}
-                  </span>
+
                 </div>
 
                 <div className="relative -mt-10 rounded-t-[32px] bg-card px-4 pb-4 pt-4 lg:px-5">
