@@ -32,6 +32,17 @@ const DIAGNOSES = [
   "Unsure",
 ];
 
+function RequiredStar() {
+  return (
+    <>
+      <span className="font-bold text-coral" aria-hidden>
+        ★
+      </span>
+      <span className="sr-only">(required)</span>
+    </>
+  );
+}
+
 
 export function DataFormScreen({
   onSubmit,
@@ -73,33 +84,28 @@ export function DataFormScreen({
       />
       <Star className="absolute left-8 top-32 z-0 hidden h-4 w-4 text-secondary sm:block" />
 
-      {/* Simplified onboarding header: logo · back · step */}
+      {/* Slim onboarding bar: back · logo · step, with one continuous progress rail */}
       <header className="relative z-20 border-b border-border/60 bg-card/85 backdrop-blur">
-        <div className="mx-auto grid w-full max-w-[560px] grid-cols-[44px_1fr_auto] items-center gap-2 px-4 py-3">
+        <div className="mx-auto grid h-14 w-full max-w-[560px] grid-cols-[40px_1fr_auto] items-center gap-2 px-4">
           <button
             type="button"
             aria-label="Go back"
             disabled={submitting}
             onClick={() => (onBack ? onBack() : window.history.back())}
-            className="press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
+            className="press-pop flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 text-primary transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
           >
             <ChevronLeftIcon />
           </button>
           <StoryProsLogo layout="row" size="sm" className="mx-auto" />
-          <span className="rounded-full bg-accent px-3 py-1.5 text-xs font-extrabold text-primary">
-            Step {step} of {totalSteps}
+          <span className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-soft">
+            Step {step} / {totalSteps}
           </span>
         </div>
-        <div className="mx-auto flex w-full max-w-[420px] gap-1.5 px-4 pb-3" aria-hidden>
-          {Array.from({ length: totalSteps }).map((_, i) => (
-            <span
-              key={i}
-              className={cn(
-                "h-0.5 flex-1 rounded-full",
-                i < step ? "bg-primary" : "bg-primary/20",
-              )}
-            />
-          ))}
+        <div className="h-0.5 w-full bg-primary/15" aria-hidden>
+          <div
+            className="h-full bg-primary transition-[width] duration-500 ease-out"
+            style={{ width: `${(step / totalSteps) * 100}%` }}
+          />
         </div>
       </header>
 
@@ -108,7 +114,15 @@ export function DataFormScreen({
           <h1 className="font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
             Create your child's profile
           </h1>
+          <p className="mt-2 text-xs font-semibold text-ink-soft">
+            <span className="text-coral" aria-hidden>
+              ★
+            </span>{" "}
+            = required
+          </p>
         </div>
+
+
 
 
         <div className="mt-8 space-y-8">
@@ -116,7 +130,7 @@ export function DataFormScreen({
             <div className="space-y-6">
               <div>
                 <label htmlFor="child-name" className="block text-sm font-extrabold text-primary">
-                  Child's name <span className="font-bold text-coral">Required</span>
+                  Child's name <RequiredStar />
                 </label>
 
                 <IconInput
@@ -133,7 +147,7 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="child-age" className="block text-sm font-extrabold text-primary">
-                  Age <span className="font-bold text-coral">Required</span>
+                  Age <RequiredStar />
                 </label>
 
                 <div className="relative mt-2">
@@ -170,7 +184,7 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="country" className="block text-sm font-extrabold text-primary">
-                  Country <span className="font-bold text-coral">Required</span>
+                  Country <RequiredStar />
                 </label>
 
                 <IconInput
@@ -194,7 +208,7 @@ export function DataFormScreen({
             <fieldset className="mt-5">
               <legend className="text-sm font-extrabold text-primary">
                 Does your child have a diagnosis?{" "}
-                <span className="font-bold text-coral">Required</span>
+                <RequiredStar />
               </legend>
               <p className="mt-1.5 text-xs font-semibold text-ink-soft">
                 Select all that apply.
