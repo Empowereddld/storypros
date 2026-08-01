@@ -25,7 +25,7 @@ type FilterTab = "all" | "open" | "completed" | "locked";
 
 const TABS: { key: FilterTab; label: string }[] = [
   { key: "all", label: "All" },
-  { key: "open", label: "Ready" },
+  { key: "open", label: "Continue" },
   { key: "completed", label: "Done" },
   { key: "locked", label: "Locked" },
 ];
