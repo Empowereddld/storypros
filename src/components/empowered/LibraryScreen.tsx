@@ -5,7 +5,7 @@ import { getAllStories } from "@/services/stories";
 import { getCompletedStoryIds, getPaperPlanes } from "@/services/progress";
 import { getCheckpoint } from "@/services/checkpoint";
 import { canAccessStory } from "@/services/subscription";
-import { TOTAL_PLAYABLE_PHASES, prettifyTheme } from "@/services/continueStory";
+import { TOTAL_PLAYABLE_PHASES } from "@/services/continueStory";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star, StoryProsLogo, LockIcon, UserIcon } from "./StoryProsBrand";
 import {
