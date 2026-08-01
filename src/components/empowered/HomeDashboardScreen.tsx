@@ -152,15 +152,13 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         {cont.story.title}
                       </h2>
                       <SpeakButton
-                        text={`${cont.story.title}. ${recap}`}
-                        label={`Hear the story title and what happened`}
+                        text={cont.story.title}
+                        label={`Hear the story title`}
                         tone="primary"
                         size="sm"
                       />
                     </div>
-                    {recap && (
-                      <p className="mt-2 text-[14px] font-medium leading-snug text-ink">{recap}</p>
-                    )}
+                    <StoryMetaPills story={cont.story} className="mt-2.5" />
                   </div>
 
                   <div className="mt-4 flex items-center justify-between text-xs font-extrabold">
