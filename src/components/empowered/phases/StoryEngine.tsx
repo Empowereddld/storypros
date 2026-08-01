@@ -312,10 +312,8 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
               <h2 className="mt-1.5 font-display text-[28px] font-extrabold leading-tight text-primary">
                 Keep going?
               </h2>
-              <p className="mt-2 text-[15px] font-semibold leading-snug text-ink-soft">
-                You’re partway through{" "}
-                <span className="font-extrabold text-ink">{storyData.title}</span>. Next:{" "}
-                <span className="font-extrabold text-primary">{nextLabel}</span>.
+              <p className="mt-2 text-[15px] font-extrabold leading-snug text-ink">
+                {storyData.title}
               </p>
 
               <div className="mt-5">
