@@ -179,7 +179,26 @@ export function StorySlidesPhase({
       <div className="relative z-10 mx-auto w-full max-w-[600px] flex-1 overflow-y-auto no-scrollbar px-5 pb-6 pt-6">
         <div key={page} className="flex w-full flex-col animate-pop-in">
           {/* Story element badge — color-coded pill so the grammar label stands out */}
-          <div className="mb-4 flex items-center">
+          <div className="mb-4 flex items-center gap-2.5">
+            {supported && (
+              <button
+                type="button"
+                onClick={() => toggle(elementLabel, "element")}
+                aria-label={isPlaying("element") ? "Stop" : `Read ${elementLabel}`}
+                className={cn(
+                  "press-pop flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                  isPlaying("element")
+                    ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
+                    : ["border-accent/50 bg-card shadow-card hover:bg-accent/40", elementColors.text],
+                )}
+              >
+                {isPlaying("element") ? (
+                  <StopIcon className="h-5 w-5" />
+                ) : (
+                  <SpeakerIcon className="h-5 w-5" />
+                )}
+              </button>
+            )}
             <span
               className={cn(
                 "inline-flex items-center gap-2.5 rounded-full pl-1.5 pr-2.5 py-2 shadow-card ring-2 ring-inset",
@@ -199,25 +218,6 @@ export function StorySlidesPhase({
               <span className="text-sm font-extrabold uppercase tracking-wide">
                 {elementLabel}
               </span>
-              {supported && (
-                <button
-                  type="button"
-                  onClick={() => toggle(elementLabel, "element")}
-                  aria-label={isPlaying("element") ? "Stop" : `Read ${elementLabel}`}
-                  className={cn(
-                    "press-pop flex h-9 w-9 items-center justify-center rounded-full transition-colors",
-                    isPlaying("element")
-                      ? "bg-destructive text-destructive-foreground animate-pulse-glow"
-                      : "bg-white/25 hover:bg-white/40",
-                  )}
-                >
-                  {isPlaying("element") ? (
-                    <StopIcon className="h-5 w-5" />
-                  ) : (
-                    <SpeakerIcon className="h-5 w-5" />
-                  )}
-                </button>
-              )}
             </span>
           </div>
 
