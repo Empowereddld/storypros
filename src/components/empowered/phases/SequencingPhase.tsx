@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import type { DragEvent } from "react";
 import { cn } from "@/lib/utils";
 import type { ActivityAttempt, SequencingFrame, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
@@ -33,6 +34,8 @@ export function SequencingPhase({
   const [feedback, setFeedback] = useState<FeedbackState>({ type: "none" });
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
+  const [draggedFrame, setDraggedFrame] = useState<number | null>(null);
+  const [dropTarget, setDropTarget] = useState<number | null>(null);
   const startTime = useRef(Date.now());
   const firstAttemptFraction = useRef<number | null>(null);
 
@@ -47,6 +50,41 @@ export function SequencingPhase({
     } else {
       setOrder([...order, index]);
     }
+  }
+
+  function placeFrameAt(shuffledIndex: number, targetPosition: number) {
+    if (showingFeedback) return;
+
+    setOrder((currentOrder) => {
+      const withoutDraggedFrame = currentOrder.filter((index) => index !== shuffledIndex);
+      const insertionPoint = Math.min(targetPosition, withoutDraggedFrame.length);
+      return [
+        ...withoutDraggedFrame.slice(0, insertionPoint),
+        shuffledIndex,
+        ...withoutDraggedFrame.slice(insertionPoint),
+      ];
+    });
+  }
+
+  function handleDragStart(event: DragEvent<HTMLButtonElement>, shuffledIndex: number) {
+    if (showingFeedback) {
+      event.preventDefault();
+      return;
+    }
+    setDraggedFrame(shuffledIndex);
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", String(shuffledIndex));
+  }
+
+  function handleDrop(event: DragEvent<HTMLButtonElement>, targetPosition: number) {
+    event.preventDefault();
+    const transferredIndex = Number(event.dataTransfer.getData("text/plain"));
+    const shuffledIndex = draggedFrame ?? transferredIndex;
+    if (Number.isInteger(shuffledIndex) && shuffledIndex >= 0 && shuffledIndex < shuffled.length) {
+      placeFrameAt(shuffledIndex, targetPosition);
+    }
+    setDraggedFrame(null);
+    setDropTarget(null);
   }
 
   function handleCheck() {
@@ -184,15 +222,47 @@ export function SequencingPhase({
               const wrong = feedback.type === "wrong" && feedback.wrongPositions.has(index);
               return (
                 <button
+                  type="button"
                   key={index}
                   onClick={() => filled && handleSelectFrame(shuffledIndex)}
+                  onDragOver={(event) => {
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = "move";
+                    setDropTarget(index);
+                  }}
+                  onDragLeave={() => setDropTarget((current) => (current === index ? null : current))}
+                  onDrop={(event) => handleDrop(event, index)}
+                  draggable={filled && !showingFeedback}
+                  onDragStart={(event) => filled && handleDragStart(event, shuffledIndex)}
+                  onDragEnd={() => {
+                    setDraggedFrame(null);
+                    setDropTarget(null);
+                  }}
+                  aria-label={filled ? `Story picture ${index + 1}. Drag to reorder or tap to remove.` : `Empty position ${index + 1}. Drop a picture here.`}
                   className={cn(
-                    "flex aspect-square items-center justify-center rounded-2xl text-sm font-extrabold shadow-sm",
-                    filled ? "bg-primary text-primary-foreground" : "bg-accent text-primary/45",
+                    "relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border-2 text-sm font-extrabold shadow-sm transition-all",
+                    filled ? "cursor-grab border-primary bg-primary text-primary-foreground active:cursor-grabbing" : "border-transparent bg-accent text-primary/45",
+                    dropTarget === index && "scale-[1.04] border-secondary bg-secondary/20 ring-4 ring-secondary/20",
                     wrong && "bg-destructive text-destructive-foreground",
                   )}
                 >
-                  {filled ? index + 1 : ""}
+                  {filled ? (
+                    <>
+                      {resolveStoryImage(storyData.id, shuffled[shuffledIndex].image) ? (
+                        <img
+                          src={resolveStoryImage(storyData.id, shuffled[shuffledIndex].image) ?? undefined}
+                          alt=""
+                          className="h-full w-full object-cover"
+                          draggable={false}
+                        />
+                      ) : (
+                        <PaperPlaneIcon className="h-6 w-6" />
+                      )}
+                      <span className="absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground shadow-sm">
+                        {index + 1}
+                      </span>
+                    </>
+                  ) : null}
                 </button>
               );
             })}
@@ -207,11 +277,20 @@ export function SequencingPhase({
 
             return (
               <button
+                type="button"
                 key={`${frame.correct_position}-${frame.caption}`}
                 onClick={() => handleSelectFrame(index)}
+                draggable={!showingFeedback}
+                onDragStart={(event) => handleDragStart(event, index)}
+                onDragEnd={() => {
+                  setDraggedFrame(null);
+                  setDropTarget(null);
+                }}
+                aria-label={`${placed ? `Story picture in position ${position + 1}` : "Unplaced story picture"}. Drag to Your order or tap to place.`}
                 className={cn(
-                  "hover-lift overflow-hidden rounded-[16px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                  "hover-lift cursor-grab overflow-hidden rounded-[16px] border-2 bg-card text-left shadow-card transition-all active:cursor-grabbing active:scale-[0.98]",
                   placed ? "border-primary bg-primary/5 opacity-75" : "border-accent/60",
+                  draggedFrame === index && "scale-95 opacity-40",
                 )}
               >
                 <div className="relative aspect-square overflow-hidden bg-accent">
