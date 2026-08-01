@@ -274,11 +274,11 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
           </div>
         </div>
 
-        <div className="relative z-10 mt-auto space-y-3 pb-6">
-          <TactileButton onClick={handleResume} leadingIcon={<ChevronRightIcon />}>
+        <div className="relative z-10 mt-auto grid grid-cols-2 gap-3 pb-6">
+          <TactileButton className="h-12" onClick={handleResume} leadingIcon={<ChevronRightIcon />}>
             Keep going
           </TactileButton>
-          <TactileButton variant="ghost" onClick={handleStartOver}>
+          <TactileButton className="h-12" variant="ghost" onClick={handleStartOver}>
             Start over
           </TactileButton>
         </div>
