@@ -35,12 +35,6 @@ export const HERO = {
   body: "Story Pros helps children with DLD and other language-based learning needs build vocabulary, understand and retell stories, and express their ideas through calm, guided practice.",
 };
 
-/** The three benefits, introduced in the section after the hero */
-export const HERO_BENEFITS = [
-  "Understand key story information.",
-  "Organize and retell ideas",
-  "Connect stories to everyday life",
-];
 
 /* ── Parent problem ── */
 
