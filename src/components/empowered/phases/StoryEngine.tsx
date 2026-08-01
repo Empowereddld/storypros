@@ -44,47 +44,48 @@ import { SectionIntro, type Buddy } from "./SectionIntro";
  * Buddies alternate so the same voice never runs the whole session. */
 const SECTION_INTROS: Partial<Record<StoryPhase, { title: string; buddy: Buddy; script: string }>> = {
   "intro-questions": {
-    title: "Question Time!",
+    title: "Question Time",
     buddy: "dan",
-    script: "Read or tap the speaker button.\nThen tap the best answer.",
+    script: "Read or listen to the question. Then choose the best answer.",
   },
   "intro-sequencing": {
-    title: "Sequencing",
+    title: "Put It in Order",
     buddy: "daria",
     script:
-      "Let's put the story in order! Drag each picture to the right spot. Start with what happened first. End with what happened last.",
+      "Put the story pictures in order, from what happened first to what happened last.",
   },
   "intro-vocabulary": {
-    title: "Vocabulary",
+    title: "Story Words",
     buddy: "dan",
     script:
-      "Let's practice our story words! Tap the pictures to hear the words. Then we will learn what each word is and how we use it. After that, you will pick the best answer in a quick game.",
+      "Let's practise some words from the story. Tap each picture to hear the word and learn what it means.",
   },
   "intro-sentences": {
-    title: "Sentences",
+    title: "Build a Sentence",
     buddy: "daria",
     script:
-      "Let's build sentences! Read the sentence with the missing word. Pick the word that fits best. You can drag or tap to choose.",
+      "Choose the word that makes the sentence make sense. Tap or drag it into place.",
   },
   "intro-jokes": {
-    title: "Jokes",
+    title: "Word Play",
     buddy: "dan",
     script:
-      "Time for jokes! First, you will learn a word with two meanings. Then I will tell you a funny joke. Listen and see if you can figure it out!",
+      "Some words can mean more than one thing. Learn the meanings, then listen to the joke and see what makes it funny.",
   },
   "intro-phonological": {
-    title: "Sounds",
+    title: "Sound Play",
     buddy: "daria",
     script:
-      "Let's play with sounds! Listen to the word. Then pick the answer that matches. It might rhyme or start with the same sound.",
+      "Listen to the word. Then choose the answer that rhymes or starts with the same sound.",
   },
   "intro-retell": {
-    title: "Retell",
+    title: "Tell the Story",
     buddy: "dan",
     script:
-      "You did it! Now tell the story to a grown-up. Use your own words. I will give you hints to help you remember.",
+      "Now tell the story in your own words. Use the pictures and hints to help you remember.",
   },
 };
+
 
 /** The ordered list of phases a child goes through */
 const PHASE_ORDER: StoryPhase[] = [

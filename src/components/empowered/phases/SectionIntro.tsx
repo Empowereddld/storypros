@@ -54,23 +54,6 @@ function SpeakerIcon({ className }: { className?: string }) {
   );
 }
 
-function ReplayIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-      <path d="M20 12a8 8 0 1 1-2.6-5.9" strokeLinecap="round" />
-      <path d="M20 4v4h-4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ChevronIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.8" aria-hidden>
-      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps) {
   const b = BUDDY[buddy];
   const [speaking, setSpeaking] = useState(false);
@@ -101,9 +84,9 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
 
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto bg-cream px-5 pb-8 pt-6">
-      <div className="mx-auto flex w-full max-w-[640px] flex-1 flex-col justify-center gap-7">
+      <div className="mx-auto flex w-full max-w-[640px] flex-1 flex-col justify-center gap-0">
         <h1
-          className="animate-slide-up text-center font-display text-[34px] font-extrabold leading-tight text-primary sm:text-[40px]"
+          className="animate-slide-up text-center font-display text-[34px] font-extrabold leading-tight text-primary sm:text-[44px]"
           style={{ animationDelay: "0ms" }}
         >
           {title}
@@ -111,7 +94,7 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
 
         {/* Buddy + speech bubble. Still after entrance — no looping motion. */}
         <div
-          className="animate-slide-up flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-5"
+          className="animate-slide-up mt-8 flex flex-col items-center gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-5"
           style={{ animationDelay: "100ms" }}
         >
           <img
@@ -121,7 +104,7 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
             draggable={false}
           />
 
-          <div className="relative w-full">
+          <div className="relative w-full sm:min-w-[320px]">
             {/* tail: up on mobile, left-pointing on desktop */}
             <span
               aria-hidden
@@ -130,8 +113,8 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
                 b.tail,
               )}
             />
-            <div className={cn("rounded-[26px] border-2 px-6 py-6 shadow-card", b.bubble)}>
-              <p className="whitespace-pre-line text-center text-[18px] font-semibold leading-relaxed text-ink">
+            <div className={cn("rounded-[26px] border-2 px-6 py-6 shadow-card sm:px-[30px] sm:py-[30px]", b.bubble)}>
+              <p className="whitespace-pre-line text-left text-[18px] font-semibold leading-[1.45] text-ink sm:text-[21px]">
                 {script}
               </p>
             </div>
@@ -140,7 +123,7 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
 
         {/* Child-controlled audio */}
         <div
-          className="animate-slide-up flex items-center justify-center gap-3"
+          className="animate-slide-up mt-7 flex items-center justify-center gap-3"
           style={{ animationDelay: "200ms" }}
         >
           <TactileButton
@@ -148,26 +131,16 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
             variant="secondary"
             onClick={toggleSpeak}
             aria-pressed={speaking}
-            className="min-h-[56px] min-w-[190px] bg-coral text-coral-foreground hover:bg-coral/95"
+            className="min-h-[56px] min-w-[210px] bg-coral text-coral-foreground hover:bg-coral/95"
             leadingIcon={<SpeakerIcon className="h-6 w-6" />}
           >
-            {speaking ? `Stop ${b.name}` : `Hear ${b.name}`}
-          </TactileButton>
-
-          <TactileButton
-            fullWidth={false}
-            variant="ghost"
-            onClick={speak}
-            aria-label="Listen again"
-            className="min-h-[56px] w-14 px-0"
-          >
-            <ReplayIcon className="h-6 w-6" />
+            {speaking ? `Stop ${b.name}` : `Listen to ${b.name}`}
           </TactileButton>
         </div>
 
-        <div className="animate-slide-up" style={{ animationDelay: "300ms" }}>
+        <div className="animate-slide-up mt-7" style={{ animationDelay: "300ms" }}>
           <TactileButton onClick={handleNext} className="min-h-[56px]">
-            Next <ChevronIcon className="h-5 w-5" />
+            Start
           </TactileButton>
         </div>
       </div>
