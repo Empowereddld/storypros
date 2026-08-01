@@ -23,7 +23,7 @@ import {
   PRICE,
   PRICE_PERIOD,
   HERO,
-  HERO_BENEFITS,
+  
   PARENT_PROBLEM,
   WHY_STORIES,
   PATHWAY,
@@ -182,21 +182,6 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-      {/* ── The three benefits, moved out of the hero ── */}
-      <section className="border-y border-accent/40 bg-card/60">
-        <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
-          <ul className="grid gap-3 sm:grid-cols-3 sm:items-stretch">
-            {HERO_BENEFITS.map((benefit, i) => (
-              <Reveal key={benefit} delay={i * 90}>
-                <li className="flex h-full min-h-[56px] items-center gap-3 rounded-[18px] border border-accent/60 bg-card p-3 shadow-card sm:min-h-[64px] sm:p-3.5">
-                  <CheckMark />
-                  <span className="text-sm font-bold leading-snug text-ink whitespace-nowrap">{benefit}</span>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
 
       {/* ── Parent problem (two-column editorial) ── */}
       <section className="px-5 py-16 sm:py-24">
