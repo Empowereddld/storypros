@@ -326,42 +326,47 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── What your child will learn (art left) ── */}
-      <CharacterSection
+      {/* ── What children practise ── */}
+      <section
         id="what-they-learn"
-        side="left"
-        image={danDariaCelebrate}
-        imageSize="lg"
-        motion="bob"
-        className="border-y border-accent/40 bg-card/50"
+        className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-12 sm:px-6 sm:py-14"
       >
-        <h2 className="font-display text-3xl font-extrabold text-primary sm:text-4xl">
-          What Your Child Will Learn
-        </h2>
-        <p className="mt-2 text-base font-medium text-ink-soft">
-          Six skills, built story by story.
-        </p>
+        <div className="mx-auto w-full max-w-5xl">
+          <h2 className="font-display text-[34px] font-extrabold leading-[1.1] text-primary sm:text-[40px] lg:text-[44px]">
+            What children practise
+          </h2>
+          <p className="mt-2 max-w-2xl text-[17px] font-medium leading-snug text-ink-soft sm:text-lg">
+            Language skills woven into every story.
+          </p>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {WILL_LEARN.map((item) => (
-            <article
-              key={item.skill}
-              className="hover-lift rounded-[22px] border border-accent/60 bg-card p-4 shadow-card transition-all"
-            >
-              <span
-                className="flex h-11 w-11 items-center justify-center rounded-[16px] bg-accent text-lg"
-                aria-hidden
-              >
-                {item.icon}
-              </span>
-              <h3 className="mt-3 text-[15px] font-extrabold text-primary">{item.skill}</h3>
-              <p className="mt-1 text-xs font-medium leading-relaxed text-ink-soft">
-                {item.detail}
-              </p>
-            </article>
-          ))}
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {WILL_LEARN.map((item) => {
+              const Icon = SKILL_ICONS[item.icon];
+              return (
+                <article
+                  key={item.skill}
+                  className="flex items-start gap-3 rounded-2xl border border-accent/40 bg-card p-4"
+                >
+                  <span
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/60 text-primary"
+                    aria-hidden
+                  >
+                    {Icon && <Icon className="h-[19px] w-[19px]" />}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="text-[17px] font-bold leading-snug text-primary sm:text-[18px]">
+                      {item.skill}
+                    </h3>
+                    <p className="mt-0.5 text-[15px] font-medium leading-snug text-ink-soft">
+                      {item.detail}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
-      </CharacterSection>
+      </section>
 
       {/* ── What makes Story Pros different (art right) ── */}
       <CharacterSection side="right" image={danDariaSurprised}>
