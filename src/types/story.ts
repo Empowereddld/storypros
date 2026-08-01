@@ -45,6 +45,8 @@ export interface ComprehensionQuestion {
   prompt: string;
   story_element: StoryElement;
   options: AnswerOption[];
+  /** Reflection prompt shown before the answer is revealed */
+  brain_check_prompt?: string;
   brain_check_correct: string;
   brain_check_wrong: string;
 }
