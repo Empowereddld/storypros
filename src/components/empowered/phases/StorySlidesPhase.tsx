@@ -1,5 +1,14 @@
-import { useEffect, useState } from "react";
-import { User, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useState, type ComponentType } from "react";
+import {
+  CheckCircle2,
+  Hand,
+  Heart,
+  MapPin,
+  TriangleAlert,
+  User,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
 import type { StoryElement, StoryPhaseProps } from "@/types/story";
@@ -17,6 +26,15 @@ const ELEMENT_LABELS: Record<StoryElement, string> = {
   emotion: "Feeling",
   action: "Action",
   result: "Result",
+};
+
+const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>> = {
+  character: User,
+  place: MapPin,
+  problem: TriangleAlert,
+  emotion: Heart,
+  action: Hand,
+  result: CheckCircle2,
 };
 
 export function StorySlidesPhase({
