@@ -119,28 +119,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         <div className="mx-auto grid w-full max-w-[1240px] items-center gap-8 px-5 pb-10 pt-6 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-9 lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] lg:gap-[80px] lg:pb-[88px] lg:pt-[80px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-center text-[10.5px] font-bold uppercase leading-tight tracking-[0.1em] text-primary shadow-card text-balance sm:px-4 sm:py-1.5 sm:text-[12.5px] sm:tracking-[0.12em]">
+            <p className="inline-flex max-w-[26ch] items-center justify-center gap-2 rounded-full bg-primary/8 px-3 py-1 text-center text-[10px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-primary text-balance sm:max-w-none sm:bg-card sm:px-4 sm:py-1.5 sm:text-[12.5px] sm:tracking-[0.12em] sm:shadow-card">
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-4 max-w-[19ch] text-balance font-display text-[37px] font-extrabold leading-[1.06] text-primary sm:mt-6 sm:max-w-[560px] sm:text-[44px] lg:mx-0 lg:mt-7 lg:max-w-[600px] lg:text-[49px]">
+            <h1 className="mx-auto mt-3 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-6 sm:max-w-[560px] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-7 lg:max-w-[600px] lg:text-[49px]">
               {HERO.heading}
             </h1>
 
-            <p className="mx-auto mt-4 max-w-[420px] text-[19px] font-semibold leading-[1.35] text-ink sm:mt-5 sm:max-w-[520px] sm:text-[21px] lg:mx-0">
+            <p className="mx-auto mt-3 max-w-[30ch] text-[17.5px] font-semibold leading-[1.4] text-ink sm:mt-5 sm:max-w-[520px] sm:text-[21px] sm:leading-[1.35] lg:mx-0">
               {HERO.subheading}
             </p>
 
-            <p className="mx-auto mt-3.5 max-w-[400px] text-[16.5px] font-medium leading-[1.55] text-ink-soft sm:mt-4 sm:max-w-[560px] sm:text-[18px] lg:mx-0 lg:max-w-[540px]">
+            <p className="mx-auto mt-2.5 max-w-[34ch] text-[15.5px] font-medium leading-[1.6] text-ink-soft sm:mt-4 sm:max-w-[560px] sm:text-[18px] sm:leading-[1.55] lg:mx-0 lg:max-w-[540px]">
               {HERO.body}
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-6 flex flex-col items-center gap-3 sm:mt-7 lg:items-start">
+            <div className="mt-7 flex flex-col items-center gap-2.5 sm:mt-7 sm:gap-3 lg:items-start">
 
               <button
                 onClick={onDemo}
-                className="press-pop inline-flex h-[54px] w-full max-w-[300px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px]"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px]"
               >
                 Try the Demo
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
@@ -149,12 +149,13 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-[54px] w-full max-w-[300px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px]"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] sm:border-2 sm:border-primary/70 sm:bg-card"
               >
                 Join the Waitlist
               </a>
             </div>
           </div>
+
 
           {/* The app preview does the visual talking */}
           <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[560px]">
