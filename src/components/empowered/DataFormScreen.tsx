@@ -249,9 +249,9 @@ export function DataFormScreen({
           <TactileButton
             disabled={!isValid || submitting}
             onClick={() => isValid && !submitting && onSubmit(values)}
-            className="h-12 disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
+            className="h-14 disabled:cursor-not-allowed disabled:opacity-45"
           >
-            <span className="inline-flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 whitespace-nowrap">
               {submitting ? (
                 <>
                   <Spinner /> Setting things up…
@@ -263,7 +263,13 @@ export function DataFormScreen({
               )}
             </span>
           </TactileButton>
+          {!isValid && !submitting ? (
+            <p className="text-center text-xs font-semibold text-ink-soft">
+              Add your child's name, age, country, and one diagnosis option to continue.
+            </p>
+          ) : null}
         </div>
+
 
       </div>
     </div>
