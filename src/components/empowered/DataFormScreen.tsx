@@ -70,15 +70,15 @@ export function DataFormScreen({
 
       <div className="relative z-10 mx-auto flex w-full max-w-[540px] flex-1 flex-col px-5 pb-6 pt-6">
         <div className="text-center animate-slide-up">
-          <h1 className="font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[30px]">
+          <h1 className="font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
             Create your child's profile
           </h1>
-          <p className="mx-auto mt-2.5 max-w-[340px] text-[15px] font-medium leading-snug text-ink-soft">
+          <p className="mx-auto mt-4 max-w-[420px] text-[15px] font-medium leading-snug text-ink-soft">
             Add a few details to personalize their Story Pros experience.
           </p>
         </div>
 
-        <div className="mt-7 rounded-[24px] border border-border/70 bg-card/95 p-5 shadow-soft backdrop-blur animate-slide-up">
+        <div className="mt-10 rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
           <label htmlFor="child-name" className="text-sm font-extrabold text-primary">
             Child's name
           </label>
@@ -92,7 +92,7 @@ export function DataFormScreen({
             autoComplete="off"
           />
 
-          <label htmlFor="child-age" className="mt-5 block text-sm font-extrabold text-primary">
+          <label htmlFor="child-age" className="mt-6 block text-sm font-extrabold text-primary">
             Age
           </label>
           <div className="relative mt-2">
@@ -131,11 +131,11 @@ export function DataFormScreen({
           </p>
         </div>
 
-        <div className="mt-6 space-y-2.5">
+        <div className="mt-8 space-y-2.5">
           <TactileButton
             disabled={!isValid}
             onClick={() => isValid && onSubmit(values)}
-            className="disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
+            className="h-12 disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
           >
             <span className="inline-flex items-center gap-2">
               Continue <ArrowRightIcon />
