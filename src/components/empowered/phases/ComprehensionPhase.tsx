@@ -299,7 +299,7 @@ export function ComprehensionPhase({
               onClick={handleListen}
               disabled={!isSupported()}
               className={cn(
-                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full btn-tactile ring-2 transition-all",
+                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full ring-2 transition-all",
                 elementStyle.bg,
                 elementStyle.text,
                 elementStyle.ring,
