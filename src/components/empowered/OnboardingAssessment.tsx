@@ -340,7 +340,23 @@ function LettersIcon() {
   );
 }
 
+function ArrowLeftIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+    >
+      <path d="M20 12H5M11 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function ArrowRightIcon() {
+
   return (
     <svg
       viewBox="0 0 24 24"
