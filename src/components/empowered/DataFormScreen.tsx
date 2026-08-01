@@ -125,6 +125,7 @@ export function DataFormScreen({
                   className="mt-2"
                   icon={<UserIcon />}
                   value={values.childName}
+                  disabled={submitting}
                   onChange={(v) => setValues((p) => ({ ...p, childName: v.slice(0, 40) }))}
                   placeholder="Enter your child's name"
                   autoComplete="off"
