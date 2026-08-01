@@ -8,6 +8,7 @@ export interface OnboardingFormValues {
   childAge: number | null;
   country: string;
   diagnoses: string[];
+  otherDiagnosis: string;
 }
 
 interface DataFormScreenProps {
