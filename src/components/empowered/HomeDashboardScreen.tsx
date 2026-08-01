@@ -18,7 +18,6 @@ import {
   ChevronRightIcon,
   CoinIcon,
   CurrencyBadge,
-  MapIcon,
   MedalIcon,
   StarIcon,
 } from "@/components/empowered/StoryProsUi";
@@ -220,14 +219,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
               completedCount={completedCount}
               onSeeAll={() => onNavigate("achievements")}
             />
-            <button
-              onClick={() => onNavigate("map")}
-              className="press-pop flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary/30 bg-card/70 py-3 text-sm font-extrabold text-primary shadow-card transition-colors hover:bg-card"
-            >
-              <MapIcon className="h-5 w-5" />
-              Adventure Map
-              <ChevronRightIcon />
-            </button>
           </aside>
         </div>
 
