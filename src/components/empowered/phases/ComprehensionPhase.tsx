@@ -281,7 +281,7 @@ export function ComprehensionPhase({
       </div>
 
       {/* Check button */}
-      <div className="relative z-10 mx-5 mb-5 mt-2">
+      <div className="relative z-10 mx-auto mb-5 mt-2 w-full max-w-[600px] px-5">
         <TactileButton
           variant="secondary"
           onClick={handleCheck}
