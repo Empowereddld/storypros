@@ -7,7 +7,7 @@
  * ───────────────────────────────────────────── */
 
 import type { ComponentType } from "react";
-import { User, MapPin, TriangleAlert, Heart, Hand, CheckCircle2, ChevronRight } from "lucide-react";
+import { User, MapPin, TriangleAlert, Heart, Hand, CheckCircle2 } from "lucide-react";
 import type { StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
 
