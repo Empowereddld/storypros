@@ -28,6 +28,48 @@ const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>>
   result: CheckCircle2,
 };
 
+const ELEMENT_COLORS: Record<
+  StoryElement,
+  { bg: string; text: string; iconBg: string; ring: string }
+> = {
+  character: {
+    bg: "bg-element-character",
+    text: "text-element-character-foreground",
+    iconBg: "bg-element-character-foreground/20",
+    ring: "ring-element-character-foreground/30",
+  },
+  place: {
+    bg: "bg-element-place",
+    text: "text-element-place-foreground",
+    iconBg: "bg-element-place-foreground/20",
+    ring: "ring-element-place-foreground/30",
+  },
+  problem: {
+    bg: "bg-element-problem",
+    text: "text-element-problem-foreground",
+    iconBg: "bg-element-problem-foreground/20",
+    ring: "ring-element-problem-foreground/30",
+  },
+  emotion: {
+    bg: "bg-element-emotion",
+    text: "text-element-emotion-foreground",
+    iconBg: "bg-element-emotion-foreground/20",
+    ring: "ring-element-emotion-foreground/30",
+  },
+  action: {
+    bg: "bg-element-action",
+    text: "text-element-action-foreground",
+    iconBg: "bg-element-action-foreground/20",
+    ring: "ring-element-action-foreground/30",
+  },
+  result: {
+    bg: "bg-element-result",
+    text: "text-element-result-foreground",
+    iconBg: "bg-element-result-foreground/20",
+    ring: "ring-element-result-foreground/30",
+  },
+};
+
 function SpeakerIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
     <svg
@@ -90,6 +132,7 @@ export function StorySlidesPhase({
   const slideImg = resolveStoryImage(storyData.id, current.image);
   const ElementIcon = ELEMENT_ICONS[current.story_element] ?? User;
   const elementLabel = ELEMENT_LABELS[current.story_element];
+  const elementColors = ELEMENT_COLORS[current.story_element];
   const isLast = page === slides.length - 1;
   const progress = ((page + 1) / slides.length) * 100;
   const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
@@ -135,13 +178,27 @@ export function StorySlidesPhase({
 
       <div className="relative z-10 mx-auto w-full max-w-[600px] flex-1 overflow-y-auto no-scrollbar px-5 pb-6 pt-6">
         <div key={page} className="flex w-full flex-col animate-pop-in">
-          {/* Story element marker — aligned to the artwork's left edge */}
-          <div className="mb-3 flex items-center gap-2.5">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card">
-              <ElementIcon className="h-5 w-5" />
-            </span>
-            <span className="text-sm font-extrabold uppercase tracking-wide text-ink-soft">
-              {elementLabel}
+          {/* Story element badge — color-coded pill so the grammar label stands out */}
+          <div className="mb-4 flex items-center">
+            <span
+              className={cn(
+                "inline-flex items-center gap-2.5 rounded-full pl-1.5 pr-4 py-1.5 shadow-card ring-2 ring-inset",
+                elementColors.bg,
+                elementColors.text,
+                elementColors.ring,
+              )}
+            >
+              <span
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-full",
+                  elementColors.iconBg,
+                )}
+              >
+                <ElementIcon className="h-5 w-5" />
+              </span>
+              <span className="text-sm font-extrabold uppercase tracking-wide">
+                {elementLabel}
+              </span>
             </span>
           </div>
 

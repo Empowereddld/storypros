@@ -57,6 +57,20 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
 
+  /* Story grammar element badge colors */
+  --color-element-character: var(--element-character);
+  --color-element-character-foreground: var(--element-character-foreground);
+  --color-element-place: var(--element-place);
+  --color-element-place-foreground: var(--element-place-foreground);
+  --color-element-problem: var(--element-problem);
+  --color-element-problem-foreground: var(--element-problem-foreground);
+  --color-element-emotion: var(--element-emotion);
+  --color-element-emotion-foreground: var(--element-emotion-foreground);
+  --color-element-action: var(--element-action);
+  --color-element-action-foreground: var(--element-action-foreground);
+  --color-element-result: var(--element-result);
+  --color-element-result-foreground: var(--element-result-foreground);
+
   --shadow-tactile: 0 6px 0 0 var(--primary-deep);
   --shadow-tactile-secondary: 0 6px 0 0 var(--secondary-deep);
   --shadow-card: 0 4px 16px -2px oklch(0.36 0.18 300 / 0.10);
@@ -214,6 +228,20 @@
 
   --destructive: oklch(0.58 0.22 27);       /* error #ba1a1a */
   --destructive-foreground: oklch(0.99 0 0);
+
+  /* Story grammar element badge palette */
+  --element-character: oklch(0.66 0.13 245);           /* denim blue */
+  --element-character-foreground: oklch(0.99 0.01 245);
+  --element-place: oklch(0.60 0.13 145);               /* leaf green */
+  --element-place-foreground: oklch(0.99 0 0);
+  --element-problem: oklch(0.65 0.16 32);                /* warm coral */
+  --element-problem-foreground: oklch(0.99 0 0);
+  --element-emotion: oklch(0.75 0.12 340);               /* soft pink */
+  --element-emotion-foreground: oklch(0.30 0.08 340);
+  --element-action: oklch(0.80 0.15 88);                 /* golden yellow */
+  --element-action-foreground: oklch(0.30 0.05 80);
+  --element-result: oklch(0.60 0.13 190);                /* teal */
+  --element-result-foreground: oklch(0.99 0 0);
 
   --border: oklch(0.86 0.018 305);          /* outline-variant #ccc3d4 */
   --input: oklch(0.93 0.014 305);
