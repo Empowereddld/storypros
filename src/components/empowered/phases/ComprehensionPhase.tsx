@@ -237,28 +237,22 @@ export function ComprehensionPhase({
         <div className="relative overflow-hidden rounded-[28px] border-2 border-accent/70 bg-card p-4 shadow-card">
           <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
           <div className="relative flex items-center gap-3">
-            {isSupported() && (
-              <button
-                onClick={handleListen}
-                className={cn(
-                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-full btn-tactile transition-all",
-                  speaking
-                    ? "bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : "bg-secondary text-secondary-foreground",
-                )}
-                aria-label={speaking ? "Stop audio" : "Hear question"}
-              >
-                {speaking ? (
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-                    <rect x="6" y="6" width="12" height="12" rx="2" />
-                  </svg>
-                ) : (
-                  <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                )}
-              </button>
-            )}
+            <button
+              onClick={handleListen}
+              disabled={!isSupported()}
+              className={cn(
+                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full btn-tactile ring-2 transition-all",
+                elementStyle.bg,
+                elementStyle.text,
+                elementStyle.ring,
+                speaking && "animate-pulse-glow",
+              )}
+              aria-label={isSupported() ? "Hear question" : elementLabel}
+              title={elementLabel}
+            >
+              <ElementIcon className="h-6 w-6" />
+            </button>
+
             <h2 className="min-w-0 flex-1 font-display text-[24px] font-extrabold leading-tight text-primary">
               {q.prompt}
             </h2>
