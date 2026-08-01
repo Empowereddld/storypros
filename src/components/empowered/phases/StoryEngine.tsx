@@ -38,20 +38,73 @@ import { PhonologicalPhase } from "./PhonologicalPhase";
 import { JokePhase } from "./JokePhase";
 import { PersonalConnectionPhase } from "./PersonalConnectionPhase";
 import { StoryCompletePhase } from "./StoryCompletePhase";
+import { SectionIntro, type Buddy } from "./SectionIntro";
+
+/* Section intro copy — one screen before each activity.
+ * Buddies alternate so the same voice never runs the whole session. */
+const SECTION_INTROS: Partial<Record<StoryPhase, { title: string; buddy: Buddy; script: string }>> = {
+  "intro-questions": {
+    title: "Question Time!",
+    buddy: "dan",
+    script: "Read or tap the speaker button.\nThen tap the best answer.",
+  },
+  "intro-sequencing": {
+    title: "Sequencing",
+    buddy: "daria",
+    script:
+      "Let's put the story in order! Drag each picture to the right spot. Start with what happened first. End with what happened last.",
+  },
+  "intro-vocabulary": {
+    title: "Vocabulary",
+    buddy: "dan",
+    script:
+      "Let's practice our story words! Tap the pictures to hear the words. Then we will learn what each word is and how we use it. After that, you will pick the best answer in a quick game.",
+  },
+  "intro-sentences": {
+    title: "Sentences",
+    buddy: "daria",
+    script:
+      "Let's build sentences! Read the sentence with the missing word. Pick the word that fits best. You can drag or tap to choose.",
+  },
+  "intro-jokes": {
+    title: "Jokes",
+    buddy: "dan",
+    script:
+      "Time for jokes! First, you will learn a word with two meanings. Then I will tell you a funny joke. Listen and see if you can figure it out!",
+  },
+  "intro-phonological": {
+    title: "Sounds",
+    buddy: "daria",
+    script:
+      "Let's play with sounds! Listen to the word. Then pick the answer that matches. It might rhyme or start with the same sound.",
+  },
+  "intro-retell": {
+    title: "Retell",
+    buddy: "dan",
+    script:
+      "You did it! Now tell the story to a grown-up. Use your own words. I will give you hints to help you remember.",
+  },
+};
 
 /** The ordered list of phases a child goes through */
 const PHASE_ORDER: StoryPhase[] = [
   "slides",
   "immediate-retell",
+  "intro-questions",
   "comprehension",
+  "intro-sequencing",
   "sequencing",
-
+  "intro-vocabulary",
   "vocab-intro",
   "vocab-quiz",
+  "intro-sentences",
   "sentence-builder",
-  "delayed-retell",
-  "phonological",
+  "intro-jokes",
   "joke",
+  "intro-phonological",
+  "phonological",
+  "intro-retell",
+  "delayed-retell",
   "personal-connection",
   "story-complete",
 ];
@@ -158,6 +211,24 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
   };
 
   function renderPhase() {
+    const intro = currentPhase ? SECTION_INTROS[currentPhase] : undefined;
+    if (intro) {
+      return (
+        <SectionIntro
+          title={intro.title}
+          buddy={intro.buddy}
+          script={intro.script}
+          onNext={() =>
+            handlePhaseComplete({
+              phase: currentPhase,
+              attempts: [],
+              first_attempt_accuracy: 1,
+              completed: true,
+            })
+          }
+        />
+      );
+    }
     switch (currentPhase) {
       case "slides":
         return <StorySlidesPhase {...phaseProps} />;
