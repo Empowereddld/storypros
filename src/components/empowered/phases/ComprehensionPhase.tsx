@@ -66,8 +66,9 @@ export function ComprehensionPhase({
   const q = questions[qi];
   const progress = (qi / questions.length) * 100;
 
-  function handleCheck() {
+  function handleReveal() {
     if (!selected) return;
+    setReflecting(false);
 
     const elapsed = Date.now() - startTime.current;
     const option = q.options.find((o) => o.id === selected)!;
