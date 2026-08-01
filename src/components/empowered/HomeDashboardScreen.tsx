@@ -336,12 +336,9 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
   const goal = "Finish today's story to earn your first coins.";
   const text = coins > 0 ? `You have ${coins} coins. Spend them in the shop.` : goal;
   return (
-    <button
-      onClick={onOpenShop}
-      className="relative flex w-full flex-col items-start gap-1 overflow-hidden rounded-[24px] border border-accent/50 bg-card p-4 text-left shadow-card transition-transform active:scale-[0.98]"
-    >
+    <div className="relative overflow-hidden rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">
       <span aria-hidden className="absolute inset-y-2 left-0 w-1.5 rounded-full bg-secondary" />
-      <span className="flex w-full items-center justify-between gap-2">
+      <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-2">
           <CoinIcon className="h-6 w-6 text-secondary" />
           {coins > 0 ? (
@@ -353,11 +350,17 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
           )}
         </span>
         <SpeakButton text={text} tone="soft" size="sm" />
-      </span>
-      <span className="text-[12px] font-bold leading-snug text-ink-soft">
+      </div>
+      <p className="mt-1 text-[12px] font-bold leading-snug text-ink-soft">
         {coins > 0 ? "Spend them in the Shop!" : goal}
-      </span>
-    </button>
+      </p>
+      <button
+        onClick={onOpenShop}
+        className="mt-2 inline-flex min-h-11 items-center gap-1 rounded-full border border-secondary/60 px-4 text-xs font-extrabold text-secondary-foreground transition-transform active:scale-95"
+      >
+        Shop <ChevronRightIcon />
+      </button>
+    </div>
   );
 }
 
