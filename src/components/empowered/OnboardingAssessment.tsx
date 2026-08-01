@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
 import danDariaThinking from "@/assets/dan-daria-thinking.webp";
 import { cn } from "@/lib/utils";
@@ -97,59 +97,51 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
         <Star className="absolute left-8 top-36 z-10 h-4 w-4 text-secondary animate-sparkle" />
         <Star className="absolute right-12 bottom-28 z-10 h-5 w-5 text-primary/40 animate-sparkle" />
 
-        <div className="relative z-20 flex h-full flex-col px-5 pb-5 pt-4">
-          <StoryProsLogo layout="row" size="md" className="mx-auto animate-pop-in" />
+        <div className="relative z-20 flex h-full flex-col items-center justify-center px-5 py-6">
+          <StoryProsLogo layout="row" size="md" className="animate-pop-in" />
 
-          <div className="mt-4 text-center animate-slide-up">
-            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-secondary-deep">
-              Story starter check
-            </p>
-            <h1 className="mt-2 font-display text-[31px] font-extrabold leading-[0.98] text-primary">
-              Let's find a just-right start
+          <div className="mt-7 text-center animate-slide-up">
+            <h1 className="font-display text-[34px] font-extrabold leading-[1.02] text-primary">
+              Starting Point
             </h1>
-            <p className="mx-auto mt-2 max-w-[315px] text-sm font-medium leading-snug text-ink-soft">
-              {firstName} will play one friendly story so Story Pros can choose the best starting
-              level.
+            <p className="mt-2.5 text-[15px] font-medium leading-snug text-ink-soft">
+              Let's find the best place to begin.
             </p>
           </div>
 
-          <div className="relative mt-4 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up">
-            <div className="relative h-44 overflow-hidden rounded-[24px] bg-accent">
-              {cover ? (
-                <img src={cover} alt="" className="h-full w-full object-cover" />
-              ) : (
-                <img src={danDariaThinking} alt="" className="h-full w-full object-cover" />
-              )}
+          <div className="mt-7 w-full max-w-[420px] overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-accent sm:aspect-[16/10]">
+              <img
+                src={cover || danDariaThinking}
+                alt=""
+                className="h-full w-full object-cover object-[center_22%]"
+              />
               <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
-                  Level placement story
+                  Starting Story
                 </span>
-                <h2 className="mt-2 text-xl font-extrabold leading-tight text-white drop-shadow">
-                  {story.title}
+                <h2 className="mt-2 text-xl font-extrabold leading-tight text-primary-foreground drop-shadow">
+                  Dan and the Papercut
                 </h2>
               </div>
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-2.5 stagger-in">
-            <FeatureChip label="Listen" icon={<HeadphonesIcon />} />
-            <FeatureChip label="Choose" icon={<CheckIcon />} />
-            <FeatureChip label="Build" icon={<BlocksIcon />} />
-            <FeatureChip label="Retell" icon={<BookIcon />} />
-          </div>
+          <p className="mt-6 text-center text-[13px] font-semibold leading-snug text-ink-soft">
+            A grown-up can change the level any time.
+          </p>
 
-          <div className="mt-auto space-y-3 pt-4">
-            <div className="rounded-[24px] bg-card/90 p-3 text-center shadow-card">
-              <p className="text-[13px] font-semibold leading-snug text-ink-soft">
-                No pressure, no grades. A grown-up can change the level anytime.
-              </p>
-            </div>
-            <TactileButton onClick={() => setPhase("playing")}>
-              Start Story Check <ArrowRightIcon />
-            </TactileButton>
-          </div>
+          <TactileButton
+            onClick={() => setPhase("playing")}
+            className="mt-5 w-full max-w-[320px]"
+          >
+            <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap">
+              Start the Story <ArrowRightIcon />
+            </span>
+          </TactileButton>
         </div>
+
       </div>
     );
   }
@@ -265,17 +257,6 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
   );
 }
 
-function FeatureChip({ icon, label }: { icon: ReactNode; label: string }) {
-  return (
-    <div className="flex min-h-14 items-center gap-2 rounded-[22px] border border-border/70 bg-card/95 p-2.5 shadow-card">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
-        {icon}
-      </span>
-      <span className="text-sm font-extrabold text-primary">{label}</span>
-    </div>
-  );
-}
-
 function DomainIcon({ domain }: { domain: SkillDomain }) {
   if (domain === "listening") return <HeadphonesIcon />;
   if (domain === "story_structure") return <BookIcon />;
@@ -296,21 +277,6 @@ function HeadphonesIcon() {
       <path d="M4 13a8 8 0 0116 0" strokeLinecap="round" />
       <rect x="3" y="13" width="5" height="7" rx="2" />
       <rect x="16" y="13" width="5" height="7" rx="2" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.6"
-      aria-hidden
-    >
-      <path d="M5 12.5l4 4L19 6.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
