@@ -182,7 +182,7 @@ export function StorySlidesPhase({
           <div className="mb-4 flex items-center">
             <span
               className={cn(
-                "inline-flex items-center gap-2.5 rounded-full pl-1.5 pr-4 py-1.5 shadow-card ring-2 ring-inset",
+                "inline-flex items-center gap-2 rounded-full pl-1.5 pr-2 py-1.5 shadow-card ring-2 ring-inset",
                 elementColors.bg,
                 elementColors.text,
                 elementColors.ring,
@@ -199,6 +199,25 @@ export function StorySlidesPhase({
               <span className="text-sm font-extrabold uppercase tracking-wide">
                 {elementLabel}
               </span>
+              {supported && (
+                <button
+                  type="button"
+                  onClick={() => toggle(elementLabel, "element")}
+                  aria-label={isPlaying("element") ? "Stop" : `Read ${elementLabel}`}
+                  className={cn(
+                    "press-pop flex h-7 w-7 items-center justify-center rounded-full transition-colors",
+                    isPlaying("element")
+                      ? "bg-destructive text-destructive-foreground animate-pulse-glow"
+                      : "bg-white/25 hover:bg-white/40",
+                  )}
+                >
+                  {isPlaying("element") ? (
+                    <StopIcon className="h-3.5 w-3.5" />
+                  ) : (
+                    <SpeakerIcon className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              )}
             </span>
           </div>
 
