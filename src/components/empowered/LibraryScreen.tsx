@@ -345,7 +345,7 @@ function StateBadge({ story }: { story: CardStory }) {
   if (story.isCompleted) {
     return (
       <Badge className="bg-success text-white">
-        <BookCheckIcon className="h-3 w-3" /> Done
+        <BookCheckIcon className="h-3 w-3" /> Completed
       </Badge>
     );
   }
@@ -467,6 +467,6 @@ function FallbackCover({ compact = false }: { compact?: boolean }) {
 function statusCopy(story: CardStory) {
   if (story.locked) return "Unlock with premium";
   if (story.isCompleted) return "Completed";
-  if (story.inProgress) return "Keep going";
+  if (story.inProgress) return "Continue story";
   return "Ready to start";
 }
