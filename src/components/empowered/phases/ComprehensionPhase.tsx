@@ -308,41 +308,6 @@ export function ComprehensionPhase({
   );
 }
 
-function ThoughtIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-8 w-8"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.4"
-      aria-hidden
-    >
-      <path d="M9 18h6" strokeLinecap="round" />
-      <path d="M10 22h4" strokeLinecap="round" />
-      <path
-        d="M8 14.5c-1.3-1.1-2-2.6-2-4.3C6 6.8 8.7 4 12 4s6 2.8 6 6.2c0 1.7-.7 3.2-2 4.3-.7.6-1.1 1.3-1.2 2.1H9.2c-.1-.8-.5-1.5-1.2-2.1Z"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function OptionGlyph() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-7 w-7"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.4"
-      aria-hidden
-    >
-      <path d="M5 12h12" strokeLinecap="round" />
-      <path d="M13 7l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function SelectedCheck() {
   return (
