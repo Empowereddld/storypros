@@ -105,7 +105,7 @@ export function StorySlidesPhase({
             )}
             <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/75 to-transparent" />
             <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-card/95 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-primary shadow-card">
-              <BookIcon className="h-4 w-4" />
+              <User className="h-4 w-4" />
               {ELEMENT_LABELS[current.story_element]}
             </span>
           </div>
