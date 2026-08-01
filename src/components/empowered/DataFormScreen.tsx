@@ -6,6 +6,8 @@ import { TactileButton } from "./TactileButton";
 export interface OnboardingFormValues {
   childName: string;
   childAge: number | null;
+  country: string;
+  diagnoses: string[];
 }
 
 interface DataFormScreenProps {
@@ -16,6 +18,31 @@ interface DataFormScreenProps {
 }
 
 const AGES = [4, 5, 6, 7, 8, 9, 10];
+
+const COUNTRIES = [
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Ireland",
+  "Australia",
+  "New Zealand",
+  "South Africa",
+  "Jamaica",
+  "Trinidad and Tobago",
+  "India",
+  "Other",
+];
+
+const DIAGNOSES = [
+  "DLD",
+  "ADHD",
+  "Dyslexia",
+  "DCD",
+  "Autism",
+  "Neurotypical",
+  "Unsure",
+];
+
 
 export function DataFormScreen({
   onSubmit,
