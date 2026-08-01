@@ -15,8 +15,9 @@ function OnboardingProfilePage() {
 
   return (
     <DataFormScreen
-      step={1}
-      totalSteps={3}
+      step={2}
+      totalSteps={2}
+
       submitting={submitting}
       error={error}
       onBack={() => navigate({ to: "/intro" })}

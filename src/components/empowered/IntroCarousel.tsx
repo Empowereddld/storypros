@@ -1,10 +1,10 @@
 /* ─────────────────────────────────────────────
  * Intro / Onboarding Carousel
  *   1. Learn Through Stories
- *   2. Understand, Retell & Connect
- *   3. Earn Coins & Rewards
- *   4. Meet Dan & Daria
+ *   2. Earn Coins & Rewards
+ *   3. Meet Dan & Daria
  * ───────────────────────────────────────────── */
+
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { TactileButton } from "./TactileButton";
@@ -56,9 +56,22 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
       <AuthBackdrop />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-[620px] flex-col px-5 pb-6 pt-4 sm:px-8">
-        {/* Header: logo + skip (Skip hidden on last slide, space preserved) */}
-        <div className="flex min-h-[44px] items-center justify-between">
-          <StoryProsLogo layout="row" size="sm" className="min-h-[44px] py-1" />
+        {/* Header: back · logo · skip (space always reserved) */}
+        <div className="grid min-h-[44px] grid-cols-[44px_1fr_auto] items-center gap-2">
+          <button
+            type="button"
+            onClick={() => go(index - 1)}
+            aria-label="Previous screen"
+            className={cn(
+              "press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+              index === 0 && "invisible",
+            )}
+            tabIndex={index === 0 ? -1 : 0}
+            aria-hidden={index === 0}
+          >
+            <ChevronLeftIcon />
+          </button>
+          <StoryProsLogo layout="row" size="sm" className="mx-auto min-h-[44px] py-1" />
           <button
             onClick={onComplete}
             aria-label="Skip introduction and go to profile setup"
@@ -73,13 +86,10 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           </button>
         </div>
 
-        {/* Slide content */}
+        {/* Slide content — one shared vertical anchor across slides */}
         <div
           key={index}
-          className={cn(
-            "motion-safe:animate-slide-up flex flex-1 flex-col overflow-y-auto pb-5",
-            index === 0 ? "justify-start pt-10 sm:pt-12" : "justify-center",
-          )}
+          className="motion-safe:animate-slide-up flex flex-1 flex-col justify-center overflow-y-auto pb-5 pt-6"
         >
           {index === 0 && <SlidePurpose />}
           {index === 1 && <SlideRewards />}
@@ -93,25 +103,34 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           aria-label={`Step ${index + 1} of ${SLIDE_COUNT}`}
         >
           {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
-            <span
+            <button
               key={i}
-              className={cn(
-                "h-2.5 rounded-full transition-all",
-                i === index ? "w-7 bg-primary" : "w-2.5 bg-accent",
-              )}
-            />
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Go to screen ${i + 1} of ${SLIDE_COUNT}`}
+              aria-current={i === index ? "step" : undefined}
+              className="flex h-8 items-center justify-center px-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span
+                className={cn(
+                  "h-2.5 rounded-full transition-all",
+                  i === index ? "w-7 bg-primary" : "w-2.5 bg-accent",
+                )}
+              />
+            </button>
           ))}
         </div>
 
-        <div className="mt-5 flex justify-center">
+        <div className="mt-3 flex justify-center">
           <TactileButton
-            className="w-full sm:max-w-[560px]"
+            className="w-full max-w-[320px]"
             aria-label={isLast ? "Get started with profile setup" : "Next screen"}
             onClick={() => (isLast ? onComplete() : go(index + 1))}
           >
             {isLast ? "Get Started" : "Next"}
           </TactileButton>
         </div>
+
       </div>
     </div>
   );
@@ -302,37 +321,6 @@ function PersonHeartIcon() {
   );
 }
 
-function HeadphonesIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <path d="M4 13a8 8 0 0116 0" strokeLinecap="round" />
-      <rect x="3" y="13" width="4" height="7" rx="2" />
-      <rect x="17" y="13" width="4" height="7" rx="2" />
-    </svg>
-  );
-}
-function QuestionIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M9.2 9.5a2.8 2.8 0 015.4 1c0 1.8-2.6 2.2-2.6 4M12 17.2h.01" strokeLinecap="round" />
-    </svg>
-  );
-}
 function SpeechIcon() {
   return (
     <svg
@@ -348,31 +336,19 @@ function SpeechIcon() {
     </svg>
   );
 }
-function HeartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-      <path d="M12 21s-7-4.5-9.5-9C1 8.5 2.5 5 6 5c2 0 3 1.2 6 4 3-2.8 4-4 6-4 3.5 0 5 3.5 3.5 7-2.5 4.5-9.5 9-9.5 9z" />
-    </svg>
-  );
-}
-function BookIcon() {
+
+function ChevronLeftIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
       className="h-6 w-6"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.8"
       aria-hidden
     >
-      <path d="M4 5h7v15H6a2 2 0 01-2-2V5zM20 5h-7v15h5a2 2 0 002-2V5z" strokeLinejoin="round" />
+      <path d="M15 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-      <path d="M8 5l12 7-12 7z" />
-    </svg>
-  );
-}
+

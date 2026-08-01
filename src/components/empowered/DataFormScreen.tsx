@@ -108,18 +108,17 @@ export function DataFormScreen({
           <h1 className="font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
             Create your child's profile
           </h1>
-          <p className="mx-auto mt-4 max-w-[420px] text-[15px] font-medium leading-snug text-ink-soft">
-            {"\n"}
-          </p>
         </div>
+
 
         <div className="mt-8 space-y-8">
           <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
             <div className="space-y-6">
               <div>
                 <label htmlFor="child-name" className="block text-sm font-extrabold text-primary">
-                  Child's name
+                  Child's name <span className="font-bold text-coral">Required</span>
                 </label>
+
                 <IconInput
                   id="child-name"
                   className="mt-2"
@@ -134,8 +133,9 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="child-age" className="block text-sm font-extrabold text-primary">
-                  Age
+                  Age <span className="font-bold text-coral">Required</span>
                 </label>
+
                 <div className="relative mt-2">
                   <span className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-primary">
                     <CalendarIcon />
@@ -170,8 +170,9 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="country" className="block text-sm font-extrabold text-primary">
-                  Country
+                  Country <span className="font-bold text-coral">Required</span>
                 </label>
+
                 <IconInput
                   id="country"
                   className="mt-2"
@@ -188,15 +189,17 @@ export function DataFormScreen({
 
           <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
             <h2 className="font-display text-lg font-extrabold text-primary">
-              Tell us more about your child
+              Diagnosis
             </h2>
             <fieldset className="mt-5">
               <legend className="text-sm font-extrabold text-primary">
-                Does your child have a diagnosis?
+                Does your child have a diagnosis?{" "}
+                <span className="font-bold text-coral">Required</span>
               </legend>
               <p className="mt-1.5 text-xs font-semibold text-ink-soft">
                 Select all that apply.
               </p>
+
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {DIAGNOSES.map((item) => {
                   const checked = values.diagnoses.includes(item);
@@ -223,17 +226,26 @@ export function DataFormScreen({
                 })}
               </div>
 
-              <input
-                id="other-diagnosis"
-                type="text"
-                value={values.otherDiagnosis}
-                disabled={submitting}
-                onChange={(event) =>
-                  setValues((p) => ({ ...p, otherDiagnosis: event.target.value.slice(0, 80) }))
-                }
-                placeholder="Type a diagnosis not listed above"
-                className="mt-6 h-[56px] w-full rounded-2xl border-2 border-primary/30 bg-card px-4 text-base font-semibold text-ink outline-none transition-colors placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              />
+              <div className="mt-6">
+                <label
+                  htmlFor="other-diagnosis"
+                  className="block text-sm font-extrabold text-primary"
+                >
+                  Another diagnosis <span className="font-bold text-ink-soft">(optional)</span>
+                </label>
+                <input
+                  id="other-diagnosis"
+                  type="text"
+                  value={values.otherDiagnosis}
+                  disabled={submitting}
+                  onChange={(event) =>
+                    setValues((p) => ({ ...p, otherDiagnosis: event.target.value.slice(0, 80) }))
+                  }
+                  placeholder="Type a diagnosis not listed above"
+                  className="mt-2 h-[56px] w-full rounded-2xl border-2 border-primary/30 bg-card px-4 text-base font-semibold text-ink outline-none transition-colors placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                />
+              </div>
+
             </fieldset>
           </div>
 
@@ -251,9 +263,9 @@ export function DataFormScreen({
           <TactileButton
             disabled={!isValid || submitting}
             onClick={() => isValid && !submitting && onSubmit(values)}
-            className="h-12 disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
+            className="h-14 disabled:cursor-not-allowed disabled:opacity-45"
           >
-            <span className="inline-flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 whitespace-nowrap">
               {submitting ? (
                 <>
                   <Spinner /> Setting things up…
@@ -265,7 +277,13 @@ export function DataFormScreen({
               )}
             </span>
           </TactileButton>
+          {!isValid && !submitting ? (
+            <p className="text-center text-xs font-semibold text-ink-soft">
+              Add your child's name, age, country, and one diagnosis option to continue.
+            </p>
+          ) : null}
         </div>
+
 
       </div>
     </div>
