@@ -141,7 +141,31 @@ export function ComprehensionPhase({
         onClose={onClose}
       />
 
+      {/* Brain Check reflection (before the answer is revealed) */}
+      {reflecting && !showingBrainCheck && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
+          <div className="w-full max-w-[440px] rounded-[28px] bg-card p-6 text-center shadow-soft animate-slide-up">
+            <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+              <BrainIcon />
+            </div>
+            <h3 className="font-display text-[26px] font-extrabold text-primary">Brain Check!</h3>
+            <p className="mt-2 text-lg font-semibold text-ink">
+              {q.brain_check_prompt ?? "Did you answer the question type?"}
+            </p>
+            <div className="mt-6 space-y-3">
+              <TactileButton variant="primary" onClick={handleReveal}>
+                Yes 👍
+              </TactileButton>
+              <TactileButton variant="ghost" onClick={() => setReflecting(false)}>
+                No, let me think
+              </TactileButton>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Brain check overlay */}
+
       {showingBrainCheck && (
         <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm animate-slide-up">
           <div
