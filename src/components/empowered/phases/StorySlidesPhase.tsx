@@ -79,6 +79,10 @@ export function StorySlidesPhase({
     setSpeaking(false);
   }
 
+  function handleBack() {
+    if (page > 0) setPage(page - 1);
+  }
+
   function handleNext() {
     if (isLast) {
       onComplete({
