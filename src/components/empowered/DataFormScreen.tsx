@@ -41,7 +41,7 @@ export function DataFormScreen({
 
       {/* Simplified onboarding header: logo · back · step */}
       <header className="relative z-20 border-b border-border/60 bg-card/85 backdrop-blur">
-        <div className="mx-auto grid w-full max-w-[560px] grid-cols-[44px_1fr_auto] items-center gap-2 px-4 py-2.5">
+        <div className="mx-auto grid w-full max-w-[560px] grid-cols-[44px_1fr_auto] items-center gap-2 px-4 py-3">
           <button
             type="button"
             aria-label="Go back"
@@ -55,13 +55,13 @@ export function DataFormScreen({
             Step {step} of {totalSteps}
           </span>
         </div>
-        <div className="mx-auto flex w-full max-w-[480px] gap-1.5 px-4 pb-2.5" aria-hidden>
+        <div className="mx-auto flex w-full max-w-[420px] gap-1.5 px-4 pb-3" aria-hidden>
           {Array.from({ length: totalSteps }).map((_, i) => (
             <span
               key={i}
               className={cn(
-                "h-1 flex-1 rounded-full",
-                i < step ? "bg-primary" : "bg-accent",
+                "h-0.5 flex-1 rounded-full",
+                i < step ? "bg-primary" : "bg-primary/20",
               )}
             />
           ))}
