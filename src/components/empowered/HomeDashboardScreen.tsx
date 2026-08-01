@@ -462,9 +462,9 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
                 className="flex w-full flex-col items-center gap-2"
                 aria-expanded={isOpen}
               >
-                <span className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-accent/50">
+                <span className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-accent/50">
                   {image ? (
-                    <img src={image} alt="" className="h-full w-full object-cover" />
+                    <img src={image} alt="" className="h-full w-full object-contain p-1.5" />
                   ) : (
                     <BookOpen className="h-7 w-7 text-primary" />
                   )}
