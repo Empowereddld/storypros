@@ -48,6 +48,7 @@ export function StorySlidesPhase({
   const slides = storyData.slides;
   const current = slides[page];
   const slideImg = resolveStoryImage(storyData.id, current.image);
+  const ElementIcon = ELEMENT_ICONS[current.story_element] ?? User;
   const isLast = page === slides.length - 1;
   const progress = ((page + 1) / slides.length) * 100;
 
