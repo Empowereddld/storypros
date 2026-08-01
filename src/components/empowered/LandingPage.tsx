@@ -26,7 +26,7 @@ const PATHWAY_IMAGES = [
   { url: stepRetellAsset.url, alt: "A mother and daughter retelling a Story Pros story together at a table" },
   { url: stepConnectAsset.url, alt: "Two children sharing a tablet and talking about a story" },
 ];
-import { ScrollStoryDemo } from "./ScrollStoryDemo";
+import { PreviewCarousel } from "./PreviewCarousel";
 import { cn } from "@/lib/utils";
 import {
   AGE_RANGE,
