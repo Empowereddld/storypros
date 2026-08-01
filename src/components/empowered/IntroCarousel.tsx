@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────
  * Intro / Onboarding Carousel
- *   1. Read, Watch & Listen
+ *   1. Learn Through Stories
  *   2. Understand, Retell & Connect
  *   3. Earn Coins & Rewards
  *   4. Meet Dan & Daria
@@ -76,9 +76,12 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
         {/* Slide content */}
         <div
           key={index}
-          className="motion-safe:animate-slide-up flex flex-1 flex-col justify-center pb-5"
+          className={cn(
+            "motion-safe:animate-slide-up flex flex-1 flex-col overflow-y-auto pb-5",
+            index === 0 ? "justify-start pt-10 sm:pt-12" : "justify-center",
+          )}
         >
-          {index === 0 && <SlideModes />}
+          {index === 0 && <SlidePurpose />}
           {index === 1 && <SlideLearn />}
           {index === 2 && <SlideRewards />}
           {index === 3 && <SlideMeet />}
@@ -101,7 +104,7 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           ))}
         </div>
 
-        <div className="mt-5 flex justify-center pb-1">
+        <div className="mt-5 flex justify-center">
           <TactileButton
             className="w-full sm:max-w-[560px]"
             aria-label={isLast ? "Get started with profile setup" : "Next screen"}
@@ -127,32 +130,35 @@ function Heading({ children }: { children: ReactNode }) {
 
 function Support({ children }: { children: ReactNode }) {
   return (
-    <p className="mx-auto mt-3 max-w-[430px] text-center text-base font-medium leading-snug text-ink-soft sm:text-[17px]">
+    <p className="mx-auto mt-3 max-w-[500px] text-center text-base font-medium leading-snug text-ink-soft sm:text-[17px]">
       {children}
     </p>
   );
 }
 
-/* ───────── Slide 1: Read, Watch & Listen ───────── */
+/* ───────── Slide 1: Learn Through Stories ───────── */
 
-function SlideModes() {
+function SlidePurpose() {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <img
         src={danDariaReading}
         alt=""
         aria-hidden
-        className="mx-auto w-[130px] object-contain sm:w-[150px]"
+        className="w-[130px] object-contain sm:w-[150px]"
       />
-      <div className="mt-6">
-        <Heading>Read, Watch &amp; Listen</Heading>
-        <Support>Choose how you want to experience each story.</Support>
+      <div className="mt-5 sm:mt-6">
+        <Heading>Learn Through Stories</Heading>
+        <Support>
+          Each story helps you understand what happened, retell ideas, and connect stories to real
+          life.
+        </Support>
       </div>
 
       <CardRow>
-        <IconCard icon={<BookIcon />} label="Read Along" />
-        <IconCard icon={<HeadphonesIcon />} label="Listen" />
-        <IconCard icon={<PlayIcon />} label="Watch" />
+        <IconCard icon={<LightbulbIcon />} label="Understand the Story" />
+        <IconCard icon={<SpeechIcon />} label="Retell in Your Words" />
+        <IconCard icon={<PersonHeartIcon />} label="Connect to Your Life" />
       </CardRow>
     </div>
   );
@@ -236,17 +242,21 @@ function SlideMeet() {
 
 function CardRow({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-7 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-4">{children}</div>
+    <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:grid sm:grid-cols-3 sm:gap-4 sm:min-h-[170px]">
+      {children}
+    </div>
   );
 }
 
 function IconCard({ icon, label }: { icon: ReactNode; label: string }) {
   return (
-    <div className="flex min-h-[68px] items-center gap-3 rounded-2xl border border-accent/60 bg-card p-4 shadow-card sm:min-h-[150px] sm:flex-col sm:justify-center sm:gap-3 sm:p-5">
+    <div className="flex h-[72px] items-center gap-3 rounded-2xl border border-accent/60 bg-card p-3 shadow-card sm:h-auto sm:min-h-[170px] sm:flex-col sm:justify-center sm:gap-4 sm:p-6">
       <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
         {icon}
       </span>
-      <p className="text-sm font-extrabold leading-tight text-ink sm:text-center">{label}</p>
+      <p className="text-[15px] font-semibold leading-tight text-ink sm:text-center sm:text-[16px]">
+        {label}
+      </p>
     </div>
   );
 }
@@ -275,6 +285,43 @@ function Pill({ children }: { children: ReactNode }) {
 }
 
 /* ───────── Icons ───────── */
+
+function LightbulbIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <path d="M9 18h6" strokeLinecap="round" />
+      <path d="M10 21h4" strokeLinecap="round" />
+      <path
+        d="M12 3a6 6 0 00-6 6c0 2.22 1.21 4.16 3 5.2V17h6v-2.8c1.79-1.04 3-2.98 3-5.2a6 6 0 00-6-6z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PersonHeartIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <circle cx="9" cy="8" r="3" />
+      <path d="M4 20c0-3 2.5-5 5-5s5 2 5 5" strokeLinecap="round" />
+      <path d="M17 20s-3.5-2.5-4.5-4.5c-.5-1 .2-2.2 1.3-2.2.7 0 1.2.4 1.4 1 .2-.6.7-1 1.4-1 1.1 0 1.8 1.2 1.3 2.2C17.5 17.5 17 20 17 20z" />
+    </svg>
+  );
+}
 
 function HeadphonesIcon() {
   return (
