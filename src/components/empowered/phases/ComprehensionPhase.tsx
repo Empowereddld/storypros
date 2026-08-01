@@ -131,6 +131,11 @@ export function ComprehensionPhase({
   const hintSlide = storyData.slides.find((s) => s.story_element === q.story_element);
   const hintImage = resolveStoryImage(storyData.id, hintSlide?.image);
 
+  const ElementIcon = ELEMENT_ICONS[q.story_element] ?? User;
+  const elementLabel = ELEMENT_LABELS[q.story_element] ?? "Story";
+  const elementStyle = ELEMENT_COLORS[q.story_element] ?? ELEMENT_COLORS.character;
+
+
   return (
     <div className="relative flex h-full flex-col overflow-hidden bg-background">
       <Star className="pointer-events-none absolute right-7 top-24 z-0 h-5 w-5 text-secondary/45 animate-sparkle" />
