@@ -382,12 +382,14 @@ function BadgesCard({
   const locked = badges.filter((b) => !owned.has(b.id)).slice(0, earned.length > 0 ? 2 : 3);
   const shown = [...earned.slice(0, 3), ...locked];
 
-  const summary =
+  const footnote =
     earned.length > 0
-      ? `My badges. You have ${earned.length}. More are coming.`
+      ? "More badges are waiting."
       : completedCount > 0
-        ? "My badges. Your first badge is coming soon."
-        : "My badges. Finish a story to open your first badge.";
+        ? "Your first badge is coming soon."
+        : "Your first badge is waiting.";
+
+
 
   return (
     <Card>
