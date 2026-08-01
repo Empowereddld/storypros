@@ -74,7 +74,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   const cover = cont
     ? resolveStoryImage(cont.story.id, cont.story.slides[0]?.image || "slide-01.webp")
     : null;
-  const recap = cont?.story.recap ?? cont?.story.slides[2]?.text ?? "";
 
   const greeting = `Hi, ${firstName}!`;
   const subtitle = doneToday
