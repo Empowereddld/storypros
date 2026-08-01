@@ -186,10 +186,10 @@ export function StorySlidesPhase({
                 onClick={() => toggle(elementLabel, "element")}
                 aria-label={isPlaying("element") ? "Stop" : `Read ${elementLabel}`}
                 className={cn(
-                  "press-pop flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                  "press-pop flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 transition-colors shadow-card",
                   isPlaying("element")
                     ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : ["border-accent/50 bg-card shadow-card hover:bg-accent/40", elementColors.text],
+                    : [elementColors.bg, elementColors.text, elementColors.ring, "hover:opacity-90"],
                 )}
               >
                 {isPlaying("element") ? (
