@@ -20,20 +20,6 @@ interface DataFormScreenProps {
 
 const AGES = [4, 5, 6, 7, 8, 9, 10];
 
-const COUNTRIES = [
-  "United States",
-  "Canada",
-  "United Kingdom",
-  "Ireland",
-  "Australia",
-  "New Zealand",
-  "South Africa",
-  "Jamaica",
-  "Trinidad and Tobago",
-  "India",
-  "Other",
-];
-
 const DIAGNOSES = [
   "DLD",
   "ADHD",
@@ -308,14 +294,6 @@ function ChevronDownIcon() {
       aria-hidden
     >
       <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function LockMiniIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0" fill="currentColor" aria-hidden>
-      <path d="M7 10V8a5 5 0 0110 0v2h1a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7a2 2 0 012-2h1zm2 0h6V8a3 3 0 00-6 0v2z" />
     </svg>
   );
 }
