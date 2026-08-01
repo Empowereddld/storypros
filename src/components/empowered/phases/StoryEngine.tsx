@@ -206,13 +206,13 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
     const cover = resolveStoryImage(storyData.id, storyData.slides[0]?.image);
 
     return (
-      <div className="relative flex h-full w-full flex-col overflow-hidden bg-cream px-5">
+      <div className="relative flex h-full w-full flex-col overflow-y-auto bg-cream px-5">
         <AuthBackdrop />
         <Star className="absolute left-8 top-28 z-10 h-4 w-4 text-secondary animate-sparkle" />
         <Star className="absolute right-8 top-44 z-10 h-4 w-4 text-primary/35 animate-sparkle" />
         <MiniPlane className="absolute right-10 top-24 z-10 h-7 w-7 rotate-[18deg] text-secondary animate-float" />
 
-        <div className="relative z-10 flex items-center justify-between pt-5">
+        <div className="relative z-10 mx-auto flex w-full max-w-[600px] items-center justify-between pt-5">
           <StoryProsLogo layout="row" size="sm" />
           <div className="flex items-center gap-1.5 rounded-full border-2 border-secondary/50 bg-card/90 px-3 py-1.5 text-sm font-extrabold text-primary shadow-card">
             <PaperPlaneIcon className="h-4 w-4 text-secondary" />
@@ -220,69 +220,70 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
           </div>
         </div>
 
-        <div className="relative z-10 mt-7 overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-pop-in">
-          {cover ? (
-            <img src={cover} alt="" className="h-[230px] w-full object-cover" />
-          ) : (
-            <div className="flex h-[230px] items-center justify-center bg-accent/50">
-              <PaperPlaneIcon className="h-16 w-16 text-secondary" />
-            </div>
-          )}
-          <div className="p-5">
-            <p className="text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
-              Welcome back
-            </p>
-            <h2 className="mt-1 font-display text-[30px] font-extrabold leading-none text-primary">
-              Keep going?
-            </h2>
-            <p className="mt-2 text-[15px] font-semibold leading-snug text-ink-soft">
-              You were partway through{" "}
-              <span className="font-extrabold text-ink">{storyData.title}</span>. Next up:{" "}
-              <span className="font-extrabold text-primary">{nextLabel}</span>.
-            </p>
-
-            <div className="mt-5">
-              <div className="mb-2 flex items-center justify-between text-xs font-extrabold text-primary">
-                <span>
-                  {done} of {total} parts done
-                </span>
-                <span>{percent}%</span>
+        <div className="relative z-10 mx-auto flex w-full max-w-[600px] flex-1 flex-col justify-center py-6">
+          <div className="overflow-hidden rounded-[28px] border-[6px] border-card bg-card shadow-soft animate-pop-in">
+            {cover ? (
+              <div className="aspect-video w-full overflow-hidden rounded-[20px] bg-accent/40">
+                <img
+                  src={cover}
+                  alt=""
+                  className="h-full w-full object-cover object-[center_30%]"
+                />
               </div>
-              <div className="h-3 overflow-hidden rounded-full bg-accent/60">
+            ) : (
+              <div className="flex aspect-video items-center justify-center rounded-[20px] bg-accent/50">
+                <PaperPlaneIcon className="h-16 w-16 text-secondary" />
+              </div>
+            )}
+            <div className="px-5 pb-5 pt-4">
+              <p className="text-[11px] font-extrabold uppercase tracking-wider text-secondary-deep">
+                Welcome back
+              </p>
+              <h2 className="mt-1.5 font-display text-[28px] font-extrabold leading-tight text-primary">
+                Keep going?
+              </h2>
+              <p className="mt-2 text-[15px] font-semibold leading-snug text-ink-soft">
+                You were partway through{" "}
+                <span className="font-extrabold text-ink">{storyData.title}</span>. Next up:{" "}
+                <span className="font-extrabold text-primary">{nextLabel}</span>.
+              </p>
+
+              <div className="mt-5">
                 <div
-                  className="h-full rounded-full bg-primary transition-all"
-                  style={{ width: `${percent}%` }}
-                />
+                  className="h-3 overflow-hidden rounded-full bg-accent/60"
+                  role="progressbar"
+                  aria-label={`${done} of ${total} parts done`}
+                  aria-valuenow={percent}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                >
+                  <div
+                    className="h-full rounded-full bg-primary transition-all"
+                    style={{ width: `${percent}%` }}
+                  />
+                </div>
+                <p className="mt-2 text-xs font-extrabold text-primary">
+                  {done} of {total} parts done · {percent}%
+                </p>
               </div>
-            </div>
 
-            <div
-              className="mt-4 grid grid-cols-6 gap-1.5"
-              aria-label={`${done} of ${total} parts done`}
-            >
-              {Array.from({ length: total }).map((_, i) => (
-                <span
-                  key={i}
-                  className={
-                    i < done
-                      ? "h-2.5 rounded-full bg-secondary shadow-[0_2px_0_var(--secondary-deep)]"
-                      : "h-2.5 rounded-full bg-accent/70"
-                  }
-                />
-              ))}
+              <div className="mt-5 grid grid-cols-2 gap-3">
+                <TactileButton
+                  className="h-12"
+                  onClick={handleResume}
+                  leadingIcon={<ChevronRightIcon />}
+                >
+                  Keep going
+                </TactileButton>
+                <TactileButton className="h-12" variant="ghost" onClick={handleStartOver}>
+                  Start over
+                </TactileButton>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="relative z-10 mt-auto grid grid-cols-2 gap-3 pb-6">
-          <TactileButton className="h-12" onClick={handleResume} leadingIcon={<ChevronRightIcon />}>
-            Keep going
-          </TactileButton>
-          <TactileButton className="h-12" variant="ghost" onClick={handleStartOver}>
-            Start over
-          </TactileButton>
-        </div>
       </div>
+
     );
   }
 
