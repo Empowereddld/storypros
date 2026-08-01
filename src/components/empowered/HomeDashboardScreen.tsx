@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { BookOpen, Play } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
 import { cn } from "@/lib/utils";
@@ -142,14 +142,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                     </div>
                   )}
                   <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
-                  <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wide text-primary-foreground shadow-card">
-                    <Play className="h-3.5 w-3.5 fill-current" />
-                    {cont.status === "in-progress"
-                      ? "Continue Story"
-                      : cont.status === "replay"
-                        ? "Replay Story"
-                        : "Next Story"}
-                  </span>
+
                 </div>
 
                 <div className="relative -mt-10 rounded-t-[32px] bg-card px-4 pb-4 pt-4 lg:px-5">
@@ -165,19 +158,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         tone="primary"
                         size="sm"
                       />
-                    </div>
-                    {/* Progress dots replace the old "Level 1" badge —
-                        progress, not a second reward number. */}
-                    <div className="mt-2 flex items-center gap-1.5" aria-hidden>
-                      {[1, 2, 3].map((n) => (
-                        <span
-                          key={n}
-                          className={cn(
-                            "h-2.5 w-2.5 rounded-full",
-                            n <= cont.story.level ? "bg-primary" : "bg-accent",
-                          )}
-                        />
-                      ))}
                     </div>
                     {recap && (
                       <p className="mt-2 text-[14px] font-medium leading-snug text-ink">{recap}</p>
@@ -433,15 +413,15 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
       <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
 
 
-      <div className="mt-3 flex gap-3 overflow-x-auto no-scrollbar pb-1">
-        {words.map((word) => {
+      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {words.slice(0, 5).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           const isOpen = openWord === word.word;
           return (
             <div
               key={word.word}
               className={cn(
-                "flex w-[128px] shrink-0 flex-col items-center gap-2 rounded-[22px] border bg-card p-3 shadow-card",
+                "flex min-w-0 flex-col items-center gap-2 rounded-[22px] border bg-card p-3 shadow-card",
                 isOpen ? "border-primary" : "border-accent/60",
               )}
             >
@@ -457,7 +437,7 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
                     <BookOpen className="h-7 w-7 text-primary" />
                   )}
                 </span>
-                <span className="text-center text-[14px] font-extrabold leading-tight text-ink">
+                <span className="flex h-9 w-full items-center justify-center text-center text-[14px] font-extrabold leading-tight text-ink">
                   {word.word}
                 </span>
               </button>
@@ -466,6 +446,7 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
           );
         })}
       </div>
+
 
       {selected && (
         <div className="mt-3 rounded-[22px] border border-accent/70 bg-card p-4 shadow-card">
