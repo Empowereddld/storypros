@@ -57,15 +57,18 @@ function AuthenticatedLayout() {
     }
   }
 
-  // Onboarding is a focused flow — hide the full app navigation there.
+  // Onboarding and story reading are focused flows — hide the full app navigation there.
   const isOnboarding = path.startsWith("/onboarding");
+  const isStory = path.startsWith("/story");
+  const hideDesktopNav = isOnboarding || isStory;
 
   // Website layout: full-bleed canvas. Laptop (lg+) gets a top nav;
   // tablets/phones keep the screens' own bottom tabs + top-left menu.
   return (
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-gradient-to-b from-white via-accent/20 to-accent/45">
       <DemoBanner />
-      {!isOnboarding && <DesktopNav />}
+      {!hideDesktopNav && <DesktopNav />}
+
 
       <div className="relative flex-1 overflow-y-auto no-scrollbar">
         <div className="relative mx-auto h-full w-full lg:max-w-5xl">
