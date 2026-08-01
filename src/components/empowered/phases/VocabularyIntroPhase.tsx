@@ -89,7 +89,7 @@ export function VocabularyIntroPhase({
           <section className="flex flex-1 flex-col items-center justify-center rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
             <div className="relative h-44 w-44 overflow-hidden rounded-[34px] bg-accent shadow-card">
               {wordImage ? (
-                <img src={wordImage} alt="" className="h-full w-full object-cover" />
+                <img src={wordImage} alt="" className="h-full w-full object-contain p-2" />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-primary">
                   <PaperPlaneIcon className="h-16 w-16" />
