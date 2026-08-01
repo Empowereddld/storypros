@@ -159,19 +159,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         size="sm"
                       />
                     </div>
-                    {/* Progress dots replace the old "Level 1" badge —
-                        progress, not a second reward number. */}
-                    <div className="mt-2 flex items-center gap-1.5" aria-hidden>
-                      {[1, 2, 3].map((n) => (
-                        <span
-                          key={n}
-                          className={cn(
-                            "h-2.5 w-2.5 rounded-full",
-                            n <= cont.story.level ? "bg-primary" : "bg-accent",
-                          )}
-                        />
-                      ))}
-                    </div>
                     {recap && (
                       <p className="mt-2 text-[14px] font-medium leading-snug text-ink">{recap}</p>
                     )}
