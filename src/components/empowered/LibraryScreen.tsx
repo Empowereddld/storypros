@@ -179,9 +179,13 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
                   <h3 className="text-[27px] font-extrabold leading-[1.05] drop-shadow sm:text-[31px]">
                     {featured.title}
                   </h3>
-                  <div>
+                  <div className="flex flex-wrap items-center gap-2">
                     <StoryPill>Level {featured.level}</StoryPill>
+                    <span className="rounded-full bg-secondary/90 px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
+                      {settingLabel(featured)}
+                    </span>
                   </div>
+
                 </div>
               </div>
 
@@ -280,11 +284,13 @@ function StoryCard({ story, onOpen }: { story: CardStory; onOpen: () => void }) 
         <h3 className="line-clamp-2 text-[15px] font-extrabold leading-snug text-ink">
           {story.title}
         </h3>
-        <div className="mt-2">
+        <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <span className="rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-extrabold text-primary">
             Level {story.level}
           </span>
+          <SettingPill story={story} />
         </div>
+
 
 
         <div className="mt-auto pt-3">
@@ -366,6 +372,36 @@ function StoryPill({ children }: { children: ReactNode }) {
     </span>
   );
 }
+
+const SETTING_BY_ID: Record<string, string> = {
+  "story-01-dan-and-the-paper-cut": "At Home",
+  "story-02-darias-carnival-ticket": "Social",
+  "story-03-dan-joins-the-game": "Social",
+  "story-04-daria-and-the-puzzle-piece": "At Home",
+  "story-05-dan-and-darias-treasure-hunt": "Social",
+  "story-06-the-kite-in-the-tree": "Social",
+  "story-07-the-sandcastle-and-the-wave": "Social",
+  "story-08-dan-talks-about-recess": "At School",
+  "story-09-daria-asks-for-the-next-step": "At School",
+  "story-10-dans-lunchroom-moment": "At School",
+  "story-11-daria-asks-again": "At School",
+};
+
+function settingLabel(story: { id: string; theme: string }) {
+  if (SETTING_BY_ID[story.id]) return SETTING_BY_ID[story.id];
+  if (story.theme === "at-school") return "At School";
+  if (story.theme === "at-home") return "At Home";
+  return "Social";
+}
+
+function SettingPill({ story }: { story: { id: string; theme: string } }) {
+  return (
+    <span className="rounded-full bg-secondary/25 px-2.5 py-0.5 text-[11px] font-extrabold text-secondary-foreground">
+      {settingLabel(story)}
+    </span>
+  );
+}
+
 
 function EmptyLibraryState({ filter }: { filter: FilterTab }) {
   const copy =
