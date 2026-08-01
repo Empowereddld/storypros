@@ -44,7 +44,7 @@ export const TactileButton = forwardRef<HTMLButtonElement, TactileButtonProps>(
         {...props}
       >
         {leadingIcon && <span className="shrink-0">{leadingIcon}</span>}
-        <span>{children}</span>
+        <span className="inline-flex items-center gap-2 whitespace-nowrap">{children}</span>
       </button>
     );
   },
