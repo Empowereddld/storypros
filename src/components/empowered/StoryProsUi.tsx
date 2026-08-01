@@ -13,6 +13,7 @@
 import { type ReactNode } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { useLongPressSpeak } from "./SpeakButton";
 
 /* ───────── Currency badge (Coins) ───────── */
 
