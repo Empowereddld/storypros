@@ -16,6 +16,8 @@ interface DataFormScreenProps {
   onBack?: () => void;
   step?: number;
   totalSteps?: number;
+  submitting?: boolean;
+  error?: string | null;
 }
 
 const AGES = [4, 5, 6, 7, 8, 9, 10];
@@ -36,6 +38,8 @@ export function DataFormScreen({
   onBack,
   step = 1,
   totalSteps = 3,
+  submitting = false,
+  error = null,
 }: DataFormScreenProps) {
   const [values, setValues] = useState<OnboardingFormValues>({
     childName: "",
@@ -75,8 +79,9 @@ export function DataFormScreen({
           <button
             type="button"
             aria-label="Go back"
+            disabled={submitting}
             onClick={() => (onBack ? onBack() : window.history.back())}
-            className="press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
           >
             <ChevronLeftIcon />
           </button>
@@ -120,6 +125,7 @@ export function DataFormScreen({
                   className="mt-2"
                   icon={<UserIcon />}
                   value={values.childName}
+                  disabled={submitting}
                   onChange={(v) => setValues((p) => ({ ...p, childName: v.slice(0, 40) }))}
                   placeholder="Enter your child's name"
                   autoComplete="off"
@@ -136,6 +142,7 @@ export function DataFormScreen({
                   </span>
                   <select
                     id="child-age"
+                    disabled={submitting}
                     value={values.childAge ?? ""}
                     onChange={(event) => {
                       const next = Number(event.target.value);
@@ -170,6 +177,7 @@ export function DataFormScreen({
                   className="mt-2"
                   icon={<GlobeIcon />}
                   value={values.country}
+                  disabled={submitting}
                   onChange={(v) => setValues((p) => ({ ...p, country: v.slice(0, 56) }))}
                   placeholder="Enter your country"
                   autoComplete="country-name"
@@ -205,6 +213,7 @@ export function DataFormScreen({
                       <input
                         type="checkbox"
                         checked={checked}
+                        disabled={submitting}
                         onChange={() => toggleDiagnosis(item)}
                         className="h-5 w-5 shrink-0 accent-primary"
                       />
@@ -218,6 +227,7 @@ export function DataFormScreen({
                 id="other-diagnosis"
                 type="text"
                 value={values.otherDiagnosis}
+                disabled={submitting}
                 onChange={(event) =>
                   setValues((p) => ({ ...p, otherDiagnosis: event.target.value.slice(0, 80) }))
                 }
@@ -230,13 +240,29 @@ export function DataFormScreen({
         </div>
 
         <div className="mt-8 space-y-2.5">
+          {error ? (
+            <p
+              role="alert"
+              className="rounded-2xl border-2 border-coral/40 bg-coral/10 px-4 py-3 text-sm font-semibold text-coral"
+            >
+              {error}
+            </p>
+          ) : null}
           <TactileButton
-            disabled={!isValid}
-            onClick={() => isValid && onSubmit(values)}
+            disabled={!isValid || submitting}
+            onClick={() => isValid && !submitting && onSubmit(values)}
             className="h-12 disabled:opacity-100 disabled:bg-primary/60 disabled:text-primary-foreground/90"
           >
             <span className="inline-flex items-center gap-2">
-              Continue <ArrowRightIcon />
+              {submitting ? (
+                <>
+                  <Spinner /> Setting things up…
+                </>
+              ) : (
+                <>
+                  Continue <ArrowRightIcon />
+                </>
+              )}
             </span>
           </TactileButton>
         </div>
@@ -319,6 +345,20 @@ function GlobeIcon() {
     >
       <circle cx="12" cy="12" r="9" />
       <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5 animate-spin" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" opacity="0.3" />
+      <path
+        d="M21 12a9 9 0 0 0-9-9"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
