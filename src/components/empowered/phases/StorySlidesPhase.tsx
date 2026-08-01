@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { User, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
 import type { StoryElement, StoryPhaseProps } from "@/types/story";
@@ -6,7 +7,7 @@ import { resolveStoryImage } from "@/services/storyImages";
 import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
@@ -104,17 +105,30 @@ export function StorySlidesPhase({
             )}
             <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/75 to-transparent" />
             <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-card/95 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-primary shadow-card">
-              <BookIcon className="h-4 w-4" />
+              <User className="h-4 w-4" />
               {ELEMENT_LABELS[current.story_element]}
             </span>
           </div>
 
           <div className="flex flex-1 flex-col p-5">
-            {page === 0 && storyData.target_connective && (
-              <span className="mb-3 inline-flex w-fit items-center rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
-                Word: {storyData.target_connective}
-              </span>
-            )}
+            <div className="mb-3 flex items-center gap-3">
+              {isSupported() && (
+                <button
+                  onClick={handleListen}
+                  className={cn(
+                    "press-pop inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-extrabold shadow-card transition-colors",
+                    speaking
+                      ? "bg-destructive text-destructive-foreground animate-pulse-glow"
+                      : "bg-secondary/25 text-secondary-foreground",
+                  )}
+                  aria-label={speaking ? "Stop audio" : "Listen"}
+                >
+                  {speaking ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                  {speaking ? "Stop" : "Listen"}
+                </button>
+              )}
+            </div>
+
             <p className="text-[24px] font-extrabold leading-snug text-primary">
               {highlightConnective(current.text, storyData.target_connective)}
             </p>
@@ -132,26 +146,10 @@ export function StorySlidesPhase({
                 ))}
               </div>
 
-              <div className="flex items-center gap-3">
-                {isSupported() && (
-                  <button
-                    onClick={handleListen}
-                    className={cn(
-                      "press-pop flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-card",
-                      speaking
-                        ? "bg-destructive text-destructive-foreground animate-pulse-glow"
-                        : "bg-secondary text-secondary-foreground",
-                    )}
-                    aria-label={speaking ? "Stop audio" : "Listen"}
-                  >
-                    <SpeakerIcon playing={speaking} />
-                  </button>
-                )}
-                <TactileButton onClick={handleNext}>
-                  {isLast ? "Done" : "Next"}
-                  <ChevronRightIcon className="h-5 w-5 text-secondary" />
-                </TactileButton>
-              </div>
+              <TactileButton onClick={handleNext} className="w-full">
+                {isLast ? "Done" : "Next"}
+                <ChevronRightIcon className="h-5 w-5 text-secondary" />
+              </TactileButton>
             </div>
           </div>
         </article>
@@ -160,18 +158,3 @@ export function StorySlidesPhase({
   );
 }
 
-function SpeakerIcon({ playing }: { playing: boolean }) {
-  if (playing) {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-        <rect x="6" y="6" width="12" height="12" rx="2" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}
