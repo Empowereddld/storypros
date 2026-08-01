@@ -184,6 +184,11 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
                     <span className="rounded-full bg-secondary/90 px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
                       {settingLabel(featured)}
                     </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/85 px-3 py-1 text-xs font-extrabold text-white ring-1 ring-white/50">
+                      <BrainIcon className="h-3.5 w-3.5" />
+                      {skillLabel(featured)}
+                    </span>
+
                   </div>
 
                 </div>
