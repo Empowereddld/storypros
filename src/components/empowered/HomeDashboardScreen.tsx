@@ -253,6 +253,7 @@ function WeekStrip({
   days: number;
   today: string;
 }) {
+  const reachedMilestone = days === 1 || days === 3 || days === 5 || days >= 7;
   const milestone =
     days >= 7
       ? "Seven days. Amazing!"
@@ -265,7 +266,7 @@ function WeekStrip({
             : "Read a story to fill a circle.";
 
   return (
-    <Card>
+    <section>
       <span className="text-sm font-extrabold text-ink">This week</span>
 
       <div className="mt-3 flex items-end justify-between gap-1">
@@ -290,8 +291,13 @@ function WeekStrip({
           );
         })}
       </div>
-      <p className="mt-2 text-[12px] font-bold leading-snug text-primary">{milestone}</p>
-    </Card>
+      <p className="mt-2 flex items-center gap-1.5 text-[12px] font-bold leading-snug text-primary">
+        {reachedMilestone && (
+          <Star className="h-3.5 w-3.5 text-secondary" aria-hidden />
+        )}
+        {milestone}
+      </p>
+    </section>
   );
 }
 
