@@ -184,7 +184,7 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="country" className="block text-sm font-extrabold text-primary">
-                  Country <span className="font-bold text-coral">Required</span>
+                  Country <RequiredStar />
                 </label>
 
                 <IconInput
