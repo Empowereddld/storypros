@@ -313,8 +313,8 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
                 Keep going?
               </h2>
               <p className="mt-2 text-[15px] font-semibold leading-snug text-ink-soft">
-                You were partway through{" "}
-                <span className="font-extrabold text-ink">{storyData.title}</span>. Next up:{" "}
+                You’re partway through{" "}
+                <span className="font-extrabold text-ink">{storyData.title}</span>. Next:{" "}
                 <span className="font-extrabold text-primary">{nextLabel}</span>.
               </p>
 
