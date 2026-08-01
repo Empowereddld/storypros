@@ -15,6 +15,7 @@ import { useState } from "react";
 import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
 import { CharacterSection, Reveal } from "./CharacterSection";
+import { StoryElementFramework } from "./StoryElementFramework";
 import { ScrollStoryDemo } from "./ScrollStoryDemo";
 import { cn } from "@/lib/utils";
 import {
