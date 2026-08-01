@@ -1,12 +1,20 @@
-import { useState } from "react";
+/* ---------------------------------------------
+ * Story Overview / Retell phase
+ * Shows every scene of the story at once so the child can
+ * review the whole narrative and retell it before answering
+ * comprehension questions. Audio is always tap-to-hear.
+ * --------------------------------------------- */
+
+import { type ComponentType } from "react";
+import { CheckCircle2, Hand, Heart, MapPin, TriangleAlert, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { StoryElement, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
-import { ListenButton, useListen } from "./ListenButton";
+import { useListen } from "./ListenButton";
 import { RetellRecorder } from "../RetellRecorder";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
@@ -14,18 +22,51 @@ const ELEMENT_LABELS: Record<StoryElement, string> = {
   place: "Where",
   problem: "Problem",
   emotion: "Feeling",
-  action: "What Happened",
+  action: "Action",
   result: "Result",
 };
 
-const ELEMENT_HELPERS: Record<StoryElement, string> = {
-  character: "Name the people in the story.",
-  place: "Say where the story happened.",
-  problem: "Tell what got tricky.",
-  emotion: "Share how they felt.",
-  action: "Explain what they did next.",
-  result: "Finish with what changed.",
+const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>> = {
+  character: User,
+  place: MapPin,
+  problem: TriangleAlert,
+  emotion: Heart,
+  action: Hand,
+  result: CheckCircle2,
 };
+
+const ELEMENT_BG: Record<StoryElement, string> = {
+  character: "bg-element-character-foreground",
+  place: "bg-element-place-foreground",
+  problem: "bg-element-problem-foreground",
+  emotion: "bg-element-emotion-foreground",
+  action: "bg-element-action-foreground",
+  result: "bg-element-result-foreground",
+};
+
+function SpeakerIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+    >
+      <path d="M4 10v4h3l4 3.5V6.5L7 10H4z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15.5 9.2a4 4 0 010 5.6M18 6.7a7.5 7.5 0 010 10.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function StopIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <rect x="6" y="6" width="12" height="12" rx="2.5" />
+    </svg>
+  );
+}
 
 export function ImmediateRetellPhase({
   storyData,
@@ -34,19 +75,9 @@ export function ImmediateRetellPhase({
   ttsSpeed = "normal",
   childId,
 }: StoryPhaseProps) {
-  const elements = storyData.retell_prompts.story_elements;
-  const [tapped, setTapped] = useState<Set<StoryElement>>(new Set());
-  const progress = elements.length > 0 ? (tapped.size / elements.length) * 100 : 0;
-  const immediatePrompt = storyData.retell_prompts.immediate;
+  const slides = [...storyData.slides].sort((a, b) => a.position - b.position);
+  const fullStory = slides.map((slide) => slide.text).join(" ");
   const { supported, isPlaying, toggle } = useListen(ttsSpeed);
-
-  function handleTap(element: StoryElement) {
-    setTapped((prev) => {
-      const next = new Set(prev);
-      next.add(element);
-      return next;
-    });
-  }
 
   function handleDone() {
     onComplete({
@@ -57,132 +88,116 @@ export function ImmediateRetellPhase({
     });
   }
 
+  const fullPlaying = isPlaying("full-story");
+
   return (
     <div className="relative flex h-full flex-col overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/10 to-accent/30" />
         <Star className="absolute right-8 top-28 h-5 w-5 text-secondary animate-sparkle" />
-        <Star className="absolute left-8 bottom-32 h-4 w-4 text-primary/30 animate-sparkle" />
-        <MiniPlane className="absolute right-10 bottom-24 h-9 w-9 rotate-12 text-secondary/70 animate-float" />
+        <MiniPlane className="absolute right-10 bottom-24 h-9 w-9 rotate-12 text-secondary/60 animate-float" />
       </div>
 
       <div className="relative z-10">
-        <ProgressHeader progress={progress} label="Retell" onClose={onClose} />
+        <ProgressHeader progress={100} label="Story Overview" onClose={onClose} />
       </div>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
-        <section className="rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
-          <div className="flex items-start gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-accent text-primary">
-              <BookIcon className="h-9 w-9" />
-            </div>
-            <div>
-              <h1 className="text-[30px] font-extrabold leading-tight text-primary">
-                Retell the Story
-              </h1>
-              <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
-                Tap each story part while you tell what happened.
-              </p>
-            </div>
-          </div>
+      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-5">
+        <div className="mx-auto w-full max-w-[860px]">
+          <h1 className="text-center font-display text-[32px] font-extrabold leading-tight text-primary">
+            {storyData.title}
+          </h1>
 
-          <div className="mt-5 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
-            <p className="flex-1 text-xl font-extrabold leading-snug text-primary">
+          {supported && (
+            <div className="mt-4 flex justify-center">
+              <button
+                type="button"
+                onClick={() => toggle(fullStory, "full-story")}
+                aria-label={fullPlaying ? "Stop audio" : "Listen to the full story"}
+                className={cn(
+                  "press-pop flex min-h-[48px] items-center gap-2.5 rounded-full border-2 px-6 text-base font-extrabold transition-all",
+                  fullPlaying
+                    ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
+                    : "border-accent bg-card text-primary shadow-card hover:bg-accent/40",
+                )}
+              >
+                {fullPlaying ? <StopIcon /> : <SpeakerIcon />}
+                <span className="whitespace-nowrap">
+                  {fullPlaying ? "Stop" : "Listen to Full Story"}
+                </span>
+              </button>
+            </div>
+          )}
+
+          <div className="mt-5 rounded-[24px] bg-card p-4 shadow-card">
+            <p className="text-base font-extrabold leading-snug text-primary">
               Can you retell {storyData.title} from beginning to end?
             </p>
-            {supported && (
-              <ListenButton
-                playing={isPlaying("immediate")}
-                onClick={() => toggle(immediatePrompt, "immediate")}
-                className="h-11 w-11"
-                ariaLabel="Hear the retell prompt"
-              />
-            )}
+            <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
           </div>
 
-          <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
-        </section>
-
-        <section className="mt-5">
-          <div className="flex items-center gap-2">
-            <BookIcon className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
-          </div>
-
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            {elements.map((element, index) => {
-              const selected = tapped.has(element);
-              const slide = storyData.slides.find((item) => item.story_element === element);
-              const image = slide ? resolveStoryImage(storyData.id, slide.image) : null;
+          <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3">
+            {slides.map((slide, index) => {
+              const image = resolveStoryImage(storyData.id, slide.image);
+              const element = slide.story_element;
+              const Icon = ELEMENT_ICONS[element];
+              const playing = isPlaying(`scene-${index}`);
 
               return (
                 <button
-                  key={`${element}-${index}`}
-                  onClick={() => handleTap(element)}
+                  key={slide.position}
+                  type="button"
+                  onClick={() => toggle(slide.text, `scene-${index}`)}
+                  aria-label={`Hear scene ${index + 1}`}
                   className={cn(
-                    "hover-lift min-h-[204px] overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
-                    selected ? "border-success bg-success/5" : "border-accent/60",
+                    "flex min-h-[220px] flex-col rounded-xl border-2 bg-card p-4 text-left shadow-card transition-all",
+                    playing ? "scale-105 border-transparent ring-4 ring-primary" : "border-accent/50",
                   )}
                 >
-                  <div className="relative h-28 overflow-hidden bg-accent">
+                  <div className="aspect-video w-full overflow-hidden rounded-lg bg-accent/50">
                     {image ? (
-                      <img src={image} alt="" className="h-full w-full object-cover" />
+                      <img
+                        src={image}
+                        alt={`Scene ${index + 1}`}
+                        className="h-full w-full object-cover"
+                      />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center text-primary">
-                        <PaperPlaneIcon className="h-10 w-10" />
+                      <div className="flex h-full w-full items-center justify-center text-sm font-extrabold text-primary">
+                        Scene {index + 1}
                       </div>
                     )}
+                  </div>
+
+                  <p className="mt-3 flex-1 text-sm font-semibold leading-snug text-ink">
+                    {slide.text}
+                  </p>
+
+                  <div className="mt-3 flex items-center gap-2">
                     <span
                       className={cn(
-                        "absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full text-sm font-extrabold shadow-card",
-                        selected
-                          ? "bg-success text-success-foreground"
-                          : "bg-primary text-primary-foreground",
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white",
+                        ELEMENT_BG[element],
                       )}
+                      title={ELEMENT_LABELS[element]}
                     >
-                      {index + 1}
+                      <Icon className="h-4 w-4" />
                     </span>
-                    {selected && (
-                      <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-card text-success shadow-card">
-                        <CheckIcon />
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-3">
-                    <p className="text-base font-extrabold leading-tight text-primary">
+                    <span className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
                       {ELEMENT_LABELS[element]}
-                    </p>
-                    <p className="mt-1 text-[12px] font-medium leading-snug text-ink-soft">
-                      {ELEMENT_HELPERS[element]}
-                    </p>
+                    </span>
                   </div>
                 </button>
               );
             })}
           </div>
-        </section>
+        </div>
       </div>
 
-      <div className="relative z-10 mx-5 mb-5">
-        <TactileButton onClick={handleDone} disabled={tapped.size < elements.length}>
-          I Retold It <ChevronRightIcon className="h-5 w-5 text-secondary" />
+      <div className="relative z-10 mx-auto mb-5 w-full max-w-[860px] px-5">
+        <TactileButton onClick={handleDone}>
+          Continue to Questions <ChevronRightIcon className="h-5 w-5 text-secondary" />
         </TactileButton>
       </div>
     </div>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      aria-hidden
-    >
-      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
