@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getAllStories } from "@/services/stories";
 import { getCompletedStoryIds, getPaperPlanes } from "@/services/progress";
 import { getCheckpoint } from "@/services/checkpoint";
-import { canAccessStory } from "@/services/subscription";
+import { canAccessStory, isPremium } from "@/services/subscription";
 import { TOTAL_PLAYABLE_PHASES } from "@/services/continueStory";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star, StoryProsLogo, LockIcon, UserIcon } from "./StoryProsBrand";
@@ -21,13 +21,13 @@ interface LibraryScreenProps {
   onNavigate: (destination: string, storyId?: string) => void;
 }
 
-type FilterTab = "all" | "open" | "completed" | "locked";
+type FilterTab = "all" | "available" | "inProgress" | "completed";
 
 const TABS: { key: FilterTab; label: string }[] = [
   { key: "all", label: "All" },
-  { key: "open", label: "Continue" },
-  { key: "completed", label: "Done" },
-  { key: "locked", label: "Locked" },
+  { key: "available", label: "Available" },
+  { key: "inProgress", label: "In Progress" },
+  { key: "completed", label: "Completed" },
 ];
 
 interface CardStory {
