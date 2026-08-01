@@ -142,6 +142,7 @@ export function DataFormScreen({
                   </span>
                   <select
                     id="child-age"
+                    disabled={submitting}
                     value={values.childAge ?? ""}
                     onChange={(event) => {
                       const next = Number(event.target.value);
