@@ -163,7 +163,7 @@ function NavTab({
   const press = useLongPressSpeak(label);
   return (
     <button
-      {...press}
+      {...press.handlers}
       onClick={() => {
         if (press.didSpeak()) return;
         onActivate();

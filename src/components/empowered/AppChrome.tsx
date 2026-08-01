@@ -65,7 +65,7 @@ function NavLink({
   return (
     <Link
       to={to}
-      {...press}
+      {...press.handlers}
       onClick={(event) => {
         if (press.didSpeak()) event.preventDefault();
       }}
