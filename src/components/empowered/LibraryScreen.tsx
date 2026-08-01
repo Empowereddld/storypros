@@ -161,30 +161,30 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
               onClick={() => onNavigate("story", featured.id)}
               className="hover-lift mt-3 block w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card text-left shadow-soft active:scale-[0.99]"
             >
-              <div className="relative h-[255px] overflow-hidden rounded-[23px] bg-accent">
+              <div className="relative h-[230px] overflow-hidden rounded-[23px] bg-accent lg:h-[300px]">
                 {featured.image ? (
-                  <img src={featured.image} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={featured.image}
+                    alt=""
+                    className="h-full w-full object-cover object-[center_30%]"
+                  />
                 ) : (
                   <FallbackCover />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/15 to-transparent" />
-                <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-primary-foreground shadow-card">
-                  <Star className="h-4 w-4 text-secondary" />
-                  Top Pick
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent" />
                 <span className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-card/95 text-primary shadow-card">
                   {featured.locked ? <LockIcon /> : <ChevronRightIcon className="h-6 w-6" />}
                 </span>
-                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                  <h3 className="max-w-[230px] text-[31px] font-extrabold leading-[0.95] drop-shadow">
+                <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 text-white">
+                  <h3 className="text-[27px] font-extrabold leading-[1.05] drop-shadow sm:text-[31px]">
                     {featured.title}
                   </h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <StoryPill>{prettifyTheme(featured.theme)}</StoryPill>
+                  <div>
                     <StoryPill>Level {featured.level}</StoryPill>
                   </div>
                 </div>
               </div>
+
 
               <div className="px-4 pb-4 pt-3">
                 <div className="flex items-center justify-between text-xs font-extrabold">
