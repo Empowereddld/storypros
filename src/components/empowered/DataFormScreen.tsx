@@ -119,57 +119,137 @@ export function DataFormScreen({
           </p>
         </div>
 
-        <div className="mt-10 rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
-          <label htmlFor="child-name" className="text-sm font-extrabold text-primary">
-            Child's name
-          </label>
-          <IconInput
-            id="child-name"
-            className="mt-2"
-            icon={<UserIcon />}
-            value={values.childName}
-            onChange={(v) => setValues((p) => ({ ...p, childName: v.slice(0, 40) }))}
-            placeholder="Enter your child's name"
-            autoComplete="off"
-          />
+        <div className="mt-8 space-y-8">
+          <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="child-name" className="block text-sm font-extrabold text-primary">
+                  Child's name
+                </label>
+                <IconInput
+                  id="child-name"
+                  className="mt-2"
+                  icon={<UserIcon />}
+                  value={values.childName}
+                  onChange={(v) => setValues((p) => ({ ...p, childName: v.slice(0, 40) }))}
+                  placeholder="Enter your child's name"
+                  autoComplete="off"
+                />
+              </div>
 
-          <label htmlFor="child-age" className="mt-6 block text-sm font-extrabold text-primary">
-            Age
-          </label>
-          <div className="relative mt-2">
-            <span className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-primary">
-              <CalendarIcon />
-            </span>
-            <select
-              id="child-age"
-              value={values.childAge ?? ""}
-              onChange={(event) => {
-                const next = Number(event.target.value);
-                setValues((p) => ({ ...p, childAge: Number.isNaN(next) ? null : next }));
-              }}
-              className={cn(
-                "h-[56px] w-full appearance-none rounded-2xl border-2 border-primary/30 bg-card pl-12 pr-12 text-base font-semibold text-ink outline-none transition-colors focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                values.childAge === null && "text-ink-soft",
-              )}
-            >
-              <option value="" disabled>
-                Choose age
-              </option>
-              {AGES.map((age) => (
-                <option key={age} value={age}>
-                  {age} years old
-                </option>
-              ))}
-            </select>
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-primary">
-              <ChevronDownIcon />
-            </span>
+              <div>
+                <label htmlFor="child-age" className="block text-sm font-extrabold text-primary">
+                  Age
+                </label>
+                <div className="relative mt-2">
+                  <span className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-primary">
+                    <CalendarIcon />
+                  </span>
+                  <select
+                    id="child-age"
+                    value={values.childAge ?? ""}
+                    onChange={(event) => {
+                      const next = Number(event.target.value);
+                      setValues((p) => ({ ...p, childAge: Number.isNaN(next) ? null : next }));
+                    }}
+                    className={cn(
+                      "h-[56px] w-full appearance-none rounded-2xl border-2 border-primary/30 bg-card pl-12 pr-12 text-base font-semibold text-ink outline-none transition-colors focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                      values.childAge === null && "text-ink-soft",
+                    )}
+                  >
+                    <option value="" disabled>
+                      Choose age
+                    </option>
+                    {AGES.map((age) => (
+                      <option key={age} value={age}>
+                        {age} years old
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+                    <ChevronDownIcon />
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="country" className="block text-sm font-extrabold text-primary">
+                  Country
+                </label>
+                <div className="relative mt-2">
+                  <span className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-primary">
+                    <GlobeIcon />
+                  </span>
+                  <select
+                    id="country"
+                    value={values.country}
+                    onChange={(event) =>
+                      setValues((p) => ({ ...p, country: event.target.value }))
+                    }
+                    className={cn(
+                      "h-[56px] w-full appearance-none rounded-2xl border-2 border-primary/30 bg-card pl-12 pr-12 text-base font-semibold text-ink outline-none transition-colors focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                      values.country === "" && "text-ink-soft",
+                    )}
+                  >
+                    <option value="" disabled>
+                      Choose country
+                    </option>
+                    {COUNTRIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+                    <ChevronDownIcon />
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-6 flex items-center justify-center gap-1.5 text-xs font-semibold text-ink-soft">
+              <LockMiniIcon />
+              Your child's information is kept private and secure.
+            </p>
           </div>
 
-          <p className="mt-3 flex items-center justify-center gap-1.5 text-xs font-semibold text-ink-soft">
-            <LockMiniIcon />
-            Your child's information is kept private and secure.
-          </p>
+          <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
+            <h2 className="font-display text-lg font-extrabold text-primary">
+              Tell us more about your child
+            </h2>
+            <fieldset className="mt-5">
+              <legend className="text-sm font-extrabold text-primary">
+                Does your child have a diagnosis?
+              </legend>
+              <p className="mt-1.5 text-xs font-semibold text-ink-soft">
+                Optional — select all that apply.
+              </p>
+              <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                {DIAGNOSES.map((item) => {
+                  const checked = values.diagnoses.includes(item);
+                  return (
+                    <label
+                      key={item}
+                      className={cn(
+                        "flex cursor-pointer items-center gap-3 rounded-2xl border-2 px-4 py-3 text-[15px] font-semibold transition-colors",
+                        checked
+                          ? "border-primary bg-accent text-primary"
+                          : "border-primary/25 bg-card text-ink hover:border-primary/50",
+                      )}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleDiagnosis(item)}
+                        className="h-5 w-5 shrink-0 accent-primary"
+                      />
+                      {item}
+                    </label>
+                  );
+                })}
+              </div>
+            </fieldset>
+          </div>
         </div>
 
         <div className="mt-8 space-y-2.5">
@@ -183,6 +263,7 @@ export function DataFormScreen({
             </span>
           </TactileButton>
         </div>
+
       </div>
     </div>
   );
