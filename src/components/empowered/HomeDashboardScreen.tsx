@@ -510,8 +510,3 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
   );
 }
 
-function Card({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">{children}</div>
-  );
-}
