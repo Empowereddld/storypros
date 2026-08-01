@@ -8,7 +8,7 @@ Reviewing the three intro slides and the child profile setup as a whole flow. Th
 2. **No visible way back.** Swipe and arrow keys go back, but there is no control for it. A quiet back chevron in the header (mirroring the profile screen) makes the flow reversible, and the space is already reserved next to the logo.
 3. **The dots are decoration only.** They can't be tapped and don't announce the active step to screen readers. Making them real buttons with the current step marked gives orientation and a shortcut.
 4. **The Next button is very wide on desktop** (up to 560px) while every other primary action in the flow tops out around 320px. Aligning it makes the whole onboarding feel like one product.
-5. **Character cards give names but no reason to care.** Dan and Daria get a name label and nothing else; one short line each ("the boy who tells the story", "the friend who asks the questions") turns two portraits into an introduction. The two portraits are also cropped differently — one sits lower in its frame than the other.
+The Meet Dan & Daria slide stays exactly as it is — no description lines, no crop changes.
 
 ## Profile setup screen
 
@@ -29,7 +29,7 @@ Country, diagnoses, and the custom diagnosis are collected but never saved — o
 - One shared vertical layout across all three intro slides.
 - Back chevron in the intro header; dots become real, announced step controls.
 - Intro primary button width aligned with the rest of the flow (320px cap).
-- One-line descriptions on Dan and Daria, matched portrait crops.
+- Meet Dan & Daria slide untouched.
 - Honest step label and progress fill on the profile screen.
 - Remove the phantom empty paragraph.
 - Required markers, a hint line for the disabled state, and a real label on the custom diagnosis field.
