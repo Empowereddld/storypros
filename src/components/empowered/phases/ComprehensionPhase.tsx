@@ -200,7 +200,7 @@ export function ComprehensionPhase({
       <div key={`q-${qi}`} className="relative z-10 mx-auto mt-4 w-full max-w-[600px] px-5 animate-slide-up">
         {hintImage && (
           <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card shadow-soft">
-            <img src={hintImage} alt="" className="h-full w-full object-cover object-[center_35%]" />
+            <img src={hintImage} alt="" className="h-full w-full object-contain object-center" />
 
             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-ink/45 to-transparent" />
             <div className="absolute bottom-3 left-3 rounded-full bg-card/95 px-3 py-1 text-xs font-extrabold text-primary shadow-card">
