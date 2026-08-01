@@ -284,11 +284,13 @@ function StoryCard({ story, onOpen }: { story: CardStory; onOpen: () => void }) 
         <h3 className="line-clamp-2 text-[15px] font-extrabold leading-snug text-ink">
           {story.title}
         </h3>
-        <div className="mt-2">
+        <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <span className="rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-extrabold text-primary">
             Level {story.level}
           </span>
+          <SettingPill story={story} />
         </div>
+
 
 
         <div className="mt-auto pt-3">
