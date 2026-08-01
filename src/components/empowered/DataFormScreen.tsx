@@ -147,7 +147,7 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="child-age" className="block text-sm font-extrabold text-primary">
-                  Age <span className="font-bold text-coral">Required</span>
+                  Age <RequiredStar />
                 </label>
 
                 <div className="relative mt-2">
