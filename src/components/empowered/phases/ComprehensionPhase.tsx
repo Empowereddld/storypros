@@ -5,20 +5,73 @@
  * advance. Brain checks confirm / prompt.
  * --------------------------------------------- */
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ComponentType } from "react";
+import { CheckCircle2, Hand, Heart, MapPin, TriangleAlert, User } from "lucide-react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
-import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
+import type { StoryPhaseProps, ActivityAttempt, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-pointing.webp";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star } from "../StoryProsBrand";
 
+const ELEMENT_LABELS: Record<StoryElement, string> = {
+  character: "Character",
+  place: "Place",
+  problem: "Problem",
+  emotion: "Feeling",
+  action: "Action",
+  result: "Result",
+};
+
+const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>> = {
+  character: User,
+  place: MapPin,
+  problem: TriangleAlert,
+  emotion: Heart,
+  action: Hand,
+  result: CheckCircle2,
+};
+
+const ELEMENT_COLORS: Record<StoryElement, { bg: string; text: string; ring: string }> = {
+  character: {
+    bg: "bg-element-character",
+    text: "text-element-character-foreground",
+    ring: "ring-element-character-foreground/30",
+  },
+  place: {
+    bg: "bg-element-place",
+    text: "text-element-place-foreground",
+    ring: "ring-element-place-foreground/30",
+  },
+  problem: {
+    bg: "bg-element-problem",
+    text: "text-element-problem-foreground",
+    ring: "ring-element-problem-foreground/30",
+  },
+  emotion: {
+    bg: "bg-element-emotion",
+    text: "text-element-emotion-foreground",
+    ring: "ring-element-emotion-foreground/30",
+  },
+  action: {
+    bg: "bg-element-action",
+    text: "text-element-action-foreground",
+    ring: "ring-element-action-foreground/30",
+  },
+  result: {
+    bg: "bg-element-result",
+    text: "text-element-result-foreground",
+    ring: "ring-element-result-foreground/30",
+  },
+};
+
 type BrainCheckState =
   | { type: "none" }
   | { type: "correct"; message: string }
   | { type: "wrong"; message: string };
+
 
 export function ComprehensionPhase({
   storyData,
