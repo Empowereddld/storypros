@@ -286,8 +286,8 @@ export function ComprehensionPhase({
       <div className="relative z-10 mx-auto mb-5 mt-2 w-full max-w-[600px] px-5">
         <TactileButton
           variant="secondary"
-          onClick={handleCheck}
-          disabled={!selected || showingBrainCheck}
+          onClick={() => setReflecting(true)}
+          disabled={!selected || showingBrainCheck || reflecting}
           leadingIcon={
             <svg
               viewBox="0 0 24 24"
