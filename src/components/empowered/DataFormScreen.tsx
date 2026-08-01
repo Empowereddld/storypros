@@ -186,15 +186,17 @@ export function DataFormScreen({
 
           <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
             <h2 className="font-display text-lg font-extrabold text-primary">
-              Tell us more about your child
+              Diagnosis
             </h2>
             <fieldset className="mt-5">
               <legend className="text-sm font-extrabold text-primary">
-                Does your child have a diagnosis?
+                Does your child have a diagnosis?{" "}
+                <span className="font-bold text-coral">Required</span>
               </legend>
               <p className="mt-1.5 text-xs font-semibold text-ink-soft">
                 Select all that apply.
               </p>
+
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {DIAGNOSES.map((item) => {
                   const checked = values.diagnoses.includes(item);
