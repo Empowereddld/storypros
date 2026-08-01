@@ -285,13 +285,10 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
         <Star className="absolute right-8 top-44 z-10 h-4 w-4 text-primary/35 animate-sparkle" />
         <MiniPlane className="absolute right-10 top-24 z-10 h-7 w-7 rotate-[18deg] text-secondary animate-float" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[600px] items-center justify-between pt-5">
+        <div className="relative z-10 mx-auto flex w-full max-w-[600px] items-center pt-5">
           <StoryProsLogo layout="row" size="sm" />
-          <div className="flex items-center gap-1.5 rounded-full border-2 border-secondary/50 bg-card/90 px-3 py-1.5 text-sm font-extrabold text-primary shadow-card">
-            <PaperPlaneIcon className="h-4 w-4 text-secondary" />
-            Pick up
-          </div>
         </div>
+
 
         <div className="relative z-10 mx-auto flex w-full max-w-[600px] flex-1 flex-col justify-center py-6">
           <div className="overflow-hidden rounded-[28px] border-[6px] border-card bg-card shadow-soft animate-pop-in">

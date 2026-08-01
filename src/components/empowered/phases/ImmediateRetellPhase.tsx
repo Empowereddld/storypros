@@ -36,13 +36,14 @@ const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>>
 };
 
 const ELEMENT_BG: Record<StoryElement, string> = {
-  character: "bg-element-character-foreground",
-  place: "bg-element-place-foreground",
-  problem: "bg-element-problem-foreground",
-  emotion: "bg-element-emotion-foreground",
-  action: "bg-element-action-foreground",
-  result: "bg-element-result-foreground",
+  character: "bg-element-character text-element-character-foreground",
+  place: "bg-element-place text-element-place-foreground",
+  problem: "bg-element-problem text-element-problem-foreground",
+  emotion: "bg-element-emotion text-element-emotion-foreground",
+  action: "bg-element-action text-element-action-foreground",
+  result: "bg-element-result text-element-result-foreground",
 };
+
 
 function SpeakerIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -175,9 +176,10 @@ export function ImmediateRetellPhase({
                   <div className="mt-3 flex items-center gap-2">
                     <span
                       className={cn(
-                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white",
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
                         ELEMENT_BG[element],
                       )}
+
                       title={ELEMENT_LABELS[element]}
                     >
                       <Icon className="h-4 w-4" />
