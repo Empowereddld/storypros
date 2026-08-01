@@ -82,7 +82,7 @@ export function StorySlidesPhase({
         <MiniPlane className="absolute right-12 bottom-24 h-9 w-9 rotate-12 text-secondary animate-float" />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-[560px]">
         <ProgressHeader
           progress={progress}
           label={`${page + 1}/${slides.length}`}
@@ -90,14 +90,14 @@ export function StorySlidesPhase({
         />
       </div>
 
-      <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
+      <div className="relative z-10 mx-auto flex w-full max-w-[560px] flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
         <article
           key={page}
           className="flex flex-1 flex-col overflow-hidden rounded-[34px] bg-card shadow-soft animate-pop-in"
         >
           <div className="relative aspect-video w-full overflow-hidden bg-accent">
             {slideImg ? (
-              <img src={slideImg} alt="" className="h-full w-full object-cover" />
+              <img src={slideImg} alt="" className="h-full w-full object-cover object-[center_35%]" />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-primary">
                 <PaperPlaneIcon className="h-16 w-16" />
