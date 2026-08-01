@@ -168,8 +168,9 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="country" className="block text-sm font-extrabold text-primary">
-                  Country
+                  Country <span className="font-bold text-coral">Required</span>
                 </label>
+
                 <IconInput
                   id="country"
                   className="mt-2"
