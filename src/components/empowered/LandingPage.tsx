@@ -277,9 +277,12 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             ))}
           </div>
 
-          <p className="mt-8 max-w-3xl text-[15px] font-medium leading-relaxed text-ink-soft">
-            {PATHWAY_NOTE}
-          </p>
+          <div className="mt-8 flex min-h-[48px] items-center justify-center gap-2 rounded-2xl bg-accent/40 px-6 py-2.5 text-center lg:min-h-[52px]">
+            <Repeat className="h-4 w-4 shrink-0 text-primary/70" aria-hidden />
+            <span className="text-[15px] font-semibold leading-snug text-primary/90 sm:text-base">
+              Same 3-step rhythm, every story.
+            </span>
+          </div>
 
         </div>
       </section>
