@@ -116,71 +116,56 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Hero: one message, one explanation, two actions ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:pb-16 sm:pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16 lg:pb-20 lg:pt-16">
+        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-12 px-5 pb-14 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] lg:gap-[80px] lg:pb-[88px] lg:pt-[88px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-center text-[10px] font-extrabold uppercase leading-tight tracking-[0.12em] text-primary shadow-card text-balance sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.14em]">
-              <span className="sm:hidden">For children ages 5–12</span>
-              <span className="hidden sm:inline">{HERO.eyebrow}</span>
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-4 py-1.5 text-center text-[12px] font-bold uppercase leading-tight tracking-[0.12em] text-primary shadow-card text-balance sm:text-[13px]">
+              {HERO.eyebrow}
             </p>
 
-            {/* Three balanced lines on mobile, two lines on desktop */}
-            <h1 className="mt-3 font-display text-[24px] font-extrabold leading-[1.12] text-primary sm:mt-5 sm:text-[40px] sm:leading-[1.12] lg:mt-7 lg:text-[46px]">
-              <span className="block sm:hidden">Language learning</span>
-              <span className="block sm:hidden">through interactive</span>
-              <span className="block sm:hidden">stories</span>
-              <span className="hidden sm:block">{HERO.headingLine1}</span>
-              <span className="hidden sm:block">{HERO.headingLine2}</span>
+            <h1 className="mx-auto mt-7 max-w-[540px] font-display text-[38px] font-extrabold leading-[1.08] text-primary sm:text-[48px] lg:mx-0 lg:mt-8 lg:text-[56px]">
+              {HERO.heading}
             </h1>
 
-            <p className="mx-auto mt-2.5 max-w-[300px] text-sm font-bold leading-snug text-secondary-foreground/90 sm:mt-4 sm:max-w-none sm:text-xl lg:mt-5">
+            <p className="mx-auto mt-6 max-w-[520px] text-[19px] font-semibold leading-[1.35] text-ink sm:text-[22px] lg:mx-0">
               {HERO.subheading}
             </p>
 
-            {/* Comfortable measure, roughly 520px on desktop */}
-            <p className="mx-auto mt-2.5 max-w-[320px] text-[13px] font-medium leading-[1.65] text-ink-soft sm:mt-4 sm:max-w-[520px] sm:text-[15px] sm:leading-[1.75] lg:mx-0 lg:mt-5">
+            <p className="mx-auto mt-5 max-w-[520px] text-[16px] font-medium leading-[1.55] text-ink-soft sm:text-[18px] lg:mx-0">
               {HERO.body}
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-5 flex flex-col items-center gap-3 sm:mt-10 sm:gap-3.5 lg:items-start">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:mt-9 lg:items-start">
+              <button
+                onClick={onDemo}
+                className="press-pop inline-flex h-[54px] w-full max-w-[300px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px]"
+              >
+                Try the Demo
+                <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
+              </button>
               <a
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-12 w-full max-w-[260px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-6 text-sm font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 sm:h-14 sm:max-w-[280px] sm:px-8 sm:text-base"
+                className="press-pop inline-flex h-[54px] w-full max-w-[300px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px]"
               >
-                Join the Story Pros Waitlist
-                <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
-              </a>
-              <a
-                href="#how-it-works"
-                className="press-pop inline-flex h-12 w-full max-w-[260px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/70 bg-card px-6 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5 sm:h-14 sm:max-w-[280px] sm:px-8 sm:text-base"
-              >
-                See How It Works
+                Join the Waitlist
               </a>
             </div>
           </div>
 
           {/* The app preview does the visual talking */}
-          <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[540px]">
+          <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[560px]">
             <span
               className="pointer-events-none absolute inset-x-10 bottom-2 h-32 rounded-full bg-primary/10 blur-2xl"
               aria-hidden
             />
             <TabletMock className="animate-float" />
           </div>
-
-          {/* Mobile-only demo action, placed after the preview */}
-          <button
-            onClick={onDemo}
-            className="press-pop mx-auto mt-6 inline-flex h-12 w-full max-w-[260px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-secondary px-6 text-sm font-extrabold text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:hidden"
-          >
-            <PaperPlaneIcon className="h-4 w-4 shrink-0" />
-            Try the Demo
-          </button>
         </div>
       </section>
+
 
 
       {/* ── Parent problem (two-column editorial) ── */}
