@@ -210,11 +210,12 @@ export function SequencingPhase({
                 key={`${frame.correct_position}-${frame.caption}`}
                 onClick={() => handleSelectFrame(index)}
                 className={cn(
-                  "hover-lift min-h-[198px] overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                  "hover-lift overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
                   placed ? "border-primary bg-primary/5 opacity-75" : "border-accent/60",
                 )}
               >
-                <div className="relative h-28 overflow-hidden bg-accent">
+                <div className="relative aspect-square overflow-hidden bg-accent">
+
                   {image ? (
                     <img src={image} alt="" className="h-full w-full object-cover" />
                   ) : (
