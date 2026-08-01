@@ -1,10 +1,10 @@
 /* ─────────────────────────────────────────────
  * Intro / Onboarding Carousel
  *   1. Learn Through Stories
- *   2. Understand, Retell & Connect
- *   3. Earn Coins & Rewards
- *   4. Meet Dan & Daria
+ *   2. Earn Coins & Rewards
+ *   3. Meet Dan & Daria
  * ───────────────────────────────────────────── */
+
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { TactileButton } from "./TactileButton";
