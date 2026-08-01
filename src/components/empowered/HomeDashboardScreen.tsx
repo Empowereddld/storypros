@@ -301,9 +301,8 @@ function WeekStrip({
 
   return (
     <Card>
-      <SpeakableText text={`This week. ${milestone}`}>
-        <span className="text-sm font-extrabold text-ink">This week</span>
-      </SpeakableText>
+      <span className="text-sm font-extrabold text-ink">This week</span>
+
       <div className="mt-3 flex items-end justify-between gap-1">
         {week.map((date, i) => {
           const filled = playedDates.includes(date);
