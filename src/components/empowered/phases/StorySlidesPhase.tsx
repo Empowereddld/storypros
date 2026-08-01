@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { User, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
 import type { StoryElement, StoryPhaseProps } from "@/types/story";
@@ -6,7 +7,7 @@ import { resolveStoryImage } from "@/services/storyImages";
 import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
