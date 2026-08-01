@@ -240,7 +240,7 @@ export function ComprehensionPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-5 mt-4 space-y-3 flex-1 overflow-y-auto no-scrollbar pb-2 animate-slide-up">
+      <div className="relative z-10 mx-auto mt-4 w-full max-w-[600px] space-y-3 flex-1 overflow-y-auto no-scrollbar px-5 pb-2 animate-slide-up">
         {q.options.map((opt, oidx) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
