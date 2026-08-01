@@ -171,24 +171,19 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
 
       {/* ── Parent problem (two-column editorial) ── */}
-      <section className="px-5 py-16 sm:py-24">
+      <section className="px-5 py-14 sm:px-6 sm:py-20 lg:py-24">
         <Reveal>
-          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_1.6fr] md:gap-16">
-            <h2 className="font-display text-3xl font-extrabold leading-tight text-primary sm:text-4xl md:text-5xl">
+          <div className="mx-auto grid w-full max-w-[1240px] gap-6 sm:gap-8 lg:grid-cols-[minmax(0,40fr)_minmax(0,58fr)] lg:gap-[80px]">
+            <h2 className="text-left font-display text-[34px] font-extrabold leading-[1.1] text-primary sm:text-[40px] lg:text-[50px]">
               {PARENT_PROBLEM.heading}
             </h2>
-            <div>
-              {PARENT_PROBLEM.lead && (
-                <p className="text-xl font-bold leading-snug text-secondary-foreground/90">
-                  {PARENT_PROBLEM.lead}
-                </p>
-              )}
-              {PARENT_PROBLEM.body.split("\n\n").map((paragraph, i) => (
+            <div className="text-left">
+              {PARENT_PROBLEM.paragraphs.map((paragraph, i) => (
                 <p
                   key={paragraph.slice(0, 24)}
                   className={cn(
-                    "text-lg font-medium leading-relaxed text-ink-soft",
-                    i > 0 || PARENT_PROBLEM.lead ? "mt-6" : "",
+                    "max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]",
+                    i > 0 ? "mt-4 sm:mt-5" : "",
                   )}
                 >
                   {paragraph}

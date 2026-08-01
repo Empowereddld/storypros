@@ -41,8 +41,10 @@ export const HERO = {
 
 export const PARENT_PROBLEM = {
   heading: "Your child has so much to say.",
-  lead: "",
-  body: "You may hear “I don't know” when you ask about their day, even when you know there is more they want to share. The details may come out in pieces, or they may become frustrated as they try to explain.\n\nStory Pros gives children calm, guided practice understanding stories, organizing their thoughts, and sharing ideas in ways that feel manageable.",
+  paragraphs: [
+    "You may hear “I don’t know” or get only part of the story, even when your child has more they want to share.",
+    "Story Pros gives children calm, guided practice understanding stories, organizing ideas, and putting their thoughts into words.",
+  ],
 };
 
 /* ── Why stories work ── */
