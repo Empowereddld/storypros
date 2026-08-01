@@ -36,17 +36,22 @@ interface StoryElementFrameworkProps {
 
 export function StoryElementFramework({ items, className }: StoryElementFrameworkProps) {
   return (
-    <ul className={cn("flex flex-wrap items-start gap-x-1 gap-y-4", className)}>
-      {items.map((item, i) => {
-        const key = item.element as StoryElement;
-        const Icon = ELEMENT_ICONS[key] ?? User;
-        const colors = ELEMENT_COLORS[key] ?? ELEMENT_COLORS.character;
-        return (
-          <li key={item.label} className="flex items-center gap-1">
-            <div className="flex w-[66px] flex-col items-center gap-1.5 text-center sm:w-[72px]">
+    <div className={cn("relative", className)}>
+      {/* subtle connecting line behind the icon row */}
+      <span
+        className="pointer-events-none absolute left-[8%] right-[8%] top-[22px] hidden h-px bg-primary/15 sm:block"
+        aria-hidden
+      />
+      <ul className="relative grid grid-cols-3 gap-y-6 sm:grid-cols-6 sm:gap-x-1">
+        {items.map((item) => {
+          const key = item.element as StoryElement;
+          const Icon = ELEMENT_ICONS[key] ?? User;
+          const colors = ELEMENT_COLORS[key] ?? ELEMENT_COLORS.character;
+          return (
+            <li key={item.label} className="flex flex-col items-center gap-2 text-center">
               <span
                 className={cn(
-                  "flex h-11 w-11 items-center justify-center rounded-full",
+                  "flex h-11 w-11 items-center justify-center rounded-full ring-4 ring-card",
                   colors.bg,
                   colors.text,
                 )}
@@ -54,16 +59,14 @@ export function StoryElementFramework({ items, className }: StoryElementFramewor
               >
                 <Icon className="h-5 w-5" />
               </span>
-              <span className="text-[13px] font-extrabold leading-tight text-primary">
+              <span className="text-[12.5px] font-extrabold leading-tight text-primary">
                 {item.label}
               </span>
-            </div>
-            {i < items.length - 1 && (
-              <ChevronRight className="mt-[10px] h-4 w-4 shrink-0 text-primary/30" aria-hidden />
-            )}
-          </li>
-        );
-      })}
-    </ul>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
+
