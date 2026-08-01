@@ -267,30 +267,21 @@ export function ComprehensionPhase({
       </div>
 
       <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
-        {q.options.map((opt, oidx) => {
+        {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
-          const letter = String.fromCharCode(65 + oidx);
           return (
             <button
               key={opt.id}
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[80px] w-full flex-col items-start justify-center gap-2 rounded-[24px] border-2 bg-card p-3 text-left shadow-card transition-all",
+                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all",
                 isSelected && "border-primary bg-primary/5 -translate-y-0.5 shadow-soft",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
               )}
             >
-              <span
-                className={cn(
-                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold shadow-[0_2px_0_rgba(0,0,0,0.08)]",
-                  isSelected ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
-                )}
-              >
-                {letter}
-              </span>
               <span
                 className={cn(
                   "text-base font-bold leading-snug",
