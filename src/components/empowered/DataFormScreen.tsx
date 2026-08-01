@@ -108,10 +108,8 @@ export function DataFormScreen({
           <h1 className="font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
             Create your child's profile
           </h1>
-          <p className="mx-auto mt-4 max-w-[420px] text-[15px] font-medium leading-snug text-ink-soft">
-            {"\n"}
-          </p>
         </div>
+
 
         <div className="mt-8 space-y-8">
           <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
