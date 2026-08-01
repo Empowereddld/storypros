@@ -147,6 +147,8 @@ export interface StoryData {
   title: string;
   level: number;
   theme: string;
+  /** One-line, past-tense, concrete recap shown on the home story card */
+  recap?: string;
   target_connective: string;
   slides: StorySlide[];
   comprehension_questions: ComprehensionQuestion[];

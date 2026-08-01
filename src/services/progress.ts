@@ -32,6 +32,8 @@ interface ChildProgress {
   streak: number;
   /** ISO date string of last story completion (for streak tracking) */
   lastPlayedDate?: string;
+  /** Every YYYY-MM-DD the child completed a story on (drives the week strip) */
+  playedDates?: string[];
 }
 
 // ── localStorage persistence (scoped per child) ──
@@ -52,6 +54,7 @@ function emptyProgress(): ChildProgress {
     paperPlanes: 0,
     currentLevel: 1,
     streak: 0,
+    playedDates: [],
   };
 }
 
