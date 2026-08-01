@@ -367,6 +367,36 @@ function StoryPill({ children }: { children: ReactNode }) {
   );
 }
 
+const SETTING_BY_ID: Record<string, string> = {
+  "story-01-dan-and-the-paper-cut": "At Home",
+  "story-02-darias-carnival-ticket": "Social",
+  "story-03-dan-joins-the-game": "Social",
+  "story-04-daria-and-the-puzzle-piece": "At Home",
+  "story-05-dan-and-darias-treasure-hunt": "Social",
+  "story-06-the-kite-in-the-tree": "Social",
+  "story-07-the-sandcastle-and-the-wave": "Social",
+  "story-08-dan-talks-about-recess": "At School",
+  "story-09-daria-asks-for-the-next-step": "At School",
+  "story-10-dans-lunchroom-moment": "At School",
+  "story-11-daria-asks-again": "At School",
+};
+
+function settingLabel(story: { id: string; theme: string }) {
+  if (SETTING_BY_ID[story.id]) return SETTING_BY_ID[story.id];
+  if (story.theme === "at-school") return "At School";
+  if (story.theme === "at-home") return "At Home";
+  return "Social";
+}
+
+function SettingPill({ story }: { story: { id: string; theme: string } }) {
+  return (
+    <span className="rounded-full bg-secondary/25 px-2.5 py-0.5 text-[11px] font-extrabold text-secondary-foreground">
+      {settingLabel(story)}
+    </span>
+  );
+}
+
+
 function EmptyLibraryState({ filter }: { filter: FilterTab }) {
   const copy =
     filter === "completed"
