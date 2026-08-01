@@ -55,6 +55,7 @@ export function DataFormScreen({
     childAge: null,
     country: "",
     diagnoses: [],
+    otherDiagnosis: "",
   });
 
   const toggleDiagnosis = (item: string) =>
@@ -68,7 +69,8 @@ export function DataFormScreen({
   const isValid =
     values.childName.trim().length > 0 &&
     values.childAge !== null &&
-    values.country.length > 0;
+    values.country.trim().length > 0 &&
+    (values.diagnoses.length > 0 || values.otherDiagnosis.trim().length > 0);
 
 
   return (
