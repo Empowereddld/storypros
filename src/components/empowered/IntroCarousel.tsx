@@ -228,7 +228,7 @@ function SlideMeet() {
   return (
     <div>
       <Heading>Meet Dan &amp; Daria</Heading>
-      <Support>Two story friends who help you explore, express yourself, and grow.</Support>
+      <Support>Two friends who help kids with their story telling skills.{"\u00a0"}</Support>
 
       <div className="mt-7 grid grid-cols-2 gap-4">
         <CharacterCard name="Dan" img={childAvatar} />
