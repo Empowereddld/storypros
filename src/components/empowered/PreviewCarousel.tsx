@@ -45,7 +45,7 @@ export function PreviewCarousel() {
         />
 
         <div
-          className="w-full max-w-[440px]"
+          className="w-full max-w-[400px]"
           onTouchStart={(e) => {
             touchStartX.current = e.touches[0].clientX;
           }}
@@ -56,10 +56,10 @@ export function PreviewCarousel() {
             touchStartX.current = null;
           }}
         >
-          <div className="relative rounded-[30px] border-[10px] border-ink/85 bg-cream shadow-[0_28px_60px_-18px_rgba(28,28,21,0.4)]">
-            <div className="overflow-hidden rounded-[20px] bg-card">
-              {/* Fixed 3:4 frame — the exact ratio the real screenshots use */}
-              <div className="relative aspect-[3/4] w-full">
+          <div className="relative rounded-[22px] border-[8px] border-ink/85 bg-cream shadow-[0_22px_50px_-16px_rgba(28,28,21,0.35)]">
+            <div className="overflow-hidden rounded-[14px] bg-card">
+              {/* Landscape frame — matches the real screenshots once added */}
+              <div className="relative aspect-[4/3] w-full">
                 {slide.image ? (
                   <img
                     src={slide.image}
@@ -67,7 +67,7 @@ export function PreviewCarousel() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-accent/35 px-6">
+                  <div className="absolute inset-0 flex items-center justify-center bg-accent/35 px-8">
                     <p className="text-center text-sm font-extrabold uppercase tracking-[0.14em] text-primary/70">
                       {slide.label}
                     </p>
