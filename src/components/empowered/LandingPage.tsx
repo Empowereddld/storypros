@@ -92,6 +92,15 @@ const NAV_LINKS = [
   { href: "#faq", label: "FAQ" },
 ];
 
+const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  MessageCircle,
+  Headphones,
+  AlignLeft,
+  BookOpen,
+  Volume2,
+  CheckCircle2,
+};
+
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
   return (
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
