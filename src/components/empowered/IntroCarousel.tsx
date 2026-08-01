@@ -20,7 +20,7 @@ interface IntroCarouselProps {
   onComplete: () => void;
 }
 
-const SLIDE_COUNT = 4;
+const SLIDE_COUNT = 3;
 
 export function IntroCarousel({ onComplete }: IntroCarouselProps) {
   const [index, setIndex] = useState(0);
@@ -82,9 +82,8 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           )}
         >
           {index === 0 && <SlidePurpose />}
-          {index === 1 && <SlideLearn />}
-          {index === 2 && <SlideRewards />}
-          {index === 3 && <SlideMeet />}
+          {index === 1 && <SlideRewards />}
+          {index === 2 && <SlideMeet />}
         </div>
 
         {/* Progress dots */}
@@ -130,7 +129,7 @@ function Heading({ children }: { children: ReactNode }) {
 
 function Support({ children }: { children: ReactNode }) {
   return (
-    <p className="mx-auto mt-3 max-w-[500px] text-center text-base font-medium leading-snug text-ink-soft sm:text-[17px]">
+    <p className="mx-auto mt-[11px] max-w-[500px] text-center text-base font-medium leading-snug text-ink-soft sm:text-[17px]">
       {children}
     </p>
   );
@@ -150,8 +149,7 @@ function SlidePurpose() {
       <div className="mt-5 sm:mt-6">
         <Heading>Learn Through Stories</Heading>
         <Support>
-          Each story helps you understand what happened, retell ideas, and connect stories to real
-          life.
+          Understand what happened, retell it in your own words, and connect it to your life.
         </Support>
       </div>
 
@@ -159,25 +157,6 @@ function SlidePurpose() {
         <IconCard icon={<LightbulbIcon />} label="Understand the Story" />
         <IconCard icon={<SpeechIcon />} label="Retell in Your Words" />
         <IconCard icon={<PersonHeartIcon />} label="Connect to Your Life" />
-      </CardRow>
-    </div>
-  );
-}
-
-/* ───────── Slide 2: Understand, Retell & Connect ───────── */
-
-function SlideLearn() {
-  return (
-    <div>
-      <Heading>Understand, Retell &amp; Connect</Heading>
-      <Support>
-        Understand what happened, tell it in your own words, and connect it to your life.
-      </Support>
-
-      <CardRow>
-        <IconCard icon={<QuestionIcon />} label="Understand the Story" />
-        <IconCard icon={<SpeechIcon />} label="Retell in Your Words" />
-        <IconCard icon={<HeartIcon />} label="Connect to Your Life" />
       </CardRow>
     </div>
   );
@@ -228,7 +207,7 @@ function SlideMeet() {
   return (
     <div>
       <Heading>Meet Dan &amp; Daria</Heading>
-      <Support>Two friends who help kids with their story telling skills.{"\u00a0"}</Support>
+      <Support>Two story friends who help you learn, express yourself, and grow.</Support>
 
       <div className="mt-7 grid grid-cols-2 gap-4">
         <CharacterCard name="Dan" img={childAvatar} />
@@ -242,7 +221,7 @@ function SlideMeet() {
 
 function CardRow({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:grid sm:grid-cols-3 sm:gap-4 sm:min-h-[170px]">
+    <div className="mt-[30px] flex flex-col gap-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:min-h-[170px]">
       {children}
     </div>
   );
