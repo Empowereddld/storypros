@@ -16,6 +16,15 @@ import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
 import { CharacterSection, Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
+import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
+import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
+import stepConnectAsset from "@/assets/step-connect-real-life.png.asset.json";
+
+const PATHWAY_IMAGES = [
+  { url: stepReadAsset.url, alt: "A child listening to a Story Pros story on a tablet with headphones" },
+  { url: stepRetellAsset.url, alt: "A mother and daughter retelling a Story Pros story together at a table" },
+  { url: stepConnectAsset.url, alt: "Two children sharing a tablet and talking about a story" },
+];
 import { ScrollStoryDemo } from "./ScrollStoryDemo";
 import { cn } from "@/lib/utils";
 import {
@@ -237,29 +246,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             How Story Pros Works
           </h2>
           <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-ink-soft">
-            A familiar, supportive routine helps children focus on language instead of figuring out
-            what to do next.
+            A familiar, supportive routine helps children focus on language, not on figuring out what
+            to do next.
           </p>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PATHWAY.map((step, i) => (
               <Reveal key={step.step} delay={i * 100}>
-                <article className="h-full overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card">
-                  {/* Image placeholder — swap for a real story image later */}
-                  <div
-                    className="flex aspect-[4/3] w-full items-center justify-center bg-accent/50 text-4xl"
-                    aria-hidden
-                  >
-                    {step.icon}
-                  </div>
-                  <div className="p-6">
-                    <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
+                <article className="flex h-full flex-col overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card">
+                  <img
+                    src={PATHWAY_IMAGES[i]?.url}
+                    alt={PATHWAY_IMAGES[i]?.alt}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
                       Step {step.step}
                     </p>
-                    <h3 className="mt-3 font-display text-xl font-extrabold text-primary">
+                    <h3 className="mt-1.5 font-display text-lg font-extrabold leading-snug text-primary">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-[15px] font-medium leading-relaxed text-ink-soft">
+                    <p className="mt-1.5 text-[14.5px] font-medium leading-relaxed text-ink-soft">
                       {step.body}
                     </p>
                   </div>
@@ -268,9 +276,10 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             ))}
           </div>
 
-          <p className="mt-10 max-w-3xl text-[15px] font-medium leading-relaxed text-ink-soft">
+          <p className="mt-8 max-w-3xl text-[15px] font-medium leading-relaxed text-ink-soft">
             {PATHWAY_NOTE}
           </p>
+
         </div>
       </section>
 
