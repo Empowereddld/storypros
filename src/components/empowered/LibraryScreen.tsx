@@ -77,20 +77,20 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
     });
   }, [childId]);
 
-  const featured =
-    stories.find((story) => story.inProgress && !story.isCompleted && !story.locked) ??
-    stories.find((story) => !story.isCompleted && !story.locked) ??
-    stories.find((story) => !story.locked) ??
-    stories[0];
+  const startedStory = stories.find(
+    (story) => story.inProgress && !story.isCompleted && !story.locked,
+  );
+  const featured = startedStory;
+  const paid = childId ? isPremium(childId) : false;
 
   const filtered = useMemo(() => {
     switch (filter) {
-      case "open":
-        return stories.filter((story) => !story.locked && !story.isCompleted);
+      case "available":
+        return stories.filter((story) => !story.locked && !story.isCompleted && !story.inProgress);
+      case "inProgress":
+        return stories.filter((story) => story.inProgress && !story.isCompleted);
       case "completed":
         return stories.filter((story) => story.isCompleted);
-      case "locked":
-        return stories.filter((story) => story.locked && !story.isCompleted);
       default:
         return stories;
     }
@@ -134,7 +134,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
         <section>
           <h1 className="text-[40px] font-extrabold leading-none text-primary">Story Library</h1>
           <p className="mt-3 max-w-[250px] text-lg font-medium leading-snug text-ink-soft lg:max-w-none">
-            Stories that inspire imagination and build confidence.
+            Practise language through stories inspired by everyday experiences.
           </p>
         </section>
 
@@ -143,10 +143,10 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
             <div className="flex items-end justify-between gap-3">
               <div>
                 <h2 className="text-[25px] font-extrabold leading-tight text-primary">
-                  Recommended for You
+                  Continue Your Story
                 </h2>
                 <p className="mt-1 text-sm font-medium text-ink-soft">
-                  Based on your library progress.
+                  Pick up where you left off.
                 </p>
               </div>
               <button
