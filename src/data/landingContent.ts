@@ -31,8 +31,9 @@ export const HERO = {
   /** Split so the headline lands on two lines on desktop */
   headingLine1: "Language learning through interactive",
   headingLine2: "stories",
-  subheading: "Learning that feels like a story,\u00a0\nnot a lesson.",
-  body: "Story Pros helps children with DLD and other language-based learning needs build vocabulary, understand and retell stories, and express their ideas through calm, guided practice.",
+  heading: "Language learning through interactive stories",
+  subheading: "Learning that feels like a story, not a lesson.",
+  body: "Designed for children with DLD and other language-learning needs, Story Pros turns relatable stories into meaningful, guided language practice.",
 };
 
 
