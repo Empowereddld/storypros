@@ -209,18 +209,11 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
                         <StarIcon filled className="h-6 w-6 text-secondary" />
                       </span>
-                      <SpeakableText
-                        text="You're done for today! Come back tomorrow."
-                        align="center"
-                        className="mt-2"
-                      >
-                        <p className="text-[15px] font-extrabold leading-snug text-primary">
-                          You&apos;re done for today!
-                          <span className="block font-medium text-ink-soft">
-                            Come back tomorrow.
-                          </span>
-                        </p>
-                      </SpeakableText>
+                      <p className="mt-2 text-[15px] font-extrabold leading-snug text-primary">
+                        You&apos;re done for today!
+                        <span className="block font-medium text-ink-soft">Come back tomorrow.</span>
+                      </p>
+
                       <button
                         onClick={openContinue}
                         className="mt-3 min-h-11 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
