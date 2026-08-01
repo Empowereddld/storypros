@@ -195,40 +195,36 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── Why stories work (art left) ── */}
-      <CharacterSection
+      {/* ── Why stories: one connected story framework ── */}
+      <section
         id="why-stories"
-        side="left"
-        image={danDariaReading}
-        imageSize="lg"
-        className="border-y border-accent/40 bg-card/50"
+        className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-14 sm:px-6 sm:py-16"
       >
-        <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-          {WHY_STORIES.eyebrow}
-        </p>
-        <h2 className="mt-2 font-display text-3xl font-extrabold text-primary sm:text-4xl">
-          {WHY_STORIES.heading}
-        </h2>
-        <p className="mt-4 text-lg font-medium leading-relaxed text-ink-soft">{WHY_STORIES.lead}</p>
+        <Reveal>
+          <div className="mx-auto grid w-full max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,40fr)_minmax(0,56fr)] lg:gap-[72px]">
+            {/* Content first on mobile */}
+            <div className="lg:order-2">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-primary sm:text-[38px]">
+                {WHY_STORIES.heading}
+              </h2>
+              <p className="mt-4 max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]">
+                {WHY_STORIES.lead}
+              </p>
+              <StoryElementFramework items={WHY_STORIES.framework} className="mt-8" />
+            </div>
 
-        <ul className="mt-6 grid grid-cols-3 gap-2.5">
-          {WHY_STORIES.framework.map((part) => (
-            <li
-              key={part.label}
-              className="hover-lift flex flex-col items-center gap-1.5 rounded-[20px] border border-accent/60 bg-card px-2 py-4 text-center shadow-card transition-all"
-            >
-              <span className="text-2xl" aria-hidden>
-                {part.icon}
-              </span>
-              <span className="text-xs font-extrabold text-primary">{part.label}</span>
-            </li>
-          ))}
-        </ul>
+            <div className="lg:order-1">
+              <img
+                src={danDariaReading}
+                alt=""
+                loading="lazy"
+                className="mx-auto h-48 w-auto object-contain drop-shadow-[0_18px_28px_rgba(63,38,140,0.16)] sm:h-56 lg:h-[260px]"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
-        <p className="mt-6 rounded-[24px] border border-accent/60 bg-card p-5 text-[15px] font-medium leading-relaxed text-ink-soft shadow-card">
-          {WHY_STORIES.close}
-        </p>
-      </CharacterSection>
 
       {/* ── How Story Pros works: the four-part pathway ── */}
       <section id="how-it-works" className="scroll-mt-20">
