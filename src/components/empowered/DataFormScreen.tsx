@@ -32,6 +32,17 @@ const DIAGNOSES = [
   "Unsure",
 ];
 
+function RequiredStar() {
+  return (
+    <>
+      <span className="font-bold text-coral" aria-hidden>
+        ★
+      </span>
+      <span className="sr-only">(required)</span>
+    </>
+  );
+}
+
 
 export function DataFormScreen({
   onSubmit,
