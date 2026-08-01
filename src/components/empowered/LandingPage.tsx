@@ -16,6 +16,15 @@ import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
 import { CharacterSection, Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
+import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
+import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
+import stepConnectAsset from "@/assets/step-connect-real-life.png.asset.json";
+
+const PATHWAY_IMAGES = [
+  { url: stepReadAsset.url, alt: "A child listening to a Story Pros story on a tablet with headphones" },
+  { url: stepRetellAsset.url, alt: "A mother and daughter retelling a Story Pros story together at a table" },
+  { url: stepConnectAsset.url, alt: "Two children sharing a tablet and talking about a story" },
+];
 import { ScrollStoryDemo } from "./ScrollStoryDemo";
 import { cn } from "@/lib/utils";
 import {
