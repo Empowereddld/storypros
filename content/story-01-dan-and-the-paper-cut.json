@@ -45,24 +45,21 @@
   "comprehension_questions": [
     {
       "position": 1,
-      "prompt": "Who is in the story?",
+      "prompt": "Who walked with Dan?",
       "story_element": "character",
       "options": [
         {
           "id": "a",
-          "label": "Dan",
-          "emoji": "🧒",
+          "label": "His mom",
           "correct": true
         },
         {
           "id": "b",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "A bird"
         },
         {
           "id": "c",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "Daria's dad"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
