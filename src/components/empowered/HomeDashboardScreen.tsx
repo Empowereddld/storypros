@@ -360,7 +360,7 @@ function BadgesCard({
 
 
   return (
-    <Card>
+    <section>
       <span className="flex w-full items-center justify-between gap-2">
         <span className="text-sm font-extrabold text-ink">My Badges</span>
 
@@ -398,7 +398,7 @@ function BadgesCard({
       <p className="mt-2 text-[12px] font-bold leading-snug text-primary">
         {footnote}
       </p>
-    </Card>
+    </section>
   );
 }
 
