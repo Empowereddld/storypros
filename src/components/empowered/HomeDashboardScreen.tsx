@@ -441,9 +441,8 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
 
   return (
     <section className="mt-6">
-      <SpeakableText text="Words you're learning">
-        <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
-      </SpeakableText>
+      <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
+
 
       <div className="mt-3 flex gap-3 overflow-x-auto no-scrollbar pb-1">
         {words.map((word) => {
