@@ -34,6 +34,7 @@ export function ComprehensionPhase({
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
+  const [reflecting, setReflecting] = useState(false);
 
   const [speaking, setSpeaking] = useState(false);
   const startTime = useRef(Date.now());
@@ -66,8 +67,9 @@ export function ComprehensionPhase({
   const q = questions[qi];
   const progress = (qi / questions.length) * 100;
 
-  function handleCheck() {
+  function handleReveal() {
     if (!selected) return;
+    setReflecting(false);
 
     const elapsed = Date.now() - startTime.current;
     const option = q.options.find((o) => o.id === selected)!;
@@ -139,7 +141,31 @@ export function ComprehensionPhase({
         onClose={onClose}
       />
 
+      {/* Brain Check reflection (before the answer is revealed) */}
+      {reflecting && !showingBrainCheck && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
+          <div className="w-full max-w-[440px] rounded-[28px] bg-card p-6 text-center shadow-soft animate-slide-up">
+            <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+              <BrainIcon />
+            </div>
+            <h3 className="font-display text-[26px] font-extrabold text-primary">Brain Check!</h3>
+            <p className="mt-2 text-lg font-semibold text-ink">
+              {q.brain_check_prompt ?? "Did you answer the question type?"}
+            </p>
+            <div className="mt-6 space-y-3">
+              <TactileButton variant="primary" onClick={handleReveal}>
+                Yes 👍
+              </TactileButton>
+              <TactileButton variant="ghost" onClick={() => setReflecting(false)}>
+                No, let me think
+              </TactileButton>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Brain check overlay */}
+
       {showingBrainCheck && (
         <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm animate-slide-up">
           <div
@@ -284,8 +310,8 @@ export function ComprehensionPhase({
       <div className="relative z-10 mx-auto mb-5 mt-2 w-full max-w-[600px] px-5">
         <TactileButton
           variant="secondary"
-          onClick={handleCheck}
-          disabled={!selected || showingBrainCheck}
+          onClick={() => setReflecting(true)}
+          disabled={!selected || showingBrainCheck || reflecting}
           leadingIcon={
             <svg
               viewBox="0 0 24 24"
@@ -352,5 +378,22 @@ function CrossBadge() {
         <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
       </svg>
     </span>
+  );
+}
+
+function BrainIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-10 w-10 text-primary"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M9.5 3.5A2.5 2.5 0 0 1 12 6v12a2.5 2.5 0 0 1-4.96.44A2.5 2.5 0 0 1 4 16.5a2.5 2.5 0 0 1-.5-4.9A2.5 2.5 0 0 1 4 6.9a2.5 2.5 0 0 1 2.5-2.4 2.5 2.5 0 0 1 3-1z" />
+      <path d="M14.5 3.5A2.5 2.5 0 0 0 12 6v12a2.5 2.5 0 0 0 4.96.44A2.5 2.5 0 0 0 20 16.5a2.5 2.5 0 0 0 .5-4.9A2.5 2.5 0 0 0 20 6.9a2.5 2.5 0 0 0-2.5-2.4 2.5 2.5 0 0 0-3-1z" />
+    </svg>
   );
 }

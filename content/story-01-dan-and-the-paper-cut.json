@@ -50,145 +50,160 @@
       "options": [
         {
           "id": "a",
+          "label": "A bandage"
+        },
+        {
+          "id": "b",
           "label": "His mom",
           "correct": true
         },
         {
-          "id": "b",
-          "label": "A bird"
+          "id": "c",
+          "label": "Daria's house"
         },
         {
-          "id": "c",
-          "label": "Daria's dad"
+          "id": "d",
+          "label": "A bird"
         }
       ],
-      "brain_check_correct": "Great job answering that WHO question with a PERSON!",
-      "brain_check_wrong": "Did you answer with a person or people?"
+      "brain_check_prompt": "Did you answer with a person?",
+      "brain_check_correct": "Great job! You found the character!",
+      "brain_check_wrong": "Remember, WHO questions need a person as the answer."
     },
     {
       "position": 2,
-      "prompt": "Where are they?",
+      "prompt": "Where did Dan go?",
       "story_element": "place",
       "options": [
         {
           "id": "a",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Dan's mom"
         },
         {
           "id": "b",
-          "label": "They walked all the way to Daria’s house",
-          "emoji": "🏠",
-          "correct": true
+          "label": "A paper airplane"
         },
         {
           "id": "c",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Daria's house",
+          "correct": true
+        },
+        {
+          "id": "d",
+          "label": "The park"
         }
       ],
-      "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
-      "brain_check_wrong": "Did you answer with a place?"
+      "brain_check_prompt": "Did you answer with a place?",
+      "brain_check_correct": "You found the setting!",
+      "brain_check_wrong": "Remember, WHERE questions need a place as the answer."
     },
     {
       "position": 3,
-      "prompt": "What went wrong?",
+      "prompt": "What problem happened to Dan?",
       "story_element": "problem",
       "options": [
         {
           "id": "a",
-          "label": "When Dan was folding his paper airplane, he got a papercu...",
-          "emoji": "📄",
-          "correct": true
+          "label": "He felt calm"
         },
         {
           "id": "b",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "He asked for help"
         },
         {
           "id": "c",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "He lost his toy"
+        },
+        {
+          "id": "d",
+          "label": "He got a papercut",
+          "correct": true
         }
       ],
-      "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
-      "brain_check_wrong": "Did you answer with what went wrong?"
+      "brain_check_prompt": "Did you answer with what went wrong?",
+      "brain_check_correct": "You identified the problem!",
+      "brain_check_wrong": "Think about what went wrong in the story."
     },
     {
       "position": 4,
-      "prompt": "How did they feel?",
+      "prompt": "How did Dan feel after taking a deep breath?",
       "story_element": "emotion",
       "options": [
         {
           "id": "a",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Calm",
+          "correct": true
         },
         {
           "id": "b",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Bleeding"
         },
         {
           "id": "c",
-          "label": "Calm",
-          "emoji": "😌",
-          "correct": true
+          "label": "Bandage"
+        },
+        {
+          "id": "d",
+          "label": "Worried"
         }
       ],
-      "brain_check_correct": "Great job answering that FEELING question with an emotion!",
-      "brain_check_wrong": "Did you answer with a feeling word?"
+      "brain_check_prompt": "Did you answer with a feeling word?",
+      "brain_check_correct": "You found the feeling!",
+      "brain_check_wrong": "Remember, feeling questions need an emotion word."
     },
     {
       "position": 5,
-      "prompt": "What did the character do?",
+      "prompt": "What did Dan do to get help?",
       "story_element": "action",
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Daria's dad"
         },
         {
           "id": "b",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Daria's house"
         },
         {
           "id": "c",
-          "label": "Dan asked Daria’s dad for a bandage",
-          "emoji": "✈️",
+          "label": "He ran away"
+        },
+        {
+          "id": "d",
+          "label": "He asked for a bandage",
           "correct": true
         }
       ],
-      "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
-      "brain_check_wrong": "Did you answer with what they did?"
+      "brain_check_prompt": "Did you answer with what Dan did?",
+      "brain_check_correct": "You found the action!",
+      "brain_check_wrong": "Think about what Dan DID to solve the problem."
     },
     {
       "position": 6,
-      "prompt": "What happened after that?",
+      "prompt": "What solved the problem?",
       "story_element": "result",
       "options": [
         {
           "id": "a",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "Dan's mom"
         },
         {
           "id": "b",
-          "label": "He put the bandage on Dan’s finger so he could keep makin...",
-          "emoji": "😴",
-          "correct": true
+          "label": "A paper airplane"
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Daria's dad put on a bandaid",
+          "correct": true
+        },
+        {
+          "id": "d",
+          "label": "Dan went home"
         }
       ],
-      "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",
-      "brain_check_wrong": "Did you answer with what happened after?"
+      "brain_check_prompt": "Did you answer with what fixed it?",
+      "brain_check_correct": "You found the solution!",
+      "brain_check_wrong": "Think about what fixed the problem in the end."
     }
   ],
   "vocabulary_words": [
