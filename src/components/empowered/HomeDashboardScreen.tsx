@@ -11,7 +11,7 @@ import { getCatalogByCategory, getOwnedItems } from "@/services/shop";
 import type { VocabularyWord } from "@/types/story";
 import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
-import { SpeakButton, SpeakableText } from "@/components/empowered/SpeakButton";
+import { SpeakButton } from "@/components/empowered/SpeakButton";
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
 import {
   AppBottomNav,
