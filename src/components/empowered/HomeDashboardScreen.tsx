@@ -11,7 +11,6 @@ import { MiniPlane, Star, StoryProsLogo } from "@/components/empowered/StoryPros
 import {
   AppBottomNav,
   ChevronRightIcon,
-  CoinIcon,
   CurrencyBadge,
   MapIcon,
   MenuIcon,
