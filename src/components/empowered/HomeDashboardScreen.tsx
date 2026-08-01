@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { BookOpen, BookOpenCheck, Play } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { getCompletedStoryIds, getPaperPlanes } from "@/services/progress";
