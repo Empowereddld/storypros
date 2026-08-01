@@ -413,15 +413,15 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
       <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
 
 
-      <div className="mt-3 flex gap-3 overflow-x-auto no-scrollbar pb-1">
-        {words.map((word) => {
+      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {words.slice(0, 5).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           const isOpen = openWord === word.word;
           return (
             <div
               key={word.word}
               className={cn(
-                "flex w-[128px] shrink-0 flex-col items-center gap-2 rounded-[22px] border bg-card p-3 shadow-card",
+                "flex min-w-0 flex-col items-center gap-2 rounded-[22px] border bg-card p-3 shadow-card",
                 isOpen ? "border-primary" : "border-accent/60",
               )}
             >
@@ -437,7 +437,7 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
                     <BookOpen className="h-7 w-7 text-primary" />
                   )}
                 </span>
-                <span className="text-center text-[14px] font-extrabold leading-tight text-ink">
+                <span className="flex h-9 w-full items-center justify-center text-center text-[14px] font-extrabold leading-tight text-ink">
                   {word.word}
                 </span>
               </button>
@@ -446,6 +446,7 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
           );
         })}
       </div>
+
 
       {selected && (
         <div className="mt-3 rounded-[22px] border border-accent/70 bg-card p-4 shadow-card">
