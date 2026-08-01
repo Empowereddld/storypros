@@ -32,6 +32,8 @@ interface ChildProgress {
   streak: number;
   /** ISO date string of last story completion (for streak tracking) */
   lastPlayedDate?: string;
+  /** Every YYYY-MM-DD the child completed a story on (drives the week strip) */
+  playedDates?: string[];
 }
 
 // ── localStorage persistence (scoped per child) ──
@@ -52,6 +54,7 @@ function emptyProgress(): ChildProgress {
     paperPlanes: 0,
     currentLevel: 1,
     streak: 0,
+    playedDates: [],
   };
 }
 
@@ -176,6 +179,7 @@ export async function hydrateProgressFromCloud(childId: string): Promise<void> {
       currentLevel: childRes.data?.current_level ?? 1,
       streak,
       lastPlayedDate,
+      playedDates: [...new Set(dates)].sort(),
     };
 
     // Only apply if the user hasn't switched children mid-flight
@@ -310,6 +314,10 @@ export function recordStoryCompletion(
       currentProgress.streak = 1;
     }
     currentProgress.lastPlayedDate = today;
+  }
+  const played = currentProgress.playedDates ?? [];
+  if (!played.includes(today)) {
+    currentProgress.playedDates = [...played, today].sort();
   }
 
   // Check for level promotion
@@ -476,6 +484,27 @@ export function getProgress(): ChildProgress {
 export function getPaperPlanes(): number {
   return currentProgress.paperPlanes;
 }
+
+/** Every day (YYYY-MM-DD) the child completed a story on — real data, no fallback */
+export function getPlayedDates(): string[] {
+  const dates = currentProgress.playedDates ?? [];
+  if (dates.length > 0) return [...dates];
+  // Older caches only kept the last played day
+  return currentProgress.lastPlayedDate ? [currentProgress.lastPlayedDate] : [];
+}
+
+/** True when today's session is already done */
+export function hasPlayedToday(): boolean {
+  const today = new Date().toISOString().slice(0, 10);
+  return getPlayedDates().includes(today);
+}
+
+/** Current consecutive-day streak */
+export function getStreak(): number {
+  return currentProgress.streak;
+}
+
+
 
 /** Spend Coins (shop purchases) */
 export function spendPaperPlanes(amount: number, reason = "shop_purchase"): boolean {

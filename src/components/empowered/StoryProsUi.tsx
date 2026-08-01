@@ -13,6 +13,7 @@
 import { type ReactNode } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { useLongPressSpeak } from "./SpeakButton";
 
 /* ───────── Currency badge (Coins) ───────── */
 
@@ -114,42 +115,73 @@ export function AppBottomNav({
 }) {
   const navigate = useNavigate();
   const items: { key: NavKey; label: string; dest: string; icon: ReactNode }[] = [
-    { key: "home", label: "Home", dest: "home", icon: <HomeIcon /> },
-    { key: "library", label: "Library", dest: "library", icon: <BookIcon /> },
-    { key: "map", label: "Adventure Map", dest: "map", icon: <MapIcon /> },
-    { key: "achievements", label: "Rewards", dest: "achievements", icon: <MedalIcon /> },
+    { key: "home", label: "Home", dest: "home", icon: <HomeIcon className="h-7 w-7" /> },
+    { key: "library", label: "Stories", dest: "library", icon: <BookIcon className="h-7 w-7" /> },
+    { key: "map", label: "Map", dest: "map", icon: <MapIcon className="h-7 w-7" /> },
+    {
+      key: "achievements",
+      label: "Rewards",
+      dest: "achievements",
+      icon: <MedalIcon className="h-7 w-7" />,
+    },
   ];
   return (
     // App-style tabs for phones/tablets; laptop uses the top DesktopNav instead
-    <nav className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-around px-2 pt-2 pb-3 bg-card/95 backdrop-blur rounded-t-3xl border-t-4 border-accent/60 shadow-[0_-8px_30px_-10px_oklch(0.36_0.18_305/0.18)] lg:hidden">
+    <nav className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-around gap-1 px-2 pt-2 pb-3 bg-card/95 backdrop-blur rounded-t-3xl border-t-4 border-accent/60 shadow-[0_-8px_30px_-10px_oklch(0.36_0.18_305/0.18)] lg:hidden">
       {items.map((it) => (
-        <button
+        <NavTab
           key={it.key}
-          onClick={() => onNavigate(it.dest)}
-          aria-current={active === it.key ? "page" : undefined}
-          className={cn(
-            "flex flex-col items-center justify-center gap-0.5 rounded-2xl px-2.5 py-1.5 transition-all active:translate-y-0.5",
-            active === it.key
-              ? "bg-secondary text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)]"
-              : "text-ink-soft/70 hover:bg-accent/40",
-          )}
-        >
-          {it.icon}
-          <span className="text-[10px] font-bold leading-none">{it.label}</span>
-        </button>
+          label={it.label}
+          icon={it.icon}
+          active={active === it.key}
+          onActivate={() => onNavigate(it.dest)}
+        />
       ))}
       {/* Review-period tab — navigates directly so screens don't need
           a new destination handler; remove before public launch */}
-      <button
-        onClick={() => navigate({ to: "/review" })}
-        className="flex flex-col items-center justify-center gap-0.5 rounded-2xl px-2.5 py-1.5 text-ink-soft/70 transition-all hover:bg-accent/40 active:translate-y-0.5"
-      >
-        <FeedbackTabIcon />
-        <span className="text-[10px] font-bold leading-none">Feedback</span>
-      </button>
+      <NavTab
+        label="Feedback"
+        icon={<FeedbackTabIcon className="h-7 w-7" />}
+        onActivate={() => navigate({ to: "/review" })}
+      />
     </nav>
   );
 }
+
+/** Icon-first tab: large icon above a short word, 44px+ target, long-press to hear */
+function NavTab({
+  label,
+  icon,
+  active,
+  onActivate,
+}: {
+  label: string;
+  icon: ReactNode;
+  active?: boolean;
+  onActivate: () => void;
+}) {
+  const press = useLongPressSpeak(label);
+  return (
+    <button
+      {...press.handlers}
+      onClick={() => {
+        if (press.didSpeak()) return;
+        onActivate();
+      }}
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "flex min-h-[58px] min-w-[58px] flex-1 flex-col items-center justify-center gap-1 rounded-2xl px-1.5 py-2 transition-all active:translate-y-0.5",
+        active
+          ? "bg-secondary text-secondary-foreground shadow-[0_4px_0_0_var(--secondary-deep)]"
+          : "text-ink-soft hover:bg-accent/40",
+      )}
+    >
+      {icon}
+      <span className="text-[11px] font-extrabold leading-none">{label}</span>
+    </button>
+  );
+}
+
 
 function FeedbackTabIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
