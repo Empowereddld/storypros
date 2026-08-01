@@ -56,9 +56,22 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
       <AuthBackdrop />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-[620px] flex-col px-5 pb-6 pt-4 sm:px-8">
-        {/* Header: logo + skip (Skip hidden on last slide, space preserved) */}
-        <div className="flex min-h-[44px] items-center justify-between">
-          <StoryProsLogo layout="row" size="sm" className="min-h-[44px] py-1" />
+        {/* Header: back · logo · skip (space always reserved) */}
+        <div className="grid min-h-[44px] grid-cols-[44px_1fr_auto] items-center gap-2">
+          <button
+            type="button"
+            onClick={() => go(index - 1)}
+            aria-label="Previous screen"
+            className={cn(
+              "press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+              index === 0 && "invisible",
+            )}
+            tabIndex={index === 0 ? -1 : 0}
+            aria-hidden={index === 0}
+          >
+            <ChevronLeftIcon />
+          </button>
+          <StoryProsLogo layout="row" size="sm" className="mx-auto min-h-[44px] py-1" />
           <button
             onClick={onComplete}
             aria-label="Skip introduction and go to profile setup"
@@ -73,13 +86,10 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           </button>
         </div>
 
-        {/* Slide content */}
+        {/* Slide content — one shared vertical anchor across slides */}
         <div
           key={index}
-          className={cn(
-            "motion-safe:animate-slide-up flex flex-1 flex-col overflow-y-auto pb-5",
-            index === 0 ? "justify-start pt-10 sm:pt-12" : "justify-center",
-          )}
+          className="motion-safe:animate-slide-up flex flex-1 flex-col justify-center overflow-y-auto pb-5 pt-6"
         >
           {index === 0 && <SlidePurpose />}
           {index === 1 && <SlideRewards />}
@@ -93,25 +103,34 @@ export function IntroCarousel({ onComplete }: IntroCarouselProps) {
           aria-label={`Step ${index + 1} of ${SLIDE_COUNT}`}
         >
           {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
-            <span
+            <button
               key={i}
-              className={cn(
-                "h-2.5 rounded-full transition-all",
-                i === index ? "w-7 bg-primary" : "w-2.5 bg-accent",
-              )}
-            />
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Go to screen ${i + 1} of ${SLIDE_COUNT}`}
+              aria-current={i === index ? "step" : undefined}
+              className="flex h-8 items-center justify-center px-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span
+                className={cn(
+                  "h-2.5 rounded-full transition-all",
+                  i === index ? "w-7 bg-primary" : "w-2.5 bg-accent",
+                )}
+              />
+            </button>
           ))}
         </div>
 
-        <div className="mt-5 flex justify-center">
+        <div className="mt-3 flex justify-center">
           <TactileButton
-            className="w-full sm:max-w-[560px]"
+            className="w-full max-w-[320px]"
             aria-label={isLast ? "Get started with profile setup" : "Next screen"}
             onClick={() => (isLast ? onComplete() : go(index + 1))}
           >
             {isLast ? "Get Started" : "Next"}
           </TactileButton>
         </div>
+
       </div>
     </div>
   );
