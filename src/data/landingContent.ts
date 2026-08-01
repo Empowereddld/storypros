@@ -95,30 +95,34 @@ export const PATHWAY_NOTE =
 
 export const WILL_LEARN = [
   {
-    icon: "💬",
+    icon: "MessageCircle",
     skill: "Vocabulary",
-    detail: "through deep word learning (Semantic Feature Analysis)",
+    detail: "Learn and use important story words.",
   },
   {
-    icon: "👂",
+    icon: "Headphones",
     skill: "Comprehension",
-    detail: "by answering who, where, what, and why questions",
+    detail: "Understand key details and ideas.",
   },
   {
-    icon: "✏️",
-    skill: "Grammar",
-    detail: 'by practicing sentence patterns with "because" and other connecting words',
-  },
-  { icon: "📖", skill: "Narrative skills", detail: "by learning to organize and retell stories" },
-  {
-    icon: "🔤",
-    skill: "Phonological awareness",
-    detail: "through rhyming and sound activities",
+    icon: "AlignLeft",
+    skill: "Sentence building",
+    detail: "Practise putting ideas into clear sentences.",
   },
   {
-    icon: "⭐",
-    skill: "Confidence",
-    detail: 'with self-monitoring "brain checks" that celebrate progress',
+    icon: "BookOpen",
+    skill: "Storytelling",
+    detail: "Organize and retell what happened.",
+  },
+  {
+    icon: "Volume2",
+    skill: "Sound awareness",
+    detail: "Notice rhymes and beginning sounds.",
+  },
+  {
+    icon: "CheckCircle2",
+    skill: "Self-monitoring",
+    detail: "Pause, check understanding, and try again.",
   },
 ];
 
