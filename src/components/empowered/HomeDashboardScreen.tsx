@@ -428,7 +428,7 @@ function BadgesCard({
         {shown.length === 0 && <MedalIcon className="h-6 w-6 text-primary/40" />}
       </div>
       <p className="mt-2 text-[12px] font-bold leading-snug text-primary">
-        {earned.length > 0 ? "More badges are waiting." : "Your first badge is waiting."}
+        {footnote}
       </p>
     </Card>
   );
