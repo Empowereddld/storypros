@@ -380,3 +380,20 @@ function CrossBadge() {
     </span>
   );
 }
+
+function BrainIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-10 w-10 text-primary"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M9.5 3.5A2.5 2.5 0 0 1 12 6v12a2.5 2.5 0 0 1-4.96.44A2.5 2.5 0 0 1 4 16.5a2.5 2.5 0 0 1-.5-4.9A2.5 2.5 0 0 1 4 6.9a2.5 2.5 0 0 1 2.5-2.4 2.5 2.5 0 0 1 3-1z" />
+      <path d="M14.5 3.5A2.5 2.5 0 0 0 12 6v12a2.5 2.5 0 0 0 4.96.44A2.5 2.5 0 0 0 20 16.5a2.5 2.5 0 0 0 .5-4.9A2.5 2.5 0 0 0 20 6.9a2.5 2.5 0 0 0-2.5-2.4 2.5 2.5 0 0 0-3-1z" />
+    </svg>
+  );
+}
