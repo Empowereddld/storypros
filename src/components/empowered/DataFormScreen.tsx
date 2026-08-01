@@ -132,8 +132,9 @@ export function DataFormScreen({
 
               <div>
                 <label htmlFor="child-age" className="block text-sm font-extrabold text-primary">
-                  Age
+                  Age <span className="font-bold text-coral">Required</span>
                 </label>
+
                 <div className="relative mt-2">
                   <span className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-primary">
                     <CalendarIcon />
