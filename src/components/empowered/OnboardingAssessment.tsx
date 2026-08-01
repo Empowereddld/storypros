@@ -134,7 +134,7 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
 
           <TactileButton
             onClick={() => setPhase("playing")}
-            className="mt-5 w-full max-w-[300px]"
+            className="mt-5 w-full max-w-[320px]"
           >
             <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap">
               Start the Story <ArrowRightIcon />
