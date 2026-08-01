@@ -5,20 +5,73 @@
  * advance. Brain checks confirm / prompt.
  * --------------------------------------------- */
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ComponentType } from "react";
+import { CheckCircle2, Hand, Heart, MapPin, TriangleAlert, User } from "lucide-react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
-import type { StoryPhaseProps, ActivityAttempt } from "@/types/story";
+import type { StoryPhaseProps, ActivityAttempt, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-pointing.webp";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star } from "../StoryProsBrand";
 
+const ELEMENT_LABELS: Record<StoryElement, string> = {
+  character: "Character",
+  place: "Place",
+  problem: "Problem",
+  emotion: "Feeling",
+  action: "Action",
+  result: "Result",
+};
+
+const ELEMENT_ICONS: Record<StoryElement, ComponentType<{ className?: string }>> = {
+  character: User,
+  place: MapPin,
+  problem: TriangleAlert,
+  emotion: Heart,
+  action: Hand,
+  result: CheckCircle2,
+};
+
+const ELEMENT_COLORS: Record<StoryElement, { bg: string; text: string; ring: string }> = {
+  character: {
+    bg: "bg-element-character",
+    text: "text-element-character-foreground",
+    ring: "ring-element-character-foreground/30",
+  },
+  place: {
+    bg: "bg-element-place",
+    text: "text-element-place-foreground",
+    ring: "ring-element-place-foreground/30",
+  },
+  problem: {
+    bg: "bg-element-problem",
+    text: "text-element-problem-foreground",
+    ring: "ring-element-problem-foreground/30",
+  },
+  emotion: {
+    bg: "bg-element-emotion",
+    text: "text-element-emotion-foreground",
+    ring: "ring-element-emotion-foreground/30",
+  },
+  action: {
+    bg: "bg-element-action",
+    text: "text-element-action-foreground",
+    ring: "ring-element-action-foreground/30",
+  },
+  result: {
+    bg: "bg-element-result",
+    text: "text-element-result-foreground",
+    ring: "ring-element-result-foreground/30",
+  },
+};
+
 type BrainCheckState =
   | { type: "none" }
   | { type: "correct"; message: string }
   | { type: "wrong"; message: string };
+
 
 export function ComprehensionPhase({
   storyData,
@@ -131,6 +184,11 @@ export function ComprehensionPhase({
   const hintSlide = storyData.slides.find((s) => s.story_element === q.story_element);
   const hintImage = resolveStoryImage(storyData.id, hintSlide?.image);
 
+  const ElementIcon = ELEMENT_ICONS[q.story_element] ?? User;
+  const elementLabel = ELEMENT_LABELS[q.story_element] ?? "Story";
+  const elementStyle = ELEMENT_COLORS[q.story_element] ?? ELEMENT_COLORS.character;
+
+
   return (
     <div className="relative flex h-full flex-col overflow-hidden bg-background">
       <Star className="pointer-events-none absolute right-7 top-24 z-0 h-5 w-5 text-secondary/45 animate-sparkle" />
@@ -237,28 +295,22 @@ export function ComprehensionPhase({
         <div className="relative overflow-hidden rounded-[28px] border-2 border-accent/70 bg-card p-4 shadow-card">
           <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
           <div className="relative flex items-center gap-3">
-            {isSupported() && (
-              <button
-                onClick={handleListen}
-                className={cn(
-                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-full btn-tactile transition-all",
-                  speaking
-                    ? "bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : "bg-secondary text-secondary-foreground",
-                )}
-                aria-label={speaking ? "Stop audio" : "Hear question"}
-              >
-                {speaking ? (
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-                    <rect x="6" y="6" width="12" height="12" rx="2" />
-                  </svg>
-                ) : (
-                  <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                )}
-              </button>
-            )}
+            <button
+              onClick={handleListen}
+              disabled={!isSupported()}
+              className={cn(
+                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full btn-tactile ring-2 transition-all",
+                elementStyle.bg,
+                elementStyle.text,
+                elementStyle.ring,
+                speaking && "animate-pulse-glow",
+              )}
+              aria-label={isSupported() ? "Hear question" : elementLabel}
+              title={elementLabel}
+            >
+              <ElementIcon className="h-6 w-6" />
+            </button>
+
             <h2 className="min-w-0 flex-1 font-display text-[24px] font-extrabold leading-tight text-primary">
               {q.prompt}
             </h2>
