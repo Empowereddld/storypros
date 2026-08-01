@@ -179,6 +179,7 @@ export async function hydrateProgressFromCloud(childId: string): Promise<void> {
       currentLevel: childRes.data?.current_level ?? 1,
       streak,
       lastPlayedDate,
+      playedDates: [...new Set(dates)].sort(),
     };
 
     // Only apply if the user hasn't switched children mid-flight
@@ -313,6 +314,10 @@ export function recordStoryCompletion(
       currentProgress.streak = 1;
     }
     currentProgress.lastPlayedDate = today;
+  }
+  const played = currentProgress.playedDates ?? [];
+  if (!played.includes(today)) {
+    currentProgress.playedDates = [...played, today].sort();
   }
 
   // Check for level promotion
