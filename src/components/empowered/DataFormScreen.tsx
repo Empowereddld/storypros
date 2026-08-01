@@ -177,6 +177,7 @@ export function DataFormScreen({
                   className="mt-2"
                   icon={<GlobeIcon />}
                   value={values.country}
+                  disabled={submitting}
                   onChange={(v) => setValues((p) => ({ ...p, country: v.slice(0, 56) }))}
                   placeholder="Enter your country"
                   autoComplete="country-name"
