@@ -42,9 +42,10 @@ import { StoryCompletePhase } from "./StoryCompletePhase";
 /** The ordered list of phases a child goes through */
 const PHASE_ORDER: StoryPhase[] = [
   "slides",
+  "immediate-retell",
   "comprehension",
   "sequencing",
-  "immediate-retell",
+
   "vocab-intro",
   "vocab-quiz",
   "sentence-builder",
