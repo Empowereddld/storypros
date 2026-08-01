@@ -16,6 +16,8 @@ interface DataFormScreenProps {
   onBack?: () => void;
   step?: number;
   totalSteps?: number;
+  submitting?: boolean;
+  error?: string | null;
 }
 
 const AGES = [4, 5, 6, 7, 8, 9, 10];
