@@ -34,6 +34,7 @@ export function ComprehensionPhase({
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
+  const [reflecting, setReflecting] = useState(false);
 
   const [speaking, setSpeaking] = useState(false);
   const startTime = useRef(Date.now());
