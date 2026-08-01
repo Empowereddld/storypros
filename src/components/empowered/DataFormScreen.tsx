@@ -8,6 +8,7 @@ export interface OnboardingFormValues {
   childAge: number | null;
   country: string;
   diagnoses: string[];
+  otherDiagnosis: string;
 }
 
 interface DataFormScreenProps {
@@ -18,20 +19,6 @@ interface DataFormScreenProps {
 }
 
 const AGES = [4, 5, 6, 7, 8, 9, 10];
-
-const COUNTRIES = [
-  "United States",
-  "Canada",
-  "United Kingdom",
-  "Ireland",
-  "Australia",
-  "New Zealand",
-  "South Africa",
-  "Jamaica",
-  "Trinidad and Tobago",
-  "India",
-  "Other",
-];
 
 const DIAGNOSES = [
   "DLD",
@@ -55,6 +42,7 @@ export function DataFormScreen({
     childAge: null,
     country: "",
     diagnoses: [],
+    otherDiagnosis: "",
   });
 
   const toggleDiagnosis = (item: string) =>
@@ -68,7 +56,8 @@ export function DataFormScreen({
   const isValid =
     values.childName.trim().length > 0 &&
     values.childAge !== null &&
-    values.country.length > 0;
+    values.country.trim().length > 0 &&
+    (values.diagnoses.length > 0 || values.otherDiagnosis.trim().length > 0);
 
 
   return (
@@ -176,41 +165,17 @@ export function DataFormScreen({
                 <label htmlFor="country" className="block text-sm font-extrabold text-primary">
                   Country
                 </label>
-                <div className="relative mt-2">
-                  <span className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-primary">
-                    <GlobeIcon />
-                  </span>
-                  <select
-                    id="country"
-                    value={values.country}
-                    onChange={(event) =>
-                      setValues((p) => ({ ...p, country: event.target.value }))
-                    }
-                    className={cn(
-                      "h-[56px] w-full appearance-none rounded-2xl border-2 border-primary/30 bg-card pl-12 pr-12 text-base font-semibold text-ink outline-none transition-colors focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                      values.country === "" && "text-ink-soft",
-                    )}
-                  >
-                    <option value="" disabled>
-                      Choose country
-                    </option>
-                    {COUNTRIES.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-primary">
-                    <ChevronDownIcon />
-                  </span>
-                </div>
+                <IconInput
+                  id="country"
+                  className="mt-2"
+                  icon={<GlobeIcon />}
+                  value={values.country}
+                  onChange={(v) => setValues((p) => ({ ...p, country: v.slice(0, 56) }))}
+                  placeholder="Enter your country"
+                  autoComplete="country-name"
+                />
               </div>
             </div>
-
-            <p className="mt-6 flex items-center justify-center gap-1.5 text-xs font-semibold text-ink-soft">
-              <LockMiniIcon />
-              Your child's information is kept private and secure.
-            </p>
           </div>
 
           <div className="rounded-[24px] border border-border/70 bg-card/95 p-6 sm:p-7 shadow-soft backdrop-blur animate-slide-up">
@@ -222,7 +187,7 @@ export function DataFormScreen({
                 Does your child have a diagnosis?
               </legend>
               <p className="mt-1.5 text-xs font-semibold text-ink-soft">
-                Optional — select all that apply.
+                Select all that apply.
               </p>
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {DIAGNOSES.map((item) => {
@@ -248,8 +213,26 @@ export function DataFormScreen({
                   );
                 })}
               </div>
+
+              <label
+                htmlFor="other-diagnosis"
+                className="mt-6 block text-sm font-extrabold text-primary"
+              >
+                Something else? Tell us here
+              </label>
+              <input
+                id="other-diagnosis"
+                type="text"
+                value={values.otherDiagnosis}
+                onChange={(event) =>
+                  setValues((p) => ({ ...p, otherDiagnosis: event.target.value.slice(0, 80) }))
+                }
+                placeholder="Type a diagnosis not listed above"
+                className="mt-2 h-[56px] w-full rounded-2xl border-2 border-primary/30 bg-card px-4 text-base font-semibold text-ink outline-none transition-colors placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              />
             </fieldset>
           </div>
+
         </div>
 
         <div className="mt-8 space-y-2.5">
@@ -311,14 +294,6 @@ function ChevronDownIcon() {
       aria-hidden
     >
       <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function LockMiniIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0" fill="currentColor" aria-hidden>
-      <path d="M7 10V8a5 5 0 0110 0v2h1a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7a2 2 0 012-2h1zm2 0h6V8a3 3 0 00-6 0v2z" />
     </svg>
   );
 }
