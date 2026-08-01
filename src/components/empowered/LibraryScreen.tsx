@@ -234,10 +234,19 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between">
-          <h2 className="text-[24px] font-extrabold text-primary">All Stories</h2>
-          <span className="rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
-            {completedCount}/{stories.length} done
+        <div className="mt-4 flex items-start justify-between gap-3">
+          <div>
+            <h2 className="text-[24px] font-extrabold text-primary">
+              {paid ? "Available Now" : "More Stories"}
+            </h2>
+            <p className="mt-1 max-w-[420px] text-sm font-medium text-ink-soft">
+              {paid
+                ? "Choose from your unlocked stories. Complete one to unlock another."
+                : "Unlock the full Story Pros experience to keep exploring."}
+            </p>
+          </div>
+          <span className="mt-1 shrink-0 rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
+            {completedCount} of {stories.length} completed
           </span>
         </div>
 
@@ -425,10 +434,12 @@ function SettingPill({ story }: { story: { id: string; theme: string } }) {
 function EmptyLibraryState({ filter }: { filter: FilterTab }) {
   const copy =
     filter === "completed"
-      ? "No finished stories yet. Pick a ready story to begin."
-      : filter === "locked"
-        ? "No locked stories are showing right now."
-        : "No stories match this filter.";
+      ? "No completed stories yet. Pick an available story to begin."
+      : filter === "inProgress"
+        ? "No stories in progress right now."
+        : filter === "available"
+          ? "No available stories right now."
+          : "No stories match this filter.";
 
   return (
     <div className="mt-8 rounded-[28px] bg-card p-6 text-center shadow-card">
