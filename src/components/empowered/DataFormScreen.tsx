@@ -41,7 +41,6 @@ export function DataFormScreen({
     childAge: null,
     country: "",
     diagnoses: [],
-    otherDiagnosis: "",
   });
 
   const toggleDiagnosis = (item: string) =>
