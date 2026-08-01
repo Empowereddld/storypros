@@ -257,33 +257,35 @@ function StoryCard({ story, onOpen }: { story: CardStory; onOpen: () => void }) 
   return (
     <button
       onClick={onOpen}
-      className="hover-lift flex min-h-[238px] flex-col overflow-hidden rounded-[26px] border border-accent/50 bg-card text-left shadow-card active:scale-[0.98]"
+      className="hover-lift flex min-h-[240px] flex-col overflow-hidden rounded-[26px] border border-accent/50 bg-card text-left shadow-card active:scale-[0.98]"
     >
-      <div className="relative h-[130px] overflow-hidden bg-accent">
+      <div className="relative h-[140px] overflow-hidden bg-accent">
         {story.image ? (
-          <img src={story.image} alt="" className="h-full w-full object-cover" />
+          <img
+            src={story.image}
+            alt=""
+            className="h-full w-full object-cover object-[center_30%]"
+          />
         ) : (
           <FallbackCover compact />
         )}
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink/65 to-transparent" />
         <StateBadge story={story} />
-        <span className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-card/95 text-[11px] font-extrabold text-primary shadow-card">
+        <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-card/95 text-[11px] font-extrabold text-primary shadow-card">
           {story.num}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-3">
-        <h3 className="line-clamp-2 min-h-[36px] text-sm font-extrabold leading-tight text-ink">
+      <div className="flex flex-1 flex-col p-4">
+        <h3 className="line-clamp-2 text-[15px] font-extrabold leading-snug text-ink">
           {story.title}
         </h3>
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-extrabold text-primary">
-            {prettifyTheme(story.theme)}
-          </span>
-          <span className="rounded-full bg-secondary/25 px-2 py-0.5 text-[10px] font-extrabold text-secondary-foreground">
-            L{story.level}
+        <div className="mt-2">
+          <span className="rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-extrabold text-primary">
+            Level {story.level}
           </span>
         </div>
+
 
         <div className="mt-auto pt-3">
           {story.locked ? (
