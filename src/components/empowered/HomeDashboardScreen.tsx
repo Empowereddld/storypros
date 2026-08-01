@@ -197,7 +197,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                     </div>
                   ) : (
                     <div className="mt-4 flex items-center gap-2">
-                      <TactileButton className="flex-1" onClick={openContinue}>
+                      <TactileButton className="flex-1" onClick={openContinue} noShadow>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
                     </div>
