@@ -485,6 +485,27 @@ export function getPaperPlanes(): number {
   return currentProgress.paperPlanes;
 }
 
+/** Every day (YYYY-MM-DD) the child completed a story on — real data, no fallback */
+export function getPlayedDates(): string[] {
+  const dates = currentProgress.playedDates ?? [];
+  if (dates.length > 0) return [...dates];
+  // Older caches only kept the last played day
+  return currentProgress.lastPlayedDate ? [currentProgress.lastPlayedDate] : [];
+}
+
+/** True when today's session is already done */
+export function hasPlayedToday(): boolean {
+  const today = new Date().toISOString().slice(0, 10);
+  return getPlayedDates().includes(today);
+}
+
+/** Current consecutive-day streak */
+export function getStreak(): number {
+  return currentProgress.streak;
+}
+
+
+
 /** Spend Coins (shop purchases) */
 export function spendPaperPlanes(amount: number, reason = "shop_purchase"): boolean {
   if (amount > currentProgress.paperPlanes) return false;
