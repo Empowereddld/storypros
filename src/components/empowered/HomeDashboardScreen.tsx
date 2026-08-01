@@ -12,6 +12,7 @@ import type { VocabularyWord } from "@/types/story";
 import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { SpeakButton } from "@/components/empowered/SpeakButton";
+import { StoryMetaPills } from "@/components/empowered/StoryMetaPills";
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
 import {
   AppBottomNav,
@@ -73,7 +74,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   const cover = cont
     ? resolveStoryImage(cont.story.id, cont.story.slides[0]?.image || "slide-01.webp")
     : null;
-  const recap = cont?.story.recap ?? cont?.story.slides[2]?.text ?? "";
 
   const greeting = `Hi, ${firstName}!`;
   const subtitle = doneToday
@@ -152,15 +152,13 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         {cont.story.title}
                       </h2>
                       <SpeakButton
-                        text={`${cont.story.title}. ${recap}`}
-                        label={`Hear the story title and what happened`}
+                        text={cont.story.title}
+                        label={`Hear the story title`}
                         tone="primary"
                         size="sm"
                       />
                     </div>
-                    {recap && (
-                      <p className="mt-2 text-[14px] font-medium leading-snug text-ink">{recap}</p>
-                    )}
+                    <StoryMetaPills story={cont.story} className="mt-2.5" />
                   </div>
 
                   <div className="mt-4 flex items-center justify-between text-xs font-extrabold">
