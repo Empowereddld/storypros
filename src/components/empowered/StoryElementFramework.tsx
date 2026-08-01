@@ -36,14 +36,14 @@ interface StoryElementFrameworkProps {
 
 export function StoryElementFramework({ items, className }: StoryElementFrameworkProps) {
   return (
-    <ul className={cn("flex flex-wrap items-start gap-x-1.5 gap-y-4 sm:gap-x-2", className)}>
+    <ul className={cn("flex flex-wrap items-start gap-x-1 gap-y-4", className)}>
       {items.map((item, i) => {
         const key = item.element as StoryElement;
         const Icon = ELEMENT_ICONS[key] ?? User;
         const colors = ELEMENT_COLORS[key] ?? ELEMENT_COLORS.character;
         return (
-          <li key={item.label} className="flex items-center gap-1.5 sm:gap-2">
-            <div className="flex w-[74px] flex-col items-center gap-1.5 text-center sm:w-[84px]">
+          <li key={item.label} className="flex items-center gap-1">
+            <div className="flex w-[66px] flex-col items-center gap-1.5 text-center sm:w-[72px]">
               <span
                 className={cn(
                   "flex h-11 w-11 items-center justify-center rounded-full",
