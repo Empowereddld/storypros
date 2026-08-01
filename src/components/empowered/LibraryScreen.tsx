@@ -184,8 +184,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
                     <span className="rounded-full bg-secondary/90 px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
                       {settingLabel(featured)}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/85 px-3 py-1 text-xs font-extrabold text-white ring-1 ring-white/50">
-                      <BrainIcon className="h-3.5 w-3.5" />
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-extrabold text-gray-700">
                       {skillLabel(featured)}
                     </span>
 
@@ -391,14 +390,6 @@ function skillLabel(story: { id: string }) {
   return SKILL_BY_ID[story.id] ?? "Working Memory";
 }
 
-function BrainIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8V15a3 3 0 0 0 3 3h1V4H9Z" />
-      <path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 1 5.8V15a3 3 0 0 1-3 3h-1V4h0Z" />
-    </svg>
-  );
-}
 
 const SETTING_BY_ID: Record<string, string> = {
 
