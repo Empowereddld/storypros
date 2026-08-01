@@ -240,6 +240,46 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   );
 }
 
+/* ───────── Unified right-rail panel ───────── */
+
+function ProgressPanel({
+  week,
+  playedDates,
+  days,
+  today,
+  coins,
+  childId,
+  completedCount,
+  onOpenShop,
+  onSeeAll,
+}: {
+  week: string[];
+  playedDates: string[];
+  days: number;
+  today: string;
+  coins: number;
+  childId: string;
+  completedCount: number;
+  onOpenShop: () => void;
+  onSeeAll: () => void;
+}) {
+  return (
+    <div className="rounded-[28px] border border-accent/50 bg-card p-4 shadow-card">
+      <div className="space-y-4">
+        <WeekStrip week={week} playedDates={playedDates} days={days} today={today} />
+        <div className="border-t border-accent/30" />
+        <CoinsCard coins={coins} onOpenShop={onOpenShop} />
+        <div className="border-t border-accent/30" />
+        <BadgesCard
+          childId={childId}
+          completedCount={completedCount}
+          onSeeAll={onSeeAll}
+        />
+      </div>
+    </div>
+  );
+}
+
 /* ───────── Week streak strip (real per-day data) ───────── */
 
 function WeekStrip({
