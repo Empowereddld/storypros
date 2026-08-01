@@ -97,7 +97,7 @@ export function StorySlidesPhase({
         >
           <div className="relative aspect-video w-full overflow-hidden bg-accent">
             {slideImg ? (
-              <img src={slideImg} alt="" className="h-full w-full object-cover" />
+              <img src={slideImg} alt="" className="h-full w-full object-cover object-[center_35%]" />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-primary">
                 <PaperPlaneIcon className="h-16 w-16" />
