@@ -199,7 +199,7 @@ export function SequencingPhase({
           </div>
         </section>
 
-        <section className="mt-4 grid grid-cols-3 gap-3">
+        <section className="mx-auto mt-4 grid max-w-[420px] grid-cols-3 gap-2">
           {shuffled.map((frame, index) => {
             const placed = order.includes(index);
             const position = order.indexOf(index);
@@ -210,7 +210,7 @@ export function SequencingPhase({
                 key={`${frame.correct_position}-${frame.caption}`}
                 onClick={() => handleSelectFrame(index)}
                 className={cn(
-                  "hover-lift overflow-hidden rounded-[20px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                  "hover-lift overflow-hidden rounded-[16px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
                   placed ? "border-primary bg-primary/5 opacity-75" : "border-accent/60",
                 )}
               >
@@ -219,12 +219,12 @@ export function SequencingPhase({
                     <img src={image} alt="" className="h-full w-full object-cover" />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-primary">
-                      <PaperPlaneIcon className="h-10 w-10" />
+                      <PaperPlaneIcon className="h-8 w-8" />
                     </div>
                   )}
                   <span
                     className={cn(
-                      "absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full text-xs font-extrabold shadow-card",
+                      "absolute left-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-extrabold shadow-card",
                       placed ? "bg-primary text-primary-foreground" : "bg-card text-primary",
                     )}
                   >
