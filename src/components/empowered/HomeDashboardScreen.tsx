@@ -75,7 +75,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
     ? resolveStoryImage(cont.story.id, cont.story.slides[0]?.image || "slide-01.webp")
     : null;
 
-  const greeting = `Hi, ${firstName}!`;
+  const greeting = `Hi, Camesha!`;
   const subtitle = doneToday
     ? "You did your story today. Great work!"
     : cont?.status === "in-progress"
