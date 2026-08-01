@@ -84,7 +84,7 @@ export function DataFormScreen({
       />
       <Star className="absolute left-8 top-32 z-0 hidden h-4 w-4 text-secondary sm:block" />
 
-      {/* Slim onboarding bar: back · logo · step, with one continuous progress rail */}
+      {/* Slim onboarding bar: back · logo · step */}
       <header className="relative z-20 border-b border-border/60 bg-card/85 backdrop-blur">
         <div className="mx-auto grid h-14 w-full max-w-[560px] grid-cols-[40px_1fr_auto] items-center gap-2 px-4">
           <button
@@ -100,12 +100,6 @@ export function DataFormScreen({
           <span className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-soft">
             Step {step} / {totalSteps}
           </span>
-        </div>
-        <div className="h-0.5 w-full bg-primary/15" aria-hidden>
-          <div
-            className="h-full bg-primary transition-[width] duration-500 ease-out"
-            style={{ width: `${(step / totalSteps) * 100}%` }}
-          />
         </div>
       </header>
 
