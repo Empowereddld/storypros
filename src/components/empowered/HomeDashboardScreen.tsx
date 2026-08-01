@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { BookOpen, Play } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
 import { cn } from "@/lib/utils";
