@@ -55,7 +55,7 @@ export function DataFormScreen({
     values.childName.trim().length > 0 &&
     values.childAge !== null &&
     values.country.trim().length > 0 &&
-    (values.diagnoses.length > 0 || values.otherDiagnosis.trim().length > 0);
+    values.diagnoses.length > 0;
 
 
   return (
