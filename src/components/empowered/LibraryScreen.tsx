@@ -179,9 +179,13 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
                   <h3 className="text-[27px] font-extrabold leading-[1.05] drop-shadow sm:text-[31px]">
                     {featured.title}
                   </h3>
-                  <div>
+                  <div className="flex flex-wrap items-center gap-2">
                     <StoryPill>Level {featured.level}</StoryPill>
+                    <span className="rounded-full bg-secondary/90 px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
+                      {settingLabel(featured)}
+                    </span>
                   </div>
+
                 </div>
               </div>
 
