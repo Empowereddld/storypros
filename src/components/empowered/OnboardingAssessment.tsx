@@ -127,10 +127,7 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
               />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary via-primary/70 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-extrabold text-secondary-foreground shadow-card">
-                  Starting Story
-                </span>
-                <h2 className="mt-2 text-xl font-extrabold leading-tight text-primary-foreground drop-shadow">
+                <h2 className="text-xl font-extrabold leading-tight text-primary-foreground drop-shadow">
                   Dan and the Papercut
                 </h2>
               </div>
