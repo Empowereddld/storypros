@@ -9,77 +9,41 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as ReviewRouteImport } from './routes/review'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as LandingpageRouteImport } from './routes/landingpage'
-import { Route as IntroRouteImport } from './routes/intro'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as DemoRouteImport } from './routes/demo'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminContentRouteImport } from './routes/admin/content'
-import { Route as AuthenticatedSlpRouteImport } from './routes/_authenticated/slp'
-import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedSelectChildRouteImport } from './routes/_authenticated/select-child'
-import { Route as AuthenticatedRetellLibraryRouteImport } from './routes/_authenticated/retell-library'
-import { Route as AuthenticatedPaywallRouteImport } from './routes/_authenticated/paywall'
-import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
-import { Route as AuthenticatedLibraryRouteImport } from './routes/_authenticated/library'
-import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as IntroRouteImport } from './routes/intro'
+import { Route as LandingpageRouteImport } from './routes/landingpage'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ReviewRouteImport } from './routes/review'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
-import { Route as AuthenticatedStoryStoryIdRouteImport } from './routes/_authenticated/story.$storyId'
-import { Route as AuthenticatedOnboardingProfileRouteImport } from './routes/_authenticated/onboarding/profile'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedLibraryRouteImport } from './routes/_authenticated/library'
+import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
+import { Route as AuthenticatedPaywallRouteImport } from './routes/_authenticated/paywall'
+import { Route as AuthenticatedRetellLibraryRouteImport } from './routes/_authenticated/retell-library'
+import { Route as AuthenticatedSelectChildRouteImport } from './routes/_authenticated/select-child'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
+import { Route as AuthenticatedSlpRouteImport } from './routes/_authenticated/slp'
+import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as AuthenticatedOnboardingAssessmentRouteImport } from './routes/_authenticated/onboarding/assessment'
+import { Route as AuthenticatedOnboardingProfileRouteImport } from './routes/_authenticated/onboarding/profile'
+import { Route as AuthenticatedStoryStoryIdRouteImport } from './routes/_authenticated/story.$storyId'
 
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReviewRoute = ReviewRouteImport.update({
-  id: '/review',
-  path: '/review',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LandingpageRoute = LandingpageRouteImport.update({
-  id: '/landingpage',
-  path: '/landingpage',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IntroRoute = IntroRouteImport.update({
-  id: '/intro',
-  path: '/intro',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -87,71 +51,50 @@ const DemoRoute = DemoRouteImport.update({
   path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const IntroRoute = IntroRouteImport.update({
+  id: '/intro',
+  path: '/intro',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminContentRoute = AdminContentRouteImport.update({
-  id: '/admin/content',
-  path: '/admin/content',
+const LandingpageRoute = LandingpageRouteImport.update({
+  id: '/landingpage',
+  path: '/landingpage',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedSlpRoute = AuthenticatedSlpRouteImport.update({
-  id: '/slp',
-  path: '/slp',
-  getParentRoute: () => AuthenticatedRoute,
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedShopRoute = AuthenticatedShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => AuthenticatedRoute,
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AuthenticatedRoute,
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedSelectChildRoute =
-  AuthenticatedSelectChildRouteImport.update({
-    id: '/select-child',
-    path: '/select-child',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedRetellLibraryRoute =
-  AuthenticatedRetellLibraryRouteImport.update({
-    id: '/retell-library',
-    path: '/retell-library',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedPaywallRoute = AuthenticatedPaywallRouteImport.update({
-  id: '/paywall',
-  path: '/paywall',
-  getParentRoute: () => AuthenticatedRoute,
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
-  id: '/map',
-  path: '/map',
-  getParentRoute: () => AuthenticatedRoute,
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedLibraryRoute = AuthenticatedLibraryRouteImport.update({
-  id: '/library',
-  path: '/library',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRoute,
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAchievementsRoute =
   AuthenticatedAchievementsRouteImport.update({
@@ -159,10 +102,67 @@ const AuthenticatedAchievementsRoute =
     path: '/achievements',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedStoryStoryIdRoute =
-  AuthenticatedStoryStoryIdRouteImport.update({
-    id: '/story/$storyId',
-    path: '/story/$storyId',
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedLibraryRoute = AuthenticatedLibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPaywallRoute = AuthenticatedPaywallRouteImport.update({
+  id: '/paywall',
+  path: '/paywall',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedRetellLibraryRoute =
+  AuthenticatedRetellLibraryRouteImport.update({
+    id: '/retell-library',
+    path: '/retell-library',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedSelectChildRoute =
+  AuthenticatedSelectChildRouteImport.update({
+    id: '/select-child',
+    path: '/select-child',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedShopRoute = AuthenticatedShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedSlpRoute = AuthenticatedSlpRouteImport.update({
+  id: '/slp',
+  path: '/slp',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/admin/content',
+  path: '/admin/content',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedOnboardingAssessmentRoute =
+  AuthenticatedOnboardingAssessmentRouteImport.update({
+    id: '/onboarding/assessment',
+    path: '/onboarding/assessment',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedOnboardingProfileRoute =
@@ -171,10 +171,10 @@ const AuthenticatedOnboardingProfileRoute =
     path: '/onboarding/profile',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedOnboardingAssessmentRoute =
-  AuthenticatedOnboardingAssessmentRouteImport.update({
-    id: '/onboarding/assessment',
-    path: '/onboarding/assessment',
+const AuthenticatedStoryStoryIdRoute =
+  AuthenticatedStoryStoryIdRouteImport.update({
+    id: '/story/$storyId',
+    path: '/story/$storyId',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
@@ -370,74 +370,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/review': {
-      id: '/review'
-      path: '/review'
-      fullPath: '/review'
-      preLoaderRoute: typeof ReviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/landingpage': {
-      id: '/landingpage'
-      path: '/landingpage'
-      fullPath: '/landingpage'
-      preLoaderRoute: typeof LandingpageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/intro': {
-      id: '/intro'
-      path: '/intro'
-      fullPath: '/intro'
-      preLoaderRoute: typeof IntroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo': {
-      id: '/demo'
-      path: '/demo'
-      fullPath: '/demo'
-      preLoaderRoute: typeof DemoRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -447,81 +384,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/content': {
-      id: '/admin/content'
-      path: '/admin/content'
-      fullPath: '/admin/content'
-      preLoaderRoute: typeof AdminContentRouteImport
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/slp': {
-      id: '/_authenticated/slp'
-      path: '/slp'
-      fullPath: '/slp'
-      preLoaderRoute: typeof AuthenticatedSlpRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/intro': {
+      id: '/intro'
+      path: '/intro'
+      fullPath: '/intro'
+      preLoaderRoute: typeof IntroRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/shop': {
-      id: '/_authenticated/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof AuthenticatedShopRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/landingpage': {
+      id: '/landingpage'
+      path: '/landingpage'
+      fullPath: '/landingpage'
+      preLoaderRoute: typeof LandingpageRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/select-child': {
-      id: '/_authenticated/select-child'
-      path: '/select-child'
-      fullPath: '/select-child'
-      preLoaderRoute: typeof AuthenticatedSelectChildRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/retell-library': {
-      id: '/_authenticated/retell-library'
-      path: '/retell-library'
-      fullPath: '/retell-library'
-      preLoaderRoute: typeof AuthenticatedRetellLibraryRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/paywall': {
-      id: '/_authenticated/paywall'
-      path: '/paywall'
-      fullPath: '/paywall'
-      preLoaderRoute: typeof AuthenticatedPaywallRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/map': {
-      id: '/_authenticated/map'
-      path: '/map'
-      fullPath: '/map'
-      preLoaderRoute: typeof AuthenticatedMapRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/library': {
-      id: '/_authenticated/library'
-      path: '/library'
-      fullPath: '/library'
-      preLoaderRoute: typeof AuthenticatedLibraryRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/home': {
-      id: '/_authenticated/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+    '/_authenticated/achievements': {
+      id: '/_authenticated/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/dashboard': {
@@ -531,18 +468,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/achievements': {
-      id: '/_authenticated/achievements'
-      path: '/achievements'
-      fullPath: '/achievements'
-      preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/story/$storyId': {
-      id: '/_authenticated/story/$storyId'
-      path: '/story/$storyId'
-      fullPath: '/story/$storyId'
-      preLoaderRoute: typeof AuthenticatedStoryStoryIdRouteImport
+    '/_authenticated/library': {
+      id: '/_authenticated/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof AuthenticatedLibraryRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/map': {
+      id: '/_authenticated/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof AuthenticatedMapRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/paywall': {
+      id: '/_authenticated/paywall'
+      path: '/paywall'
+      fullPath: '/paywall'
+      preLoaderRoute: typeof AuthenticatedPaywallRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/retell-library': {
+      id: '/_authenticated/retell-library'
+      path: '/retell-library'
+      fullPath: '/retell-library'
+      preLoaderRoute: typeof AuthenticatedRetellLibraryRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/select-child': {
+      id: '/_authenticated/select-child'
+      path: '/select-child'
+      fullPath: '/select-child'
+      preLoaderRoute: typeof AuthenticatedSelectChildRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/shop': {
+      id: '/_authenticated/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof AuthenticatedShopRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/slp': {
+      id: '/_authenticated/slp'
+      path: '/slp'
+      fullPath: '/slp'
+      preLoaderRoute: typeof AuthenticatedSlpRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/admin/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/onboarding/assessment': {
+      id: '/_authenticated/onboarding/assessment'
+      path: '/onboarding/assessment'
+      fullPath: '/onboarding/assessment'
+      preLoaderRoute: typeof AuthenticatedOnboardingAssessmentRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/onboarding/profile': {
@@ -552,11 +552,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingProfileRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/onboarding/assessment': {
-      id: '/_authenticated/onboarding/assessment'
-      path: '/onboarding/assessment'
-      fullPath: '/onboarding/assessment'
-      preLoaderRoute: typeof AuthenticatedOnboardingAssessmentRouteImport
+    '/_authenticated/story/$storyId': {
+      id: '/_authenticated/story/$storyId'
+      path: '/story/$storyId'
+      fullPath: '/story/$storyId'
+      preLoaderRoute: typeof AuthenticatedStoryStoryIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
   }
