@@ -11,7 +11,7 @@ import { getCatalogByCategory, getOwnedItems } from "@/services/shop";
 import type { VocabularyWord } from "@/types/story";
 import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
-import { SpeakButton, SpeakableText } from "@/components/empowered/SpeakButton";
+import { SpeakButton } from "@/components/empowered/SpeakButton";
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
 import {
   AppBottomNav,
@@ -121,15 +121,12 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-6">
         <div className="lg:text-left">
-          <SpeakableText text={greeting} tone="soft" size="sm">
-            <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[34px]">
-              {greeting}
-            </h1>
-          </SpeakableText>
-          <SpeakableText text={subtitle} tone="soft" size="sm" className="mt-1">
-            <p className="text-[15px] font-medium text-ink-soft lg:text-base">{subtitle}</p>
-          </SpeakableText>
+          <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[34px]">
+            {greeting}
+          </h1>
+          <p className="mt-1 text-[15px] font-medium text-ink-soft lg:text-base">{subtitle}</p>
         </div>
+
 
         {/* Laptop: story hero on the left, quick cards on the right */}
         <div className="mt-4 lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-6">
@@ -209,18 +206,11 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
                         <StarIcon filled className="h-6 w-6 text-secondary" />
                       </span>
-                      <SpeakableText
-                        text="You're done for today! Come back tomorrow."
-                        align="center"
-                        className="mt-2"
-                      >
-                        <p className="text-[15px] font-extrabold leading-snug text-primary">
-                          You&apos;re done for today!
-                          <span className="block font-medium text-ink-soft">
-                            Come back tomorrow.
-                          </span>
-                        </p>
-                      </SpeakableText>
+                      <p className="mt-2 text-[15px] font-extrabold leading-snug text-primary">
+                        You&apos;re done for today!
+                        <span className="block font-medium text-ink-soft">Come back tomorrow.</span>
+                      </p>
+
                       <button
                         onClick={openContinue}
                         className="mt-3 min-h-11 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
@@ -233,8 +223,8 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       <TactileButton className="flex-1" onClick={openContinue}>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
-                      <SpeakButton text={ctaLabel} tone="soft" />
                     </div>
+
                   )}
                 </div>
               </article>
@@ -301,9 +291,8 @@ function WeekStrip({
 
   return (
     <Card>
-      <SpeakableText text={`This week. ${milestone}`}>
-        <span className="text-sm font-extrabold text-ink">This week</span>
-      </SpeakableText>
+      <span className="text-sm font-extrabold text-ink">This week</span>
+
       <div className="mt-3 flex items-end justify-between gap-1">
         {week.map((date, i) => {
           const filled = playedDates.includes(date);
@@ -335,7 +324,6 @@ function WeekStrip({
 
 function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => void }) {
   const goal = "Finish today's story to earn your first coins.";
-  const text = coins > 0 ? `You have ${coins} coins. Spend them in the shop.` : goal;
   return (
     <div className="relative overflow-hidden rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">
       <span aria-hidden className="absolute inset-y-2 left-0 w-1.5 rounded-full bg-secondary" />
@@ -350,8 +338,8 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
             <span className="text-sm font-extrabold text-ink">Coins</span>
           )}
         </span>
-        <SpeakButton text={text} tone="soft" size="sm" />
       </div>
+
       <p className="mt-1 text-[12px] font-bold leading-snug text-ink-soft">
         {coins > 0 ? "Spend them in the Shop!" : goal}
       </p>
@@ -382,19 +370,20 @@ function BadgesCard({
   const locked = badges.filter((b) => !owned.has(b.id)).slice(0, earned.length > 0 ? 2 : 3);
   const shown = [...earned.slice(0, 3), ...locked];
 
-  const summary =
+  const footnote =
     earned.length > 0
-      ? `My badges. You have ${earned.length}. More are coming.`
+      ? "More badges are waiting."
       : completedCount > 0
-        ? "My badges. Your first badge is coming soon."
-        : "My badges. Finish a story to open your first badge.";
+        ? "Your first badge is coming soon."
+        : "Your first badge is waiting.";
+
+
 
   return (
     <Card>
       <span className="flex w-full items-center justify-between gap-2">
-        <SpeakableText text={summary}>
-          <span className="text-sm font-extrabold text-ink">My Badges</span>
-        </SpeakableText>
+        <span className="text-sm font-extrabold text-ink">My Badges</span>
+
         <button
           onClick={onSeeAll}
           className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[12px] font-extrabold text-primary"
@@ -427,7 +416,7 @@ function BadgesCard({
         {shown.length === 0 && <MedalIcon className="h-6 w-6 text-primary/40" />}
       </div>
       <p className="mt-2 text-[12px] font-bold leading-snug text-primary">
-        {earned.length > 0 ? "More badges are waiting." : "Your first badge is waiting."}
+        {footnote}
       </p>
     </Card>
   );
@@ -441,9 +430,8 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
 
   return (
     <section className="mt-6">
-      <SpeakableText text="Words you're learning">
-        <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
-      </SpeakableText>
+      <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
+
 
       <div className="mt-3 flex gap-3 overflow-x-auto no-scrollbar pb-1">
         {words.map((word) => {
@@ -483,12 +471,8 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
         <div className="mt-3 rounded-[22px] border border-accent/70 bg-card p-4 shadow-card">
           <div className="flex items-start justify-between gap-2">
             <h3 className="text-[16px] font-extrabold text-primary">{selected.word}</h3>
-            <SpeakButton
-              text={`${selected.word}. ${selected.sfa.function} ${selected.sfa.appearance}`}
-              tone="primary"
-              size="sm"
-            />
           </div>
+
           <p className="mt-1.5 text-[14px] font-medium leading-snug text-ink">
             {selected.sfa.function}
           </p>
