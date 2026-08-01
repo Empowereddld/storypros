@@ -10,13 +10,11 @@ import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import {
   AppBottomNav,
-  BookCheckIcon,
   ChevronRightIcon,
   CoinIcon,
   CurrencyBadge,
   MapIcon,
   MenuIcon,
-  PaperPlaneIcon,
 } from "@/components/empowered/StoryProsUi";
 
 interface HomeDashboardScreenProps {
