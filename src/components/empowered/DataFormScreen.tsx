@@ -38,6 +38,8 @@ export function DataFormScreen({
   onBack,
   step = 1,
   totalSteps = 3,
+  submitting = false,
+  error = null,
 }: DataFormScreenProps) {
   const [values, setValues] = useState<OnboardingFormValues>({
     childName: "",
