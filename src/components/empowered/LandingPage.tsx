@@ -26,7 +26,7 @@ const PATHWAY_IMAGES = [
   { url: stepRetellAsset.url, alt: "A mother and daughter retelling a Story Pros story together at a table" },
   { url: stepConnectAsset.url, alt: "Two children sharing a tablet and talking about a story" },
 ];
-import { ScrollStoryDemo } from "./ScrollStoryDemo";
+import { PreviewCarousel } from "./PreviewCarousel";
 import { cn } from "@/lib/utils";
 import {
   AGE_RANGE,
@@ -286,33 +286,31 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-      {/* ── See Story Pros in action ── */}
+      {/* ── Take a peek inside Story Pros ── */}
       <section id="in-action" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
-        <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-            {IN_ACTION.eyebrow}
-          </p>
-          <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
-            {IN_ACTION.heading}
+        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16">
+          <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
+            Take a peek inside Story Pros
           </h2>
-          <p className="mt-2 text-center text-base font-medium text-ink-soft">
-            Follow “{IN_ACTION.storyTitle}” from the first page to the family dashboard.
+          <p className="mx-auto mt-3 max-w-xl text-center text-base font-medium text-ink-soft">
+            See how one story guides children through listening, vocabulary, understanding, and
+            retelling.
           </p>
 
-          {/* Scroll-driven walkthrough: the tablet follows the steps */}
-          <ScrollStoryDemo />
+          <PreviewCarousel />
 
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <button
               onClick={onDemo}
-              className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
+              className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Try it yourself
+              Try the Demo
               <ChevronRightIcon className="h-5 w-5" />
             </button>
           </div>
         </div>
       </section>
+
 
       {/* ── What your child will learn (art left) ── */}
       <CharacterSection
