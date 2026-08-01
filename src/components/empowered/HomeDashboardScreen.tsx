@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BookOpen } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -211,12 +211,16 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           </div>
 
           {/* Right rail on laptop; flows underneath on phones/tablets */}
-          <aside className="mt-3 space-y-3 lg:mt-0">
-            <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
-            <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
-            <BadgesCard
+          <aside className="mt-3 lg:mt-0">
+            <ProgressPanel
+              week={week}
+              playedDates={playedDates}
+              days={daysThisWeek}
+              today={today}
+              coins={coins}
               childId={childId}
               completedCount={completedCount}
+              onOpenShop={() => onNavigate("shop")}
               onSeeAll={() => onNavigate("achievements")}
             />
           </aside>
@@ -236,6 +240,46 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   );
 }
 
+/* ───────── Unified right-rail panel ───────── */
+
+function ProgressPanel({
+  week,
+  playedDates,
+  days,
+  today,
+  coins,
+  childId,
+  completedCount,
+  onOpenShop,
+  onSeeAll,
+}: {
+  week: string[];
+  playedDates: string[];
+  days: number;
+  today: string;
+  coins: number;
+  childId: string;
+  completedCount: number;
+  onOpenShop: () => void;
+  onSeeAll: () => void;
+}) {
+  return (
+    <div className="rounded-[28px] border border-accent/50 bg-card p-4 shadow-card">
+      <div className="space-y-4">
+        <WeekStrip week={week} playedDates={playedDates} days={days} today={today} />
+        <div className="border-t border-accent/30" />
+        <CoinsCard coins={coins} onOpenShop={onOpenShop} />
+        <div className="border-t border-accent/30" />
+        <BadgesCard
+          childId={childId}
+          completedCount={completedCount}
+          onSeeAll={onSeeAll}
+        />
+      </div>
+    </div>
+  );
+}
+
 /* ───────── Week streak strip (real per-day data) ───────── */
 
 function WeekStrip({
@@ -249,6 +293,7 @@ function WeekStrip({
   days: number;
   today: string;
 }) {
+  const reachedMilestone = days === 1 || days === 3 || days === 5 || days >= 7;
   const milestone =
     days >= 7
       ? "Seven days. Amazing!"
@@ -261,7 +306,7 @@ function WeekStrip({
             : "Read a story to fill a circle.";
 
   return (
-    <Card>
+    <section>
       <span className="text-sm font-extrabold text-ink">This week</span>
 
       <div className="mt-3 flex items-end justify-between gap-1">
@@ -286,8 +331,13 @@ function WeekStrip({
           );
         })}
       </div>
-      <p className="mt-2 text-[12px] font-bold leading-snug text-primary">{milestone}</p>
-    </Card>
+      <p className="mt-2 flex items-center gap-1.5 text-[12px] font-bold leading-snug text-primary">
+        {reachedMilestone && (
+          <Star className="h-3.5 w-3.5 text-secondary" aria-hidden />
+        )}
+        {milestone}
+      </p>
+    </section>
   );
 }
 
@@ -296,8 +346,7 @@ function WeekStrip({
 function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => void }) {
   const goal = "Finish today's story to earn your first coins.";
   return (
-    <div className="relative overflow-hidden rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">
-      <span aria-hidden className="absolute inset-y-2 left-0 w-1.5 rounded-full bg-secondary" />
+    <section>
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-2">
           <CoinIcon className="h-6 w-6 text-secondary" />
@@ -320,7 +369,7 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
       >
         Shop <ChevronRightIcon />
       </button>
-    </div>
+    </section>
   );
 }
 
@@ -351,7 +400,7 @@ function BadgesCard({
 
 
   return (
-    <Card>
+    <section>
       <span className="flex w-full items-center justify-between gap-2">
         <span className="text-sm font-extrabold text-ink">My Badges</span>
 
@@ -389,7 +438,7 @@ function BadgesCard({
       <p className="mt-2 text-[12px] font-bold leading-snug text-primary">
         {footnote}
       </p>
-    </Card>
+    </section>
   );
 }
 
@@ -461,8 +510,3 @@ function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord
   );
 }
 
-function Card({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">{children}</div>
-  );
-}
