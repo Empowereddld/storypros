@@ -121,15 +121,12 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-6">
         <div className="lg:text-left">
-          <SpeakableText text={greeting} tone="soft" size="sm">
-            <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[34px]">
-              {greeting}
-            </h1>
-          </SpeakableText>
-          <SpeakableText text={subtitle} tone="soft" size="sm" className="mt-1">
-            <p className="text-[15px] font-medium text-ink-soft lg:text-base">{subtitle}</p>
-          </SpeakableText>
+          <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[34px]">
+            {greeting}
+          </h1>
+          <p className="mt-1 text-[15px] font-medium text-ink-soft lg:text-base">{subtitle}</p>
         </div>
+
 
         {/* Laptop: story hero on the left, quick cards on the right */}
         <div className="mt-4 lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-6">
