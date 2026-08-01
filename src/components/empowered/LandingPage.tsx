@@ -123,7 +123,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-7 max-w-[540px] font-display text-[38px] font-extrabold leading-[1.08] text-primary sm:text-[48px] lg:mx-0 lg:mt-8 lg:text-[56px]">
+            <h1 className="mx-auto mt-7 max-w-[560px] font-display text-[40px] font-extrabold leading-[1.08] text-primary sm:text-[48px] lg:mx-0 lg:mt-8 lg:text-[52px]">
               {HERO.heading}
             </h1>
 
