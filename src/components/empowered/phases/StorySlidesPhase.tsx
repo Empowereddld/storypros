@@ -111,11 +111,24 @@ export function StorySlidesPhase({
           </div>
 
           <div className="flex flex-1 flex-col p-5">
-            {page === 0 && storyData.target_connective && (
-              <span className="mb-3 inline-flex w-fit items-center rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
-                Word: {storyData.target_connective}
-              </span>
-            )}
+            <div className="mb-3 flex items-center gap-3">
+              {isSupported() && (
+                <button
+                  onClick={handleListen}
+                  className={cn(
+                    "press-pop inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-extrabold shadow-card transition-colors",
+                    speaking
+                      ? "bg-destructive text-destructive-foreground animate-pulse-glow"
+                      : "bg-secondary/25 text-secondary-foreground",
+                  )}
+                  aria-label={speaking ? "Stop audio" : "Listen"}
+                >
+                  {speaking ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                  {speaking ? "Stop" : "Listen"}
+                </button>
+              )}
+            </div>
+
             <p className="text-[24px] font-extrabold leading-snug text-primary">
               {highlightConnective(current.text, storyData.target_connective)}
             </p>
@@ -133,26 +146,10 @@ export function StorySlidesPhase({
                 ))}
               </div>
 
-              <div className="flex items-center gap-3">
-                {isSupported() && (
-                  <button
-                    onClick={handleListen}
-                    className={cn(
-                      "press-pop flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-card",
-                      speaking
-                        ? "bg-destructive text-destructive-foreground animate-pulse-glow"
-                        : "bg-secondary text-secondary-foreground",
-                    )}
-                    aria-label={speaking ? "Stop audio" : "Listen"}
-                  >
-                    <SpeakerIcon playing={speaking} />
-                  </button>
-                )}
-                <TactileButton onClick={handleNext}>
-                  {isLast ? "Done" : "Next"}
-                  <ChevronRightIcon className="h-5 w-5 text-secondary" />
-                </TactileButton>
-              </div>
+              <TactileButton onClick={handleNext} className="w-full">
+                {isLast ? "Done" : "Next"}
+                <ChevronRightIcon className="h-5 w-5 text-secondary" />
+              </TactileButton>
             </div>
           </div>
         </article>
