@@ -238,11 +238,8 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── How Story Pros works: the four-part pathway ── */}
       <section id="how-it-works" className="scroll-mt-20">
-        <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
-          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-            How it works
-          </p>
-          <h2 className="mt-2 font-display text-3xl font-extrabold text-primary sm:text-4xl">
+        <div className="mx-auto w-full max-w-6xl px-4 pt-16 pb-20 sm:px-6">
+          <h2 className="font-display text-3xl font-extrabold text-primary sm:text-4xl">
             How Story Pros Works
           </h2>
           <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-ink-soft">
