@@ -112,18 +112,21 @@ export function useLongPressSpeak(text: string, holdMs = 500) {
   useEffect(() => clear, []);
 
   return {
-    onPointerDown: () => {
-      spoke.current = false;
-      clear();
-      timer.current = setTimeout(() => {
-        spoke.current = true;
-        speakLabel(text);
-      }, holdMs);
+    /** Spread onto the element */
+    handlers: {
+      onPointerDown: () => {
+        spoke.current = false;
+        clear();
+        timer.current = setTimeout(() => {
+          spoke.current = true;
+          speakLabel(text);
+        }, holdMs);
+      },
+      onPointerUp: clear,
+      onPointerLeave: clear,
+      onPointerCancel: clear,
+      onContextMenu: (event: React.MouseEvent) => event.preventDefault(),
     },
-    onPointerUp: clear,
-    onPointerLeave: clear,
-    onPointerCancel: clear,
-    onContextMenu: (event: React.MouseEvent) => event.preventDefault(),
     /** True when the last interaction was a long press (suppress navigation) */
     didSpeak: () => spoke.current,
   };
