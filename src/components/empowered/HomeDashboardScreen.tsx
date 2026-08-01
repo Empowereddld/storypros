@@ -392,9 +392,8 @@ function BadgesCard({
   return (
     <Card>
       <span className="flex w-full items-center justify-between gap-2">
-        <SpeakableText text={summary}>
-          <span className="text-sm font-extrabold text-ink">My Badges</span>
-        </SpeakableText>
+        <span className="text-sm font-extrabold text-ink">My Badges</span>
+
         <button
           onClick={onSeeAll}
           className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[12px] font-extrabold text-primary"
