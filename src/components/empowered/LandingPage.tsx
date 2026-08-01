@@ -116,27 +116,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Hero: one message, one explanation, two actions ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-12 px-5 pb-14 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] lg:gap-[80px] lg:pb-[88px] lg:pt-[88px]">
+        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-8 px-5 pb-10 pt-6 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-9 lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] lg:gap-[80px] lg:pb-[88px] lg:pt-[80px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-4 py-1.5 text-center text-[12px] font-bold uppercase leading-tight tracking-[0.12em] text-primary shadow-card text-balance sm:text-[13px]">
+            <p className="inline-flex items-center justify-center gap-2 rounded-full bg-card px-3 py-1 text-center text-[10.5px] font-bold uppercase leading-tight tracking-[0.1em] text-primary shadow-card text-balance sm:px-4 sm:py-1.5 sm:text-[12.5px] sm:tracking-[0.12em]">
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-7 max-w-[560px] font-display text-[40px] font-extrabold leading-[1.08] text-primary sm:text-[48px] lg:mx-0 lg:mt-8 lg:text-[52px]">
+            <h1 className="mx-auto mt-4 max-w-[19ch] text-balance font-display text-[37px] font-extrabold leading-[1.06] text-primary sm:mt-6 sm:max-w-[560px] sm:text-[44px] lg:mx-0 lg:mt-7 lg:max-w-[600px] lg:text-[49px]">
               {HERO.heading}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[520px] text-[19px] font-semibold leading-[1.35] text-ink sm:text-[22px] lg:mx-0">
+            <p className="mx-auto mt-4 max-w-[420px] text-[19px] font-semibold leading-[1.35] text-ink sm:mt-5 sm:max-w-[520px] sm:text-[21px] lg:mx-0">
               {HERO.subheading}
             </p>
 
-            <p className="mx-auto mt-5 max-w-[520px] text-[16px] font-medium leading-[1.55] text-ink-soft sm:text-[18px] lg:mx-0">
+            <p className="mx-auto mt-3.5 max-w-[400px] text-[16.5px] font-medium leading-[1.55] text-ink-soft sm:mt-4 sm:max-w-[560px] sm:text-[18px] lg:mx-0 lg:max-w-[540px]">
               {HERO.body}
             </p>
 
             {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-8 flex flex-col items-center gap-3 sm:mt-9 lg:items-start">
+            <div className="mt-6 flex flex-col items-center gap-3 sm:mt-7 lg:items-start">
+
               <button
                 onClick={onDemo}
                 className="press-pop inline-flex h-[54px] w-full max-w-[300px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px]"
