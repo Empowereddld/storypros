@@ -49,20 +49,18 @@ export const PARENT_PROBLEM = {
 
 /* ── Why stories work ── */
 
+/** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
-  eyebrow: "Why stories?",
-  heading: "Why does it work?",
-  lead: "Stories are how children naturally learn language. For kids with DLD, stories provide a predictable framework that makes language easier to understand and remember.",
+  heading: "Why stories?",
+  lead: "Stories give language a clear, meaningful structure. Story Pros helps children notice key parts of a story, understand how events connect, and use that structure to remember and retell what happened.",
   framework: [
-    { icon: "🧒", label: "Who" },
-    { icon: "📍", label: "Where" },
-    { icon: "❓", label: "Problem" },
-    { icon: "💜", label: "Feeling" },
-    { icon: "⚡", label: "Action" },
-    { icon: "✅", label: "Solution" },
-  ],
-  close:
-    "Research shows that narrative skills, understanding and telling stories, are the foundation for vocabulary, grammar, reading, and writing. Story Pros gives your child repeated practice with this framework in every session, building the language skills they need for school and life.",
+    { element: "character", label: "Character" },
+    { element: "place", label: "Place" },
+    { element: "problem", label: "Problem" },
+    { element: "emotion", label: "Feeling" },
+    { element: "action", label: "Action" },
+    { element: "result", label: "Result" },
+  ] as const,
 };
 
 /* ── The four-part pathway ── */
