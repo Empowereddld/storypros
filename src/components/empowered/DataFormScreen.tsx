@@ -79,8 +79,9 @@ export function DataFormScreen({
           <button
             type="button"
             aria-label="Go back"
+            disabled={submitting}
             onClick={() => (onBack ? onBack() : window.history.back())}
-            className="press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="press-pop flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
           >
             <ChevronLeftIcon />
           </button>
