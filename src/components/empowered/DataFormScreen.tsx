@@ -8,6 +8,7 @@ export interface OnboardingFormValues {
   childAge: number | null;
   country: string;
   diagnoses: string[];
+  otherDiagnosis: string;
 }
 
 interface DataFormScreenProps {
@@ -41,6 +42,7 @@ export function DataFormScreen({
     childAge: null,
     country: "",
     diagnoses: [],
+    otherDiagnosis: "",
   });
 
   const toggleDiagnosis = (item: string) =>
@@ -55,7 +57,7 @@ export function DataFormScreen({
     values.childName.trim().length > 0 &&
     values.childAge !== null &&
     values.country.trim().length > 0 &&
-    values.diagnoses.length > 0;
+    (values.diagnoses.length > 0 || values.otherDiagnosis.trim().length > 0);
 
 
   return (
@@ -212,6 +214,22 @@ export function DataFormScreen({
                 })}
               </div>
 
+              <label
+                htmlFor="other-diagnosis"
+                className="mt-6 block text-sm font-extrabold text-primary"
+              >
+                Something else? Tell us here
+              </label>
+              <input
+                id="other-diagnosis"
+                type="text"
+                value={values.otherDiagnosis}
+                onChange={(event) =>
+                  setValues((p) => ({ ...p, otherDiagnosis: event.target.value.slice(0, 80) }))
+                }
+                placeholder="Type a diagnosis not listed above"
+                className="mt-2 h-[56px] w-full rounded-2xl border-2 border-primary/30 bg-card px-4 text-base font-semibold text-ink outline-none transition-colors placeholder:font-medium placeholder:text-ink-soft focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              />
             </fieldset>
           </div>
 
