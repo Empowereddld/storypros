@@ -177,13 +177,27 @@ export function StorySlidesPhase({
 
       <div className="relative z-10 mx-auto w-full max-w-[600px] flex-1 overflow-y-auto no-scrollbar px-5 pb-6 pt-6">
         <div key={page} className="flex w-full flex-col animate-pop-in">
-          {/* Story element marker — aligned to the artwork's left edge */}
-          <div className="mb-3 flex items-center gap-2.5">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card">
-              <ElementIcon className="h-5 w-5" />
-            </span>
-            <span className="text-sm font-extrabold uppercase tracking-wide text-ink-soft">
-              {elementLabel}
+          {/* Story element badge — color-coded pill so the grammar label stands out */}
+          <div className="mb-4 flex items-center">
+            <span
+              className={cn(
+                "inline-flex items-center gap-2.5 rounded-full pl-1.5 pr-4 py-1.5 shadow-card ring-2 ring-inset",
+                elementColors.bg,
+                elementColors.text,
+                elementColors.ring,
+              )}
+            >
+              <span
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-full",
+                  elementColors.iconBg,
+                )}
+              >
+                <ElementIcon className="h-5 w-5" />
+              </span>
+              <span className="text-sm font-extrabold uppercase tracking-wide">
+                {elementLabel}
+              </span>
             </span>
           </div>
 
