@@ -34,7 +34,6 @@ import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/h
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedStoryStoryIdRouteImport } from './routes/_authenticated/story.$storyId'
-import { Route as AuthenticatedOnboardingSuccessRouteImport } from './routes/_authenticated/onboarding/success'
 import { Route as AuthenticatedOnboardingProfileRouteImport } from './routes/_authenticated/onboarding/profile'
 import { Route as AuthenticatedOnboardingAssessmentRouteImport } from './routes/_authenticated/onboarding/assessment'
 
@@ -166,12 +165,6 @@ const AuthenticatedStoryStoryIdRoute =
     path: '/story/$storyId',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedOnboardingSuccessRoute =
-  AuthenticatedOnboardingSuccessRouteImport.update({
-    id: '/onboarding/success',
-    path: '/onboarding/success',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
 const AuthenticatedOnboardingProfileRoute =
   AuthenticatedOnboardingProfileRouteImport.update({
     id: '/onboarding/profile',
@@ -211,7 +204,6 @@ export interface FileRoutesByFullPath {
   '/admin/content': typeof AdminContentRoute
   '/onboarding/assessment': typeof AuthenticatedOnboardingAssessmentRoute
   '/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
-  '/onboarding/success': typeof AuthenticatedOnboardingSuccessRoute
   '/story/$storyId': typeof AuthenticatedStoryStoryIdRoute
 }
 export interface FileRoutesByTo {
@@ -240,7 +232,6 @@ export interface FileRoutesByTo {
   '/admin/content': typeof AdminContentRoute
   '/onboarding/assessment': typeof AuthenticatedOnboardingAssessmentRoute
   '/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
-  '/onboarding/success': typeof AuthenticatedOnboardingSuccessRoute
   '/story/$storyId': typeof AuthenticatedStoryStoryIdRoute
 }
 export interface FileRoutesById {
@@ -271,7 +262,6 @@ export interface FileRoutesById {
   '/admin/content': typeof AdminContentRoute
   '/_authenticated/onboarding/assessment': typeof AuthenticatedOnboardingAssessmentRoute
   '/_authenticated/onboarding/profile': typeof AuthenticatedOnboardingProfileRoute
-  '/_authenticated/onboarding/success': typeof AuthenticatedOnboardingSuccessRoute
   '/_authenticated/story/$storyId': typeof AuthenticatedStoryStoryIdRoute
 }
 export interface FileRouteTypes {
@@ -302,7 +292,6 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/onboarding/assessment'
     | '/onboarding/profile'
-    | '/onboarding/success'
     | '/story/$storyId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -331,7 +320,6 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/onboarding/assessment'
     | '/onboarding/profile'
-    | '/onboarding/success'
     | '/story/$storyId'
   id:
     | '__root__'
@@ -361,7 +349,6 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/_authenticated/onboarding/assessment'
     | '/_authenticated/onboarding/profile'
-    | '/_authenticated/onboarding/success'
     | '/_authenticated/story/$storyId'
   fileRoutesById: FileRoutesById
 }
@@ -558,13 +545,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStoryStoryIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/onboarding/success': {
-      id: '/_authenticated/onboarding/success'
-      path: '/onboarding/success'
-      fullPath: '/onboarding/success'
-      preLoaderRoute: typeof AuthenticatedOnboardingSuccessRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
     '/_authenticated/onboarding/profile': {
       id: '/_authenticated/onboarding/profile'
       path: '/onboarding/profile'
@@ -596,7 +576,6 @@ interface AuthenticatedRouteChildren {
   AuthenticatedSlpRoute: typeof AuthenticatedSlpRoute
   AuthenticatedOnboardingAssessmentRoute: typeof AuthenticatedOnboardingAssessmentRoute
   AuthenticatedOnboardingProfileRoute: typeof AuthenticatedOnboardingProfileRoute
-  AuthenticatedOnboardingSuccessRoute: typeof AuthenticatedOnboardingSuccessRoute
   AuthenticatedStoryStoryIdRoute: typeof AuthenticatedStoryStoryIdRoute
 }
 
@@ -615,7 +594,6 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedOnboardingAssessmentRoute:
     AuthenticatedOnboardingAssessmentRoute,
   AuthenticatedOnboardingProfileRoute: AuthenticatedOnboardingProfileRoute,
-  AuthenticatedOnboardingSuccessRoute: AuthenticatedOnboardingSuccessRoute,
   AuthenticatedStoryStoryIdRoute: AuthenticatedStoryStoryIdRoute,
 }
 
