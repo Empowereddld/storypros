@@ -50,12 +50,12 @@
       "options": [
         {
           "id": "a",
-          "label": "His mom",
-          "correct": true
+          "label": "A bandage"
         },
         {
           "id": "b",
-          "label": "A bandage"
+          "label": "His mom",
+          "correct": true
         },
         {
           "id": "c",
@@ -77,16 +77,16 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria's house",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Dan's mom"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "A paper airplane"
+        },
+        {
+          "id": "c",
+          "label": "Daria's house",
+          "correct": true
         },
         {
           "id": "d",
@@ -104,20 +104,20 @@
       "options": [
         {
           "id": "a",
-          "label": "He got a papercut",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "He felt calm"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "He asked for help"
         },
         {
-          "id": "d",
+          "id": "c",
           "label": "He lost his toy"
+        },
+        {
+          "id": "d",
+          "label": "He got a papercut",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Did you answer with what went wrong?",
@@ -158,20 +158,20 @@
       "options": [
         {
           "id": "a",
-          "label": "He asked for a bandage",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Daria's dad"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "Daria's house"
         },
         {
-          "id": "d",
+          "id": "c",
           "label": "He ran away"
+        },
+        {
+          "id": "d",
+          "label": "He asked for a bandage",
+          "correct": true
         }
       ],
       "brain_check_prompt": "Did you answer with what Dan did?",
@@ -185,16 +185,16 @@
       "options": [
         {
           "id": "a",
-          "label": "Daria's dad put on a bandaid",
-          "correct": true
-        },
-        {
-          "id": "b",
           "label": "Dan's mom"
         },
         {
-          "id": "c",
+          "id": "b",
           "label": "A paper airplane"
+        },
+        {
+          "id": "c",
+          "label": "Daria's dad put on a bandaid",
+          "correct": true
         },
         {
           "id": "d",
