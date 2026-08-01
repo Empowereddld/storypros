@@ -70,25 +70,26 @@ export const PATHWAY = [
     step: "1",
     icon: "🎧",
     title: "Read & Understand",
-    body: "Children explore a short interactive story, learn vocabulary, and identify important details.",
+    body: "Read or listen to a short story, learn key words, and notice important details.",
   },
   {
     step: "2",
     icon: "🗣️",
-    title: "Retell & Express",
-    body: "Visual supports, models, and choices help children organize the story and share it in their own words.",
+    title: "Retell with Support",
+    body: "Use visuals, prompts, and choices to organize the story and share it in your own words.",
   },
   {
     step: "3",
     icon: "💜",
-    title: "Connect & Grow",
-    body: "Children connect the story to their own experiences, feelings, and ideas, helping language become more meaningful.",
+    title: "Connect to Real Life",
+    body: "Link the story to feelings, experiences, and everyday situations so language feels meaningful.",
   },
 ];
 
 
 export const PATHWAY_NOTE =
-  "The same supportive sequence is used across stories, creating a predictable routine that children can become more confident using over time.";
+  "The same simple routine is used across stories, helping children feel confident and know what to expect.";
+
 
 /* ── What your child will learn ── */
 
