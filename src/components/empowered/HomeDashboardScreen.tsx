@@ -179,7 +179,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-1">
               <StatCardLite
                 tone="primary"
-                icon={<BookOpenCheck className="h-5 w-5" />}
                 value={completedCount}
                 label={completedCount === 1 ? "Story Completed" : "Stories Completed"}
                 subtitle={
@@ -188,7 +187,6 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
               />
               <StatCardLite
                 tone="secondary"
-                icon={<CoinIcon className="h-6 w-6" />}
                 value={paperPlanes}
                 label="Coins"
                 subtitle="Spend them in the Shop!"
@@ -206,14 +204,12 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 }
 
 function StatCardLite({
-  icon,
   value,
   label,
   subtitle,
   tone,
   onClick,
 }: {
-  icon: ReactNode;
   value: ReactNode;
   label: string;
   subtitle?: string;
@@ -225,29 +221,37 @@ function StatCardLite({
     <Comp
       onClick={onClick}
       className={cn(
-        "flex min-h-[104px] flex-col items-start justify-between rounded-[24px] border border-accent/50 bg-card p-3 text-left shadow-card",
+        "relative flex w-full flex-col items-start overflow-hidden rounded-[24px] border border-accent/50 bg-card py-3 pl-4 pr-3 text-left shadow-card",
         onClick && "transition-transform active:scale-[0.98]",
       )}
     >
       <span
+        aria-hidden
         className={cn(
-          "flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px]",
-          tone === "primary"
-            ? "bg-accent text-primary"
-            : "bg-secondary/25 text-secondary-foreground",
+          "absolute inset-y-2 left-0 w-1.5 rounded-full",
+          tone === "primary" ? "bg-primary/70" : "bg-secondary",
         )}
-      >
-        {icon}
-      </span>
-      <span className="mt-3 min-w-0">
-        <span className="block text-[22px] font-extrabold leading-none text-ink">{value}</span>
-        <span className="mt-1 block text-sm font-extrabold leading-tight text-primary">
-          {label}
+      />
+      <span className="flex w-full items-start justify-between gap-2">
+        <span className="min-w-0">
+          <span
+            className={cn(
+              "block text-[30px] font-extrabold leading-none",
+              tone === "primary" ? "text-primary" : "text-secondary-foreground",
+            )}
+          >
+            {value}
+          </span>
+          <span className="mt-1.5 block text-sm font-extrabold leading-tight text-ink">
+            {label}
+          </span>
+          {subtitle && (
+            <span className="mt-1 block text-[11px] leading-snug text-ink-soft">{subtitle}</span>
+          )}
         </span>
-        {subtitle && (
-          <span className="mt-1 block text-[11px] leading-snug text-ink-soft">{subtitle}</span>
-        )}
+        {onClick && <ChevronRightIcon className="mt-1 h-4 w-4 shrink-0 text-ink-soft" />}
       </span>
     </Comp>
   );
 }
+
