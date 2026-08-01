@@ -18,7 +18,6 @@ import {
   ChevronRightIcon,
   CoinIcon,
   CurrencyBadge,
-  MapIcon,
   MedalIcon,
   StarIcon,
 } from "@/components/empowered/StoryProsUi";
