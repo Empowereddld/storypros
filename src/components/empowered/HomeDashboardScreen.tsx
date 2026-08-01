@@ -20,6 +20,7 @@ import {
   CurrencyBadge,
   MapIcon,
   MedalIcon,
+  StarIcon,
 } from "@/components/empowered/StoryProsUi";
 
 interface HomeDashboardScreenProps {
@@ -206,7 +207,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                   {doneToday ? (
                     <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/30 p-4 text-center">
                       <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
-                        <Star className="h-6 w-6 text-secondary" />
+                        <StarIcon filled className="h-6 w-6 text-secondary" />
                       </span>
                       <SpeakableText
                         text="You're done for today! Come back tomorrow."
@@ -318,7 +319,7 @@ function WeekStrip({
                   isToday && !filled && "border-primary",
                 )}
               >
-                {filled && <Star className="h-4 w-4" />}
+                {filled && <StarIcon filled className="h-4 w-4" />}
               </span>
               <span className="text-[10px] font-bold text-ink-soft">{DAY_LABELS[i]}</span>
             </span>
