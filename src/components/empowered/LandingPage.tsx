@@ -66,7 +66,6 @@ import {
 } from "@/data/landingContent";
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
-import danDariaCelebrate from "@/assets/dan-daria-celebrate.webp";
 import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
 import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
