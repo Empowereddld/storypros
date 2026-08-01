@@ -140,23 +140,6 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
 
         {featured && (
           <section className="mt-6">
-            <div className="flex items-end justify-between gap-3">
-              <div>
-                <h2 className="text-[25px] font-extrabold leading-tight text-primary">
-                  Continue Your Story
-                </h2>
-                <p className="mt-1 text-sm font-medium text-ink-soft">
-                  Pick up where you left off.
-                </p>
-              </div>
-              <button
-                onClick={() => setFilter("all")}
-                className="press-pop inline-flex shrink-0 items-center gap-1 text-sm font-extrabold text-primary"
-              >
-                See All <ChevronRightIcon />
-              </button>
-            </div>
-
             <button
               onClick={() => onNavigate("story", featured.id)}
               className="hover-lift mt-3 block w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card text-left shadow-soft active:scale-[0.99]"
