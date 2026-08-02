@@ -105,38 +105,26 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
           />
 
           <div className="relative w-full sm:min-w-[320px]">
-            {/* tail: up on mobile, left-pointing on desktop */}
-            <span
-              aria-hidden
-              className={cn(
-                "absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 border-l-2 border-t-2 sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:-rotate-45 sm:border-b-2 sm:border-l-2 sm:border-t-0",
-                b.tail,
-              )}
-            />
             <div className={cn("rounded-[26px] border-2 px-6 py-6 shadow-card sm:px-[30px] sm:py-[30px]", b.bubble)}>
               <p className="whitespace-pre-line text-left text-[18px] font-semibold leading-[1.45] text-ink sm:text-[21px]">
+                <button
+                  type="button"
+                  onClick={toggleSpeak}
+                  aria-pressed={speaking}
+                  aria-label={speaking ? `Stop ${b.name}` : `Listen to ${b.name}`}
+                  className={cn(
+                    "mr-3 inline-flex h-11 w-11 shrink-0 translate-y-[3px] items-center justify-center rounded-full border-2 border-primary/25 bg-card text-primary shadow-card transition-colors hover:border-primary/45",
+                    speaking && "bg-primary text-primary-foreground border-primary",
+                  )}
+                >
+                  <SpeakerIcon className="h-5 w-5" />
+                </button>
                 {script}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Child-controlled audio */}
-        <div
-          className="animate-slide-up mt-7 flex items-center justify-center gap-3"
-          style={{ animationDelay: "200ms" }}
-        >
-          <TactileButton
-            fullWidth={false}
-            variant="secondary"
-            onClick={toggleSpeak}
-            aria-pressed={speaking}
-            className="min-h-[56px] min-w-[210px] bg-coral text-coral-foreground hover:bg-coral/95"
-            leadingIcon={<SpeakerIcon className="h-6 w-6" />}
-          >
-            {speaking ? `Stop ${b.name}` : `Listen to ${b.name}`}
-          </TactileButton>
-        </div>
 
         <div className="animate-slide-up mt-7" style={{ animationDelay: "300ms" }}>
           <TactileButton onClick={handleNext} className="min-h-[56px]">
