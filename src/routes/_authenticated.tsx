@@ -1,8 +1,6 @@
 import { createFileRoute, Outlet, Navigate, useLocation } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { DesktopNav, DemoBanner } from "@/components/empowered/AppChrome";
-import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { processExpiredSubscriptions } from "@/services/subscription";
 import { hasSeenIntro } from "@/lib/introSeen";

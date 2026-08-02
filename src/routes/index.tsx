@@ -30,7 +30,9 @@ function Index() {
     // Signed in (or still checking) — the effect routes to the right place
     return (
       <PhoneFrame>
-        <LoadingScreen />
+        <div className="flex h-full items-center justify-center">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-primary" aria-label="Loading" />
+        </div>
       </PhoneFrame>
     );
   }
