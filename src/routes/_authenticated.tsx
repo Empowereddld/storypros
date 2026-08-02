@@ -1,8 +1,6 @@
 import { createFileRoute, Outlet, Navigate, useLocation } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { DesktopNav, DemoBanner } from "@/components/empowered/AppChrome";
-import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { processExpiredSubscriptions } from "@/services/subscription";
 import { hasSeenIntro } from "@/lib/introSeen";
@@ -21,9 +19,9 @@ function AuthenticatedLayout() {
 
   if (loading) {
     return (
-      <PhoneFrame>
-        <LoadingScreen />
-      </PhoneFrame>
+      <div className="flex h-dvh w-full items-center justify-center bg-gradient-to-b from-white via-accent/20 to-accent/45">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-primary" aria-label="Loading" />
+      </div>
     );
   }
 

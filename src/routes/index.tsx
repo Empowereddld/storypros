@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { LandingPage } from "@/components/empowered/LandingPage";
-import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { DEMO_PERSONA_ID } from "@/services/demoAccounts";
 import { hasSeenIntro } from "@/lib/introSeen";
@@ -31,7 +30,9 @@ function Index() {
     // Signed in (or still checking) — the effect routes to the right place
     return (
       <PhoneFrame>
-        <LoadingScreen />
+        <div className="flex h-full items-center justify-center">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-primary" aria-label="Loading" />
+        </div>
       </PhoneFrame>
     );
   }
