@@ -10,7 +10,7 @@ import { useState } from "react";
 import { AuthStatusCard } from "./AuthStatusCard";
 import { TactileButton } from "./TactileButton";
 import { useAuth } from "@/contexts/AuthContext";
-import dariaAndFriend from "@/assets/dan-daria-highfive.webp";
+
 import {
   AuthBackdrop,
   StoryProsLogo,
