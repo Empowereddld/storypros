@@ -1,6 +1,5 @@
 import { type ReactNode } from "react";
 import danDariaThinking from "@/assets/dan-daria-thinking.webp";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
 import danDariaAirplane from "@/assets/dan-daria-airplane.webp";
 import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
 import { cn } from "@/lib/utils";
