@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { LandingPage } from "@/components/empowered/LandingPage";
-import { LoadingScreen } from "@/components/empowered/StateScreens";
 import { useAuth } from "@/contexts/AuthContext";
 import { DEMO_PERSONA_ID } from "@/services/demoAccounts";
 import { hasSeenIntro } from "@/lib/introSeen";
