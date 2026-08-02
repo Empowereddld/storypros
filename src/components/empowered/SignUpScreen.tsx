@@ -79,84 +79,88 @@ export function SignUpScreen({ onContinue, onSignIn, onDemo }: SignUpScreenProps
   const nameLabel = accountRole === "parent" ? "Parent name" : "Your name";
 
   return (
-    <div className="relative flex h-full flex-col bg-cream">
+    <div className="relative flex min-h-full flex-col bg-cream">
       <AuthBackdrop />
 
-      <div className="relative z-10 flex h-full flex-col overflow-y-auto no-scrollbar px-6 pb-6">
-        <StoryProsLogo layout="row" size="sm" className="mx-auto pt-6" />
+      <div className="relative z-10 flex min-h-full flex-col items-center overflow-y-auto no-scrollbar px-5 py-8 sm:px-6">
+        <StoryProsLogo layout="row" size="lg" />
 
-        <h1 className="mt-4 text-center font-display text-[28px] font-extrabold leading-tight text-primary">
-          Create your account
-        </h1>
-        <p className="mt-1 text-center text-sm font-medium text-ink-soft">
-          Start a learning journey filled with stories, growth, and fun.
-        </p>
+        <div className="mt-8 w-full max-w-[520px] rounded-3xl border border-primary/10 bg-card p-8 shadow-[0_18px_44px_-24px_rgba(82,29,153,0.28)] sm:p-10">
+          <h1 className="text-center font-display text-3xl font-extrabold leading-tight text-primary">
+            Create your account
+          </h1>
+          <p className="mt-2.5 text-center text-sm font-medium text-ink-soft">
+            Start a learning journey filled with stories, growth, and fun.
+          </p>
 
-        {/* Role selector — hidden while SLP/teacher accounts are off;
-            every signup is a parent account */}
-        {FEATURES.slp && (
-          <div className="mt-4 flex gap-2 rounded-2xl bg-accent/40 p-1">
-            {ROLES.map((r) => (
-              <button
-                key={r.role}
-                type="button"
-                onClick={() => setAccountRole(r.role)}
-                className={cn(
-                  "flex-1 rounded-xl py-2 text-sm font-bold transition-all",
-                  accountRole === r.role
-                    ? "bg-card text-primary shadow-card"
-                    : "text-ink-soft hover:text-primary",
-                )}
-              >
-                {r.label}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-          <IconInput
-            icon={<UserIcon />}
-            value={displayName}
-            onChange={setDisplayName}
-            placeholder={nameLabel}
-            autoComplete="name"
-          />
-          <IconInput
-            icon={<MailIcon />}
-            type="email"
-            value={email}
-            onChange={setEmail}
-            placeholder="Email"
-            autoComplete="email"
-          />
-          <IconInput
-            icon={<LockIcon />}
-            revealable
-            value={password}
-            onChange={setPassword}
-            placeholder="Create password"
-            autoComplete="new-password"
-          />
-
-          {error && <AuthStatusCard tone="error" title="Almost there" message={error} />}
-
-          {(loading || oauthLoading) && (
-            <AuthStatusCard
-              tone="loading"
-              title={oauthLoading ? "Opening secure sign-up" : "Creating your account"}
-              message="We are setting up your grown-up account."
-            />
+          {/* Role selector — hidden while SLP/teacher accounts are off;
+              every signup is a parent account */}
+          {FEATURES.slp && (
+            <div className="mt-6 flex gap-2 rounded-2xl bg-accent/40 p-1">
+              {ROLES.map((r) => (
+                <button
+                  key={r.role}
+                  type="button"
+                  onClick={() => setAccountRole(r.role)}
+                  className={cn(
+                    "flex-1 rounded-xl py-2 text-sm font-bold transition-all",
+                    accountRole === r.role
+                      ? "bg-card text-primary shadow-card"
+                      : "text-ink-soft hover:text-primary",
+                  )}
+                >
+                  {r.label}
+                </button>
+              ))}
+            </div>
           )}
 
-          <TactileButton
-            type="submit"
-            disabled={loading || !email.trim() || !password || !displayName.trim()}
-          >
-            {loading ? "Creating account…" : "Create Account"}
-          </TactileButton>
+          <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+            <IconInput
+              icon={<UserIcon />}
+              value={displayName}
+              onChange={setDisplayName}
+              placeholder={nameLabel}
+              autoComplete="name"
+            />
+            <IconInput
+              icon={<MailIcon />}
+              type="email"
+              value={email}
+              onChange={setEmail}
+              placeholder="Email"
+              autoComplete="email"
+            />
+            <IconInput
+              icon={<LockIcon />}
+              revealable
+              value={password}
+              onChange={setPassword}
+              placeholder="Create password"
+              autoComplete="new-password"
+            />
 
-          <p className="pt-1 text-center text-[11px] font-semibold leading-snug text-ink-soft">
+            {error && <AuthStatusCard tone="error" title="Almost there" message={error} />}
+
+            {(loading || oauthLoading) && (
+              <AuthStatusCard
+                tone="loading"
+                title={oauthLoading ? "Opening secure sign-up" : "Creating your account"}
+                message="We are setting up your grown-up account."
+              />
+            )}
+
+            <div className="pt-1">
+              <TactileButton
+                type="submit"
+                disabled={loading || !email.trim() || !password || !displayName.trim()}
+              >
+                {loading ? "Creating account…" : "Create Account"}
+              </TactileButton>
+            </div>
+          </form>
+
+          <p className="mt-4 text-center text-[11px] font-semibold leading-relaxed text-ink-soft">
             By creating an account you agree to our{" "}
             <a href="/terms" target="_blank" rel="noopener" className="font-bold text-primary hover:underline">
               Terms
@@ -167,59 +171,57 @@ export function SignUpScreen({ onContinue, onSignIn, onDemo }: SignUpScreenProps
             </a>
             .
           </p>
-        </form>
 
-        <button
-          type="button"
-          onClick={onSignIn}
-          className="mt-3 w-full text-center text-sm font-semibold text-ink-soft"
-        >
-          Already have an account? <span className="font-bold text-primary">Log in</span>
-        </button>
+          {/* Divider */}
+          <div className="my-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-primary/15" />
+            <span className="text-xs font-bold uppercase tracking-wider text-ink-soft/70">or</span>
+            <div className="h-px flex-1 bg-primary/15" />
+          </div>
 
-        {onDemo && (
-          <button
-            type="button"
-            onClick={onDemo}
-            className="mt-2 w-full text-center text-sm font-bold text-primary hover:text-primary/80 transition-colors"
-          >
-            Just exploring? Try a Demo Account
-          </button>
-        )}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={() => handleOAuth("google")}
+              disabled={oauthLoading !== null}
+              className="flex h-[52px] items-center justify-center gap-2 rounded-2xl border-2 border-primary/20 bg-card text-sm font-bold text-ink hover:border-primary/40 transition-colors disabled:opacity-50"
+            >
+              <GoogleMark />
+              {oauthLoading === "google" ? "…" : "Google"}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleOAuth("apple")}
+              disabled={oauthLoading !== null}
+              className="flex h-[52px] items-center justify-center gap-2 rounded-2xl border-2 border-ink bg-ink text-sm font-bold text-cream hover:bg-ink/90 transition-colors disabled:opacity-50"
+            >
+              <AppleMark />
+              {oauthLoading === "apple" ? "…" : "Apple"}
+            </button>
+          </div>
 
-        {/* Divider */}
-        <div className="mt-4 flex items-center gap-3">
-          <div className="h-px flex-1 bg-accent" />
-          <span className="text-xs font-bold uppercase tracking-wider text-ink-soft/70">or</span>
-          <div className="h-px flex-1 bg-accent" />
-        </div>
+          <div className="mt-8 text-center">
+            <button
+              type="button"
+              onClick={onSignIn}
+              className="w-full text-center text-sm font-semibold text-ink-soft"
+            >
+              Already have an account? <span className="font-bold text-primary">Log in</span>
+            </button>
 
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          <button
-            type="button"
-            onClick={() => handleOAuth("google")}
-            disabled={oauthLoading !== null}
-            className="flex items-center justify-center gap-2 rounded-2xl border-2 border-accent/80 bg-card py-3 text-sm font-bold text-ink hover:border-primary/50 transition-colors disabled:opacity-50"
-          >
-            <GoogleMark />
-            {oauthLoading === "google" ? "…" : "Google"}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleOAuth("apple")}
-            disabled={oauthLoading !== null}
-            className="flex items-center justify-center gap-2 rounded-2xl border-2 border-ink bg-ink py-3 text-sm font-bold text-cream hover:bg-ink/90 transition-colors disabled:opacity-50"
-          >
-            <AppleMark />
-            {oauthLoading === "apple" ? "…" : "Apple"}
-          </button>
-        </div>
-
-        {/* Characters */}
-        <div className="mt-4 flex justify-center">
-          <img src={dariaAndFriend} alt="Dan and Daria" className="h-28 w-auto object-contain" />
+            {onDemo && (
+              <button
+                type="button"
+                onClick={onDemo}
+                className="mt-4 w-full text-center text-xs font-semibold text-ink-soft underline underline-offset-4 transition-colors hover:text-primary"
+              >
+                Just exploring? Try a demo account
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
