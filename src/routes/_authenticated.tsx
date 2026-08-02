@@ -19,9 +19,9 @@ function AuthenticatedLayout() {
 
   if (loading) {
     return (
-      <PhoneFrame>
-        <LoadingScreen />
-      </PhoneFrame>
+      <div className="flex h-dvh w-full items-center justify-center bg-gradient-to-b from-white via-accent/20 to-accent/45">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-primary" aria-label="Loading" />
+      </div>
     );
   }
 
