@@ -108,7 +108,6 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
         <Star className="absolute right-24 top-28 h-7 w-7 text-secondary animate-sparkle" />
         <Star className="absolute right-14 top-52 h-5 w-5 text-primary/25 animate-sparkle" />
         <MiniPlane className="absolute right-11 top-40 h-12 w-12 rotate-[18deg] text-secondary drop-shadow-md animate-float" />
-        <div className="absolute -right-8 top-44 h-20 w-32 rounded-[50%] border-2 border-dashed border-primary/15" />
       </div>
 
       {/* App-style header for phones/tablets — laptop uses the top DesktopNav */}
