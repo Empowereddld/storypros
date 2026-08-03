@@ -391,7 +391,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
               {COMMUNITY.eyebrow}
             </p>
-            <h2 className="mt-2 max-w-[22ch] font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
+            <h2 className="mt-2 font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
               {COMMUNITY.heading}
             </h2>
             <p className="mt-3 text-[17px] font-semibold text-ink">{COMMUNITY.subheading}</p>
@@ -426,7 +426,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               })}
             </ul>
 
-            <p className="mt-4 max-w-[54ch] text-[13.5px] font-medium leading-relaxed text-ink-soft">
+            <p className="mt-4 text-[13.5px] font-medium leading-relaxed text-ink-soft">
               {COMMUNITY.note}
             </p>
 
