@@ -88,14 +88,6 @@ function SpeakerIcon({ className = "h-5 w-5" }: { className?: string }) {
   );
 }
 
-function StopIcon({ className = "h-5 w-5" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <rect x="6" y="6" width="12" height="12" rx="2.5" />
-    </svg>
-  );
-}
-
 export function StorySlidesPhase({
   storyData,
   onComplete,
@@ -158,23 +150,13 @@ export function StorySlidesPhase({
           {/* Story element badge — color-coded pill so the grammar label stands out */}
           <div className="mb-4 flex items-center gap-2.5">
             {supported && (
-              <button
-                type="button"
+              <AudioButton
+                size="sm"
+                tone="quiet"
+                playing={isPlaying("element")}
                 onClick={() => toggle(elementLabel, "element")}
-                aria-label={isPlaying("element") ? "Stop" : `Read ${elementLabel}`}
-                className={cn(
-                  "press-pop flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 transition-colors shadow-card",
-                  isPlaying("element")
-                    ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : [elementColors.bg, elementColors.text, elementColors.ring, "hover:opacity-90"],
-                )}
-              >
-                {isPlaying("element") ? (
-                  <StopIcon className="h-5 w-5" />
-                ) : (
-                  <SpeakerIcon className="h-5 w-5" />
-                )}
-              </button>
+                text={elementLabel}
+              />
             )}
             <span
               className={cn(
