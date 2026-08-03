@@ -97,7 +97,7 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
         {/* Buddy + speech bubble. Still after entrance — no looping motion. */}
         <div
           className={cn(
-            "animate-slide-up mt-8 flex flex-col items-center sm:mt-8 sm:flex-row sm:items-center",
+            "animate-slide-up mt-8 flex flex-col items-center justify-center sm:mt-8 sm:flex-row sm:items-center",
             compact ? "gap-2 sm:gap-3" : "gap-3 sm:gap-5",
           )}
           style={{ animationDelay: "100ms" }}
