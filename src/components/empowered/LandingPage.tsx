@@ -47,7 +47,6 @@ import {
   WHY_STORIES,
   PATHWAY,
   WILL_LEARN,
-  DIFFERENTIATORS,
   COMMUNITY,
   DASHBOARD,
   DESIGNED_FOR,
@@ -66,7 +65,6 @@ import {
 } from "@/data/landingContent";
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
-import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
 import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
 import dariaAndFriend from "@/assets/daria-and-friend.webp";
@@ -328,7 +326,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       {/* ── What children practise ── */}
       <section
         id="what-they-learn"
-        className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-12 sm:px-6 sm:py-14"
+        className="scroll-mt-20 border-t border-accent/40 bg-card/50 px-5 py-12 sm:px-6 sm:py-14"
       >
         <div className="mx-auto w-full max-w-5xl">
           <h2 className="font-display text-[34px] font-extrabold leading-[1.1] text-primary sm:text-[40px] lg:text-[44px]">
@@ -366,38 +364,6 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           </div>
         </div>
       </section>
-
-      {/* ── What makes Story Pros different (art right) ── */}
-      <CharacterSection side="right" image={danDariaSurprised}>
-        <h2 className="font-display text-3xl font-extrabold text-primary sm:text-4xl">
-          What Makes Story Pros Different
-        </h2>
-        <p className="mt-2 text-base font-medium text-ink-soft">
-          Evidence-based language learning for your child.
-        </p>
-
-        <div className="mt-6 space-y-3">
-          {DIFFERENTIATORS.map((item) => (
-            <article
-              key={item.title}
-              className="hover-lift flex gap-4 rounded-[24px] border border-accent/60 bg-card p-4 shadow-card transition-all"
-            >
-              <span
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-accent text-xl"
-                aria-hidden
-              >
-                {item.icon}
-              </span>
-              <div className="min-w-0">
-                <h3 className="text-[15px] font-extrabold text-primary">{item.title}</h3>
-                <p className="mt-1 text-sm font-medium leading-relaxed text-ink-soft">
-                  {item.body}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </CharacterSection>
 
       {/* ── Monthly Community Circle ── */}
       <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-primary/5">
