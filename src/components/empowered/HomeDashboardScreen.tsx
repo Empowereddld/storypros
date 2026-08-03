@@ -211,7 +211,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           {/* Right rail on laptop; flows underneath on phones/tablets */}
           <aside className="mt-3 space-y-3 lg:mt-0">
             <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
               <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
               <BadgesCard
                 childId={childId}
