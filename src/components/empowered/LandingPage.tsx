@@ -103,7 +103,10 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
   Clock,
   Repeat,
   Users,
+  Sparkles,
+  Home,
 };
+
 
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
   return (
