@@ -174,7 +174,7 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
               />
             </svg>
 
-            <ol className="relative space-y-8">
+            <ol className="relative space-y-10">
               {checkpoints.map((checkpoint, index) => (
                 <li
                   key={checkpoint.storyId}
