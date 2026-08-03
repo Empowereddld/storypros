@@ -11,6 +11,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { AudioButton } from "./AudioButton";
 import { speakLabel, stopLabelSpeech } from "@/lib/speak";
 
 export function SpeakButton({
@@ -31,9 +32,7 @@ export function SpeakButton({
 
   useEffect(() => () => stopLabelSpeech(), []);
 
-  function handle(event: React.MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
+  function handle() {
     if (speaking) {
       stopLabelSpeech();
       setSpeaking(false);
@@ -46,7 +45,7 @@ export function SpeakButton({
   return (
     <AudioButton
       playing={speaking}
-      onClick={() => handle({ stopPropagation() {}, preventDefault() {} } as React.MouseEvent)}
+      onClick={handle}
       size={size === "sm" ? "md" : "lg"}
       tone={tone === "soft" ? "quiet" : "primary"}
       ariaLabel={label ?? `Hear "${text}"`}
