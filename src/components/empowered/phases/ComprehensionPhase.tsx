@@ -375,10 +375,10 @@ export function ComprehensionPhase({
 
 function SelectedCheck() {
   return (
-    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
       <svg
         viewBox="0 0 24 24"
-        className="h-4 w-4"
+        className="h-3 w-3"
         stroke="currentColor"
         strokeWidth="3"
         fill="none"
