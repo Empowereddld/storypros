@@ -25,12 +25,16 @@ import {
   BookOpen,
   Volume2,
   CheckCircle2,
+  Sparkles,
+  Home,
 } from "lucide-react";
 import { CharacterSection, Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
+import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
 import stepConnectAsset from "@/assets/step-connect-real-life.png.asset.json";
+
 
 const PATHWAY_IMAGES = [
   { url: stepReadAsset.url, alt: "A child listening to a Story Pros story on a tablet with headphones" },
