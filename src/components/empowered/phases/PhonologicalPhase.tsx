@@ -7,6 +7,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -19,6 +20,7 @@ export function PhonologicalPhase({
 }: StoryPhaseProps) {
   const items = storyData.phonological_items;
   const [questionIndex, setQuestionIndex] = useState(0);
+  useDevSubSteps(items.length, questionIndex, setQuestionIndex, "item");
   const [selected, setSelected] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<FeedbackState>({ type: "none" });
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);

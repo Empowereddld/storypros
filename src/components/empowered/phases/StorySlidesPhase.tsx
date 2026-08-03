@@ -9,6 +9,7 @@ import { Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Character",
@@ -128,6 +129,7 @@ export function StorySlidesPhase({
 }: StoryPhaseProps) {
   const [page, setPage] = useState(0);
   const slides = storyData.slides;
+  useDevSubSteps(slides.length, page, setPage, "page");
   const current = slides[page];
   const slideImg = resolveStoryImage(storyData.id, current.image);
   const ElementIcon = ELEMENT_ICONS[current.story_element] ?? User;

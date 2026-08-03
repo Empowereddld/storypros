@@ -15,6 +15,7 @@ import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services
 import dariaSolo from "@/assets/daria-pointing.webp";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star } from "../StoryProsBrand";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Character",
@@ -82,6 +83,7 @@ export function ComprehensionPhase({
 }: StoryPhaseProps) {
   const questions = storyData.comprehension_questions;
   const [qi, setQi] = useState(0);
+  useDevSubSteps(questions.length, qi, setQi, "question");
   const [selected, setSelected] = useState<string | null>(null);
   const [brainCheck, setBrainCheck] = useState<BrainCheckState>({ type: "none" });
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
