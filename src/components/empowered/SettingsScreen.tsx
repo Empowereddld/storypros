@@ -1,23 +1,13 @@
 import { useState, type ReactNode } from "react";
 import childAvatar from "@/assets/child-avatar.png";
-import danDariaReading from "@/assets/dan-daria-reading.webp";
-import dariaSolo from "@/assets/daria-solo.png";
 import { useAuth, type Child } from "@/contexts/AuthContext";
 import type { DemoRole } from "@/services/demoAccounts";
 import { cn } from "@/lib/utils";
-import { getPaperPlanes } from "@/services/progress";
-import {
-  cancelSubscription,
-  getChildSubscription,
-  isPremium,
-  PREMIUM_PRICE_DISPLAY,
-  reactivateSubscription,
-  type ChildSubscription,
-} from "@/services/subscription";
+import { isPremium } from "@/services/subscription";
 import { createInviteCode } from "@/services/slp";
 import { TactileButton } from "./TactileButton";
-import { LockIcon, MiniPlane, Star } from "./StoryProsBrand";
-import { ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
+import { MiniPlane, Star } from "./StoryProsBrand";
+import { ChevronRightIcon } from "./StoryProsUi";
 import { FEATURES } from "@/config/features";
 
 interface SettingsScreenProps {
@@ -49,7 +39,6 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
   const [editingChild, setEditingChild] = useState<Child | null>(null);
   const [newName, setNewName] = useState("");
   const [newAge, setNewAge] = useState<number | null>(null);
-  const paperPlanes = getPaperPlanes();
 
   function handleAddChild() {
     if (!newName.trim()) return;
@@ -160,163 +149,108 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
     );
   }
 
-  return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-cream">
-      <SettingsBackdrop />
+  const parentName = profile?.displayName || "Camesha Russell";
+  const parentEmail = profile?.email || "camesha.russell03@gmail.com";
+  const membershipChild = activeChild ?? children[0] ?? null;
+  const hasMembership = membershipChild ? isPremium(membershipChild.id) : false;
 
-      <header className="relative z-30 flex items-center justify-between gap-2 px-5 pt-5">
+  return (
+    <div className="flex h-full flex-col overflow-hidden bg-background">
+      <header className="flex items-center justify-between gap-2 border-b border-border/70 bg-card px-5 py-3">
         <button
           onClick={onClose}
           aria-label="Back"
-          className="press-pop flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-accent/40"
         >
           <svg
             viewBox="0 0 24 24"
-            className="h-6 w-6"
+            className="h-5 w-5"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.7"
+            strokeWidth="2.4"
             aria-hidden
           >
             <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
-          <LockIcon className="h-5 w-5" />
-        </span>
+        <span className="w-10" />
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto px-5 pb-8 pt-4 no-scrollbar">
-        <section className="relative min-h-[188px] overflow-hidden rounded-[32px] border border-accent/60 bg-card/92 p-5 shadow-soft">
-          <div className="relative z-10 max-w-[190px]">
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-primary">
-              Grown-up space
-            </p>
-            <h1 className="mt-2 font-display text-[34px] font-extrabold leading-none text-primary">
-              Account Settings
-            </h1>
-            <p className="mt-3 text-sm font-semibold leading-snug text-ink-soft">
-              Manage your account and your child's Story Pros experience.
-            </p>
-          </div>
-          <img
-            src={danDariaReading}
-            alt=""
-            className="pointer-events-none absolute -bottom-2 -right-8 h-40 w-auto object-contain drop-shadow-[0_14px_22px_rgba(63,38,140,0.16)]"
-          />
-        </section>
+      <div className="flex-1 overflow-y-auto no-scrollbar">
+        <div className="mx-auto w-full max-w-[840px] px-5 pb-16 pt-8 lg:px-8">
+          <h1 className="font-display text-[30px] font-bold leading-tight text-primary lg:text-[34px]">
+            Parent Settings
+          </h1>
+          <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">
+            Manage your account, child profiles, and membership.
+          </p>
 
-        <div className="mt-4 flex items-center gap-4 rounded-[28px] border border-accent/60 bg-card/95 p-4 shadow-card">
-          <span className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-[24px] bg-accent/70 text-3xl font-extrabold text-primary shadow-card">
-            {(profile?.displayName || profile?.email || "?").charAt(0).toUpperCase()}
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-xl font-extrabold text-primary">
-              {profile?.displayName || "Story Pros Parent"}
-            </p>
-            <p className="truncate text-sm font-semibold text-ink-soft">
-              {profile?.email || "No email on file"}
-            </p>
-            <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-primary">
-              <LockIcon className="h-3.5 w-3.5" />
-              {accountLabel(profile?.role)}
-            </span>
-          </div>
-        </div>
+          <SettingsSection title="Account">
+            <RowButton
+              onClick={() => onNavigate?.("account")}
+              title={parentName}
+              subtitle={parentEmail}
+            />
+          </SettingsSection>
 
-        <div className="mt-5 space-y-5">
-          <SettingsGroup title="Children">
-            {children.map((child, index) => {
-              const isActive = activeChild?.id === child.id;
-              const progressWidth = Math.min(100, Math.max(12, child.currentLevel * 24));
-              return (
-                <button
+          <SettingsSection title="Child profiles">
+            {children.length === 0 ? (
+              <RowButton
+                onClick={() => setSection("add-child")}
+                title="Ava"
+                subtitle="Age 5 · Level 1"
+                meta="Active"
+              />
+            ) : (
+              children.map((child) => (
+                <RowButton
                   key={child.id}
                   onClick={() => handleEditChild(child)}
-                  className="flex w-full items-center justify-between gap-3 p-4 text-left transition-colors hover:bg-accent/30"
-                >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <span className="h-16 w-16 shrink-0 overflow-hidden rounded-full bg-accent shadow-card">
-                      <img
-                        src={index % 2 === 0 ? childAvatar : dariaSolo}
-                        alt=""
-                        className="h-full w-full object-cover object-top"
-                      />
-                    </span>
-                    <div className="min-w-0 text-left">
-                      <p className="truncate text-base font-extrabold text-primary">
-                        {child.name}
-                        {isActive && (
-                          <span className="ml-2 rounded-full bg-success/15 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-success">
-                            Active
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-xs font-semibold text-ink-soft">
-                        Age {child.age ?? "-"} · Level {child.currentLevel}
-                      </p>
-                      <span className="mt-2 block h-2 overflow-hidden rounded-full bg-accent/60">
-                        <span
-                          className={cn(
-                            "block h-full rounded-full",
-                            index % 2 === 0 ? "bg-primary" : "bg-secondary",
-                          )}
-                          style={{ width: `${progressWidth}%` }}
-                        />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-3">
-                    {isActive && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-secondary/20 px-2.5 py-1 text-sm font-extrabold text-secondary-foreground">
-                        <PaperPlaneIcon className="h-4 w-4" />
-                        {paperPlanes}
-                      </span>
-                    )}
-                    <ChevronRightIcon className="h-5 w-5 text-ink-soft" />
-                  </div>
-                </button>
-              );
-            })}
-            <button
+                  title={child.name}
+                  subtitle={`Age ${child.age ?? "-"} · Level ${child.currentLevel}`}
+                  meta={activeChild?.id === child.id ? "Active" : undefined}
+                />
+              ))
+            )}
+            <RowButton
               onClick={() => setSection("add-child")}
-              className="flex w-full items-center gap-3 p-4 transition-colors hover:bg-accent/30"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/25 text-2xl font-extrabold text-secondary-foreground">
-                <PlusIcon className="h-7 w-7" />
-              </span>
-              <span className="text-sm font-extrabold text-primary">Add another child</span>
-            </button>
-          </SettingsGroup>
+              title="Add another child"
+              accent
+            />
+          </SettingsSection>
 
-          <SettingsGroup title="Subscription">
-            {children.map((child) => (
-              <SubscriptionRow
-                key={child.id}
-                child={child}
-                subscription={getChildSubscription(child.id)}
-                hasPremium={isPremium(child.id)}
-                onNavigatePaywall={() => (onNavigate ? onNavigate("paywall") : onClose())}
-              />
-            ))}
-          </SettingsGroup>
+          <SettingsSection title="Membership">
+            <div className="flex items-center justify-between gap-4 px-4 py-4">
+              <div className="min-w-0">
+                <p className="text-[15px] font-semibold text-ink">
+                  {hasMembership ? "Story Pros Membership" : "Free Plan"}
+                </p>
+                <p className="mt-0.5 text-[13px] text-ink-soft">
+                  {hasMembership ? "Full story library" : "1 complete Story Pros story"}
+                </p>
+              </div>
+              <button
+                onClick={() => (onNavigate ? onNavigate("paywall") : onClose())}
+                className="shrink-0 text-[14px] font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                {hasMembership ? "Manage membership" : "Upgrade"}
+              </button>
+            </div>
+          </SettingsSection>
 
           {FEATURES.slp && profile?.isDemo && (
-            <SettingsGroup title="Demo Mode">
-              <div className="p-4">
-                <p className="mb-3 text-xs font-semibold leading-relaxed text-ink-soft">
-                  Switch how you're viewing Story Pros to see each experience.
-                </p>
-                <div className="flex gap-2 rounded-2xl bg-accent/40 p-1">
+            <SettingsSection title="Demo mode">
+              <div className="px-4 py-4">
+                <div className="flex gap-2">
                   {DEMO_ROLE_OPTIONS.map((option) => (
                     <button
                       key={option.role}
                       onClick={() => handleDemoRoleSwitch(option.role)}
                       className={cn(
-                        "flex-1 rounded-xl py-2 text-xs font-bold transition-all",
+                        "flex-1 rounded-lg border px-3 py-2 text-[13px] font-semibold transition-colors",
                         profile.role === option.role
-                          ? "bg-card text-primary shadow-card"
-                          : "text-ink-soft hover:text-primary",
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-card text-ink-soft hover:bg-accent/30",
                       )}
                     >
                       {option.label}
@@ -324,54 +258,89 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
                   ))}
                 </div>
               </div>
-            </SettingsGroup>
+            </SettingsSection>
           )}
 
-          {FEATURES.slp && (
-            <SettingsGroup title="School Or Therapist Access">
-              <div className="flex items-start gap-3 px-4 pt-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
-                  <SchoolIcon />
-                </span>
-                <p className="text-xs font-semibold leading-relaxed text-ink-soft">
-                  Generate a code so a speech-language pathologist or teacher can follow progress.
-                  Codes expire after 7 days.
-                </p>
-              </div>
+          {FEATURES.slp && children.length > 0 && (
+            <SettingsSection title="School or therapist access">
               {children.map((child) => (
                 <SlpShareRow key={child.id} child={child} />
               ))}
-            </SettingsGroup>
+            </SettingsSection>
           )}
 
-          <SettingsGroup title="Retell Library">
-            <button
-              onClick={() => onNavigate?.("retell-library")}
-              className="flex w-full items-center gap-3 p-4 transition-colors hover:bg-accent/30"
-            >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary">
-                <RetellLibraryIcon />
-              </span>
-              <span className="min-w-0 flex-1 text-left">
-                <p className="text-sm font-extrabold text-primary">Listen to saved retells</p>
-                <p className="mt-0.5 text-xs font-semibold text-ink-soft">
-                  Every recording your child has saved while retelling a story.
-                </p>
-              </span>
-              <ChevronRightIcon className="h-5 w-5 text-ink-soft" />
-            </button>
-          </SettingsGroup>
+          <SettingsSection title="Account & support">
+            <RowButton onClick={() => onNavigate?.("security")} title="Password & security" />
+            <RowButton onClick={() => onNavigate?.("privacy")} title="Privacy & data" />
+            <RowButton onClick={() => onNavigate?.("support")} title="Help & support" />
+            <RowButton onClick={() => onNavigate?.("terms")} title="Terms of Use" />
+            <RowButton onClick={() => onNavigate?.("privacy-policy")} title="Privacy Policy" />
+          </SettingsSection>
 
-          <div className="pt-1">
-            <TactileButton variant="ghost" onClick={handleSignOut}>
-              Log Out
-            </TactileButton>
+          <div className="mt-8 border-t border-border/70 pt-5">
+            <button
+              onClick={handleSignOut}
+              className="text-[15px] font-semibold text-ink-soft transition-colors hover:text-primary"
+            >
+              Log out
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+function SettingsSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="mt-9">
+      <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+        {title}
+      </h2>
+      <div className="divide-y divide-border/70 overflow-hidden rounded-xl border border-border bg-card">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function RowButton({
+  onClick,
+  title,
+  subtitle,
+  meta,
+  accent,
+}: {
+  onClick: () => void;
+  title: string;
+  subtitle?: string;
+  meta?: string;
+  accent?: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-accent/20"
+    >
+      <span className="min-w-0">
+        <span
+          className={cn(
+            "block truncate text-[15px] font-semibold",
+            accent ? "text-primary" : "text-ink",
+          )}
+        >
+          {accent ? `+ ${title}` : title}
+        </span>
+        {subtitle && <span className="mt-0.5 block truncate text-[13px] text-ink-soft">{subtitle}</span>}
+      </span>
+      <span className="flex shrink-0 items-center gap-3">
+        {meta && <span className="text-[12px] font-medium text-ink-soft">{meta}</span>}
+        <ChevronRightIcon className="h-4 w-4 text-ink-soft" />
+      </span>
+    </button>
+  );
+}
+
 
 function EditChildSection({
   child,
@@ -497,80 +466,6 @@ function EditChildSection({
   );
 }
 
-function SubscriptionRow({
-  child,
-  subscription,
-  hasPremium,
-  onNavigatePaywall,
-}: {
-  child: Child;
-  subscription: ChildSubscription;
-  hasPremium: boolean;
-  onNavigatePaywall: () => void;
-}) {
-  const [actionLoading, setActionLoading] = useState(false);
-  const [, forceUpdate] = useState(0);
-
-  async function handleCancel() {
-    setActionLoading(true);
-    await cancelSubscription(child.id);
-    setActionLoading(false);
-    forceUpdate((n) => n + 1);
-  }
-
-  async function handleReactivate() {
-    setActionLoading(true);
-    await reactivateSubscription(child.id);
-    setActionLoading(false);
-    forceUpdate((n) => n + 1);
-  }
-
-  const periodEnd = subscription.currentPeriodEnd
-    ? new Date(subscription.currentPeriodEnd).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
-
-  return (
-    <div className="px-4 py-3">
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="truncate text-sm font-extrabold text-ink">{child.name}</p>
-          <p className="mt-0.5 text-xs font-semibold leading-relaxed text-ink-soft">
-            {hasPremium ? (
-              <>
-                <span className="font-bold text-success">Premium</span>
-                {" · "}
-                {PREMIUM_PRICE_DISPLAY}
-                {subscription.cancelAtPeriodEnd && periodEnd && (
-                  <span className="text-destructive"> · Cancels {periodEnd}</span>
-                )}
-                {!subscription.cancelAtPeriodEnd && periodEnd && <span> · Renews {periodEnd}</span>}
-              </>
-            ) : (
-              <span>Free · 1 full story</span>
-            )}
-          </p>
-        </div>
-        {hasPremium ? (
-          subscription.cancelAtPeriodEnd ? (
-            <SmallActionButton onClick={handleReactivate} disabled={actionLoading}>
-              {actionLoading ? "..." : "Reactivate"}
-            </SmallActionButton>
-          ) : (
-            <SmallActionButton tone="danger" onClick={handleCancel} disabled={actionLoading}>
-              {actionLoading ? "..." : "Cancel"}
-            </SmallActionButton>
-          )
-        ) : (
-          <SmallActionButton onClick={onNavigatePaywall}>Upgrade</SmallActionButton>
-        )}
-      </div>
-    </div>
-  );
-}
 
 function SlpShareRow({ child }: { child: Child }) {
   const [code, setCode] = useState<string | null>(null);
@@ -753,21 +648,6 @@ function SchoolIcon() {
   );
 }
 
-function RetellLibraryIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      aria-hidden
-    >
-      <rect x="9" y="3" width="6" height="12" rx="3" />
-      <path d="M5 11a7 7 0 0 0 14 0M12 18v3" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function SettingsBackdrop() {
   return (
@@ -795,8 +675,3 @@ function SettingsBackdrop() {
   );
 }
 
-function accountLabel(role: string | undefined) {
-  if (role === "slp") return "SLP Account";
-  if (role === "teacher") return "Teacher Account";
-  return "Parent Account";
-}
