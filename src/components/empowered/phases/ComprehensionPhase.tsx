@@ -199,20 +199,23 @@ export function ComprehensionPhase({
         progress={progress}
         label={`Question ${qi + 1} of ${questions.length}`}
         onClose={onClose}
+        rowClassName="mx-auto w-full max-w-[660px]"
       />
 
       {/* Brain Check reflection (before the answer is revealed) */}
       {reflecting && !showingBrainCheck && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
-          <div className="w-full max-w-[440px] rounded-[28px] bg-card p-6 text-center shadow-soft animate-slide-up">
-            <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/30 p-5">
+          <div className="w-full max-w-[420px] rounded-[26px] bg-card px-7 py-6 text-center shadow-soft animate-slide-up">
+            <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
               <BrainIcon />
             </div>
-            <h3 className="font-display text-[26px] font-extrabold text-primary">Brain Check!</h3>
-            <p className="mt-2 text-lg font-semibold text-ink">
+            <h3 className="font-display text-[26px] font-extrabold leading-tight text-primary">
+              Brain Check!
+            </h3>
+            <p className="mt-1.5 text-base font-semibold leading-snug text-ink">
               {q.brain_check_prompt ?? "Did you answer the question type?"}
             </p>
-            <div className="mt-6 space-y-3">
+            <div className="mt-5 space-y-2.5">
               <TactileButton variant="primary" onClick={handleReveal}>
                 Yes 👍
               </TactileButton>
@@ -227,76 +230,88 @@ export function ComprehensionPhase({
       {/* Brain check overlay */}
 
       {showingBrainCheck && (
-        <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm animate-slide-up">
+        <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/30 animate-slide-up">
           <div
-            className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft"
+            className="w-full rounded-t-[28px] bg-card px-5 pb-6 pt-5 shadow-soft"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
-
-            <div className="flex items-start gap-3">
-              <img src={dariaSolo} alt="" className="h-16 w-auto object-contain" />
-              <div className="flex-1">
-                <div
-                  className={cn(
-                    "rounded-2xl rounded-bl-sm p-4 shadow-card",
-                    brainCheck.type === "correct"
-                      ? "bg-success/10 border-2 border-success animate-tada"
-                      : "bg-sky animate-shake",
-                  )}
-                >
-                  <p className="text-base font-semibold leading-snug text-primary">
-                    {brainCheck.message}
-                  </p>
+            <div className="mx-auto w-full max-w-[660px]">
+              <div className="flex items-center gap-3">
+                <img src={dariaSolo} alt="" className="h-12 w-auto shrink-0 object-contain" />
+                <div className="flex-1">
+                  <div
+                    className={cn(
+                      "rounded-2xl rounded-bl-sm px-4 py-3",
+                      brainCheck.type === "correct"
+                        ? "bg-success/10 border-2 border-success animate-tada"
+                        : "bg-sky animate-shake",
+                    )}
+                  >
+                    <p className="text-base font-semibold leading-snug text-primary">
+                      {brainCheck.message}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {brainCheck.type === "correct" && (
-              <div className="mt-4 flex items-center justify-center gap-2 text-success">
-                <CheckBadge />
-                <span className="text-lg font-bold">Correct!</span>
+              {brainCheck.type === "correct" && (
+                <div className="mt-3 flex items-center justify-center gap-2 text-success">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-success text-success-foreground">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-3.5 w-3.5"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      fill="none"
+                    >
+                      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span className="text-base font-bold">Correct!</span>
+                </div>
+              )}
+
+              {brainCheck.type === "wrong" && (
+                <div className="mt-3 flex items-center justify-center gap-2 text-destructive">
+                  <CrossBadge />
+                  <span className="text-base font-bold">Let's try again!</span>
+                </div>
+              )}
+
+              <div className="mx-auto mt-4 w-full max-w-[580px]">
+                <TactileButton
+                  variant={brainCheck.type === "correct" ? "primary" : "secondary"}
+                  onClick={handleBrainCheckContinue}
+                >
+                  {brainCheck.type === "correct"
+                    ? qi + 1 >= questions.length
+                      ? "See results"
+                      : "Next question"
+                    : "Try again"}
+                </TactileButton>
               </div>
-            )}
-
-            {brainCheck.type === "wrong" && (
-              <div className="mt-4 flex items-center justify-center gap-2 text-destructive">
-                <CrossBadge />
-                <span className="text-lg font-bold">Let's try again!</span>
-              </div>
-            )}
-
-            <div className="mt-5">
-              <TactileButton
-                variant={brainCheck.type === "correct" ? "primary" : "secondary"}
-                onClick={handleBrainCheckContinue}
-              >
-                {brainCheck.type === "correct"
-                  ? qi + 1 >= questions.length
-                    ? "See results"
-                    : "Next question"
-                  : "Try again"}
-              </TactileButton>
             </div>
           </div>
         </div>
       )}
 
       {/* Question prompt - always visible */}
-      <div key={`q-${qi}`} className="relative z-10 mx-auto mt-3 w-full max-w-[560px] shrink-0 px-5 animate-slide-up">
+      <div
+        key={`q-${qi}`}
+        className="relative z-10 mx-auto mt-7 w-full max-w-[660px] shrink-0 px-5 animate-slide-up"
+      >
         {hintImage && (
-          <div className="relative mb-2 aspect-video w-full overflow-hidden rounded-[24px] border-[4px] border-card bg-card shadow-soft">
+          <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-[24px] bg-card">
             <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
           </div>
         )}
-        <div className="relative overflow-hidden rounded-[24px] border-2 border-accent/70 bg-card p-3.5 shadow-card">
-          <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
-          <div className="relative flex items-center gap-3">
+        <div className="rounded-[24px] border-2 border-accent/70 bg-card px-4 py-[22px]">
+          <div className="flex items-center gap-3">
             <button
               onClick={handleListen}
               disabled={!isSupported()}
               className={cn(
-                "flex h-11 w-11 shrink-0 items-center justify-center rounded-full ring-2 transition-all active:scale-95",
+                "flex h-10 w-10 shrink-0 items-center justify-center rounded-full ring-2 transition-all active:scale-95",
                 elementStyle.bg,
                 elementStyle.text,
                 elementStyle.ring,
@@ -305,7 +320,7 @@ export function ComprehensionPhase({
               aria-label={isSupported() ? "Hear question" : elementLabel}
               title={elementLabel}
             >
-              <ElementIcon className="h-5 w-5" />
+              <ElementIcon className="h-[18px] w-[18px]" />
             </button>
 
             <h2 className="min-w-0 flex-1 font-display text-[22px] font-extrabold leading-tight text-primary">
@@ -315,7 +330,7 @@ export function ComprehensionPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-3 grid w-full max-w-[560px] flex-1 grid-cols-2 gap-2.5 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
+      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[660px] flex-1 grid-cols-1 gap-[15px] overflow-y-auto px-5 pb-1 no-scrollbar animate-slide-up sm:grid-cols-2">
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
@@ -325,9 +340,9 @@ export function ComprehensionPhase({
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-4 py-2.5 text-center shadow-card transition-all",
-                isSelected && "border-primary bg-primary/5 shadow-sm",
-                !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
+                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-4 py-2.5 text-center outline-none transition-colors",
+                isSelected && "border-primary bg-primary/8 ring-2 ring-primary/20",
+                !isSelected && !isDisabled && "border-accent/70 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
               )}
             >
@@ -347,7 +362,7 @@ export function ComprehensionPhase({
       </div>
 
       {/* Check button */}
-      <div className="relative z-10 mx-auto mb-5 mt-2 w-full max-w-[600px] px-5">
+      <div className="relative z-10 mx-auto mb-5 mt-[22px] w-full max-w-[620px] px-5">
         <TactileButton
           variant="secondary"
           onClick={() => setReflecting(true)}
@@ -367,6 +382,8 @@ export function ComprehensionPhase({
           Check Answer
         </TactileButton>
       </div>
+
+
 
     </div>
   );
