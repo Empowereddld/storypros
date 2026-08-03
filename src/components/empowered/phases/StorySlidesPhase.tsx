@@ -9,6 +9,7 @@ import { Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
@@ -92,32 +93,6 @@ function StopIcon({ className = "h-5 w-5" }: { className?: string }) {
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
       <rect x="6" y="6" width="12" height="12" rx="2.5" />
     </svg>
-  );
-}
-
-function SpeakerButton({
-  playing,
-  onClick,
-  label,
-}: {
-  playing: boolean;
-  onClick: () => void;
-  label: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={playing ? "Stop audio" : label}
-      className={cn(
-        "press-pop flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 transition-all",
-        playing
-          ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
-          : "border-accent bg-card text-primary shadow-card hover:bg-accent/40",
-      )}
-    >
-      {playing ? <StopIcon className="h-5 w-5" /> : <SpeakerIcon className="h-5 w-5" />}
-    </button>
   );
 }
 
@@ -239,10 +214,12 @@ export function StorySlidesPhase({
 
           <div className="mt-5 flex min-h-[104px] items-start gap-4 rounded-[26px] bg-card p-4 shadow-soft sm:p-5">
             {supported && (
-              <SpeakerButton
+              <AudioButton
+                size="lg"
+                tone="primary"
                 playing={isPlaying("sentence")}
                 onClick={() => toggle(current.text, "sentence")}
-                label="Listen to this page"
+                ariaLabel="Listen to this page"
               />
             )}
             <p className="flex-1 pt-1 text-[22px] font-extrabold leading-[1.35] text-primary sm:text-[24px]">

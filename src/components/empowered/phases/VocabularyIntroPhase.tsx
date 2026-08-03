@@ -7,6 +7,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
@@ -117,18 +118,15 @@ export function VocabularyIntroPhase({
             </h1>
 
             {supported && (
-              <button
+              <AudioButton
+                className="mt-4"
+                size="lg"
+                tone="primary"
+                playing={isPlaying("word")}
                 onClick={() => toggle(word.word, "word")}
-                className={cn(
-                  "press-pop mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold shadow-card",
-                  isPlaying("word")
-                    ? "bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : "bg-primary text-primary-foreground",
-                )}
-              >
-                {isPlaying("word") ? "Stop" : "Hear It"}
-                <SpeakerIcon playing={isPlaying("word")} />
-              </button>
+                text={word.word}
+                label="Hear It"
+              />
             )}
 
             <p className="mt-5 max-w-[285px] text-base font-semibold leading-relaxed text-ink-soft">
