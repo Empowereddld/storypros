@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import dariaSolo from "@/assets/daria-solo.png";
 import { cn } from "@/lib/utils";
 import { getStoriesByLevel } from "@/services/stories";
 import { getCompletedStoryIds, getCurrentLevel, getPaperPlanes } from "@/services/progress";
@@ -143,9 +142,9 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
             </h1>
             <p className="mt-1.5 text-[15px] font-bold text-ink">Your next story is ready.</p>
             <p className="mt-1 text-[12px] font-semibold text-ink-soft">
-              {completedCount} {completedCount === 1 ? "story" : "stories"} completed ·{" "}
-              {paperPlanes} {paperPlanes === 1 ? "coin" : "coins"}
+              {completedCount} {completedCount === 1 ? "story" : "stories"} completed
             </p>
+
           </header>
 
           <div className="relative mt-8">
@@ -189,14 +188,7 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
                     checkpoint={checkpoint}
                     onStart={() => onNavigate("story", checkpoint.storyId)}
                   />
-                  {checkpoint.state === "current" && (
-                    <img
-                      src={dariaSolo}
-                      alt=""
-                      aria-hidden
-                      className="pointer-events-none absolute -right-2 -top-10 hidden h-24 w-auto object-contain drop-shadow-[0_10px_16px_rgba(63,38,140,0.16)] sm:block"
-                    />
-                  )}
+
                 </li>
               ))}
 
