@@ -26,6 +26,8 @@ export interface SectionIntroProps {
   /** Spoken + displayed script. Newlines are preserved. */
   script: string;
   onNext: () => void;
+  /** Compact layout for the Question Time intro: narrower card, closer buddy, narrower button. */
+  compact?: boolean;
 }
 
 const BUDDY = {
@@ -54,7 +56,7 @@ function SpeakerIcon({ className }: { className?: string }) {
   );
 }
 
-export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps) {
+export function SectionIntro({ title, buddy, script, onNext, compact }: SectionIntroProps) {
   const b = BUDDY[buddy];
   const [speaking, setSpeaking] = useState(false);
 
