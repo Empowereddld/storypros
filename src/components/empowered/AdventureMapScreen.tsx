@@ -298,7 +298,7 @@ function CheckpointCard({
       {isCurrent && (
         <TactileButton
           onClick={onStart}
-          className="mt-3.5 text-base"
+          className="mt-6 h-14 text-base"
           leadingIcon={<PaperPlaneIcon className="h-5 w-5" />}
         >
           {checkpoint.inProgress ? "Continue Story" : "Start Story"}
