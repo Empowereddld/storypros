@@ -454,22 +454,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       <section className="scroll-mt-20 bg-card/40">
         <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-6 sm:py-24">
           <Reveal>
-            <div className="grid items-center gap-10 lg:grid-cols-[57fr_43fr] lg:gap-x-14 lg:gap-y-8">
-              {/* Copy — first on mobile, second column on desktop */}
-              <div className="lg:order-2 lg:col-start-2 lg:row-start-1 lg:self-end">
-                <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-                  {DASHBOARD.eyebrow}
-                </p>
-                <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-4xl">
-                  {DASHBOARD.heading}
-                </h2>
-                <p className="mt-3.5 text-[16.5px] font-medium leading-relaxed text-ink-soft sm:text-lg">
-                  {DASHBOARD.body}
-                </p>
-              </div>
-
+            <div className="grid items-center gap-10 lg:grid-cols-[57fr_43fr] lg:gap-14">
               {/* Dashboard mockup */}
-              <div className="lg:order-1 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
+              <div className="order-2 lg:order-1">
                 <img
                   src={familyDashboardAsset.url}
                   alt="The Story Pros Family Dashboard on a tablet, showing what a child practised this week, a next step for home, a story just completed, and saved retells"
@@ -478,8 +465,23 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 />
               </div>
 
-              {/* Two support items — last on mobile, under the copy on desktop */}
-              <ul className="space-y-5 lg:order-3 lg:col-start-2 lg:row-start-2 lg:self-start">
+              {/* Copy column — on mobile its children flow around the image */}
+              <div className="contents lg:order-2 lg:block">
+                <div className="order-1">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+                    {DASHBOARD.eyebrow}
+                  </p>
+                  <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-4xl">
+                    {DASHBOARD.heading}
+                  </h2>
+                  <p className="mt-3.5 text-[16.5px] font-medium leading-relaxed text-ink-soft sm:text-lg">
+                    {DASHBOARD.body}
+                  </p>
+                </div>
+
+                {/* Two support items */}
+                <ul className="order-3 space-y-5 lg:mt-9">
+
 
                 {DASHBOARD.points.map((point) => {
                   const Icon = SKILL_ICONS[point.icon];
