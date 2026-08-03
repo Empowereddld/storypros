@@ -68,7 +68,7 @@
         }
       ],
       "brain_check_prompt": "Did you answer with a person?\u00a0",
-      "brain_check_correct": "Great job!",
+      "brain_check_correct": "You found the character!",
       "brain_check_wrong": "Remember, WHO questions need a person as the answer."
     },
     {
