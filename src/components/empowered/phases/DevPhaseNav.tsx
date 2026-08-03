@@ -17,7 +17,7 @@ export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
   if (!import.meta.env.DEV) return null;
 
   return (
-    <div className="pointer-events-auto fixed bottom-4 left-1/2 z-[100] -translate-x-1/2">
+    <div className="pointer-events-auto fixed top-4 left-1/2 z-[100] -translate-x-1/2">
       {open ? (
         <div className="flex items-center gap-2 rounded-full border border-border bg-card/95 px-2 py-1.5 shadow-lg backdrop-blur">
           <button
