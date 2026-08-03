@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getAllCompletions, getCompletedStoryIds } from "@/services/progress";
 import { getAllStories, getStory } from "@/services/stories";
 import { resolveStoryImage } from "@/services/storyImages";
-import { StoryProsLogo } from "./StoryProsBrand";
+
 
 interface ParentDashboardScreenProps {
   onClose: () => void;
