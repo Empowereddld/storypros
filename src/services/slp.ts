@@ -13,6 +13,7 @@
  * ───────────────────────────────────────────── */
 
 import { db, isCloudId, logSyncError, emitDataUpdated } from "./cloud";
+import { createSlpInvite, redeemSlpInvite } from "@/lib/privileged.functions";
 
 // ── Types ──
 
@@ -214,11 +215,8 @@ export async function createInviteCode(
     return { error: "Demo children can't be shared with an SLP." };
   }
   try {
-    const { data, error } = await db.rpc("create_slp_invite", {
-      p_child_id: childId,
-    });
-    if (error) throw error;
-    return { code: data as string };
+    const { code } = await createSlpInvite({ data: { childId } });
+    return { code };
   } catch (err) {
     logSyncError("create invite")(err);
     return { error: "Couldn't create a code right now. Please try again." };
@@ -236,13 +234,9 @@ export async function redeemInviteCode(
     };
   }
   try {
-    const { data, error } = await db.rpc("redeem_slp_invite", {
-      p_code: code,
-    });
-    if (error) throw error;
-    const row = (data as { linked_child_name?: string }[] | null)?.[0];
+    const { childName } = await redeemSlpInvite({ data: { code } });
     await hydrateSlpFromCloud(slpId);
-    return { success: true, childName: row?.linked_child_name };
+    return { success: true, childName };
   } catch (err) {
     logSyncError("redeem invite")(err);
     return {
