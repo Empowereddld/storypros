@@ -324,7 +324,7 @@ export function ComprehensionPhase({
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
-          const label = opt.label || opt.text;
+          const label = opt.label || opt.text || "";
           return (
             <div
               key={opt.id}
