@@ -374,22 +374,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Monthly Community Circle ── */}
       <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-accent/15">
-        <div className="mx-auto grid w-full max-w-[1180px] gap-6 px-5 py-12 sm:px-8 sm:py-14 lg:grid-cols-2 lg:items-center lg:gap-x-[56px] lg:gap-y-5">
-          {/* Copy first on mobile, image second (mobile order per spec) */}
-          <div className="order-1 lg:col-start-2 lg:row-start-1">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
-              {COMMUNITY.eyebrow}
-            </p>
-            <h2 className="mt-2 max-w-[22ch] font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
-              {COMMUNITY.heading}
-            </h2>
-            <p className="mt-3 text-[17px] font-semibold text-ink">{COMMUNITY.subheading}</p>
-            <p className="mt-3 max-w-[52ch] text-[15.5px] font-medium leading-relaxed text-ink-soft sm:text-base">
-              {COMMUNITY.body}
-            </p>
-          </div>
-
-          <div className="order-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:self-center">
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-5 py-12 sm:px-8 sm:py-14 lg:grid lg:grid-cols-2 lg:items-center lg:gap-[56px]">
+          {/* Desktop-only image column (left) */}
+          <div className="hidden lg:block">
             <img
               src={communityCircleZoom}
               alt="Children meeting together on a video call during a Story Pros Community Circle"
@@ -400,7 +387,30 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             />
           </div>
 
-          <div className="order-3 lg:col-start-2 lg:row-start-2">
+          <div>
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
+              {COMMUNITY.eyebrow}
+            </p>
+            <h2 className="mt-2 max-w-[22ch] font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
+              {COMMUNITY.heading}
+            </h2>
+            <p className="mt-3 text-[17px] font-semibold text-ink">{COMMUNITY.subheading}</p>
+            <p className="mt-3 max-w-[52ch] text-[15.5px] font-medium leading-relaxed text-ink-soft sm:text-base">
+              {COMMUNITY.body}
+            </p>
+
+            {/* Mobile image sits between the body copy and the chips */}
+            <img
+              src={communityCircleZoom}
+              alt="Children meeting together on a video call during a Story Pros Community Circle"
+              loading="lazy"
+              width={1280}
+              height={960}
+              className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover lg:hidden"
+            />
+
+            <div className="mt-6">
+
             <ul className="grid gap-2.5 sm:grid-cols-2">
               {COMMUNITY.chips.map((chip) => {
                 const Icon = SKILL_ICONS[chip.icon];
