@@ -132,13 +132,10 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-2 lg:px-8 lg:pb-10 lg:pt-8">
         <section>
           <h1 className="text-[40px] font-extrabold leading-none text-primary">Story Library</h1>
-          <p className="mt-3 max-w-[250px] text-lg font-medium leading-snug text-ink-soft lg:max-w-none">
-            Practise language through stories inspired by everyday experiences.
-          </p>
         </section>
 
         {featured && (
-          <section className="mt-6">
+          <section className="mt-5">
             <button
               onClick={() => onNavigate("story", featured.id)}
               className="hover-lift mt-3 block w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card text-left shadow-soft active:scale-[0.99]"
@@ -197,7 +194,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
           </section>
         )}
 
-        <div className="mt-5 rounded-[28px] bg-card/80 p-2 shadow-card backdrop-blur">
+        <div className="mt-4 rounded-[28px] bg-card/80 p-2 shadow-card backdrop-blur">
           <div className="grid grid-cols-4 gap-1">
             {TABS.map((tab) => (
               <button
