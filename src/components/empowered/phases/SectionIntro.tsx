@@ -138,13 +138,13 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
 
 
         <div
-          className={cn("animate-slide-up", compact ? "mt-8" : "mt-7")}
+          className={cn("animate-slide-up flex justify-center", compact ? "mt-8" : "mt-7")}
           style={{ animationDelay: "300ms" }}
         >
           <TactileButton
             onClick={handleNext}
             fullWidth={!compact}
-            className={cn(compact && "w-full max-w-[340px] sm:max-w-[420px] mx-auto")}
+            className={cn(compact && "w-full max-w-[340px] sm:max-w-[420px]")}
           >
             Start
           </TactileButton>
