@@ -72,7 +72,6 @@ import {
 } from "@/data/landingContent";
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
-import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
 import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
 import dariaPointing from "@/assets/daria-pointing.webp";
