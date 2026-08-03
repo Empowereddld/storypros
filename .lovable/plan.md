@@ -1,17 +1,24 @@
-# Fix Community Circle note text wrapping
+# Fix Community Circle text from feeling squeezed
 
 ## Problem
-The explanatory sentence under the Community Circle chips ("Session times rotate throughout the year...") is constrained by `max-w-[54ch]` in `src/components/empowered/LandingPage.tsx`. At tablet/desktop widths this creates a narrow, ragged block with a poor line break that feels cut-off and cheap, not premium.
+In the Community Circle section of `src/components/empowered/LandingPage.tsx`, three text elements are locked to narrow character widths:
+- Heading: `max-w-[22ch]`
+- Body copy: `max-w-[52ch]`
+- Note under chips: `max-w-[54ch]`
+
+At desktop/tablet widths these constraints squeeze the copy to the left side of the text column, create awkward mid-phrase line breaks, and make the section look cheap and unbalanced rather than premium and confident.
 
 ## Goal
-Let the note breathe and align with the section's confident, spacious layout so it reads as one polished thought instead of a cramped caption.
+Let the text fill the column naturally so the section feels open, balanced, and high-quality across all breakpoints.
 
 ## Changes
-1. In `src/components/empowered/LandingPage.tsx`, remove the `max-w-[54ch]` width cap from the Community Circle note paragraph.
-2. Allow the note to flow to the natural column width, which lets it sit as a single line on desktop and a balanced wrap on smaller screens.
-3. Keep the existing font size, color, and line-height; only the width constraint changes.
-4. Verify the change at mobile, tablet, and desktop widths so the note no longer breaks mid-phrase.
+1. In `src/components/empowered/LandingPage.tsx`, remove the width caps from the Community Circle text blocks:
+   - Remove `max-w-[22ch]` from the heading.
+   - Remove `max-w-[52ch]` from the body paragraph.
+   - Remove `max-w-[54ch]` from the note paragraph under the chips.
+2. Keep existing font sizes, weights, colors, and line-heights unchanged.
+3. Verify the text now flows cleanly in the two-column desktop layout and stacks gracefully on mobile/tablet without awkward breaks.
 
 ## Out of scope
 - No copy changes.
-- No changes to the chips, image, button, or section background.
+- No changes to the chips, image, button, section background, or breakpoints.
