@@ -229,8 +229,8 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
               completed: true,
             })
           }
-          />
         />
+
       );
     }
     switch (currentPhase) {
