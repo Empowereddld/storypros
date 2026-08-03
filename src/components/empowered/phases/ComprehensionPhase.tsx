@@ -329,7 +329,7 @@ export function ComprehensionPhase({
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all",
+                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all sm:min-h-[68px]",
                 isSelected && "border-primary bg-primary/5 -translate-y-0.5 shadow-soft",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
