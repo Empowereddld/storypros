@@ -374,9 +374,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Monthly Community Circle ── */}
       <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-accent/15">
-        <div className="mx-auto grid w-full max-w-[1180px] items-center gap-8 px-5 py-12 sm:px-8 sm:py-14 lg:grid-cols-2 lg:gap-[56px]">
+        <div className="mx-auto grid w-full max-w-[1180px] gap-6 px-5 py-12 sm:px-8 sm:py-14 lg:grid-cols-2 lg:items-center lg:gap-x-[56px] lg:gap-y-5">
           {/* Copy first on mobile, image second (mobile order per spec) */}
-          <div className="order-1 lg:order-2">
+          <div className="order-1 lg:col-start-2 lg:row-start-1">
             <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
               {COMMUNITY.eyebrow}
             </p>
@@ -389,7 +389,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             </p>
           </div>
 
-          <div className="order-2 lg:order-1">
+          <div className="order-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:self-center">
             <img
               src={communityCircleZoom}
               alt="Children meeting together on a video call during a Story Pros Community Circle"
@@ -400,7 +400,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             />
           </div>
 
-          <div className="order-3 lg:order-2 lg:col-start-2">
+          <div className="order-3 lg:col-start-2 lg:row-start-2">
             <ul className="grid gap-2.5 sm:grid-cols-2">
               {COMMUNITY.chips.map((chip) => {
                 const Icon = SKILL_ICONS[chip.icon];
