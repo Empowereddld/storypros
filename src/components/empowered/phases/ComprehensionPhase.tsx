@@ -410,7 +410,7 @@ function CheckBadge({ size = "md" }: { size?: "sm" | "md" }) {
   return (
     <span
       className={cn(
-        "flex items-center justify-center rounded-full bg-success text-success-foreground",
+        "flex shrink-0 items-center justify-center rounded-full bg-success text-success-foreground",
         box,
       )}
     >
