@@ -29,6 +29,9 @@ function DashboardPage() {
             case "shop":
               navigate({ to: "/shop" });
               break;
+            case "retell-library":
+              navigate({ to: "/retell-library" });
+              break;
           }
         }}
       />
