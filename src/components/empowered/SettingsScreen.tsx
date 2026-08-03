@@ -550,7 +550,7 @@ function SubscriptionRow({
                 {!subscription.cancelAtPeriodEnd && periodEnd && <span> · Renews {periodEnd}</span>}
               </>
             ) : (
-              <span>Free forever · 1 full story</span>
+              <span>Free · 1 full story</span>
             )}
           </p>
         </div>
