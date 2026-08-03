@@ -211,12 +211,14 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           {/* Right rail on laptop; flows underneath on phones/tablets */}
           <aside className="mt-3 space-y-3 lg:mt-0">
             <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
-            <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
-            <BadgesCard
-              childId={childId}
-              completedCount={completedCount}
-              onSeeAll={() => onNavigate("achievements")}
-            />
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
+              <BadgesCard
+                childId={childId}
+                completedCount={completedCount}
+                onSeeAll={() => onNavigate("achievements")}
+              />
+            </div>
           </aside>
         </div>
 
