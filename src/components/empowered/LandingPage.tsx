@@ -406,7 +406,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               loading="lazy"
               width={1447}
               height={1080}
-              className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover lg:hidden"
+              className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover md:max-h-[360px] lg:hidden"
             />
 
             <div className="mt-6">
