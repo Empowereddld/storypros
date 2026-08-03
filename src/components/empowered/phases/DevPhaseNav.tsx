@@ -84,9 +84,13 @@ export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
     if (index < phases.length - 1) onChange(index + 1);
   }, [sub, index, onChange, phases.length]);
 
+  const host = typeof window !== "undefined" ? window.location.hostname : "";
   const showDevNav =
     import.meta.env.DEV ||
-    (typeof window !== "undefined" && window.location.hostname.endsWith(".lovableproject.com"));
+    host.endsWith(".lovableproject.com") ||
+    host.startsWith("id-preview--") ||
+    host.endsWith("-dev.lovable.app") ||
+    host === "localhost";
   if (!showDevNav) return null;
 
   const atStart = index <= 0 && (!sub || sub.index <= 0);
