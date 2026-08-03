@@ -1,23 +1,13 @@
 import { useState, type ReactNode } from "react";
 import childAvatar from "@/assets/child-avatar.png";
-import danDariaReading from "@/assets/dan-daria-reading.webp";
-import dariaSolo from "@/assets/daria-solo.png";
 import { useAuth, type Child } from "@/contexts/AuthContext";
 import type { DemoRole } from "@/services/demoAccounts";
 import { cn } from "@/lib/utils";
-import { getPaperPlanes } from "@/services/progress";
-import {
-  cancelSubscription,
-  getChildSubscription,
-  isPremium,
-  PREMIUM_PRICE_DISPLAY,
-  reactivateSubscription,
-  type ChildSubscription,
-} from "@/services/subscription";
+import { isPremium } from "@/services/subscription";
 import { createInviteCode } from "@/services/slp";
 import { TactileButton } from "./TactileButton";
-import { LockIcon, MiniPlane, Star } from "./StoryProsBrand";
-import { ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
+import { MiniPlane, Star } from "./StoryProsBrand";
+import { ChevronRightIcon } from "./StoryProsUi";
 import { FEATURES } from "@/config/features";
 
 interface SettingsScreenProps {
@@ -49,7 +39,6 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
   const [editingChild, setEditingChild] = useState<Child | null>(null);
   const [newName, setNewName] = useState("");
   const [newAge, setNewAge] = useState<number | null>(null);
-  const paperPlanes = getPaperPlanes();
 
   function handleAddChild() {
     if (!newName.trim()) return;
@@ -477,80 +466,6 @@ function EditChildSection({
   );
 }
 
-function SubscriptionRow({
-  child,
-  subscription,
-  hasPremium,
-  onNavigatePaywall,
-}: {
-  child: Child;
-  subscription: ChildSubscription;
-  hasPremium: boolean;
-  onNavigatePaywall: () => void;
-}) {
-  const [actionLoading, setActionLoading] = useState(false);
-  const [, forceUpdate] = useState(0);
-
-  async function handleCancel() {
-    setActionLoading(true);
-    await cancelSubscription(child.id);
-    setActionLoading(false);
-    forceUpdate((n) => n + 1);
-  }
-
-  async function handleReactivate() {
-    setActionLoading(true);
-    await reactivateSubscription(child.id);
-    setActionLoading(false);
-    forceUpdate((n) => n + 1);
-  }
-
-  const periodEnd = subscription.currentPeriodEnd
-    ? new Date(subscription.currentPeriodEnd).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
-
-  return (
-    <div className="px-4 py-3">
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="truncate text-sm font-extrabold text-ink">{child.name}</p>
-          <p className="mt-0.5 text-xs font-semibold leading-relaxed text-ink-soft">
-            {hasPremium ? (
-              <>
-                <span className="font-bold text-success">Premium</span>
-                {" · "}
-                {PREMIUM_PRICE_DISPLAY}
-                {subscription.cancelAtPeriodEnd && periodEnd && (
-                  <span className="text-destructive"> · Cancels {periodEnd}</span>
-                )}
-                {!subscription.cancelAtPeriodEnd && periodEnd && <span> · Renews {periodEnd}</span>}
-              </>
-            ) : (
-              <span>Free · 1 full story</span>
-            )}
-          </p>
-        </div>
-        {hasPremium ? (
-          subscription.cancelAtPeriodEnd ? (
-            <SmallActionButton onClick={handleReactivate} disabled={actionLoading}>
-              {actionLoading ? "..." : "Reactivate"}
-            </SmallActionButton>
-          ) : (
-            <SmallActionButton tone="danger" onClick={handleCancel} disabled={actionLoading}>
-              {actionLoading ? "..." : "Cancel"}
-            </SmallActionButton>
-          )
-        ) : (
-          <SmallActionButton onClick={onNavigatePaywall}>Upgrade</SmallActionButton>
-        )}
-      </div>
-    </div>
-  );
-}
 
 function SlpShareRow({ child }: { child: Child }) {
   const [code, setCode] = useState<string | null>(null);
@@ -733,21 +648,6 @@ function SchoolIcon() {
   );
 }
 
-function RetellLibraryIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      aria-hidden
-    >
-      <rect x="9" y="3" width="6" height="12" rx="3" />
-      <path d="M5 11a7 7 0 0 0 14 0M12 18v3" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function SettingsBackdrop() {
   return (
@@ -775,8 +675,3 @@ function SettingsBackdrop() {
   );
 }
 
-function accountLabel(role: string | undefined) {
-  if (role === "slp") return "SLP Account";
-  if (role === "teacher") return "Teacher Account";
-  return "Parent Account";
-}
