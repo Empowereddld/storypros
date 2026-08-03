@@ -366,45 +366,63 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
       {/* ── Monthly Community Circle ── */}
-      <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-primary/5">
-        <div className="mx-auto w-full max-w-5xl px-4 py-16 text-center sm:px-6">
-          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-            {COMMUNITY.eyebrow}
-          </p>
-          <h2 className="mt-2 font-display text-3xl font-extrabold text-primary sm:text-4xl">
-            {COMMUNITY.heading}
-          </h2>
+      <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-accent/15">
+        <div className="mx-auto grid w-full max-w-[1180px] items-center gap-8 px-5 py-12 sm:px-8 sm:py-14 lg:grid-cols-2 lg:gap-[56px]">
+          {/* Copy first on mobile, image second (mobile order per spec) */}
+          <div className="order-1 lg:order-2">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
+              {COMMUNITY.eyebrow}
+            </p>
+            <h2 className="mt-2 max-w-[22ch] font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
+              {COMMUNITY.heading}
+            </h2>
+            <p className="mt-3 text-[17px] font-semibold text-ink">{COMMUNITY.subheading}</p>
+            <p className="mt-3 max-w-[52ch] text-[15.5px] font-medium leading-relaxed text-ink-soft sm:text-base">
+              {COMMUNITY.body}
+            </p>
+          </div>
 
-          <img
-            src={dariaAndFriend}
-            alt=""
-            loading="lazy"
-            className="mx-auto mt-6 h-40 w-auto animate-bob object-contain drop-shadow-[0_18px_28px_rgba(63,38,140,0.18)]"
-          />
+          <div className="order-2 lg:order-1">
+            <img
+              src={communityCircleZoom}
+              alt="Children meeting together on a video call during a Story Pros Community Circle"
+              loading="lazy"
+              width={1280}
+              height={960}
+              className="w-full rounded-[26px] border border-accent/40 object-cover"
+            />
+          </div>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg font-bold leading-snug text-ink">
-            {COMMUNITY.lead}
-          </p>
-          <p className="mx-auto mt-3 max-w-3xl text-base font-medium leading-relaxed text-ink-soft">
-            {COMMUNITY.body}
-          </p>
+          <div className="order-3 lg:order-2 lg:col-start-2">
+            <ul className="grid gap-2.5 sm:grid-cols-2">
+              {COMMUNITY.chips.map((chip) => {
+                const Icon = SKILL_ICONS[chip.icon];
+                return (
+                  <li
+                    key={chip.label}
+                    className="flex items-center gap-2.5 rounded-2xl border border-accent/50 bg-card px-3.5 py-2.5"
+                  >
+                    {Icon && <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden />}
+                    <span className="text-[14.5px] font-semibold text-ink">{chip.label}</span>
+                  </li>
+                );
+              })}
+            </ul>
 
-          <ul className="mx-auto mt-8 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
-            {COMMUNITY.checks.map((check, i) => (
-              <Reveal key={check} delay={i * 80}>
-                <li className="flex h-full items-start gap-3 rounded-[22px] border border-accent/60 bg-card p-4 shadow-card">
-                  <CheckMark />
-                  <span className="text-sm font-bold leading-snug text-ink">{check}</span>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
+            <p className="mt-4 max-w-[54ch] text-[13.5px] font-medium leading-relaxed text-ink-soft">
+              {COMMUNITY.note}
+            </p>
 
-          <p className="mx-auto mt-8 max-w-2xl font-display text-xl font-extrabold leading-snug text-primary">
-            {COMMUNITY.close}
-          </p>
+            <a
+              href="#membership"
+              className="press-pop mt-6 inline-flex h-[52px] items-center justify-center whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+            >
+              {COMMUNITY.cta}
+            </a>
+          </div>
         </div>
       </section>
+
 
       {/* ── Family dashboard (art left) ── */}
       <CharacterSection side="left" image={danDariaThumbsUp}>
