@@ -84,7 +84,10 @@ export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
     if (index < phases.length - 1) onChange(index + 1);
   }, [sub, index, onChange, phases.length]);
 
-  if (!import.meta.env.DEV) return null;
+  const showDevNav =
+    import.meta.env.DEV ||
+    (typeof window !== "undefined" && window.location.hostname.endsWith(".lovableproject.com"));
+  if (!showDevNav) return null;
 
   const atStart = index <= 0 && (!sub || sub.index <= 0);
   const atEnd =
