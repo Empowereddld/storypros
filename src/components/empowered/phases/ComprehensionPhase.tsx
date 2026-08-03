@@ -253,9 +253,20 @@ export function ComprehensionPhase({
                       </span>
                     </div>
 
-                    <p className="text-lg font-bold leading-snug text-primary">
-                      {brainCheck.message}
-                    </p>
+                    <div className="flex items-center gap-3">
+                      {supported && (
+                        <AudioButton
+                          size="md"
+                          tone="quiet"
+                          playing={isPlaying("feedback")}
+                          onClick={() => toggle(brainCheck.message, "feedback")}
+                          text={brainCheck.message}
+                        />
+                      )}
+                      <p className="min-w-0 flex-1 text-lg font-bold leading-snug text-primary">
+                        {brainCheck.message}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
