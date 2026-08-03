@@ -161,7 +161,7 @@ export const COMMUNITY = {
   chips: [
     { icon: "CalendarDays", label: "Monthly" },
     { icon: "Clock", label: "About 1 hour" },
-    { icon: "Repeat", label: "Rotating Saturdays" },
+    { icon: "Repeat", label: "Rotating Times" },
     { icon: "Users", label: "Parents welcome" },
   ],
   note: "Session times rotate throughout the year to make it easier for families in different parts of the world to join.",
