@@ -224,7 +224,7 @@ function CheckpointCard({
       className={cn(
         "relative rounded-[24px] border bg-card/95 p-3.5 backdrop-blur",
         isCurrent
-          ? "border-primary/30 bg-card p-4 shadow-[0_14px_28px_rgba(73,32,191,0.16)] ring-2 ring-secondary/60"
+          ? "border-primary/30 bg-card px-4 pt-6 pb-5 shadow-[0_14px_28px_rgba(73,32,191,0.16)] ring-2 ring-secondary/60"
           : "border-accent/60 shadow-card",
         isCompleted && "bg-card/80",
       )}
