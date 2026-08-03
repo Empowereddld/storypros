@@ -96,7 +96,10 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
 
         {/* Buddy + speech bubble. Still after entrance — no looping motion. */}
         <div
-          className="animate-slide-up mt-8 flex flex-col items-center gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-5"
+          className={cn(
+            "animate-slide-up mt-8 flex flex-col items-center sm:mt-8 sm:flex-row sm:items-center",
+            compact ? "gap-2 sm:gap-3" : "gap-3 sm:gap-5",
+          )}
           style={{ animationDelay: "100ms" }}
         >
           <img
@@ -106,8 +109,14 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
             draggable={false}
           />
 
-          <div className="relative w-full sm:min-w-[320px]">
-            <div className={cn("rounded-[26px] border-2 px-6 py-6 shadow-card sm:px-[30px] sm:py-[30px]", b.bubble)}>
+          <div className={cn("relative w-full", compact ? "sm:max-w-[520px]" : "sm:min-w-[320px]")}>
+            <div
+              className={cn(
+                "rounded-[26px] border-2 shadow-card",
+                compact ? "px-5 py-5 sm:px-6 sm:py-6" : "px-6 py-6 sm:px-[30px] sm:py-[30px]",
+                b.bubble,
+              )}
+            >
               <p className="whitespace-pre-line text-left text-[18px] font-semibold leading-[1.45] text-ink sm:text-[21px]">
                 <button
                   type="button"
@@ -128,8 +137,15 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
         </div>
 
 
-        <div className="animate-slide-up mt-7" style={{ animationDelay: "300ms" }}>
-          <TactileButton onClick={handleNext} className="min-h-[56px]">
+        <div
+          className={cn("animate-slide-up", compact ? "mt-8" : "mt-7")}
+          style={{ animationDelay: "300ms" }}
+        >
+          <TactileButton
+            onClick={handleNext}
+            fullWidth={!compact}
+            className={cn(compact && "w-full max-w-[340px] sm:max-w-[420px] mx-auto")}
+          >
             Start
           </TactileButton>
         </div>
