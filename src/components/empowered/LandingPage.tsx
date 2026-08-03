@@ -70,7 +70,7 @@ import {
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
-import communityCircleZoom from "@/assets/community-circle-zoom.jpg";
+import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
 import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
@@ -378,11 +378,11 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
           {/* Desktop-only image column (left) */}
           <div className="hidden lg:block">
             <img
-              src={communityCircleZoom}
+              src={communityCircleZoomAsset.url}
               alt="Children meeting together on a video call during a Story Pros Community Circle"
               loading="lazy"
-              width={1280}
-              height={960}
+              width={1447}
+              height={1080}
               className="w-full rounded-[26px] border border-accent/40 object-cover"
             />
           </div>
@@ -401,11 +401,11 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
             {/* Mobile image sits between the body copy and the chips */}
             <img
-              src={communityCircleZoom}
+              src={communityCircleZoomAsset.url}
               alt="Children meeting together on a video call during a Story Pros Community Circle"
               loading="lazy"
-              width={1280}
-              height={960}
+              width={1447}
+              height={1080}
               className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover lg:hidden"
             />
 
