@@ -325,8 +325,8 @@ export function ComprehensionPhase({
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-3 py-2.5 text-center shadow-card transition-all",
-                isSelected && "border-primary bg-primary/5 -translate-y-0.5 shadow-soft",
+                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-4 py-2.5 text-center shadow-card transition-all",
+                isSelected && "border-primary bg-primary/5 shadow-sm",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
               )}
@@ -375,10 +375,10 @@ export function ComprehensionPhase({
 
 function SelectedCheck() {
   return (
-    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
       <svg
         viewBox="0 0 24 24"
-        className="h-4 w-4"
+        className="h-3 w-3"
         stroke="currentColor"
         strokeWidth="3"
         fill="none"
