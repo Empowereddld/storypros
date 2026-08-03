@@ -140,14 +140,13 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
             <h1 className="font-display text-[30px] font-extrabold leading-tight text-primary sm:text-[34px]">
               Adventure Map
             </h1>
-            <p className="mt-1.5 text-[15px] font-bold text-ink">Your next story is ready.</p>
-            <p className="mt-1 text-[12px] font-semibold text-ink-soft">
+            <p className="mt-2.5 text-[15px] font-bold text-ink">Your next story is ready.</p>
+            <p className="mt-1.5 text-[12px] font-semibold text-ink-soft">
               {completedCount} {completedCount === 1 ? "story" : "stories"} completed
             </p>
-
           </header>
 
-          <div className="relative mt-8">
+          <div className="relative mt-10">
             {/* winding path behind the checkpoints */}
             <svg
               className="pointer-events-none absolute inset-0 h-full w-full"
@@ -175,7 +174,7 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
               />
             </svg>
 
-            <ol className="relative space-y-8">
+            <ol className="relative space-y-10">
               {checkpoints.map((checkpoint, index) => (
                 <li
                   key={checkpoint.storyId}
@@ -225,7 +224,7 @@ function CheckpointCard({
       className={cn(
         "relative rounded-[24px] border bg-card/95 p-3.5 backdrop-blur",
         isCurrent
-          ? "border-primary/30 bg-card p-4 shadow-[0_14px_28px_rgba(73,32,191,0.16)] ring-2 ring-secondary/60"
+          ? "border-primary/30 bg-card px-4 pt-6 pb-5 shadow-[0_14px_28px_rgba(73,32,191,0.16)] ring-2 ring-secondary/60"
           : "border-accent/60 shadow-card",
         isCompleted && "bg-card/80",
       )}
@@ -299,7 +298,7 @@ function CheckpointCard({
       {isCurrent && (
         <TactileButton
           onClick={onStart}
-          className="mt-3.5 text-base"
+          className="mt-6 h-14 text-base"
           leadingIcon={<PaperPlaneIcon className="h-5 w-5" />}
         >
           {checkpoint.inProgress ? "Continue Story" : "Start Story"}
@@ -311,12 +310,12 @@ function CheckpointCard({
 
 function FutureMarker({ isFree, onUpgrade }: { isFree: boolean; onUpgrade: () => void }) {
   return (
-    <div className="rounded-[24px] border border-dashed border-primary/25 bg-card/70 p-4 text-center backdrop-blur">
+    <div className="rounded-[24px] border border-dashed border-primary/25 bg-card/70 px-4 py-6 text-center backdrop-blur">
       <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent/70 text-primary">
         <LockIcon />
       </span>
-      <p className="mt-2 text-[15px] font-extrabold text-ink">More stories ahead</p>
-      <p className="mt-1 text-[13px] font-semibold leading-relaxed text-ink-soft">
+      <p className="mt-4 text-[15px] font-extrabold text-ink">More stories ahead</p>
+      <p className="mt-2 text-[13px] font-semibold leading-relaxed text-ink-soft">
         {isFree
           ? "Join Story Pros to continue your adventure."
           : "Finish a story to unlock the next one."}
@@ -324,7 +323,7 @@ function FutureMarker({ isFree, onUpgrade }: { isFree: boolean; onUpgrade: () =>
       {isFree && (
         <button
           onClick={onUpgrade}
-          className="press-pop mt-3 inline-flex items-center rounded-full bg-accent/50 px-4 py-2 text-[13px] font-extrabold text-primary"
+          className="press-pop mt-5 inline-flex items-center rounded-full bg-accent/50 px-4 py-2 text-[13px] font-extrabold text-primary"
         >
           See Membership
         </button>
