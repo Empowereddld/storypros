@@ -11,11 +11,12 @@ import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, ActivityAttempt, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
-import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-pointing.webp";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { AudioButton } from "../AudioButton";
+import { useListen } from "./ListenButton";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Character",
