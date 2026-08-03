@@ -406,21 +406,6 @@ function SelectedCheck() {
   );
 }
 
-function CheckBadge() {
-  return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-success text-success-foreground">
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        stroke="currentColor"
-        strokeWidth="3"
-        fill="none"
-      >
-        <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </span>
-  );
-}
 
 function CrossBadge() {
   return (
