@@ -92,33 +92,14 @@ export function ComprehensionPhase({
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const [reflecting, setReflecting] = useState(false);
 
-  const [speaking, setSpeaking] = useState(false);
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
   const startTime = useRef(Date.now());
 
+  // Stop any audio when moving to the next question.
   useEffect(() => {
-    preloadVoices();
-  }, []);
-  useEffect(() => {
-    return () => {
-      stop();
-      setSpeaking(false);
-    };
-  }, [qi]);
+    return () => cancel();
+  }, [qi, cancel]);
 
-  async function handleListen() {
-    if (speaking) {
-      stop();
-      setSpeaking(false);
-      return;
-    }
-    setSpeaking(true);
-    try {
-      await speak(q.prompt, { rate: speedToRate(ttsSpeed) });
-    } catch {
-      /* TTS unavailable — the child can still read the prompt */
-    }
-    setSpeaking(false);
-  }
 
   const q = questions[qi];
   const progress = (qi / questions.length) * 100;
