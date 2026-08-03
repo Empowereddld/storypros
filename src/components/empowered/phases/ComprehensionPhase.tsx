@@ -252,7 +252,7 @@ export function ComprehensionPhase({
                         brainCheck.type === "correct" ? "text-success" : "text-destructive",
                       )}
                     >
-                      {brainCheck.type === "correct" ? <CheckBadge /> : <CrossBadge />}
+                      {brainCheck.type === "correct" ? <CheckBadge size="sm" /> : <CrossBadge size="sm" />}
                       <span>{brainCheck.type === "correct" ? "Correct" : "Not quite"}</span>
                     </div>
                     <p className="text-base font-semibold leading-snug text-primary">
