@@ -26,9 +26,8 @@ export interface SectionIntroProps {
   /** Spoken + displayed script. Newlines are preserved. */
   script: string;
   onNext: () => void;
-  /** Compact layout for the Question Time intro: narrower card, closer buddy, narrower button. */
-  compact?: boolean;
 }
+
 
 const BUDDY = {
   dan: {
