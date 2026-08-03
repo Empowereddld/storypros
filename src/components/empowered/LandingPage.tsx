@@ -436,8 +436,10 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             >
               {COMMUNITY.cta}
             </a>
+            </div>
           </div>
         </div>
+
       </section>
 
 
