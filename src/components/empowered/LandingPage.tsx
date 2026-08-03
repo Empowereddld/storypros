@@ -47,7 +47,6 @@ import {
   WHY_STORIES,
   PATHWAY,
   WILL_LEARN,
-  DIFFERENTIATORS,
   COMMUNITY,
   DASHBOARD,
   DESIGNED_FOR,
@@ -66,7 +65,6 @@ import {
 } from "@/data/landingContent";
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
-import danDariaSurprised from "@/assets/dan-daria-surprised.webp";
 import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
 import dariaAndFriend from "@/assets/daria-and-friend.webp";
