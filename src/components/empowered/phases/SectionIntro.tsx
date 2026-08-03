@@ -97,7 +97,7 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
         {/* Buddy + speech bubble. Still after entrance — no looping motion. */}
         <div
           className={cn(
-            "animate-slide-up mt-8 flex flex-col items-center sm:mt-8 sm:flex-row sm:items-center",
+            "animate-slide-up mt-8 flex flex-col items-center justify-center sm:mt-8 sm:flex-row sm:items-center",
             compact ? "gap-2 sm:gap-3" : "gap-3 sm:gap-5",
           )}
           style={{ animationDelay: "100ms" }}
@@ -138,13 +138,13 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
 
 
         <div
-          className={cn("animate-slide-up", compact ? "mt-8" : "mt-7")}
+          className={cn("animate-slide-up flex justify-center", compact ? "mt-8" : "mt-7")}
           style={{ animationDelay: "300ms" }}
         >
           <TactileButton
             onClick={handleNext}
             fullWidth={!compact}
-            className={cn(compact && "w-full max-w-[340px] sm:max-w-[420px] mx-auto")}
+            className={cn(compact && "w-full max-w-[340px] sm:max-w-[420px]")}
           >
             Start
           </TactileButton>
