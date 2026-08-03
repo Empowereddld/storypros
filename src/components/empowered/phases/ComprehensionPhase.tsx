@@ -442,7 +442,7 @@ function BrainIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-10 w-10 text-primary"
+      className="h-8 w-8 text-primary"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.8"
