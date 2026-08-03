@@ -229,58 +229,56 @@ export function ComprehensionPhase({
       {showingBrainCheck && (
         <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm animate-slide-up">
           <div
-            className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft"
+            className="w-full rounded-t-[32px] bg-card px-5 pb-7 pt-5 shadow-soft"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
+            <div className="mx-auto w-full max-w-[560px]">
+              <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-accent" />
 
-            <div className="flex items-start gap-3">
-              <img src={dariaSolo} alt="" className="h-16 w-auto object-contain" />
-              <div className="flex-1">
-                <div
-                  className={cn(
-                    "rounded-2xl rounded-bl-sm p-4 shadow-card",
-                    brainCheck.type === "correct"
-                      ? "bg-success/10 border-2 border-success animate-tada"
-                      : "bg-sky animate-shake",
-                  )}
-                >
-                  <p className="text-base font-semibold leading-snug text-primary">
-                    {brainCheck.message}
-                  </p>
+              <div className="flex items-end gap-3">
+                <img src={dariaSolo} alt="" className="h-20 w-auto shrink-0 object-contain" />
+                <div className="flex-1">
+                  <div
+                    className={cn(
+                      "rounded-2xl rounded-bl-sm p-4 shadow-card",
+                      brainCheck.type === "correct"
+                        ? "bg-success/10 border-2 border-success animate-scale-in"
+                        : "bg-sky border-2 border-destructive/40 animate-scale-in",
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        "mb-1.5 inline-flex items-center gap-1.5 text-sm font-bold",
+                        brainCheck.type === "correct" ? "text-success" : "text-destructive",
+                      )}
+                    >
+                      {brainCheck.type === "correct" ? <CheckBadge /> : <CrossBadge />}
+                      <span>{brainCheck.type === "correct" ? "Correct" : "Not quite"}</span>
+                    </div>
+                    <p className="text-base font-semibold leading-snug text-primary">
+                      {brainCheck.message}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {brainCheck.type === "correct" && (
-              <div className="mt-4 flex items-center justify-center gap-2 text-success">
-                <CheckBadge />
-                <span className="text-lg font-bold">Correct!</span>
+              <div className="mx-auto mt-6 w-full sm:max-w-[400px]">
+                <TactileButton
+                  variant={brainCheck.type === "correct" ? "primary" : "secondary"}
+                  onClick={handleBrainCheckContinue}
+                >
+                  {brainCheck.type === "correct"
+                    ? qi + 1 >= questions.length
+                      ? "See results"
+                      : "Next question"
+                    : "Try again"}
+                </TactileButton>
               </div>
-            )}
-
-            {brainCheck.type === "wrong" && (
-              <div className="mt-4 flex items-center justify-center gap-2 text-destructive">
-                <CrossBadge />
-                <span className="text-lg font-bold">Let's try again!</span>
-              </div>
-            )}
-
-            <div className="mt-5">
-              <TactileButton
-                variant={brainCheck.type === "correct" ? "primary" : "secondary"}
-                onClick={handleBrainCheckContinue}
-              >
-                {brainCheck.type === "correct"
-                  ? qi + 1 >= questions.length
-                    ? "See results"
-                    : "Next question"
-                  : "Try again"}
-              </TactileButton>
             </div>
           </div>
         </div>
       )}
+
 
       {/* Question prompt - always visible */}
       <div key={`q-${qi}`} className="relative z-10 mx-auto mt-3 w-full max-w-[560px] shrink-0 px-5 animate-slide-up">
