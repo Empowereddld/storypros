@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import dariaSolo from "@/assets/daria-solo.png";
 import { cn } from "@/lib/utils";
 import { getStoriesByLevel } from "@/services/stories";
 import { getCompletedStoryIds, getCurrentLevel, getPaperPlanes } from "@/services/progress";
