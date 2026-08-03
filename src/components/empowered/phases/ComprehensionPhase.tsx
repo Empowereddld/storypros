@@ -242,8 +242,8 @@ export function ComprehensionPhase({
                     className={cn(
                       "rounded-2xl rounded-bl-sm p-4 shadow-card",
                       brainCheck.type === "correct"
-                        ? "bg-success/10 border-2 border-success animate-scale-in"
-                        : "bg-sky border-2 border-destructive/40 animate-scale-in",
+                        ? "bg-success/10 border-2 border-success animate-pop-in"
+                        : "bg-sky border-2 border-destructive/40 animate-pop-in",
                     )}
                   >
                     <div
