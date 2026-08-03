@@ -78,8 +78,9 @@ No instructional or activity copy changes in this pass — visuals, placement, a
 
 ## Technical notes
 
-- New `src/components/empowered/AudioButton.tsx`: props `text`, `size: "lg" | "md" | "sm"`, `tone: "primary" | "quiet"`, `playing`, `onClick`. Pure presentation.
+- New `src/components/empowered/AudioButton.tsx`: props `text`, `size: "lg" | "md" | "sm"`, `tone: "primary" | "quiet"`, `playing`, `onClick`, `label?`. Pure presentation; enforces the 44px minimum hit area independent of visible circle size, and stops event propagation so it never triggers a parent card's selection.
 - Keep both audio engines as-is: `useListen`/`services/tts` for narration that has pre-generated clips, `speakLabel` for UI/answer text. The visual control is shared; the engine choice per screen doesn't change.
 - `ListenButton.tsx` keeps `useListen` (the playback hook) and re-exports the new visual so existing imports don't break, then call sites are migrated.
-- Colours stay on existing tokens (`primary`, `accent`, `secondary`); no new palette values.
+- Remove `animate-pulse` / `animate-pulse-glow` from every speaker; playing state is tint + ring only.
+- Colours stay on existing tokens (`primary`, `accent`, `secondary`); no new palette values. No copy edits in this pass.
 - Files touched: `AudioButton.tsx` (new), `SpeakButton.tsx`, `ListenButton.tsx`, `ComprehensionPhase.tsx`, `PhonologicalPhase.tsx`, `VocabularyIntroPhase.tsx`, `VocabularyQuizPhase.tsx`, `StorySlidesPhase.tsx`, `SectionIntro.tsx`, `ImmediateRetellPhase.tsx`, `DelayedRetellPhase.tsx`, `SentenceBuilderPhase.tsx`, `JokePhase.tsx`, `PersonalConnectionPhase.tsx`.
