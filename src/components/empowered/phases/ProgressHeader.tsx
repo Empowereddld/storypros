@@ -2,14 +2,17 @@ interface ProgressHeaderProps {
   progress: number;
   label?: string;
   onClose: () => void;
+  /** Optional wrapper classes to align the row with a page content column */
+  rowClassName?: string;
 }
 
-export function ProgressHeader({ progress, label, onClose }: ProgressHeaderProps) {
+export function ProgressHeader({ progress, label, onClose, rowClassName }: ProgressHeaderProps) {
   const clamped = Math.min(100, Math.max(0, progress));
 
   return (
     <header className="px-5 pt-4">
-      <div className="flex items-center gap-3">
+      <div className={`flex items-center gap-3 ${rowClassName ?? ""}`}>
+
         <button
           onClick={onClose}
           aria-label="Quit story"
