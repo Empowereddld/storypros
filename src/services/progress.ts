@@ -12,6 +12,7 @@ import type { ActivityAttempt, PhaseResult } from "@/types/story";
 import { calculateDomainScores, calculateOverallScore, type SkillDomain } from "./scoring";
 import { awardBadge } from "./shop";
 import { db, isCloudId, logSyncError, emitDataUpdated } from "./cloud";
+import { getPaperPlanes } from "@/lib/privileged.functions";
 
 // ── In-memory store (cached in localStorage, synced to Supabase) ──
 
@@ -143,7 +144,7 @@ export async function hydrateProgressFromCloud(childId: string): Promise<void> {
         )
         .eq("child_id", childId)
         .order("completed_at", { ascending: true }),
-      db.rpc("get_paper_planes", { p_child_id: childId }),
+      getPaperPlanes({ data: { childId } }).catch(() => ({ total: 0 })),
       db
         .from("daily_streaks")
         .select("streak_date")
