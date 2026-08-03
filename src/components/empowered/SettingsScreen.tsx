@@ -16,7 +16,7 @@ import {
 } from "@/services/subscription";
 import { createInviteCode } from "@/services/slp";
 import { TactileButton } from "./TactileButton";
-import { LockIcon, MiniPlane, Star, StoryProsLogo } from "./StoryProsBrand";
+import { LockIcon, MiniPlane, Star } from "./StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "./StoryProsUi";
 import { FEATURES } from "@/config/features";
 
@@ -181,7 +181,6 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
             <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <StoryProsLogo layout="row" size="md" className="scale-90" />
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
           <LockIcon className="h-5 w-5" />
         </span>
