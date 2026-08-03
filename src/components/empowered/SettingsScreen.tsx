@@ -231,9 +231,9 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
               </div>
               <button
                 onClick={() => (onNavigate ? onNavigate("paywall") : onClose())}
-                className="shrink-0 text-[14px] font-semibold text-primary underline-offset-4 hover:underline"
+                className="shrink-0 rounded-lg bg-accent/40 px-3 py-1.5 text-[13px] font-semibold text-primary transition-colors hover:bg-accent/60"
               >
-                {hasMembership ? "Manage membership" : "Upgrade"}
+                {hasMembership ? "Manage" : "Upgrade"}
               </button>
             </div>
           </SettingsSection>
@@ -269,7 +269,7 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
             </SettingsSection>
           )}
 
-          <SettingsSection title="Account & support">
+          <SettingsSection title="Account & help">
             <RowButton onClick={() => onNavigate?.("security")} title="Password & security" />
             <RowButton onClick={() => onNavigate?.("privacy")} title="Privacy & data" />
             <RowButton onClick={() => onNavigate?.("support")} title="Help & support" />
@@ -294,7 +294,7 @@ export function SettingsScreen({ onClose, onNavigate }: SettingsScreenProps) {
 function SettingsSection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="mt-9">
-      <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+      <h2 className="mb-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-soft/80">
         {title}
       </h2>
       <div className="divide-y divide-border/70 overflow-hidden rounded-xl border border-border bg-card">
