@@ -16,6 +16,9 @@ import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
 import {
   Repeat,
+  CalendarDays,
+  Clock,
+  Users,
   MessageCircle,
   Headphones,
   AlignLeft,
@@ -67,7 +70,7 @@ import {
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import communityCircleZoom from "@/assets/community-circle-zoom.jpg";
 import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
@@ -96,6 +99,10 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
   BookOpen,
   Volume2,
   CheckCircle2,
+  CalendarDays,
+  Clock,
+  Repeat,
+  Users,
 };
 
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
@@ -366,45 +373,75 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
       {/* ── Monthly Community Circle ── */}
-      <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-primary/5">
-        <div className="mx-auto w-full max-w-5xl px-4 py-16 text-center sm:px-6">
-          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-            {COMMUNITY.eyebrow}
-          </p>
-          <h2 className="mt-2 font-display text-3xl font-extrabold text-primary sm:text-4xl">
-            {COMMUNITY.heading}
-          </h2>
+      <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-accent/15">
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-5 py-12 sm:px-8 sm:py-14 lg:grid lg:grid-cols-2 lg:items-center lg:gap-[56px]">
+          {/* Desktop-only image column (left) */}
+          <div className="hidden lg:block">
+            <img
+              src={communityCircleZoom}
+              alt="Children meeting together on a video call during a Story Pros Community Circle"
+              loading="lazy"
+              width={1280}
+              height={960}
+              className="w-full rounded-[26px] border border-accent/40 object-cover"
+            />
+          </div>
 
-          <img
-            src={dariaAndFriend}
-            alt=""
-            loading="lazy"
-            className="mx-auto mt-6 h-40 w-auto animate-bob object-contain drop-shadow-[0_18px_28px_rgba(63,38,140,0.18)]"
-          />
+          <div>
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground/80">
+              {COMMUNITY.eyebrow}
+            </p>
+            <h2 className="mt-2 max-w-[22ch] font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
+              {COMMUNITY.heading}
+            </h2>
+            <p className="mt-3 text-[17px] font-semibold text-ink">{COMMUNITY.subheading}</p>
+            <p className="mt-3 max-w-[52ch] text-[15.5px] font-medium leading-relaxed text-ink-soft sm:text-base">
+              {COMMUNITY.body}
+            </p>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg font-bold leading-snug text-ink">
-            {COMMUNITY.lead}
-          </p>
-          <p className="mx-auto mt-3 max-w-3xl text-base font-medium leading-relaxed text-ink-soft">
-            {COMMUNITY.body}
-          </p>
+            {/* Mobile image sits between the body copy and the chips */}
+            <img
+              src={communityCircleZoom}
+              alt="Children meeting together on a video call during a Story Pros Community Circle"
+              loading="lazy"
+              width={1280}
+              height={960}
+              className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover lg:hidden"
+            />
 
-          <ul className="mx-auto mt-8 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
-            {COMMUNITY.checks.map((check, i) => (
-              <Reveal key={check} delay={i * 80}>
-                <li className="flex h-full items-start gap-3 rounded-[22px] border border-accent/60 bg-card p-4 shadow-card">
-                  <CheckMark />
-                  <span className="text-sm font-bold leading-snug text-ink">{check}</span>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
+            <div className="mt-6">
 
-          <p className="mx-auto mt-8 max-w-2xl font-display text-xl font-extrabold leading-snug text-primary">
-            {COMMUNITY.close}
-          </p>
+            <ul className="grid gap-2.5 sm:grid-cols-2">
+              {COMMUNITY.chips.map((chip) => {
+                const Icon = SKILL_ICONS[chip.icon];
+                return (
+                  <li
+                    key={chip.label}
+                    className="flex items-center gap-2.5 rounded-2xl border border-accent/50 bg-card px-3.5 py-2.5"
+                  >
+                    {Icon && <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden />}
+                    <span className="text-[14.5px] font-semibold text-ink">{chip.label}</span>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <p className="mt-4 max-w-[54ch] text-[13.5px] font-medium leading-relaxed text-ink-soft">
+              {COMMUNITY.note}
+            </p>
+
+            <a
+              href="#membership"
+              className="press-pop mt-6 inline-flex h-[52px] items-center justify-center whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+            >
+              {COMMUNITY.cta}
+            </a>
+            </div>
+          </div>
         </div>
+
       </section>
+
 
       {/* ── Family dashboard (art left) ── */}
       <CharacterSection side="left" image={danDariaThumbsUp}>

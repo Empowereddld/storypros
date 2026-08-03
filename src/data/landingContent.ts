@@ -155,16 +155,19 @@ export const DIFFERENTIATORS = [
 
 export const COMMUNITY = {
   eyebrow: "Included with membership",
-  heading: "Learn, connect, and grow together",
-  lead: "More than an app: every Story Pros membership includes access to a live monthly Story Pros Global Community Circle on Zoom.",
-  body: "Children and families can join guided story activities, practise communication in a welcoming environment, and connect with others who understand language differences.",
-  checks: [
-    "Practise communication in a welcoming, low-pressure setting",
-    "Connect with other children and families who understand language differences",
-    "Build confidence, belonging, and self-advocacy",
+  heading: "More than an app. A community too.",
+  subheading: "Story Pros Community Circle",
+  body: "Once a month, children can come together live on Zoom to talk, share, connect, and spend time with other kids who understand that communication can sometimes be hard.",
+  chips: [
+    { icon: "CalendarDays", label: "Monthly" },
+    { icon: "Clock", label: "About 1 hour" },
+    { icon: "Repeat", label: "Rotating Saturdays" },
+    { icon: "Users", label: "Parents welcome" },
   ],
-  close: "Stories help children practise language. Community helps them feel understood.",
+  note: "Session times rotate throughout the year to make it easier for families in different parts of the world to join.",
+  cta: "Explore Membership",
 };
+
 
 /* ── Family dashboard ── */
 
