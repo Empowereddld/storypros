@@ -55,7 +55,7 @@ function SpeakerIcon({ className }: { className?: string }) {
   );
 }
 
-export function SectionIntro({ title, buddy, script, onNext, compact }: SectionIntroProps) {
+export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps) {
   const b = BUDDY[buddy];
   const [speaking, setSpeaking] = useState(false);
 
