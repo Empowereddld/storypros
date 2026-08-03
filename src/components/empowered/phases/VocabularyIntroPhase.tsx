@@ -140,7 +140,6 @@ export function VocabularyIntroPhase({
                 <ListenButton
                   playing={isPlaying("intro")}
                   onClick={() => toggle(introNarration, "intro")}
-                  className="h-12 w-12"
                   ariaLabel="Hear about this word"
                 />
               </div>
@@ -226,7 +225,6 @@ export function VocabularyIntroPhase({
                       <ListenButton
                         playing={isPlaying(`feat-${index}`)}
                         onClick={() => toggle(narration, `feat-${index}`)}
-                        className="h-11 w-11"
                         ariaLabel="Hear this feature"
                       />
                     </div>

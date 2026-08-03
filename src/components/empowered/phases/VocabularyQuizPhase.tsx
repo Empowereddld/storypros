@@ -187,7 +187,6 @@ export function VocabularyQuizPhase({
               <ListenButton
                 playing={isPlaying("prompt")}
                 onClick={() => toggle(question.prompt, "prompt")}
-                className="h-12 w-12"
                 ariaLabel="Hear the question"
               />
             </div>

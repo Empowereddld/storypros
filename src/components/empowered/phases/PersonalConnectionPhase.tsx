@@ -67,7 +67,6 @@ export function PersonalConnectionPhase({
                 <ListenButton
                   playing={isPlaying("prompt")}
                   onClick={() => toggle(prompt, "prompt")}
-                  className="mt-1 h-12 w-12"
                   ariaLabel="Hear the question"
                 />
               )}

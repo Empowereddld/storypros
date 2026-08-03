@@ -94,7 +94,6 @@ export function DelayedRetellPhase({
                 <ListenButton
                   playing={isPlaying("delayed")}
                   onClick={() => toggle(delayedPrompt, "delayed")}
-                  className="h-11 w-11"
                   ariaLabel="Hear the retell prompt"
                 />
               )}
