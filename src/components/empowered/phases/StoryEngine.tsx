@@ -39,6 +39,8 @@ import { JokePhase } from "./JokePhase";
 import { PersonalConnectionPhase } from "./PersonalConnectionPhase";
 import { StoryCompletePhase } from "./StoryCompletePhase";
 import { SectionIntro, type Buddy } from "./SectionIntro";
+import { DevPhaseNav } from "./DevPhaseNav";
+
 
 /* Section intro copy — one screen before each activity.
  * Buddies alternate so the same voice never runs the whole session. */
@@ -376,6 +378,12 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
         </div>
       )}
       {renderPhase()}
+      <DevPhaseNav
+        phases={PHASE_ORDER}
+        index={phaseIndex}
+        onChange={(i: number) => setPhaseIndex(Math.max(0, Math.min(PHASE_ORDER.length - 1, i)))}
+      />
+
     </div>
   );
 }
