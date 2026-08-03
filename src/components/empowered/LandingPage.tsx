@@ -374,9 +374,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Monthly Community Circle ── */}
       <section id="community" className="scroll-mt-20 border-y border-accent/40 bg-accent/15">
-        <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-5 py-12 sm:px-8 sm:py-14 lg:grid lg:grid-cols-2 lg:items-center lg:gap-[56px]">
-          {/* Desktop-only image column (left) */}
-          <div className="hidden lg:block">
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-5 py-12 sm:px-8 sm:py-14 md:grid md:grid-cols-2 md:items-center md:gap-[40px] lg:gap-[56px]">
+          {/* Side-by-side image column (left) */}
+          <div className="hidden md:block">
             <img
               src={communityCircleZoomAsset.url}
               alt="Children meeting together on a video call during a Story Pros Community Circle"
@@ -399,14 +399,14 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               {COMMUNITY.body}
             </p>
 
-            {/* Mobile image sits between the body copy and the chips */}
+            {/* Stacked image sits between the body copy and the chips on phones */}
             <img
               src={communityCircleZoomAsset.url}
               alt="Children meeting together on a video call during a Story Pros Community Circle"
               loading="lazy"
               width={1447}
               height={1080}
-              className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover lg:hidden"
+              className="mt-6 w-full rounded-[26px] border border-accent/40 object-cover md:hidden"
             />
 
             <div className="mt-6">
