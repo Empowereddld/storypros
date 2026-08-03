@@ -283,20 +283,20 @@ export function ComprehensionPhase({
       )}
 
       {/* Question prompt - always visible */}
-      <div key={`q-${qi}`} className="relative z-10 mx-auto mt-4 w-full max-w-[600px] shrink-0 px-5 animate-slide-up">
+      <div key={`q-${qi}`} className="relative z-10 mx-auto mt-3 w-full max-w-[560px] shrink-0 px-5 animate-slide-up">
         {hintImage && (
-          <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card shadow-soft">
+          <div className="relative mb-2 aspect-video w-full overflow-hidden rounded-[24px] border-[4px] border-card bg-card shadow-soft">
             <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
           </div>
         )}
-        <div className="relative overflow-hidden rounded-[28px] border-2 border-accent/70 bg-card p-4 shadow-card">
+        <div className="relative overflow-hidden rounded-[24px] border-2 border-accent/70 bg-card p-3.5 shadow-card">
           <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
           <div className="relative flex items-center gap-3">
             <button
               onClick={handleListen}
               disabled={!isSupported()}
               className={cn(
-                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full ring-2 transition-all active:scale-95",
+                "flex h-11 w-11 shrink-0 items-center justify-center rounded-full ring-2 transition-all active:scale-95",
                 elementStyle.bg,
                 elementStyle.text,
                 elementStyle.ring,
@@ -305,17 +305,17 @@ export function ComprehensionPhase({
               aria-label={isSupported() ? "Hear question" : elementLabel}
               title={elementLabel}
             >
-              <ElementIcon className="h-6 w-6" />
+              <ElementIcon className="h-5 w-5" />
             </button>
 
-            <h2 className="min-w-0 flex-1 font-display text-[24px] font-extrabold leading-tight text-primary">
+            <h2 className="min-w-0 flex-1 font-display text-[22px] font-extrabold leading-tight text-primary">
               {q.prompt}
             </h2>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
+      <div className="relative z-10 mx-auto mt-3 grid w-full max-w-[560px] flex-1 grid-cols-2 gap-2.5 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
@@ -325,7 +325,7 @@ export function ComprehensionPhase({
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all",
+                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-3 py-2.5 text-center shadow-card transition-all",
                 isSelected && "border-primary bg-primary/5 -translate-y-0.5 shadow-soft",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
@@ -333,7 +333,7 @@ export function ComprehensionPhase({
             >
               <span
                 className={cn(
-                  "text-base font-bold leading-snug",
+                  "text-[15px] font-bold leading-snug",
                   isDisabled ? "text-ink-soft line-through" : "text-ink",
                 )}
               >
