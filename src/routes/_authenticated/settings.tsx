@@ -18,6 +18,8 @@ function SettingsPage() {
     if (destination === "home") navigate({ to: "/home" });
     if (destination === "slp") navigate({ to: "/slp" });
     if (destination === "retell-library") navigate({ to: "/retell-library" });
+    if (destination === "terms") navigate({ to: "/terms" });
+    if (destination === "privacy-policy" || destination === "privacy") navigate({ to: "/privacy" });
   };
 
   const screen = (
