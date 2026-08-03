@@ -16,6 +16,9 @@ import { StoryProsLogo } from "./StoryProsBrand";
 import { PaperPlaneIcon, ChevronRightIcon } from "./StoryProsUi";
 import {
   Repeat,
+  CalendarDays,
+  Clock,
+  Users,
   MessageCircle,
   Headphones,
   AlignLeft,
@@ -67,7 +70,7 @@ import {
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
-import dariaAndFriend from "@/assets/daria-and-friend.webp";
+import communityCircleZoom from "@/assets/community-circle-zoom.jpg";
 import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
@@ -96,6 +99,10 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
   BookOpen,
   Volume2,
   CheckCircle2,
+  CalendarDays,
+  Clock,
+  Repeat,
+  Users,
 };
 
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
