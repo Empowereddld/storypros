@@ -319,7 +319,7 @@ export function ComprehensionPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
+      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 content-start gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up sm:flex-none sm:overflow-visible">
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
