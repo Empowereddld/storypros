@@ -285,8 +285,8 @@ export function ComprehensionPhase({
       {/* Question prompt - always visible */}
       <div key={`q-${qi}`} className="relative z-10 mx-auto mt-4 w-full max-w-[600px] shrink-0 px-5 animate-slide-up">
         {hintImage && (
-          <div className="relative mb-3 aspect-video h-auto w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card shadow-soft sm:aspect-auto sm:h-[clamp(150px,26vh,280px)]">
-            <img src={hintImage} alt="" className="h-full w-full object-contain object-center" />
+          <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-[30px] border-[5px] border-card bg-card shadow-soft">
+            <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
 
 
             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-ink/45 to-transparent" />
@@ -302,7 +302,7 @@ export function ComprehensionPhase({
               onClick={handleListen}
               disabled={!isSupported()}
               className={cn(
-                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full ring-2 transition-all",
+                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full btn-tactile ring-2 transition-all",
                 elementStyle.bg,
                 elementStyle.text,
                 elementStyle.ring,
@@ -321,7 +321,7 @@ export function ComprehensionPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 content-start gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up sm:flex-none sm:overflow-visible">
+      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
@@ -331,7 +331,7 @@ export function ComprehensionPhase({
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all sm:min-h-[68px]",
+                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all",
                 isSelected && "border-primary bg-primary/5 -translate-y-0.5 shadow-soft",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
