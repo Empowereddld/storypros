@@ -26,9 +26,8 @@ export interface SectionIntroProps {
   /** Spoken + displayed script. Newlines are preserved. */
   script: string;
   onNext: () => void;
-  /** Compact layout for the Question Time intro: narrower card, closer buddy, narrower button. */
-  compact?: boolean;
 }
+
 
 const BUDDY = {
   dan: {
@@ -56,7 +55,7 @@ function SpeakerIcon({ className }: { className?: string }) {
   );
 }
 
-export function SectionIntro({ title, buddy, script, onNext, compact }: SectionIntroProps) {
+export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps) {
   const b = BUDDY[buddy];
   const [speaking, setSpeaking] = useState(false);
 
@@ -86,9 +85,9 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
 
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto bg-cream px-5 pb-8 pt-6">
-      <div className="mx-auto flex w-full max-w-[640px] flex-1 flex-col justify-center gap-0">
+      <div className="mx-auto flex w-full max-w-[620px] flex-1 flex-col justify-center gap-0">
         <h1
-          className="animate-slide-up text-center font-display text-[34px] font-extrabold leading-tight text-primary sm:text-[44px]"
+          className="animate-slide-up text-center font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]"
           style={{ animationDelay: "0ms" }}
         >
           {title}
@@ -96,35 +95,34 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
 
         {/* Buddy + speech bubble. Still after entrance — no looping motion. */}
         <div
-          className={cn(
-            "animate-slide-up mt-8 flex flex-col items-center justify-center sm:mt-8 sm:flex-row sm:items-center",
-            compact ? "gap-2 sm:gap-3" : "gap-3 sm:gap-5",
-          )}
+          className="animate-slide-up mt-5 flex flex-col items-center justify-center gap-1 sm:mt-6 sm:flex-row sm:items-center sm:gap-1"
           style={{ animationDelay: "100ms" }}
         >
           <img
             src={b.image}
             alt={b.alt}
-            className="h-[150px] w-auto shrink-0 select-none object-contain sm:h-[180px]"
+            className="h-[170px] w-auto shrink-0 select-none object-contain sm:h-[210px]"
             draggable={false}
           />
 
-          <div className={cn("relative w-full", compact ? "sm:max-w-[520px]" : "sm:min-w-[320px]")}>
+          <div className="relative w-full sm:max-w-[400px]">
+            {/* Tail pointing back at the buddy */}
             <div
               className={cn(
-                "rounded-[26px] border-2 shadow-card",
-                compact ? "px-5 py-5 sm:px-6 sm:py-6" : "px-6 py-6 sm:px-[30px] sm:py-[30px]",
-                b.bubble,
+                "absolute left-1/2 top-[-9px] hidden h-4 w-4 -translate-x-1/2 rotate-45 border-l-2 border-t-2 sm:left-[-9px] sm:top-1/2 sm:block sm:-translate-x-0 sm:-translate-y-1/2 sm:-rotate-45",
+                b.tail,
               )}
-            >
-              <p className="whitespace-pre-line text-left text-[18px] font-semibold leading-[1.45] text-ink sm:text-[21px]">
+              aria-hidden
+            />
+            <div className={cn("relative rounded-[24px] border-2 px-5 py-5 shadow-card sm:px-6 sm:py-6", b.bubble)}>
+              <p className="whitespace-pre-line text-left text-[17px] font-semibold leading-[1.45] text-ink sm:text-[19px]">
                 <button
                   type="button"
                   onClick={toggleSpeak}
                   aria-pressed={speaking}
                   aria-label={speaking ? `Stop ${b.name}` : `Listen to ${b.name}`}
                   className={cn(
-                    "mr-3 inline-flex h-11 w-11 shrink-0 translate-y-[3px] items-center justify-center rounded-full border-2 border-primary/25 bg-card text-primary shadow-card transition-colors hover:border-primary/45",
+                    "mr-3 inline-flex h-10 w-10 shrink-0 translate-y-[3px] items-center justify-center rounded-full border-2 border-primary/25 bg-card text-primary shadow-card transition-colors hover:border-primary/45",
                     speaking && "bg-primary text-primary-foreground border-primary",
                   )}
                 >
@@ -136,20 +134,18 @@ export function SectionIntro({ title, buddy, script, onNext, compact }: SectionI
           </div>
         </div>
 
-
-        <div
-          className={cn("animate-slide-up flex justify-center", compact ? "mt-8" : "mt-7")}
-          style={{ animationDelay: "300ms" }}
-        >
+        <div className="animate-slide-up mt-6 flex justify-center" style={{ animationDelay: "300ms" }}>
           <TactileButton
             onClick={handleNext}
-            fullWidth={!compact}
-            className={cn(compact && "w-full max-w-[340px] sm:max-w-[420px]")}
+            fullWidth={false}
+            noShadow
+            className="w-full max-w-[340px] shadow-card sm:max-w-[400px]"
           >
             Start
           </TactileButton>
         </div>
       </div>
     </div>
+
   );
 }
