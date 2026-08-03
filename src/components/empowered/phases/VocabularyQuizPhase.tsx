@@ -6,6 +6,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -20,6 +21,23 @@ export function VocabularyQuizPhase({
   const words = storyData.vocabulary_words;
   const [wordIdx, setWordIdx] = useState(0);
   const [qIdx, setQIdx] = useState(0);
+  const devFlatQuestions = words.flatMap((w, wi) =>
+    w.quiz_questions.map((_, qi2) => ({ wi, qi2 })),
+  );
+  useDevSubSteps(
+    devFlatQuestions.length,
+    Math.max(
+      0,
+      devFlatQuestions.findIndex((q) => q.wi === wordIdx && q.qi2 === qIdx),
+    ),
+    (i: number) => {
+      const target = devFlatQuestions[i];
+      if (!target) return;
+      setWordIdx(target.wi);
+      setQIdx(target.qi2);
+    },
+    "question",
+  );
   const [selected, setSelected] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<FeedbackState>({ type: "none" });
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);

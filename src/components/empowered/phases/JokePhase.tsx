@@ -6,6 +6,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 type Step = "intro" | "meaning1" | "meaning2" | "joke";
 
@@ -23,6 +24,13 @@ export function JokePhase({
   ttsSpeed = "normal",
 }: StoryPhaseProps) {
   const [step, setStep] = useState<Step>("intro");
+  const JOKE_STEPS: Step[] = ["intro", "meaning1", "meaning2", "joke"];
+  useDevSubSteps(
+    JOKE_STEPS.length,
+    JOKE_STEPS.indexOf(step),
+    (i: number) => setStep(JOKE_STEPS[i]),
+    "step",
+  );
   const joke = storyData.joke;
   const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
 
