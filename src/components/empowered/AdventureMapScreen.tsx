@@ -176,13 +176,13 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
               />
             </svg>
 
-            <ol className="relative space-y-5">
+            <ol className="relative space-y-8">
               {checkpoints.map((checkpoint, index) => (
                 <li
                   key={checkpoint.storyId}
                   className={cn(
                     "relative",
-                    index % 2 === 0 ? "sm:pr-8" : "sm:pl-8",
+                    index % 2 === 0 ? "mr-6 sm:mr-12" : "ml-6 sm:ml-12",
                   )}
                 >
                   <CheckpointCard
@@ -201,7 +201,7 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
               ))}
 
               {remaining > 0 && (
-                <li className="relative sm:px-4">
+                <li className="relative mx-3 sm:mx-6">
                   <FutureMarker
                     isFree={isFree}
                     onUpgrade={() => onNavigate("paywall")}
