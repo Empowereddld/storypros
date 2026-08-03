@@ -227,6 +227,7 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
               completed: true,
             })
           }
+          compact={currentPhase === "intro-questions"}
         />
       );
     }
