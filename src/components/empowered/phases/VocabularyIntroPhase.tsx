@@ -7,6 +7,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
 
@@ -28,6 +29,16 @@ export function VocabularyIntroPhase({
   const [wordIdx, setWordIdx] = useState(0);
   const [featureIdx, setFeatureIdx] = useState(-1);
   const [revealed, setRevealed] = useState<Set<number>>(new Set());
+  const devPerWord = SFA_KEYS.length + 1;
+  useDevSubSteps(
+    words.length * devPerWord,
+    wordIdx * devPerWord + (featureIdx + 1),
+    (i: number) => {
+      setWordIdx(Math.floor(i / devPerWord));
+      setFeatureIdx((i % devPerWord) - 1);
+    },
+    "screen",
+  );
   // Vocab narration is clamped to at most "normal" speed for clarity.
   const { supported, isPlaying, toggle, cancel } = useListen(
     ttsSpeed === "fast" ? "normal" : ttsSpeed,

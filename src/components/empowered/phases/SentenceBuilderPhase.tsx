@@ -7,6 +7,7 @@ import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { useDevSubSteps } from "./DevPhaseNav";
 
 type FeedbackState =
   | { type: "none" }
@@ -22,6 +23,7 @@ export function SentenceBuilderPhase({
 }: StoryPhaseProps) {
   const frames = storyData.sentence_frames;
   const [frameIdx, setFrameIdx] = useState(0);
+  useDevSubSteps(frames.length, frameIdx, setFrameIdx, "frame");
   const [selected, setSelected] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<FeedbackState>({ type: "none" });
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
