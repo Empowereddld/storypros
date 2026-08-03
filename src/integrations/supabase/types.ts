@@ -980,8 +980,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      create_slp_invite: { Args: { p_child_id: string }; Returns: string }
-      get_paper_planes: { Args: { p_child_id: string }; Returns: number }
+      create_slp_invite: {
+        Args: { p_caller_id: string; p_child_id: string }
+        Returns: string
+      }
+      get_paper_planes: {
+        Args: { p_caller_id: string; p_child_id: string }
+        Returns: number
+      }
       get_slp_caseload_summary: {
         Args: { p_slp_id: string }
         Returns: {
@@ -997,7 +1003,7 @@ export type Database = {
       is_child_premium: { Args: { p_child_id: string }; Returns: boolean }
       process_expired_subscriptions: { Args: never; Returns: number }
       redeem_slp_invite: {
-        Args: { p_code: string }
+        Args: { p_caller_id: string; p_code: string }
         Returns: {
           linked_child_id: string
           linked_child_name: string
