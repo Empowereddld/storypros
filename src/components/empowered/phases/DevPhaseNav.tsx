@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -47,12 +48,14 @@ export function useDevSubSteps(
 ) {
   const ctx = useContext(DevNavContext);
   const setSub = ctx?.setSub;
+  const setIndexRef = useRef(setIndex);
+  setIndexRef.current = setIndex;
 
   useEffect(() => {
     if (!import.meta.env.DEV || !setSub) return;
-    setSub({ count, index, setIndex, label });
+    setSub({ count, index, setIndex: (i: number) => setIndexRef.current(i), label });
     return () => setSub(null);
-  }, [count, index, setIndex, label, setSub]);
+  }, [count, index, label, setSub]);
 }
 
 interface DevPhaseNavProps {
