@@ -481,28 +481,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
                 {/* Two support items */}
                 <ul className="order-3 space-y-5 lg:mt-9">
-
-
-                {DASHBOARD.points.map((point) => {
-                  const Icon = SKILL_ICONS[point.icon];
-                  return (
-                    <li key={point.title} className="flex items-start gap-3.5">
-                      <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/10">
-                        {Icon && <Icon className="h-4.5 w-4.5 text-primary" aria-hidden />}
-                      </span>
-                      <div className="min-w-0">
-                        <p className="font-display text-[16px] font-extrabold text-ink">
-                          {point.title}
-                        </p>
-                        <p className="mt-1 text-[14.5px] font-medium leading-relaxed text-ink-soft">
-                          {point.detail}
-                        </p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
+                  {DASHBOARD.points.map((point) => {
+                    const Icon = SKILL_ICONS[point.icon];
+                    return (
+                      <li key={point.title} className="flex items-start gap-3.5">
+                        <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/10">
+                          {Icon && <Icon className="h-[18px] w-[18px] text-primary" aria-hidden />}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-display text-[16px] font-extrabold text-ink">
+                            {point.title}
+                          </p>
+                          <p className="mt-1 text-[14.5px] font-medium leading-relaxed text-ink-soft">
+                            {point.detail}
+                          </p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
+
           </Reveal>
         </div>
       </section>
