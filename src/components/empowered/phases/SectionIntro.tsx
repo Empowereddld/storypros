@@ -108,7 +108,7 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
           className="animate-slide-up mt-6 rounded-[28px] border border-primary/10 bg-card px-4 pb-5 pt-5 shadow-card sm:mt-7 sm:px-7 sm:pb-6 sm:pt-6"
           style={{ animationDelay: "120ms" }}
         >
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:gap-2">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:gap-7">
             {/* Buddy, grounded with a soft contact shadow */}
             <div className="relative shrink-0 pb-3">
               <img
@@ -127,7 +127,7 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
               {/* Tail pointing back at the buddy */}
               <div
                 className={cn(
-                  "absolute left-1/2 top-[-8px] h-4 w-4 -translate-x-1/2 rotate-45 border-l-2 border-t-2 sm:left-[-9px] sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2 sm:-rotate-45",
+                  "absolute left-1/2 top-[-8px] h-4 w-4 -translate-x-1/2 rotate-45 border-l-2 border-t-2 sm:left-[-10px] sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2 sm:-rotate-45",
                   b.tail,
                 )}
                 aria-hidden
