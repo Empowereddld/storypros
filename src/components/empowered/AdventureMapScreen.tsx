@@ -140,14 +140,13 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
             <h1 className="font-display text-[30px] font-extrabold leading-tight text-primary sm:text-[34px]">
               Adventure Map
             </h1>
-            <p className="mt-1.5 text-[15px] font-bold text-ink">Your next story is ready.</p>
-            <p className="mt-1 text-[12px] font-semibold text-ink-soft">
+            <p className="mt-2.5 text-[15px] font-bold text-ink">Your next story is ready.</p>
+            <p className="mt-1.5 text-[12px] font-semibold text-ink-soft">
               {completedCount} {completedCount === 1 ? "story" : "stories"} completed
             </p>
-
           </header>
 
-          <div className="relative mt-8">
+          <div className="relative mt-10">
             {/* winding path behind the checkpoints */}
             <svg
               className="pointer-events-none absolute inset-0 h-full w-full"
