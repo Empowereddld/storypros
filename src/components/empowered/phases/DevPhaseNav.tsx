@@ -1,10 +1,60 @@
 import { ChevronLeft, ChevronRight, Wrench } from "lucide-react";
-import { useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 /**
- * Dev-only phase stepper. Lets a developer jump between story phases
- * without replaying the whole story. Never rendered in production builds.
+ * Dev-only screen stepper. Lets a developer move between every screen of a
+ * story — both across phases and within a phase (story pages, individual
+ * questions, vocabulary words, sentence frames). Never rendered in production.
  */
+
+interface SubSteps {
+  count: number;
+  index: number;
+  setIndex: (i: number) => void;
+  label?: string;
+}
+
+interface DevNavCtx {
+  sub: SubSteps | null;
+  setSub: (s: SubSteps | null) => void;
+}
+
+const DevNavContext = createContext<DevNavCtx | null>(null);
+
+export function DevNavProvider({ children }: { children: ReactNode }) {
+  const [sub, setSub] = useState<SubSteps | null>(null);
+  const value = useMemo(() => ({ sub, setSub }), [sub]);
+  return <DevNavContext.Provider value={value}>{children}</DevNavContext.Provider>;
+}
+
+/**
+ * Phases call this to expose their internal screens to the dev stepper.
+ * No-op in production.
+ */
+export function useDevSubSteps(
+  count: number,
+  index: number,
+  setIndex: (i: number) => void,
+  label?: string,
+) {
+  const ctx = useContext(DevNavContext);
+  const setSub = ctx?.setSub;
+
+  useEffect(() => {
+    if (!import.meta.env.DEV || !setSub) return;
+    setSub({ count, index, setIndex, label });
+    return () => setSub(null);
+  }, [count, index, setIndex, label, setSub]);
+}
+
 interface DevPhaseNavProps {
   phases: string[];
   index: number;
@@ -13,8 +63,29 @@ interface DevPhaseNavProps {
 
 export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
   const [open, setOpen] = useState(true);
+  const sub = useContext(DevNavContext)?.sub ?? null;
+
+  const goPrev = useCallback(() => {
+    if (sub && sub.index > 0) {
+      sub.setIndex(sub.index - 1);
+      return;
+    }
+    if (index > 0) onChange(index - 1);
+  }, [sub, index, onChange]);
+
+  const goNext = useCallback(() => {
+    if (sub && sub.index < sub.count - 1) {
+      sub.setIndex(sub.index + 1);
+      return;
+    }
+    if (index < phases.length - 1) onChange(index + 1);
+  }, [sub, index, onChange, phases.length]);
 
   if (!import.meta.env.DEV) return null;
+
+  const atStart = index <= 0 && (!sub || sub.index <= 0);
+  const atEnd =
+    index >= phases.length - 1 && (!sub || sub.index >= sub.count - 1);
 
   return (
     <div className="pointer-events-auto fixed top-4 left-1/2 z-[100] -translate-x-1/2">
@@ -22,9 +93,9 @@ export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
         <div className="flex items-center gap-2 rounded-full border border-border bg-card/95 px-2 py-1.5 shadow-lg backdrop-blur">
           <button
             type="button"
-            aria-label="Previous phase (dev)"
-            disabled={index <= 0}
-            onClick={() => onChange(index - 1)}
+            aria-label="Previous screen (dev)"
+            disabled={atStart}
+            onClick={goPrev}
             className="grid h-8 w-8 place-items-center rounded-full bg-muted text-foreground disabled:opacity-30"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -43,11 +114,26 @@ export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
             ))}
           </select>
 
+          {sub && sub.count > 1 && (
+            <select
+              value={sub.index}
+              onChange={(e) => sub.setIndex(Number(e.target.value))}
+              aria-label="Jump to screen within phase (dev)"
+              className="max-w-[150px] rounded-full bg-muted/60 px-2 py-1 text-xs font-medium text-foreground outline-none"
+            >
+              {Array.from({ length: sub.count }).map((_, i) => (
+                <option key={i} value={i}>
+                  {sub.label ?? "screen"} {i + 1}/{sub.count}
+                </option>
+              ))}
+            </select>
+          )}
+
           <button
             type="button"
-            aria-label="Next phase (dev)"
-            disabled={index >= phases.length - 1}
-            onClick={() => onChange(index + 1)}
+            aria-label="Next screen (dev)"
+            disabled={atEnd}
+            onClick={goNext}
             className="grid h-8 w-8 place-items-center rounded-full bg-muted text-foreground disabled:opacity-30"
           >
             <ChevronRight className="h-4 w-4" />
