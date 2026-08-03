@@ -395,7 +395,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               {COMMUNITY.heading}
             </h2>
             <p className="mt-3 text-[17px] font-semibold text-ink">{COMMUNITY.subheading}</p>
-            <p className="mt-3 max-w-[52ch] text-[15.5px] font-medium leading-relaxed text-ink-soft sm:text-base">
+            <p className="mt-3 text-[15.5px] font-medium leading-relaxed text-ink-soft sm:text-base">
               {COMMUNITY.body}
             </p>
 
