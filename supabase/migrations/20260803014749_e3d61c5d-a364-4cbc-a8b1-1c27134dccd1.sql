@@ -1,0 +1,1 @@
+DELETE FROM public.children WHERE profile_id = 'd5641b04-7ed2-440d-aa34-fa746c94c752' AND name <> 'Camesha';
