@@ -10,8 +10,8 @@
  * clip, and falls back to Web Speech when there is no match.
  * ───────────────────────────────────────────── */
 import { useCallback, useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
+import { AudioButton, type AudioButtonSize, type AudioButtonTone } from "../AudioButton";
 
 type Speed = "slow" | "normal" | "fast";
 
