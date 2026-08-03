@@ -76,7 +76,17 @@ No instructional or activity copy changes in this pass — visuals, placement, a
 - `SpeakButton` becomes a thin wrapper over the shared control so sizes and glyph match the story flow.
 
 
+## Final refinements
+
+- **Comprehension hierarchy:** the story-element badge stays visually quieter than the speaker and the question — smaller, low-contrast tint, no ring or shadow — so the speaker remains the only control-looking thing in the row.
+- **Compact answer group:** speaker + label form one balanced group inside the option card (speaker, 12px gap, label, sized to the content) rather than a speaker pinned left and text drifting away. No large dead space on the right.
+- **Size default:** 40px is the default secondary control. The 32px visible circle is reserved for genuinely tight inline contexts.
+- **Standardize the control, not the container:** no forcing every host into a pill. The audio control drops cleanly into existing cards, rows, vocabulary panels, sentence boxes, and bubbles as they are.
+- **No new auto-play:** each screen's current narration behavior is preserved exactly. The standard speaker only adds a predictable optional way to hear content; screens that already auto-play keep doing so and gain no duplicate control.
+- **No copy changes:** all instructional and activity wording stays exactly as it is.
+
 ## Technical notes
+
 
 - New `src/components/empowered/AudioButton.tsx`: props `text`, `size: "lg" | "md" | "sm"`, `tone: "primary" | "quiet"`, `playing`, `onClick`, `label?`. Pure presentation; enforces the 44px minimum hit area independent of visible circle size, and stops event propagation so it never triggers a parent card's selection.
 - Keep both audio engines as-is: `useListen`/`services/tts` for narration that has pre-generated clips, `speakLabel` for UI/answer text. The visual control is shared; the engine choice per screen doesn't change.
