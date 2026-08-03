@@ -255,6 +255,18 @@ export function ComprehensionPhase({
                       {brainCheck.type === "correct" ? <CheckBadge size="sm" /> : <CrossBadge size="sm" />}
                       <span>{brainCheck.type === "correct" ? "Correct" : "Not quite"}</span>
                     </div>
+
+                    <div
+                      className={cn(
+                        "mb-2 inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-sm font-bold",
+                        elementStyle.bg,
+                        elementStyle.text,
+                      )}
+                    >
+                      <ElementIcon className="h-4 w-4" />
+                      <span>{elementLabel}</span>
+                    </div>
+
                     <p className="text-base font-semibold leading-snug text-primary">
                       {brainCheck.message}
                     </p>
