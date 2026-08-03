@@ -96,7 +96,6 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
             <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <StoryProsLogo layout="row" size="sm" />
         <span className="w-10" />
       </header>
 
