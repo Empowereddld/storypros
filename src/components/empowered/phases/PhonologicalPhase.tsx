@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
-import { speak, speedToRate } from "@/services/tts";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
-import { ListenButton, useListen } from "./ListenButton";
+import { useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
@@ -36,13 +36,6 @@ export function PhonologicalPhase({
   const progress = (questionIndex / items.length) * 100;
   const showingFeedback = feedback.type !== "none";
   const typeLabel = item.type === "rhyme" ? "Rhyme Time" : "Sound Detective";
-
-  function pronounceOption(text: string) {
-    // Reset any playing prompt clip, then read the answer option aloud.
-    cancel();
-    const phonSpeed = ttsSpeed === "fast" ? "normal" : ttsSpeed;
-    speak(text, { rate: speedToRate(phonSpeed) }).catch(() => {});
-  }
 
   function handleCheck() {
     if (!selected) return;
@@ -254,10 +247,3 @@ function SoundIcon() {
   );
 }
 
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}
