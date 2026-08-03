@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
-import { speak, speedToRate } from "@/services/tts";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
-import { ListenButton, useListen } from "./ListenButton";
+import { useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
@@ -36,13 +36,6 @@ export function PhonologicalPhase({
   const progress = (questionIndex / items.length) * 100;
   const showingFeedback = feedback.type !== "none";
   const typeLabel = item.type === "rhyme" ? "Rhyme Time" : "Sound Detective";
-
-  function pronounceOption(text: string) {
-    // Reset any playing prompt clip, then read the answer option aloud.
-    cancel();
-    const phonSpeed = ttsSpeed === "fast" ? "normal" : ttsSpeed;
-    speak(text, { rate: speedToRate(phonSpeed) }).catch(() => {});
-  }
 
   function handleCheck() {
     if (!selected) return;
@@ -166,11 +159,12 @@ export function PhonologicalPhase({
           </h1>
           {supported && (
             <div className="mt-3 flex justify-center">
-              <ListenButton
+              <AudioButton
+                size="lg"
+                tone="primary"
                 playing={isPlaying("prompt")}
                 onClick={() => toggle(item.prompt, "prompt")}
-                className="h-12 w-12"
-                ariaLabel="Hear the question"
+                text={item.prompt}
               />
             </div>
           )}
@@ -178,51 +172,56 @@ export function PhonologicalPhase({
 
         <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
           {item.options.map((option, index) => {
-            const label = option.text ?? option.label;
+            const label = option.text ?? option.label ?? "";
             const isSelected = selected === option.id;
             const isDisabled = wrongIds.has(option.id);
             return (
-              <div key={option.id} className="flex items-center gap-2">
+              <div
+                key={option.id}
+                className={cn(
+                  "flex min-h-[62px] items-center gap-3 rounded-[26px] border-2 bg-card px-3 py-2.5 shadow-card transition-all",
+                  isSelected && "border-primary bg-primary/5",
+                  !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
+                  isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
+                )}
+              >
+                {supported && !isDisabled && (
+                  <AudioButton
+                    size="md"
+                    tone="quiet"
+                    playing={isPlaying(`opt-${option.id}`)}
+                    onClick={() => toggle(label, `opt-${option.id}`)}
+                    text={label}
+                    className="-my-1"
+                  />
+                )}
                 <button
                   onClick={() => !isDisabled && setSelected(option.id)}
                   disabled={isDisabled}
-                  className={cn(
-                    "flex min-h-[74px] flex-1 items-center gap-3 rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
-                    isSelected && "border-primary bg-primary/5 -translate-y-0.5",
-                    !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
-                    isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
-                  )}
+                  className="flex min-w-0 flex-1 items-center gap-3 self-stretch text-left"
                 >
                   <span
                     className={cn(
-                      "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
-                      isSelected ? "bg-primary text-primary-foreground" : "bg-accent text-primary",
+                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
+                      isSelected ? "bg-primary text-primary-foreground" : "bg-accent/70 text-primary",
                     )}
                   >
                     {String.fromCharCode(65 + index)}
                   </span>
                   <span
                     className={cn(
-                      "flex-1 text-[22px] font-extrabold leading-tight",
+                      "min-w-0 flex-1 text-[22px] font-extrabold leading-tight",
                       isDisabled ? "text-ink-soft line-through" : "text-primary",
                     )}
                   >
                     {label}
                   </span>
                 </button>
-                {supported && !isDisabled && (
-                  <button
-                    onClick={() => pronounceOption(label)}
-                    className="press-pop flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card"
-                    aria-label={`Hear ${label}`}
-                  >
-                    <PlayIcon />
-                  </button>
-                )}
               </div>
             );
           })}
         </div>
+
 
         <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
           Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
@@ -248,10 +247,3 @@ function SoundIcon() {
   );
 }
 
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}

@@ -6,6 +6,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
@@ -187,7 +188,6 @@ export function VocabularyQuizPhase({
               <ListenButton
                 playing={isPlaying("prompt")}
                 onClick={() => toggle(question.prompt, "prompt")}
-                className="h-12 w-12"
                 ariaLabel="Hear the question"
               />
             </div>
@@ -214,37 +214,52 @@ export function VocabularyQuizPhase({
               {question.options.map((option, index) => {
                 const isSelected = selected === option.id;
                 const isDisabled = wrongIds.has(option.id);
+                const label = option.text || option.label || "";
                 return (
-                  <button
+                  <div
                     key={option.id}
-                    onClick={() => !isDisabled && setSelected(option.id)}
-                    disabled={isDisabled}
                     className={cn(
-                      "flex w-full items-center gap-3 rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
-                      isSelected && "border-primary bg-primary/5 -translate-y-0.5",
+                      "flex w-full items-center gap-3 rounded-[26px] border-2 bg-card px-3 py-3 shadow-card transition-all",
+                      isSelected && "border-primary bg-primary/5",
                       !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
                       isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
                     )}
                   >
-                    <span
-                      className={cn(
-                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
-                        isSelected
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-accent text-primary",
-                      )}
+                    {supported && !isDisabled && (
+                      <AudioButton
+                        size="md"
+                        tone="quiet"
+                        playing={isPlaying(`opt-${option.id}`)}
+                        onClick={() => toggle(label, `opt-${option.id}`)}
+                        text={label}
+                        className="-my-1"
+                      />
+                    )}
+                    <button
+                      onClick={() => !isDisabled && setSelected(option.id)}
+                      disabled={isDisabled}
+                      className="flex min-w-0 flex-1 items-center gap-3 self-stretch text-left"
                     >
-                      {String.fromCharCode(65 + index)}
-                    </span>
-                    <span
-                      className={cn(
-                        "flex-1 text-base font-extrabold leading-snug",
-                        isDisabled ? "text-ink-soft line-through" : "text-ink",
-                      )}
-                    >
-                      {option.text || option.label}
-                    </span>
-                  </button>
+                      <span
+                        className={cn(
+                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
+                          isSelected
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-accent/70 text-primary",
+                        )}
+                      >
+                        {String.fromCharCode(65 + index)}
+                      </span>
+                      <span
+                        className={cn(
+                          "min-w-0 flex-1 text-base font-extrabold leading-snug",
+                          isDisabled ? "text-ink-soft line-through" : "text-ink",
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  </div>
                 );
               })}
             </div>

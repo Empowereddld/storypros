@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
 import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
+import { AudioButton } from "../AudioButton";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
@@ -209,13 +210,13 @@ export function SentenceBuilderPhase({
               Word: {storyData.target_connective}
             </span>
             {isSupported() && (
-              <button
+              <AudioButton
+                size="md"
+                tone="quiet"
+                playing={speaking}
                 onClick={handleListenFrame}
-                className="press-pop inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-extrabold text-primary-foreground"
-              >
-                {speaking ? "Stop" : "Listen"}
-                <SpeakerIcon playing={speaking} />
-              </button>
+                ariaLabel="Hear the sentence"
+              />
             )}
           </div>
         </section>
@@ -265,18 +266,3 @@ export function SentenceBuilderPhase({
   );
 }
 
-function SpeakerIcon({ playing }: { playing: boolean }) {
-  if (playing) {
-    return (
-      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
-        <rect x="6" y="6" width="12" height="12" rx="2" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}

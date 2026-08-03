@@ -10,8 +10,8 @@
  * clip, and falls back to Web Speech when there is no match.
  * ───────────────────────────────────────────── */
 import { useCallback, useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
+import { AudioButton, type AudioButtonSize, type AudioButtonTone } from "../AudioButton";
 
 type Speed = "slow" | "normal" | "fast";
 
@@ -63,41 +63,36 @@ interface ListenButtonProps {
   playing: boolean;
   onClick: () => void;
   className?: string;
-  playingClassName?: string;
-  idleClassName?: string;
+  /** Visible circle size; the tap target stays >= 44px */
+  size?: AudioButtonSize;
+  tone?: AudioButtonTone;
   ariaLabel?: string;
-  iconSize?: string;
+  text?: string;
 }
 
+/**
+ * Thin wrapper kept for existing call sites — the visual is the
+ * shared AudioButton, so every "hear this" control looks the same.
+ */
 export function ListenButton({
   playing,
   onClick,
   className,
-  playingClassName = "bg-destructive text-destructive-foreground animate-pulse-glow",
-  idleClassName = "bg-secondary text-secondary-foreground",
-  ariaLabel = "Listen",
-  iconSize = "h-5 w-5",
+  size = "lg",
+  tone = "primary",
+  ariaLabel,
+  text,
 }: ListenButtonProps) {
   return (
-    <button
-      type="button"
+    <AudioButton
+      playing={playing}
       onClick={onClick}
-      aria-label={playing ? "Stop audio" : ariaLabel}
-      className={cn(
-        "press-pop flex shrink-0 items-center justify-center rounded-full shadow-card transition-all",
-        playing ? playingClassName : idleClassName,
-        className,
-      )}
-    >
-      {playing ? (
-        <svg viewBox="0 0 24 24" className={iconSize} fill="currentColor" aria-hidden>
-          <rect x="6" y="6" width="12" height="12" rx="2" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 24 24" className={cn("ml-0.5", iconSize)} fill="currentColor" aria-hidden>
-          <path d="M8 5v14l11-7z" />
-        </svg>
-      )}
-    </button>
+      size={size}
+      tone={tone}
+      ariaLabel={ariaLabel}
+      text={text}
+      className={className}
+    />
   );
 }
+

@@ -114,7 +114,6 @@ export function JokePhase({
                   <ListenButton
                     playing={isPlaying("joke")}
                     onClick={() => toggle(joke.joke_text, "joke")}
-                    className="h-12 w-12"
                     ariaLabel="Hear the joke"
                   />
                 </div>

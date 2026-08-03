@@ -11,6 +11,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { AudioButton } from "./AudioButton";
 import { speakLabel, stopLabelSpeech } from "@/lib/speak";
 
 export function SpeakButton({
@@ -31,9 +32,7 @@ export function SpeakButton({
 
   useEffect(() => () => stopLabelSpeech(), []);
 
-  function handle(event: React.MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
+  function handle() {
     if (speaking) {
       stopLabelSpeech();
       setSpeaking(false);
@@ -44,26 +43,17 @@ export function SpeakButton({
   }
 
   return (
-    <button
-      type="button"
+    <AudioButton
+      playing={speaking}
       onClick={handle}
-      aria-label={label ?? `Hear "${text}"`}
-      className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full transition-transform active:scale-95",
-        // 44px minimum tap target on every speaker
-        "min-h-11 min-w-11",
-        size === "sm" ? "h-11 w-11" : "h-12 w-12",
-        tone === "primary" && "bg-primary text-primary-foreground shadow-card",
-        tone === "secondary" && "bg-secondary text-secondary-foreground shadow-card",
-        tone === "soft" && "bg-accent text-primary",
-        speaking && "animate-pulse",
-        className,
-      )}
-    >
-      <SpeakerIcon className={size === "sm" ? "h-5 w-5" : "h-6 w-6"} />
-    </button>
+      size={size === "sm" ? "md" : "lg"}
+      tone={tone === "soft" ? "quiet" : "primary"}
+      ariaLabel={label ?? `Hear "${text}"`}
+      className={className}
+    />
   );
 }
+
 
 export function SpeakableText({
   text,

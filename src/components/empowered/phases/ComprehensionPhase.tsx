@@ -11,11 +11,12 @@ import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import type { StoryPhaseProps, ActivityAttempt, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
-import { speak, stop, speedToRate, preloadVoices, isSupported } from "@/services/tts";
 import dariaSolo from "@/assets/daria-pointing.webp";
 import { resolveStoryImage } from "@/services/storyImages";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { AudioButton } from "../AudioButton";
+import { useListen } from "./ListenButton";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Character",
@@ -91,33 +92,14 @@ export function ComprehensionPhase({
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const [reflecting, setReflecting] = useState(false);
 
-  const [speaking, setSpeaking] = useState(false);
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
   const startTime = useRef(Date.now());
 
+  // Stop any audio when moving to the next question.
   useEffect(() => {
-    preloadVoices();
-  }, []);
-  useEffect(() => {
-    return () => {
-      stop();
-      setSpeaking(false);
-    };
-  }, [qi]);
+    return () => cancel();
+  }, [qi, cancel]);
 
-  async function handleListen() {
-    if (speaking) {
-      stop();
-      setSpeaking(false);
-      return;
-    }
-    setSpeaking(true);
-    try {
-      await speak(q.prompt, { rate: speedToRate(ttsSpeed) });
-    } catch {
-      /* TTS unavailable — the child can still read the prompt */
-    }
-    setSpeaking(false);
-  }
 
   const q = questions[qi];
   const progress = (qi / questions.length) * 100;
@@ -271,9 +253,20 @@ export function ComprehensionPhase({
                       </span>
                     </div>
 
-                    <p className="text-lg font-bold leading-snug text-primary">
-                      {brainCheck.message}
-                    </p>
+                    <div className="flex items-center gap-3">
+                      {supported && (
+                        <AudioButton
+                          size="md"
+                          tone="quiet"
+                          playing={isPlaying("feedback")}
+                          onClick={() => toggle(brainCheck.message, "feedback")}
+                          text={brainCheck.message}
+                        />
+                      )}
+                      <p className="min-w-0 flex-1 text-lg font-bold leading-snug text-primary">
+                        {brainCheck.message}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -307,25 +300,33 @@ export function ComprehensionPhase({
         <div className="relative overflow-hidden rounded-[24px] border-2 border-accent/70 bg-card p-3.5 shadow-card">
           <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
           <div className="relative flex items-center gap-3">
-            <button
-              onClick={handleListen}
-              disabled={!isSupported()}
-              className={cn(
-                "flex h-11 w-11 shrink-0 items-center justify-center rounded-full ring-2 transition-all active:scale-95",
-                elementStyle.bg,
-                elementStyle.text,
-                elementStyle.ring,
-                speaking && "animate-pulse-glow",
-              )}
-              aria-label={isSupported() ? "Hear question" : elementLabel}
-              title={elementLabel}
-            >
-              <ElementIcon className="h-5 w-5" />
-            </button>
+            {supported && (
+              <AudioButton
+                size="lg"
+                tone="primary"
+                playing={isPlaying("prompt")}
+                onClick={() => toggle(q.prompt, "prompt")}
+                text={q.prompt}
+              />
+            )}
 
             <h2 className="min-w-0 flex-1 font-display text-[22px] font-extrabold leading-tight text-primary">
               {q.prompt}
             </h2>
+
+            {/* Teaching marker only — quieter than the speaker, never a control */}
+            <span
+              className={cn(
+                "flex h-8 w-8 shrink-0 items-center justify-center rounded-full opacity-70",
+                elementStyle.bg,
+                elementStyle.text,
+              )}
+              title={elementLabel}
+              aria-label={elementLabel}
+              role="img"
+            >
+              <ElementIcon className="h-4 w-4" />
+            </span>
           </div>
         </div>
       </div>
@@ -334,32 +335,48 @@ export function ComprehensionPhase({
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
+          const label = opt.label || opt.text || "";
           return (
-            <button
+            <div
               key={opt.id}
-              onClick={() => !isDisabled && setSelected(opt.id)}
-              disabled={isDisabled}
               className={cn(
-                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-4 py-2.5 text-center shadow-card transition-all",
+                "flex min-h-[60px] w-full items-center gap-3 rounded-[20px] border-2 bg-card px-3 py-2.5 shadow-card transition-all",
                 isSelected && "border-primary bg-primary/5 shadow-sm",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
               )}
             >
-              <span
-                className={cn(
-                  "text-[15px] font-bold leading-snug",
-                  isDisabled ? "text-ink-soft line-through" : "text-ink",
-                )}
+              {supported && !isDisabled && (
+                <AudioButton
+                  size="md"
+                  tone="quiet"
+                  playing={isPlaying(`opt-${opt.id}`)}
+                  onClick={() => toggle(label, `opt-${opt.id}`)}
+                  text={label}
+                  className="-my-1"
+                />
+              )}
+              <button
+                onClick={() => !isDisabled && setSelected(opt.id)}
+                disabled={isDisabled}
+                className="flex min-w-0 flex-1 items-center gap-2 self-stretch text-left"
               >
-                {opt.label || opt.text}
-              </span>
-              {isSelected && <SelectedCheck />}
-              {isDisabled && <CrossBadge />}
-            </button>
+                <span
+                  className={cn(
+                    "min-w-0 flex-1 text-[15px] font-bold leading-snug",
+                    isDisabled ? "text-ink-soft line-through" : "text-ink",
+                  )}
+                >
+                  {label}
+                </span>
+                {isSelected && <SelectedCheck />}
+                {isDisabled && <CrossBadge />}
+              </button>
+            </div>
           );
         })}
       </div>
+
 
       {/* Check button */}
       <div className="relative z-10 mx-auto mb-5 mt-2 w-full max-w-[600px] px-5">

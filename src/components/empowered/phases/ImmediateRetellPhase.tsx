@@ -15,6 +15,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { RetellRecorder } from "../RetellRecorder";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
@@ -45,29 +46,7 @@ const ELEMENT_BG: Record<StoryElement, string> = {
 };
 
 
-function SpeakerIcon({ className = "h-5 w-5" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      aria-hidden
-    >
-      <path d="M4 10v4h3l4 3.5V6.5L7 10H4z" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15.5 9.2a4 4 0 010 5.6M18 6.7a7.5 7.5 0 010 10.6" strokeLinecap="round" />
-    </svg>
-  );
-}
 
-function StopIcon({ className = "h-5 w-5" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <rect x="6" y="6" width="12" height="12" rx="2.5" />
-    </svg>
-  );
-}
 
 export function ImmediateRetellPhase({
   storyData,
@@ -111,22 +90,14 @@ export function ImmediateRetellPhase({
 
           {supported && (
             <div className="mt-4 flex justify-center">
-              <button
-                type="button"
+              <AudioButton
+                size="lg"
+                tone="primary"
+                playing={fullPlaying}
                 onClick={() => toggle(fullStory, "full-story")}
-                aria-label={fullPlaying ? "Stop audio" : "Listen to the full story"}
-                className={cn(
-                  "press-pop flex min-h-[48px] items-center gap-2.5 rounded-full border-2 px-6 text-base font-extrabold transition-all",
-                  fullPlaying
-                    ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : "border-accent bg-card text-primary shadow-card hover:bg-accent/40",
-                )}
-              >
-                {fullPlaying ? <StopIcon /> : <SpeakerIcon />}
-                <span className="whitespace-nowrap">
-                  {fullPlaying ? "Stop" : "Listen to Full Story"}
-                </span>
-              </button>
+                ariaLabel="Listen to the full story"
+                label="Listen to Full Story"
+              />
             </div>
           )}
 
@@ -145,11 +116,8 @@ export function ImmediateRetellPhase({
               const playing = isPlaying(`scene-${index}`);
 
               return (
-                <button
+                <div
                   key={slide.position}
-                  type="button"
-                  onClick={() => toggle(slide.text, `scene-${index}`)}
-                  aria-label={`Hear scene ${index + 1}`}
                   className={cn(
                     "flex min-h-[220px] flex-col rounded-xl border-2 bg-card p-4 text-left shadow-card transition-all",
                     playing ? "scale-105 border-transparent ring-4 ring-primary" : "border-accent/50",
@@ -184,11 +152,20 @@ export function ImmediateRetellPhase({
                     >
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+                    <span className="flex-1 text-xs font-extrabold uppercase tracking-wide text-ink-soft">
                       {ELEMENT_LABELS[element]}
                     </span>
+                    {supported && (
+                      <AudioButton
+                        size="sm"
+                        tone="quiet"
+                        playing={playing}
+                        onClick={() => toggle(slide.text, `scene-${index}`)}
+                        ariaLabel={`Hear scene ${index + 1}`}
+                      />
+                    )}
                   </div>
-                </button>
+                </div>
               );
             })}
           </div>

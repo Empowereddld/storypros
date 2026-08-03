@@ -13,6 +13,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { AudioButton } from "../AudioButton";
 import { TactileButton } from "../TactileButton";
 import { speakLabel, stopLabelSpeech } from "@/lib/speak";
 import danImg from "@/assets/child-avatar.png";
@@ -45,14 +46,6 @@ const BUDDY = {
   },
 } as const;
 
-function SpeakerIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-      <path d="M11 5 6 9H3v6h3l5 4V5Z" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function ChevronIcon({ className }: { className?: string }) {
   return (
@@ -134,18 +127,14 @@ export function SectionIntro({ title, buddy, script, onNext }: SectionIntroProps
               />
               <div className={cn("relative rounded-[24px] border-2 px-5 pb-5 pt-7 sm:px-6 sm:pb-6 sm:pt-8", b.bubble)}>
                 {/* Speaker pinned to the corner so the sentence keeps a clean left edge */}
-                <button
-                  type="button"
+                <AudioButton
+                  size="md"
+                  tone="quiet"
+                  playing={speaking}
                   onClick={toggleSpeak}
-                  aria-pressed={speaking}
-                  aria-label={speaking ? `Stop ${b.name}` : `Listen to ${b.name}`}
-                  className={cn(
-                    "absolute left-4 top-[-20px] inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary/20 bg-card text-primary shadow-card transition-colors hover:border-primary/45 sm:left-5",
-                    speaking && "border-primary bg-primary text-primary-foreground",
-                  )}
-                >
-                  <SpeakerIcon className="h-5 w-5" />
-                </button>
+                  ariaLabel={`Listen to ${b.name}`}
+                  className="absolute left-3 top-[-22px] bg-card shadow-card ring-2 ring-primary/15 sm:left-4"
+                />
                 <p className="max-w-[34ch] whitespace-pre-line text-left text-[17px] font-semibold leading-[1.5] text-ink sm:text-[19px]">
                   {script}
                 </p>
