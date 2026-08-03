@@ -443,27 +443,60 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── Family dashboard (art left) ── */}
-      <CharacterSection side="left" image={danDariaThumbsUp}>
-        <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-          {DASHBOARD.eyebrow}
-        </p>
-        <h2 className="mt-2 font-display text-3xl font-extrabold leading-tight text-primary sm:text-4xl">
-          {DASHBOARD.heading}
-        </h2>
-        <p className="mt-4 text-lg font-medium leading-relaxed text-ink-soft">{DASHBOARD.body}</p>
-        <ul className="mt-6 space-y-2.5">
-          {DASHBOARD.points.map((point) => (
-            <li
-              key={point}
-              className="flex items-center gap-3 rounded-[18px] border border-accent/50 bg-card px-4 py-3 shadow-card"
-            >
-              <CheckMark />
-              <span className="text-sm font-bold text-ink">{point}</span>
-            </li>
-          ))}
-        </ul>
-      </CharacterSection>
+      {/* ── Family dashboard (product proof) ── */}
+      <section className="scroll-mt-20 bg-card/40">
+        <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-6 sm:py-24">
+          <Reveal>
+            <div className="grid items-center gap-10 lg:grid-cols-[57fr_43fr] lg:gap-14">
+              {/* Copy — first on mobile, second column on desktop */}
+              <div className="lg:order-2">
+                <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+                  {DASHBOARD.eyebrow}
+                </p>
+                <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-4xl">
+                  {DASHBOARD.heading}
+                </h2>
+                <p className="mt-3.5 text-[16.5px] font-medium leading-relaxed text-ink-soft sm:text-lg">
+                  {DASHBOARD.body}
+                </p>
+              </div>
+
+              {/* Dashboard mockup */}
+              <div className="lg:order-1">
+                <img
+                  src={familyDashboardAsset.url}
+                  alt="The Story Pros Family Dashboard on a tablet, showing what a child practised this week, a next step for home, a story just completed, and saved retells"
+                  loading="lazy"
+                  className="w-full drop-shadow-[0_18px_40px_rgba(82,29,153,0.10)]"
+                />
+              </div>
+
+              {/* Two support items — last on mobile, under the copy on desktop */}
+              <ul className="space-y-5 lg:order-3 lg:col-start-2 lg:-mt-4">
+                {DASHBOARD.points.map((point) => {
+                  const Icon = SKILL_ICONS[point.icon];
+                  return (
+                    <li key={point.title} className="flex items-start gap-3.5">
+                      <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/10">
+                        {Icon && <Icon className="h-4.5 w-4.5 text-primary" aria-hidden />}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-display text-[16px] font-extrabold text-ink">
+                          {point.title}
+                        </p>
+                        <p className="mt-1 text-[14.5px] font-medium leading-relaxed text-ink-soft">
+                          {point.detail}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
 
       {/* ── Who Story Pros is designed for (art right) ── */}
       <CharacterSection
