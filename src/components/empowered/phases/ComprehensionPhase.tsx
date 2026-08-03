@@ -235,39 +235,43 @@ export function ComprehensionPhase({
             <div className="mx-auto w-full max-w-[560px]">
               <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-accent" />
 
-              <div className="flex items-end gap-3">
-                <img src={dariaSolo} alt="" className="h-20 w-auto shrink-0 object-contain" />
-                <div className="flex-1">
+              <div className="flex items-end gap-3 sm:gap-4">
+                <img src={dariaSolo} alt="" className="h-24 w-auto shrink-0 object-contain" />
+                <div className="min-w-0 flex-1">
                   <div
                     className={cn(
-                      "rounded-2xl rounded-bl-sm p-4 shadow-card",
+                      "animate-pop-in rounded-2xl rounded-bl-sm border-2 p-4 shadow-card",
                       brainCheck.type === "correct"
-                        ? "bg-success/10 border-2 border-success animate-pop-in"
-                        : "bg-sky border-2 border-destructive/40 animate-pop-in",
+                        ? "border-success bg-success/8"
+                        : "border-destructive/40 bg-sky",
                     )}
                   >
-                    <div
-                      className={cn(
-                        "mb-1.5 inline-flex items-center gap-1.5 text-sm font-bold",
-                        brainCheck.type === "correct" ? "text-success" : "text-destructive",
-                      )}
-                    >
-                      {brainCheck.type === "correct" ? <CheckBadge size="sm" /> : <CrossBadge size="sm" />}
-                      <span>{brainCheck.type === "correct" ? "Correct" : "Not quite"}</span>
+                    <div className="mb-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-2">
+                      <span
+                        className={cn(
+                          "inline-flex shrink-0 items-center gap-1.5 text-sm font-bold uppercase tracking-wide",
+                          brainCheck.type === "correct" ? "text-success" : "text-destructive",
+                        )}
+                      >
+                        {brainCheck.type === "correct" ? <CheckBadge size="sm" /> : <CrossBadge size="sm" />}
+                        <span>{brainCheck.type === "correct" ? "Correct" : "Not quite"}</span>
+                      </span>
+
+                      <span aria-hidden className="h-4 w-px shrink-0 bg-ink/10" />
+
+                      <span
+                        className={cn(
+                          "inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide",
+                          elementStyle.bg,
+                          elementStyle.text,
+                        )}
+                      >
+                        <ElementIcon className="h-3.5 w-3.5" />
+                        <span>{elementLabel}</span>
+                      </span>
                     </div>
 
-                    <div
-                      className={cn(
-                        "mb-2 inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-sm font-bold",
-                        elementStyle.bg,
-                        elementStyle.text,
-                      )}
-                    >
-                      <ElementIcon className="h-4 w-4" />
-                      <span>{elementLabel}</span>
-                    </div>
-
-                    <p className="text-base font-semibold leading-snug text-primary">
+                    <p className="text-lg font-bold leading-snug text-primary">
                       {brainCheck.message}
                     </p>
                   </div>
@@ -286,6 +290,7 @@ export function ComprehensionPhase({
                     : "Try again"}
                 </TactileButton>
               </div>
+
             </div>
           </div>
         </div>
@@ -405,7 +410,7 @@ function CheckBadge({ size = "md" }: { size?: "sm" | "md" }) {
   return (
     <span
       className={cn(
-        "flex items-center justify-center rounded-full bg-success text-success-foreground",
+        "flex shrink-0 items-center justify-center rounded-full bg-success text-success-foreground",
         box,
       )}
     >
