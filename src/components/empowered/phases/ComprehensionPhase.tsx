@@ -387,12 +387,19 @@ function SelectedCheck() {
   );
 }
 
-function CheckBadge() {
+function CheckBadge({ size = "md" }: { size?: "sm" | "md" }) {
+  const box = size === "sm" ? "h-5 w-5" : "h-8 w-8";
+  const icon = size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5";
   return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-success text-success-foreground">
+    <span
+      className={cn(
+        "flex items-center justify-center rounded-full bg-success text-success-foreground",
+        box,
+      )}
+    >
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5"
+        className={icon}
         stroke="currentColor"
         strokeWidth="3"
         fill="none"
@@ -403,12 +410,19 @@ function CheckBadge() {
   );
 }
 
-function CrossBadge() {
+function CrossBadge({ size = "md" }: { size?: "sm" | "md" }) {
+  const box = size === "sm" ? "h-5 w-5" : "h-8 w-8";
+  const icon = size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5";
   return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-destructive text-destructive-foreground">
+    <span
+      className={cn(
+        "flex items-center justify-center rounded-full bg-destructive text-destructive-foreground",
+        box,
+      )}
+    >
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5"
+        className={icon}
         stroke="currentColor"
         strokeWidth="3"
         fill="none"
