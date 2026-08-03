@@ -194,7 +194,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
           </section>
         )}
 
-        <div className="mt-5 rounded-[28px] bg-card/80 p-2 shadow-card backdrop-blur">
+        <div className="mt-4 rounded-[28px] bg-card/80 p-2 shadow-card backdrop-blur">
           <div className="grid grid-cols-4 gap-1">
             {TABS.map((tab) => (
               <button
