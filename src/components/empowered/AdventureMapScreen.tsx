@@ -189,14 +189,7 @@ export function AdventureMapScreen({ onNavigate }: AdventureMapScreenProps) {
                     checkpoint={checkpoint}
                     onStart={() => onNavigate("story", checkpoint.storyId)}
                   />
-                  {checkpoint.state === "current" && (
-                    <img
-                      src={dariaSolo}
-                      alt=""
-                      aria-hidden
-                      className="pointer-events-none absolute -right-2 -top-10 hidden h-24 w-auto object-contain drop-shadow-[0_10px_16px_rgba(63,38,140,0.16)] sm:block"
-                    />
-                  )}
+
                 </li>
               ))}
 
