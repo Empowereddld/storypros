@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getAllCompletions, getCompletedStoryIds } from "@/services/progress";
 import { getAllStories, getStory } from "@/services/stories";
 import { resolveStoryImage } from "@/services/storyImages";
-import { StoryProsLogo } from "./StoryProsBrand";
+
 
 interface ParentDashboardScreenProps {
   onClose: () => void;
@@ -96,7 +96,6 @@ export function ParentDashboardScreen({ onClose, onNavigate }: ParentDashboardSc
             <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <StoryProsLogo layout="row" size="sm" />
         <span className="w-10" />
       </header>
 
