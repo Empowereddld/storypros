@@ -315,7 +315,7 @@ export function ComprehensionPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-4 grid w-full max-w-[600px] flex-1 grid-cols-2 gap-3 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
+      <div className="relative z-10 mx-auto mt-3 grid w-full max-w-[560px] flex-1 grid-cols-2 gap-2.5 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
@@ -325,7 +325,7 @@ export function ComprehensionPhase({
               onClick={() => !isDisabled && setSelected(opt.id)}
               disabled={isDisabled}
               className={cn(
-                "flex min-h-[80px] w-full items-center justify-center gap-3 rounded-[24px] border-2 bg-card p-4 text-center shadow-card transition-all",
+                "flex min-h-[60px] w-full items-center justify-center gap-2 rounded-[20px] border-2 bg-card px-3 py-2.5 text-center shadow-card transition-all",
                 isSelected && "border-primary bg-primary/5 -translate-y-0.5 shadow-soft",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
@@ -333,7 +333,7 @@ export function ComprehensionPhase({
             >
               <span
                 className={cn(
-                  "text-base font-bold leading-snug",
+                  "text-[15px] font-bold leading-snug",
                   isDisabled ? "text-ink-soft line-through" : "text-ink",
                 )}
               >
