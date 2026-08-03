@@ -25,12 +25,16 @@ import {
   BookOpen,
   Volume2,
   CheckCircle2,
+  Sparkles,
+  Home,
 } from "lucide-react";
 import { CharacterSection, Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
+import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
 import stepConnectAsset from "@/assets/step-connect-real-life.png.asset.json";
+
 
 const PATHWAY_IMAGES = [
   { url: stepReadAsset.url, alt: "A child listening to a Story Pros story on a tablet with headphones" },
@@ -68,7 +72,6 @@ import {
 } from "@/data/landingContent";
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
-import danDariaThumbsUp from "@/assets/dan-daria-thumbsup.webp";
 import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
 import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
 import dariaPointing from "@/assets/daria-pointing.webp";
@@ -103,7 +106,10 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
   Clock,
   Repeat,
   Users,
+  Sparkles,
+  Home,
 };
+
 
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
   return (
@@ -443,27 +449,63 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── Family dashboard (art left) ── */}
-      <CharacterSection side="left" image={danDariaThumbsUp}>
-        <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-          {DASHBOARD.eyebrow}
-        </p>
-        <h2 className="mt-2 font-display text-3xl font-extrabold leading-tight text-primary sm:text-4xl">
-          {DASHBOARD.heading}
-        </h2>
-        <p className="mt-4 text-lg font-medium leading-relaxed text-ink-soft">{DASHBOARD.body}</p>
-        <ul className="mt-6 space-y-2.5">
-          {DASHBOARD.points.map((point) => (
-            <li
-              key={point}
-              className="flex items-center gap-3 rounded-[18px] border border-accent/50 bg-card px-4 py-3 shadow-card"
-            >
-              <CheckMark />
-              <span className="text-sm font-bold text-ink">{point}</span>
-            </li>
-          ))}
-        </ul>
-      </CharacterSection>
+      {/* ── Family dashboard (product proof) ── */}
+      <section className="scroll-mt-20 bg-card/40">
+        <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-6 sm:py-24">
+          <Reveal>
+            <div className="grid items-center gap-10 lg:grid-cols-[57fr_43fr] lg:gap-14">
+              {/* Dashboard mockup */}
+              <div className="order-2 lg:order-1">
+                <img
+                  src={familyDashboardAsset.url}
+                  alt="The Story Pros Family Dashboard on a tablet, showing what a child practised this week, a next step for home, a story just completed, and saved retells"
+                  loading="lazy"
+                  className="w-full drop-shadow-[0_18px_40px_rgba(82,29,153,0.10)]"
+                />
+              </div>
+
+              {/* Copy column — on mobile its children flow around the image */}
+              <div className="contents lg:order-2 lg:block">
+                <div className="order-1">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+                    {DASHBOARD.eyebrow}
+                  </p>
+                  <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-4xl">
+                    {DASHBOARD.heading}
+                  </h2>
+                  <p className="mt-3.5 text-[16.5px] font-medium leading-relaxed text-ink-soft sm:text-lg">
+                    {DASHBOARD.body}
+                  </p>
+                </div>
+
+                {/* Two support items */}
+                <ul className="order-3 space-y-5 lg:mt-9">
+                  {DASHBOARD.points.map((point) => {
+                    const Icon = SKILL_ICONS[point.icon];
+                    return (
+                      <li key={point.title} className="flex items-start gap-3.5">
+                        <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/10">
+                          {Icon && <Icon className="h-[18px] w-[18px] text-primary" aria-hidden />}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-display text-[16px] font-extrabold text-ink">
+                            {point.title}
+                          </p>
+                          <p className="mt-1 text-[14.5px] font-medium leading-relaxed text-ink-soft">
+                            {point.detail}
+                          </p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+
+          </Reveal>
+        </div>
+      </section>
+
 
       {/* ── Who Story Pros is designed for (art right) ── */}
       <CharacterSection

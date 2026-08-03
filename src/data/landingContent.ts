@@ -173,14 +173,22 @@ export const COMMUNITY = {
 
 export const DASHBOARD = {
   eyebrow: "For grown-ups",
-  heading: "You see what they practised, and what to try next",
-  body: "The family dashboard shows what your child worked on today across understanding, vocabulary, retelling, and sounds, along with a simple next step you can practise together at home.",
+  heading: "See what they practised. Know what to try next.",
+  body: "After a story, the Family Dashboard gives you a simple look at what your child practised, what we noticed, and one practical way to support them at home.",
   points: [
-    "A clear picture of what grew this week",
-    "Conversation starters that fit the story they just finished",
-    "Progress that saves automatically across devices",
+    {
+      icon: "Sparkles",
+      title: "See what they practised",
+      detail: "A clear, strengths-based look at the language skills they worked on.",
+    },
+    {
+      icon: "Home",
+      title: "Know what to try next",
+      detail: "Simple ideas and parent tips you can use in everyday moments.",
+    },
   ],
 };
+
 
 /* ── Who it is designed for ── */
 
