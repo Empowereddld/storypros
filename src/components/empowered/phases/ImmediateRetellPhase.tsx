@@ -15,6 +15,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { RetellRecorder } from "../RetellRecorder";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
@@ -111,22 +112,14 @@ export function ImmediateRetellPhase({
 
           {supported && (
             <div className="mt-4 flex justify-center">
-              <button
-                type="button"
+              <AudioButton
+                size="lg"
+                tone="primary"
+                playing={fullPlaying}
                 onClick={() => toggle(fullStory, "full-story")}
-                aria-label={fullPlaying ? "Stop audio" : "Listen to the full story"}
-                className={cn(
-                  "press-pop flex min-h-[48px] items-center gap-2.5 rounded-full border-2 px-6 text-base font-extrabold transition-all",
-                  fullPlaying
-                    ? "border-transparent bg-destructive text-destructive-foreground animate-pulse-glow"
-                    : "border-accent bg-card text-primary shadow-card hover:bg-accent/40",
-                )}
-              >
-                {fullPlaying ? <StopIcon /> : <SpeakerIcon />}
-                <span className="whitespace-nowrap">
-                  {fullPlaying ? "Stop" : "Listen to Full Story"}
-                </span>
-              </button>
+                ariaLabel="Listen to the full story"
+                label="Listen to Full Story"
+              />
             </div>
           )}
 
@@ -145,11 +138,8 @@ export function ImmediateRetellPhase({
               const playing = isPlaying(`scene-${index}`);
 
               return (
-                <button
+                <div
                   key={slide.position}
-                  type="button"
-                  onClick={() => toggle(slide.text, `scene-${index}`)}
-                  aria-label={`Hear scene ${index + 1}`}
                   className={cn(
                     "flex min-h-[220px] flex-col rounded-xl border-2 bg-card p-4 text-left shadow-card transition-all",
                     playing ? "scale-105 border-transparent ring-4 ring-primary" : "border-accent/50",
@@ -184,11 +174,20 @@ export function ImmediateRetellPhase({
                     >
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+                    <span className="flex-1 text-xs font-extrabold uppercase tracking-wide text-ink-soft">
                       {ELEMENT_LABELS[element]}
                     </span>
+                    {supported && (
+                      <AudioButton
+                        size="sm"
+                        tone="quiet"
+                        playing={playing}
+                        onClick={() => toggle(slide.text, `scene-${index}`)}
+                        ariaLabel={`Hear scene ${index + 1}`}
+                      />
+                    )}
                   </div>
-                </button>
+                </div>
               );
             })}
           </div>

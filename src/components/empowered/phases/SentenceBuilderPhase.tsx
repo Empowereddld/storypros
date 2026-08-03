@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { highlightConnective } from "@/lib/highlightConnective";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
 import { isSupported, preloadVoices, speak, speedToRate, stop } from "@/services/tts";
+import { AudioButton } from "../AudioButton";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
@@ -209,13 +210,13 @@ export function SentenceBuilderPhase({
               Word: {storyData.target_connective}
             </span>
             {isSupported() && (
-              <button
+              <AudioButton
+                size="md"
+                tone="quiet"
+                playing={speaking}
                 onClick={handleListenFrame}
-                className="press-pop inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-extrabold text-primary-foreground"
-              >
-                {speaking ? "Stop" : "Listen"}
-                <SpeakerIcon playing={speaking} />
-              </button>
+                ariaLabel="Hear the sentence"
+              />
             )}
           </div>
         </section>
