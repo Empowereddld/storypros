@@ -381,7 +381,7 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
       <DevPhaseNav
         phases={PHASE_ORDER}
         index={phaseIndex}
-        onChange={(i) => setPhaseIndex(Math.max(0, Math.min(PHASE_ORDER.length - 1, i)))}
+        onChange={(i: number) => setPhaseIndex(Math.max(0, Math.min(PHASE_ORDER.length - 1, i)))}
       />
 
     </div>
