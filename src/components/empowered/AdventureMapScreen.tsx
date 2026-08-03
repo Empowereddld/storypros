@@ -310,12 +310,12 @@ function CheckpointCard({
 
 function FutureMarker({ isFree, onUpgrade }: { isFree: boolean; onUpgrade: () => void }) {
   return (
-    <div className="rounded-[24px] border border-dashed border-primary/25 bg-card/70 p-4 text-center backdrop-blur">
+    <div className="rounded-[24px] border border-dashed border-primary/25 bg-card/70 px-4 py-6 text-center backdrop-blur">
       <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent/70 text-primary">
         <LockIcon />
       </span>
-      <p className="mt-2 text-[15px] font-extrabold text-ink">More stories ahead</p>
-      <p className="mt-1 text-[13px] font-semibold leading-relaxed text-ink-soft">
+      <p className="mt-4 text-[15px] font-extrabold text-ink">More stories ahead</p>
+      <p className="mt-2 text-[13px] font-semibold leading-relaxed text-ink-soft">
         {isFree
           ? "Join Story Pros to continue your adventure."
           : "Finish a story to unlock the next one."}
@@ -323,7 +323,7 @@ function FutureMarker({ isFree, onUpgrade }: { isFree: boolean; onUpgrade: () =>
       {isFree && (
         <button
           onClick={onUpgrade}
-          className="press-pop mt-3 inline-flex items-center rounded-full bg-accent/50 px-4 py-2 text-[13px] font-extrabold text-primary"
+          className="press-pop mt-5 inline-flex items-center rounded-full bg-accent/50 px-4 py-2 text-[13px] font-extrabold text-primary"
         >
           See Membership
         </button>
