@@ -63,7 +63,7 @@ import {
   PRICE,
   PRICE_PERIOD,
   HERO,
-  
+
   PARENT_PROBLEM,
   WHY_STORIES,
   PATHWAY,
@@ -75,13 +75,12 @@ import {
   DESIGNED_FOR_INTRO,
   DESIGNED_FOR_NOTE,
   FOUNDERS,
-  IN_ACTION,
 
   PRICING_HEADLINE,
   PRICING_SUBHEAD,
   FREE_TIER,
   MEMBERSHIP_TIER,
-  
+
   FAQS,
 } from "@/data/landingContent";
 
