@@ -43,6 +43,8 @@ const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
 import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
+import familyCtaAsset from "@/assets/family-cta.png.asset.json";
+
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
 import stepConnectAsset from "@/assets/step-connect-real-life.png.asset.json";
