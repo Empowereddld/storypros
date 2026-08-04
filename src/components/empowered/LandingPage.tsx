@@ -56,7 +56,6 @@ const PATHWAY_IMAGES = [
 import { PreviewCarousel } from "./PreviewCarousel";
 import { cn } from "@/lib/utils";
 import {
-  AGE_RANGE,
   WAITLIST_URL,
   PRICE,
   PRICE_PERIOD,
@@ -85,7 +84,6 @@ import {
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
-import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
 import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
