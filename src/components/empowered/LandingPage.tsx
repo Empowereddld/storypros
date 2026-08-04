@@ -90,7 +90,6 @@ import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
 import storyVocab from "@/assets/stories/dan-and-the-paper-cut/vocab-bandage.webp";
 
 interface LandingPageProps {
-  onGetStarted: () => void;
   onLogin: () => void;
   /** One click, straight into the live demo */
   onDemo: () => void;
@@ -123,7 +122,7 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
 };
 
 
-export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
+export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
