@@ -559,9 +559,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── Created by ── */}
+      {/* ── Built with expertise ── */}
       <section className="scroll-mt-20">
-        <div className="mx-auto w-full max-w-4xl px-4 py-16 text-center sm:px-6">
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 text-center sm:px-6">
           <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
             {FOUNDERS.eyebrow}
           </p>
@@ -572,25 +572,31 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
             {FOUNDERS.body}
           </p>
 
-          <div className="mx-auto mt-8 grid max-w-2xl gap-4 sm:grid-cols-2">
-            {FOUNDERS.people.map((person, i) => (
-              <Reveal key={person.name} delay={i * 90}>
-                <div className="h-full rounded-[26px] border border-accent/60 bg-card p-6 shadow-card">
-                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-2xl">
-                    {i === 0 ? "🩺" : "🍎"}
-                  </span>
-                  <p className="mt-4 text-lg font-extrabold text-primary">{person.name}</p>
-                  <p className="mt-1 text-sm font-semibold text-ink-soft">{person.role}</p>
-                </div>
-              </Reveal>
-            ))}
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {FOUNDERS.pillars.map((pillar, i) => {
+              const Icon = PILLAR_ICONS[pillar.icon] ?? MessagesSquare;
+              return (
+                <Reveal key={pillar.title} delay={i * 90}>
+                  <div className="flex h-full flex-col items-center rounded-[22px] border border-accent/50 bg-card/70 px-5 py-6 text-center">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent/60">
+                      <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} aria-hidden />
+                    </span>
+                    <p className="mt-4 text-base font-extrabold text-primary">{pillar.title}</p>
+                    <p className="mt-1.5 text-[14px] font-medium leading-relaxed text-ink-soft">
+                      {pillar.detail}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
 
-          <p className="mx-auto mt-8 max-w-2xl rounded-[24px] border border-accent/60 bg-card p-5 text-[15px] font-medium leading-relaxed text-ink-soft shadow-card">
+          <p className="mx-auto mt-8 max-w-2xl text-[13.5px] font-medium leading-relaxed text-ink-soft/80">
             {FOUNDERS.close}
           </p>
         </div>
       </section>
+
 
       {/* ── How Story Pros differs from typical learning apps ── */}
       <section className="border-y border-accent/40 bg-card/50">
