@@ -863,27 +863,43 @@ function TabletMock({ className }: { className?: string }) {
   );
 }
 
-function FaqItem({ question, answer }: { question: string; answer: string }) {
-  const [open, setOpen] = useState(false);
+function FaqItem({
+  question,
+  answer,
+  isFirst,
+  open,
+  onToggle,
+}: {
+  question: string;
+  answer: string;
+  isFirst: boolean;
+  open: boolean;
+  onToggle: () => void;
+}) {
   return (
-    <div className="overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card">
+    <div className={cn(!isFirst && "border-t border-accent/40")}>
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-center gap-3 px-5 py-4 text-left transition-colors hover:bg-accent/20"
+        className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-accent/10 sm:px-6 sm:py-5"
       >
-        <span className="flex-1 text-[15px] font-extrabold text-primary">{question}</span>
+        <span className="flex-1 text-[15px] font-bold leading-snug text-primary sm:text-base">
+          {question}
+        </span>
         <ChevronRightIcon
-          className={cn("h-5 w-5 shrink-0 text-ink-soft transition-transform", open && "rotate-90")}
+          className={cn(
+            "h-5 w-5 shrink-0 text-ink-soft transition-transform duration-200",
+            open && "rotate-90",
+          )}
         />
       </button>
       {open && (
-        <div className="animate-slide-up space-y-2 border-t border-accent/40 px-5 py-4">
+        <div className="space-y-3 px-5 pb-5 sm:px-6 sm:pb-6">
           {answer
             .split("\n")
             .filter(Boolean)
             .map((line, i) => (
-              <p key={i} className="text-sm font-medium leading-relaxed text-ink-soft">
+              <p key={i} className="max-w-[68ch] text-sm leading-7 text-ink-soft">
                 {line}
               </p>
             ))}
@@ -892,6 +908,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
     </div>
   );
 }
+
 
 function CheckMark() {
   return (
