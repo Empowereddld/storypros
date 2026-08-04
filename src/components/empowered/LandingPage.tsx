@@ -638,7 +638,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 </ul>
                 <div className="flex-1" />
                 <button
-                  onClick={onGetStarted}
+                  onClick={onDemo}
                   className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center rounded-3xl border-2 border-primary/60 bg-card text-sm font-extrabold text-primary transition-colors hover:bg-primary/5"
                 >
                   {FREE_TIER.cta}
