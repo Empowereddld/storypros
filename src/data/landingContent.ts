@@ -277,29 +277,32 @@ export const IN_ACTION = {
 
 
 
-export const PRICING_HEADLINE = "Everything your child needs to find their words";
+export const PRICING_HEADLINE = "Start free. Join when you're ready.";
 export const PRICING_SUBHEAD =
-  "Start free with one story. Become a member when your family is ready.";
+  "Try one complete story free, then unlock the full Story Pros experience with membership.";
 
 export const FREE_TIER = {
   title: "Free",
   price: "$0",
-  note: "Start here",
-  body: "Play the first story from beginning to end, no card needed.",
-  features: ["One complete story", "Every activity in that story", "Family dashboard preview"],
+  note: "Try Story Pros",
+  body: "Try one complete Story Pros story from beginning to end.",
+  features: ["One complete story", "Every activity in that story", "Family Dashboard preview"],
+  cta: "Try the Free Story",
+  reassurance: "No card needed",
 };
 
 export const MEMBERSHIP_TIER = {
   title: "Story Pros Membership",
-  note: "Full access",
-  body: "The whole library, the dashboard, and the monthly Community Circle.",
-};
-
-export const FOUNDING_OFFER = {
-  title: "Founding Membership",
-  heading: `${FOUNDING_PRICE} a month, locked in for life`,
-  body: `Join the waitlist to claim a founding rate. The first ${FOUNDING_SPOTS} founding members keep ${FOUNDING_PRICE} USD a month for as long as they stay members, even as the regular price rises.`,
-  cta: "Join the Founding Member Waitlist",
+  note: "Full membership",
+  body: "Full access to the Story Pros experience.",
+  features: [
+    "Every Story Pros story and activity",
+    "Family Dashboard with practical support for home",
+    "Monthly live Community Circle for children",
+  ],
+  supporting: "New stories are included as Story Pros grows.",
+  cta: "Join Story Pros",
+  reassurance: "Cancel anytime",
 };
 
 /* ── FAQ ── */

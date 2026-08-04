@@ -79,7 +79,7 @@ import {
   PRICING_SUBHEAD,
   FREE_TIER,
   MEMBERSHIP_TIER,
-  FOUNDING_OFFER,
+  
   FAQS,
 } from "@/data/landingContent";
 
@@ -604,111 +604,94 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── Membership ── */}
       <section id="membership" className="scroll-mt-20 border-t border-accent/40">
-        <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">
           <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
             Membership
           </p>
           <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             {PRICING_HEADLINE}
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-center text-base font-medium text-ink-soft">
+          <p className="mx-auto mt-3 max-w-3xl text-center text-base font-medium text-ink-soft">
             {PRICING_SUBHEAD}
           </p>
 
-          {/* Free / membership / founding */}
-          <div className="mt-10" />
-
-          <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
+          <div className="mt-10 flex flex-col items-stretch gap-5 lg:flex-row">
             {/* Free */}
-            <Reveal className="flex">
-              <div className="flex w-full flex-col rounded-[30px] border border-accent/60 bg-card p-7 text-center shadow-card">
-                <p className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+            <Reveal className="flex lg:w-[43%]">
+              <div className="flex w-full flex-col rounded-[28px] border border-accent/70 bg-card p-6 shadow-card sm:p-7">
+                <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-ink-soft">
                   {FREE_TIER.note}
                 </p>
-                <p className="mt-2 font-display text-4xl font-extrabold text-primary">
+                <p className="mt-3 font-display text-4xl font-extrabold leading-none text-primary">
                   {FREE_TIER.price}
                 </p>
-                <p className="mt-1 text-sm font-extrabold text-primary">{FREE_TIER.title}</p>
+                <p className="mt-1.5 text-sm font-extrabold text-ink">{FREE_TIER.title}</p>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-ink-soft">
                   {FREE_TIER.body}
                 </p>
-                <ul className="mt-4 space-y-2 text-left">
+                <ul className="mt-5 space-y-2.5">
                   {FREE_TIER.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2.5">
+                    <li key={f} className="flex items-start gap-2.5">
                       <CheckMark />
-                      <span className="text-sm font-bold text-ink">{f}</span>
+                      <span className="text-[14px] font-bold leading-snug text-ink">{f}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="flex-1" />
                 <button
                   onClick={onGetStarted}
-                  className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center rounded-3xl border-2 border-primary/70 bg-card text-sm font-extrabold text-primary transition-colors hover:bg-primary/5"
+                  className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center rounded-3xl border-2 border-primary/60 bg-card text-sm font-extrabold text-primary transition-colors hover:bg-primary/5"
                 >
-                  Create a free account
+                  {FREE_TIER.cta}
                 </button>
+                <p className="mt-2 text-center text-xs font-bold text-ink-soft">
+                  {FREE_TIER.reassurance}
+                </p>
               </div>
             </Reveal>
 
             {/* Membership */}
-            <Reveal delay={90} className="flex">
-              <div className="relative flex w-full flex-col overflow-hidden rounded-[30px] border-2 border-primary/30 bg-card p-7 text-center shadow-soft">
-                <span
-                  className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-secondary/20 blur-2xl"
-                  aria-hidden
-                />
-                <p className="relative text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+            <Reveal delay={90} className="flex lg:w-[57%]">
+              <div className="flex w-full flex-col rounded-[28px] border-2 border-primary/35 bg-primary/[0.04] p-6 shadow-soft sm:p-7">
+                <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-primary/80">
                   {MEMBERSHIP_TIER.note}
                 </p>
-                <p className="relative mt-2 font-display text-5xl font-extrabold leading-none text-primary">
+                <p className="mt-3 font-display text-[2.75rem] font-extrabold leading-none text-primary">
                   {PRICE}
-                  <span className="text-xl font-bold text-ink-soft">{PRICE_PERIOD}</span>
+                  <span className="text-lg font-bold text-ink-soft">{PRICE_PERIOD}</span>
                 </p>
-                <p className="relative mt-1 text-sm font-extrabold text-primary">
-                  {MEMBERSHIP_TIER.title}
-                </p>
-                <p className="relative mt-3 text-sm font-medium leading-relaxed text-ink-soft">
+                <p className="mt-1.5 text-sm font-extrabold text-ink">{MEMBERSHIP_TIER.title}</p>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-ink-soft">
                   {MEMBERSHIP_TIER.body}
+                </p>
+                <ul className="mt-5 space-y-2.5">
+                  {MEMBERSHIP_TIER.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2.5">
+                      <CheckMark />
+                      <span className="text-[14px] font-bold leading-snug text-ink">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3.5 pl-[26px] text-[13px] font-medium leading-relaxed text-ink-soft/80">
+                  {MEMBERSHIP_TIER.supporting}
                 </p>
                 <div className="flex-1" />
                 <button
                   onClick={onGetStarted}
-                  className="press-pop relative mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-3xl bg-primary text-sm font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
-                >
-                  Sign up
-                  <ChevronRightIcon className="h-4 w-4 text-secondary" />
-                </button>
-                <p className="relative mt-2 text-xs font-bold text-ink-soft">Cancel anytime</p>
-              </div>
-            </Reveal>
-
-            {/* Founding offer */}
-            <Reveal delay={180} className="flex">
-              <div className="flex w-full flex-col rounded-[30px] border-2 border-secondary bg-secondary/10 p-7 text-center shadow-card">
-                <p className="inline-flex self-center rounded-full bg-secondary px-4 py-1.5 text-xs font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)]">
-                  {FOUNDING_OFFER.title}
-                </p>
-                <p className="mt-4 font-display text-2xl font-extrabold leading-tight text-primary">
-                  {FOUNDING_OFFER.heading}
-                </p>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-ink-soft">
-                  {FOUNDING_OFFER.body}
-                </p>
-                <div className="flex-1" />
-                <a
-                  href={WAITLIST_URL}
-                  target="_blank"
-                  rel="noopener"
                   className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-3xl bg-primary text-sm font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
                 >
-                  {FOUNDING_OFFER.cta}
+                  {MEMBERSHIP_TIER.cta}
                   <ChevronRightIcon className="h-4 w-4 text-secondary" />
-                </a>
+                </button>
+                <p className="mt-2 text-center text-xs font-bold text-ink-soft">
+                  {MEMBERSHIP_TIER.reassurance}
+                </p>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
+
 
       {/* ── FAQ ── */}
       <section id="faq" className="scroll-mt-20 border-y border-accent/40 bg-card/50">
