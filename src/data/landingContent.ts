@@ -175,8 +175,6 @@ export const DASHBOARD = {
   eyebrow: "For grown-ups",
   heading: "See what they practised. Know what to try next.",
   body: "The Family Dashboard turns each story into a short, plain-language read on your child's language skills.",
-  cta: "See a sample dashboard",
-  ctaHref: "#membership",
   points: [
     {
       icon: "Sparkles",

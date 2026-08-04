@@ -502,12 +502,6 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                   })}
                 </ul>
 
-                <a
-                  href={DASHBOARD.ctaHref}
-                  className="press-pop order-4 mt-7 inline-flex h-[52px] items-center justify-center whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
-                >
-                  {DASHBOARD.cta}
-                </a>
               </div>
             </div>
 
