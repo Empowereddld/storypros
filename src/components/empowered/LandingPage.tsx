@@ -207,7 +207,12 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               className="pointer-events-none absolute inset-x-10 bottom-2 h-32 rounded-full bg-primary/10 blur-2xl"
               aria-hidden
             />
-            <TabletMock className="animate-float" />
+            <img
+              src={heroComprehensionAsset.url}
+              alt="A Story Pros comprehension question on a tablet"
+              loading="eager"
+              className="animate-float w-full rounded-[28px] shadow-[0_28px_60px_-18px_rgba(28,28,21,0.45)]"
+            />
           </div>
         </div>
       </section>
