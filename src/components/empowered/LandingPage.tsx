@@ -843,9 +843,9 @@ function IncludedSection() {
           {INCLUDED.lead}
         </p>
 
-        <div className="mt-12 grid items-end gap-8 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12">
-          {/* Daria, looking up at the list */}
-          <div className="relative mx-auto w-full max-w-[300px] lg:mx-0">
+        <div className="mt-12 grid items-end gap-8 lg:grid-cols-[1fr_minmax(0,320px)] lg:gap-12">
+          {/* Daria, looking up at the list — right on desktop */}
+          <div className="relative mx-auto w-full max-w-[300px] lg:order-2 lg:mx-0">
             <span
               className="pointer-events-none absolute inset-x-4 bottom-0 h-24 rounded-full bg-primary/10 blur-2xl"
               aria-hidden
@@ -859,7 +859,7 @@ function IncludedSection() {
           </div>
 
           {/* The items she's looking up at, drifting in one by one */}
-          <ul className="grid gap-3 sm:grid-cols-2">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:order-1">
             {MEMBERSHIP_FEATURES.map((feature, i) => (
               <Reveal key={feature.title} delay={i * 110}>
                 <li
