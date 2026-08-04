@@ -309,39 +309,32 @@ export const MEMBERSHIP_TIER = {
 
 export const FAQS = [
   {
-    q: "What ages is Story Pros designed for?",
-    a: `Story Pros is designed for children ${AGE_RANGE} with language-based learning differences, including DLD, language delays, ADHD, autism, and dyslexia.`,
+    q: "Who is Story Pros designed for?",
+    a: `Story Pros is designed for children ${AGE_RANGE} with DLD and other language-based learning needs. A formal diagnosis is not required.`,
   },
   {
-    q: "Does my child need a formal diagnosis to use Story Pros?",
-    a: "No. Story Pros is helpful for any child who struggles with language, whether they have a formal diagnosis or not. Many children on waitlists for evaluation benefit from starting practice right away.",
+    q: "Is Story Pros right for multilingual children?",
+    a: "Yes, multilingual children can use Story Pros. Multilingualism itself is not a language disorder. Story Pros may be especially relevant for multilingual children who also have DLD or other language-based learning needs.",
   },
   {
-    q: "Is there a free version?",
-    a: "Yes. The free plan lets your child play the first story from beginning to end, with every activity included and no card required. Membership unlocks the full library, new stories as they are added, and the monthly Community Circle.",
+    q: "How often should my child use Story Pros?",
+    a: "There is no one schedule that will be right for every child. Short, regular sessions are a good place to start, and families can choose a pace that works for their child. Story Pros includes repetition across activities and stories, so children have multiple opportunities to revisit language skills.",
   },
   {
-    q: "What is the Story Pros Community Circle?",
-    a: "It is a live monthly gathering on Zoom for member families, with guided story activities and a chance to connect with others who understand language differences. It is educational and community-based rather than group speech therapy. Members receive the joining details, timing, and format before each session.",
+    q: "Do I need to sit with my child while they use Story Pros?",
+    a: "Not always. Some children can use Story Pros independently, while younger children or children who need more support may benefit from having an adult nearby, especially at first. Retell activities also create natural opportunities to practise together.",
   },
   {
-    q: "How often should my child use the app?",
-    a: "We recommend daily sessions for the best results. Research shows children with DLD need consistent, repeated exposure to new language skills.",
+    q: "How does Story Pros fit with my child's speech therapy or school support?",
+    a: "Story Pros is designed to complement, not replace, speech-language therapy or school-based support. It gives children additional opportunities to practise language skills through stories between the other learning and support they receive.",
   },
   {
-    q: "Do I need to sit with my child while they use the app?",
-    a: "For younger children or children who need more support, we recommend parents stay nearby, especially at first. Older or more independent children can often complete stories on their own. The app includes an optional retell section where children can practise telling the story to you.",
-  },
-  {
-    q: "How does this fit with my child's speech therapy or school support?",
-    a: "Story Pros is designed to complement professional therapy, not replace it. Think of it as daily practice between therapy sessions, like homework that is actually engaging. Many SLPs recommend our app to families.",
-  },
-  {
-    q: "My child is multilingual. Is Story Pros right for us?",
-    a: "Being multilingual is not a language disorder. Story Pros may help when a multilingual child also has language-based learning needs, or when they benefit from structured story support for understanding, organizing, and retelling ideas.",
+    q: "What happens in the Story Pros Community Circle?",
+    a: "The Community Circle is a live, child-focused Zoom gathering for members, held for about an hour once a month. Children can connect with others in the Story Pros community, and parents are welcome to sit in. Saturday session times will rotate to better support families across different time zones. It is a community experience, not group speech therapy.",
   },
   {
     q: "How is Story Pros different from other learning apps?",
-    a: "Story Pros uses connected stories to build language in context, with built-in supports such as repetition, visuals, choices, and extra processing time. It also extends beyond the child’s screen with a Family Dashboard and monthly Community Circle for members.",
+    a: "Story Pros uses connected stories to support language practice in meaningful context. Built-in supports include visuals, repetition, choices, and extra processing time. Membership also extends beyond the app with a Family Dashboard and monthly Community Circle.",
   },
 ];
+

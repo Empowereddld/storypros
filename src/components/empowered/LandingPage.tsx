@@ -126,6 +126,7 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
 
 
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
       {/* ── Top nav ── */}
@@ -695,23 +696,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── FAQ ── */}
       <section id="faq" className="scroll-mt-20 border-y border-accent/40 bg-card/50">
-        <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
+        <div className="mx-auto w-full max-w-[820px] px-4 py-14 sm:px-6">
           <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             Frequently Asked Questions
           </h2>
-          <p className="mt-2 text-center text-base font-medium text-ink-soft">
-            Everything you need to know
-          </p>
 
-          <div className="mt-8 space-y-3">
-            {FAQS.map((faq, i) => (
-              <Reveal key={faq.q} delay={i * 60}>
-                <FaqItem question={faq.q} answer={faq.a} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <div className="mt-8 overflow-hidden rounded-[20px] border border-accent/50 bg-card">
+              {FAQS.map((faq, i) => (
+                <FaqItem
+                  key={faq.q}
+                  question={faq.q}
+                  answer={faq.a}
+                  isFirst={i === 0}
+                  open={openFaq === i}
+                  onToggle={() => setOpenFaq((cur) => (cur === i ? null : i))}
+                />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
+
 
       {/* ── Final CTA ── */}
       <section>
@@ -857,27 +863,43 @@ function TabletMock({ className }: { className?: string }) {
   );
 }
 
-function FaqItem({ question, answer }: { question: string; answer: string }) {
-  const [open, setOpen] = useState(false);
+function FaqItem({
+  question,
+  answer,
+  isFirst,
+  open,
+  onToggle,
+}: {
+  question: string;
+  answer: string;
+  isFirst: boolean;
+  open: boolean;
+  onToggle: () => void;
+}) {
   return (
-    <div className="overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card">
+    <div className={cn(!isFirst && "border-t border-accent/40")}>
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-center gap-3 px-5 py-4 text-left transition-colors hover:bg-accent/20"
+        className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-accent/10 sm:px-6 sm:py-5"
       >
-        <span className="flex-1 text-[15px] font-extrabold text-primary">{question}</span>
+        <span className="flex-1 text-[15px] font-bold leading-snug text-primary sm:text-base">
+          {question}
+        </span>
         <ChevronRightIcon
-          className={cn("h-5 w-5 shrink-0 text-ink-soft transition-transform", open && "rotate-90")}
+          className={cn(
+            "h-5 w-5 shrink-0 text-ink-soft transition-transform duration-200",
+            open && "rotate-90",
+          )}
         />
       </button>
       {open && (
-        <div className="animate-slide-up space-y-2 border-t border-accent/40 px-5 py-4">
+        <div className="space-y-3 px-5 pb-5 sm:px-6 sm:pb-6">
           {answer
             .split("\n")
             .filter(Boolean)
             .map((line, i) => (
-              <p key={i} className="text-sm font-medium leading-relaxed text-ink-soft">
+              <p key={i} className="max-w-[68ch] text-sm leading-7 text-ink-soft">
                 {line}
               </p>
             ))}
@@ -886,6 +908,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
     </div>
   );
 }
+
 
 function CheckMark() {
   return (
