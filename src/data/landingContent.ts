@@ -275,44 +275,7 @@ export const IN_ACTION = {
 
 /* ── Membership ── */
 
-export const MEMBERSHIP_FEATURES: { icon: string; title: string; benefit: string }[] = [
-  {
-    icon: "📚",
-    title: "Access to the interactive story library",
-    benefit: "Every story is a full guided session your child can play as often as they like.",
-  },
-  {
-    icon: "✨",
-    title: "New stories and activities as they are added",
-    benefit: "The library keeps growing, and your membership keeps up with it.",
-  },
-  {
-    icon: "📈",
-    title: "Family progress dashboard",
-    benefit: "See what your child practised across understanding, vocabulary, and retelling.",
-  },
-  {
-    icon: "🏡",
-    title: "Supportive next-step ideas for home",
-    benefit: "Simple things to try together after the story, no prep needed.",
-  },
-  {
-    icon: "🎙️",
-    title: "One live Community Circle each month",
-    benefit: "Guided story activities with other children and families around the world.",
-  },
-  {
-    icon: "🔓",
-    title: "Cancel anytime",
-    benefit: "No lock-in. Your child's progress stays saved if you come back.",
-  },
-];
 
-export const INCLUDED = {
-  eyebrow: "What's included",
-  heading: "Everything in one membership",
-  lead: "One membership covers the whole Story Pros experience: the stories your child plays, the guidance you get at home, and the community you both join.",
-};
 
 export const PRICING_HEADLINE = "Everything your child needs to find their words";
 export const PRICING_SUBHEAD =
