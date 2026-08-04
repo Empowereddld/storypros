@@ -56,7 +56,6 @@ const PATHWAY_IMAGES = [
 import { PreviewCarousel } from "./PreviewCarousel";
 import { cn } from "@/lib/utils";
 import {
-  AGE_RANGE,
   WAITLIST_URL,
   PRICE,
   PRICE_PERIOD,
@@ -85,7 +84,6 @@ import {
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
-import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
 import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
@@ -720,50 +718,51 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
 
       {/* ── Final CTA ── */}
-      <section>
-        <div className="mx-auto w-full max-w-4xl px-4 py-16 text-center sm:px-6">
-          <img
-            src={dariaPointing}
-            alt=""
-            loading="lazy"
-            className="mx-auto h-28 w-auto animate-bob object-contain"
-          />
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-primary sm:text-4xl">
-            Start Building Language Skills Today
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-base font-medium text-ink-soft">
-            Join the families getting ready to start Story Pros with their children.
-          </p>
-          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={WAITLIST_URL}
-              target="_blank"
-              rel="noopener"
-              className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_5px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
-            >
-              Join the Founding Member Waitlist
-              <ChevronRightIcon className="h-5 w-5 text-secondary" />
-            </a>
-            <button
-              onClick={onGetStarted}
-              className="press-pop inline-flex h-14 items-center justify-center rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5"
-            >
-              Start free with one story
-            </button>
-          </div>
+      <section className="bg-accent/25">
+        <div className="mx-auto w-full max-w-[1150px] px-4 py-16 sm:px-6 sm:py-20">
+          <Reveal>
+            <div className="rounded-[30px] border border-accent/60 bg-card px-6 py-12 text-center sm:px-12 sm:py-16">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-soft">
+                Ready to explore?
+              </p>
+              <h2 className="mx-auto mt-4 max-w-2xl font-display text-2xl font-extrabold leading-tight text-primary sm:text-4xl">
+                See if Story Pros feels right for your child.
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base font-medium text-ink">
+                Try one complete story free, or join the waitlist for launch updates.
+              </p>
+              <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
+                <button
+                  onClick={onGetStarted}
+                  className="press-pop inline-flex h-14 items-center justify-center rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-all hover:brightness-105 sm:min-w-[240px]"
+                >
+                  Try the Free Story
+                </button>
+                <a
+                  href={WAITLIST_URL}
+                  target="_blank"
+                  rel="noopener"
+                  className="press-pop inline-flex h-14 items-center justify-center rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 sm:min-w-[240px]"
+                >
+                  Join the Waitlist
+                </a>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-accent/40">
+      <footer className="border-t border-accent/50 bg-accent/40">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <StoryProsLogo layout="row" size="sm" />
             <p className="mt-3 max-w-xs text-sm font-medium leading-relaxed text-ink-soft">
-              Story Pros helps families and children connect with language through stories and
-              trust. Made for {AGE_RANGE}.
+              Story-based language learning for ages 5–12.
             </p>
+            <p className="mt-1 text-xs font-semibold text-ink-soft/80">By Empowered DLD</p>
           </div>
+
 
           <div>
             <p className="text-xs font-extrabold uppercase tracking-wide text-primary">
