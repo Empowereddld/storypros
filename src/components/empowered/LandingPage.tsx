@@ -87,10 +87,6 @@ import {
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
 import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
-// TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
-// when it lands — this is the only import that needs changing.
-import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
-import storyVocab from "@/assets/stories/dan-and-the-paper-cut/vocab-bandage.webp";
 
 interface LandingPageProps {
   onLogin: () => void;
