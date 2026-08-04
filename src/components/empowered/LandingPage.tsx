@@ -74,9 +74,7 @@ import {
   DESIGNED_FOR_NOTE,
   FOUNDERS,
   IN_ACTION,
-  MEMBERSHIP_FEATURES,
 
-  INCLUDED,
   PRICING_HEADLINE,
   PRICING_SUBHEAD,
   FREE_TIER,
@@ -90,7 +88,6 @@ import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.j
 import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
-import dariaLookingUp from "@/assets/daria-solo.png";
 import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
 import storyVocab from "@/assets/stories/dan-and-the-paper-cut/vocab-bandage.webp";
 
@@ -605,13 +602,8 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-
-
-      {/* ── What's included: Daria looks up at everything in the membership ── */}
-      <IncludedSection />
-
       {/* ── Membership ── */}
-      <section id="membership" className="scroll-mt-20">
+      <section id="membership" className="scroll-mt-20 border-t border-accent/40">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
           <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
             Membership
@@ -825,73 +817,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
 /* ───────── pieces ───────── */
 
-/**
- * What's Included — Daria sits at the lower left, chin in hand,
- * looking up at the membership items as they float in above her.
- */
-function IncludedSection() {
-  return (
-    <section id="included" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-        <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-          {INCLUDED.eyebrow}
-        </p>
-        <h2 className="mt-2 text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
-          {INCLUDED.heading}
-        </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-base font-medium text-ink-soft">
-          {INCLUDED.lead}
-        </p>
 
-        <div className="mt-12 grid items-end gap-8 lg:grid-cols-[1fr_minmax(0,320px)] lg:gap-12">
-          {/* Daria, looking up at the list — right on desktop */}
-          <div className="relative mx-auto w-full max-w-[300px] lg:order-2 lg:mx-0">
-            <span
-              className="pointer-events-none absolute inset-x-4 bottom-0 h-24 rounded-full bg-primary/10 blur-2xl"
-              aria-hidden
-            />
-            <img
-              src={dariaLookingUp}
-              alt="Daria looking up at everything included in a Story Pros membership"
-              loading="lazy"
-              className="relative z-10 mx-auto h-72 w-auto animate-bob object-contain object-bottom drop-shadow-[0_20px_32px_rgba(63,38,140,0.18)] lg:h-[380px]"
-            />
-          </div>
-
-          {/* The items she's looking up at, drifting in one by one */}
-          <ul className="grid gap-3 sm:grid-cols-2 lg:order-1">
-            {MEMBERSHIP_FEATURES.map((feature, i) => (
-              <Reveal key={feature.title} delay={i * 110}>
-                <li
-                  className={cn(
-                    "hover-lift flex h-full gap-3.5 rounded-[24px] border border-accent/60 bg-card p-4 shadow-card transition-all",
-                    // gentle staircase so they read as floating above her
-                    i % 2 === 0 ? "sm:-translate-y-2" : "sm:translate-y-2",
-                  )}
-                >
-                  <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] bg-accent text-lg"
-                    aria-hidden
-                  >
-                    {feature.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-[15px] font-extrabold leading-snug text-primary">
-                      {feature.title}
-                    </p>
-                    <p className="mt-1 text-xs font-medium leading-relaxed text-ink-soft">
-                      {feature.benefit}
-                    </p>
-                  </div>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /** A real Story Pros story shown on a tablet, so the product is the visual */
 function TabletMock({ className }: { className?: string }) {
