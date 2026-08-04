@@ -507,31 +507,48 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── Who Story Pros is designed for (art right) ── */}
-      <CharacterSection
-        id="designed-for"
-        side="right"
-        image={danDariaHighfive}
-        className="border-y border-accent/40 bg-card/50"
-      >
-        <h2 className="font-display text-3xl font-extrabold text-primary sm:text-4xl">
-          Designed for children who may:
-        </h2>
-        <ul className="mt-6 space-y-2.5">
-          {DESIGNED_FOR.map((item) => (
-            <li
-              key={item}
-              className="flex items-start gap-3 rounded-[18px] border border-accent/50 bg-card px-4 py-2.5 shadow-card"
-            >
-              <CheckMark />
-              <span className="text-sm font-bold leading-snug text-ink">{item}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 rounded-[24px] border border-accent/60 bg-card p-5 text-[15px] font-medium leading-relaxed text-ink-soft shadow-card">
-          {DESIGNED_FOR_NOTE}
-        </p>
-      </CharacterSection>
+      {/* ── Who Story Pros is designed for (centered 2x3 grid) ── */}
+      <section id="designed-for" className="scroll-mt-20 border-y border-accent/40 bg-card/50">
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+          <Reveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="font-display text-3xl font-extrabold text-primary sm:text-4xl">
+                {DESIGNED_FOR_HEADING}
+              </h2>
+              <p className="mt-3 text-[16px] font-medium leading-relaxed text-ink-soft sm:text-[17px]">
+                {DESIGNED_FOR_INTRO}
+              </p>
+            </div>
+
+            <ul className="mt-9 grid gap-3.5 sm:mt-10 sm:grid-cols-2 sm:gap-4">
+              {DESIGNED_FOR.map((item) => {
+                const Icon = SKILL_ICONS[item.icon];
+                return (
+                  <li
+                    key={item.text}
+                    className="flex h-full items-start gap-3.5 rounded-[20px] border border-accent/50 bg-card px-4 py-4 sm:px-5"
+                  >
+                    <span
+                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent/60 text-primary"
+                      aria-hidden
+                    >
+                      {Icon && <Icon className="h-[18px] w-[18px]" />}
+                    </span>
+                    <span className="text-[15px] font-semibold leading-snug text-ink sm:text-[15.5px]">
+                      {item.text}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <p className="mx-auto mt-8 max-w-2xl text-center text-[13.5px] font-medium leading-relaxed text-ink-soft/80">
+              {DESIGNED_FOR_NOTE}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
 
       {/* ── Created by ── */}
       <section className="scroll-mt-20">
