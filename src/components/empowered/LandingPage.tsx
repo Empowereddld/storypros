@@ -605,13 +605,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         </div>
       </section>
 
-
-
-      {/* ── What's included: Daria looks up at everything in the membership ── */}
-      <IncludedSection />
-
       {/* ── Membership ── */}
-      <section id="membership" className="scroll-mt-20">
+      <section id="membership" className="scroll-mt-20 border-t border-accent/40">
+
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
           <p className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
             Membership
