@@ -194,18 +194,40 @@ export const DASHBOARD = {
 
 /* ── Who it is designed for ── */
 
-export const DESIGNED_FOR = [
-  "Have DLD or other language-based learning needs",
-  "Find it difficult to understand or retell stories",
-  "Need extra time to process spoken language",
-  "Have ideas they cannot easily organize or explain",
-  "Benefit from visuals, repetition, models, and choices",
-  "Feel overwhelmed by language-heavy learning activities",
-  "Need support connecting stories to their own experiences",
+export const DESIGNED_FOR_HEADING = "Could Story Pros be a good fit for your child?";
+
+export const DESIGNED_FOR_INTRO = "Story Pros may be helpful for children who:";
+
+export const DESIGNED_FOR: { icon: string; text: string }[] = [
+  {
+    icon: "MessagesSquare",
+    text: "Have lots to say, but organizing words and ideas can be hard",
+  },
+  {
+    icon: "Ear",
+    text: "Find it difficult to understand or remember spoken information",
+  },
+  {
+    icon: "BookOpen",
+    text: "Have trouble retelling stories or explaining what happened",
+  },
+  {
+    icon: "Clock",
+    text: "Need extra time to process questions and respond",
+  },
+  {
+    icon: "Search",
+    text: "Have difficulty finding the words they want",
+  },
+  {
+    icon: "LayoutGrid",
+    text: "Do better with visuals, repetition, models, and clear choices",
+  },
 ];
 
 export const DESIGNED_FOR_NOTE =
-  "Story Pros was created with children with DLD in mind. Children with related language and learning needs may also benefit from its calm, structured approach.";
+  "Created with children with DLD in mind, with supports that may also help children with related language-based needs.";
+
 
 /* ── Created by ── */
 
