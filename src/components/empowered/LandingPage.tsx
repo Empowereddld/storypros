@@ -735,7 +735,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               </p>
               <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
                 <button
-                  onClick={onGetStarted}
+                  onClick={onDemo}
                   className="press-pop inline-flex h-14 items-center justify-center rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-all hover:brightness-105 sm:min-w-[240px]"
                 >
                   Try the Free Story
