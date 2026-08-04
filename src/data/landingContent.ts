@@ -232,14 +232,27 @@ export const DESIGNED_FOR_NOTE =
 /* ── Created by ── */
 
 export const FOUNDERS = {
-  eyebrow: "Who made this",
-  heading: "Created with language development in mind",
-  body: "Story Pros is being developed by Jinean Whitley Cheng, a speech pathologist, and Camesha Russell, an experienced educator.",
+  eyebrow: "Built with expertise",
+  heading: "Built around how children learn language",
+  body: "Story Pros is developed by Empowered DLD, bringing together clinical expertise, classroom experience, and thoughtful language-learning design.",
   close:
-    "Grounded in research and best practices, and shaped through collaboration with speech pathologists and educators, Story Pros brings together clinical knowledge, classroom experience, and meaningful storytelling.",
-  people: [
-    { name: "Jinean Whitley Cheng", role: "Speech-language pathologist" },
-    { name: "Camesha Russell", role: "Educator" },
+    "Grounded in research and best practices, and shaped through collaboration with speech pathologists, educators, researchers, and families.",
+  pillars: [
+    {
+      icon: "MessagesSquare",
+      title: "Clinical expertise",
+      detail: "DLD-informed language design",
+    },
+    {
+      icon: "GraduationCap",
+      title: "Classroom experience",
+      detail: "Built with real learners and learning environments in mind",
+    },
+    {
+      icon: "Handshake",
+      title: "Collaborative development",
+      detail: "Shaped through research, professional input, and ongoing evaluation",
+    },
   ],
 };
 
