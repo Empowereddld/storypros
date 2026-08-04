@@ -718,40 +718,53 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
       </section>
 
 
-      {/* ── Final CTA ── */}
-      <section className="bg-accent/25">
-        <div className="mx-auto w-full max-w-[1150px] px-4 py-16 sm:px-6 sm:py-20">
+      {/* ── Final CTA: split banner, one product visual ── */}
+      <section className="bg-accent/20">
+        <div className="mx-auto w-full max-w-[1180px] px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
           <Reveal>
-            <div className="rounded-[30px] border border-accent/60 bg-card px-6 py-12 text-center sm:px-12 sm:py-16">
-              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-soft">
-                Ready to explore?
-              </p>
-              <h2 className="mx-auto mt-4 max-w-2xl font-display text-2xl font-extrabold leading-tight text-primary sm:text-4xl">
-                See if Story Pros feels right for your child.
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base font-medium text-ink">
-                Try one complete story free, or join the waitlist for launch updates.
-              </p>
-              <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
-                <button
-                  onClick={onDemo}
-                  className="press-pop inline-flex h-14 items-center justify-center rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-all hover:brightness-105 sm:min-w-[240px]"
-                >
-                  Try the Free Story
-                </button>
-                <a
-                  href={WAITLIST_URL}
-                  target="_blank"
-                  rel="noopener"
-                  className="press-pop inline-flex h-14 items-center justify-center rounded-3xl border-2 border-primary/70 bg-card px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 sm:min-w-[240px]"
-                >
-                  Join the Waitlist
-                </a>
+            <div className="overflow-hidden rounded-[32px] border border-accent/60 bg-card">
+              <div className="grid lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)]">
+                {/* Visual side */}
+                <div className="relative flex items-end justify-center bg-accent/35 px-6 pb-0 pt-10 sm:px-10 sm:pt-12 lg:items-center lg:py-12">
+                  <div className="w-full max-w-[360px] translate-y-4 lg:translate-y-0 lg:max-w-[400px]">
+                    <TabletMock />
+                  </div>
+                </div>
+
+                {/* Copy side */}
+                <div className="flex flex-col justify-center px-6 py-10 text-left sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+                  <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+                    Ready to explore?
+                  </p>
+                  <h2 className="mt-3 max-w-[20ch] font-display text-[28px] font-extrabold leading-[1.12] text-primary sm:text-[34px] lg:text-[38px]">
+                    See if Story Pros feels right for your child.
+                  </h2>
+                  <p className="mt-3.5 max-w-[38ch] text-base font-medium leading-relaxed text-ink">
+                    Try one complete story free, or join the waitlist for launch updates.
+                  </p>
+                  <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                    <button
+                      onClick={onDemo}
+                      className="press-pop inline-flex h-[54px] items-center justify-center whitespace-nowrap rounded-3xl bg-primary px-7 text-base font-extrabold text-primary-foreground transition-all hover:brightness-105 sm:min-w-[204px]"
+                    >
+                      Try the Free Story
+                    </button>
+                    <a
+                      href={WAITLIST_URL}
+                      target="_blank"
+                      rel="noopener"
+                      className="press-pop inline-flex h-[54px] items-center justify-center whitespace-nowrap rounded-3xl border-2 border-primary/60 bg-card px-7 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 sm:min-w-[188px]"
+                    >
+                      Join the Waitlist
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
+
 
       {/* ── Footer ── */}
       <footer className="border-t border-accent/50 bg-accent/40">
