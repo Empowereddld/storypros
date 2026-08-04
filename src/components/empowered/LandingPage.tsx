@@ -238,9 +238,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-14 sm:px-6 sm:py-16"
       >
         <Reveal>
-          <div className="mx-auto grid w-full max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,40fr)_minmax(0,56fr)] lg:gap-[72px]">
-            {/* Content first on mobile */}
-            <div className="lg:order-2">
+          <div className="mx-auto grid w-full max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,56fr)_minmax(0,40fr)] lg:gap-[72px]">
+            {/* Content first on mobile and on desktop (copy left, art right) */}
+            <div className="lg:order-1">
               <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-primary sm:text-[38px]">
                 {WHY_STORIES.heading}
               </h2>
@@ -250,7 +250,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               <StoryElementFramework items={WHY_STORIES.framework} className="mt-8" />
             </div>
 
-            <div className="lg:order-1">
+            <div className="lg:order-2">
               <img
                 src={danDariaReading}
                 alt=""
