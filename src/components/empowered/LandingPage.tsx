@@ -43,6 +43,8 @@ const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
 import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
+import familyCtaAsset from "@/assets/family-cta.png.asset.json";
+
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
 import stepConnectAsset from "@/assets/step-connect-real-life.png.asset.json";
@@ -723,13 +725,17 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
         <div className="mx-auto w-full max-w-[1180px] px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
           <Reveal>
             <div className="overflow-hidden rounded-[32px] border border-accent/60 bg-card">
-              <div className="grid lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)]">
+              <div className="grid lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)]">
                 {/* Visual side */}
-                <div className="relative flex items-end justify-center bg-accent/35 px-6 pb-0 pt-10 sm:px-10 sm:pt-12 lg:items-center lg:py-12">
-                  <div className="w-full max-w-[360px] translate-y-4 lg:translate-y-0 lg:max-w-[400px]">
-                    <TabletMock />
-                  </div>
+                <div className="relative h-[240px] sm:h-[300px] lg:h-auto lg:min-h-[440px]">
+                  <img
+                    src={familyCtaAsset.url}
+                    alt="A mother and her son reading a Story Pros story together on a tablet at home"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
+                  />
                 </div>
+
 
                 {/* Copy side */}
                 <div className="flex flex-col justify-center px-6 py-10 text-left sm:px-10 sm:py-12 lg:px-14 lg:py-16">
