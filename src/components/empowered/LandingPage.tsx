@@ -32,7 +32,7 @@ import {
   Search,
   LayoutGrid,
 } from "lucide-react";
-import { CharacterSection, Reveal } from "./CharacterSection";
+import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
@@ -78,7 +78,6 @@ import {
 } from "@/data/landingContent";
 
 import danDariaReading from "@/assets/dan-daria-reading.webp";
-import danDariaHighfive from "@/assets/dan-daria-highfive.webp";
 import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.json";
 import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
