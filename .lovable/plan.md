@@ -1,49 +1,32 @@
 # Tighten the landing-page hero copy
 
-## What feels wordy
+## Goal
 
-The hero currently stacks four separate text blocks before the CTAs:
+Each hero line should have one distinct job: audience → product → experience → action.
 
-1. **Eyebrow**: "Story-based language learning for ages 5–12"
-2. **H1**: "Language learning through interactive stories"
-3. **Subheading**: "Learning that feels like a story, not a lesson."
-4. **Body**: "Designed for children with DLD and other language-learning needs, Story Pros turns relatable stories into meaningful, guided language practice."
+## Approved hero copy
 
-The repetition is real: the word "story/stories" appears four times and "learning" appears three times before the user even reaches a button. The eyebrow and the headline essentially say the same thing, and the subheading adds a fourth line that restates the premise rather than the benefit.
+- **Eyebrow**: "For ages 5–12 with DLD + language-based needs"
+- **H1**: "Language learning through interactive stories"
+- **Subheading**: "Learning that feels like a story, not a lesson."
+- **CTAs**: Keep existing "Try the Demo" and "Join the Waitlist" buttons.
 
-## The fix: make each line do one job
+The body paragraph is removed entirely and not replaced.
 
-Reduce to three lines with distinct roles:
+## Changes
 
-```text
-Eyebrow  → Who it's for
-Headline → The big promise
-Body     → The specific outcome
-```
+1. `src/data/landingContent.ts`
+   - Update `HERO.eyebrow` to "For ages 5–12 with DLD + language-based needs".
+   - Remove the `body` field from the `HERO` object.
 
-Proposed copy:
-
-- **Eyebrow**: "For children ages 5–12 with language-learning needs"  
-  (was: "Story-based language learning for ages 5–12")
-- **H1**: "Language learning through interactive stories"  
-  (keep — it is the clearest promise)
-- **Body**: "Story Pros helps children understand, retell, and connect through guided stories."  
-  (remove the subheading and merge the benefit into one shorter line)
-
-This removes the redundant "story-based" / "not a lesson" framing and gives the CTA group more visual weight.
-
-## Layout polish
-
-- Slightly reduce the top padding on tablet/desktop so the app preview stays closer to the fold.
-- Keep the eyebrow pill compact and content-hugging; do not let it stretch.
-- Preserve mobile stacking and the existing button wording ("Try the Demo", "Join the Waitlist").
-
-## Files to change
-
-- `src/data/landingContent.ts` — update `HERO` object.
-- `src/components/empowered/LandingPage.tsx` — remove the separate subheading paragraph, keep eyebrow/H1/body, adjust spacing if needed.
+2. `src/components/empowered/LandingPage.tsx`
+   - Remove the body paragraph element below the subheading.
+   - Tighten vertical spacing (margins/padding) between the subheading and the CTA buttons so the buttons move up naturally and no empty gap remains.
+   - Keep the app preview and button wording unchanged.
 
 ## Verification
 
-- Screenshot the hero at 1440px, 768px, and 390px.
-- Confirm the headline remains prominent, the body is readable, and the CTA pair sits above the fold on desktop.
+Screenshot the hero at desktop (1440px), tablet (768px), and mobile (390px) and confirm:
+- Only eyebrow, H1, subheading, and CTAs appear in the hero text column.
+- CTA buttons sit directly below the subheading with no awkward gap.
+- App preview remains unchanged and well-positioned.
