@@ -44,7 +44,7 @@ import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import familyCtaAsset from "@/assets/family-cta.png.asset.json";
-import heroComprehensionAsset from "@/assets/hero-comprehension.png.asset.json";
+import heroCleanAsset from "@/assets/hero-comprehension-clean.png.asset.json";
 
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
@@ -202,17 +202,14 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
           {/* The app preview does the visual talking */}
           <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[560px]">
-            <span
-              className="pointer-events-none absolute inset-x-10 bottom-2 h-32 rounded-full bg-primary/10 blur-2xl"
-              aria-hidden
-            />
             <img
-              src={heroComprehensionAsset.url}
+              src={heroCleanAsset.url}
               alt="A Story Pros comprehension question on a tablet"
               loading="eager"
-              className="animate-float w-full rounded-[28px] shadow-[0_28px_60px_-18px_rgba(28,28,21,0.45)]"
+              className="animate-float w-full drop-shadow-[0_22px_28px_rgba(28,28,21,0.18)]"
             />
           </div>
+
         </div>
       </section>
 
