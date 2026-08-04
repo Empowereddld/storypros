@@ -453,9 +453,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       <section className="scroll-mt-20 bg-card/40">
         <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-6 sm:py-24">
           <Reveal>
-            <div className="grid items-start gap-10 lg:grid-cols-[62fr_38fr] lg:gap-12">
-              {/* Dashboard mockup */}
-              <div className="order-2 lg:order-1">
+            <div className="grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-12">
+              {/* Dashboard mockup — right on desktop */}
+              <div className="order-2 lg:order-2">
                 <div className="rounded-[28px] border border-accent/50 bg-accent/25 p-3 sm:p-5">
                   <img
                     src={familyDashboardAsset.url}
@@ -467,12 +467,12 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               </div>
 
               {/* Copy column — on mobile its children flow around the image */}
-              <div className="contents lg:order-2 lg:block">
+              <div className="contents lg:order-1 lg:block">
                 <div className="order-1">
                   <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
                     {DASHBOARD.eyebrow}
                   </p>
-                  <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
+                  <h2 className="mt-2 font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
                     {DASHBOARD.heading}
                   </h2>
                   <p className="mt-3.5 text-[16px] font-medium leading-relaxed text-ink-soft sm:text-[17px]">
