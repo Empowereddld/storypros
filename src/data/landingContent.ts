@@ -27,13 +27,12 @@ export const FOUNDING_SPOTS = 100;
 /* ── Hero ── */
 
 export const HERO = {
-  eyebrow: "Story-based language learning for ages 5–12",
+  eyebrow: "For ages 5–12 with DLD + language-based needs",
   /** Split so the headline lands on two lines on desktop */
   headingLine1: "Language learning through interactive",
   headingLine2: "stories",
   heading: "Language learning through interactive stories",
   subheading: "Learning that feels like a story, not a lesson.",
-  body: "Designed for children with DLD and other language-learning needs, Story Pros turns relatable stories into meaningful, guided language practice.",
 };
 
 
