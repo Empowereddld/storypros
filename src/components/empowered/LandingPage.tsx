@@ -27,6 +27,10 @@ import {
   CheckCircle2,
   Sparkles,
   Home,
+  MessagesSquare,
+  Ear,
+  Search,
+  LayoutGrid,
 } from "lucide-react";
 import { CharacterSection, Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
@@ -57,6 +61,8 @@ import {
   COMMUNITY,
   DASHBOARD,
   DESIGNED_FOR,
+  DESIGNED_FOR_HEADING,
+  DESIGNED_FOR_INTRO,
   DESIGNED_FOR_NOTE,
   FOUNDERS,
   IN_ACTION,
@@ -108,6 +114,10 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
   Users,
   Sparkles,
   Home,
+  MessagesSquare,
+  Ear,
+  Search,
+  LayoutGrid,
 };
 
 
