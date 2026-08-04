@@ -31,7 +31,15 @@ import {
   Ear,
   Search,
   LayoutGrid,
+  GraduationCap,
+  Handshake,
 } from "lucide-react";
+
+const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
+  MessagesSquare,
+  GraduationCap,
+  Handshake,
+};
 import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
