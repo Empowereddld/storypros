@@ -732,7 +732,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 </div>
 
                 {/* Copy side */}
-                <div className="px-6 py-10 text-left sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+                <div className="flex flex-col justify-center px-6 py-10 text-left sm:px-10 sm:py-12 lg:px-14 lg:py-16">
                   <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
                     Ready to explore?
                   </p>
