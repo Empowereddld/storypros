@@ -238,9 +238,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
         className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-14 sm:px-6 sm:py-16"
       >
         <Reveal>
-          <div className="mx-auto grid w-full max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,40fr)_minmax(0,56fr)] lg:gap-[72px]">
-            {/* Content first on mobile */}
-            <div className="lg:order-2">
+          <div className="mx-auto grid w-full max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,56fr)_minmax(0,40fr)] lg:gap-[72px]">
+            {/* Content first on mobile and on desktop (copy left, art right) */}
+            <div className="lg:order-1">
               <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-primary sm:text-[38px]">
                 {WHY_STORIES.heading}
               </h2>
@@ -250,7 +250,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               <StoryElementFramework items={WHY_STORIES.framework} className="mt-8" />
             </div>
 
-            <div className="lg:order-1">
+            <div className="lg:order-2">
               <img
                 src={danDariaReading}
                 alt=""
@@ -453,9 +453,9 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       <section className="scroll-mt-20 bg-card/40">
         <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-6 sm:py-24">
           <Reveal>
-            <div className="grid items-start gap-10 lg:grid-cols-[62fr_38fr] lg:gap-12">
-              {/* Dashboard mockup */}
-              <div className="order-2 lg:order-1">
+            <div className="grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-12">
+              {/* Dashboard mockup — right on desktop */}
+              <div className="order-2 lg:order-2">
                 <div className="rounded-[28px] border border-accent/50 bg-accent/25 p-3 sm:p-5">
                   <img
                     src={familyDashboardAsset.url}
@@ -467,12 +467,12 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               </div>
 
               {/* Copy column — on mobile its children flow around the image */}
-              <div className="contents lg:order-2 lg:block">
+              <div className="contents lg:order-1 lg:block">
                 <div className="order-1">
                   <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
                     {DASHBOARD.eyebrow}
                   </p>
-                  <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
+                  <h2 className="mt-2 font-display text-[29px] font-extrabold leading-[1.12] text-primary sm:text-[38px]">
                     {DASHBOARD.heading}
                   </h2>
                   <p className="mt-3.5 text-[16px] font-medium leading-relaxed text-ink-soft sm:text-[17px]">
@@ -843,9 +843,9 @@ function IncludedSection() {
           {INCLUDED.lead}
         </p>
 
-        <div className="mt-12 grid items-end gap-8 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12">
-          {/* Daria, looking up at the list */}
-          <div className="relative mx-auto w-full max-w-[300px] lg:mx-0">
+        <div className="mt-12 grid items-end gap-8 lg:grid-cols-[1fr_minmax(0,320px)] lg:gap-12">
+          {/* Daria, looking up at the list — right on desktop */}
+          <div className="relative mx-auto w-full max-w-[300px] lg:order-2 lg:mx-0">
             <span
               className="pointer-events-none absolute inset-x-4 bottom-0 h-24 rounded-full bg-primary/10 blur-2xl"
               aria-hidden
@@ -859,7 +859,7 @@ function IncludedSection() {
           </div>
 
           {/* The items she's looking up at, drifting in one by one */}
-          <ul className="grid gap-3 sm:grid-cols-2">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:order-1">
             {MEMBERSHIP_FEATURES.map((feature, i) => (
               <Reveal key={feature.title} delay={i * 110}>
                 <li
