@@ -126,6 +126,7 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
 
 
 export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
       {/* ── Top nav ── */}
