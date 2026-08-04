@@ -44,6 +44,7 @@ import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import familyCtaAsset from "@/assets/family-cta.png.asset.json";
+import heroComprehensionAsset from "@/assets/hero-comprehension.png.asset.json";
 
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
