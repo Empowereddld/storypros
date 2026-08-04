@@ -74,8 +74,8 @@ import {
   DESIGNED_FOR_NOTE,
   FOUNDERS,
   IN_ACTION,
-  APP_COMPARISON,
   MEMBERSHIP_FEATURES,
+
   INCLUDED,
   PRICING_HEADLINE,
   PRICING_SUBHEAD,
@@ -606,42 +606,6 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       </section>
 
 
-      {/* ── How Story Pros differs from typical learning apps ── */}
-      <section className="border-y border-accent/40 bg-card/50">
-        <div className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6">
-          <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
-            What makes Story Pros different from typical learning apps?
-          </h2>
-
-          <div className="mt-10 space-y-3">
-            <div className="hidden gap-4 px-5 sm:grid sm:grid-cols-2">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
-                Typical learning apps
-              </p>
-              <p className="text-xs font-extrabold uppercase tracking-wide text-primary">
-                Story Pros
-              </p>
-            </div>
-
-            {APP_COMPARISON.map((row, i) => (
-              <Reveal key={row.typical} delay={i * 70}>
-                <div className="grid gap-3 overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card sm:grid-cols-2 sm:gap-0">
-                  <p className="flex items-start gap-3 p-5 text-sm font-medium text-ink-soft">
-                    <span className="mt-0.5 text-ink-soft/50" aria-hidden>
-                      —
-                    </span>
-                    {row.typical}
-                  </p>
-                  <p className="flex items-start gap-3 bg-primary/5 p-5 text-sm font-bold text-ink">
-                    <CheckMark />
-                    {row.storyPros}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── What's included: Daria looks up at everything in the membership ── */}
       <IncludedSection />

@@ -272,30 +272,6 @@ export const IN_ACTION = {
   ],
 };
 
-/* ── How Story Pros differs from typical learning apps ── */
-
-export const APP_COMPARISON: { typical: string; storyPros: string }[] = [
-  {
-    typical: "Practise isolated answers",
-    storyPros: "Builds language through connected stories",
-  },
-  {
-    typical: "Move quickly from question to question",
-    storyPros: "Allows time, repetition, and supported practice",
-  },
-  {
-    typical: "Focus mainly on right or wrong answers",
-    storyPros: "Helps children understand, organize, retell, and connect",
-  },
-  {
-    typical: "Provide limited support for families",
-    storyPros: "Includes a family dashboard and monthly Community Circle",
-  },
-  {
-    typical: "May feel busy or overstimulating",
-    storyPros: "Uses a calm, predictable, age-respectful experience",
-  },
-];
 
 /* ── Membership ── */
 
@@ -397,5 +373,9 @@ export const FAQS = [
   {
     q: "My child is multilingual. Is Story Pros right for us?",
     a: "Being multilingual is not a language disorder. Story Pros may help when a multilingual child also has language-based learning needs, or when they benefit from structured story support for understanding, organizing, and retelling ideas.",
+  },
+  {
+    q: "How is Story Pros different from other learning apps?",
+    a: "Story Pros uses connected stories to build language in context, with built-in supports such as repetition, visuals, choices, and extra processing time. It also extends beyond the child’s screen with a Family Dashboard and monthly Community Circle for members.",
   },
 ];
