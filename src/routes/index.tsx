@@ -47,7 +47,6 @@ function Index() {
   // Signed out — the public front door
   return (
     <LandingPage
-      onGetStarted={() => navigate({ to: "/signup" })}
       onLogin={() => navigate({ to: "/login" })}
       onDemo={startDemo}
     />

@@ -31,7 +31,6 @@ function LandingPageRoute() {
 
   return (
     <LandingPage
-      onGetStarted={() => navigate({ to: "/signup" })}
       onLogin={() => navigate({ to: "/login" })}
       onDemo={() => {
         startDemoSession(DEMO_PERSONA_ID);
