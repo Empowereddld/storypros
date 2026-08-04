@@ -74,9 +74,7 @@ import {
   DESIGNED_FOR_NOTE,
   FOUNDERS,
   IN_ACTION,
-  MEMBERSHIP_FEATURES,
 
-  INCLUDED,
   PRICING_HEADLINE,
   PRICING_SUBHEAD,
   FREE_TIER,
@@ -90,7 +88,6 @@ import communityCircleZoomAsset from "@/assets/community-circle-zoom.png.asset.j
 import dariaPointing from "@/assets/daria-pointing.webp";
 // TODO(art): swap for the new "Daria, chin in hand, looking up" illustration
 // when it lands — this is the only import that needs changing.
-import dariaLookingUp from "@/assets/daria-solo.png";
 import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
 import storyVocab from "@/assets/stories/dan-and-the-paper-cut/vocab-bandage.webp";
 
