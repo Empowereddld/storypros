@@ -79,7 +79,7 @@ import {
   PRICING_SUBHEAD,
   FREE_TIER,
   MEMBERSHIP_TIER,
-  FOUNDING_OFFER,
+  
   FAQS,
 } from "@/data/landingContent";
 
