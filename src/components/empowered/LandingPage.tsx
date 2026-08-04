@@ -695,23 +695,28 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
 
       {/* ── FAQ ── */}
       <section id="faq" className="scroll-mt-20 border-y border-accent/40 bg-card/50">
-        <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
+        <div className="mx-auto w-full max-w-[820px] px-4 py-14 sm:px-6">
           <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             Frequently Asked Questions
           </h2>
-          <p className="mt-2 text-center text-base font-medium text-ink-soft">
-            Everything you need to know
-          </p>
 
-          <div className="mt-8 space-y-3">
-            {FAQS.map((faq, i) => (
-              <Reveal key={faq.q} delay={i * 60}>
-                <FaqItem question={faq.q} answer={faq.a} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <div className="mt-8 overflow-hidden rounded-[20px] border border-accent/50 bg-card">
+              {FAQS.map((faq, i) => (
+                <FaqItem
+                  key={faq.q}
+                  question={faq.q}
+                  answer={faq.a}
+                  isFirst={i === 0}
+                  open={openFaq === i}
+                  onToggle={() => setOpenFaq((cur) => (cur === i ? null : i))}
+                />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
+
 
       {/* ── Final CTA ── */}
       <section>
