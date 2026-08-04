@@ -453,15 +453,17 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
       <section className="scroll-mt-20 bg-card/40">
         <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-6 sm:py-24">
           <Reveal>
-            <div className="grid items-center gap-10 lg:grid-cols-[57fr_43fr] lg:gap-14">
+            <div className="grid items-start gap-10 lg:grid-cols-[62fr_38fr] lg:gap-12">
               {/* Dashboard mockup */}
               <div className="order-2 lg:order-1">
-                <img
-                  src={familyDashboardAsset.url}
-                  alt="The Story Pros Family Dashboard on a tablet, showing what a child practised this week, a next step for home, a story just completed, and saved retells"
-                  loading="lazy"
-                  className="w-full drop-shadow-[0_18px_40px_rgba(82,29,153,0.10)]"
-                />
+                <div className="rounded-[28px] border border-accent/50 bg-accent/25 p-3 sm:p-5">
+                  <img
+                    src={familyDashboardAsset.url}
+                    alt="The Story Pros Family Dashboard on a tablet, showing what a child practised this week, a next step for home, a story just completed, and saved retells"
+                    loading="lazy"
+                    className="w-full rounded-[18px] drop-shadow-[0_14px_34px_rgba(82,29,153,0.10)]"
+                  />
+                </div>
               </div>
 
               {/* Copy column — on mobile its children flow around the image */}
@@ -470,16 +472,16 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                   <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
                     {DASHBOARD.eyebrow}
                   </p>
-                  <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-4xl">
+                  <h2 className="mt-2 font-display text-[26px] font-extrabold leading-tight text-primary sm:text-[32px]">
                     {DASHBOARD.heading}
                   </h2>
-                  <p className="mt-3.5 text-[16.5px] font-medium leading-relaxed text-ink-soft sm:text-lg">
+                  <p className="mt-3.5 text-[16px] font-medium leading-relaxed text-ink-soft sm:text-[17px]">
                     {DASHBOARD.body}
                   </p>
                 </div>
 
                 {/* Two support items */}
-                <ul className="order-3 space-y-5 lg:mt-9">
+                <ul className="order-3 space-y-5 lg:mt-8">
                   {DASHBOARD.points.map((point) => {
                     const Icon = SKILL_ICONS[point.icon];
                     return (
@@ -499,8 +501,16 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                     );
                   })}
                 </ul>
+
+                <a
+                  href={DASHBOARD.ctaHref}
+                  className="press-pop order-4 mt-7 inline-flex h-[52px] items-center justify-center whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+                >
+                  {DASHBOARD.cta}
+                </a>
               </div>
             </div>
+
 
           </Reveal>
         </div>
