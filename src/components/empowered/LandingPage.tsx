@@ -827,63 +827,6 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 /* ───────── pieces ───────── */
 
-
-
-/** A real Story Pros story shown on a tablet, so the product is the visual */
-function TabletMock({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "relative mx-auto w-full max-w-[520px] rounded-[30px] border-[11px] border-ink/85 bg-cream shadow-[0_28px_60px_-18px_rgba(28,28,21,0.45)]",
-        className,
-      )}
-    >
-      <div className="overflow-hidden rounded-[18px] bg-card">
-        {/* Story header */}
-        <div className="flex items-center justify-between gap-2 bg-primary px-4 py-2.5">
-          <span className="text-[11px] font-extrabold uppercase tracking-wide text-primary-foreground">
-            {IN_ACTION.storyTitle}
-          </span>
-          <span className="rounded-full bg-primary-foreground/15 px-2 py-0.5 text-[10px] font-extrabold text-primary-foreground">
-            1 of 6
-          </span>
-        </div>
-
-        {/* Story slide */}
-        <img src={storySlide} alt="A page from a Story Pros story" className="w-full" />
-
-        {/* Slide text */}
-        <div className="px-4 pb-3 pt-3">
-          <p className="text-[15px] font-bold leading-snug text-ink">
-            On Friday, Dan and his mom went on a walk.
-          </p>
-
-          {/* Vocabulary chip */}
-          <div className="mt-3 flex items-center gap-3 rounded-2xl border border-accent/60 bg-accent/30 p-2.5">
-            <img src={storyVocab} alt="" className="h-10 w-10 rounded-xl object-cover" />
-            <div className="min-w-0">
-              <p className="text-[10px] font-extrabold uppercase tracking-wide text-secondary-foreground/80">
-                New word
-              </p>
-              <p className="text-sm font-extrabold text-primary">bandage</p>
-            </div>
-            <span className="ml-auto flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
-                <path d="M11 5L6 9H3v6h3l5 4V5zm4.5 7a4 4 0 00-2-3.46v6.92A4 4 0 0015.5 12z" />
-              </svg>
-            </span>
-          </div>
-
-          {/* Progress */}
-          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-accent/70">
-            <div className="h-full w-1/6 rounded-full bg-primary" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function FaqItem({
   question,
   answer,
