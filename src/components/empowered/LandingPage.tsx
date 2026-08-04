@@ -144,7 +144,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               className="press-pop hidden items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:inline-flex"
             >
               <PaperPlaneIcon className="h-4 w-4" />
-              Try the Demo
+              Try the Free Story
             </button>
             <button
               onClick={onLogin}
@@ -188,7 +188,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 onClick={onDemo}
                 className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px]"
               >
-                Try the Demo
+                Try the Free Story
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
               </button>
               <a
@@ -337,7 +337,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               onClick={onDemo}
               className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Try the Demo
+              Try the Free Story
               <ChevronRightIcon className="h-5 w-5" />
             </button>
           </div>
