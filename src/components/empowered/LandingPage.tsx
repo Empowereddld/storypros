@@ -90,7 +90,6 @@ import storySlide from "@/assets/stories/dan-and-the-paper-cut/slide-01.webp";
 import storyVocab from "@/assets/stories/dan-and-the-paper-cut/vocab-bandage.webp";
 
 interface LandingPageProps {
-  onGetStarted: () => void;
   onLogin: () => void;
   /** One click, straight into the live demo */
   onDemo: () => void;
@@ -123,7 +122,7 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
 };
 
 
-export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps) {
+export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
@@ -144,7 +143,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               className="press-pop hidden items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:inline-flex"
             >
               <PaperPlaneIcon className="h-4 w-4" />
-              Try the Demo
+              Try the Free Story
             </button>
             <button
               onClick={onLogin}
@@ -188,7 +187,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 onClick={onDemo}
                 className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px]"
               >
-                Try the Demo
+                Try the Free Story
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
               </button>
               <a
@@ -337,7 +336,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               onClick={onDemo}
               className="press-pop inline-flex h-14 items-center justify-center gap-2 rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Try the Demo
+              Try the Free Story
               <ChevronRightIcon className="h-5 w-5" />
             </button>
           </div>
@@ -638,7 +637,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                 </ul>
                 <div className="flex-1" />
                 <button
-                  onClick={onGetStarted}
+                  onClick={onDemo}
                   className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center rounded-3xl border-2 border-primary/60 bg-card text-sm font-extrabold text-primary transition-colors hover:bg-primary/5"
                 >
                   {FREE_TIER.cta}
@@ -675,13 +674,15 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                   {MEMBERSHIP_TIER.supporting}
                 </p>
                 <div className="flex-1" />
-                <button
-                  onClick={onGetStarted}
+                <a
+                  href={WAITLIST_URL}
+                  target="_blank"
+                  rel="noopener"
                   className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-3xl bg-primary text-sm font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
                 >
                   {MEMBERSHIP_TIER.cta}
                   <ChevronRightIcon className="h-4 w-4 text-secondary" />
-                </button>
+                </a>
                 <p className="mt-2 text-center text-xs font-bold text-ink-soft">
                   {MEMBERSHIP_TIER.reassurance}
                 </p>
@@ -733,7 +734,7 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
               </p>
               <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
                 <button
-                  onClick={onGetStarted}
+                  onClick={onDemo}
                   className="press-pop inline-flex h-14 items-center justify-center rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground transition-all hover:brightness-105 sm:min-w-[240px]"
                 >
                   Try the Free Story

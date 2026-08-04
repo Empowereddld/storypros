@@ -284,7 +284,7 @@ export const PRICING_SUBHEAD =
 export const FREE_TIER = {
   title: "Free",
   price: "$0",
-  note: "Try Story Pros",
+  note: "Free story",
   body: "Try one complete Story Pros story from beginning to end.",
   features: ["One complete story", "Every activity in that story", "Family Dashboard preview"],
   cta: "Try the Free Story",
@@ -301,7 +301,7 @@ export const MEMBERSHIP_TIER = {
     "Monthly live Community Circle for children",
   ],
   supporting: "New stories are included as Story Pros grows.",
-  cta: "Join Story Pros",
+  cta: "Join the Waitlist",
   reassurance: "Cancel anytime",
 };
 
