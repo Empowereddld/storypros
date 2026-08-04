@@ -675,13 +675,15 @@ export function LandingPage({ onGetStarted, onLogin, onDemo }: LandingPageProps)
                   {MEMBERSHIP_TIER.supporting}
                 </p>
                 <div className="flex-1" />
-                <button
-                  onClick={onGetStarted}
+                <a
+                  href={WAITLIST_URL}
+                  target="_blank"
+                  rel="noopener"
                   className="press-pop mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-3xl bg-primary text-sm font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
                 >
                   {MEMBERSHIP_TIER.cta}
                   <ChevronRightIcon className="h-4 w-4 text-secondary" />
-                </button>
+                </a>
                 <p className="mt-2 text-center text-xs font-bold text-ink-soft">
                   {MEMBERSHIP_TIER.reassurance}
                 </p>
