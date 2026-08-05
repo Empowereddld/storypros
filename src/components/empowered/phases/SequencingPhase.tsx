@@ -289,7 +289,7 @@ export function SequencingPhase({
 
         {/* Story bank — centered in remaining space */}
         <div className="relative z-10 flex flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-4 pt-4">
-          <section className="mx-auto my-auto grid max-w-[720px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          <section className="mx-auto my-auto grid w-full max-w-[720px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:max-w-[960px] lg:gap-5">
             {shuffled.map((frame, index) => {
               const placed = order.includes(index);
               const position = order.indexOf(index);
