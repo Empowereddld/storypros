@@ -128,7 +128,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
       <header className="sticky top-0 z-40 border-b border-accent/40 bg-cream/85 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-3 sm:gap-4 sm:px-6">
           <StoryProsLogo layout="row" size="sm" className="h-9" />
-          <nav className="hidden items-center gap-6 text-sm font-bold text-ink-soft lg:flex">
+          <nav className="hidden items-center gap-4 text-[13px] font-bold text-ink-soft md:flex lg:gap-6 lg:text-sm">
             {NAV_LINKS.map((link) => (
               <a key={link.href} href={link.href} className="transition-colors hover:text-primary">
                 {link.label}
@@ -138,10 +138,11 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={onDemo}
-              className="press-pop hidden items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:inline-flex"
+              className="press-pop inline-flex items-center gap-1.5 rounded-2xl bg-secondary px-3 py-2 text-[13px] font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:px-4 sm:text-sm"
             >
               <PaperPlaneIcon className="h-4 w-4" />
-              Try the Free Story
+              <span className="sm:hidden">Free Story</span>
+              <span className="hidden sm:inline">Try the Free Story</span>
             </button>
             <button
               onClick={onLogin}
@@ -149,6 +150,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
             >
               Log in
             </button>
+
             <a
               href={WAITLIST_URL}
               target="_blank"
