@@ -7,7 +7,7 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
-import { AudioButton } from "../AudioButton";
+import { AudioButton, SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
@@ -97,58 +97,69 @@ export function VocabularyIntroPhase({
       </div>
 
       {isOnTitleCard ? (
-        <div className="relative z-10 flex flex-1 flex-col px-5 pb-5 pt-5">
-          <section className="flex flex-1 flex-col items-center justify-center rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
-            <div className="relative h-44 w-44 overflow-hidden rounded-[34px] bg-accent shadow-card">
-              {wordImage ? (
-                <img src={wordImage} alt="" className="h-full w-full object-contain p-2" />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-primary">
-                  <PaperPlaneIcon className="h-16 w-16" />
+        <div className="relative z-10 flex flex-1 flex-col items-center overflow-y-auto no-scrollbar px-5 pb-6 pt-4">
+          <div className="w-full max-w-[580px]">
+            <section className="flex flex-col items-center rounded-[40px] border border-accent/50 bg-card px-6 py-8 text-center shadow-soft animate-pop-in sm:px-10">
+              {/* Word picture with its one tap-to-hear control */}
+              <div className="relative">
+                <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-[42px] bg-accent shadow-inner sm:h-52 sm:w-52">
+                  {wordImage ? (
+                    <img src={wordImage} alt="" className="h-full w-full object-contain p-3" />
+                  ) : (
+                    <PaperPlaneIcon className="h-16 w-16 text-primary" />
+                  )}
                 </div>
-              )}
-            </div>
 
-            <span className="mt-5 rounded-full bg-secondary/25 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
-              {word.type === "emotion" ? "Feeling Word" : "Story Word"}
-            </span>
-
-            <h1 className="mt-3 text-[40px] font-extrabold capitalize leading-none text-primary">
-              {word.word}
-            </h1>
-
-            {supported && (
-              <AudioButton
-                className="mt-4"
-                size="lg"
-                tone="primary"
-                playing={isPlaying("word")}
-                onClick={() => toggle(word.word, "word")}
-                text={word.word}
-                label="Hear It"
-              />
-            )}
-
-            <p className="mt-5 max-w-[285px] text-base font-semibold leading-relaxed text-ink-soft">
-              {word.sfa_teaching?.intro_text ?? "Let's learn what this word means."}
-            </p>
-
-            {supported && introNarration && (
-              <div className="mt-4 flex justify-center">
-                <ListenButton
-                  playing={isPlaying("intro")}
-                  onClick={() => toggle(introNarration, "intro")}
-                  ariaLabel="Hear about this word"
-                />
+                {supported && (
+                  <button
+                    type="button"
+                    onClick={() => toggle(word.word, "word")}
+                    aria-label={`Hear "${word.word}"`}
+                    aria-pressed={isPlaying("word")}
+                    className={cn(
+                      "absolute -bottom-3 -right-3 flex h-16 w-16 items-center justify-center rounded-[22px] bg-secondary text-primary transition-all",
+                      "shadow-[0_7px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[5px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
+                      isPlaying("word") && "ring-4 ring-primary/25",
+                    )}
+                  >
+                    <SpeakerGlyph className="h-8 w-8" />
+                  </button>
+                )}
               </div>
-            )}
-          </section>
 
-          <TactileButton className="mt-4" onClick={() => setFeatureIdx(0)}>
-            Explore the Word <ChevronRightIcon className="h-5 w-5 text-secondary" />
-          </TactileButton>
+              <span className="mt-7 rounded-lg bg-accent/70 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary">
+                {word.type === "emotion" ? "Feeling Word" : "Story Word"}
+              </span>
+
+              <h1 className="mt-2 text-[44px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[56px]">
+                {word.word}
+              </h1>
+
+              <div className="mt-6 w-full max-w-[400px] rounded-[30px] border border-accent/60 bg-accent/20 p-5">
+                <p className="text-[15.5px] font-semibold leading-relaxed text-ink">
+                  {word.sfa_teaching?.intro_text ?? "Let's learn what this word means."}
+                </p>
+
+                {supported && introNarration && (
+                  <div className="mt-3 flex justify-center">
+                    <AudioButton
+                      size="sm"
+                      playing={isPlaying("intro")}
+                      onClick={() => toggle(introNarration, "intro")}
+                      ariaLabel="Hear what this word means"
+                    />
+                  </div>
+                )}
+              </div>
+            </section>
+
+            <TactileButton className="mt-4" onClick={() => setFeatureIdx(0)}>
+              Explore the Word <ChevronRightIcon className="h-5 w-5 text-secondary" />
+            </TactileButton>
+          </div>
         </div>
       ) : (
+
         <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
           <section className="rounded-[30px] bg-card p-4 shadow-soft">
             <div className="flex items-center gap-3">
