@@ -168,7 +168,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
       {/* ── Hero: audience → product → experience → action ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-6 px-5 pb-8 pt-4 sm:gap-9 sm:px-8 sm:pb-10 sm:pt-8 lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)] lg:gap-[56px] lg:pb-[24px] lg:pt-[40px]">
+        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-6 px-5 pb-8 pt-4 sm:gap-9 sm:px-8 sm:pb-10 sm:pt-8 lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)] lg:gap-[56px] lg:pb-[24px] lg:pt-[40px] min-[1200px]:min-h-[calc(100svh-72px)] min-[1200px]:py-[48px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
             <p className="inline-flex max-w-[36ch] items-center justify-center gap-2 rounded-full bg-card px-3.5 py-2 text-center text-[10px] font-bold uppercase leading-[1.5] tracking-[0.06em] text-primary shadow-card text-balance sm:max-w-none sm:px-4 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.07em]">
