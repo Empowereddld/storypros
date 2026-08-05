@@ -66,22 +66,50 @@ export function JokePhase({
         <ProgressHeader progress={PROGRESS[step]} label="Word Play" onClose={onClose} />
       </div>
 
-      <div className="relative z-10 flex flex-1 flex-col px-5 pb-5 pt-4">
-        <section className="flex flex-1 flex-col justify-center rounded-[34px] bg-card p-5 text-center shadow-soft animate-pop-in">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-5 pt-4">
+        <section className="my-auto w-full max-w-[520px] rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
           {step === "intro" && (
-            <>
-              <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-secondary text-secondary-foreground shadow-card">
-                <PaperPlaneIcon className="h-10 w-10" />
-              </span>
-              <h1 className="mt-5 text-[34px] font-extrabold leading-tight text-primary">
-                Words Can Have Two Meanings
-              </h1>
-              <p className="mt-3 text-base font-semibold leading-snug text-ink-soft">
-                Today&apos;s word is{" "}
-                <span className="font-extrabold capitalize text-primary">{joke.word}</span>.
-              </p>
-            </>
+            <div className="relative flex flex-col items-center gap-6 overflow-hidden">
+              <span
+                className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-secondary/10"
+                aria-hidden
+              />
+              <div className="space-y-2">
+                <h1 className="text-[30px] font-extrabold leading-tight text-primary">
+                  Words Can Have
+                  <br />
+                  Two Meanings
+                </h1>
+                <p className="text-base font-bold text-ink-soft">Today&apos;s word is…</p>
+              </div>
+
+              <div className="relative">
+                <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-4 border-primary/10 bg-accent/40">
+                  <img
+                    src={danImg}
+                    alt=""
+                    className="h-[118px] w-[118px] object-contain object-bottom animate-float"
+                  />
+                </div>
+                {supported && (
+                  <div className="absolute -bottom-1 -right-1">
+                    <ListenButton
+                      playing={isPlaying("word")}
+                      onClick={() => toggle(joke.word, "word")}
+                      ariaLabel={`Hear the word ${joke.word}`}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="-rotate-1 rounded-[24px] bg-secondary px-10 py-4 shadow-[0_6px_0_0_color-mix(in_oklab,var(--secondary)_70%,black)]">
+                <span className="text-[40px] font-extrabold uppercase leading-none tracking-[0.12em] text-secondary-foreground">
+                  {joke.word}
+                </span>
+              </div>
+            </div>
           )}
+
 
           {step === "meaning1" && (
             <MeaningCard
