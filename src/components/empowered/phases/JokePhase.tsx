@@ -8,6 +8,22 @@ import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
+function StarIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M12 2l2.4 5.6L20 9l-4.6 3.8L17 19l-5-3-5 3 1.6-6.2L4 9l5.6-1.4L12 2z" />
+    </svg>
+  );
+}
+
+function splitJoke(jokeText: string): { setup: string; punchline: string } {
+  const split = jokeText.split("? ");
+  if (split.length >= 2) {
+    return { setup: `${split[0]}?`, punchline: split.slice(1).join("? ") };
+  }
+  return { setup: "", punchline: jokeText };
+}
+
 
 
 type Step = "intro" | "meaning1" | "meaning2" | "joke";
