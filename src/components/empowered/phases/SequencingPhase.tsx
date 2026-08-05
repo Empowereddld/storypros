@@ -231,7 +231,7 @@ export function SequencingPhase({
                 const shuffledIndex = order[index];
                 const filled = shuffledIndex !== undefined;
                 const wrong = feedback.type === "wrong" && feedback.wrongPositions.has(index);
-                const label = ORDER_LABELS[index] ?? `${index + 1}`;
+                const label = labels[index] ?? `${index + 1}`;
                 return (
                   <button
                     type="button"
