@@ -5,8 +5,10 @@ import type { ActivityAttempt, SequencingFrame, StoryPhaseProps } from "@/types/
 import { resolveStoryImage } from "@/services/storyImages";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+
+const ORDER_LABELS = ["First", "Next", "Then", "Then", "After that", "Finally"] as const;
 
 type FeedbackState =
   | { type: "none" }
@@ -191,138 +193,154 @@ export function SequencingPhase({
         </div>
       )}
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
-        <section className="rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
-          <div className="flex items-start gap-4">
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-accent text-primary">
-              <BookIcon className="h-9 w-9" />
-            </span>
+      <div className="relative z-10 flex flex-1 flex-col overflow-hidden">
+        {/* Timeline rail — top half */}
+        <section className="flex shrink-0 flex-col gap-3 border-b border-accent/30 bg-card/50 px-4 pb-4 pt-3">
+          <div className="flex items-end justify-between">
             <div>
-              <h1 className="text-[29px] font-extrabold leading-tight text-primary">
+              <h1 className="text-[22px] font-extrabold leading-tight text-primary">
                 Put the Story in Order
               </h1>
-              <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
+              <p className="text-xs font-semibold text-ink-soft">
                 Tap each picture from first to last.
               </p>
             </div>
-          </div>
-        </section>
-
-        <section className="mt-4 rounded-[26px] bg-card/90 p-3 shadow-card">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-extrabold text-primary">Your order</p>
             <span className="text-xs font-extrabold text-ink-soft">
               {order.length}/{frames.length}
             </span>
           </div>
-          <div className="mt-3 grid grid-cols-6 gap-1.5">
-            {Array.from({ length: frames.length }).map((_, index) => {
-              const shuffledIndex = order[index];
-              const filled = shuffledIndex !== undefined;
-              const wrong = feedback.type === "wrong" && feedback.wrongPositions.has(index);
+
+          <div className="relative -mx-4 overflow-x-auto no-scrollbar px-4">
+            {/* Dotted timeline rail */}
+            <div className="relative inline-flex w-max items-center gap-2 py-2">
+              <span
+                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-72px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-92px)]"
+                aria-hidden
+              />
+              {Array.from({ length: frames.length }).map((_, index) => {
+                const shuffledIndex = order[index];
+                const filled = shuffledIndex !== undefined;
+                const wrong = feedback.type === "wrong" && feedback.wrongPositions.has(index);
+                const label = ORDER_LABELS[index] ?? `${index + 1}`;
+                return (
+                  <button
+                    type="button"
+                    key={index}
+                    onClick={() => filled && handleSelectFrame(shuffledIndex)}
+                    onDragOver={(event) => {
+                      event.preventDefault();
+                      event.dataTransfer.dropEffect = "move";
+                      setDropTarget(index);
+                    }}
+                    onDragLeave={() => setDropTarget((current) => (current === index ? null : current))}
+                    onDrop={(event) => handleDrop(event, index)}
+                    draggable={filled && !showingFeedback}
+                    onDragStart={(event) => filled && handleDragStart(event, shuffledIndex)}
+                    onDragEnd={() => {
+                      setDraggedFrame(null);
+                      setDropTarget(null);
+                    }}
+                    aria-label={
+                      filled
+                        ? `Story picture ${index + 1}, ${label}. Drag to reorder or tap to remove.`
+                        : `Empty ${label} slot. Drop a picture here.`
+                    }
+                    className={cn(
+                      "relative z-10 flex h-[92px] w-[72px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1.5 text-center transition-all sm:h-[112px] sm:w-[92px]",
+                      filled
+                        ? "cursor-grab border-primary bg-card active:cursor-grabbing"
+                        : "border-dashed border-primary/25 bg-card/60 text-primary/40",
+                      dropTarget === index && "scale-[1.04] border-secondary bg-secondary/15 ring-4 ring-secondary/15",
+                      wrong && "border-destructive bg-destructive/10",
+                    )}
+                  >
+                    {filled ? (
+                      <>
+                        {resolveStoryImage(storyData.id, shuffled[shuffledIndex].image) ? (
+                          <img
+                            src={resolveStoryImage(storyData.id, shuffled[shuffledIndex].image) ?? undefined}
+                            alt=""
+                            className="absolute inset-0 h-full w-full object-cover"
+                            draggable={false}
+                          />
+                        ) : (
+                          <PaperPlaneIcon className="h-6 w-6" />
+                        )}
+                        <span className="absolute left-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-extrabold text-primary-foreground shadow-sm">
+                          {index + 1}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="mt-2 text-[10px] font-black uppercase leading-tight tracking-wide sm:text-xs">
+                          {label}
+                        </span>
+                        <span className="mb-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-dotted border-primary/25 text-[10px] font-extrabold text-primary/30 sm:h-7 sm:w-7">
+                          {index + 1}
+                        </span>
+                      </>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Story bank — bottom half */}
+        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-4 pt-4">
+          <section className="mx-auto grid max-w-[520px] grid-cols-3 gap-3 sm:gap-4">
+            {shuffled.map((frame, index) => {
+              const placed = order.includes(index);
+              const position = order.indexOf(index);
+              const image = resolveStoryImage(storyData.id, frame.image);
+
               return (
                 <button
                   type="button"
-                  key={index}
-                  onClick={() => filled && handleSelectFrame(shuffledIndex)}
-                  onDragOver={(event) => {
-                    event.preventDefault();
-                    event.dataTransfer.dropEffect = "move";
-                    setDropTarget(index);
-                  }}
-                  onDragLeave={() => setDropTarget((current) => (current === index ? null : current))}
-                  onDrop={(event) => handleDrop(event, index)}
-                  draggable={filled && !showingFeedback}
-                  onDragStart={(event) => filled && handleDragStart(event, shuffledIndex)}
+                  key={`${frame.correct_position}-${frame.caption}`}
+                  onClick={() => handleSelectFrame(index)}
+                  draggable={!showingFeedback}
+                  onDragStart={(event) => handleDragStart(event, index)}
                   onDragEnd={() => {
                     setDraggedFrame(null);
                     setDropTarget(null);
                   }}
-                  aria-label={filled ? `Story picture ${index + 1}. Drag to reorder or tap to remove.` : `Empty position ${index + 1}. Drop a picture here.`}
+                  aria-label={`${placed ? `Story picture in position ${position + 1}` : "Unplaced story picture"}. Drag to the timeline or tap to place.`}
                   className={cn(
-                    "relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border-2 text-sm font-extrabold shadow-sm transition-all",
-                    filled ? "cursor-grab border-primary bg-primary text-primary-foreground active:cursor-grabbing" : "border-transparent bg-accent text-primary/45",
-                    dropTarget === index && "scale-[1.04] border-secondary bg-secondary/20 ring-4 ring-secondary/20",
-                    wrong && "bg-destructive text-destructive-foreground",
+                    "hover-lift cursor-grab overflow-hidden rounded-2xl border-4 border-white bg-card text-left shadow-card transition-all active:cursor-grabbing active:scale-[0.98]",
+                    placed ? "opacity-60 grayscale-[0.25]" : "",
+                    draggedFrame === index && "scale-95 opacity-40",
                   )}
                 >
-                  {filled ? (
-                    <>
-                      {resolveStoryImage(storyData.id, shuffled[shuffledIndex].image) ? (
-                        <img
-                          src={resolveStoryImage(storyData.id, shuffled[shuffledIndex].image) ?? undefined}
-                          alt=""
-                          className="h-full w-full object-cover"
-                          draggable={false}
-                        />
-                      ) : (
-                        <PaperPlaneIcon className="h-6 w-6" />
-                      )}
-                      <span className="absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground shadow-sm">
-                        {index + 1}
+                  <div className="relative aspect-[3/4] overflow-hidden bg-accent">
+                    {image ? (
+                      <img src={image} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-primary">
+                        <PaperPlaneIcon className="h-8 w-8" />
+                      </div>
+                    )}
+                    {placed && (
+                      <span className="absolute left-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-extrabold text-primary-foreground shadow-card">
+                        {position + 1}
                       </span>
-                    </>
-                  ) : null}
+                    )}
+                  </div>
                 </button>
               );
             })}
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <section className="mx-auto mt-4 grid max-w-[420px] grid-cols-3 gap-2">
-          {shuffled.map((frame, index) => {
-            const placed = order.includes(index);
-            const position = order.indexOf(index);
-            const image = resolveStoryImage(storyData.id, frame.image);
-
-            return (
-              <button
-                type="button"
-                key={`${frame.correct_position}-${frame.caption}`}
-                onClick={() => handleSelectFrame(index)}
-                draggable={!showingFeedback}
-                onDragStart={(event) => handleDragStart(event, index)}
-                onDragEnd={() => {
-                  setDraggedFrame(null);
-                  setDropTarget(null);
-                }}
-                aria-label={`${placed ? `Story picture in position ${position + 1}` : "Unplaced story picture"}. Drag to Your order or tap to place.`}
-                className={cn(
-                  "hover-lift cursor-grab overflow-hidden rounded-[16px] border-2 bg-card text-left shadow-card transition-all active:cursor-grabbing active:scale-[0.98]",
-                  placed ? "border-primary bg-primary/5 opacity-75" : "border-accent/60",
-                  draggedFrame === index && "scale-95 opacity-40",
-                )}
-              >
-                <div className="relative aspect-square overflow-hidden bg-accent">
-                  {image ? (
-                    <img src={image} alt="" className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-primary">
-                      <PaperPlaneIcon className="h-8 w-8" />
-                    </div>
-                  )}
-                  <span
-                    className={cn(
-                      "absolute left-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-extrabold shadow-card",
-                      placed ? "bg-primary text-primary-foreground" : "bg-card text-primary",
-                    )}
-                  >
-                    {placed ? position + 1 : "?"}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </section>
-      </div>
-
-      <div className="relative z-10 mx-5 mb-5">
-        <TactileButton
-          onClick={handleCheck}
-          disabled={order.length !== frames.length || showingFeedback}
-        >
-          Check Order
-        </TactileButton>
+        <div className="relative z-10 mx-4 mb-4">
+          <TactileButton
+            onClick={handleCheck}
+            disabled={order.length !== frames.length || showingFeedback}
+          >
+            Check Order
+          </TactileButton>
+        </div>
       </div>
     </div>
   );
