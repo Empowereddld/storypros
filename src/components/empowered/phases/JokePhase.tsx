@@ -87,22 +87,19 @@ export function JokePhase({
                 <p className="text-base font-bold text-ink-soft">Today&apos;s word is…</p>
               </div>
 
-              <div className="relative">
-                <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-4 border-primary/10 bg-accent/40">
-                  <img
-                    src={danImg}
-                    alt=""
-                    className="h-[118px] w-[118px] object-contain object-bottom animate-float"
-                  />
+              <div className="flex items-center gap-3">
+                <div className="-rotate-1 rounded-[24px] bg-secondary px-10 py-4 shadow-[0_6px_0_0_color-mix(in_oklab,var(--secondary)_70%,black)]">
+                  <span className="text-[40px] font-extrabold uppercase leading-none tracking-[0.12em] text-secondary-foreground">
+                    {joke.word}
+                  </span>
                 </div>
                 {supported && (
-                  <div className="absolute -bottom-1 -right-1">
-                    <ListenButton
-                      playing={isPlaying("word")}
-                      onClick={() => toggle(joke.word, "word")}
-                      ariaLabel={`Hear the word ${joke.word}`}
-                    />
-                  </div>
+                  <ListenButton
+                    playing={isPlaying("word")}
+                    onClick={() => toggle(joke.word, "word")}
+                    ariaLabel={`Hear the word ${joke.word}`}
+                    size="md"
+                  />
                 )}
               </div>
 
