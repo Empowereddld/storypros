@@ -69,13 +69,14 @@ export function JokePhase({
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-5 pt-4">
-        <section className="my-auto w-full max-w-[520px] rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
+        <section className="relative w-full max-w-[520px] overflow-hidden rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
           {step === "intro" && (
-            <div className="relative flex flex-col items-center gap-6 overflow-hidden">
+            <div className="flex flex-col items-center gap-6">
               <span
-                className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-secondary/10"
+                className="pointer-events-none absolute -right-14 -top-14 h-32 w-32 rounded-full bg-secondary/10"
                 aria-hidden
               />
+
               <div className="space-y-2">
                 <h1 className="text-[30px] font-extrabold leading-tight text-primary">
                   Words Can Have
