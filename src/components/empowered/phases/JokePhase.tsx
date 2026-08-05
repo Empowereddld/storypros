@@ -103,11 +103,6 @@ export function JokePhase({
                 )}
               </div>
 
-              <div className="-rotate-1 rounded-[24px] bg-secondary px-10 py-4 shadow-[0_6px_0_0_color-mix(in_oklab,var(--secondary)_70%,black)]">
-                <span className="text-[40px] font-extrabold uppercase leading-none tracking-[0.12em] text-secondary-foreground">
-                  {joke.word}
-                </span>
-              </div>
             </div>
           )}
 
