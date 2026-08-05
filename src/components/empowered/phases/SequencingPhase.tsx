@@ -289,7 +289,7 @@ export function SequencingPhase({
 
         {/* Story bank — bottom half */}
         <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-4 pt-4">
-          <section className="mx-auto grid max-w-[520px] grid-cols-3 gap-3 sm:gap-4">
+          <section className="mx-auto grid max-w-[720px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
             {shuffled.map((frame, index) => {
               const placed = order.includes(index);
               const position = order.indexOf(index);
@@ -313,7 +313,7 @@ export function SequencingPhase({
                     draggedFrame === index && "scale-95 opacity-40",
                   )}
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden bg-accent">
+                  <div className="relative aspect-video overflow-hidden bg-accent">
                     {image ? (
                       <img src={image} alt="" className="h-full w-full object-cover" />
                     ) : (
