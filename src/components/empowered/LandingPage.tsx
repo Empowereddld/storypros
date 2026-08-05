@@ -44,7 +44,7 @@ import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import familyCtaAsset from "@/assets/family-cta.png.asset.json";
-import heroCleanAsset from "@/assets/hero-comprehension-clean.png.asset.json";
+import heroTabletAsset from "@/assets/hero-tablet.png.asset.json";
 
 import stepReadAsset from "@/assets/step-read-understand.png.asset.json";
 import stepRetellAsset from "@/assets/step-retell-support.png.asset.json";
@@ -128,62 +128,66 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
       <header className="sticky top-0 z-40 border-b border-accent/40 bg-cream/85 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-3 sm:gap-4 sm:px-6">
           <StoryProsLogo layout="row" size="sm" className="h-9" />
-          <nav className="hidden items-center gap-6 text-sm font-bold text-ink-soft lg:flex">
+          <nav className="hidden items-center gap-3.5 text-[12.5px] font-bold text-ink-soft md:flex lg:gap-6 lg:text-sm">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="transition-colors hover:text-primary">
+              <a key={link.href} href={link.href} className="whitespace-nowrap transition-colors hover:text-primary">
                 {link.label}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3">
             <button
               onClick={onDemo}
-              className="press-pop hidden items-center gap-1.5 rounded-2xl bg-secondary px-4 py-2 text-sm font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:inline-flex"
+              className="press-pop inline-flex items-center gap-1.5 whitespace-nowrap rounded-2xl bg-secondary px-3 py-2 text-[13px] font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 lg:px-4 lg:text-sm"
             >
-              <PaperPlaneIcon className="h-4 w-4" />
-              Try the Free Story
+              <PaperPlaneIcon className="h-4 w-4 shrink-0" />
+              <span className="lg:hidden">Free Story</span>
+              <span className="hidden lg:inline">Try the Free Story</span>
             </button>
             <button
               onClick={onLogin}
-              className="press-pop hidden rounded-2xl px-4 py-2 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5 sm:inline-flex"
+              className="press-pop hidden whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5 lg:inline-flex"
             >
               Log in
             </button>
+
             <a
               href={WAITLIST_URL}
               target="_blank"
               rel="noopener"
-              className="press-pop rounded-2xl bg-primary px-3 py-2 text-sm font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 sm:px-4"
+              className="press-pop whitespace-nowrap rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 lg:px-4 lg:text-sm"
             >
-              Join the Waitlist
+              <span className="lg:hidden">Waitlist</span>
+              <span className="hidden lg:inline">Join the Waitlist</span>
+
             </a>
           </div>
+
         </div>
       </header>
 
       {/* ── Hero: audience → product → experience → action ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-7 px-5 pb-8 pt-4 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-9 lg:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] lg:gap-[80px] lg:pb-[80px] lg:pt-[64px]">
+        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-6 px-5 pb-8 pt-4 sm:gap-9 sm:px-8 sm:pb-12 sm:pt-8 lg:grid-cols-[minmax(0,48fr)_minmax(0,52fr)] lg:gap-[64px] lg:pb-[44px] lg:pt-[40px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex max-w-[34ch] items-center justify-center gap-2 rounded-full bg-primary/8 px-3 py-1.5 text-center text-[9px] font-bold uppercase leading-[1.7] tracking-[0.04em] text-primary text-balance sm:max-w-none sm:bg-card sm:px-4 sm:py-2 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.07em] sm:shadow-card">
+            <p className="inline-flex max-w-[36ch] items-center justify-center gap-2 rounded-full bg-card px-3.5 py-2 text-center text-[10px] font-bold uppercase leading-[1.5] tracking-[0.06em] text-primary shadow-card text-balance sm:max-w-none sm:px-4 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.07em]">
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-2.5 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-4 sm:max-w-[560px] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-5 lg:max-w-[600px] lg:text-[49px]">
+            <h1 className="mx-auto mt-3 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-4 sm:max-w-[19ch] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-4 lg:max-w-[600px] lg:text-[49px]">
               {HERO.heading}
             </h1>
 
-            <p className="mx-auto mt-2 max-w-[30ch] text-[17.5px] font-semibold leading-[1.4] text-ink sm:mt-3 sm:max-w-[520px] sm:text-[21px] sm:leading-[1.35] lg:mx-0">
+            <p className="mx-auto mt-2 max-w-[30ch] text-[17.5px] font-semibold leading-[1.4] text-ink sm:mt-3 sm:max-w-[34ch] sm:text-[21px] sm:leading-[1.35] lg:mx-0">
               {HERO.subheading}
             </p>
 
-            {/* Stacked so neither label ever wraps onto a second line */}
-            <div className="mt-5 flex flex-col items-center gap-2.5 sm:mt-6 sm:gap-3 lg:items-start">
+            <div className="mt-5 flex flex-col items-center gap-2.5 sm:mt-6 sm:gap-3 lg:flex-row lg:items-center lg:justify-start">
 
               <button
                 onClick={onDemo}
-                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px]"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] lg:w-auto lg:px-7"
               >
                 Try the Free Story
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
@@ -192,7 +196,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] sm:border-2 sm:border-primary/70 sm:bg-card"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] sm:border-2 sm:border-primary/70 sm:bg-card lg:w-auto lg:px-7"
               >
                 Join the Waitlist
               </a>
@@ -201,9 +205,9 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
           {/* The app preview does the visual talking */}
-          <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[560px]">
+          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[560px]">
             <img
-              src={heroCleanAsset.url}
+              src={heroTabletAsset.url}
               alt="A Story Pros comprehension question on a tablet"
               loading="eager"
               className="animate-float w-full drop-shadow-[0_22px_28px_rgba(28,28,21,0.18)]"
@@ -211,6 +215,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
           </div>
 
         </div>
+
       </section>
 
 
