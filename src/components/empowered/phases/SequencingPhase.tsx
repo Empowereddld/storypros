@@ -194,7 +194,7 @@ export function SequencingPhase({
       )}
 
       <div className="relative z-10 flex flex-1 flex-col overflow-hidden">
-        {/* Timeline rail — top half */}
+        {/* Timeline rail */}
         <section className="flex shrink-0 flex-col gap-3 border-b border-accent/30 bg-card/50 px-4 pb-4 pt-3">
           <div className="flex items-end justify-between">
             <div>
