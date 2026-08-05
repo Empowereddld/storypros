@@ -246,7 +246,7 @@ export function SequencingPhase({
                         : `Empty ${label} slot. Drop a picture here.`
                     }
                     className={cn(
-                      "relative z-10 flex h-[80px] w-[120px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[90px] sm:w-[130px] md:h-[100px] md:w-[140px] lg:h-[100px] lg:w-[150px] xl:h-[112px] xl:w-[168px]",
+                      "relative z-10 flex h-[80px] w-[120px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[90px] sm:w-[130px] md:h-[100px] md:w-[140px] lg:h-[100px] lg:w-[150px]",
                       filled
                         ? "cursor-grab border-primary bg-card active:cursor-grabbing"
                         : "border-dashed border-primary/25 bg-card/60 text-primary/40",
