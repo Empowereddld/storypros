@@ -103,11 +103,6 @@ export function JokePhase({
                 )}
               </div>
 
-              <div className="-rotate-1 rounded-[24px] bg-secondary px-10 py-4 shadow-[0_6px_0_0_color-mix(in_oklab,var(--secondary)_70%,black)]">
-                <span className="text-[40px] font-extrabold uppercase leading-none tracking-[0.12em] text-secondary-foreground">
-                  {joke.word}
-                </span>
-              </div>
             </div>
           )}
 
@@ -182,9 +177,9 @@ function MeaningCard({
       <span className="mx-auto rounded-full bg-primary px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-primary-foreground">
         Meaning {number}
       </span>
-      <div className="mt-4 h-48 overflow-hidden rounded-[28px] bg-accent shadow-card">
+      <div className="mt-4 aspect-video w-full overflow-hidden rounded-[28px] bg-accent shadow-card">
         {image ? (
-          <img src={image} alt="" className="h-full w-full object-cover" />
+          <img src={image} alt="" className="h-full w-full object-contain" />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-primary">
             <PaperPlaneIcon className="h-14 w-14" />
