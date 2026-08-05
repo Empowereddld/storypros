@@ -136,21 +136,21 @@ export function VocabularyIntroPhase({
               </h1>
 
               <div className="mt-6 w-full max-w-[400px] rounded-[30px] border border-accent/60 bg-accent/20 p-5">
-                <p className="text-[15.5px] font-semibold leading-relaxed text-ink">
-                  {word.sfa_teaching?.intro_text ?? "Let's learn what this word means."}
-                </p>
-
-                {supported && introNarration && (
-                  <div className="mt-3 flex justify-center">
+                <div className="flex items-center gap-3 text-left">
+                  {supported && introNarration && (
                     <AudioButton
-                      size="sm"
+                      size="md"
                       playing={isPlaying("intro")}
                       onClick={() => toggle(introNarration, "intro")}
                       ariaLabel="Hear what this word means"
                     />
-                  </div>
-                )}
+                  )}
+                  <p className="flex-1 text-[15.5px] font-semibold leading-relaxed text-ink">
+                    {word.sfa_teaching?.intro_text ?? "Let's learn what this word means."}
+                  </p>
+                </div>
               </div>
+
             </section>
 
             <TactileButton className="mt-4" onClick={() => setFeatureIdx(0)}>
