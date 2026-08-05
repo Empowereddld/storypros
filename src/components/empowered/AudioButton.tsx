@@ -15,17 +15,19 @@
 
 import { cn } from "@/lib/utils";
 
-export type AudioButtonSize = "lg" | "md" | "sm";
+export type AudioButtonSize = "lg" | "md" | "sm" | "xl";
 export type AudioButtonTone = "primary" | "quiet";
 
-/** Visible circle: lg 48px, md 40px, sm 32px */
+/** Visible circle: xl 64px, lg 48px, md 40px, sm 32px */
 const CIRCLE: Record<AudioButtonSize, string> = {
+  xl: "h-16 w-16",
   lg: "h-12 w-12",
   md: "h-10 w-10",
   sm: "h-8 w-8",
 };
 
 const ICON: Record<AudioButtonSize, string> = {
+  xl: "h-7 w-7",
   lg: "h-6 w-6",
   md: "h-5 w-5",
   sm: "h-4 w-4",
