@@ -212,9 +212,9 @@ export function SequencingPhase({
 
           <div className="relative -mx-4 overflow-x-auto no-scrollbar px-4">
             {/* Dotted timeline rail */}
-            <div className="relative inline-flex w-max items-center gap-3 py-2">
+            <div className="relative inline-flex w-max items-center gap-3 py-2 lg:gap-4">
               <span
-                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-120px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-150px)]"
+                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-120px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-150px)] lg:w-[calc(100%-180px)]"
                 aria-hidden
               />
               {Array.from({ length: frames.length }).map((_, index) => {
