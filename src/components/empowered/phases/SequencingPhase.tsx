@@ -8,7 +8,16 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 
-const ORDER_LABELS = ["First", "Next", "Then", "Then", "After that", "Finally"] as const;
+/** Ordering micro-labels that adapt to any number of sequencing frames (3+). */
+function orderLabels(count: number): string[] {
+  if (count <= 1) return ["First"];
+  if (count === 2) return ["First", "Finally"];
+  const labels = ["First", "Next"];
+  while (labels.length < count - 2) labels.push("Then");
+  if (count >= 4) labels.push("After that");
+  labels.push("Finally");
+  return labels.slice(0, count);
+}
 
 type FeedbackState =
   | { type: "none" }
