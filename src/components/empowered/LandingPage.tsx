@@ -155,9 +155,11 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               href={WAITLIST_URL}
               target="_blank"
               rel="noopener"
-              className="press-pop rounded-2xl bg-primary px-3 py-2 text-sm font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 sm:px-4"
+              className="press-pop rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 sm:px-4 sm:text-sm"
             >
-              Join the Waitlist
+              <span className="sm:hidden">Waitlist</span>
+              <span className="hidden sm:inline">Join the Waitlist</span>
+
             </a>
           </div>
         </div>
