@@ -168,14 +168,14 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
       {/* ── Hero: audience → product → experience → action ── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-6 px-5 pb-8 pt-4 sm:gap-9 sm:px-8 sm:pb-12 sm:pt-8 lg:grid-cols-[minmax(0,48fr)_minmax(0,52fr)] lg:gap-[64px] lg:pb-[44px] lg:pt-[40px]">
+        <div className="mx-auto grid w-full max-w-[1240px] items-center gap-6 px-5 pb-8 pt-4 sm:gap-9 sm:px-8 sm:pb-10 sm:pt-8 lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)] lg:gap-[56px] lg:pb-[24px] lg:pt-[40px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
             <p className="inline-flex max-w-[36ch] items-center justify-center gap-2 rounded-full bg-card px-3.5 py-2 text-center text-[10px] font-bold uppercase leading-[1.5] tracking-[0.06em] text-primary shadow-card text-balance sm:max-w-none sm:px-4 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.07em]">
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-3 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-4 sm:max-w-[19ch] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-4 lg:max-w-[600px] lg:text-[49px]">
+            <h1 className="mx-auto mt-3 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-4 sm:max-w-[19ch] sm:text-[42px] sm:leading-[1.08] lg:mx-0 lg:mt-4 lg:max-w-[15ch] lg:text-[46px] lg:leading-[1.08]">
               {HERO.heading}
             </h1>
 
@@ -205,7 +205,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
           {/* The app preview does the visual talking */}
-          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[560px]">
+          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[600px]">
             <img
               src={heroTabletAsset.url}
               alt="A Story Pros comprehension question on a tablet"
@@ -221,7 +221,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
       {/* ── Parent problem (two-column editorial) ── */}
-      <section className="px-5 py-14 sm:px-6 sm:py-20 lg:py-24">
+      <section className="px-5 pb-14 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-[72px]">
         <Reveal>
           <div className="mx-auto grid w-full max-w-[1240px] gap-6 sm:gap-8 lg:grid-cols-[minmax(0,40fr)_minmax(0,58fr)] lg:gap-[80px]">
             <h2 className="text-left font-display text-[34px] font-extrabold leading-[1.1] text-primary sm:text-[40px] lg:text-[50px]">
