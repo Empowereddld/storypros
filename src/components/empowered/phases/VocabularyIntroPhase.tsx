@@ -118,7 +118,7 @@ export function VocabularyIntroPhase({
                     aria-pressed={isPlaying("word")}
                     className={cn(
                       "absolute -bottom-3 -right-3 flex h-16 w-16 items-center justify-center rounded-[22px] bg-secondary text-primary transition-all",
-                      "shadow-[0_7px_0_hsl(45_98%_43%)] active:translate-y-[5px] active:shadow-[0_2px_0_hsl(45_98%_43%)]",
+                      "shadow-[0_7px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[5px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
                       isPlaying("word") && "ring-4 ring-primary/25",
                     )}
                   >
