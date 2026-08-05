@@ -73,9 +73,10 @@ export function JokePhase({
           {step === "intro" && (
             <div className="flex flex-col items-center gap-6">
               <span
-                className="pointer-events-none absolute -right-14 -top-14 h-32 w-32 rounded-full bg-secondary/10"
+                className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-secondary/10 blur-[2px]"
                 aria-hidden
               />
+
 
               <div className="space-y-2">
                 <h1 className="text-[30px] font-extrabold leading-tight text-primary">
