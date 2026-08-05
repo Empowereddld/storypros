@@ -568,10 +568,10 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
       {/* ── Built with expertise ── */}
-      <section className="scroll-mt-20">
-        <div className="mx-auto w-full max-w-5xl px-4 py-16 text-center sm:px-6">
-          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
-            {FOUNDERS.eyebrow}
+      <section className="scroll-mt-20 bg-accent/25">
+        <div className="mx-auto w-full max-w-5xl px-4 py-20 text-center sm:px-6 sm:py-28">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-secondary-foreground/80">
+            BUILT WITH EXPERTISE
           </p>
           <h2 className="mt-2 font-display text-3xl font-extrabold text-primary sm:text-4xl">
             {FOUNDERS.heading}
@@ -585,7 +585,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               const Icon = PILLAR_ICONS[pillar.icon] ?? MessagesSquare;
               return (
                 <Reveal key={pillar.title} delay={i * 90}>
-                  <div className="flex h-full flex-col items-center rounded-[22px] border border-accent/50 bg-card/70 px-5 py-6 text-center">
+                  <div className="flex h-full flex-col items-center rounded-[22px] border border-accent/50 bg-card px-5 py-6 text-center shadow-card">
                     <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent/60">
                       <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} aria-hidden />
                     </span>
