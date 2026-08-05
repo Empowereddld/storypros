@@ -212,9 +212,9 @@ export function SequencingPhase({
 
           <div className="relative -mx-4 overflow-x-auto no-scrollbar px-4">
             {/* Dotted timeline rail */}
-            <div className="relative inline-flex w-max items-center gap-2 py-2">
+            <div className="relative inline-flex w-max items-center gap-3 py-2">
               <span
-                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-72px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-92px)]"
+                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-96px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-120px)]"
                 aria-hidden
               />
               {Array.from({ length: frames.length }).map((_, index) => {
@@ -246,7 +246,7 @@ export function SequencingPhase({
                         : `Empty ${label} slot. Drop a picture here.`
                     }
                     className={cn(
-                      "relative z-10 flex h-[92px] w-[72px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1.5 text-center transition-all sm:h-[112px] sm:w-[92px]",
+                      "relative z-10 flex h-[64px] w-[96px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[80px] sm:w-[120px]",
                       filled
                         ? "cursor-grab border-primary bg-card active:cursor-grabbing"
                         : "border-dashed border-primary/25 bg-card/60 text-primary/40",
@@ -289,7 +289,7 @@ export function SequencingPhase({
 
         {/* Story bank — bottom half */}
         <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-4 pt-4">
-          <section className="mx-auto grid max-w-[520px] grid-cols-3 gap-3 sm:gap-4">
+          <section className="mx-auto grid max-w-[720px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
             {shuffled.map((frame, index) => {
               const placed = order.includes(index);
               const position = order.indexOf(index);
@@ -313,7 +313,7 @@ export function SequencingPhase({
                     draggedFrame === index && "scale-95 opacity-40",
                   )}
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden bg-accent">
+                  <div className="relative aspect-video overflow-hidden bg-accent">
                     {image ? (
                       <img src={image} alt="" className="h-full w-full object-cover" />
                     ) : (
