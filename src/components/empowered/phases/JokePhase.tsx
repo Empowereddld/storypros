@@ -126,26 +126,41 @@ export function JokePhase({
           )}
 
           {step === "joke" && (
-            <>
-              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-[24px] bg-secondary text-secondary-foreground shadow-card">
-                <Star className="h-9 w-9" />
+            <div className="flex flex-col items-center gap-6">
+              {/* Floating star badge */}
+              <span
+                className="absolute -top-8 left-1/2 z-10 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-2xl border-4 border-card bg-secondary text-secondary-foreground shadow-card rotate-3"
+                aria-hidden
+              >
+                <StarIcon className="h-8 w-8" />
               </span>
-              <p className="mt-5 text-[28px] font-extrabold leading-tight text-primary">
-                {joke.joke_text}
-              </p>
+
+              {/* Joke content */}
+              <div className="space-y-4 pt-2">
+                <p className="text-xl font-medium leading-tight text-primary/80">
+                  {splitJoke(joke.joke_text).setup}
+                </p>
+                <p className="text-[28px] font-extrabold leading-tight text-primary">
+                  {splitJoke(joke.joke_text).punchline}
+                </p>
+              </div>
+
+              {/* Audio action */}
               {supported && (
-                <div className="mt-4 flex justify-center">
-                  <ListenButton
-                    playing={isPlaying("joke")}
-                    onClick={() => toggle(joke.joke_text, "joke")}
-                    ariaLabel="Hear the joke"
-                  />
-                </div>
+                <ListenButton
+                  playing={isPlaying("joke")}
+                  onClick={() => toggle(joke.joke_text, "joke")}
+                  ariaLabel="Hear the joke"
+                  size="xl"
+                  tone="primary"
+                />
               )}
-              <p className="mt-4 text-sm font-semibold text-ink-soft">
-                Both meanings of &quot;{joke.word}&quot; make the joke work.
+
+              {/* Why it works caption */}
+              <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                Both meanings of &quot;{joke.word}&quot; make the joke work
               </p>
-            </>
+            </div>
           )}
         </section>
 
