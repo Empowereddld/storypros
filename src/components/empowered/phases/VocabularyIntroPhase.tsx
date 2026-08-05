@@ -97,8 +97,8 @@ export function VocabularyIntroPhase({
       </div>
 
       {isOnTitleCard ? (
-        <div className="relative z-10 flex flex-1 flex-col items-center overflow-y-auto no-scrollbar px-5 pb-6 pt-4">
-          <div className="w-full max-w-[580px]">
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center overflow-y-auto no-scrollbar px-5 pb-6 pt-4">
+          <div className="my-auto w-full max-w-[580px]">
             <section className="flex flex-col items-center rounded-[40px] border border-accent/50 bg-card px-6 py-8 text-center shadow-soft animate-pop-in sm:px-10">
               {/* Word picture with its one tap-to-hear control */}
               <div className="relative">
