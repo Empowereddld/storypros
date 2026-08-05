@@ -177,7 +177,7 @@ export function VocabularyIntroPhase({
             </div>
           </section>
 
-          <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
+          <div className="my-auto flex-1 space-y-3 overflow-y-auto no-scrollbar py-2">
             {SFA_KEYS.map((key, index) => {
               const isActive = index === featureIdx;
               const isPast = index < featureIdx;
