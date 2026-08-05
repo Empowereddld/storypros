@@ -177,9 +177,9 @@ function MeaningCard({
       <span className="mx-auto rounded-full bg-primary px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-primary-foreground">
         Meaning {number}
       </span>
-      <div className="mt-4 h-48 overflow-hidden rounded-[28px] bg-accent shadow-card">
+      <div className="mt-4 aspect-video w-full overflow-hidden rounded-[28px] bg-accent shadow-card">
         {image ? (
-          <img src={image} alt="" className="h-full w-full object-cover" />
+          <img src={image} alt="" className="h-full w-full object-contain" />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-primary">
             <PaperPlaneIcon className="h-14 w-14" />
