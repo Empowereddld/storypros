@@ -1000,6 +1000,7 @@ export type Database = {
           tag: string
         }[]
       }
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
       is_child_premium: { Args: { p_child_id: string }; Returns: boolean }
       process_expired_subscriptions: { Args: never; Returns: number }
       redeem_slp_invite: {
