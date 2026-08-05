@@ -40,6 +40,7 @@ export function SequencingPhase({
   childId = "demo",
 }: StoryPhaseProps) {
   const frames = storyData.sequencing_frames;
+  const labels = orderLabels(frames.length);
   const [shuffled] = useState<SequencingFrame[]>(() => shuffle(frames));
   const [order, setOrder] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<FeedbackState>({ type: "none" });
