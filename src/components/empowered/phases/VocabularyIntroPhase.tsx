@@ -6,7 +6,7 @@ import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
-import { ListenButton, useListen } from "./ListenButton";
+import { useListen } from "./ListenButton";
 import { AudioButton, SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
