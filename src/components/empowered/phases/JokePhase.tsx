@@ -7,7 +7,7 @@ import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
 import { useDevSubSteps } from "./DevPhaseNav";
-import danImg from "@/assets/child-avatar.png";
+
 
 
 type Step = "intro" | "meaning1" | "meaning2" | "joke";
