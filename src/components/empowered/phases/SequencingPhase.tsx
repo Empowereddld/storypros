@@ -8,7 +8,16 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 
-const ORDER_LABELS = ["First", "Next", "Then", "Then", "After that", "Finally"] as const;
+/** Ordering micro-labels that adapt to any number of sequencing frames (3+). */
+function orderLabels(count: number): string[] {
+  if (count <= 1) return ["First"];
+  if (count === 2) return ["First", "Finally"];
+  const labels = ["First", "Next"];
+  while (labels.length < count - 2) labels.push("Then");
+  if (count >= 4) labels.push("After that");
+  labels.push("Finally");
+  return labels.slice(0, count);
+}
 
 type FeedbackState =
   | { type: "none" }
@@ -31,6 +40,7 @@ export function SequencingPhase({
   childId = "demo",
 }: StoryPhaseProps) {
   const frames = storyData.sequencing_frames;
+  const labels = orderLabels(frames.length);
   const [shuffled] = useState<SequencingFrame[]>(() => shuffle(frames));
   const [order, setOrder] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<FeedbackState>({ type: "none" });
@@ -221,7 +231,7 @@ export function SequencingPhase({
                 const shuffledIndex = order[index];
                 const filled = shuffledIndex !== undefined;
                 const wrong = feedback.type === "wrong" && feedback.wrongPositions.has(index);
-                const label = ORDER_LABELS[index] ?? `${index + 1}`;
+                const label = labels[index] ?? `${index + 1}`;
                 return (
                   <button
                     type="button"
