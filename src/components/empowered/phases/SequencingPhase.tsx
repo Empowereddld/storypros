@@ -272,7 +272,7 @@ export function SequencingPhase({
                       </>
                     ) : (
                       <>
-                        <span className="mt-2 text-[10px] font-black uppercase leading-tight tracking-wide sm:text-xs">
+                        <span className="mt-2 text-[10px] font-black uppercase leading-tight tracking-wide lg:text-xs">
                           {label}
                         </span>
                         <span className="mb-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-dotted border-primary/25 text-[10px] font-extrabold text-primary/30 sm:h-7 sm:w-7">
