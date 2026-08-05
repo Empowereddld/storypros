@@ -6,7 +6,7 @@ import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
-import { ListenButton, useListen } from "./ListenButton";
+import { useListen } from "./ListenButton";
 import { AudioButton, SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
@@ -222,24 +222,26 @@ export function VocabularyIntroPhase({
                           </p>
                         )}
                         {isRevealed && (
-                          <p className="mt-1 text-base font-semibold leading-snug text-ink">
-                            {displayText}
-                          </p>
+                          <div className="mt-1 flex items-center gap-3">
+                            {isActive && supported && narration && (
+                              <AudioButton
+                                size="sm"
+                                playing={isPlaying(`feat-${index}`)}
+                                onClick={() => toggle(narration, `feat-${index}`)}
+                                ariaLabel="Hear this feature"
+                              />
+                            )}
+                            <p className="flex-1 text-base font-semibold leading-snug text-ink">
+                              {displayText}
+                            </p>
+                          </div>
                         )}
                       </div>
                     </div>
                   </button>
-                  {isActive && isRevealed && supported && narration && (
-                    <div className="mt-2 flex justify-center">
-                      <ListenButton
-                        playing={isPlaying(`feat-${index}`)}
-                        onClick={() => toggle(narration, `feat-${index}`)}
-                        ariaLabel="Hear this feature"
-                      />
-                    </div>
-                  )}
                 </div>
               );
+
             })}
           </div>
 

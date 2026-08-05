@@ -5,7 +5,7 @@ import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
-import { ListenButton, useListen } from "./ListenButton";
+import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
@@ -180,18 +180,20 @@ export function VocabularyQuizPhase({
           <h1 className="mt-1 text-[32px] font-extrabold capitalize leading-none text-primary">
             {word.word}
           </h1>
-          <p className="mt-4 text-[23px] font-extrabold leading-tight text-ink">
-            {question.prompt}
-          </p>
-          {supported && (
-            <div className="mt-3 flex justify-center">
-              <ListenButton
+          <div className="mt-4 flex items-center gap-3 text-left">
+            {supported && (
+              <AudioButton
+                size="md"
                 playing={isPlaying("prompt")}
                 onClick={() => toggle(question.prompt, "prompt")}
                 ariaLabel="Hear the question"
               />
-            </div>
-          )}
+            )}
+            <p className="flex-1 text-[23px] font-extrabold leading-tight text-ink">
+              {question.prompt}
+            </p>
+          </div>
+
         </section>
 
         {!optionsRevealed ? (
