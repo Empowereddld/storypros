@@ -525,8 +525,8 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
       {/* ── Who Story Pros is designed for (centered 2x3 grid) ── */}
-      <section id="designed-for" className="scroll-mt-20 border-y border-accent/40 bg-card/50">
-        <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+      <section id="designed-for" className="scroll-mt-20">
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 pb-20 sm:px-6 sm:py-20 sm:pb-28">
           <Reveal>
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="font-display text-3xl font-extrabold text-primary sm:text-4xl">
