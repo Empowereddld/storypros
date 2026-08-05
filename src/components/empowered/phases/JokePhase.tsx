@@ -155,10 +155,13 @@ export function JokePhase({
           )}
         </section>
 
-        <TactileButton className="mt-4" onClick={handleNext}>
-          {step === "joke" ? "Keep Going" : "Next"}
-          <ChevronRightIcon className="h-5 w-5 text-secondary" />
-        </TactileButton>
+        <div className="w-full max-w-[520px]">
+          <TactileButton className="mt-4" onClick={handleNext}>
+            {step === "joke" ? "Keep Going" : "Next"}
+            <ChevronRightIcon className="h-5 w-5 text-secondary" />
+          </TactileButton>
+        </div>
+
       </div>
     </div>
   );
