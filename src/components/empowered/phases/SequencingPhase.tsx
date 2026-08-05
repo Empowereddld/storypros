@@ -214,7 +214,7 @@ export function SequencingPhase({
             {/* Dotted timeline rail */}
             <div className="relative inline-flex w-max items-center gap-3 py-2">
               <span
-                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-96px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-120px)]"
+                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-120px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-150px)]"
                 aria-hidden
               />
               {Array.from({ length: frames.length }).map((_, index) => {
@@ -246,7 +246,7 @@ export function SequencingPhase({
                         : `Empty ${label} slot. Drop a picture here.`
                     }
                     className={cn(
-                      "relative z-10 flex h-[64px] w-[96px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[80px] sm:w-[120px]",
+                      "relative z-10 flex h-[80px] w-[120px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[100px] sm:w-[150px]",
                       filled
                         ? "cursor-grab border-primary bg-card active:cursor-grabbing"
                         : "border-dashed border-primary/25 bg-card/60 text-primary/40",
