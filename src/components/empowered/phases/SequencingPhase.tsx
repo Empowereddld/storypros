@@ -194,7 +194,7 @@ export function SequencingPhase({
       )}
 
       <div className="relative z-10 flex flex-1 flex-col overflow-hidden">
-        {/* Timeline rail — top half */}
+        {/* Timeline rail */}
         <section className="flex shrink-0 flex-col gap-3 border-b border-accent/30 bg-card/50 px-4 pb-4 pt-3">
           <div className="flex items-end justify-between">
             <div>
@@ -212,9 +212,9 @@ export function SequencingPhase({
 
           <div className="relative -mx-4 overflow-x-auto no-scrollbar px-4">
             {/* Dotted timeline rail */}
-            <div className="relative inline-flex w-max items-center gap-3 py-2">
+            <div className="relative inline-flex w-max items-center gap-3 py-2 lg:gap-4">
               <span
-                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-120px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-150px)]"
+                className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-120px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-150px)] lg:w-[calc(100%-180px)]"
                 aria-hidden
               />
               {Array.from({ length: frames.length }).map((_, index) => {
@@ -246,7 +246,7 @@ export function SequencingPhase({
                         : `Empty ${label} slot. Drop a picture here.`
                     }
                     className={cn(
-                      "relative z-10 flex h-[80px] w-[120px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[100px] sm:w-[150px]",
+                      "relative z-10 flex h-[80px] w-[120px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[100px] sm:w-[150px] lg:h-[112px] lg:w-[168px]",
                       filled
                         ? "cursor-grab border-primary bg-card active:cursor-grabbing"
                         : "border-dashed border-primary/25 bg-card/60 text-primary/40",
@@ -287,9 +287,9 @@ export function SequencingPhase({
           </div>
         </section>
 
-        {/* Story bank — bottom half */}
-        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-4 pt-4">
-          <section className="mx-auto grid max-w-[720px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+        {/* Story bank — centered in remaining space */}
+        <div className="relative z-10 flex flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-4 pt-4">
+          <section className="mx-auto my-auto grid w-full max-w-[720px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:max-w-[960px] lg:gap-5">
             {shuffled.map((frame, index) => {
               const placed = order.includes(index);
               const position = order.indexOf(index);
