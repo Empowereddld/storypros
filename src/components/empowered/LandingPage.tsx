@@ -128,25 +128,25 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
       <header className="sticky top-0 z-40 border-b border-accent/40 bg-cream/85 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-3 sm:gap-4 sm:px-6">
           <StoryProsLogo layout="row" size="sm" className="h-9" />
-          <nav className="hidden items-center gap-4 text-[13px] font-bold text-ink-soft md:flex lg:gap-6 lg:text-sm">
+          <nav className="hidden items-center gap-3.5 text-[12.5px] font-bold text-ink-soft md:flex lg:gap-6 lg:text-sm">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="transition-colors hover:text-primary">
+              <a key={link.href} href={link.href} className="whitespace-nowrap transition-colors hover:text-primary">
                 {link.label}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3">
             <button
               onClick={onDemo}
-              className="press-pop inline-flex items-center gap-1.5 rounded-2xl bg-secondary px-3 py-2 text-[13px] font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 sm:px-4 sm:text-sm"
+              className="press-pop inline-flex items-center gap-1.5 whitespace-nowrap rounded-2xl bg-secondary px-3 py-2 text-[13px] font-extrabold text-secondary-foreground shadow-[0_3px_0_0_var(--secondary-deep)] transition-all hover:brightness-105 lg:px-4 lg:text-sm"
             >
-              <PaperPlaneIcon className="h-4 w-4" />
-              <span className="sm:hidden">Free Story</span>
-              <span className="hidden sm:inline">Try the Free Story</span>
+              <PaperPlaneIcon className="h-4 w-4 shrink-0" />
+              <span className="lg:hidden">Free Story</span>
+              <span className="hidden lg:inline">Try the Free Story</span>
             </button>
             <button
               onClick={onLogin}
-              className="press-pop hidden rounded-2xl px-4 py-2 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5 sm:inline-flex"
+              className="press-pop hidden whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-extrabold text-primary transition-colors hover:bg-primary/5 lg:inline-flex"
             >
               Log in
             </button>
@@ -155,13 +155,14 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               href={WAITLIST_URL}
               target="_blank"
               rel="noopener"
-              className="press-pop rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 sm:px-4 sm:text-sm"
+              className="press-pop whitespace-nowrap rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 lg:px-4 lg:text-sm"
             >
-              <span className="sm:hidden">Waitlist</span>
-              <span className="hidden sm:inline">Join the Waitlist</span>
+              <span className="lg:hidden">Waitlist</span>
+              <span className="hidden lg:inline">Join the Waitlist</span>
 
             </a>
           </div>
+
         </div>
       </header>
 
