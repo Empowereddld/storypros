@@ -155,7 +155,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
                   {featured.locked ? <LockIcon /> : <ChevronRightIcon className="h-6 w-6" />}
                 </span>
                 <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 text-white">
-                  <h3 className="text-[27px] font-extrabold leading-[1.05] drop-shadow sm:text-[31px]">
+                  <h3 className="text-[22px] font-extrabold leading-[1.1] drop-shadow whitespace-nowrap sm:text-[31px]">
                     {featured.title}
                   </h3>
                   <div className="flex flex-wrap items-center gap-2">
@@ -201,7 +201,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
                 key={tab.key}
                 onClick={() => setFilter(tab.key)}
                 className={cn(
-                  "press-pop rounded-[20px] px-2 py-2 text-xs font-extrabold transition-colors",
+                  "press-pop rounded-[20px] px-1.5 py-2 text-[11px] font-extrabold transition-colors sm:px-2 sm:text-xs",
                   filter === tab.key
                     ? "bg-primary text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)]"
                     : "text-ink-soft hover:bg-accent/60 hover:text-primary",
