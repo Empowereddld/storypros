@@ -227,7 +227,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         </button>
                       </div>
                     ) : (
-                      <TactileButton className="mt-4 w-full" onClick={openContinue} noShadow>
+                      <TactileButton className="mt-5 w-full" onClick={openContinue} noShadow>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
                     )}
@@ -237,7 +237,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             </div>
 
             {/* Right rail on laptop; flows underneath on phones/tablets */}
-            <aside className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-4">
+            <aside className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-5">
               <div className="sm:col-span-2 lg:col-span-1">
                 <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
               </div>
@@ -446,7 +446,7 @@ function WordsStrip({
   onViewAll: () => void;
 }) {
   return (
-    <section className="mt-5 rounded-[28px] bg-card p-4 shadow-soft lg:p-5">
+    <section className="mt-6 rounded-[28px] bg-card p-4 shadow-soft lg:mt-8 lg:p-5">
       <div className="flex items-center justify-between gap-2">
         <CardHeading
           icon={<BookIcon className="h-5 w-5 text-primary" />}
