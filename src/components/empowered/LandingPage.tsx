@@ -382,7 +382,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
       {/* ── Take a peek inside Story Pros ── */}
       <section id="in-action" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
-        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16">
+        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16 lg:max-w-4xl">
           <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             Take a peek inside Story Pros
           </h2>
