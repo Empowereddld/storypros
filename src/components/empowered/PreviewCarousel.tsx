@@ -16,6 +16,7 @@ import readListenAsset from "@/assets/preview-read-listen.png.asset.json";
 import storyWordsAsset from "@/assets/preview-story-words.png.asset.json";
 import checkUnderstandingAsset from "@/assets/preview-check-understanding.png.asset.json";
 import orderRetellAsset from "@/assets/preview-order-retell.png.asset.json";
+import connectToYouAsset from "@/assets/preview-connect-to-you.png.asset.json";
 
 interface PreviewSlide {
   label: string;
@@ -46,7 +47,11 @@ const SLIDES: PreviewSlide[] = [
     image: orderRetellAsset.url,
   },
 
-  { label: "Family Dashboard", caption: "See what was practised and what to try next at home." },
+  {
+    label: "Connect It to You",
+    caption: "Connect the story to something from your own life.",
+    image: connectToYouAsset.url,
+  },
 ];
 
 
