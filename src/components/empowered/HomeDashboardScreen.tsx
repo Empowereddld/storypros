@@ -13,6 +13,7 @@ import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { SpeakButton } from "@/components/empowered/SpeakButton";
 import treasureChest from "@/assets/treasure-chest.png";
+import buddyAvatar from "@/assets/dan-daria-highfive.webp";
 
 
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
@@ -123,13 +124,13 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-6">
         <div className="mx-auto w-full max-w-[1180px]">
-          {/* ── Greeting with star mascot ── */}
+          {/* ── Greeting with buddy avatar ── */}
           <div className="flex items-center gap-3 lg:gap-4">
             <span
               aria-hidden
-              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary shadow-soft lg:h-[68px] lg:w-[68px]"
+              className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/60 shadow-soft lg:h-[68px] lg:w-[68px]"
             >
-              <StarIcon filled className="h-8 w-8 text-secondary lg:h-10 lg:w-10" />
+              <img src={buddyAvatar} alt="" className="h-full w-full object-cover" />
             </span>
             <div className="min-w-0">
               <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[38px]">
@@ -179,22 +180,33 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
 
 
-                    <div className="mt-4 flex items-center justify-between text-[13px] font-extrabold">
-                      <span className="text-ink-soft">
-                        {cont.status === "in-progress"
-                          ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
-                          : `Part 1 of ${cont.totalPhases}`}
-                      </span>
-                      <span className="text-primary">{cont.percent}% complete</span>
+                    <div className="mt-5 rounded-[20px] bg-accent/25 px-4 py-3">
+                      {cont.percent >= 100 ? (
+                        <p className="text-center text-[14px] font-extrabold text-primary">
+                          Story complete!
+                        </p>
+                      ) : (
+                        <>
+                          <div className="flex items-center justify-between text-[13px] font-extrabold">
+                            <span className="text-ink-soft">
+                              {cont.status === "in-progress"
+                                ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
+                                : `Part 1 of ${cont.totalPhases}`}
+                            </span>
+                            <span className="text-primary">{cont.percent}% complete</span>
+                          </div>
+                          <div className="mt-2.5 h-3 w-full overflow-hidden rounded-full bg-card">
+                            <div
+                              className="h-full rounded-full bg-primary transition-all duration-500"
+                              style={{
+                                width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
+                              }}
+                            />
+                          </div>
+                        </>
+                      )}
                     </div>
-                    <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-accent/70">
-                      <div
-                        className="h-full rounded-full bg-primary transition-all duration-500"
-                        style={{
-                          width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
-                        }}
-                      />
-                    </div>
+
 
                     {doneToday ? (
                       <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/30 p-4 text-center">
@@ -215,7 +227,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         </button>
                       </div>
                     ) : (
-                      <TactileButton className="mt-4 w-full" onClick={openContinue} noShadow>
+                      <TactileButton className="mt-5 w-full" onClick={openContinue} noShadow>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
                     )}
@@ -225,7 +237,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             </div>
 
             {/* Right rail on laptop; flows underneath on phones/tablets */}
-            <aside className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-4">
+            <aside className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-5">
               <div className="sm:col-span-2 lg:col-span-1">
                 <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
               </div>
@@ -434,7 +446,7 @@ function WordsStrip({
   onViewAll: () => void;
 }) {
   return (
-    <section className="mt-5 rounded-[28px] bg-card p-4 shadow-soft lg:p-5">
+    <section className="mt-6 rounded-[28px] bg-card p-4 shadow-soft lg:mt-8 lg:p-5">
       <div className="flex items-center justify-between gap-2">
         <CardHeading
           icon={<BookIcon className="h-5 w-5 text-primary" />}
