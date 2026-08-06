@@ -180,22 +180,33 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
 
 
-                    <div className="mt-4 flex items-center justify-between text-[13px] font-extrabold">
-                      <span className="text-ink-soft">
-                        {cont.status === "in-progress"
-                          ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
-                          : `Part 1 of ${cont.totalPhases}`}
-                      </span>
-                      <span className="text-primary">{cont.percent}% complete</span>
+                    <div className="mt-5 rounded-[20px] bg-accent/25 px-4 py-3">
+                      {cont.percent >= 100 ? (
+                        <p className="text-center text-[14px] font-extrabold text-primary">
+                          Story complete!
+                        </p>
+                      ) : (
+                        <>
+                          <div className="flex items-center justify-between text-[13px] font-extrabold">
+                            <span className="text-ink-soft">
+                              {cont.status === "in-progress"
+                                ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
+                                : `Part 1 of ${cont.totalPhases}`}
+                            </span>
+                            <span className="text-primary">{cont.percent}% complete</span>
+                          </div>
+                          <div className="mt-2.5 h-3 w-full overflow-hidden rounded-full bg-card">
+                            <div
+                              className="h-full rounded-full bg-primary transition-all duration-500"
+                              style={{
+                                width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
+                              }}
+                            />
+                          </div>
+                        </>
+                      )}
                     </div>
-                    <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-accent/70">
-                      <div
-                        className="h-full rounded-full bg-primary transition-all duration-500"
-                        style={{
-                          width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
-                        }}
-                      />
-                    </div>
+
 
                     {doneToday ? (
                       <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/30 p-4 text-center">
