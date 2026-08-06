@@ -13,6 +13,7 @@ import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import readListenAsset from "@/assets/preview-read-listen.png.asset.json";
+import storyWordsAsset from "@/assets/preview-story-words.png.asset.json";
 
 interface PreviewSlide {
   label: string;
@@ -27,7 +28,12 @@ const SLIDES: PreviewSlide[] = [
     caption: "Read or listen to a short story, one page at a time.",
     image: readListenAsset.url,
   },
-  { label: "Story Words", caption: "Learn important words in context, not just definitions." },
+  {
+    label: "Story Words",
+    caption: "Learn important words in context, not just definitions.",
+    image: storyWordsAsset.url,
+  },
+
   { label: "Check Understanding", caption: "Answer supported questions and build understanding." },
   { label: "Put It in Order & Retell", caption: "Organize the story, then retell it in your own words." },
   { label: "Family Dashboard", caption: "See what was practised and what to try next at home." },
