@@ -72,7 +72,7 @@ export function PreviewCarousel() {
         />
 
         <div
-          className="w-full max-w-[400px]"
+          className="w-full max-w-[400px] lg:max-w-[500px]"
           onTouchStart={(e) => {
             touchStartX.current = e.touches[0].clientX;
           }}

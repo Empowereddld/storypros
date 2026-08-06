@@ -33,7 +33,10 @@ import {
   LayoutGrid,
   GraduationCap,
   Handshake,
+  Menu,
+  X,
 } from "lucide-react";
+
 
 const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
   MessagesSquare,
@@ -122,6 +125,8 @@ const SKILL_ICONS: Record<string, React.ComponentType<{ className?: string }>> =
 
 export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="min-h-dvh w-full bg-gradient-to-br from-cream-deep via-cream to-sky/40 text-ink">
       {/* ── Top nav ── */}
@@ -155,16 +160,68 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               href={WAITLIST_URL}
               target="_blank"
               rel="noopener"
-              className="press-pop whitespace-nowrap rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 lg:px-4 lg:text-sm"
+              className="press-pop hidden whitespace-nowrap rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 md:inline-flex lg:px-4 lg:text-sm"
             >
               <span className="lg:hidden">Waitlist</span>
               <span className="hidden lg:inline">Join the Waitlist</span>
-
             </a>
+
+            {/* Mobile menu toggle */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              className="press-pop inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary/25 bg-card text-primary transition-colors hover:bg-primary/5 md:hidden"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
 
         </div>
+
+        {/* Mobile menu panel */}
+        {menuOpen && (
+          <div
+            id="mobile-menu"
+            className="border-t border-accent/40 bg-cream/98 px-4 pb-5 pt-2 shadow-card backdrop-blur md:hidden"
+          >
+            <nav className="flex flex-col">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex min-h-[52px] items-center justify-between border-b border-accent/40 text-[16px] font-bold text-ink transition-colors hover:text-primary"
+                >
+                  {link.label}
+                  <ChevronRightIcon className="h-4 w-4 text-primary/50" />
+                </a>
+              ))}
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onLogin();
+                }}
+                className="flex min-h-[52px] items-center border-b border-accent/40 text-left text-[16px] font-bold text-ink transition-colors hover:text-primary"
+              >
+                Log in
+              </button>
+            </nav>
+            <a
+              href={WAITLIST_URL}
+              target="_blank"
+              rel="noopener"
+              onClick={() => setMenuOpen(false)}
+              className="press-pop mt-4 inline-flex h-[52px] w-full items-center justify-center rounded-3xl bg-primary text-[15px] font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
+            >
+              Join the Waitlist
+            </a>
+          </div>
+        )}
       </header>
+
 
       {/* ── Hero: audience → product → experience → action ── */}
       <section className="relative overflow-hidden">
@@ -287,7 +344,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
             to do next.
           </p>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-3 md:gap-4 lg:gap-6">
             {PATHWAY.map((step, i) => (
               <Reveal key={step.step} delay={i * 100}>
                 <article className="flex h-full flex-col overflow-hidden rounded-[24px] border border-accent/60 bg-card shadow-card">
@@ -325,7 +382,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
       {/* ── Take a peek inside Story Pros ── */}
       <section id="in-action" className="scroll-mt-20 border-y border-accent/40 bg-card/60">
-        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16">
+        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16 lg:max-w-4xl">
           <h2 className="text-center font-display text-3xl font-extrabold text-primary sm:text-4xl">
             Take a peek inside Story Pros
           </h2>
@@ -537,19 +594,20 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               </p>
             </div>
 
-            <ul className="mt-9 grid gap-3.5 sm:mt-10 sm:grid-cols-2 sm:gap-4">
+            {/* Mobile: light checklist. sm+: card grid. */}
+            <ul className="mt-8 overflow-hidden rounded-[20px] border border-accent/50 bg-card sm:mt-10 sm:grid sm:gap-4 sm:overflow-visible sm:rounded-none sm:border-0 sm:bg-transparent sm:grid-cols-2">
               {DESIGNED_FOR.map((item) => {
                 const Icon = SKILL_ICONS[item.icon];
                 return (
                   <li
                     key={item.text}
-                    className="flex h-full items-start gap-3.5 rounded-[20px] border border-accent/50 bg-card px-4 py-4 sm:px-5"
+                    className="flex h-full items-start gap-3 border-b border-accent/40 px-4 py-3.5 last:border-b-0 sm:gap-3.5 sm:rounded-[20px] sm:border sm:border-accent/50 sm:bg-card sm:px-5 sm:py-4"
                   >
                     <span
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent/60 text-primary"
+                      className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-accent/60 text-primary sm:h-9 sm:w-9 sm:rounded-xl"
                       aria-hidden
                     >
-                      {Icon && <Icon className="h-[18px] w-[18px]" />}
+                      {Icon && <Icon className="h-[15px] w-[15px] sm:h-[18px] sm:w-[18px]" />}
                     </span>
                     <span className="text-[15px] font-semibold leading-snug text-ink sm:text-[15.5px]">
                       {item.text}
@@ -558,6 +616,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 );
               })}
             </ul>
+
 
             <p className="mx-auto mt-8 max-w-2xl text-center text-[13.5px] font-medium leading-relaxed text-ink-soft/80">
               {DESIGNED_FOR_NOTE}
@@ -580,24 +639,30 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
             {FOUNDERS.body}
           </p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-8 grid gap-2.5 sm:mt-10 sm:gap-4 sm:grid-cols-3">
             {FOUNDERS.pillars.map((pillar, i) => {
               const Icon = PILLAR_ICONS[pillar.icon] ?? MessagesSquare;
               return (
                 <Reveal key={pillar.title} delay={i * 90}>
-                  <div className="flex h-full flex-col items-center rounded-[22px] border border-accent/50 bg-card px-5 py-6 text-center shadow-card">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent/60">
-                      <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} aria-hidden />
+                  {/* Mobile: compact icon + text row. sm+: centered card. */}
+                  <div className="flex h-full items-start gap-3 rounded-[18px] bg-card/70 px-4 py-3.5 text-left sm:flex-col sm:items-center sm:rounded-[22px] sm:border sm:border-accent/50 sm:bg-card sm:px-5 sm:py-6 sm:text-center sm:shadow-card">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/60 sm:h-11 sm:w-11">
+                      <Icon className="h-[18px] w-[18px] text-primary sm:h-5 sm:w-5" strokeWidth={1.75} aria-hidden />
                     </span>
-                    <p className="mt-4 text-base font-extrabold text-primary">{pillar.title}</p>
-                    <p className="mt-1.5 text-[14px] font-medium leading-relaxed text-ink-soft">
-                      {pillar.detail}
-                    </p>
+                    <div className="min-w-0 sm:contents">
+                      <p className="text-[15px] font-extrabold text-primary sm:mt-4 sm:text-base">
+                        {pillar.title}
+                      </p>
+                      <p className="mt-0.5 text-[13.5px] font-medium leading-relaxed text-ink-soft sm:mt-1.5 sm:text-[14px]">
+                        {pillar.detail}
+                      </p>
+                    </div>
                   </div>
                 </Reveal>
               );
             })}
           </div>
+
 
           <p className="mx-auto mt-8 max-w-2xl text-[13.5px] font-medium leading-relaxed text-ink-soft/80">
             {FOUNDERS.close}
