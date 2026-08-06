@@ -33,7 +33,10 @@ import {
   LayoutGrid,
   GraduationCap,
   Handshake,
+  Menu,
+  X,
 } from "lucide-react";
+
 
 const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
   MessagesSquare,
