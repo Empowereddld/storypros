@@ -155,16 +155,68 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               href={WAITLIST_URL}
               target="_blank"
               rel="noopener"
-              className="press-pop whitespace-nowrap rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 lg:px-4 lg:text-sm"
+              className="press-pop hidden whitespace-nowrap rounded-2xl bg-primary px-3 py-2 text-[13px] font-extrabold text-primary-foreground shadow-card transition-colors hover:bg-primary/95 md:inline-flex lg:px-4 lg:text-sm"
             >
               <span className="lg:hidden">Waitlist</span>
               <span className="hidden lg:inline">Join the Waitlist</span>
-
             </a>
+
+            {/* Mobile menu toggle */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              className="press-pop inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary/25 bg-card text-primary transition-colors hover:bg-primary/5 md:hidden"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
 
         </div>
+
+        {/* Mobile menu panel */}
+        {menuOpen && (
+          <div
+            id="mobile-menu"
+            className="border-t border-accent/40 bg-cream/98 px-4 pb-5 pt-2 shadow-card backdrop-blur md:hidden"
+          >
+            <nav className="flex flex-col">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex min-h-[52px] items-center justify-between border-b border-accent/40 text-[16px] font-bold text-ink transition-colors hover:text-primary"
+                >
+                  {link.label}
+                  <ChevronRightIcon className="h-4 w-4 text-primary/50" />
+                </a>
+              ))}
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onLogin();
+                }}
+                className="flex min-h-[52px] items-center border-b border-accent/40 text-left text-[16px] font-bold text-ink transition-colors hover:text-primary"
+              >
+                Log in
+              </button>
+            </nav>
+            <a
+              href={WAITLIST_URL}
+              target="_blank"
+              rel="noopener"
+              onClick={() => setMenuOpen(false)}
+              className="press-pop mt-4 inline-flex h-[52px] w-full items-center justify-center rounded-3xl bg-primary text-[15px] font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105"
+            >
+              Join the Waitlist
+            </a>
+          </div>
+        )}
       </header>
+
 
       {/* ── Hero: audience → product → experience → action ── */}
       <section className="relative overflow-hidden">
