@@ -329,7 +329,7 @@ function HeroStat({
       </span>
       <span className="min-w-0">
         <span className="block text-[22px] font-extrabold leading-none text-primary">{value}</span>
-        <span className="mt-0.5 block truncate text-[11px] font-extrabold uppercase tracking-wide text-ink-soft">
+        <span className="mt-0.5 block text-[11px] font-extrabold uppercase leading-tight tracking-wide text-ink-soft">
           {label}
         </span>
       </span>
