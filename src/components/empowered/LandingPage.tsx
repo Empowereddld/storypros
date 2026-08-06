@@ -639,24 +639,30 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
             {FOUNDERS.body}
           </p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-8 grid gap-2.5 sm:mt-10 sm:gap-4 sm:grid-cols-3">
             {FOUNDERS.pillars.map((pillar, i) => {
               const Icon = PILLAR_ICONS[pillar.icon] ?? MessagesSquare;
               return (
                 <Reveal key={pillar.title} delay={i * 90}>
-                  <div className="flex h-full flex-col items-center rounded-[22px] border border-accent/50 bg-card px-5 py-6 text-center shadow-card">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent/60">
-                      <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} aria-hidden />
+                  {/* Mobile: compact icon + text row. sm+: centered card. */}
+                  <div className="flex h-full items-start gap-3 rounded-[18px] bg-card/70 px-4 py-3.5 text-left sm:flex-col sm:items-center sm:rounded-[22px] sm:border sm:border-accent/50 sm:bg-card sm:px-5 sm:py-6 sm:text-center sm:shadow-card">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/60 sm:h-11 sm:w-11">
+                      <Icon className="h-[18px] w-[18px] text-primary sm:h-5 sm:w-5" strokeWidth={1.75} aria-hidden />
                     </span>
-                    <p className="mt-4 text-base font-extrabold text-primary">{pillar.title}</p>
-                    <p className="mt-1.5 text-[14px] font-medium leading-relaxed text-ink-soft">
-                      {pillar.detail}
-                    </p>
+                    <div className="min-w-0 sm:contents">
+                      <p className="text-[15px] font-extrabold text-primary sm:mt-4 sm:text-base">
+                        {pillar.title}
+                      </p>
+                      <p className="mt-0.5 text-[13.5px] font-medium leading-relaxed text-ink-soft sm:mt-1.5 sm:text-[14px]">
+                        {pillar.detail}
+                      </p>
+                    </div>
                   </div>
                 </Reveal>
               );
             })}
           </div>
+
 
           <p className="mx-auto mt-8 max-w-2xl text-[13.5px] font-medium leading-relaxed text-ink-soft/80">
             {FOUNDERS.close}
