@@ -226,8 +226,8 @@ export function AchievementGalleryScreen({
                   />
                   <HeroStat
                     icon={<StarIcon filled className="h-5 w-5" />}
-                    value={`Lv.${level}`}
-                    label={levelTitle}
+                    value={level}
+                    label={`Level ${level}`}
                   />
                 </div>
               </div>
