@@ -13,7 +13,7 @@ import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { SpeakButton } from "@/components/empowered/SpeakButton";
 import treasureChest from "@/assets/treasure-chest.png";
-import buddyAvatar from "@/assets/dan-daria-highfive.webp";
+
 
 
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
@@ -124,14 +124,8 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-6">
         <div className="mx-auto w-full max-w-[1180px]">
-          {/* ── Greeting with buddy avatar ── */}
+          {/* ── Greeting ── */}
           <div className="flex items-center gap-3 lg:gap-4">
-            <span
-              aria-hidden
-              className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/60 shadow-soft lg:h-[68px] lg:w-[68px]"
-            >
-              <img src={buddyAvatar} alt="" className="h-full w-full object-cover" />
-            </span>
             <div className="min-w-0">
               <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[38px]">
                 {greeting}
