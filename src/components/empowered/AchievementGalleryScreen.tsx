@@ -131,13 +131,14 @@ export function AchievementGalleryScreen({
       .filter((c): c is Collectible => Boolean(c))
       .map((item) => {
         const copy = BADGE_COPY[item.id];
+        const prog = progressFor(item.id);
         return {
           ...item,
-          unlocked: owned.has(item.id),
+          unlocked: owned.has(item.id) || (prog ? prog.current >= prog.target : false),
           label: copy?.name ?? item.name,
           requirement: copy?.requirement ?? item.unlockCondition ?? item.description,
           blurb: copy?.blurb ?? item.description,
-          progress: progressFor(item.id),
+          progress: prog,
         };
       });
   }, [childId, completedCount, streak, mastery.storiesMastered, mastery.storiesRequired]);
@@ -216,12 +217,12 @@ export function AchievementGalleryScreen({
                   <HeroStat
                     icon={<BookCheckIcon className="h-5 w-5" />}
                     value={completedCount}
-                    label="Stories done"
+                    label="Stories"
                   />
                   <HeroStat
                     icon={<MedalIcon className="h-5 w-5" />}
                     value={earned.length}
-                    label="Badges earned"
+                    label="Badges"
                   />
                   <HeroStat
                     icon={<StarIcon filled className="h-5 w-5" />}
