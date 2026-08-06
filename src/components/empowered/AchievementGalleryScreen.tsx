@@ -256,7 +256,7 @@ export function AchievementGalleryScreen({
           <section className="mt-3 rounded-[22px] bg-card px-4 py-3 shadow-card">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-[13px] font-extrabold text-primary">
-                Lv.{level} · {levelTitle}
+                Level {level} · {levelTitle}
               </p>
               <p className="text-[12px] font-bold text-ink-soft">
                 {mastery.ready
