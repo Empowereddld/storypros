@@ -112,7 +112,7 @@ export function LibraryScreen({ onNavigate }: LibraryScreenProps) {
 
       {/* App-style header for phones/tablets — laptop uses the top DesktopNav */}
       <header className="relative z-30 flex items-center justify-between px-5 pb-1 pt-4 lg:hidden">
-        <StoryProsLogo layout="row" size="md" />
+        <StoryProsLogo layout="row" size="sm" />
         <div className="flex items-center gap-2">
           <CurrencyBadge
             count={planes}
