@@ -13,7 +13,7 @@ import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { SpeakButton } from "@/components/empowered/SpeakButton";
 import treasureChest from "@/assets/treasure-chest.png";
-import buddyAvatar from "@/assets/dan-daria-highfive.webp";
+
 
 
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
