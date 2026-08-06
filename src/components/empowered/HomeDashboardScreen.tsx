@@ -12,7 +12,7 @@ import type { VocabularyWord } from "@/types/story";
 import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { SpeakButton } from "@/components/empowered/SpeakButton";
-import { StoryMetaPills } from "@/components/empowered/StoryMetaPills";
+
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
 import {
   AppBottomNav,
@@ -175,7 +175,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       />
                     </div>
 
-                    <StoryMetaPills story={cont.story} className="mt-3" />
+
 
                     <div className="mt-4 flex items-center justify-between text-[13px] font-extrabold">
                       <span className="text-ink-soft">
