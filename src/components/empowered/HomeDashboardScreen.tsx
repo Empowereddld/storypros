@@ -240,7 +240,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             <WordsStrip
               storyId={cont.story.id}
               words={cont.story.vocabulary_words}
-              onViewAll={() => onNavigate("words")}
+              onViewAll={() => onNavigate("library")}
             />
           )}
 
