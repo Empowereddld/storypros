@@ -594,19 +594,20 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               </p>
             </div>
 
-            <ul className="mt-9 grid gap-3.5 sm:mt-10 sm:grid-cols-2 sm:gap-4">
+            {/* Mobile: light checklist. sm+: card grid. */}
+            <ul className="mt-8 overflow-hidden rounded-[20px] border border-accent/50 bg-card sm:mt-10 sm:grid sm:gap-4 sm:overflow-visible sm:rounded-none sm:border-0 sm:bg-transparent sm:grid-cols-2">
               {DESIGNED_FOR.map((item) => {
                 const Icon = SKILL_ICONS[item.icon];
                 return (
                   <li
                     key={item.text}
-                    className="flex h-full items-start gap-3.5 rounded-[20px] border border-accent/50 bg-card px-4 py-4 sm:px-5"
+                    className="flex h-full items-start gap-3 border-b border-accent/40 px-4 py-3.5 last:border-b-0 sm:gap-3.5 sm:rounded-[20px] sm:border sm:border-accent/50 sm:bg-card sm:px-5 sm:py-4"
                   >
                     <span
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent/60 text-primary"
+                      className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-accent/60 text-primary sm:h-9 sm:w-9 sm:rounded-xl"
                       aria-hidden
                     >
-                      {Icon && <Icon className="h-[18px] w-[18px]" />}
+                      {Icon && <Icon className="h-[15px] w-[15px] sm:h-[18px] sm:w-[18px]" />}
                     </span>
                     <span className="text-[15px] font-semibold leading-snug text-ink sm:text-[15.5px]">
                       {item.text}
@@ -615,6 +616,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 );
               })}
             </ul>
+
 
             <p className="mx-auto mt-8 max-w-2xl text-center text-[13.5px] font-medium leading-relaxed text-ink-soft/80">
               {DESIGNED_FOR_NOTE}
