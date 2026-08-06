@@ -47,7 +47,11 @@ const SLIDES: PreviewSlide[] = [
     image: orderRetellAsset.url,
   },
 
-  { label: "Family Dashboard", caption: "See what was practised and what to try next at home." },
+  {
+    label: "Connect It to You",
+    caption: "Connect the story to something from your own life.",
+    image: connectToYouAsset.url,
+  },
 ];
 
 
