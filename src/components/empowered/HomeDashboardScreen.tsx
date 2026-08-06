@@ -469,7 +469,7 @@ function WordsStrip({
                   <BookOpen className="h-5 w-5 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1 truncate text-[17px] font-extrabold italic text-ink">
+              <span className="min-w-0 flex-1 truncate text-[17px] font-extrabold text-ink">
                 {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
