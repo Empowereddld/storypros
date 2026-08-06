@@ -440,25 +440,21 @@ function WordsStrip({
           return (
             <div
               key={word.word}
-              className="flex min-w-0 items-center gap-3 rounded-[22px] border border-accent/60 bg-card p-3 shadow-card"
+              className="flex min-w-0 items-center gap-3 rounded-[22px] border border-accent/60 bg-card p-2.5 shadow-card"
             >
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
                 {image ? (
                   <img src={image} alt="" className="h-full w-full object-contain p-1.5" />
                 ) : (
-                  <BookOpen className="h-6 w-6 text-primary" />
+                  <BookOpen className="h-5 w-5 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[15px] font-extrabold italic text-ink">
-                  {word.word}
-                </span>
-                <span className="mt-0.5 block text-[13px] font-medium leading-snug text-ink-soft">
-                  {word.sfa.function}
-                </span>
+              <span className="min-w-0 flex-1 truncate text-[17px] font-extrabold italic text-ink">
+                {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
             </div>
+
           );
         })}
       </div>
