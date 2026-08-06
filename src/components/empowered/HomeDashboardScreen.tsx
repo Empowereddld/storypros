@@ -12,6 +12,8 @@ import type { VocabularyWord } from "@/types/story";
 import { TactileButton } from "@/components/empowered/TactileButton";
 import { MiniPlane, LockIcon, Star, StoryProsLogo } from "@/components/empowered/StoryProsBrand";
 import { SpeakButton } from "@/components/empowered/SpeakButton";
+import treasureChest from "@/assets/treasure-chest.png";
+
 
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
 import {
@@ -324,25 +326,37 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
   const goal = "Finish today's story to earn your first coins.";
   return (
     <Card>
-      <div className="flex items-center justify-between gap-2">
-        <CardHeading
-          icon={<CoinIcon className="h-6 w-6 text-secondary" />}
-          title={coins > 0 ? `${coins} Coins` : "Coins"}
+      <div className="relative flex items-center gap-3">
+        <div className="min-w-0 flex-1">
+          <CardHeading
+            icon={<CoinIcon className="h-6 w-6 text-secondary" />}
+            title={coins > 0 ? `${coins} Coins` : "Coins"}
+          />
+
+          <p className="mt-2 text-[13px] font-medium leading-snug text-ink-soft">
+            {coins > 0 ? "Spend them in the Rewards shop!" : goal}
+          </p>
+          <button
+            onClick={onOpenShop}
+            className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full border-2 border-secondary/70 px-5 text-[13px] font-extrabold text-secondary-foreground transition-transform active:scale-95"
+          >
+            Shop Rewards <ChevronRightIcon />
+          </button>
+        </div>
+
+        <img
+          src={treasureChest}
+          alt=""
+          loading="lazy"
+          width={816}
+          height={816}
+          className="pointer-events-none -mr-1 h-24 w-24 shrink-0 self-end object-contain drop-shadow-sm sm:h-28 sm:w-28"
         />
       </div>
-
-      <p className="mt-2 text-[13px] font-medium leading-snug text-ink-soft">
-        {coins > 0 ? "Spend them in the Rewards shop!" : goal}
-      </p>
-      <button
-        onClick={onOpenShop}
-        className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full border-2 border-secondary/70 px-5 text-[13px] font-extrabold text-secondary-foreground transition-transform active:scale-95"
-      >
-        Shop Rewards <ChevronRightIcon />
-      </button>
     </Card>
   );
 }
+
 
 /* ───────── Badges: earned in colour, next ones locked ───────── */
 
