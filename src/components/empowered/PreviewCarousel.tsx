@@ -16,6 +16,7 @@ import readListenAsset from "@/assets/preview-read-listen.png.asset.json";
 import storyWordsAsset from "@/assets/preview-story-words.png.asset.json";
 import checkUnderstandingAsset from "@/assets/preview-check-understanding.png.asset.json";
 import orderRetellAsset from "@/assets/preview-order-retell.png.asset.json";
+import connectToYouAsset from "@/assets/preview-connect-to-you.png.asset.json";
 
 interface PreviewSlide {
   label: string;
