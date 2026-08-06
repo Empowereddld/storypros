@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { BookOpen } from "lucide-react";
+import { BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
 import { cn } from "@/lib/utils";
@@ -16,6 +16,7 @@ import { StoryMetaPills } from "@/components/empowered/StoryMetaPills";
 import { GrownUpsButton } from "@/components/empowered/GrownUpsButton";
 import {
   AppBottomNav,
+  BookIcon,
   ChevronRightIcon,
   CoinIcon,
   CurrencyBadge,
@@ -75,14 +76,14 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
     ? resolveStoryImage(cont.story.id, cont.story.slides[0]?.image || "slide-01.webp")
     : null;
 
-  const greeting = `Hi, Camesha!`;
+  const greeting = `Hi, ${firstName}!`;
   const subtitle = doneToday
     ? "You did your story today. Great work!"
     : cont?.status === "in-progress"
-      ? "Let's finish your story."
+      ? "Let's finish your story and keep your streak going!"
       : cont?.status === "replay"
         ? "You finished every story. Read a favourite again!"
-        : "Let's start your story.";
+        : "Let's start your story and build your streak!";
 
   const ctaLabel =
     cont?.status === "in-progress"
@@ -119,115 +120,133 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
       </header>
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-6">
-        <div className="lg:text-left">
-          <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[34px]">
-            {greeting}
-          </h1>
-          <p className="mt-1 text-[15px] font-medium text-ink-soft lg:text-base">{subtitle}</p>
-        </div>
+        <div className="mx-auto w-full max-w-[1180px]">
+          {/* ── Greeting with star mascot ── */}
+          <div className="flex items-center gap-3 lg:gap-4">
+            <span
+              aria-hidden
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary shadow-soft lg:h-[68px] lg:w-[68px]"
+            >
+              <StarIcon filled className="h-8 w-8 text-secondary lg:h-10 lg:w-10" />
+            </span>
+            <div className="min-w-0">
+              <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[38px]">
+                {greeting}
+              </h1>
+              <p className="mt-0.5 text-[15px] font-medium text-ink-soft lg:text-[17px]">
+                {subtitle}
+              </p>
+            </div>
+          </div>
 
+          {/* ── Hero story + right rail ── */}
+          <div className="mt-5 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-6">
+            <div className="min-w-0">
+              {cont && (
+                <article className="overflow-hidden rounded-[32px] bg-card p-2.5 shadow-soft animate-slide-up lg:p-3">
+                  <div className="relative h-[210px] w-full overflow-hidden rounded-[24px] bg-accent/40 lg:h-[300px]">
+                    {cover ? (
+                      <img src={cover} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-accent text-primary">
+                        <BookOpen className="h-16 w-16" />
+                      </div>
+                    )}
+                  </div>
 
-        {/* Laptop: story hero on the left, quick cards on the right */}
-        <div className="mt-4 lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-6">
-          <div className="min-w-0">
-            {cont && (
-              <article className="overflow-hidden rounded-[32px] border-[6px] border-card bg-card shadow-soft animate-slide-up">
-                <div className="relative h-[200px] w-full overflow-hidden rounded-[25px] bg-accent/40 lg:h-[260px]">
-                  {cover ? (
-                    <img src={cover} alt="" className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-accent text-primary">
-                      <BookOpen className="h-16 w-16" />
-                    </div>
-                  )}
-                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
+                  <div className="relative px-2 pb-2 pt-3 lg:px-4">
+                    {/* Book badge tucked over the image edge */}
+                    <span
+                      aria-hidden
+                      className="absolute -top-8 left-2 flex h-16 w-16 items-center justify-center rounded-[22px] border-4 border-card bg-accent text-primary shadow-card lg:left-4"
+                    >
+                      <BookIcon className="h-7 w-7" />
+                    </span>
 
-                </div>
-
-                <div className="relative -mt-10 rounded-t-[32px] bg-card px-4 pb-4 pt-4 lg:px-5">
-                  <div className="absolute -top-10 left-0 right-0 h-14 bg-card [clip-path:ellipse(62%_58%_at_50%_100%)]" />
-                  <div className="relative">
-                    <div className="flex items-start justify-between gap-3">
-                      <h2 className="min-w-0 text-[23px] font-extrabold leading-[1.05] text-primary lg:text-[26px]">
+                    <div className="ml-[76px] flex items-start justify-between gap-3 lg:ml-[80px]">
+                      <h2 className="min-w-0 text-[23px] font-extrabold leading-[1.1] text-primary lg:text-[30px]">
                         {cont.story.title}
                       </h2>
                       <SpeakButton
                         text={cont.story.title}
-                        label={`Hear the story title`}
+                        label="Hear the story title"
                         tone="primary"
                         size="sm"
                       />
                     </div>
-                    <StoryMetaPills story={cont.story} className="mt-2.5" />
-                  </div>
 
-                  <div className="mt-4 flex items-center justify-between text-xs font-extrabold">
-                    <span className="text-ink-soft">
-                      {cont.status === "in-progress"
-                        ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
-                        : `Part 1 of ${cont.totalPhases}`}
-                    </span>
-                    <span className="text-primary">{cont.percent}% complete</span>
-                  </div>
-                  <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-accent/70">
-                    <div
-                      className="h-full rounded-full bg-primary transition-all duration-500"
-                      style={{
-                        width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
-                      }}
-                    />
-                  </div>
+                    <StoryMetaPills story={cont.story} className="mt-3" />
 
-                  {doneToday ? (
-                    <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/30 p-4 text-center">
-                      <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
-                        <StarIcon filled className="h-6 w-6 text-secondary" />
+                    <div className="mt-4 flex items-center justify-between text-[13px] font-extrabold">
+                      <span className="text-ink-soft">
+                        {cont.status === "in-progress"
+                          ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
+                          : `Part 1 of ${cont.totalPhases}`}
                       </span>
-                      <p className="mt-2 text-[15px] font-extrabold leading-snug text-primary">
-                        You&apos;re done for today!
-                        <span className="block font-medium text-ink-soft">Come back tomorrow.</span>
-                      </p>
-
-                      <button
-                        onClick={openContinue}
-                        className="mt-3 min-h-11 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
-                      >
-                        Read more anyway
-                      </button>
+                      <span className="text-primary">{cont.percent}% complete</span>
                     </div>
-                  ) : (
-                    <div className="mt-4 flex items-center gap-2">
-                      <TactileButton className="flex-1" onClick={openContinue} noShadow>
+                    <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-accent/70">
+                      <div
+                        className="h-full rounded-full bg-primary transition-all duration-500"
+                        style={{
+                          width: `${Math.max(cont.percent, cont.status === "in-progress" ? 6 : 0)}%`,
+                        }}
+                      />
+                    </div>
+
+                    {doneToday ? (
+                      <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/30 p-4 text-center">
+                        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
+                          <StarIcon filled className="h-6 w-6 text-secondary" />
+                        </span>
+                        <p className="mt-2 text-[15px] font-extrabold leading-snug text-primary">
+                          You&apos;re done for today!
+                          <span className="block font-medium text-ink-soft">
+                            Come back tomorrow.
+                          </span>
+                        </p>
+                        <button
+                          onClick={openContinue}
+                          className="mt-3 min-h-11 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
+                        >
+                          Read more anyway
+                        </button>
+                      </div>
+                    ) : (
+                      <TactileButton className="mt-4 w-full" onClick={openContinue} noShadow>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
-                    </div>
+                    )}
+                  </div>
+                </article>
+              )}
+            </div>
 
-                  )}
-                </div>
-              </article>
-            )}
-          </div>
-
-          {/* Right rail on laptop; flows underneath on phones/tablets */}
-          <aside className="mt-3 space-y-3 lg:mt-0">
-            <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {/* Right rail on laptop; flows underneath on phones/tablets */}
+            <aside className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-4">
+              <div className="sm:col-span-2 lg:col-span-1">
+                <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
+              </div>
               <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
               <BadgesCard
                 childId={childId}
                 completedCount={completedCount}
                 onSeeAll={() => onNavigate("achievements")}
               />
-            </div>
-          </aside>
-        </div>
+            </aside>
+          </div>
 
-        {cont && cont.story.vocabulary_words.length > 0 && (
-          <WordsStrip storyId={cont.story.id} words={cont.story.vocabulary_words} />
-        )}
+          {cont && cont.story.vocabulary_words.length > 0 && (
+            <WordsStrip
+              storyId={cont.story.id}
+              words={cont.story.vocabulary_words}
+              onViewAll={() => onNavigate("library")}
+            />
+          )}
 
-        <div className="mt-6 flex justify-center lg:justify-end">
-          <GrownUpsButton onEnter={() => navigate({ to: "/settings" })} />
+          <div className="mt-6 flex justify-center lg:justify-end">
+            <GrownUpsButton onEnter={() => navigate({ to: "/settings" })} />
+          </div>
         </div>
       </div>
 
@@ -258,35 +277,43 @@ function WeekStrip({
           ? "Three days in a row!"
           : days === 1
             ? "First day done!"
-            : "Read a story to fill a circle.";
+            : "Read a story every day to keep your streak!";
 
   return (
     <Card>
-      <span className="text-sm font-extrabold text-ink">This week</span>
+      <CardHeading icon={<CalendarDays className="h-5 w-5 text-primary" />} title="This week" />
 
-      <div className="mt-3 flex items-end justify-between gap-1">
+      <div className="mt-4 flex items-start justify-between gap-1">
         {week.map((date, i) => {
           const filled = playedDates.includes(date);
           const isToday = date === today;
           return (
-            <span key={date} className="flex flex-col items-center gap-1">
+            <span key={date} className="flex flex-col items-center gap-1.5">
               <span
                 className={cn(
-                  "flex h-8 w-8 items-center justify-center rounded-full border-2",
+                  "flex h-9 w-9 items-center justify-center rounded-full border-2",
                   filled
                     ? "border-secondary bg-secondary text-secondary-foreground"
                     : "border-accent bg-card",
-                  isToday && !filled && "border-primary",
+                  isToday && "border-primary border-[3px]",
                 )}
               >
                 {filled && <StarIcon filled className="h-4 w-4" />}
+                {!filled && isToday && <StarIcon filled className="h-4 w-4 text-secondary" />}
               </span>
-              <span className="text-[10px] font-bold text-ink-soft">{DAY_LABELS[i]}</span>
+              <span
+                className={cn(
+                  "text-[11px] font-bold",
+                  isToday ? "text-primary" : "text-ink-soft",
+                )}
+              >
+                {DAY_LABELS[i]}
+              </span>
             </span>
           );
         })}
       </div>
-      <p className="mt-2 text-[12px] font-bold leading-snug text-primary">{milestone}</p>
+      <p className="mt-3 text-[13px] font-medium leading-snug text-ink-soft">{milestone}</p>
     </Card>
   );
 }
@@ -296,31 +323,24 @@ function WeekStrip({
 function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => void }) {
   const goal = "Finish today's story to earn your first coins.";
   return (
-    <div className="relative overflow-hidden rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">
-      <span aria-hidden className="absolute inset-y-2 left-0 w-1.5 rounded-full bg-secondary" />
+    <Card>
       <div className="flex items-center justify-between gap-2">
-        <span className="flex items-center gap-2">
-          <CoinIcon className="h-6 w-6 text-secondary" />
-          {coins > 0 ? (
-            <span className="text-[26px] font-extrabold leading-none text-secondary-foreground">
-              {coins}
-            </span>
-          ) : (
-            <span className="text-sm font-extrabold text-ink">Coins</span>
-          )}
-        </span>
+        <CardHeading
+          icon={<CoinIcon className="h-6 w-6 text-secondary" />}
+          title={coins > 0 ? `${coins} Coins` : "Coins"}
+        />
       </div>
 
-      <p className="mt-1 text-[12px] font-bold leading-snug text-ink-soft">
-        {coins > 0 ? "Spend them in the Shop!" : goal}
+      <p className="mt-2 text-[13px] font-medium leading-snug text-ink-soft">
+        {coins > 0 ? "Spend them in the Rewards shop!" : goal}
       </p>
       <button
         onClick={onOpenShop}
-        className="mt-2 inline-flex min-h-11 items-center gap-1 rounded-full border border-secondary/60 px-4 text-xs font-extrabold text-secondary-foreground transition-transform active:scale-95"
+        className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full border-2 border-secondary/70 px-5 text-[13px] font-extrabold text-secondary-foreground transition-transform active:scale-95"
       >
-        Shop <ChevronRightIcon />
+        Shop Rewards <ChevronRightIcon />
       </button>
-    </div>
+    </Card>
   );
 }
 
@@ -346,24 +366,21 @@ function BadgesCard({
       ? "More badges are waiting."
       : completedCount > 0
         ? "Your first badge is coming soon."
-        : "Your first badge is waiting.";
-
-
+        : "Your first badge is waiting. Keep reading!";
 
   return (
     <Card>
-      <span className="flex w-full items-center justify-between gap-2">
-        <span className="text-sm font-extrabold text-ink">My Badges</span>
-
+      <div className="flex items-center justify-between gap-2">
+        <CardHeading icon={<ShieldCheck className="h-5 w-5 text-primary" />} title="My Badges" />
         <button
           onClick={onSeeAll}
-          className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[12px] font-extrabold text-primary"
+          className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[13px] font-extrabold text-primary"
         >
-          See All <ChevronRightIcon />
+          See all <ChevronRightIcon />
         </button>
-      </span>
+      </div>
 
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-3">
         {shown.map((badge) => {
           const isEarned = owned.has(badge.id);
           return (
@@ -371,7 +388,7 @@ function BadgesCard({
               key={badge.id}
               title={isEarned ? badge.name : "Coming soon"}
               className={cn(
-                "relative flex h-12 w-12 items-center justify-center rounded-2xl text-xl",
+                "relative flex h-14 w-14 items-center justify-center rounded-2xl text-2xl",
                 isEarned ? "bg-secondary/25" : "bg-accent/60",
               )}
             >
@@ -379,90 +396,87 @@ function BadgesCard({
                 {badge.icon}
               </span>
               {!isEarned && (
-                <LockIcon className="absolute h-4 w-4 text-primary/70" aria-hidden={false} />
+                <LockIcon className="absolute h-5 w-5 text-primary/70" aria-hidden={false} />
               )}
             </span>
           );
         })}
         {shown.length === 0 && <MedalIcon className="h-6 w-6 text-primary/40" />}
       </div>
-      <p className="mt-2 text-[12px] font-bold leading-snug text-primary">
-        {footnote}
-      </p>
+      <p className="mt-3 text-[13px] font-medium leading-snug text-ink-soft">{footnote}</p>
     </Card>
   );
 }
 
 /* ───────── Words you're learning ───────── */
 
-function WordsStrip({ storyId, words }: { storyId: string; words: VocabularyWord[] }) {
-  const [openWord, setOpenWord] = useState<string | null>(null);
-  const selected = words.find((w) => w.word === openWord) ?? null;
-
+function WordsStrip({
+  storyId,
+  words,
+  onViewAll,
+}: {
+  storyId: string;
+  words: VocabularyWord[];
+  onViewAll: () => void;
+}) {
   return (
-    <section className="mt-6">
-      <h2 className="text-[17px] font-extrabold text-primary">Words you&apos;re learning</h2>
+    <section className="mt-5 rounded-[28px] bg-card p-4 shadow-soft lg:p-5">
+      <div className="flex items-center justify-between gap-2">
+        <CardHeading
+          icon={<BookIcon className="h-5 w-5 text-primary" />}
+          title="Words you're learning"
+        />
+        <button
+          onClick={onViewAll}
+          className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[13px] font-extrabold text-primary"
+        >
+          View all words <ChevronRightIcon />
+        </button>
+      </div>
 
-
-      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {words.slice(0, 5).map((word) => {
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
-          const isOpen = openWord === word.word;
           return (
             <div
               key={word.word}
-              className={cn(
-                "flex min-w-0 flex-col items-center gap-2 rounded-[22px] border bg-card p-3 shadow-card",
-                isOpen ? "border-primary" : "border-accent/60",
-              )}
+              className="flex min-w-0 items-center gap-3 rounded-[22px] border border-accent/60 bg-card p-3 shadow-card"
             >
-              <button
-                onClick={() => setOpenWord(isOpen ? null : word.word)}
-                className="flex w-full flex-col items-center gap-2"
-                aria-expanded={isOpen}
-              >
-                <span className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-accent/50">
-                  {image ? (
-                    <img src={image} alt="" className="h-full w-full object-contain p-1.5" />
-                  ) : (
-                    <BookOpen className="h-7 w-7 text-primary" />
-                  )}
-                </span>
-                <span className="flex h-9 w-full items-center justify-center text-center text-[14px] font-extrabold leading-tight text-ink">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
+                {image ? (
+                  <img src={image} alt="" className="h-full w-full object-contain p-1.5" />
+                ) : (
+                  <BookOpen className="h-6 w-6 text-primary" />
+                )}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-[15px] font-extrabold italic text-ink">
                   {word.word}
                 </span>
-              </button>
+                <span className="mt-0.5 block text-[13px] font-medium leading-snug text-ink-soft">
+                  {word.sfa.function}
+                </span>
+              </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
             </div>
           );
         })}
       </div>
-
-
-      {selected && (
-        <div className="mt-3 rounded-[22px] border border-accent/70 bg-card p-4 shadow-card">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="text-[16px] font-extrabold text-primary">{selected.word}</h3>
-          </div>
-
-          <p className="mt-1.5 text-[14px] font-medium leading-snug text-ink">
-            {selected.sfa.function}
-          </p>
-          <p className="mt-1 text-[13px] leading-snug text-ink-soft">{selected.sfa.appearance}</p>
-          <button
-            onClick={() => setOpenWord(null)}
-            className="mt-3 min-h-11 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
-          >
-            Close
-          </button>
-        </div>
-      )}
     </section>
   );
 }
 
-function Card({ children }: { children: ReactNode }) {
+function CardHeading({ icon, title }: { icon: ReactNode; title: string }) {
   return (
-    <div className="rounded-[24px] border border-accent/50 bg-card p-4 shadow-card">{children}</div>
+    <span className="flex min-w-0 items-center gap-2">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/60">
+        {icon}
+      </span>
+      <span className="truncate text-[15px] font-extrabold text-ink">{title}</span>
+    </span>
   );
+}
+
+function Card({ children }: { children: ReactNode }) {
+  return <div className="rounded-[24px] bg-card p-4 shadow-soft lg:p-5">{children}</div>;
 }
