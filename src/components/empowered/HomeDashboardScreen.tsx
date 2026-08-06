@@ -175,7 +175,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       />
                     </div>
 
-                    <StoryMetaPills story={cont.story} className="mt-3" />
+
 
                     <div className="mt-4 flex items-center justify-between text-[13px] font-extrabold">
                       <span className="text-ink-soft">
