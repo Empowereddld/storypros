@@ -143,11 +143,11 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           </div>
 
           {/* ── Hero story + right rail ── */}
-          <div className="mt-5 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-6">
-            <div className="min-w-0">
+          <div className="mt-5 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-stretch lg:gap-6">
+            <div className="min-w-0 lg:flex">
               {cont && (
-                <article className="overflow-hidden rounded-[32px] bg-card p-2.5 shadow-soft animate-slide-up lg:p-3">
-                  <div className="relative h-[210px] w-full overflow-hidden rounded-[24px] bg-accent/40 lg:h-[300px]">
+                <article className="flex w-full flex-col overflow-hidden rounded-[32px] bg-card p-2.5 shadow-soft animate-slide-up lg:p-3">
+                  <div className="relative h-[210px] w-full overflow-hidden rounded-[24px] bg-accent/40 lg:h-auto lg:min-h-[300px] lg:flex-1">
                     {cover ? (
                       <img src={cover} alt="" className="h-full w-full object-cover" />
                     ) : (
