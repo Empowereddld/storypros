@@ -95,7 +95,7 @@
         }
       ],
       "brain_check_prompt": "Did you answer with a place?",
-      "brain_check_correct": "You found the setting!",
+      "brain_check_correct": "You found the place!",
       "brain_check_wrong": "Remember, WHERE questions need a place as the answer."
     },
     {
