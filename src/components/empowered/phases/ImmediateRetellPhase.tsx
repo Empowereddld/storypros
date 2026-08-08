@@ -109,7 +109,7 @@ export function ImmediateRetellPhase({
                     className="shrink-0"
                   />
                 )}
-                <div className="shrink-0 [&>div]:mt-0 [&>p]:mt-0">
+                <div className="w-full min-w-0 sm:w-auto sm:shrink-0 [&>div]:mt-0 [&>div]:flex-wrap [&>div]:justify-center [&>p]:mt-0 [&_p]:min-w-0">
                   <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
                 </div>
               </div>
