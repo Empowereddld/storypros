@@ -164,7 +164,7 @@ export function ImmediateRetellPhase({
                       <div className="absolute right-2 top-2">
                         <AudioButton
                           size="sm"
-                          tone="secondary"
+                          tone="primary"
                           playing={playing}
                           onClick={() => toggle(slide.text, `scene-${index}`)}
                           ariaLabel={`Hear scene ${index + 1}`}
