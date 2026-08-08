@@ -86,10 +86,14 @@ export function ImmediateRetellPhase({
       <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-2 pt-2 sm:overflow-hidden sm:px-6">
         <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col lg:max-w-[1080px]">
           {/* One compact command bar: title · listen · retell */}
-          <div className="shrink-0 rounded-[22px] border border-primary/10 bg-card/90 px-4 py-3 shadow-card backdrop-blur-sm sm:px-5">
-            <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-              <div className="min-w-0 text-center lg:text-left">
-                <h1 className="font-display text-[22px] font-extrabold leading-tight text-primary sm:text-[25px]">
+          <div className="shrink-0 overflow-hidden rounded-[24px] border border-primary/10 bg-card/95 shadow-card backdrop-blur-sm">
+            <div className="flex flex-col gap-3 p-4 sm:p-5 lg:flex-row lg:items-center lg:gap-6">
+              {/* Title block */}
+              <div className="min-w-0 flex-1 text-center lg:text-left">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/70 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-primary">
+                  Step 1 · Retell
+                </span>
+                <h1 className="mt-1.5 font-display text-[22px] font-extrabold leading-tight text-primary sm:text-[26px]">
                   {storyData.title}
                 </h1>
                 <p className="mt-0.5 text-[13px] font-semibold leading-snug text-ink-soft">
@@ -97,24 +101,34 @@ export function ImmediateRetellPhase({
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-2.5 lg:shrink-0 lg:justify-end">
-                {supported && (
-                  <AudioButton
-                    size="lg"
-                    tone="primary"
-                    playing={fullPlaying}
-                    onClick={() => toggle(fullStory, "full-story")}
-                    ariaLabel="Listen to the full story"
-                    label="Listen to Story"
-                    className="shrink-0"
-                  />
-                )}
-                <div className="w-full min-w-0 sm:w-auto sm:shrink-0 [&>div]:mt-0 [&>div]:flex-wrap [&>div]:justify-center [&>p]:mt-0 [&_p]:min-w-0">
-                  <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
+              {/* Divider */}
+              <div className="hidden h-14 w-px shrink-0 bg-primary/10 lg:block" />
+
+              {/* Actions */}
+              <div className="flex shrink-0 flex-col items-stretch gap-2 sm:mx-auto sm:w-auto sm:items-center lg:mx-0 lg:items-end">
+                <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-2.5">
+                  {supported && (
+                    <AudioButton
+                      size="lg"
+                      tone="primary"
+                      playing={fullPlaying}
+                      onClick={() => toggle(fullStory, "full-story")}
+                      ariaLabel="Listen to the full story"
+                      label="Listen to Story"
+                      className="shrink-0 justify-center"
+                    />
+                  )}
+                  <div className="min-w-0 [&>div]:mt-0 [&>div]:justify-center [&>div]:bg-transparent [&>div]:px-0 [&>div]:py-0 [&>div>p]:hidden">
+                    <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
+                  </div>
                 </div>
+                <p className="text-center text-[11px] font-semibold text-ink-soft/80 lg:text-right">
+                  Recording is optional — saved for a grown-up to hear later.
+                </p>
               </div>
             </div>
           </div>
+
 
 
           <div className="mt-3 grid grid-cols-1 gap-3 sm:mt-3 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3.5">
