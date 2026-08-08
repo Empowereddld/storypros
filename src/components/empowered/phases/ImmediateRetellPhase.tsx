@@ -132,7 +132,7 @@ export function ImmediateRetellPhase({
                     playing ? "ring-4 ring-primary" : "ring-primary/10",
                   )}
                 >
-                  <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-accent/40 sm:aspect-auto sm:min-h-0 sm:flex-1">
+                  <div className="relative aspect-video w-full shrink-0 grow-0 overflow-hidden bg-accent/40 sm:aspect-auto sm:min-h-0 sm:basis-[72%]">
                     {image ? (
                       <img
                         src={image}
@@ -171,7 +171,7 @@ export function ImmediateRetellPhase({
                     )}
                   </div>
 
-                  <div className="flex shrink-0 items-start gap-2 px-3 py-2.5">
+                  <div className="flex shrink-0 items-start gap-2 px-3 py-2.5 sm:min-h-0 sm:flex-1 sm:shrink sm:items-start sm:overflow-hidden">
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/60 text-[10px] font-extrabold text-primary">
                       {index + 1}
                     </span>
