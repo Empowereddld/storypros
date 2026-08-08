@@ -298,8 +298,8 @@ export function ComprehensionPhase({
       >
         {/* Story image — takes the leftover vertical space on phone/tablet */}
         {hintImage && (
-          <figure className="relative min-h-0 w-full flex-1 animate-slide-up sm:h-[44vh] sm:flex-none lg:h-auto lg:flex-none lg:self-center">
-            <div className="relative h-full min-h-[96px] w-full overflow-hidden rounded-[24px] sm:max-h-[46vh] border-[3px] border-card bg-card shadow-soft sm:rounded-[28px] sm:border-[5px] lg:h-auto lg:max-h-[58vh] lg:aspect-[4/3] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
+          <figure className="relative min-h-0 w-full flex-1 animate-slide-up sm:h-[52vh] sm:flex-none lg:h-auto lg:flex-none lg:self-center">
+            <div className="relative h-full min-h-[96px] w-full overflow-hidden rounded-[24px] sm:max-h-[52vh] border-[3px] border-card bg-card shadow-soft sm:rounded-[28px] sm:border-[5px] lg:h-auto lg:max-h-[58vh] lg:aspect-[4/3] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
               <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
               <div className="pointer-events-none absolute inset-0 rounded-[20px] ring-1 ring-inset ring-primary/10 lg:rounded-[26px]" />
             </div>
