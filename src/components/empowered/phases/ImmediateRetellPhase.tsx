@@ -83,38 +83,41 @@ export function ImmediateRetellPhase({
       </div>
 
       {/* Mobile: simple vertical scroll. Tablet/desktop: single viewport, no scroll. */}
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-3 pt-3 sm:overflow-hidden sm:pt-2">
-        <div className="mx-auto flex min-h-0 w-full max-w-[860px] flex-1 flex-col lg:max-w-[1040px]">
-          {/* Compact top block: title + listen + retell prompt + recorder */}
-          <div className="shrink-0">
-            <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <h1 className="text-center font-display text-[26px] font-extrabold leading-tight text-primary sm:text-left sm:text-[28px]">
-                {storyData.title}
-              </h1>
-              {supported && (
-                <AudioButton
-                  size="lg"
-                  tone="primary"
-                  playing={fullPlaying}
-                  onClick={() => toggle(fullStory, "full-story")}
-                  ariaLabel="Listen to the full story"
-                  label="Listen to Story"
-                  className="shrink-0"
-                />
-              )}
-            </div>
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-2 pt-2 sm:overflow-hidden sm:px-6">
+        <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col lg:max-w-[1080px]">
+          {/* One compact command bar: title · listen · retell */}
+          <div className="shrink-0 rounded-[22px] border border-primary/10 bg-card/90 px-4 py-3 shadow-card backdrop-blur-sm sm:px-5">
+            <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+              <div className="min-w-0 text-center lg:text-left">
+                <h1 className="font-display text-[22px] font-extrabold leading-tight text-primary sm:text-[25px]">
+                  {storyData.title}
+                </h1>
+                <p className="mt-0.5 text-[13px] font-semibold leading-snug text-ink-soft">
+                  Can you retell the story from beginning to end?
+                </p>
+              </div>
 
-            <div className="mt-2.5 flex flex-col gap-1 rounded-[20px] bg-card px-4 py-3 shadow-card sm:mt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <p className="text-[15px] font-extrabold leading-snug text-primary">
-                Can you retell the story from beginning to end?
-              </p>
-              <div className="shrink-0 [&>div]:mt-0 [&>p]:mt-0">
-                <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
+              <div className="flex flex-wrap items-center justify-center gap-2.5 lg:shrink-0 lg:justify-end">
+                {supported && (
+                  <AudioButton
+                    size="lg"
+                    tone="primary"
+                    playing={fullPlaying}
+                    onClick={() => toggle(fullStory, "full-story")}
+                    ariaLabel="Listen to the full story"
+                    label="Listen to Story"
+                    className="shrink-0"
+                  />
+                )}
+                <div className="w-full min-w-0 sm:w-auto sm:shrink-0 [&>div]:mt-0 [&>div]:flex-wrap [&>div]:justify-center [&>p]:mt-0 [&_p]:min-w-0">
+                  <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-3 grid grid-cols-1 gap-3 sm:mt-4 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3">
+
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:mt-3 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3.5">
             {slides.map((slide, index) => {
               const image = resolveStoryImage(storyData.id, slide.image);
               const element = slide.story_element;
@@ -125,50 +128,56 @@ export function ImmediateRetellPhase({
                 <div
                   key={slide.position}
                   className={cn(
-                    "flex flex-col rounded-xl border-2 bg-card p-3 text-left shadow-card transition-all sm:min-h-0 sm:overflow-hidden",
-                    playing ? "border-transparent ring-4 ring-primary" : "border-accent/50",
+                    "group relative flex flex-col overflow-hidden rounded-[20px] bg-card shadow-card ring-1 transition-all sm:min-h-0",
+                    playing ? "ring-4 ring-primary" : "ring-primary/10",
                   )}
                 >
-                  <div className="aspect-video w-full shrink-0 overflow-hidden rounded-lg bg-accent/50 sm:aspect-auto sm:min-h-0 sm:flex-1">
+                  <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-accent/40 sm:aspect-auto sm:min-h-0 sm:flex-1">
                     {image ? (
                       <img
                         src={image}
                         alt={`Scene ${index + 1}`}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-top"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-sm font-extrabold text-primary">
                         Scene {index + 1}
                       </div>
                     )}
-                  </div>
 
-                  <p className="mt-2 shrink-0 text-sm font-semibold leading-snug text-ink">
-                    {slide.text}
-                  </p>
-
-                  <div className="mt-2 flex shrink-0 items-center gap-2">
+                    {/* Element chip floating on the image */}
                     <span
                       className={cn(
-                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
+                        "absolute left-2.5 top-2.5 flex items-center gap-1.5 rounded-full pl-1.5 pr-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide shadow-card",
                         ELEMENT_BG[element],
                       )}
-                      title={ELEMENT_LABELS[element]}
                     >
-                      <Icon className="h-4 w-4" />
-                    </span>
-                    <span className="flex-1 truncate text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25">
+                        <Icon className="h-3 w-3" />
+                      </span>
                       {ELEMENT_LABELS[element]}
                     </span>
+
                     {supported && (
-                      <AudioButton
-                        size="sm"
-                        tone="quiet"
-                        playing={playing}
-                        onClick={() => toggle(slide.text, `scene-${index}`)}
-                        ariaLabel={`Hear scene ${index + 1}`}
-                      />
+                      <div className="absolute right-2 top-2">
+                        <AudioButton
+                          size="sm"
+                          tone="primary"
+                          playing={playing}
+                          onClick={() => toggle(slide.text, `scene-${index}`)}
+                          ariaLabel={`Hear scene ${index + 1}`}
+                        />
+                      </div>
                     )}
+                  </div>
+
+                  <div className="flex shrink-0 items-start gap-2 px-3 py-2.5">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/60 text-[10px] font-extrabold text-primary">
+                      {index + 1}
+                    </span>
+                    <p className="text-[13.5px] font-semibold leading-snug text-ink">
+                      {slide.text}
+                    </p>
                   </div>
                 </div>
               );
@@ -177,7 +186,7 @@ export function ImmediateRetellPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mb-4 w-full max-w-[860px] shrink-0 px-5 lg:max-w-[1040px]">
+      <div className="relative z-10 mx-auto mb-3 w-full max-w-[880px] shrink-0 px-4 sm:px-6 lg:max-w-[1080px]">
         <TactileButton onClick={handleDone}>
           Continue to Questions <ChevronRightIcon className="h-5 w-5 text-secondary" />
         </TactileButton>
