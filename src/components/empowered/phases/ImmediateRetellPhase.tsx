@@ -125,7 +125,7 @@ export function ImmediateRetellPhase({
                 <div
                   key={slide.position}
                   className={cn(
-                    "flex min-h-0 flex-col overflow-hidden rounded-xl border-2 bg-card p-3 text-left shadow-card transition-all",
+                    "flex flex-col rounded-xl border-2 bg-card p-3 text-left shadow-card transition-all sm:min-h-0 sm:overflow-hidden",
                     playing ? "border-transparent ring-4 ring-primary" : "border-accent/50",
                   )}
                 >
