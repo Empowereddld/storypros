@@ -294,12 +294,12 @@ export function ComprehensionPhase({
           Mobile: stacked column. Desktop: image left / question + answers right. */}
       <div
         key={`q-${qi}`}
-        className="relative z-10 mx-auto flex min-h-0 w-full max-w-[520px] flex-1 flex-col gap-3 px-4 pb-4 pt-2 sm:max-w-[600px] sm:gap-4 sm:px-6 sm:pb-6 lg:max-w-[1040px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-8 lg:px-8 lg:pb-6"
+        className="relative z-10 mx-auto flex min-h-0 w-full max-w-[520px] flex-1 flex-col justify-center gap-3 px-4 pb-4 pt-2 sm:max-w-[600px] sm:gap-4 sm:px-6 sm:pb-6 lg:max-w-[1040px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-8 lg:px-8 lg:pb-6"
       >
         {/* Story image — takes the leftover vertical space on phone/tablet */}
         {hintImage && (
           <figure className="relative min-h-0 w-full flex-1 animate-slide-up lg:flex-none lg:self-center">
-            <div className="relative h-full min-h-[96px] w-full overflow-hidden rounded-[24px] border-[3px] border-card bg-card shadow-soft sm:rounded-[28px] sm:border-[5px] lg:h-auto lg:max-h-[58vh] lg:aspect-[4/3] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
+            <div className="relative h-full min-h-[96px] w-full overflow-hidden rounded-[24px] sm:max-h-[46vh] border-[3px] border-card bg-card shadow-soft sm:rounded-[28px] sm:border-[5px] lg:h-auto lg:max-h-[58vh] lg:aspect-[4/3] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
               <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
               <div className="pointer-events-none absolute inset-0 rounded-[20px] ring-1 ring-inset ring-primary/10 lg:rounded-[26px]" />
             </div>
