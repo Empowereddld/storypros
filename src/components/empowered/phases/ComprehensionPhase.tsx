@@ -336,26 +336,14 @@ export function ComprehensionPhase({
                 {q.prompt}
               </h2>
 
-              {/* Teaching marker only — quieter than the speaker, never a control */}
-              <span
-                className={cn(
-                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full opacity-70 lg:hidden",
-                  elementStyle.bg,
-                  elementStyle.text,
-                )}
-                title={elementLabel}
-                aria-label={elementLabel}
-                role="img"
-              >
-                <ElementIcon className="h-4 w-4" />
-              </span>
+              {/* Element badge lives on the image now — marker hidden here */}
             </div>
           </div>
 
           <div
             className={cn(
-              "grid min-h-0 flex-1 gap-2 animate-slide-up lg:flex-none lg:gap-2.5",
-              q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-stretch",
+              "grid gap-2 animate-slide-up sm:gap-2.5 lg:gap-2.5",
+              q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1",
             )}
           >
             {q.options.map((opt) => {
@@ -366,13 +354,14 @@ export function ComprehensionPhase({
                 <div
                   key={opt.id}
                   className={cn(
-                    "flex min-h-[52px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all lg:min-h-[60px] lg:rounded-[20px] lg:px-4",
+                    "flex min-h-[50px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all sm:min-h-[56px] sm:rounded-[20px] sm:px-4 lg:min-h-[60px]",
                     isSelected &&
                       "border-primary bg-primary/5 shadow-[0_10px_24px_-14px_color-mix(in_oklab,var(--primary)_60%,transparent)]",
                     !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                     isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
                   )}
                 >
+
                   {supported && !isDisabled && (
                     <AudioButton
                       size="md"
