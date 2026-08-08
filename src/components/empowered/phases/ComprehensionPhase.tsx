@@ -294,18 +294,18 @@ export function ComprehensionPhase({
           Mobile: stacked column. Desktop: image left / question + answers right. */}
       <div
         key={`q-${qi}`}
-        className="relative z-10 mx-auto flex min-h-0 w-full max-w-[560px] flex-1 flex-col gap-3 px-4 pb-4 pt-2 sm:px-5 lg:max-w-[1040px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-8 lg:px-8 lg:pb-6"
+        className="relative z-10 mx-auto flex min-h-0 w-full max-w-[520px] flex-1 flex-col justify-center gap-3 px-4 pb-4 pt-2 sm:max-w-[600px] sm:gap-4 sm:px-6 sm:pb-6 lg:max-w-[1040px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-8 lg:px-8 lg:pb-6"
       >
-        {/* Story image */}
+        {/* Story image — takes the leftover vertical space on phone/tablet */}
         {hintImage && (
-          <figure className="relative w-full shrink-0 animate-slide-up lg:self-center">
-            <div className="relative h-[15vh] max-h-[180px] min-h-[92px] w-full overflow-hidden rounded-[24px] border-[3px] border-card bg-card shadow-soft lg:h-auto lg:aspect-[4/3] lg:max-h-[58vh] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
+          <figure className="relative min-h-0 w-full flex-1 animate-slide-up sm:h-[52vh] sm:flex-none lg:h-auto lg:flex-none lg:self-center">
+            <div className="relative h-full min-h-[96px] w-full overflow-hidden rounded-[24px] sm:max-h-[52vh] border-[3px] border-card bg-card shadow-soft sm:rounded-[28px] sm:border-[5px] lg:h-auto lg:max-h-[58vh] lg:aspect-[4/3] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
               <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
               <div className="pointer-events-none absolute inset-0 rounded-[20px] ring-1 ring-inset ring-primary/10 lg:rounded-[26px]" />
             </div>
             <span
               className={cn(
-                "absolute -bottom-3 left-4 hidden items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em] shadow-card lg:inline-flex",
+                "absolute -bottom-2.5 left-4 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.12em] shadow-card sm:-bottom-3 sm:px-3 sm:py-1.5 sm:text-[11px]",
                 elementStyle.bg,
                 elementStyle.text,
               )}
@@ -317,7 +317,8 @@ export function ComprehensionPhase({
         )}
 
         {/* Question + answers */}
-        <div className="flex min-h-0 flex-1 flex-col gap-3 lg:flex-none lg:gap-4">
+        <div className="flex shrink-0 flex-col gap-2.5 sm:gap-3 lg:gap-4">
+
           <div className="relative shrink-0 overflow-hidden rounded-[22px] border-2 border-accent/70 bg-card p-3 shadow-card animate-slide-up lg:rounded-[26px] lg:p-4">
             <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
             <div className="relative flex items-center gap-3">
@@ -335,26 +336,14 @@ export function ComprehensionPhase({
                 {q.prompt}
               </h2>
 
-              {/* Teaching marker only — quieter than the speaker, never a control */}
-              <span
-                className={cn(
-                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full opacity-70 lg:hidden",
-                  elementStyle.bg,
-                  elementStyle.text,
-                )}
-                title={elementLabel}
-                aria-label={elementLabel}
-                role="img"
-              >
-                <ElementIcon className="h-4 w-4" />
-              </span>
+              {/* Element badge lives on the image now — marker hidden here */}
             </div>
           </div>
 
           <div
             className={cn(
-              "grid min-h-0 flex-1 gap-2 animate-slide-up lg:flex-none lg:gap-2.5",
-              q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-stretch",
+              "grid gap-2 animate-slide-up sm:gap-2.5 lg:gap-2.5",
+              q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1",
             )}
           >
             {q.options.map((opt) => {
@@ -365,13 +354,14 @@ export function ComprehensionPhase({
                 <div
                   key={opt.id}
                   className={cn(
-                    "flex min-h-[52px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all lg:min-h-[60px] lg:rounded-[20px] lg:px-4",
+                    "flex min-h-[50px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all sm:min-h-[56px] sm:rounded-[20px] sm:px-4 lg:min-h-[60px]",
                     isSelected &&
                       "border-primary bg-primary/5 shadow-[0_10px_24px_-14px_color-mix(in_oklab,var(--primary)_60%,transparent)]",
                     !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                     isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
                   )}
                 >
+
                   {supported && !isDisabled && (
                     <AudioButton
                       size="md"
