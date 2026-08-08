@@ -87,12 +87,9 @@ export function ImmediateRetellPhase({
         <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col lg:max-w-[1080px]">
           {/* One compact command bar: title · listen · retell */}
           <div className="shrink-0 rounded-[22px] border border-primary/10 bg-card/90 px-4 py-3 shadow-card backdrop-blur-sm sm:px-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
-              <div className="min-w-0 text-center sm:text-left">
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-ink-soft">
-                  Story Overview
-                </p>
-                <h1 className="truncate font-display text-[22px] font-extrabold leading-tight text-primary sm:text-[26px]">
+            <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+              <div className="min-w-0 text-center lg:text-left">
+                <h1 className="font-display text-[22px] font-extrabold leading-tight text-primary sm:text-[25px]">
                   {storyData.title}
                 </h1>
                 <p className="mt-0.5 text-[13px] font-semibold leading-snug text-ink-soft">
@@ -100,7 +97,7 @@ export function ImmediateRetellPhase({
                 </p>
               </div>
 
-              <div className="flex shrink-0 flex-wrap items-center justify-center gap-2.5 sm:justify-end">
+              <div className="flex flex-wrap items-center justify-center gap-2.5 lg:shrink-0 lg:justify-end">
                 {supported && (
                   <AudioButton
                     size="lg"
@@ -118,6 +115,7 @@ export function ImmediateRetellPhase({
               </div>
             </div>
           </div>
+
 
           <div className="mt-3 grid grid-cols-1 gap-3 sm:mt-3 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3.5">
             {slides.map((slide, index) => {
