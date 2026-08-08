@@ -290,122 +290,143 @@ export function ComprehensionPhase({
       )}
 
 
-      {/* Question prompt - always visible */}
-      <div key={`q-${qi}`} className="relative z-10 mx-auto mt-2 w-full max-w-[560px] shrink-0 px-4 sm:px-5 animate-slide-up">
+      {/* Question stage — one viewport, no scroll.
+          Mobile: stacked column. Desktop: image left / question + answers right. */}
+      <div
+        key={`q-${qi}`}
+        className="relative z-10 mx-auto flex min-h-0 w-full max-w-[560px] flex-1 flex-col gap-3 px-4 pb-4 pt-2 sm:px-5 lg:max-w-[1040px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-8 lg:px-8 lg:pb-6"
+      >
+        {/* Story image */}
         {hintImage && (
-          <div className="relative mb-2 h-[16vh] max-h-[190px] min-h-[92px] w-full overflow-hidden rounded-[22px] border-[3px] border-card bg-card shadow-soft sm:h-[20vh]">
-            <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
-          </div>
-        )}
-        <div className="relative overflow-hidden rounded-[22px] border-2 border-accent/70 bg-card p-3 shadow-card">
-          <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
-          <div className="relative flex items-center gap-3">
-            {supported && (
-              <AudioButton
-                size="lg"
-                tone="primary"
-                playing={isPlaying("prompt")}
-                onClick={() => toggle(q.prompt, "prompt")}
-                text={q.prompt}
-              />
-            )}
-
-            <h2 className="min-w-0 flex-1 font-display text-[19px] font-extrabold leading-tight text-primary sm:text-[22px]">
-              {q.prompt}
-            </h2>
-
-            {/* Teaching marker only — quieter than the speaker, never a control */}
+          <figure className="relative w-full shrink-0 animate-slide-up lg:self-center">
+            <div className="relative h-[15vh] max-h-[180px] min-h-[92px] w-full overflow-hidden rounded-[24px] border-[3px] border-card bg-card shadow-soft lg:h-auto lg:aspect-[4/3] lg:max-h-[58vh] lg:rounded-[32px] lg:border-[6px] lg:shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_45%,transparent)]">
+              <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
+              <div className="pointer-events-none absolute inset-0 rounded-[20px] ring-1 ring-inset ring-primary/10 lg:rounded-[26px]" />
+            </div>
             <span
               className={cn(
-                "flex h-8 w-8 shrink-0 items-center justify-center rounded-full opacity-70",
+                "absolute -bottom-3 left-4 hidden items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em] shadow-card lg:inline-flex",
                 elementStyle.bg,
                 elementStyle.text,
               )}
-              title={elementLabel}
-              aria-label={elementLabel}
-              role="img"
             >
-              <ElementIcon className="h-4 w-4" />
+              <ElementIcon className="h-3.5 w-3.5" />
+              {elementLabel}
             </span>
+          </figure>
+        )}
+
+        {/* Question + answers */}
+        <div className="flex min-h-0 flex-1 flex-col gap-3 lg:flex-none lg:gap-4">
+          <div className="relative shrink-0 overflow-hidden rounded-[22px] border-2 border-accent/70 bg-card p-3 shadow-card animate-slide-up lg:rounded-[26px] lg:p-4">
+            <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
+            <div className="relative flex items-center gap-3">
+              {supported && (
+                <AudioButton
+                  size="lg"
+                  tone="primary"
+                  playing={isPlaying("prompt")}
+                  onClick={() => toggle(q.prompt, "prompt")}
+                  text={q.prompt}
+                />
+              )}
+
+              <h2 className="min-w-0 flex-1 font-display text-[19px] font-extrabold leading-tight text-primary sm:text-[22px] lg:text-[26px]">
+                {q.prompt}
+              </h2>
+
+              {/* Teaching marker only — quieter than the speaker, never a control */}
+              <span
+                className={cn(
+                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full opacity-70 lg:hidden",
+                  elementStyle.bg,
+                  elementStyle.text,
+                )}
+                title={elementLabel}
+                aria-label={elementLabel}
+                role="img"
+              >
+                <ElementIcon className="h-4 w-4" />
+              </span>
+            </div>
+          </div>
+
+          <div
+            className={cn(
+              "grid min-h-0 flex-1 gap-2 animate-slide-up lg:flex-none lg:gap-2.5",
+              q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-stretch",
+            )}
+          >
+            {q.options.map((opt) => {
+              const isSelected = selected === opt.id;
+              const isDisabled = wrongIds.has(opt.id);
+              const label = opt.label || opt.text || "";
+              return (
+                <div
+                  key={opt.id}
+                  className={cn(
+                    "flex min-h-[52px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all lg:min-h-[60px] lg:rounded-[20px] lg:px-4",
+                    isSelected &&
+                      "border-primary bg-primary/5 shadow-[0_10px_24px_-14px_color-mix(in_oklab,var(--primary)_60%,transparent)]",
+                    !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
+                    isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
+                  )}
+                >
+                  {supported && !isDisabled && (
+                    <AudioButton
+                      size="md"
+                      tone="quiet"
+                      playing={isPlaying(`opt-${opt.id}`)}
+                      onClick={() => toggle(label, `opt-${opt.id}`)}
+                      text={label}
+                      className="-my-1"
+                    />
+                  )}
+                  <button
+                    onClick={() => !isDisabled && setSelected(opt.id)}
+                    disabled={isDisabled}
+                    className="flex min-w-0 flex-1 items-center gap-2 self-stretch text-left"
+                  >
+                    <span
+                      className={cn(
+                        "min-w-0 flex-1 text-[15px] font-bold leading-snug lg:text-[17px]",
+                        isDisabled ? "text-ink-soft line-through" : "text-ink",
+                      )}
+                    >
+                      {label}
+                    </span>
+                    {isSelected && <SelectedCheck />}
+                    {isDisabled && <CrossBadge />}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Check button */}
+          <div className="mx-auto w-full shrink-0 lg:max-w-[380px]">
+            <TactileButton
+              variant="secondary"
+              onClick={() => setReflecting(true)}
+              disabled={!selected || showingBrainCheck || reflecting}
+              leadingIcon={
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                >
+                  <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              }
+            >
+              Check Answer
+            </TactileButton>
           </div>
         </div>
       </div>
 
-      <div
-        className={cn(
-          "relative z-10 mx-auto mt-2 grid min-h-0 w-full max-w-[560px] flex-1 gap-2 px-4 pb-1 sm:px-5 animate-slide-up",
-          // Three choices (Level 1) read best as a single balanced column on
-          // every screen size; even counts keep the two-up grid.
-          q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-stretch",
-        )}
-      >
-        {q.options.map((opt) => {
-          const isSelected = selected === opt.id;
-          const isDisabled = wrongIds.has(opt.id);
-          const label = opt.label || opt.text || "";
-          return (
-            <div
-              key={opt.id}
-              className={cn(
-                "flex min-h-[52px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all",
-                isSelected && "border-primary bg-primary/5 shadow-sm",
-                !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
-                isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
-              )}
-            >
-              {supported && !isDisabled && (
-                <AudioButton
-                  size="md"
-                  tone="quiet"
-                  playing={isPlaying(`opt-${opt.id}`)}
-                  onClick={() => toggle(label, `opt-${opt.id}`)}
-                  text={label}
-                  className="-my-1"
-                />
-              )}
-              <button
-                onClick={() => !isDisabled && setSelected(opt.id)}
-                disabled={isDisabled}
-                className="flex min-w-0 flex-1 items-center gap-2 self-stretch text-left"
-              >
-                <span
-                  className={cn(
-                    "min-w-0 flex-1 text-[15px] font-bold leading-snug",
-                    isDisabled ? "text-ink-soft line-through" : "text-ink",
-                  )}
-                >
-                  {label}
-                </span>
-                {isSelected && <SelectedCheck />}
-                {isDisabled && <CrossBadge />}
-              </button>
-            </div>
-          );
-        })}
-      </div>
-
-
-      {/* Check button */}
-      <div className="relative z-10 mx-auto mb-3 mt-2 w-full max-w-[600px] shrink-0 px-4 sm:mb-4 sm:px-5">
-        <TactileButton
-          variant="secondary"
-          onClick={() => setReflecting(true)}
-          disabled={!selected || showingBrainCheck || reflecting}
-          leadingIcon={
-            <svg
-              viewBox="0 0 24 24"
-              className="h-5 w-5"
-              stroke="currentColor"
-              strokeWidth="3"
-              fill="none"
-            >
-              <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          }
-        >
-          Check Answer
-        </TactileButton>
-      </div>
 
 
     </div>
