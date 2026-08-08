@@ -291,13 +291,13 @@ export function ComprehensionPhase({
 
 
       {/* Question prompt - always visible */}
-      <div key={`q-${qi}`} className="relative z-10 mx-auto mt-3 w-full max-w-[560px] shrink-0 px-5 animate-slide-up">
+      <div key={`q-${qi}`} className="relative z-10 mx-auto mt-2 w-full max-w-[560px] shrink-0 px-4 sm:px-5 animate-slide-up">
         {hintImage && (
-          <div className="relative mb-2 aspect-video w-full overflow-hidden rounded-[24px] border-[4px] border-card bg-card shadow-soft">
+          <div className="relative mb-2 h-[16vh] max-h-[190px] min-h-[92px] w-full overflow-hidden rounded-[22px] border-[3px] border-card bg-card shadow-soft sm:h-[20vh]">
             <img src={hintImage} alt="" className="h-full w-full object-cover object-center" />
           </div>
         )}
-        <div className="relative overflow-hidden rounded-[24px] border-2 border-accent/70 bg-card p-3.5 shadow-card">
+        <div className="relative overflow-hidden rounded-[22px] border-2 border-accent/70 bg-card p-3 shadow-card">
           <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-secondary/12" />
           <div className="relative flex items-center gap-3">
             {supported && (
@@ -310,7 +310,7 @@ export function ComprehensionPhase({
               />
             )}
 
-            <h2 className="min-w-0 flex-1 font-display text-[22px] font-extrabold leading-tight text-primary">
+            <h2 className="min-w-0 flex-1 font-display text-[19px] font-extrabold leading-tight text-primary sm:text-[22px]">
               {q.prompt}
             </h2>
 
@@ -333,10 +333,10 @@ export function ComprehensionPhase({
 
       <div
         className={cn(
-          "relative z-10 mx-auto mt-3 grid w-full max-w-[560px] flex-1 gap-2.5 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up",
+          "relative z-10 mx-auto mt-2 grid min-h-0 w-full max-w-[560px] flex-1 gap-2 px-4 pb-1 sm:px-5 animate-slide-up",
           // Three choices (Level 1) read best as a single balanced column on
           // every screen size; even counts keep the two-up grid.
-          q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-start",
+          q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-stretch",
         )}
       >
         {q.options.map((opt) => {
@@ -347,7 +347,7 @@ export function ComprehensionPhase({
             <div
               key={opt.id}
               className={cn(
-                "flex min-h-[60px] w-full items-center gap-3 rounded-[20px] border-2 bg-card px-3 py-2.5 shadow-card transition-all",
+                "flex min-h-[52px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all",
                 isSelected && "border-primary bg-primary/5 shadow-sm",
                 !isSelected && !isDisabled && "border-accent/60 hover:border-primary/40",
                 isDisabled && "opacity-40 border-destructive/30 bg-destructive/5",
@@ -386,7 +386,7 @@ export function ComprehensionPhase({
 
 
       {/* Check button */}
-      <div className="relative z-10 mx-auto mb-5 mt-2 w-full max-w-[600px] px-5">
+      <div className="relative z-10 mx-auto mb-3 mt-2 w-full max-w-[600px] shrink-0 px-4 sm:mb-4 sm:px-5">
         <TactileButton
           variant="secondary"
           onClick={() => setReflecting(true)}
@@ -406,6 +406,7 @@ export function ComprehensionPhase({
           Check Answer
         </TactileButton>
       </div>
+
 
     </div>
   );
