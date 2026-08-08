@@ -114,7 +114,7 @@ export function ImmediateRetellPhase({
             </div>
           </div>
 
-          <div className="mt-3 grid min-h-0 flex-1 grid-cols-1 gap-3 sm:mt-4 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3">
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:mt-4 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3">
             {slides.map((slide, index) => {
               const image = resolveStoryImage(storyData.id, slide.image);
               const element = slide.story_element;
