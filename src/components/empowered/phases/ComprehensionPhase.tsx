@@ -331,7 +331,14 @@ export function ComprehensionPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-3 grid w-full max-w-[560px] flex-1 grid-cols-2 gap-2.5 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up">
+      <div
+        className={cn(
+          "relative z-10 mx-auto mt-3 grid w-full max-w-[560px] flex-1 gap-2.5 overflow-y-auto px-5 pb-2 no-scrollbar animate-slide-up",
+          // Three choices (Level 1) read best as a single balanced column on
+          // every screen size; even counts keep the two-up grid.
+          q.options.length % 2 === 0 ? "grid-cols-2" : "grid-cols-1 content-start",
+        )}
+      >
         {q.options.map((opt) => {
           const isSelected = selected === opt.id;
           const isDisabled = wrongIds.has(opt.id);
