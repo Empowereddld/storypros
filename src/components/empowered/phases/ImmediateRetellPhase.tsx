@@ -82,33 +82,39 @@ export function ImmediateRetellPhase({
         <ProgressHeader progress={100} label="Story Overview" onClose={onClose} />
       </div>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-5">
-        <div className="mx-auto w-full max-w-[860px]">
-          <h1 className="text-center font-display text-[32px] font-extrabold leading-tight text-primary">
-            {storyData.title}
-          </h1>
-
-          {supported && (
-            <div className="mt-4 flex justify-center">
-              <AudioButton
-                size="lg"
-                tone="primary"
-                playing={fullPlaying}
-                onClick={() => toggle(fullStory, "full-story")}
-                ariaLabel="Listen to the full story"
-                label="Listen to Full Story"
-              />
+      {/* Mobile: simple vertical scroll. Tablet/desktop: single viewport, no scroll. */}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-3 pt-3 sm:overflow-hidden sm:pt-2">
+        <div className="mx-auto flex min-h-0 w-full max-w-[860px] flex-1 flex-col lg:max-w-[1040px]">
+          {/* Compact top block: title + listen + retell prompt + recorder */}
+          <div className="shrink-0">
+            <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <h1 className="text-center font-display text-[26px] font-extrabold leading-tight text-primary sm:text-left sm:text-[28px]">
+                {storyData.title}
+              </h1>
+              {supported && (
+                <AudioButton
+                  size="lg"
+                  tone="primary"
+                  playing={fullPlaying}
+                  onClick={() => toggle(fullStory, "full-story")}
+                  ariaLabel="Listen to the full story"
+                  label="Listen to Story"
+                  className="shrink-0"
+                />
+              )}
             </div>
-          )}
 
-          <div className="mt-5 rounded-[24px] bg-card p-4 shadow-card">
-            <p className="text-base font-extrabold leading-snug text-primary">
-              Can you retell {storyData.title} from beginning to end?
-            </p>
-            <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
+            <div className="mt-2.5 flex flex-col gap-1 rounded-[20px] bg-card px-4 py-3 shadow-card sm:mt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <p className="text-[15px] font-extrabold leading-snug text-primary">
+                Can you retell the story from beginning to end?
+              </p>
+              <div className="shrink-0 [&>div]:mt-0 [&>p]:mt-0">
+                <RetellRecorder childId={childId} storyId={storyData.id} phase="immediate" />
+              </div>
+            </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3">
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:mt-4 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3">
             {slides.map((slide, index) => {
               const image = resolveStoryImage(storyData.id, slide.image);
               const element = slide.story_element;
@@ -119,11 +125,11 @@ export function ImmediateRetellPhase({
                 <div
                   key={slide.position}
                   className={cn(
-                    "flex min-h-[220px] flex-col rounded-xl border-2 bg-card p-4 text-left shadow-card transition-all",
-                    playing ? "scale-105 border-transparent ring-4 ring-primary" : "border-accent/50",
+                    "flex flex-col rounded-xl border-2 bg-card p-3 text-left shadow-card transition-all sm:min-h-0 sm:overflow-hidden",
+                    playing ? "border-transparent ring-4 ring-primary" : "border-accent/50",
                   )}
                 >
-                  <div className="aspect-video w-full overflow-hidden rounded-lg bg-accent/50">
+                  <div className="aspect-video w-full shrink-0 overflow-hidden rounded-lg bg-accent/50 sm:aspect-auto sm:min-h-0 sm:flex-1">
                     {image ? (
                       <img
                         src={image}
@@ -137,22 +143,21 @@ export function ImmediateRetellPhase({
                     )}
                   </div>
 
-                  <p className="mt-3 flex-1 text-sm font-semibold leading-snug text-ink">
+                  <p className="mt-2 shrink-0 text-sm font-semibold leading-snug text-ink">
                     {slide.text}
                   </p>
 
-                  <div className="mt-3 flex items-center gap-2">
+                  <div className="mt-2 flex shrink-0 items-center gap-2">
                     <span
                       className={cn(
                         "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
                         ELEMENT_BG[element],
                       )}
-
                       title={ELEMENT_LABELS[element]}
                     >
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="flex-1 text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+                    <span className="flex-1 truncate text-xs font-extrabold uppercase tracking-wide text-ink-soft">
                       {ELEMENT_LABELS[element]}
                     </span>
                     {supported && (
@@ -172,11 +177,12 @@ export function ImmediateRetellPhase({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mb-5 w-full max-w-[860px] px-5">
+      <div className="relative z-10 mx-auto mb-4 w-full max-w-[860px] shrink-0 px-5 lg:max-w-[1040px]">
         <TactileButton onClick={handleDone}>
           Continue to Questions <ChevronRightIcon className="h-5 w-5 text-secondary" />
         </TactileButton>
       </div>
+
     </div>
   );
 }
