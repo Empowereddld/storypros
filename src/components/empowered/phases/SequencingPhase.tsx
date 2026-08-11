@@ -220,9 +220,9 @@ export function SequencingPhase({
             </span>
           </div>
 
-          <div className="relative -mx-4 overflow-x-auto no-scrollbar px-4">
+          <div className="relative">
             {/* Dotted timeline rail */}
-            <div className="relative inline-flex w-max items-center gap-2 py-2 sm:gap-3 lg:gap-4">
+            <div className="relative flex w-full items-center gap-1.5 py-2 sm:gap-2 lg:gap-3">
               <span
                 className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-240px)] -translate-x-1/2 -translate-y-1/2 border-t-2 border-dotted border-primary/20 sm:w-[calc(100%-260px)] md:w-[calc(100%-280px)] lg:w-[calc(100%-300px)]"
                 aria-hidden
@@ -256,7 +256,7 @@ export function SequencingPhase({
                         : `Empty ${label} slot. Drop a picture here.`
                     }
                     className={cn(
-                      "relative z-10 flex h-[80px] w-[120px] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[90px] sm:w-[130px] md:h-[100px] md:w-[140px] lg:h-[100px] lg:w-[150px]",
+                      "relative z-10 flex h-[72px] min-w-0 flex-1 flex-col items-center justify-between overflow-hidden rounded-2xl border-2 p-1 text-center transition-all sm:h-[84px] md:h-[92px] lg:h-[100px]",
                       filled
                         ? "cursor-grab border-primary bg-card active:cursor-grabbing"
                         : "border-dashed border-primary/25 bg-card/60 text-primary/40",
@@ -282,10 +282,10 @@ export function SequencingPhase({
                       </>
                     ) : (
                       <>
-                        <span className="mt-2 text-[10px] font-black uppercase leading-tight tracking-wide lg:text-xs">
+                        <span className="mt-1.5 w-full px-0.5 text-[8px] font-black uppercase leading-tight tracking-tight sm:text-[9px] md:text-[10px] lg:text-[11px]">
                           {label}
                         </span>
-                        <span className="mb-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-dotted border-primary/25 text-[10px] font-extrabold text-primary/30 sm:h-7 sm:w-7">
+                        <span className="mb-1.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-dotted border-primary/25 text-[9px] font-extrabold text-primary/30 sm:h-6 sm:w-6 sm:text-[10px]">
                           {index + 1}
                         </span>
                       </>
