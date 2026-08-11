@@ -213,24 +213,23 @@ export function VocabularyIntroPhase({
             /* ── Screens 2-6: exactly ONE semantic feature ── */
             <section
               key={`${wordIdx}-${featureIdx}`}
-              className="flex min-h-0 flex-1 flex-col items-center rounded-[40px] border border-accent/50 bg-card px-5 py-6 text-center shadow-soft animate-pop-in sm:px-8"
+              className="flex min-h-0 flex-1 flex-col items-center rounded-[40px] border-4 border-card bg-card px-5 pb-5 pt-6 text-center shadow-soft animate-pop-in sm:px-8"
             >
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                <span className="rounded-lg bg-primary px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary-foreground">
-                  {SFA_LABELS[featureKey as SFAKey]}
-                </span>
-                <span className="text-[13px] font-extrabold capitalize text-ink-soft">
-                  {word.word}
-                </span>
-              </div>
+              {/* Stacked hierarchy: quiet category pill, loud word */}
+              <span className="rounded-full bg-primary/10 px-5 py-2 text-[12px] font-extrabold uppercase tracking-[0.15em] text-primary">
+                {SFA_LABELS[featureKey as SFAKey]}
+              </span>
+              <h2 className="mt-3 text-[34px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[44px]">
+                {word.word}
+              </h2>
 
-              <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center">
-                <div className="flex h-full max-h-[300px] min-h-[150px] w-full max-w-[380px] items-center justify-center overflow-hidden rounded-[34px] bg-accent/40 p-3 shadow-inner">
+              <div className="mt-5 flex min-h-0 w-full flex-1 items-center justify-center">
+                <div className="flex h-full max-h-[300px] min-h-[150px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[32px] border-2 border-primary/10 bg-primary/[0.04] p-4 shadow-inner">
                   {featureImage ? (
                     <img
                       src={featureImage}
                       alt={featureText}
-                      className="h-full w-full object-contain"
+                      className="h-full w-full rounded-2xl object-contain"
                     />
                   ) : (
                     <PaperPlaneIcon className="h-14 w-14 text-primary" />
@@ -238,20 +237,29 @@ export function VocabularyIntroPhase({
                 </div>
               </div>
 
-              <div className="mt-4 flex w-full max-w-[440px] shrink-0 items-center gap-3 rounded-[28px] border border-accent/60 bg-accent/20 p-4 text-left">
+              {/* Purple sentence bar with tactile yellow speaker */}
+              <div className="mt-5 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
                 {supported && (
-                  <AudioButton
-                    size="lg"
-                    playing={isPlaying(`feat-${featureIdx}`)}
+                  <button
+                    type="button"
                     onClick={() => toggle(featureNarration, `feat-${featureIdx}`)}
-                    ariaLabel="Hear this sentence"
-                  />
+                    aria-label="Hear this sentence"
+                    aria-pressed={isPlaying(`feat-${featureIdx}`)}
+                    className={cn(
+                      "flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-secondary text-primary transition-transform",
+                      "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
+                      isPlaying(`feat-${featureIdx}`) && "ring-4 ring-primary-foreground/40",
+                    )}
+                  >
+                    <SpeakerGlyph className="h-8 w-8" />
+                  </button>
                 )}
-                <p className="flex-1 text-[17px] font-extrabold leading-snug text-ink">
+                <p className="flex-1 pr-3 text-[17px] font-semibold leading-snug text-primary-foreground sm:text-[19px]">
                   {featureText}
                 </p>
               </div>
             </section>
+
           )}
 
           {/* ── Navigation ── */}
