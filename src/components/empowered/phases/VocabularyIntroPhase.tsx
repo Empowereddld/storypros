@@ -1,24 +1,54 @@
+/* ─────────────────────────────────────────────
+ * Level 1 vocabulary teaching flow
+ *
+ * Reusable template for ANY Level 1 target word:
+ *   Step 1  word intro   (word + picture + audio + short definition)
+ *   Step 2  GROUP
+ *   Step 3  WHAT IT DOES
+ *   Step 4  LOOKS LIKE
+ *   Step 5  PARTS
+ *   Step 6  WHERE / WHEN YOU USE IT
+ *
+ * One idea → one picture → hear/read it → Next.
+ * Never more than one semantic feature on screen.
+ *
+ * Feature pictures are resolved per story as
+ *   <vocab-image-basename>-<feature>.webp
+ * e.g. vocab-bandage-category.webp. When a feature picture
+ * hasn't been drawn yet, the word's own picture is used, so
+ * the flow works for every word from day one.
+ * ───────────────────────────────────────────── */
+
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import type { SFATeachingSlide, StoryPhaseProps } from "@/types/story";
+import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { AudioButton, SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
+type SFAKey = (typeof SFA_KEYS)[number];
 
-const SFA_LABELS: Record<string, string> = {
+const SFA_LABELS: Record<SFAKey, string> = {
   category: "Group",
   function: "What it does",
   appearance: "Looks like",
   parts: "Parts",
-  location: "Where",
+  location: "Where / when you use it",
 };
+
+/** vocab-bandage.webp + "category" → vocab-bandage-category.webp */
+function featureImageName(wordImage: string | undefined, key: SFAKey) {
+  if (!wordImage) return null;
+  const dot = wordImage.lastIndexOf(".");
+  if (dot === -1) return `${wordImage}-${key}`;
+  return `${wordImage.slice(0, dot)}-${key}${wordImage.slice(dot)}`;
+}
 
 export function VocabularyIntroPhase({
   storyData,
@@ -28,18 +58,20 @@ export function VocabularyIntroPhase({
 }: StoryPhaseProps) {
   const words = storyData.vocabulary_words;
   const [wordIdx, setWordIdx] = useState(0);
+  // -1 = word intro screen, 0..4 = one semantic feature per screen
   const [featureIdx, setFeatureIdx] = useState(-1);
-  const [revealed, setRevealed] = useState<Set<number>>(new Set());
-  const devPerWord = SFA_KEYS.length + 1;
+
+  const stepsPerWord = SFA_KEYS.length + 1;
   useDevSubSteps(
-    words.length * devPerWord,
-    wordIdx * devPerWord + (featureIdx + 1),
+    words.length * stepsPerWord,
+    wordIdx * stepsPerWord + (featureIdx + 1),
     (i: number) => {
-      setWordIdx(Math.floor(i / devPerWord));
-      setFeatureIdx((i % devPerWord) - 1);
+      setWordIdx(Math.floor(i / stepsPerWord));
+      setFeatureIdx((i % stepsPerWord) - 1);
     },
     "screen",
   );
+
   // Vocab narration is clamped to at most "normal" speed for clarity.
   const { supported, isPlaying, toggle, cancel } = useListen(
     ttsSpeed === "fast" ? "normal" : ttsSpeed,
@@ -50,33 +82,55 @@ export function VocabularyIntroPhase({
 
   const word = words[wordIdx];
   const wordImage = resolveStoryImage(storyData.id, word.image);
-  const introNarration = word.sfa_teaching?.intro_narration;
-  const totalSteps = words.length * (SFA_KEYS.length + 1);
-  const currentStep = wordIdx * (SFA_KEYS.length + 1) + (featureIdx + 1);
-  const progress = (currentStep / totalSteps) * 100;
-  const isOnTitleCard = featureIdx === -1;
-  const allRevealed = !isOnTitleCard && revealed.size >= 1;
+  const introText = word.sfa_teaching?.intro_text ?? "Let's learn what this word means.";
+  const introNarration = word.sfa_teaching?.intro_narration ?? introText;
 
-  function handleNext() {
+  const totalSteps = words.length * stepsPerWord;
+  const currentStep = wordIdx * stepsPerWord + (featureIdx + 1);
+  const progress = ((currentStep + 1) / totalSteps) * 100;
+  const isIntro = featureIdx === -1;
+  const isVeryFirstScreen = wordIdx === 0 && isIntro;
+  const isLastScreen = wordIdx === words.length - 1 && featureIdx === SFA_KEYS.length - 1;
+
+  const featureKey = isIntro ? null : SFA_KEYS[featureIdx];
+  const teachingSlide = featureKey
+    ? word.sfa_teaching?.slides?.find((slide: SFATeachingSlide) => slide.feature === featureKey)
+    : undefined;
+  const featureText = featureKey
+    ? teachingSlide?.teaching_text || word.sfa[featureKey as keyof SFAFeatures]
+    : "";
+  const featureNarration = teachingSlide?.narration || featureText;
+  const featureImage = featureKey
+    ? (resolveStoryImage(storyData.id, featureImageName(word.image, featureKey)) ?? wordImage)
+    : wordImage;
+
+  function goNext() {
     if (featureIdx < SFA_KEYS.length - 1) {
       setFeatureIdx(featureIdx + 1);
-      setRevealed(new Set());
       return;
     }
-
     if (wordIdx < words.length - 1) {
       setWordIdx(wordIdx + 1);
       setFeatureIdx(-1);
-      setRevealed(new Set());
       return;
     }
-
     onComplete({
       phase: "vocab-intro",
       attempts: [],
       first_attempt_accuracy: 1,
       completed: true,
     });
+  }
+
+  function goBack() {
+    if (featureIdx > -1) {
+      setFeatureIdx(featureIdx - 1);
+      return;
+    }
+    if (wordIdx > 0) {
+      setWordIdx(wordIdx - 1);
+      setFeatureIdx(SFA_KEYS.length - 1);
+    }
   }
 
   return (
@@ -91,20 +145,20 @@ export function VocabularyIntroPhase({
       <div className="relative z-10">
         <ProgressHeader
           progress={progress}
-          label={`Word ${wordIdx + 1}/${words.length}`}
+          label={`Word ${wordIdx + 1}/${words.length} · Step ${featureIdx + 2}/${stepsPerWord}`}
           onClose={onClose}
         />
       </div>
 
-      {isOnTitleCard ? (
-        <div className="relative z-10 flex flex-1 flex-col items-center justify-center overflow-y-auto no-scrollbar px-5 pb-6 pt-4">
-          <div className="my-auto w-full max-w-[580px]">
-            <section className="flex flex-col items-center rounded-[40px] border border-accent/50 bg-card px-6 py-8 text-center shadow-soft animate-pop-in sm:px-10">
-              {/* Word picture with its one tap-to-hear control */}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center overflow-y-auto no-scrollbar px-5 pb-5 pt-4 sm:overflow-hidden">
+        <div className="flex w-full max-w-[620px] flex-1 flex-col justify-center gap-4 sm:min-h-0">
+          {isIntro ? (
+            /* ── Screen 1: word introduction ── */
+            <section className="flex flex-col items-center rounded-[40px] border border-accent/50 bg-card px-6 py-7 text-center shadow-soft animate-pop-in sm:px-10">
               <div className="relative">
-                <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-[42px] bg-accent shadow-inner sm:h-52 sm:w-52">
+                <div className="flex h-40 w-40 items-center justify-center overflow-hidden rounded-[42px] bg-accent shadow-inner sm:h-48 sm:w-48">
                   {wordImage ? (
-                    <img src={wordImage} alt="" className="h-full w-full object-contain p-3" />
+                    <img src={wordImage} alt={word.word} className="h-full w-full object-contain p-3" />
                   ) : (
                     <PaperPlaneIcon className="h-16 w-16 text-primary" />
                   )}
@@ -131,126 +185,92 @@ export function VocabularyIntroPhase({
                 {word.type === "emotion" ? "Feeling Word" : "Story Word"}
               </span>
 
-              <h1 className="mt-2 text-[44px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[56px]">
+              <h1 className="mt-2 text-[42px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[54px]">
                 {word.word}
               </h1>
 
-              <div className="mt-6 w-full max-w-[400px] rounded-[30px] border border-accent/60 bg-accent/20 p-5">
+              <div className="mt-5 w-full max-w-[420px] rounded-[30px] border border-accent/60 bg-accent/20 p-4">
                 <div className="flex items-center gap-3 text-left">
-                  {supported && introNarration && (
+                  {supported && (
                     <AudioButton
-                      size="md"
+                      size="lg"
                       playing={isPlaying("intro")}
                       onClick={() => toggle(introNarration, "intro")}
                       ariaLabel="Hear what this word means"
                     />
                   )}
                   <p className="flex-1 text-[15.5px] font-semibold leading-relaxed text-ink">
-                    {word.sfa_teaching?.intro_text ?? "Let's learn what this word means."}
+                    {introText}
                   </p>
                 </div>
               </div>
-
             </section>
-
-            <TactileButton className="mt-4" onClick={() => setFeatureIdx(0)}>
-              Explore the Word <ChevronRightIcon className="h-5 w-5 text-secondary" />
-            </TactileButton>
-          </div>
-        </div>
-      ) : (
-
-        <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
-          <section className="rounded-[30px] bg-card p-4 shadow-soft">
-            <div className="flex items-center gap-3">
-              <span className="flex h-14 w-14 items-center justify-center rounded-[22px] bg-accent text-primary">
-                <BookIcon className="h-8 w-8" />
-              </span>
-              <div>
-                <p className="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
-                  Explore
-                </p>
-                <h1 className="text-[28px] font-extrabold capitalize leading-tight text-primary">
+          ) : (
+            /* ── Screens 2-6: exactly ONE semantic feature ── */
+            <section
+              key={`${wordIdx}-${featureIdx}`}
+              className="flex min-h-0 flex-1 flex-col items-center rounded-[40px] border border-accent/50 bg-card px-5 py-6 text-center shadow-soft animate-pop-in sm:px-8"
+            >
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <span className="rounded-lg bg-primary px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary-foreground">
+                  {SFA_LABELS[featureKey as SFAKey]}
+                </span>
+                <span className="text-[13px] font-extrabold capitalize text-ink-soft">
                   {word.word}
-                </h1>
+                </span>
               </div>
-            </div>
-          </section>
 
-          <div className="my-auto flex-1 space-y-3 overflow-y-auto no-scrollbar py-2">
-            {SFA_KEYS.map((key, index) => {
-              const isActive = index === featureIdx;
-              const isPast = index < featureIdx;
-              const isFuture = index > featureIdx;
-              const isRevealed = revealed.has(index) || isPast;
-              const teachingSlide = word.sfa_teaching?.slides?.find(
-                (slide: SFATeachingSlide) => slide.feature === key,
-              );
-              const displayPrompt = teachingSlide?.prompt;
-              const displayText = teachingSlide?.teaching_text || word.sfa[key];
-              const narration = teachingSlide?.narration;
-
-              return (
-                <div key={key}>
-                  <button
-                    onClick={() => isActive && setRevealed((prev) => new Set(prev).add(index))}
-                    disabled={!isActive}
-                    className={cn(
-                      "w-full rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
-                      isActive && !isRevealed && "border-primary bg-primary/5 animate-pulse-glow",
-                      isActive && isRevealed && "border-primary bg-primary/5",
-                      isPast && "border-success/40 bg-success/5",
-                      isFuture && "border-transparent opacity-45",
-                    )}
-                  >
-                    <div className="flex items-start gap-3">
-                      <span
-                        className={cn(
-                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] text-sm font-extrabold",
-                          isPast ? "bg-success text-success-foreground" : "bg-accent text-primary",
-                        )}
-                      >
-                        {index + 1}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-extrabold uppercase tracking-wide text-primary">
-                          {SFA_LABELS[key]}
-                        </p>
-                        {isActive && !isRevealed && displayPrompt && (
-                          <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
-                            {displayPrompt}
-                          </p>
-                        )}
-                        {isRevealed && (
-                          <div className="mt-1 flex items-center gap-3">
-                            {isActive && supported && narration && (
-                              <AudioButton
-                                size="sm"
-                                playing={isPlaying(`feat-${index}`)}
-                                onClick={() => toggle(narration, `feat-${index}`)}
-                                ariaLabel="Hear this feature"
-                              />
-                            )}
-                            <p className="flex-1 text-base font-semibold leading-snug text-ink">
-                              {displayText}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </button>
+              <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center">
+                <div className="flex h-full max-h-[300px] min-h-[150px] w-full max-w-[380px] items-center justify-center overflow-hidden rounded-[34px] bg-accent/40 p-3 shadow-inner">
+                  {featureImage ? (
+                    <img
+                      src={featureImage}
+                      alt={featureText}
+                      className="h-full w-full object-contain"
+                    />
+                  ) : (
+                    <PaperPlaneIcon className="h-14 w-14 text-primary" />
+                  )}
                 </div>
-              );
+              </div>
 
-            })}
+              <div className="mt-4 flex w-full max-w-[440px] shrink-0 items-center gap-3 rounded-[28px] border border-accent/60 bg-accent/20 p-4 text-left">
+                {supported && (
+                  <AudioButton
+                    size="lg"
+                    playing={isPlaying(`feat-${featureIdx}`)}
+                    onClick={() => toggle(featureNarration, `feat-${featureIdx}`)}
+                    ariaLabel="Hear this sentence"
+                  />
+                )}
+                <p className="flex-1 text-[17px] font-extrabold leading-snug text-ink">
+                  {featureText}
+                </p>
+              </div>
+            </section>
+          )}
+
+          {/* ── Navigation ── */}
+          <div className="flex shrink-0 items-center gap-3">
+            {!isVeryFirstScreen && (
+              <button
+                type="button"
+                onClick={goBack}
+                className="press-pop flex h-14 shrink-0 items-center gap-1 rounded-[22px] border-2 border-accent bg-card px-5 text-sm font-extrabold uppercase tracking-wide text-primary shadow-card"
+              >
+                <ChevronRightIcon className="h-5 w-5 rotate-180 text-primary" />
+                Back
+              </button>
+            )}
+            <div className="min-w-0 flex-1">
+              <TactileButton onClick={goNext}>
+                {isIntro ? "Explore the Word" : isLastScreen ? "Done" : "Next"}
+                <ChevronRightIcon className="h-5 w-5 text-secondary" />
+              </TactileButton>
+            </div>
           </div>
-
-          <TactileButton onClick={handleNext} disabled={!allRevealed}>
-            {featureIdx === SFA_KEYS.length - 1 && wordIdx === words.length - 1 ? "Done" : "Next"}
-          </TactileButton>
         </div>
-      )}
+      </div>
     </div>
   );
 }
-
