@@ -42,12 +42,16 @@ const SFA_LABELS: Record<SFAKey, string> = {
   location: "Where / when you use it",
 };
 
-/** vocab-bandage.webp + "category" → vocab-bandage-category.webp */
-function featureImageName(wordImage: string | undefined, key: SFAKey) {
+/** vocab-bandage.webp + "category" → vocab-bandage-category.{webp,png,jpg} */
+function resolveFeatureImage(storyId: string, wordImage: string | undefined, key: SFAKey) {
   if (!wordImage) return null;
   const dot = wordImage.lastIndexOf(".");
-  if (dot === -1) return `${wordImage}-${key}`;
-  return `${wordImage.slice(0, dot)}-${key}${wordImage.slice(dot)}`;
+  const base = dot === -1 ? wordImage : wordImage.slice(0, dot);
+  for (const ext of ["webp", "png", "jpg", "jpeg"]) {
+    const hit = resolveStoryImage(storyId, `${base}-${key}.${ext}`);
+    if (hit) return hit;
+  }
+  return null;
 }
 
 export function VocabularyIntroPhase({
@@ -101,7 +105,7 @@ export function VocabularyIntroPhase({
     : "";
   const featureNarration = teachingSlide?.narration || featureText;
   const featureImage = featureKey
-    ? (resolveStoryImage(storyData.id, featureImageName(word.image, featureKey)) ?? wordImage)
+    ? (resolveFeatureImage(storyData.id, word.image, featureKey) ?? wordImage)
     : wordImage;
 
   function goNext() {
