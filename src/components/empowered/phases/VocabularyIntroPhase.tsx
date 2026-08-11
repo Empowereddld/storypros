@@ -215,8 +215,8 @@ export function VocabularyIntroPhase({
               key={`${wordIdx}-${featureIdx}`}
               className="flex min-h-0 flex-1 flex-col items-center rounded-[40px] border-4 border-card bg-card px-5 pb-5 pt-6 text-center shadow-soft animate-pop-in sm:px-8"
             >
-              {/* Stacked hierarchy: quiet category pill, loud word */}
-              <span className="rounded-full bg-primary/10 px-5 py-2 text-[12px] font-extrabold uppercase tracking-[0.15em] text-primary">
+              {/* Stacked hierarchy: bold category label, loud word */}
+              <span className="rounded-2xl bg-primary px-6 py-3 text-[20px] font-extrabold uppercase tracking-[0.08em] text-primary-foreground shadow-soft sm:text-[24px]">
                 {SFA_LABELS[featureKey as SFAKey]}
               </span>
               <h2 className="mt-3 text-[34px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[44px]">
