@@ -219,7 +219,7 @@ export function VocabularyIntroPhase({
               <span className="rounded-2xl bg-primary px-6 py-3 text-[20px] font-extrabold uppercase tracking-[0.08em] text-primary-foreground shadow-soft sm:text-[24px]">
                 {SFA_LABELS[featureKey as SFAKey]}
               </span>
-              <h2 className="mt-3 text-[34px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[44px]">
+              <h2 className="mt-3 text-[26px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[32px]">
                 {word.word}
               </h2>
 
