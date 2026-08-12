@@ -446,36 +446,36 @@ function WordsStrip({
   onViewAll: () => void;
 }) {
   return (
-    <section className="mt-3 shrink-0 rounded-[24px] bg-card p-3.5 shadow-soft lg:mt-4 lg:p-4">
-      <div className="flex items-center justify-between gap-2">
+    <section className="mt-3 shrink-0 rounded-[22px] bg-card p-3 shadow-soft sm:flex sm:items-center sm:gap-3 lg:mt-4 lg:p-3.5">
+      <div className="flex shrink-0 items-center justify-between gap-2">
         <CardHeading
           icon={<BookIcon className="h-5 w-5 text-primary" />}
           title="Words you're learning"
         />
         <button
           onClick={onViewAll}
-          className="inline-flex min-h-10 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary"
+          className="inline-flex min-h-9 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary sm:hidden"
         >
-          View all words <ChevronRightIcon />
+          View all <ChevronRightIcon />
         </button>
       </div>
 
-      <div className="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+      <div className="mt-2.5 grid min-w-0 flex-1 grid-cols-1 gap-2.5 sm:mt-0 sm:grid-cols-3">
         {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           return (
             <div
               key={word.word}
-              className="flex min-w-0 items-center gap-2.5 rounded-[20px] border border-accent/60 bg-card p-2 shadow-card"
+              className="flex min-w-0 items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
                 {image ? (
                   <img src={image} alt="" className="h-full w-full object-contain p-1.5" />
                 ) : (
-                  <BookOpen className="h-5 w-5 text-primary" />
+                  <BookOpen className="h-4 w-4 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1 truncate text-[15.5px] font-extrabold text-ink">
+              <span className="min-w-0 flex-1 truncate text-[14.5px] font-extrabold text-ink">
                 {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
@@ -483,9 +483,17 @@ function WordsStrip({
           );
         })}
       </div>
+
+      <button
+        onClick={onViewAll}
+        className="hidden shrink-0 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary sm:inline-flex"
+      >
+        View all <ChevronRightIcon />
+      </button>
     </section>
   );
 }
+
 
 function CardHeading({ icon, title }: { icon: ReactNode; title: string }) {
   return (
