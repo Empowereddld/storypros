@@ -101,7 +101,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   }
 
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-background">
+    <div className="relative flex h-[100dvh] flex-col overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/15 to-accent/35" />
         <div className="absolute -left-12 top-32 h-28 w-40 rounded-full bg-accent/50 blur-2xl" />
@@ -113,7 +113,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
 
       {/* App-style header for phones/tablets — laptop uses the top DesktopNav.
           No settings/account controls here: those live behind Grown-ups. */}
-      <header className="relative z-30 flex items-center justify-between gap-2 px-5 pb-1 pt-3 lg:hidden">
+      <header className="relative z-30 flex shrink-0 items-center justify-between gap-2 px-5 pb-1 pt-3 lg:hidden">
         <StoryProsLogo layout="row" size="md" className="scale-90" />
         <CurrencyBadge
           count={coins}
@@ -122,28 +122,35 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
         />
       </header>
 
-      <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-28 pt-0 lg:px-8 lg:pb-10 lg:pt-6">
-        <div className="mx-auto w-full max-w-[1180px]">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-28 pt-1 sm:overflow-hidden sm:pb-24 lg:px-8 lg:pb-6 lg:pt-4">
+        <div className="mx-auto flex w-full max-w-[1180px] min-h-0 flex-1 flex-col">
           {/* ── Greeting ── */}
-          <div className="flex items-center gap-3 lg:gap-4">
+          <div className="flex shrink-0 items-end justify-between gap-3">
             <div className="min-w-0">
-              <h1 className="text-[27px] font-extrabold leading-tight text-primary lg:text-[38px]">
+              <h1 className="text-[26px] font-extrabold leading-tight text-primary lg:text-[34px]">
                 {greeting}
               </h1>
-              <p className="mt-0.5 text-[15px] font-medium text-ink-soft lg:text-[17px]">
+              <p className="mt-0.5 truncate text-[14px] font-medium text-ink-soft lg:text-[16px]">
                 {subtitle}
               </p>
+            </div>
+            <div className="hidden shrink-0 sm:block">
+              <GrownUpsButton onEnter={() => navigate({ to: "/settings" })} />
             </div>
           </div>
 
           {/* ── Hero story + right rail ── */}
-          <div className="mt-5 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-stretch lg:gap-6">
-            <div className="min-w-0 lg:flex">
+          <div className="mt-3 min-h-0 flex-1 sm:grid sm:grid-cols-[minmax(0,1fr)_300px] sm:items-stretch sm:gap-4 lg:mt-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-6">
+            <div className="flex min-h-0 min-w-0">
               {cont && (
-                <article className="flex w-full flex-col overflow-hidden rounded-[32px] bg-card p-2.5 shadow-soft animate-slide-up lg:p-3">
-                  <div className="relative h-[210px] w-full overflow-hidden rounded-[24px] bg-accent/40 lg:h-auto lg:min-h-[300px] lg:flex-1">
+                <article className="flex min-h-0 w-full flex-col overflow-hidden rounded-[28px] bg-card p-2.5 shadow-soft animate-slide-up lg:rounded-[32px] lg:p-3">
+                  <div className="relative h-[190px] w-full shrink-0 overflow-hidden rounded-[22px] bg-accent/40 sm:h-auto sm:min-h-0 sm:flex-1">
                     {cover ? (
-                      <img src={cover} alt="" className="h-full w-full object-cover" />
+                      <img
+                        src={cover}
+                        alt=""
+                        className="h-full w-full object-cover object-[50%_35%]"
+                      />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-accent text-primary">
                         <BookOpen className="h-16 w-16" />
@@ -151,17 +158,17 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                     )}
                   </div>
 
-                  <div className="relative px-2 pb-2 pt-3 lg:px-4">
+                  <div className="relative shrink-0 px-2 pb-1 pt-3 lg:px-4">
                     {/* Book badge tucked over the image edge */}
                     <span
                       aria-hidden
-                      className="absolute -top-8 left-2 flex h-16 w-16 items-center justify-center rounded-[22px] border-4 border-card bg-accent text-primary shadow-card lg:left-4"
+                      className="absolute -top-7 left-2 flex h-14 w-14 items-center justify-center rounded-[20px] border-4 border-card bg-accent text-primary shadow-card lg:left-4"
                     >
-                      <BookIcon className="h-7 w-7" />
+                      <BookIcon className="h-6 w-6" />
                     </span>
 
-                    <div className="ml-[76px] flex items-start justify-between gap-3 lg:ml-[80px]">
-                      <h2 className="min-w-0 text-[23px] font-extrabold leading-[1.1] text-primary lg:text-[30px]">
+                    <div className="ml-[68px] flex items-center justify-between gap-3 lg:ml-[72px]">
+                      <h2 className="min-w-0 truncate text-[20px] font-extrabold leading-[1.15] text-primary lg:text-[26px]">
                         {cont.story.title}
                       </h2>
                       <SpeakButton
@@ -172,9 +179,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       />
                     </div>
 
-
-
-                    <div className="mt-5 rounded-[20px] bg-accent/25 px-4 py-3">
+                    <div className="mt-3 rounded-[18px] bg-accent/25 px-4 py-2.5">
                       {cont.percent >= 100 ? (
                         <p className="text-center text-[14px] font-extrabold text-primary">
                           Story complete!
@@ -189,7 +194,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                             </span>
                             <span className="text-primary">{cont.percent}% complete</span>
                           </div>
-                          <div className="mt-2.5 h-3 w-full overflow-hidden rounded-full bg-card">
+                          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-card">
                             <div
                               className="h-full rounded-full bg-primary transition-all duration-500"
                               style={{
@@ -201,13 +206,12 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       )}
                     </div>
 
-
                     {doneToday ? (
-                      <div className="mt-4 rounded-[24px] border border-accent/70 bg-accent/30 p-4 text-center">
-                        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-card text-primary shadow-card">
+                      <div className="mt-3 flex items-center gap-3 rounded-[20px] border border-accent/70 bg-accent/30 p-3">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card text-primary shadow-card">
                           <StarIcon filled className="h-6 w-6 text-secondary" />
                         </span>
-                        <p className="mt-2 text-[15px] font-extrabold leading-snug text-primary">
+                        <p className="min-w-0 flex-1 text-[14px] font-extrabold leading-snug text-primary">
                           You&apos;re done for today!
                           <span className="block font-medium text-ink-soft">
                             Come back tomorrow.
@@ -215,13 +219,13 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                         </p>
                         <button
                           onClick={openContinue}
-                          className="mt-3 min-h-11 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
+                          className="min-h-11 shrink-0 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
                         >
-                          Read more anyway
+                          Read more
                         </button>
                       </div>
                     ) : (
-                      <TactileButton className="mt-5 w-full" onClick={openContinue} noShadow>
+                      <TactileButton className="mt-3 w-full" onClick={openContinue} noShadow>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
                     )}
@@ -230,11 +234,9 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
               )}
             </div>
 
-            {/* Right rail on laptop; flows underneath on phones/tablets */}
-            <aside className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-5">
-              <div className="sm:col-span-2 lg:col-span-1">
-                <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
-              </div>
+            {/* Right rail — compact stack that shares the same viewport height */}
+            <aside className="mt-3 grid min-h-0 grid-cols-1 gap-3 sm:mt-0 sm:grid-rows-[auto_auto_1fr] lg:gap-4">
+              <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
               <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
               <BadgesCard
                 childId={childId}
@@ -252,7 +254,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             />
           )}
 
-          <div className="mt-6 flex justify-center lg:justify-end">
+          <div className="mt-5 flex shrink-0 justify-center sm:hidden">
             <GrownUpsButton onEnter={() => navigate({ to: "/settings" })} />
           </div>
         </div>
@@ -262,6 +264,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
     </div>
   );
 }
+
 
 /* ───────── Week streak strip (real per-day data) ───────── */
 
