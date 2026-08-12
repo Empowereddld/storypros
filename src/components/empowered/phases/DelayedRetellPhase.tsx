@@ -123,7 +123,7 @@ export function DelayedRetellPhase({
                     key={`${element}-${index}`}
                     onClick={() => handleTap(index)}
                     className={cn(
-                      "hover-lift flex min-h-[204px] flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                      "hover-lift flex flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
                       "sm:min-h-0 sm:flex-1",
                       selected ? "border-success bg-success/5" : "border-accent/60",
                     )}
