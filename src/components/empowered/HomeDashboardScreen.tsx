@@ -449,7 +449,7 @@ function WordsStrip({
   onViewAll: () => void;
 }) {
   return (
-    <section className="mt-3 shrink-0 rounded-[22px] bg-card p-3 shadow-soft sm:flex sm:items-center sm:gap-3 lg:mt-4 lg:p-3.5">
+    <section className="mt-3 shrink-0 rounded-[22px] bg-card p-3 shadow-soft lg:mt-4 lg:flex lg:items-center lg:gap-3 lg:p-3.5">
       <div className="flex shrink-0 items-center justify-between gap-2">
         <CardHeading
           icon={<BookIcon className="h-5 w-5 text-primary" />}
@@ -457,13 +457,14 @@ function WordsStrip({
         />
         <button
           onClick={onViewAll}
-          className="inline-flex min-h-9 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary sm:hidden"
+          className="inline-flex min-h-9 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary lg:hidden"
         >
           View all <ChevronRightIcon />
         </button>
       </div>
 
-      <div className="mt-2.5 grid min-w-0 flex-1 grid-cols-1 gap-2.5 sm:mt-0 sm:grid-cols-3">
+      <div className="mt-2.5 grid min-w-0 flex-1 grid-cols-1 gap-2.5 sm:grid-cols-3 lg:mt-0">
+
         {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           return (
