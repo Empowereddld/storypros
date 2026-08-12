@@ -42,8 +42,13 @@ export function ProgressHeader({ progress, label, onClose, showCoins = true }: P
         </div>
 
         {label ? (
-          <span className="shrink-0 text-sm font-extrabold tabular-nums text-primary">{label}</span>
+          <span className="hidden shrink-0 text-sm font-extrabold tabular-nums text-primary sm:inline">
+            {label}
+          </span>
         ) : null}
+
+        {showCoins ? <CoinPill /> : null}
+
       </div>
     </header>
   );
