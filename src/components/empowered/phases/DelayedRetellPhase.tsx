@@ -70,8 +70,8 @@ export function DelayedRetellPhase({
       </div>
 
       {!started ? (
-        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
-          <section className="rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-4 sm:overflow-hidden">
+          <section className="flex min-h-0 flex-col rounded-[30px] bg-card p-5 shadow-soft animate-slide-up sm:flex-1">
             <div className="flex items-start gap-4">
               <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-accent text-primary">
                 <BrainIcon className="h-9 w-9" />
@@ -86,8 +86,8 @@ export function DelayedRetellPhase({
               </div>
             </div>
 
-            <div className="mt-5 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
-              <p className="flex-1 text-xl font-extrabold leading-snug text-primary">
+            <div className="mt-4 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
+              <p className="flex-1 text-lg font-extrabold leading-snug text-primary sm:text-xl">
                 {delayedPrompt}
               </p>
               {supported && (
@@ -99,7 +99,9 @@ export function DelayedRetellPhase({
               )}
             </div>
 
-            <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" />
+            <div className="mt-4 min-h-0 flex-1 overflow-y-auto no-scrollbar sm:overflow-hidden">
+              <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" />
+            </div>
           </section>
         </div>
       ) : (
