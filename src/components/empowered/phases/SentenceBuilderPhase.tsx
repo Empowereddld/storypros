@@ -243,6 +243,7 @@ export function SentenceBuilderPhase({
             return (
               <button
                 key={choice.id}
+                data-choice-id={choice.id}
                 onClick={() => !isDisabled && setSelected(choice.id)}
                 disabled={isDisabled}
                 className={cn(

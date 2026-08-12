@@ -368,6 +368,7 @@ export function ComprehensionPhase({
               return (
                 <div
                   key={opt.id}
+                  data-answer-option={opt.id}
                   className={cn(
                     "flex min-h-[50px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all sm:min-h-[56px] sm:rounded-[20px] sm:px-4 lg:min-h-[60px]",
                     isSelected &&
