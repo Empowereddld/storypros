@@ -140,7 +140,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
           </div>
 
           {/* ── Hero story + right rail ── */}
-          <div className="mt-3 min-h-0 flex-1 sm:grid sm:grid-cols-[minmax(0,1fr)_300px] sm:items-stretch sm:gap-4 lg:mt-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-6">
+          <div className="mt-3 sm:grid sm:min-h-0 sm:flex-1 sm:grid-cols-[minmax(0,1fr)_300px] sm:items-stretch sm:gap-4 lg:mt-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-6">
             <div className="flex min-h-0 min-w-0">
               {cont && (
                 <article className="flex min-h-0 w-full flex-col overflow-hidden rounded-[28px] bg-card p-2.5 shadow-soft animate-slide-up lg:rounded-[32px] lg:p-3">
