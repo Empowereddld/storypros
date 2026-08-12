@@ -112,7 +112,7 @@ export function DelayedRetellPhase({
               <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
             </div>
 
-            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-rows-3 sm:gap-3">
+            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-[auto_auto] sm:content-center sm:items-center sm:gap-4">
               {elements.map((element, index) => {
                 const selected = tapped.has(index);
                 const slide = storyData.slides.find((item) => item.story_element === element);
@@ -124,16 +124,16 @@ export function DelayedRetellPhase({
                     onClick={() => handleTap(index)}
                     className={cn(
                       "hover-lift flex flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
-                      "sm:min-h-0 sm:flex-1",
+                      "sm:min-h-0 sm:self-center",
                       selected ? "border-success bg-success/5" : "border-accent/60",
                     )}
                   >
-                    <div className="relative h-28 overflow-hidden bg-accent sm:flex-1 sm:min-h-0">
+                    <div className="relative mx-auto aspect-video w-full max-h-full shrink-0 overflow-hidden rounded-[18px] bg-accent/40">
                       {image ? (
                         <img
                           src={image}
                           alt=""
-                          className="h-full w-full object-cover object-[center_12%]"
+                          className="h-full w-full object-contain"
                         />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center text-primary">
@@ -156,8 +156,8 @@ export function DelayedRetellPhase({
                         </span>
                       )}
                     </div>
-                    <div className="shrink-0 p-3">
-                      <p className="text-base font-extrabold leading-tight text-primary">
+                    <div className="flex shrink-0 items-center justify-center px-2 py-2">
+                      <p className="text-center text-sm font-extrabold leading-tight text-primary sm:text-base">
                         {ELEMENT_LABELS[element]}
                       </p>
                     </div>
