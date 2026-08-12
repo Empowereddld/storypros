@@ -255,10 +255,10 @@ export function VocabularyIntroPhase({
               <div className="mt-5 w-full max-w-[420px] rounded-[30px] border border-accent/60 bg-accent/20 p-4">
                 <div className="flex items-center gap-3 text-left">
                   {supported && (
-                    <AudioButton
-                      size="lg"
+                    <ListenButton
+                      label={heard.has(heardKey) ? "Listen again" : "Listen"}
                       playing={isPlaying("intro")}
-                      onClick={() => toggle(introNarration, "intro")}
+                      onClick={() => playWithTrack(introNarration, "intro")}
                       ariaLabel="Hear what this word means"
                     />
                   )}
@@ -296,22 +296,15 @@ export function VocabularyIntroPhase({
                 </div>
               </div>
 
-              {/* Purple sentence bar with tactile yellow speaker */}
+              {/* Purple sentence bar with tactile yellow Listen control */}
               <div className="mt-5 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
                 {supported && (
-                  <button
-                    type="button"
-                    onClick={() => toggle(featureNarration, `feat-${featureIdx}`)}
-                    aria-label="Hear this sentence"
-                    aria-pressed={isPlaying(`feat-${featureIdx}`)}
-                    className={cn(
-                      "flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-secondary text-primary transition-transform",
-                      "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
-                      isPlaying(`feat-${featureIdx}`) && "ring-4 ring-primary-foreground/40",
-                    )}
-                  >
-                    <SpeakerGlyph className="h-8 w-8" />
-                  </button>
+                  <ListenButton
+                    label={heard.has(heardKey) ? "Listen again" : "Listen"}
+                    playing={isPlaying(`feat-${featureIdx}`)}
+                    onClick={() => playWithTrack(featureNarration, `feat-${featureIdx}`)}
+                    ariaLabel="Hear this sentence"
+                  />
                 )}
                 <p className="flex-1 pr-3 text-[17px] font-semibold leading-snug text-primary-foreground sm:text-[19px]">
                   {featureText}
