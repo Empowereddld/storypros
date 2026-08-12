@@ -123,7 +123,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
       </header>
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-28 pt-1 sm:overflow-hidden sm:pb-24 lg:px-8 lg:pb-6 lg:pt-4">
-        <div className="mx-auto flex w-full max-w-[1180px] min-h-0 flex-1 flex-col">
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col sm:min-h-0 sm:flex-1">
           {/* ── Greeting ── */}
           <div className="flex shrink-0 items-end justify-between gap-3">
             <div className="min-w-0">
