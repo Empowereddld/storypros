@@ -9,6 +9,8 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY, sentenceAward } from "@/services/coinEconomy";
 
 type FeedbackState =
   | { type: "none" }
@@ -87,6 +89,13 @@ export function SentenceBuilderPhase({
     setAttempts((prev) => [...prev, attempt]);
 
     if (isCorrect) {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "sentences",
+        item: frameIdx,
+        amount: sentenceAward(currentAttempt, frames.length),
+        anchor: document.querySelector(`[data-choice-id="${selected}"]`),
+      });
       setFeedback({ type: "correct", brainCheck: frame.brain_check_prompt });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
@@ -98,6 +107,12 @@ export function SentenceBuilderPhase({
   function handleContinue() {
     if (feedback.type === "correct") {
       if (frameIdx + 1 >= frames.length) {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "sentences",
+          amount: COIN_ECONOMY.sentences.completion,
+          label: "Sentences complete!",
+        });
         const firstAttempts = attempts.filter((attempt) => attempt.attempt_number === 1);
         const correctFirst = firstAttempts.filter((attempt) => attempt.is_correct).length;
         const accuracy = frames.length > 0 ? correctFirst / frames.length : 0;
@@ -228,6 +243,7 @@ export function SentenceBuilderPhase({
             return (
               <button
                 key={choice.id}
+                data-choice-id={choice.id}
                 onClick={() => !isDisabled && setSelected(choice.id)}
                 disabled={isDisabled}
                 className={cn(

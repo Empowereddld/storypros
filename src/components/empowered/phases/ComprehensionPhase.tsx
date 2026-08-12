@@ -17,6 +17,8 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { AudioButton } from "../AudioButton";
 import { useListen } from "./ListenButton";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY, comprehensionAward } from "@/services/coinEconomy";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Character",
@@ -125,6 +127,13 @@ export function ComprehensionPhase({
     setAttempts((prev) => [...prev, attempt]);
 
     if (isCorrect) {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "comprehension",
+        item: qi,
+        amount: comprehensionAward(currentAttempt),
+        anchor: document.querySelector(`[data-answer-option="${selected}"]`),
+      });
       setBrainCheck({ type: "correct", message: q.brain_check_correct });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
@@ -136,6 +145,12 @@ export function ComprehensionPhase({
   function handleBrainCheckContinue() {
     if (brainCheck.type === "correct") {
       if (qi + 1 >= questions.length) {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "comprehension",
+          amount: COIN_ECONOMY.comprehension.completion,
+          label: "Question Time complete!",
+        });
         const firstAttempts = attempts.filter(
           (a) => a.attempt_number === 1 && a.activity_type === "comprehension",
         );
@@ -353,6 +368,7 @@ export function ComprehensionPhase({
               return (
                 <div
                   key={opt.id}
+                  data-answer-option={opt.id}
                   className={cn(
                     "flex min-h-[50px] w-full items-center gap-3 rounded-[18px] border-2 bg-card px-3 py-2 shadow-card transition-all sm:min-h-[56px] sm:rounded-[20px] sm:px-4 lg:min-h-[60px]",
                     isSelected &&

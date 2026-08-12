@@ -8,6 +8,8 @@ import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -67,6 +69,12 @@ export function PhonologicalPhase({
   function handleContinue() {
     if (feedback.type === "correct") {
       if (questionIndex + 1 >= items.length) {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "sounds",
+          amount: COIN_ECONOMY.sounds.completion,
+          label: "Sound Play complete!",
+        });
         const firstAttempts = attempts.filter((attempt) => attempt.attempt_number === 1);
         const correctFirst = firstAttempts.filter((attempt) => attempt.is_correct).length;
         const accuracy = items.length > 0 ? correctFirst / items.length : 0;

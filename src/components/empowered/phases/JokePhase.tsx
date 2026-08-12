@@ -7,6 +7,8 @@ import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 function StarIcon({ className }: { className?: string }) {
   return (
@@ -62,6 +64,12 @@ export function JokePhase({
     if (step === "meaning1") setStep("meaning2");
     if (step === "meaning2") setStep("joke");
     if (step === "joke") {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "jokes",
+        amount: COIN_ECONOMY.jokes.completion,
+        label: "Word Play complete!",
+      });
       onComplete({
         phase: "joke",
         attempts: [],

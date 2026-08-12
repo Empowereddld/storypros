@@ -15,6 +15,8 @@ import type { StoryPhaseProps, StoryElement } from "@/types/story";
 import { cn } from "@/lib/utils";
 import { ListenButton, useListen } from "./ListenButton";
 import { RetellRecorder } from "../RetellRecorder";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Who",
@@ -48,6 +50,12 @@ export function DelayedRetellPhase({
   }
 
   function handleDone() {
+    earnCoins({
+      storyId: storyData.id,
+      activity: "delayed-retell",
+      amount: COIN_ECONOMY["delayed-retell"].completion,
+      label: "You told the whole story!",
+    });
     onComplete({
       phase: "delayed-retell",
       attempts: [],

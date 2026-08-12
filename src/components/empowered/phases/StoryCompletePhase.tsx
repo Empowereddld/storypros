@@ -23,6 +23,7 @@ interface StoryCompleteData {
   phaseResults: PhaseResult[];
   paperPlanesEarned: number;
   totalPaperPlanes: number;
+  previousPaperPlanes?: number;
 }
 
 const DOMAIN_LABELS: Record<SkillDomain, string> = {
@@ -69,6 +70,7 @@ export function StoryCompletePhase({
   const phaseResults = data?.phaseResults ?? [];
   const paperPlanesEarned = data?.paperPlanesEarned ?? 0;
   const totalPaperPlanes = data?.totalPaperPlanes ?? 0;
+  const previousPaperPlanes = data?.previousPaperPlanes ?? Math.max(0, totalPaperPlanes - paperPlanesEarned);
 
   const domainScores = calculateDomainScores(phaseResults);
   const overallScore = calculateOverallScore(domainScores);
@@ -159,7 +161,7 @@ export function StoryCompletePhase({
           <div className="flex items-center justify-between gap-4 bg-secondary/12 p-4">
             <div>
               <p className="text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
-                Coins earned
+                Coins earned this story
               </p>
               <p className="font-display text-[38px] font-extrabold leading-none text-primary">
                 +{paperPlanesEarned}
@@ -169,9 +171,21 @@ export function StoryCompletePhase({
               <CoinIcon className="h-9 w-9" />
             </span>
           </div>
-          <div className="flex items-center justify-between px-4 py-3 text-sm font-bold text-ink-soft">
-            <span>Total Coins</span>
-            <span className="font-extrabold text-primary">{totalPaperPlanes}</span>
+          <div className="divide-y-2 divide-accent/50 px-4 text-sm font-bold text-ink-soft">
+            <div className="flex items-center justify-between py-2.5">
+              <span>Coins before</span>
+              <span className="font-extrabold tabular-nums text-ink">{previousPaperPlanes}</span>
+            </div>
+            <div className="flex items-center justify-between py-2.5">
+              <span>Earned this story</span>
+              <span className="font-extrabold tabular-nums text-secondary-deep">
+                +{paperPlanesEarned}
+              </span>
+            </div>
+            <div className="flex items-center justify-between py-2.5">
+              <span>New total</span>
+              <span className="font-extrabold tabular-nums text-primary">{totalPaperPlanes}</span>
+            </div>
           </div>
         </div>
 

@@ -30,6 +30,8 @@ import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 type HeardKey = `intro-${number}` | `feat-${number}-${number}`;
 
@@ -172,6 +174,14 @@ export function VocabularyIntroPhase({
       setFeatureIdx(featureIdx + 1);
       return;
     }
+    // Last teaching screen for this word — the word sequence is complete.
+    earnCoins({
+      storyId: storyData.id,
+      activity: "vocabulary",
+      item: word.word,
+      amount: COIN_ECONOMY.vocabulary.perWord,
+      label: `You learned "${word.word}"!`,
+    });
     if (wordIdx < words.length - 1) {
       setWordIdx(wordIdx + 1);
       setFeatureIdx(-1);

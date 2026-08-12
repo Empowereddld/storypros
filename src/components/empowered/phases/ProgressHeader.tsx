@@ -1,11 +1,16 @@
+import { CoinPill } from "../CoinRewards";
+
 interface ProgressHeaderProps {
   progress: number;
   label?: string;
   onClose: () => void;
+  /** Set false to hide the coin balance (non-earning screens) */
+  showCoins?: boolean;
 }
 
-export function ProgressHeader({ progress, label, onClose }: ProgressHeaderProps) {
+export function ProgressHeader({ progress, label, onClose, showCoins = true }: ProgressHeaderProps) {
   const clamped = Math.min(100, Math.max(0, progress));
+
 
   return (
     <header className="px-5 pt-4">
@@ -37,8 +42,14 @@ export function ProgressHeader({ progress, label, onClose }: ProgressHeaderProps
         </div>
 
         {label ? (
-          <span className="shrink-0 text-sm font-extrabold tabular-nums text-primary">{label}</span>
+          <span className="shrink-0 text-xs font-extrabold tabular-nums text-primary sm:text-sm">
+            {label}
+          </span>
         ) : null}
+
+
+        {showCoins ? <CoinPill /> : null}
+
       </div>
     </header>
   );

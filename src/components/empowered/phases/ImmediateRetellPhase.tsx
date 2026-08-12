@@ -17,6 +17,8 @@ import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
 import { RetellRecorder } from "../RetellRecorder";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Who",
@@ -60,6 +62,12 @@ export function ImmediateRetellPhase({
   const { supported, isPlaying, toggle } = useListen(ttsSpeed);
 
   function handleDone() {
+    earnCoins({
+      storyId: storyData.id,
+      activity: "immediate-retell",
+      amount: COIN_ECONOMY["immediate-retell"].completion,
+      label: "Nice telling!",
+    });
     onComplete({
       phase: "immediate-retell",
       attempts: [],

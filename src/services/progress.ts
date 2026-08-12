@@ -294,9 +294,10 @@ export function recordStoryCompletion(
   // Keep both scores on replay (Jinean's decision: show both, don't replace)
   currentProgress.completions.push(completion);
 
-  // Award Coins based on performance
-  const planesEarned = calculatePaperPlanes(overallScore, !!existing);
-  currentProgress.paperPlanes += planesEarned;
+  // Coins are earned inside the activities themselves (services/coins),
+  // so completing a story no longer pays a separate performance bonus.
+  const planesEarned = 0;
+
 
   // Update streak (tracks consecutive days, not consecutive stories)
   const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
@@ -448,21 +449,36 @@ async function syncCompletionToCloud(
   }
 }
 
-/** Calculate Coins earned */
-function calculatePaperPlanes(overallScore: number, isReplay: boolean): number {
-  let base = 10; // base award for completing a story
-  if (overallScore >= 90)
-    base += 15; // mastery bonus
-  else if (overallScore >= 70) base += 10;
-  else if (overallScore >= 50) base += 5;
+/**
+ * Add coins to the wallet (never subtracts).
+ * Used by services/coins for in-activity rewards; the
+ * ledger row keeps the reward key so awards stay idempotent.
+ * Returns the new balance.
+ */
+export function addCoins(amount: number, reason: string, storyId?: string): number {
+  if (!Number.isFinite(amount) || amount <= 0) return currentProgress.paperPlanes;
 
-  if (isReplay) {
-    // Diminishing returns on replay
-    base = Math.floor(base * 0.5);
+  currentProgress.paperPlanes += Math.round(amount);
+  saveProgress();
+
+  if (isCloudId(activeChildId)) {
+    void db
+      .from("coins_ledger")
+      .insert({
+        child_id: activeChildId,
+        amount: Math.round(amount),
+        reason,
+        story_id: storyId ?? null,
+      })
+      .then(({ error }) => {
+        if (error) logSyncError("insert coin award")(error);
+      });
   }
 
-  return base;
+  emitDataUpdated("progress");
+  return currentProgress.paperPlanes;
 }
+
 
 // ── Getters (synchronous, read the cache) ──
 

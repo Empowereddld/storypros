@@ -49,7 +49,7 @@ const CATALOG: Collectible[] = [
     name: "Sunset Glider",
     description: "Orange and pink gradient wings.",
     icon: "🌅",
-    price: 15,
+    price: 100,
     rarity: "common",
   },
   {
@@ -58,7 +58,7 @@ const CATALOG: Collectible[] = [
     name: "Ocean Breeze",
     description: "Blue waves painted on the wings.",
     icon: "🌊",
-    price: 20,
+    price: 200,
     rarity: "uncommon",
   },
   {
@@ -67,7 +67,7 @@ const CATALOG: Collectible[] = [
     name: "Starlight Jet",
     description: "Covered in twinkling stars.",
     icon: "⭐",
-    price: 30,
+    price: 350,
     rarity: "uncommon",
   },
   {
@@ -76,7 +76,7 @@ const CATALOG: Collectible[] = [
     name: "Rainbow Racer",
     description: "Every color of the rainbow!",
     icon: "🌈",
-    price: 50,
+    price: 500,
     rarity: "rare",
   },
   {
@@ -85,7 +85,7 @@ const CATALOG: Collectible[] = [
     name: "Golden Eagle",
     description: "A legendary golden plane.",
     icon: "🦅",
-    price: 100,
+    price: 1000,
     rarity: "legendary",
   },
 
@@ -168,7 +168,7 @@ const CATALOG: Collectible[] = [
     name: "Sunny Meadow",
     description: "A bright field of wildflowers.",
     icon: "🌻",
-    price: 10,
+    price: 100,
     rarity: "common",
   },
   {
@@ -177,7 +177,7 @@ const CATALOG: Collectible[] = [
     name: "Starry Night",
     description: "A sky full of twinkling stars.",
     icon: "🌙",
-    price: 20,
+    price: 200,
     rarity: "uncommon",
   },
   {
@@ -186,7 +186,7 @@ const CATALOG: Collectible[] = [
     name: "Under the Sea",
     description: "Coral reefs and friendly fish.",
     icon: "🐠",
-    price: 30,
+    price: 350,
     rarity: "uncommon",
   },
   {
@@ -195,7 +195,7 @@ const CATALOG: Collectible[] = [
     name: "Enchanted Castle",
     description: "A magical castle in the clouds.",
     icon: "🏰",
-    price: 50,
+    price: 500,
     rarity: "rare",
   },
 
@@ -206,7 +206,7 @@ const CATALOG: Collectible[] = [
     name: "Dan's First Word",
     description: "How Dan discovered his love for stories.",
     icon: "📖",
-    price: 10,
+    price: 100,
     rarity: "common",
   },
   {
@@ -215,7 +215,7 @@ const CATALOG: Collectible[] = [
     name: "Daria Gets Wings",
     description: "The day Daria learned to fly.",
     icon: "🦋",
-    price: 15,
+    price: 200,
     rarity: "uncommon",
   },
   {
@@ -224,7 +224,7 @@ const CATALOG: Collectible[] = [
     name: "The Secret Map",
     description: "A hidden map behind the bookshelf...",
     icon: "🗺️",
-    price: 25,
+    price: 350,
     rarity: "rare",
   },
   {
@@ -233,7 +233,7 @@ const CATALOG: Collectible[] = [
     name: "The Founders' Tale",
     description: "Who built the Story Pros world?",
     icon: "📜",
-    price: 40,
+    price: 500,
     rarity: "legendary",
   },
 
@@ -244,7 +244,7 @@ const CATALOG: Collectible[] = [
     name: "Loop-de-Loop",
     description: "Your plane does a loop!",
     icon: "🔄",
-    price: 15,
+    price: 200,
     rarity: "common",
   },
   {
@@ -253,7 +253,7 @@ const CATALOG: Collectible[] = [
     name: "Barrel Roll",
     description: "Spin through the air!",
     icon: "🌀",
-    price: 25,
+    price: 350,
     rarity: "uncommon",
   },
   {
@@ -262,7 +262,7 @@ const CATALOG: Collectible[] = [
     name: "Sky Writer",
     description: "Write your name in the clouds.",
     icon: "☁️",
-    price: 35,
+    price: 500,
     rarity: "rare",
   },
   {
@@ -271,7 +271,7 @@ const CATALOG: Collectible[] = [
     name: "Sonic Boom",
     description: "Break the sound barrier!",
     icon: "💥",
-    price: 60,
+    price: 750,
     rarity: "legendary",
   },
 ];

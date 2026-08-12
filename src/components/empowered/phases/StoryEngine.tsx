@@ -15,10 +15,13 @@
  * checkpoint offers "Keep going" or "Start over".
  * --------------------------------------------- */
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { StoryData, StoryPhase, PhaseResult } from "@/types/story";
 import { recordPhaseAttempts, recordStoryCompletion, getPaperPlanes } from "@/services/progress";
 import { saveCheckpoint, getCheckpoint, clearCheckpoint } from "@/services/checkpoint";
+import { startCoinSession, getSessionCoins, getSessionStartBalance, earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
+import { CoinRewardLayer } from "../CoinRewards";
 import { useAuth } from "@/contexts/AuthContext";
 import { TactileButton } from "../TactileButton";
 import { AuthBackdrop, MiniPlane, Star, StoryProsLogo } from "../StoryProsBrand";
@@ -145,6 +148,12 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
   const [phaseResults, setPhaseResults] = useState<PhaseResult[]>([]);
   const [paperPlanesEarned, setPaperPlanesEarned] = useState(0);
   const [totalPaperPlanes, setTotalPaperPlanes] = useState(getPaperPlanes());
+  const [previousPaperPlanes, setPreviousPaperPlanes] = useState(getPaperPlanes());
+
+  // Coins are earned inside the activities; this scopes the tally to this story.
+  useEffect(() => {
+    startCoinSession(storyData.id);
+  }, [storyData.id]);
 
   const currentPhase = PHASE_ORDER[phaseIndex];
 
@@ -181,10 +190,15 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
       const nextIdx = phaseIndex + 1;
       if (PHASE_ORDER[nextIdx] === "story-complete") {
         recordStoryCompletion(storyData.id, updated);
-        const newTotal = getPaperPlanes();
-        const earned = newTotal - totalPaperPlanes;
-        setPaperPlanesEarned(earned);
-        setTotalPaperPlanes(newTotal);
+        earnCoins({
+          storyId: storyData.id,
+          activity: "story-complete",
+          amount: COIN_ECONOMY["story-complete"].completion,
+          label: "Story finished!",
+        });
+        setPaperPlanesEarned(getSessionCoins());
+        setTotalPaperPlanes(getPaperPlanes());
+        setPreviousPaperPlanes(getSessionStartBalance());
         // Story finished - the checkpoint has served its purpose
         clearCheckpoint(childId, storyData.id);
       } else {
@@ -264,6 +278,7 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
               phaseResults,
               paperPlanesEarned,
               totalPaperPlanes,
+              previousPaperPlanes,
             }}
           />
         );
@@ -385,6 +400,9 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
           onChange={(i: number) => setPhaseIndex(Math.max(0, Math.min(PHASE_ORDER.length - 1, i)))}
         />
       </DevNavProvider>
+      <CoinRewardLayer />
+
+
 
     </div>
   );
