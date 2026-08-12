@@ -85,13 +85,16 @@ export function JokePhase({
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-5 pt-4">
-        <section className="relative w-full max-w-[520px] overflow-hidden rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
+        <section className="relative mt-8 w-full max-w-[520px] rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
           {step === "intro" && (
             <div className="flex flex-col items-center gap-6">
               <span
-                className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-secondary/10 blur-[2px]"
+                className="pointer-events-none absolute inset-0 overflow-hidden rounded-[34px]"
                 aria-hidden
-              />
+              >
+                <span className="absolute -right-12 -top-12 block h-28 w-28 rounded-full bg-secondary/10 blur-[2px]" />
+              </span>
+
 
 
               <div className="space-y-2">
