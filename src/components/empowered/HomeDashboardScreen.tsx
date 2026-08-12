@@ -235,7 +235,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             </div>
 
             {/* Right rail — compact stack that shares the same viewport height */}
-            <aside className="mt-3 grid min-h-0 grid-cols-1 gap-3 sm:mt-0 sm:grid-rows-[auto_auto_1fr] lg:gap-4">
+            <aside className="mt-3 grid min-h-0 grid-cols-1 gap-3 sm:mt-0 sm:auto-rows-min sm:content-start lg:gap-4">
               <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
               <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
               <BadgesCard
