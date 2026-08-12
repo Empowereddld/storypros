@@ -343,12 +343,12 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
             title={coins > 0 ? `${coins} Coins` : "Coins"}
           />
 
-          <p className="mt-1.5 text-[12.5px] font-medium leading-snug text-ink-soft">
+          <p className="mt-1 hidden text-[12.5px] font-medium leading-snug text-ink-soft sm:block lg:hidden">
             {coins > 0 ? "Spend them in the Rewards shop!" : goal}
           </p>
           <button
             onClick={onOpenShop}
-            className="mt-2 inline-flex min-h-10 items-center gap-1.5 rounded-full border-2 border-secondary/70 px-4 text-[12.5px] font-extrabold text-secondary-foreground transition-transform active:scale-95"
+            className="mt-2 inline-flex min-h-9 items-center gap-1.5 rounded-full border-2 border-secondary/70 px-4 text-[12.5px] font-extrabold text-secondary-foreground transition-transform active:scale-95"
           >
             Shop Rewards <ChevronRightIcon />
           </button>
@@ -360,8 +360,9 @@ function CoinsCard({ coins, onOpenShop }: { coins: number; onOpenShop: () => voi
           loading="lazy"
           width={816}
           height={816}
-          className="pointer-events-none -mr-1 h-20 w-20 shrink-0 self-end object-contain drop-shadow-sm lg:h-24 lg:w-24"
+          className="pointer-events-none -mr-1 h-16 w-16 shrink-0 self-end object-contain drop-shadow-sm lg:h-20 lg:w-20"
         />
+
 
       </div>
     </Card>
