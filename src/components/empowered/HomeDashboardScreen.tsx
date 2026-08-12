@@ -57,6 +57,9 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   useEffect(() => {
     const onUpdate = () => setProgressVersion((v) => v + 1);
     window.addEventListener("storypros:progress-updated", onUpdate);
+    // Cloud hydration can finish before this listener attaches — re-read once on mount
+    // so the coin total here always matches the counter in the top nav.
+    onUpdate();
     return () => window.removeEventListener("storypros:progress-updated", onUpdate);
   }, []);
 
@@ -158,17 +161,15 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                     )}
                   </div>
 
-                  <div className="relative shrink-0 px-2 pb-1 pt-3 lg:px-4">
-                    {/* Book badge tucked over the image edge */}
-                    <span
-                      aria-hidden
-                      className="absolute -top-7 left-2 flex h-14 w-14 items-center justify-center rounded-[20px] border-4 border-card bg-accent text-primary shadow-card lg:left-4"
-                    >
-                      <BookIcon className="h-6 w-6" />
-                    </span>
-
-                    <div className="ml-[68px] flex items-center justify-between gap-3 lg:ml-[72px]">
-                      <h2 className="min-w-0 truncate text-[20px] font-extrabold leading-[1.15] text-primary lg:text-[26px]">
+                  <div className="shrink-0 px-2 pb-1 pt-3 lg:px-3">
+                    <div className="flex items-center gap-3">
+                      <span
+                        aria-hidden
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary lg:h-12 lg:w-12"
+                      >
+                        <BookIcon className="h-6 w-6" />
+                      </span>
+                      <h2 className="min-w-0 flex-1 truncate text-[20px] font-extrabold leading-[1.15] text-primary lg:text-[26px]">
                         {cont.story.title}
                       </h2>
                       <SpeakButton
@@ -463,14 +464,14 @@ function WordsStrip({
         </button>
       </div>
 
-      <div className="mt-2.5 grid min-w-0 flex-1 grid-cols-1 gap-2.5 sm:grid-cols-3 lg:mt-0">
+      <div className="mt-2.5 flex min-w-0 flex-1 flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:mt-0">
 
         {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           return (
             <div
               key={word.word}
-              className="flex min-w-0 items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card"
+              className="flex min-w-0 flex-auto items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card"
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
                 {image ? (
@@ -479,7 +480,7 @@ function WordsStrip({
                   <BookOpen className="h-4 w-4 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1 truncate text-[14.5px] font-extrabold text-ink">
+              <span className="min-w-0 flex-1 whitespace-nowrap text-[14.5px] font-extrabold text-ink">
                 {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
