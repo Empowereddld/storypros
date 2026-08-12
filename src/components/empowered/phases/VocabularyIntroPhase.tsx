@@ -19,7 +19,7 @@
  * the flow works for every word from day one.
  * ───────────────────────────────────────────── */
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
@@ -28,8 +28,46 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
-import { AudioButton, SpeakerGlyph } from "../AudioButton";
+import { SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+
+type HeardKey = `intro-${number}` | `feat-${number}-${number}`;
+
+/**
+ * One labeled Listen control per vocabulary screen.
+ *
+ * Shows "🔊 Listen" before the child has played the audio on this screen,
+ * and "🔊 Listen again" after they have played it once. The label flips
+ * back to "Listen" as soon as the child moves to a new word or feature.
+ */
+function ListenButton({
+  label,
+  playing,
+  onClick,
+  ariaLabel,
+}: {
+  label: string;
+  playing: boolean;
+  onClick: () => void;
+  ariaLabel?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={ariaLabel}
+      aria-pressed={playing}
+      className={cn(
+        "flex h-14 shrink-0 items-center gap-2.5 rounded-[24px] bg-secondary px-4 text-primary transition-transform",
+        "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
+        playing && "ring-4 ring-primary-foreground/40",
+      )}
+    >
+      <SpeakerGlyph className="h-7 w-7" />
+      <span className="text-[15px] font-extrabold tracking-tight whitespace-nowrap">{label}</span>
+    </button>
+  );
+}
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
 type SFAKey = (typeof SFA_KEYS)[number];
@@ -81,6 +119,10 @@ export function VocabularyIntroPhase({
     ttsSpeed === "fast" ? "normal" : ttsSpeed,
   );
 
+  // Track which screen's audio has been played at least once, so the
+  // Listen button can flip to "Listen again" without affecting navigation.
+  const [heard, setHeard] = useState<Set<HeardKey>>(new Set());
+
   // Stop narration when the word or feature changes.
   useEffect(() => cancel, [wordIdx, featureIdx, cancel]);
 
@@ -95,6 +137,23 @@ export function VocabularyIntroPhase({
   const isIntro = featureIdx === -1;
   const isVeryFirstScreen = wordIdx === 0 && isIntro;
   const isLastScreen = wordIdx === words.length - 1 && featureIdx === SFA_KEYS.length - 1;
+
+  const heardKey = useMemo<HeardKey>(
+    () => (isIntro ? `intro-${wordIdx}` : `feat-${wordIdx}-${featureIdx}`),
+    [isIntro, wordIdx, featureIdx],
+  );
+
+  function playWithTrack(text: string, audioKey: string) {
+    if (!isPlaying(audioKey)) {
+      setHeard((prev) => {
+        if (prev.has(heardKey)) return prev;
+        const next = new Set(prev);
+        next.add(heardKey);
+        return next;
+      });
+    }
+    toggle(text, audioKey);
+  }
 
   const featureKey = isIntro ? null : SFA_KEYS[featureIdx];
   const teachingSlide = featureKey
@@ -196,10 +255,10 @@ export function VocabularyIntroPhase({
               <div className="mt-5 w-full max-w-[420px] rounded-[30px] border border-accent/60 bg-accent/20 p-4">
                 <div className="flex items-center gap-3 text-left">
                   {supported && (
-                    <AudioButton
-                      size="lg"
+                    <ListenButton
+                      label={heard.has(heardKey) ? "Listen again" : "Listen"}
                       playing={isPlaying("intro")}
-                      onClick={() => toggle(introNarration, "intro")}
+                      onClick={() => playWithTrack(introNarration, "intro")}
                       ariaLabel="Hear what this word means"
                     />
                   )}
@@ -237,22 +296,15 @@ export function VocabularyIntroPhase({
                 </div>
               </div>
 
-              {/* Purple sentence bar with tactile yellow speaker */}
+              {/* Purple sentence bar with tactile yellow Listen control */}
               <div className="mt-5 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
                 {supported && (
-                  <button
-                    type="button"
-                    onClick={() => toggle(featureNarration, `feat-${featureIdx}`)}
-                    aria-label="Hear this sentence"
-                    aria-pressed={isPlaying(`feat-${featureIdx}`)}
-                    className={cn(
-                      "flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-secondary text-primary transition-transform",
-                      "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
-                      isPlaying(`feat-${featureIdx}`) && "ring-4 ring-primary-foreground/40",
-                    )}
-                  >
-                    <SpeakerGlyph className="h-8 w-8" />
-                  </button>
+                  <ListenButton
+                    label={heard.has(heardKey) ? "Listen again" : "Listen"}
+                    playing={isPlaying(`feat-${featureIdx}`)}
+                    onClick={() => playWithTrack(featureNarration, `feat-${featureIdx}`)}
+                    ariaLabel="Hear this sentence"
+                  />
                 )}
                 <p className="flex-1 pr-3 text-[17px] font-semibold leading-snug text-primary-foreground sm:text-[19px]">
                   {featureText}
