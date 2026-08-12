@@ -464,14 +464,14 @@ function WordsStrip({
         </button>
       </div>
 
-      <div className="mt-2.5 grid min-w-0 flex-1 grid-cols-1 gap-2.5 sm:grid-cols-3 lg:mt-0">
+      <div className="mt-2.5 flex min-w-0 flex-1 flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:mt-0">
 
         {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           return (
             <div
               key={word.word}
-              className="flex min-w-0 items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card"
+              className="flex min-w-0 flex-auto items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card"
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
                 {image ? (
@@ -480,7 +480,7 @@ function WordsStrip({
                   <BookOpen className="h-4 w-4 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1 truncate text-[14.5px] font-extrabold text-ink">
+              <span className="min-w-0 flex-1 whitespace-nowrap text-[14.5px] font-extrabold text-ink">
                 {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
