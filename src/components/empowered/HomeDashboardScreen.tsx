@@ -446,7 +446,7 @@ function WordsStrip({
   onViewAll: () => void;
 }) {
   return (
-    <section className="mt-6 rounded-[28px] bg-card p-4 shadow-soft lg:mt-8 lg:p-5">
+    <section className="mt-3 shrink-0 rounded-[24px] bg-card p-3.5 shadow-soft lg:mt-4 lg:p-4">
       <div className="flex items-center justify-between gap-2">
         <CardHeading
           icon={<BookIcon className="h-5 w-5 text-primary" />}
@@ -454,33 +454,32 @@ function WordsStrip({
         />
         <button
           onClick={onViewAll}
-          className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[13px] font-extrabold text-primary"
+          className="inline-flex min-h-10 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary"
         >
           View all words <ChevronRightIcon />
         </button>
       </div>
 
-      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
         {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           return (
             <div
               key={word.word}
-              className="flex min-w-0 items-center gap-3 rounded-[22px] border border-accent/60 bg-card p-2.5 shadow-card"
+              className="flex min-w-0 items-center gap-2.5 rounded-[20px] border border-accent/60 bg-card p-2 shadow-card"
             >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
                 {image ? (
                   <img src={image} alt="" className="h-full w-full object-contain p-1.5" />
                 ) : (
                   <BookOpen className="h-5 w-5 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1 truncate text-[17px] font-extrabold text-ink">
+              <span className="min-w-0 flex-1 truncate text-[15.5px] font-extrabold text-ink">
                 {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
             </div>
-
           );
         })}
       </div>
@@ -491,14 +490,17 @@ function WordsStrip({
 function CardHeading({ icon, title }: { icon: ReactNode; title: string }) {
   return (
     <span className="flex min-w-0 items-center gap-2">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/60">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent/60">
         {icon}
       </span>
-      <span className="truncate text-[15px] font-extrabold text-ink">{title}</span>
+      <span className="truncate text-[14.5px] font-extrabold text-ink">{title}</span>
     </span>
   );
 }
 
 function Card({ children }: { children: ReactNode }) {
-  return <div className="rounded-[24px] bg-card p-4 shadow-soft lg:p-5">{children}</div>;
+  return (
+    <div className="min-h-0 rounded-[22px] bg-card p-3.5 shadow-soft lg:p-4">{children}</div>
+  );
 }
+
