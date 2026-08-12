@@ -101,7 +101,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   }
 
   return (
-    <div className="relative flex h-[100dvh] flex-col overflow-hidden bg-background">
+    <div className="relative flex h-[100dvh] flex-col overflow-hidden bg-background lg:h-[calc(100dvh-5rem-1px)]">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div className="absolute inset-0 bg-gradient-to-b from-white via-accent/15 to-accent/35" />
         <div className="absolute -left-12 top-32 h-28 w-40 rounded-full bg-accent/50 blur-2xl" />
