@@ -193,9 +193,13 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                                 ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
                                 : `Part 1 of ${cont.totalPhases}`}
                             </span>
-                            <span className="text-primary">{cont.percent}% complete</span>
+                            <span className="text-primary">
+                              {cont.percent === 0 ? "Not started yet" : `${cont.percent}% complete`}
+                            </span>
                           </div>
-                          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-card">
+                          {/* Inset ring keeps the empty (0%) track readable instead of
+                              looking like a rendering glitch. */}
+                          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full border border-primary/15 bg-card">
                             <div
                               className="h-full rounded-full bg-primary transition-all duration-500"
                               style={{
@@ -203,6 +207,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                               }}
                             />
                           </div>
+
                         </>
                       )}
                     </div>
