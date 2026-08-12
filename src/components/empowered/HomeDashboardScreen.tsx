@@ -490,7 +490,7 @@ function WordsStrip({
 
       <button
         onClick={onViewAll}
-        className="hidden shrink-0 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary sm:inline-flex"
+        className="hidden shrink-0 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary lg:inline-flex"
       >
         View all <ChevronRightIcon />
       </button>
