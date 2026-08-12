@@ -294,27 +294,27 @@ function WeekStrip({
     <Card>
       <CardHeading icon={<CalendarDays className="h-5 w-5 text-primary" />} title="This week" />
 
-      <div className="mt-3 flex items-start justify-between gap-1">
+      <div className="mt-2 flex items-start justify-between gap-1">
         {week.map((date, i) => {
           const filled = playedDates.includes(date);
           const isToday = date === today;
           return (
-            <span key={date} className="flex flex-col items-center gap-1">
+            <span key={date} className="flex flex-col items-center gap-0.5">
               <span
                 className={cn(
-                  "flex h-8 w-8 items-center justify-center rounded-full border-2",
+                  "flex h-7 w-7 items-center justify-center rounded-full border-2",
                   filled
                     ? "border-secondary bg-secondary text-secondary-foreground"
                     : "border-accent bg-card",
                   isToday && "border-primary border-[3px]",
                 )}
               >
-                {filled && <StarIcon filled className="h-4 w-4" />}
-                {!filled && isToday && <StarIcon filled className="h-4 w-4 text-secondary" />}
+                {filled && <StarIcon filled className="h-3.5 w-3.5" />}
+                {!filled && isToday && <StarIcon filled className="h-3.5 w-3.5 text-secondary" />}
               </span>
               <span
                 className={cn(
-                  "text-[10.5px] font-bold",
+                  "text-[10px] font-bold",
                   isToday ? "text-primary" : "text-ink-soft",
                 )}
               >
@@ -324,7 +324,8 @@ function WeekStrip({
           );
         })}
       </div>
-      <p className="mt-2 text-[12.5px] font-medium leading-snug text-ink-soft">{milestone}</p>
+      <p className="mt-1.5 text-[11.5px] font-medium leading-snug text-ink-soft">{milestone}</p>
+
 
     </Card>
   );
