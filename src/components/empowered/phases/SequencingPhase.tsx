@@ -134,6 +134,21 @@ export function SequencingPhase({
     setAttempts((prev) => [...prev, attempt]);
 
     if (isCorrect) {
+      const perEvent = sequencingAward(currentAttempt);
+      order.forEach((shuffledIndex) => {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "sequencing",
+          item: shuffled[shuffledIndex].correct_position,
+          amount: perEvent,
+        });
+      });
+      earnCoins({
+        storyId: storyData.id,
+        activity: "sequencing",
+        amount: COIN_ECONOMY.sequencing.completion,
+        label: "Put It in Order complete!",
+      });
       setFeedback({ type: "correct" });
     } else {
       setFeedback({ type: "wrong", wrongPositions });

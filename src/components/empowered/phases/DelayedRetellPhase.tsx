@@ -48,6 +48,12 @@ export function DelayedRetellPhase({
   }
 
   function handleDone() {
+    earnCoins({
+      storyId: storyData.id,
+      activity: "delayed-retell",
+      amount: COIN_ECONOMY["delayed-retell"].completion,
+      label: "You told the whole story!",
+    });
     onComplete({
       phase: "delayed-retell",
       attempts: [],

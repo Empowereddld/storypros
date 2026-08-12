@@ -172,6 +172,14 @@ export function VocabularyIntroPhase({
       setFeatureIdx(featureIdx + 1);
       return;
     }
+    // Last teaching screen for this word — the word sequence is complete.
+    earnCoins({
+      storyId: storyData.id,
+      activity: "vocabulary",
+      item: word.word,
+      amount: COIN_ECONOMY.vocabulary.perWord,
+      label: `You learned "${word.word}"!`,
+    });
     if (wordIdx < words.length - 1) {
       setWordIdx(wordIdx + 1);
       setFeatureIdx(-1);

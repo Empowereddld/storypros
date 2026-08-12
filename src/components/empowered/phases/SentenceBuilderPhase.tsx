@@ -98,6 +98,12 @@ export function SentenceBuilderPhase({
   function handleContinue() {
     if (feedback.type === "correct") {
       if (frameIdx + 1 >= frames.length) {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "sentences",
+          amount: COIN_ECONOMY.sentences.completion,
+          label: "Sentences complete!",
+        });
         const firstAttempts = attempts.filter((attempt) => attempt.attempt_number === 1);
         const correctFirst = firstAttempts.filter((attempt) => attempt.is_correct).length;
         const accuracy = frames.length > 0 ? correctFirst / frames.length : 0;

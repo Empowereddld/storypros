@@ -102,6 +102,12 @@ export function StorySlidesPhase({
   function handleNext() {
     if (isLast) {
       cancel();
+      earnCoins({
+        storyId: storyData.id,
+        activity: "read-listen",
+        amount: COIN_ECONOMY["read-listen"].completion,
+        label: "Story read!",
+      });
       onComplete({
         phase: "slides",
         attempts: [],

@@ -125,6 +125,13 @@ export function ComprehensionPhase({
     setAttempts((prev) => [...prev, attempt]);
 
     if (isCorrect) {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "comprehension",
+        item: qi,
+        amount: comprehensionAward(currentAttempt),
+        anchor: document.querySelector(`[data-answer-option="${selected}"]`),
+      });
       setBrainCheck({ type: "correct", message: q.brain_check_correct });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
@@ -136,6 +143,12 @@ export function ComprehensionPhase({
   function handleBrainCheckContinue() {
     if (brainCheck.type === "correct") {
       if (qi + 1 >= questions.length) {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "comprehension",
+          amount: COIN_ECONOMY.comprehension.completion,
+          label: "Question Time complete!",
+        });
         const firstAttempts = attempts.filter(
           (a) => a.attempt_number === 1 && a.activity_type === "comprehension",
         );

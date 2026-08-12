@@ -60,6 +60,12 @@ export function ImmediateRetellPhase({
   const { supported, isPlaying, toggle } = useListen(ttsSpeed);
 
   function handleDone() {
+    earnCoins({
+      storyId: storyData.id,
+      activity: "immediate-retell",
+      amount: COIN_ECONOMY["immediate-retell"].completion,
+      label: "Nice telling!",
+    });
     onComplete({
       phase: "immediate-retell",
       attempts: [],

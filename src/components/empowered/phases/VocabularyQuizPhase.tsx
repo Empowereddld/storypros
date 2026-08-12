@@ -94,6 +94,12 @@ export function VocabularyQuizPhase({
         setWordIdx(wordIdx + 1);
         setQIdx(0);
       } else {
+        earnCoins({
+          storyId: storyData.id,
+          activity: "vocabulary",
+          amount: COIN_ECONOMY.vocabulary.completion,
+          label: "Story Words complete!",
+        });
         const firstAttempts = attempts.filter((attempt) => attempt.attempt_number === 1);
         const correctFirst = firstAttempts.filter((attempt) => attempt.is_correct).length;
         const accuracy = totalQuestions > 0 ? correctFirst / totalQuestions : 0;

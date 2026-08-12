@@ -62,6 +62,12 @@ export function JokePhase({
     if (step === "meaning1") setStep("meaning2");
     if (step === "meaning2") setStep("joke");
     if (step === "joke") {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "jokes",
+        amount: COIN_ECONOMY.jokes.completion,
+        label: "Word Play complete!",
+      });
       onComplete({
         phase: "joke",
         attempts: [],
