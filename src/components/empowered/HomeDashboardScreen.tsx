@@ -57,6 +57,9 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
   useEffect(() => {
     const onUpdate = () => setProgressVersion((v) => v + 1);
     window.addEventListener("storypros:progress-updated", onUpdate);
+    // Cloud hydration can finish before this listener attaches — re-read once on mount
+    // so the coin total here always matches the counter in the top nav.
+    onUpdate();
     return () => window.removeEventListener("storypros:progress-updated", onUpdate);
   }, []);
 
