@@ -401,13 +401,13 @@ function BadgesCard({
         <CardHeading icon={<ShieldCheck className="h-5 w-5 text-primary" />} title="My Badges" />
         <button
           onClick={onSeeAll}
-          className="inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[13px] font-extrabold text-primary"
+          className="inline-flex min-h-9 items-center gap-1 rounded-full px-2 text-[12.5px] font-extrabold text-primary"
         >
           See all <ChevronRightIcon />
         </button>
       </div>
 
-      <div className="mt-2.5 flex items-center gap-2.5">
+      <div className="mt-2 flex items-center gap-2">
         {shown.map((badge) => {
           const isEarned = owned.has(badge.id);
           return (
@@ -415,7 +415,7 @@ function BadgesCard({
               key={badge.id}
               title={isEarned ? badge.name : "Coming soon"}
               className={cn(
-                "relative flex h-12 w-12 items-center justify-center rounded-2xl text-xl",
+                "relative flex h-11 w-11 items-center justify-center rounded-2xl text-xl",
                 isEarned ? "bg-secondary/25" : "bg-accent/60",
               )}
             >
@@ -430,7 +430,8 @@ function BadgesCard({
         })}
         {shown.length === 0 && <MedalIcon className="h-6 w-6 text-primary/40" />}
       </div>
-      <p className="mt-2 text-[12.5px] font-medium leading-snug text-ink-soft">{footnote}</p>
+      <p className="mt-1.5 text-[11.5px] font-medium leading-snug text-ink-soft">{footnote}</p>
+
 
     </Card>
   );
