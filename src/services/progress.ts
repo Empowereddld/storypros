@@ -294,9 +294,10 @@ export function recordStoryCompletion(
   // Keep both scores on replay (Jinean's decision: show both, don't replace)
   currentProgress.completions.push(completion);
 
-  // Award Coins based on performance
-  const planesEarned = calculatePaperPlanes(overallScore, !!existing);
-  currentProgress.paperPlanes += planesEarned;
+  // Coins are earned inside the activities themselves (services/coins),
+  // so completing a story no longer pays a separate performance bonus.
+  const planesEarned = 0;
+
 
   // Update streak (tracks consecutive days, not consecutive stories)
   const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
