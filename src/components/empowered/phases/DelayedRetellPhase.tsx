@@ -112,7 +112,7 @@ export function DelayedRetellPhase({
               <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
             </div>
 
-            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-rows-3 sm:gap-3">
+            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-2 sm:gap-3">
               {elements.map((element, index) => {
                 const selected = tapped.has(index);
                 const slide = storyData.slides.find((item) => item.story_element === element);
@@ -128,12 +128,12 @@ export function DelayedRetellPhase({
                       selected ? "border-success bg-success/5" : "border-accent/60",
                     )}
                   >
-                    <div className="relative h-28 overflow-hidden bg-accent sm:flex-1 sm:min-h-0">
+                    <div className="relative aspect-video w-full overflow-hidden bg-accent/50 sm:aspect-auto sm:h-auto sm:min-h-0 sm:flex-[4]">
                       {image ? (
                         <img
                           src={image}
                           alt=""
-                          className="h-full w-full object-cover object-[center_12%]"
+                          className="h-full w-full object-contain"
                         />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center text-primary">
@@ -156,8 +156,8 @@ export function DelayedRetellPhase({
                         </span>
                       )}
                     </div>
-                    <div className="shrink-0 p-3">
-                      <p className="text-base font-extrabold leading-tight text-primary">
+                    <div className="flex shrink-0 items-center justify-center px-2 py-1.5 sm:flex-1">
+                      <p className="text-center text-sm font-extrabold leading-tight text-primary sm:text-base">
                         {ELEMENT_LABELS[element]}
                       </p>
                     </div>
