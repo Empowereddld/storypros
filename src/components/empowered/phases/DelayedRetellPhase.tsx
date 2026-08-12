@@ -165,7 +165,7 @@ export function DelayedRetellPhase({
         </div>
       )}
 
-      <div className="relative z-10 mx-5 mb-5">
+      <div className="relative z-10 mx-5 mb-4 shrink-0">
         {!started ? (
           <TactileButton onClick={() => setStarted(true)}>
             Let's go! <ChevronRightIcon className="h-5 w-5 text-secondary" />
