@@ -215,7 +215,7 @@ const CATALOG: Collectible[] = [
     name: "Daria Gets Wings",
     description: "The day Daria learned to fly.",
     icon: "🦋",
-    price: 100,
+    price: 200,
     rarity: "uncommon",
   },
   {
@@ -244,7 +244,7 @@ const CATALOG: Collectible[] = [
     name: "Loop-de-Loop",
     description: "Your plane does a loop!",
     icon: "🔄",
-    price: 100,
+    price: 200,
     rarity: "common",
   },
   {
