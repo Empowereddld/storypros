@@ -161,17 +161,15 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                     )}
                   </div>
 
-                  <div className="relative shrink-0 px-2 pb-1 pt-3 lg:px-4">
-                    {/* Book badge tucked over the image edge */}
-                    <span
-                      aria-hidden
-                      className="absolute -top-7 left-2 flex h-14 w-14 items-center justify-center rounded-[20px] border-4 border-card bg-accent text-primary shadow-card lg:left-4"
-                    >
-                      <BookIcon className="h-6 w-6" />
-                    </span>
-
-                    <div className="ml-[68px] flex items-center justify-between gap-3 lg:ml-[72px]">
-                      <h2 className="min-w-0 truncate text-[20px] font-extrabold leading-[1.15] text-primary lg:text-[26px]">
+                  <div className="shrink-0 px-2 pb-1 pt-3 lg:px-3">
+                    <div className="flex items-center gap-3">
+                      <span
+                        aria-hidden
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary lg:h-12 lg:w-12"
+                      >
+                        <BookIcon className="h-6 w-6" />
+                      </span>
+                      <h2 className="min-w-0 flex-1 truncate text-[20px] font-extrabold leading-[1.15] text-primary lg:text-[26px]">
                         {cont.story.title}
                       </h2>
                       <SpeakButton
