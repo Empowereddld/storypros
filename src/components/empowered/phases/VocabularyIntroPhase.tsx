@@ -30,6 +30,8 @@ import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 type HeardKey = `intro-${number}` | `feat-${number}-${number}`;
 

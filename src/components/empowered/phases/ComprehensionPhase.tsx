@@ -17,6 +17,8 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { AudioButton } from "../AudioButton";
 import { useListen } from "./ListenButton";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY, comprehensionAward } from "@/services/coinEconomy";
 
 const ELEMENT_LABELS: Record<StoryElement, string> = {
   character: "Character",

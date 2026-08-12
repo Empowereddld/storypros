@@ -7,6 +7,8 @@ import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY, sequencingAward } from "@/services/coinEconomy";
 
 /** Ordering micro-labels that adapt to any number of sequencing frames (3+). */
 function orderLabels(count: number): string[] {

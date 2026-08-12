@@ -9,6 +9,8 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY, sentenceAward } from "@/services/coinEconomy";
 
 type FeedbackState =
   | { type: "none" }
@@ -87,6 +89,13 @@ export function SentenceBuilderPhase({
     setAttempts((prev) => [...prev, attempt]);
 
     if (isCorrect) {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "sentences",
+        item: frameIdx,
+        amount: sentenceAward(currentAttempt, frames.length),
+        anchor: document.querySelector(`[data-choice-id="${selected}"]`),
+      });
       setFeedback({ type: "correct", brainCheck: frame.brain_check_prompt });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));

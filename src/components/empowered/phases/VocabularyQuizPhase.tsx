@@ -8,6 +8,8 @@ import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+import { earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
