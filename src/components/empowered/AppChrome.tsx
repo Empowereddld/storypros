@@ -85,7 +85,20 @@ function NavLink({
 /** Top navigation for laptop-size screens (hidden below lg) */
 export function DesktopNav() {
   const location = useLocation();
-  const planes = getPaperPlanes();
+  // Coins live in a module-level store; re-read whenever it changes (child
+  // switch, cloud hydration, in-activity rewards) so the chrome never shows
+  // a stale total that disagrees with the home screen.
+  const [planes, setPlanes] = useState(getPaperPlanes);
+  useEffect(() => {
+    const sync = () => setPlanes(getPaperPlanes());
+    sync();
+    window.addEventListener("storypros:progress-updated", sync);
+    window.addEventListener("storypros:coin-earned", sync);
+    return () => {
+      window.removeEventListener("storypros:progress-updated", sync);
+      window.removeEventListener("storypros:coin-earned", sync);
+    };
+  }, [location.pathname]);
 
   return (
     <header className="sticky top-0 z-40 hidden border-b border-accent/50 bg-card/90 backdrop-blur lg:block">
