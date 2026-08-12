@@ -123,6 +123,21 @@ export function VocabularyIntroPhase({
   // Listen button can flip to "Listen again" without affecting navigation.
   const [heard, setHeard] = useState<Set<HeardKey>>(new Set());
 
+  // Stop narration when the word or feature changes.
+  useEffect(() => cancel, [wordIdx, featureIdx, cancel]);
+
+  const word = words[wordIdx];
+  const wordImage = resolveStoryImage(storyData.id, word.image);
+  const introText = word.sfa_teaching?.intro_text ?? "Let's learn what this word means.";
+  const introNarration = word.sfa_teaching?.intro_narration ?? introText;
+
+  const totalSteps = words.length * stepsPerWord;
+  const currentStep = wordIdx * stepsPerWord + (featureIdx + 1);
+  const progress = ((currentStep + 1) / totalSteps) * 100;
+  const isIntro = featureIdx === -1;
+  const isVeryFirstScreen = wordIdx === 0 && isIntro;
+  const isLastScreen = wordIdx === words.length - 1 && featureIdx === SFA_KEYS.length - 1;
+
   const heardKey = useMemo<HeardKey>(
     () => (isIntro ? `intro-${wordIdx}` : `feat-${wordIdx}-${featureIdx}`),
     [isIntro, wordIdx, featureIdx],
@@ -139,21 +154,6 @@ export function VocabularyIntroPhase({
     }
     toggle(text, audioKey);
   }
-
-  // Stop narration when the word or feature changes.
-  useEffect(() => cancel, [wordIdx, featureIdx, cancel]);
-
-  const word = words[wordIdx];
-  const wordImage = resolveStoryImage(storyData.id, word.image);
-  const introText = word.sfa_teaching?.intro_text ?? "Let's learn what this word means.";
-  const introNarration = word.sfa_teaching?.intro_narration ?? introText;
-
-  const totalSteps = words.length * stepsPerWord;
-  const currentStep = wordIdx * stepsPerWord + (featureIdx + 1);
-  const progress = ((currentStep + 1) / totalSteps) * 100;
-  const isIntro = featureIdx === -1;
-  const isVeryFirstScreen = wordIdx === 0 && isIntro;
-  const isLastScreen = wordIdx === words.length - 1 && featureIdx === SFA_KEYS.length - 1;
 
   const featureKey = isIntro ? null : SFA_KEYS[featureIdx];
   const teachingSlide = featureKey
