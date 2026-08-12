@@ -130,7 +130,11 @@ export function DelayedRetellPhase({
                   >
                     <div className="relative h-28 overflow-hidden bg-accent sm:flex-1 sm:min-h-0">
                       {image ? (
-                        <img src={image} alt="" className="h-full w-full object-cover" />
+                        <img
+                          src={image}
+                          alt=""
+                          className="h-full w-full object-cover object-[center_12%]"
+                        />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center text-primary">
                           <PaperPlaneIcon className="h-10 w-10" />
