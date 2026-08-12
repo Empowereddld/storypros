@@ -112,7 +112,7 @@ export function DelayedRetellPhase({
               <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
             </div>
 
-            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-[auto_auto] sm:content-center sm:gap-4">
+            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-[auto_auto] sm:content-center sm:items-center sm:gap-4">
               {elements.map((element, index) => {
                 const selected = tapped.has(index);
                 const slide = storyData.slides.find((item) => item.story_element === element);
@@ -124,7 +124,7 @@ export function DelayedRetellPhase({
                     onClick={() => handleTap(index)}
                     className={cn(
                       "hover-lift flex flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
-                      "sm:min-h-0",
+                      "sm:min-h-0 sm:self-center",
                       selected ? "border-success bg-success/5" : "border-accent/60",
                     )}
                   >
