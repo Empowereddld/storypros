@@ -393,6 +393,9 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
           onChange={(i: number) => setPhaseIndex(Math.max(0, Math.min(PHASE_ORDER.length - 1, i)))}
         />
       </DevNavProvider>
+      <CoinRewardLayer />
+
+
 
     </div>
   );
