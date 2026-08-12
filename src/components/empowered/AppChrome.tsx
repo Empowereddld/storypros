@@ -128,6 +128,8 @@ export function DesktopNav() {
         >
           <CoinIcon className="h-5 w-5" />
           {planes}
+          <span className="text-xs font-bold opacity-80">coins</span>
+
         </Link>
       </div>
     </header>

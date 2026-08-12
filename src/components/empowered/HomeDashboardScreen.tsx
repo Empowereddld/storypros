@@ -125,7 +125,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
         />
       </header>
 
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-28 pt-1 sm:overflow-hidden sm:pb-24 lg:px-8 lg:pb-6 lg:pt-4">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-4 pb-28 pt-1 sm:overflow-hidden sm:pb-24 lg:px-8 lg:pb-7 lg:pt-4">
         <div className="mx-auto flex w-full max-w-[1180px] flex-col sm:min-h-0 sm:flex-1">
           {/* ── Greeting ── */}
           <div className="flex shrink-0 items-end justify-between gap-3">
@@ -193,9 +193,13 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                                 ? `Part ${cont.phaseIndex} of ${cont.totalPhases}`
                                 : `Part 1 of ${cont.totalPhases}`}
                             </span>
-                            <span className="text-primary">{cont.percent}% complete</span>
+                            <span className="text-primary">
+                              {cont.percent === 0 ? "Not started yet" : `${cont.percent}% complete`}
+                            </span>
                           </div>
-                          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-card">
+                          {/* Inset ring keeps the empty (0%) track readable instead of
+                              looking like a rendering glitch. */}
+                          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full border border-primary/15 bg-card">
                             <div
                               className="h-full rounded-full bg-primary transition-all duration-500"
                               style={{
@@ -203,6 +207,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                               }}
                             />
                           </div>
+
                         </>
                       )}
                     </div>
@@ -464,14 +469,15 @@ function WordsStrip({
         </button>
       </div>
 
-      <div className="mt-2.5 flex min-w-0 flex-1 flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:mt-0">
-
+      {/* Chips keep their natural width (no truncated words) and the row itself
+          clips/scrolls, so a long word can never bleed outside the white card. */}
+      <div className="mt-2.5 flex min-w-0 flex-1 flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:mt-0 lg:flex-nowrap lg:overflow-x-auto lg:no-scrollbar">
         {words.slice(0, 3).map((word) => {
           const image = resolveStoryImage(storyId, word.image);
           return (
             <div
               key={word.word}
-              className="flex min-w-0 flex-auto items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card"
+              className="flex items-center gap-2 rounded-full border border-accent/60 bg-card px-2 py-1.5 shadow-card sm:flex-auto lg:flex-none"
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent/50">
                 {image ? (
@@ -480,7 +486,7 @@ function WordsStrip({
                   <BookOpen className="h-4 w-4 text-primary" />
                 )}
               </span>
-              <span className="min-w-0 flex-1 whitespace-nowrap text-[14.5px] font-extrabold text-ink">
+              <span className="whitespace-nowrap pr-0.5 text-[14.5px] font-extrabold text-ink">
                 {word.word}
               </span>
               <SpeakButton text={word.word} tone="soft" size="sm" />
@@ -488,6 +494,7 @@ function WordsStrip({
           );
         })}
       </div>
+
 
       <button
         onClick={onViewAll}
