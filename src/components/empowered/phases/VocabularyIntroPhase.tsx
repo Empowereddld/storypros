@@ -19,7 +19,7 @@
  * the flow works for every word from day one.
  * ───────────────────────────────────────────── */
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
@@ -28,8 +28,46 @@ import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
-import { AudioButton, SpeakerGlyph } from "../AudioButton";
+import { SpeakerGlyph } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
+
+type HeardKey = `intro-${number}` | `feat-${number}-${number}`;
+
+/**
+ * One labeled Listen control per vocabulary screen.
+ *
+ * Shows "🔊 Listen" before the child has played the audio on this screen,
+ * and "🔊 Listen again" after they have played it once. The label flips
+ * back to "Listen" as soon as the child moves to a new word or feature.
+ */
+function ListenButton({
+  label,
+  playing,
+  onClick,
+  ariaLabel,
+}: {
+  label: string;
+  playing: boolean;
+  onClick: () => void;
+  ariaLabel?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={ariaLabel}
+      aria-pressed={playing}
+      className={cn(
+        "flex h-14 shrink-0 items-center gap-2.5 rounded-[24px] bg-secondary px-4 text-primary transition-transform",
+        "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
+        playing && "ring-4 ring-primary-foreground/40",
+      )}
+    >
+      <SpeakerGlyph className="h-7 w-7" />
+      <span className="text-[15px] font-extrabold tracking-tight whitespace-nowrap">{label}</span>
+    </button>
+  );
+}
 
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
 type SFAKey = (typeof SFA_KEYS)[number];
