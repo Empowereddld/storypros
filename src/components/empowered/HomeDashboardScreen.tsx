@@ -405,7 +405,7 @@ function BadgesCard({
         </button>
       </div>
 
-      <div className="mt-3 flex items-center gap-3">
+      <div className="mt-2.5 flex items-center gap-2.5">
         {shown.map((badge) => {
           const isEarned = owned.has(badge.id);
           return (
@@ -413,7 +413,7 @@ function BadgesCard({
               key={badge.id}
               title={isEarned ? badge.name : "Coming soon"}
               className={cn(
-                "relative flex h-14 w-14 items-center justify-center rounded-2xl text-2xl",
+                "relative flex h-12 w-12 items-center justify-center rounded-2xl text-xl",
                 isEarned ? "bg-secondary/25" : "bg-accent/60",
               )}
             >
@@ -428,7 +428,8 @@ function BadgesCard({
         })}
         {shown.length === 0 && <MedalIcon className="h-6 w-6 text-primary/40" />}
       </div>
-      <p className="mt-3 text-[13px] font-medium leading-snug text-ink-soft">{footnote}</p>
+      <p className="mt-2 text-[12.5px] font-medium leading-snug text-ink-soft">{footnote}</p>
+
     </Card>
   );
 }
