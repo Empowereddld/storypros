@@ -12,7 +12,7 @@
  * ───────────────────────────────────────────── */
 
 import { Link, useNavigate, useLocation } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { StoryProsLogo } from "./StoryProsBrand";
 import { HomeIcon, BookIcon, MapIcon, MedalIcon, CoinIcon } from "./StoryProsUi";
