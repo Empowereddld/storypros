@@ -119,6 +119,27 @@ export function VocabularyIntroPhase({
     ttsSpeed === "fast" ? "normal" : ttsSpeed,
   );
 
+  // Track which screen's audio has been played at least once, so the
+  // Listen button can flip to "Listen again" without affecting navigation.
+  const [heard, setHeard] = useState<Set<HeardKey>>(new Set());
+
+  const heardKey = useMemo<HeardKey>(
+    () => (isIntro ? `intro-${wordIdx}` : `feat-${wordIdx}-${featureIdx}`),
+    [isIntro, wordIdx, featureIdx],
+  );
+
+  function playWithTrack(text: string, audioKey: string) {
+    if (!isPlaying(audioKey)) {
+      setHeard((prev) => {
+        if (prev.has(heardKey)) return prev;
+        const next = new Set(prev);
+        next.add(heardKey);
+        return next;
+      });
+    }
+    toggle(text, audioKey);
+  }
+
   // Stop narration when the word or feature changes.
   useEffect(() => cancel, [wordIdx, featureIdx, cancel]);
 
