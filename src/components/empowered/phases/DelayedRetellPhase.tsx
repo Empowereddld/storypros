@@ -124,11 +124,11 @@ export function DelayedRetellPhase({
                     onClick={() => handleTap(index)}
                     className={cn(
                       "hover-lift flex flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
-                      "sm:min-h-0 sm:flex-1",
+                      "sm:min-h-0 sm:flex-1 sm:justify-center",
                       selected ? "border-success bg-success/5" : "border-accent/60",
                     )}
                   >
-                    <div className="relative aspect-video w-full overflow-hidden bg-accent/50 sm:aspect-auto sm:h-auto sm:min-h-0 sm:flex-[4]">
+                    <div className="relative mx-auto aspect-video w-full max-h-full shrink-0 overflow-hidden rounded-[18px] bg-accent/40">
                       {image ? (
                         <img
                           src={image}
@@ -156,7 +156,7 @@ export function DelayedRetellPhase({
                         </span>
                       )}
                     </div>
-                    <div className="flex shrink-0 items-center justify-center px-2 py-1.5 sm:flex-1">
+                    <div className="flex shrink-0 items-center justify-center px-2 py-2">
                       <p className="text-center text-sm font-extrabold leading-tight text-primary sm:text-base">
                         {ELEMENT_LABELS[element]}
                       </p>
