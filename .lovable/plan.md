@@ -1,51 +1,24 @@
-# Moment-to-moment coin rewards
+# Fix: My Badges card bleeding into "Words you're learning"
 
-Connect the learning activities to the coin system already in the app, so children see coins arrive the instant they succeed instead of only at the end of a story.
+## What's happening
 
-## The economy
+The dashboard is a fixed-height, no-scroll screen. The right column ("This week", "Coins", "My Badges") is laid out as a grid with `auto-rows-min` and `content-start`, so its three cards keep their natural heights no matter how much room the row actually has. At shorter desktop heights (your 707px viewport) the three stacked cards are taller than the row, and because nothing clips or compresses them, the bottom card (My Badges) spills out of its column and lands on top of the words strip below.
 
-One fully completed story = up to 100 coins.
+The left hero column doesn't have this problem because its image flexes (`flex-1`) to absorb leftover space.
 
-| Activity | How coins are earned | Max |
-|---|---|---|
-| Read & Listen | finishing the reading section | 5 |
-| Question Time | 6 questions (4 / 3 / 2) + 6 completion | 30 |
-| Sequencing | 6 events (2 first try, 1 after support) + 3 completion | 15 |
-| Story Words | 4 per completed word sequence + 3 completion | 15 |
-| Sentences | 3 / 2 / 1 per response + completion bonus | 10 |
-| Word Play (jokes) | completing the activity | 5 |
-| Sound Play | completing the activity | 5 |
-| Retell | 5 immediate + 5 delayed | 10 |
-| **Total** | | **100** |
+## Fix
 
-Rules baked in:
-- Wrong answers never remove coins; supported success still earns (a smaller amount).
-- Coins reward learning actions only — never a plain Next tap, never the Listen button.
-- Each coin-earning action pays out once per story. Replays are free to practise but already-earned coins don't pay again.
+Make the right rail fit the space it's given instead of overflowing it:
 
-## What the child sees
+1. Distribute the rail height across the three cards instead of stacking at natural size (drop `auto-rows-min` / `content-start` on tablet+, let rows share the available height, keep `min-h-0` on each card).
+2. Let the badges card shrink gracefully at short heights: badge tiles step down in size and the footnote hides when vertical room is tight, so the card never needs more height than the row offers.
+3. Add overflow containment on the rail as a safety net so no child can ever paint over the section below.
+4. Reserve the words strip as a fixed-height row at the bottom of the layout so the grid above always knows its real budget.
 
-- A small persistent coin pill in the activity header: a coin icon and the running total.
-- On a successful response: the answer gets its positive state, a small "+4" floats up beside it, a coin travels to the pill, and the number counts up. Roughly 600ms, and Next is never blocked or delayed by it.
-- At the end of a section: a calm line in the existing section-complete moment — "Question Time complete! You earned 27 coins."
-- At the end of the story: the existing completion screen shows the real story total ("You earned 91 coins") instead of the current performance-score payout.
-- No confetti bursts, no full-screen interruptions, no sound spam.
+## Verification
 
-## Rewards shop and badges
-
-Shop items today cost 10-100 coins, which is far too cheap once a story pays up to 100. Prices get rescaled to the intended ladder: small collectible 100, accessory 200, better item 350, theme 500, premium 750, rare 1000. Existing balances are scaled up by the same factor so no child loses purchasing power.
-
-Badges stay achievement-only and are never purchasable: coins are currency, badges are accomplishments.
+Screenshot the dashboard with Playwright at 1065x707, 1280x800, and 768x1024 tablet, confirming: no vertical scrolling, all three right-rail cards fully visible inside their column, and the words strip sitting clear of the badges card.
 
 ## Technical notes
 
-- New `src/services/coins.ts` module: the per-activity coin table, an `awardCoins(action, tier)` API that dedupes by `storyId + action key` for the current story run, and event emission for the UI.
-- Award persistence reuses the existing `coins_ledger` write path in `src/services/progress.ts` (with a per-activity `reason`), so the parent dashboard and totals keep working. `calculatePaperPlanes` at story completion is replaced by the sum of awards actually earned during the run; the checkpoint payload carries earned awards so a resumed story doesn't double-pay.
-- New `CoinPill` + `CoinBurst` presentation components; the pill mounts in `ProgressHeader.tsx`, the burst is anchored to the answering element in each phase.
-- Phases wired to emit awards: `StorySlidesPhase`, `ComprehensionPhase` (per-attempt tier), `SequencingPhase`, `VocabularyIntroPhase` / `VocabularyQuizPhase` (per completed word), `SentenceBuilderPhase`, `JokePhase`, `PhonologicalPhase`, `ImmediateRetellPhase`, `DelayedRetellPhase`.
-- Animations respect `prefers-reduced-motion` (number updates instantly, no travel).
-- Single-viewport layouts already enforced on several phases stay intact — the pill lives in the existing header row and the burst is absolutely positioned.
-
-## Out of scope for this pass
-
-Avatar items, new collectibles, and parent-facing coin reporting beyond what already exists.
+All changes stay in `src/components/empowered/HomeDashboardScreen.tsx` — the outer grid at line 146, the `<aside>` at line 244, and `BadgesCard` (lines 404-440). Presentation only; no data or logic changes.
