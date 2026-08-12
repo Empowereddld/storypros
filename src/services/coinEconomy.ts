@@ -12,6 +12,7 @@
  *   Jokes ........................  5
  *   Sounds .......................  5
  *   Retell (immediate + delayed) . 10   (5 + 5)
+ *   Finishing the whole story ....  5
  *   ------------------------------------------
  *   Maximum per story ........... 100
  *
@@ -29,7 +30,8 @@ export type CoinActivity =
   | "jokes"
   | "sounds"
   | "immediate-retell"
-  | "delayed-retell";
+  | "delayed-retell"
+  | "story-complete";
 
 export const COIN_ECONOMY = {
   "read-listen": {
@@ -82,6 +84,11 @@ export const COIN_ECONOMY = {
   },
   "delayed-retell": {
     label: "Tell It Again",
+    completion: 5,
+    max: 5,
+  },
+  "story-complete": {
+    label: "Story finished",
     completion: 5,
     max: 5,
   },

@@ -19,7 +19,8 @@ import { useState, useCallback, useEffect } from "react";
 import type { StoryData, StoryPhase, PhaseResult } from "@/types/story";
 import { recordPhaseAttempts, recordStoryCompletion, getPaperPlanes } from "@/services/progress";
 import { saveCheckpoint, getCheckpoint, clearCheckpoint } from "@/services/checkpoint";
-import { startCoinSession, getSessionCoins, getSessionStartBalance } from "@/services/coins";
+import { startCoinSession, getSessionCoins, getSessionStartBalance, earnCoins } from "@/services/coins";
+import { COIN_ECONOMY } from "@/services/coinEconomy";
 import { CoinRewardLayer } from "../CoinRewards";
 import { useAuth } from "@/contexts/AuthContext";
 import { TactileButton } from "../TactileButton";
@@ -189,6 +190,12 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
       const nextIdx = phaseIndex + 1;
       if (PHASE_ORDER[nextIdx] === "story-complete") {
         recordStoryCompletion(storyData.id, updated);
+        earnCoins({
+          storyId: storyData.id,
+          activity: "story-complete",
+          amount: COIN_ECONOMY["story-complete"].completion,
+          label: "Story finished!",
+        });
         setPaperPlanesEarned(getSessionCoins());
         setTotalPaperPlanes(getPaperPlanes());
         setPreviousPaperPlanes(getSessionStartBalance());
