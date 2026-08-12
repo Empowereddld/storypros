@@ -105,14 +105,14 @@ export function DelayedRetellPhase({
           </section>
         </div>
       ) : (
-        <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
-          <section>
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-2 sm:overflow-hidden">
+          <section className="flex min-h-0 flex-1 flex-col">
             <div className="flex items-center gap-2">
               <BookIcon className="h-5 w-5 text-primary" />
               <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
             </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-3">
+            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-rows-3 sm:gap-3">
               {elements.map((element, index) => {
                 const selected = tapped.has(index);
                 const slide = storyData.slides.find((item) => item.story_element === element);
@@ -123,11 +123,12 @@ export function DelayedRetellPhase({
                     key={`${element}-${index}`}
                     onClick={() => handleTap(index)}
                     className={cn(
-                      "hover-lift min-h-[204px] overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                      "hover-lift flex min-h-[204px] flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
+                      "sm:min-h-0 sm:flex-1",
                       selected ? "border-success bg-success/5" : "border-accent/60",
                     )}
                   >
-                    <div className="relative h-28 overflow-hidden bg-accent">
+                    <div className="relative h-28 overflow-hidden bg-accent sm:flex-1 sm:min-h-0">
                       {image ? (
                         <img src={image} alt="" className="h-full w-full object-cover" />
                       ) : (
@@ -151,7 +152,7 @@ export function DelayedRetellPhase({
                         </span>
                       )}
                     </div>
-                    <div className="p-3">
+                    <div className="shrink-0 p-3">
                       <p className="text-base font-extrabold leading-tight text-primary">
                         {ELEMENT_LABELS[element]}
                       </p>
