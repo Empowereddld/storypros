@@ -331,7 +331,7 @@ export const FAQS = [
   },
   {
     q: "Is Story Pros right for multilingual children?",
-    a: "Yes, multilingual children can use Story Pros. Multilingualism itself is not a language disorder. Story Pros may be especially relevant for multilingual children who also have DLD or other language-based learning needs.",
+    a: "Yes, multilingual children can use Story Pros. Story Pros may be especially relevant for multilingual children who also have DLD or other language-based learning needs.",
   },
   {
     q: "How often should my child use Story Pros?",
