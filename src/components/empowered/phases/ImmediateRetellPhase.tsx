@@ -193,14 +193,11 @@ export function ImmediateRetellPhase({
                     )}
                   </div>
 
-                  <div className="flex shrink-0 items-start gap-2 px-3 py-2.5 sm:min-h-0 sm:flex-1 sm:shrink sm:items-center sm:overflow-hidden">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/60 text-[10px] font-extrabold text-primary">
-                      {index + 1}
-                    </span>
-                    <p className="text-[13.5px] font-semibold leading-snug text-ink">
-                      {slide.text}
-                    </p>
-                  </div>
+                  {/* Picture-only card: the number keeps the order clear without words. */}
+                  <span className="absolute bottom-2.5 left-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-card text-[12px] font-extrabold text-primary shadow-card">
+                    {index + 1}
+                  </span>
+
                 </div>
               );
             })}
