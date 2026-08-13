@@ -120,6 +120,31 @@ const CUES: Cue[] = [
   [/while running a race|running very fast/, "🏃"],
   [/when you are swimming/, "🏊"],
 
+  // ── Feeling faces and body cues ──
+  [/frown|biting lip|wringing hands|turn red and look down/, "😟"],
+  [/crying|red face/, "😢"],
+  [/sitting alone|looking down, quiet|give up and walk away/, "😔"],
+  [/jumping up and down|screaming/, "🤩"],
+  [/yell at the other kids/, "😠"],
+  [/heart beats very fast/, "💓"],
+  [/calm and peaceful/, "😌"],
+  [/getting a hug|pet a puppy/, "🤗"],
+  [/stub your toe/, "🤕"],
+  [/take a nap/, "😴"],
+  [/bubble bath/, "🛁"],
+  [/watching your favorite show/, "📺"],
+  [/birthday present/, "🎁"],
+  [/score a goal|win a game/, "🏆"],
+  [/play with friends|playing your favorite game/, "🎲"],
+
+  // ── Objects (second pass) ──
+  [/castle shape made of sand/, "🏖️"],
+  [/many pieces with a picture/, "🧩"],
+  [/missing part of the directions|page with words or pictures|instruction page/, "📄"],
+  [/write or draw on it/, "✏️"],
+  [/paper or digital pass/, "🎟️"],
+  [/\bcar\b/, "🚗"],
+
   // ── Generic fallbacks (kept last) ──
   [/\ba feeling\b/, "😊"],
   [/\ba food\b/, "🍎"],
