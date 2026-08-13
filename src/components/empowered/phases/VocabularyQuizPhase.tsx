@@ -264,6 +264,17 @@ export function VocabularyQuizPhase({
                       >
                         {String.fromCharCode(65 + index)}
                       </span>
+                      {cue && (
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-2xl leading-none",
+                            isSelected ? "bg-primary/15" : "bg-accent/45",
+                          )}
+                        >
+                          {cue}
+                        </span>
+                      )}
                       <span
                         className={cn(
                           "min-w-0 flex-1 text-base font-extrabold leading-snug",
