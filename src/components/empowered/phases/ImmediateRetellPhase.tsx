@@ -154,7 +154,7 @@ export function ImmediateRetellPhase({
                     playing ? "ring-4 ring-primary" : "ring-primary/10",
                   )}
                 >
-                  <div className="relative aspect-video w-full shrink-0 grow-0 overflow-hidden bg-accent/40 sm:aspect-auto sm:min-h-0 sm:basis-[72%]">
+                  <div className="relative aspect-video w-full shrink-0 grow-0 overflow-hidden bg-accent/40 sm:aspect-auto sm:min-h-0 sm:flex-1 sm:shrink sm:grow">
                     {image ? (
                       <img
                         src={image}
