@@ -318,8 +318,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               <p className="mt-4 max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]">
                 {WHY_STORIES.lead}
               </p>
-              <StoryElementFramework items={WHY_STORIES.framework} className="mt-8" />
-              <StoryMathFormula className="mt-6" />
+              <StoryMathFormula className="mt-8" />
             </div>
 
             <div className="lg:order-2">
