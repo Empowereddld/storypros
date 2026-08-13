@@ -351,7 +351,7 @@ export const FAQS = [
   },
   {
     q: "How is Story Pros different from other learning apps?",
-    a: "Story Pros uses connected stories to support language practice in meaningful context. Built-in supports include visuals, repetition, choices, and extra processing time. Membership also extends beyond the app with a Family Dashboard and monthly Community Circle.",
+    a: "Story Pros uses connected stories to support language practice in meaningful context. Built-in supports include visuals, repetition, choices, and extra processing time. A key feature is also frequent metacognitive checks which teach kids to think about their own thinking. Membership also extends beyond the app with a Family Dashboard and monthly Community Circle.",
   },
 ];
 
