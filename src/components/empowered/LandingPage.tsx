@@ -45,6 +45,7 @@ const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
 };
 import { Reveal } from "./CharacterSection";
 import { StoryElementFramework } from "./StoryElementFramework";
+import { StoryMathFormula } from "./StoryMathFormula";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import familyCtaAsset from "@/assets/family-cta.png.asset.json";
 import heroTabletAsset from "@/assets/hero-tablet.png.asset.json";
@@ -318,6 +319,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 {WHY_STORIES.lead}
               </p>
               <StoryElementFramework items={WHY_STORIES.framework} className="mt-8" />
+              <StoryMathFormula className="mt-6" />
             </div>
 
             <div className="lg:order-2">
