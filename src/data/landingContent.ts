@@ -51,7 +51,7 @@ export const PARENT_PROBLEM = {
 /** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
   heading: "Why stories?",
-  lead: "When children know the elements needed to tell a complete story, they can put more brain power into thinking of specific words and producing complex sentences. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read.\u00a0",
+  lead: "When children know the elements needed to tell a complete story, they can put more brain power into thinking of specific words and producing complex sentences. That same story framework also supports story comprehension, giving kids a clear way to organize and make sense of what they hear or read.\u00a0",
   framework: [
     { element: "character", label: "Character" },
     { element: "place", label: "Place" },
