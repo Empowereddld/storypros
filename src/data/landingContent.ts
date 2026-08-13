@@ -69,12 +69,12 @@ export const WHY_STORIES_BENEFITS = {
     {
       icon: "GraduationCap",
       title: "At school",
-      body: "The same structure helps children understand what they read, organize their ideas, and share what they know with teachers and classmates.",
+      body: 'The "story formula" helps children understand what they read, organize their ideas, and share what they know with teachers and classmates.',
     },
     {
       icon: "MessagesSquare",
       title: "With friends",
-      body: "Children can tell clearer stories about their own experiences, join conversations more easily, and feel more confident connecting with others.",
+      body: "Children can tell clearer stories about their own experiences, join conversations more easily, and feel more confident connecting with others when they .",
     },
   ],
 };
