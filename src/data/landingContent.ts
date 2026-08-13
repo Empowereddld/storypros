@@ -253,7 +253,7 @@ export const FOUNDERS = {
   heading: "Built around how children learn language",
   body: "Story Pros is developed by Empowered DLD, bringing together clinical expertise, classroom experience, and thoughtful language-learning design.",
   close:
-    "Grounded in research and best practices, and shaped through collaboration with speech pathologists, educators, researchers, and families.",
+    "Grounded in research and best practices, and shaped through collaboration with speech-language pathologists, educators, researchers, and families.",
   pillars: [
     {
       icon: "MessagesSquare",
