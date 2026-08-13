@@ -27,21 +27,21 @@ export const FOUNDING_SPOTS = 100;
 /* ── Hero ── */
 
 export const HERO = {
-  eyebrow: "For ages 5–12 with DLD + language-based needs",
+  eyebrow: "FOR KIDS WITH LANGUAGE DISORDERS",
   /** Split so the headline lands on two lines on desktop */
-  headingLine1: "Language learning through interactive",
+  headingLine1: "Improving language skills through interactive",
   headingLine2: "stories",
-  heading: "Language learning through interactive stories",
-  subheading: "Learning that feels like a story, not a lesson.",
+  heading: "Improving language skills through interactive stories",
+  subheading: "Stories are an ideal context to gain new vocabulary and grammar skills!",
 };
 
 
 /* ── Parent problem ── */
 
 export const PARENT_PROBLEM = {
-  heading: "Your child has so much to say.",
+  heading: "Does your child struggle to share their ideas or tell you about their day?",
   paragraphs: [
-    "You may hear “I don’t know” or get only part of the story, even when your child has more they want to share.",
+    "Kids with language disorders often need help sharing their amazing ideas in a way others can easily follow. ",
     "Story Pros gives children calm, guided practice understanding stories, organizing ideas, and putting their thoughts into words.",
   ],
 };
@@ -51,7 +51,7 @@ export const PARENT_PROBLEM = {
 /** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
   heading: "Why stories?",
-  lead: "Stories give language a clear, meaningful structure. Story Pros helps children notice key parts of a story, understand how events connect, and use that structure to remember and retell what happened.",
+  lead: "Story Pros helps children notice key parts of a story, understand how events connect, and use that structure to remember and retell what happened. We lower the cognitive demands by teaching the story framework kids can use again and again!",
   framework: [
     { element: "character", label: "Character" },
     { element: "place", label: "Place" },
