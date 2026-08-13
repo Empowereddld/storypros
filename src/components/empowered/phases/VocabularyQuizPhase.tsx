@@ -10,6 +10,7 @@ import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY } from "@/services/coinEconomy";
+import { getOptionPictureCue } from "@/data/optionPictureCues";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -225,6 +226,9 @@ export function VocabularyQuizPhase({
                 const isSelected = selected === option.id;
                 const isDisabled = wrongIds.has(option.id);
                 const label = option.text || option.label || "";
+                // Picture cue sits beside the words (never replaces them) so a
+                // child with DLD can hold each choice in mind while comparing.
+                const cue = getOptionPictureCue(label, option.emoji);
                 return (
                   <div
                     key={option.id}
@@ -260,6 +264,17 @@ export function VocabularyQuizPhase({
                       >
                         {String.fromCharCode(65 + index)}
                       </span>
+                      {cue && (
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-2xl leading-none",
+                            isSelected ? "bg-primary/15" : "bg-accent/45",
+                          )}
+                        >
+                          {cue}
+                        </span>
+                      )}
                       <span
                         className={cn(
                           "min-w-0 flex-1 text-base font-extrabold leading-snug",
