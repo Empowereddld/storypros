@@ -327,7 +327,7 @@ export const MEMBERSHIP_TIER = {
 export const FAQS = [
   {
     q: "Who is Story Pros designed for?",
-    a: `Story Pros is designed for children ${AGE_RANGE} with DLD and other language-based learning needs. A formal diagnosis is not required.`,
+    a: "Story Pros is designed for children aged about 5 to 12 with DLD and other language-based learning needs. It can also be enriching for neurotypical kids.",
   },
   {
     q: "Is Story Pros right for multilingual children?",
