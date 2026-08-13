@@ -319,6 +319,30 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 {WHY_STORIES.lead}
               </p>
               <StoryMathFormula className="mt-8" />
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                {WHY_STORIES_BENEFITS.items.map((item) => {
+                  const Icon = item.icon === "GraduationCap" ? GraduationCap : MessagesSquare;
+                  return (
+                    <div
+                      key={item.title}
+                      className="rounded-[22px] border border-accent/50 bg-card p-5 shadow-card sm:p-6"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/60 sm:h-11 sm:w-11">
+                          <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} aria-hidden />
+                        </span>
+                        <h3 className="font-display text-lg font-extrabold text-primary sm:text-xl">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <p className="mt-3 text-[14.5px] font-medium leading-relaxed text-ink-soft sm:text-[15px]">
+                        {item.body}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="lg:order-2">
