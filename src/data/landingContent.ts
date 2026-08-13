@@ -96,7 +96,7 @@ export const WILL_LEARN = [
   {
     icon: "MessageCircle",
     skill: "Vocabulary",
-    detail: "Learn and use important story words.",
+    detail: "Deepen understanding of key story words",
   },
   {
     icon: "Headphones",
@@ -106,7 +106,7 @@ export const WILL_LEARN = [
   {
     icon: "AlignLeft",
     skill: "Sentence building",
-    detail: "Practise putting ideas into clear sentences.",
+    detail: "Practise putting ideas into complex sentences.",
   },
   {
     icon: "BookOpen",
@@ -156,7 +156,7 @@ export const COMMUNITY = {
   eyebrow: "Included with membership",
   heading: "More than an app. A community too.",
   subheading: "Story Pros Community Circle",
-  body: "Once a month, children can come together live on Zoom to talk, share, connect, and spend time with other kids who understand that communication can sometimes be hard.",
+  body: "Once a month, children can come together live on Zoom to talk, share, connect, and spend time with other kids who understand that communication can sometimes be hard. This is a fantastic opportunity to make friends with people who get it!",
   chips: [
     { icon: "CalendarDays", label: "Monthly" },
     { icon: "Clock", label: "About 1 hour" },
@@ -185,7 +185,7 @@ export const DASHBOARD = {
       icon: "Home",
       title: "One step for home",
       detail:
-        "A single prompt to try together — like “Why do you think he did that?” — with the reason it helps.",
+        "A single prompt to try together, like “Why do you think he did that?” to help your child think more deeply.",
     },
   ],
 };
