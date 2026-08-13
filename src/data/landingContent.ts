@@ -62,6 +62,23 @@ export const WHY_STORIES = {
   ] as const,
 };
 
+export const WHY_STORIES_BENEFITS = {
+  heading: "A framework that works everywhere",
+  lead: "Once children learn the Story Pros formula, they can use it at school, at home, and with friends.",
+  items: [
+    {
+      icon: "GraduationCap",
+      title: "At school",
+      body: "The same structure helps children understand what they read, organize their ideas, and share what they know with teachers and classmates.",
+    },
+    {
+      icon: "MessagesSquare",
+      title: "With friends",
+      body: "Children can tell clearer stories about their own experiences, join conversations more easily, and feel more confident connecting with others.",
+    },
+  ],
+};
+
 /* ── The four-part pathway ── */
 
 export const PATHWAY = [
