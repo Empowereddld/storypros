@@ -520,9 +520,11 @@ function CardHeading({ icon, title }: { icon: ReactNode; title: string }) {
   );
 }
 
-function Card({ children }: { children: ReactNode }) {
+function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className="min-h-0 rounded-[22px] bg-card p-3.5 shadow-soft lg:p-4">{children}</div>
+    <div className={cn("min-h-0 rounded-[22px] bg-card p-3.5 shadow-soft lg:p-4", className)}>
+      {children}
+    </div>
   );
 }
 
