@@ -51,7 +51,7 @@ export const PARENT_PROBLEM = {
 /** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
   heading: "Why stories?",
-  lead: "Story Pros helps children notice key parts of a story, understand how events connect, and use that structure to remember and retell what happened. When children learn the formula and understand the parts, they can put more brain power into thinking of the words and producing the sentences they need. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read. We lower the cognitive demands by teaching a story framework kids can use again and again at home and at school!",
+  lead: "When children know the elements they need to tell a complete story, they can put more brain power into thinking of the words and producing the sentences they need. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read.\u00a0",
   framework: [
     { element: "character", label: "Character" },
     { element: "place", label: "Place" },
