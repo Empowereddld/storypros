@@ -10,6 +10,7 @@ import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY } from "@/services/coinEconomy";
+import { getOptionPictureCue } from "@/data/optionPictureCues";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
