@@ -41,7 +41,7 @@ export const HERO = {
 export const PARENT_PROBLEM = {
   heading: "Does your child struggle to share their ideas or tell you about their day?",
   paragraphs: [
-    "Kids with language disorders often need help sharing their amazing ideas in a way others can easily follow. ",
+    "Kids with language disorders often need help sharing their amazing ideas and experiences in a way others can easily follow. ",
     "Story Pros gives children calm, guided practice understanding stories, organizing ideas, and putting their thoughts into words.",
   ],
 };
@@ -51,7 +51,7 @@ export const PARENT_PROBLEM = {
 /** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
   heading: "Why stories?",
-  lead: "Story Pros helps children notice key parts of a story, understand how events connect, and use that structure to remember and retell what happened. We lower the cognitive demands by teaching the story framework kids can use again and again!",
+  lead: "Story Pros helps children notice key parts of a story, understand how events connect, and use that structure to remember and retell what happened. We lower the cognitive demands by teaching a story framework kids can use again and again at home and at school!",
   framework: [
     { element: "character", label: "Character" },
     { element: "place", label: "Place" },
