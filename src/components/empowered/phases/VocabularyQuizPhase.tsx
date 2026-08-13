@@ -225,6 +225,9 @@ export function VocabularyQuizPhase({
                 const isSelected = selected === option.id;
                 const isDisabled = wrongIds.has(option.id);
                 const label = option.text || option.label || "";
+                // Picture cue sits beside the words (never replaces them) so a
+                // child with DLD can hold each choice in mind while comparing.
+                const cue = getOptionPictureCue(label, option.emoji);
                 return (
                   <div
                     key={option.id}
