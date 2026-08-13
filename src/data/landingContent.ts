@@ -51,7 +51,7 @@ export const PARENT_PROBLEM = {
 /** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
   heading: "Why stories?",
-  lead: "When children know the elements they need to tell a complete story, they can put more brain power into thinking of the words and producing the sentences they need. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read.\u00a0",
+  lead: "When children know the elements they need to tell a complete story, they can put more brain power into thinking of their words and producing the sentences they need. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read.\u00a0",
   framework: [
     { element: "character", label: "Character" },
     { element: "place", label: "Place" },
@@ -226,7 +226,7 @@ export const DESIGNED_FOR: { icon: string; text: string }[] = [
 ];
 
 export const DESIGNED_FOR_NOTE =
-  "Created with children with DLD in mind, with supports that may also help children with related language-based needs.";
+  "Created with children with Developmental Language Disorder (DLD) in mind, with supports that may also help children with related language-based needs.";
 
 
 /* ── Created by ── */
