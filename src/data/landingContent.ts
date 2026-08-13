@@ -74,7 +74,7 @@ export const WHY_STORIES_BENEFITS = {
     {
       icon: "MessagesSquare",
       title: "With friends",
-      body: "Children can tell clearer stories about their own experiences, join conversations more easily, and feel more confident connecting with others when they .",
+      body: "Children can tell clearer stories about their own experiences, join conversations more easily, and feel more confident connecting with others.",
     },
   ],
 };
