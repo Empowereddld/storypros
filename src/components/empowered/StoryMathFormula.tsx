@@ -40,7 +40,7 @@ export function StoryMathFormula({ className }: { className?: string }) {
   return (
     <div className={cn("rounded-3xl border border-accent/50 bg-card p-5 shadow-card sm:p-6", className)}>
       <p className="mb-4 text-center text-sm font-semibold leading-snug text-ink-soft sm:text-base">
-        Think of it like a math formula: each part adds up to a complete story.
+        Think of it like a math formula:{"\u00a0"}
       </p>
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
         {FORMULA.map((item, index) => {
