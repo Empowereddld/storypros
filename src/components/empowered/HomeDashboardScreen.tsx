@@ -241,7 +241,7 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
             </div>
 
             {/* Right rail — compact stack that shares the same viewport height */}
-            <aside className="mt-3 grid min-h-0 grid-cols-1 gap-3 sm:mt-0 sm:auto-rows-min sm:content-start lg:gap-4">
+            <aside className="mt-3 grid min-h-0 grid-cols-1 gap-3 sm:mt-0 sm:grid-rows-[auto_auto_minmax(0,1fr)] sm:overflow-hidden lg:gap-4">
               <WeekStrip week={week} playedDates={playedDates} days={daysThisWeek} today={today} />
               <CoinsCard coins={coins} onOpenShop={() => onNavigate("shop")} />
               <BadgesCard
@@ -402,8 +402,8 @@ function BadgesCard({
         : "Your first badge is waiting. Keep reading!";
 
   return (
-    <Card>
-      <div className="flex items-center justify-between gap-2">
+    <Card className="flex flex-col overflow-hidden">
+      <div className="flex shrink-0 items-center justify-between gap-2">
         <CardHeading icon={<ShieldCheck className="h-5 w-5 text-primary" />} title="My Badges" />
         <button
           onClick={onSeeAll}
@@ -413,7 +413,9 @@ function BadgesCard({
         </button>
       </div>
 
-      <div className="mt-2 flex items-center gap-2">
+      {/* Tiles step down at short viewport heights so the card can always
+          fit the height its column offers instead of spilling below it. */}
+      <div className="mt-2 flex min-h-0 shrink items-center gap-2">
         {shown.map((badge) => {
           const isEarned = owned.has(badge.id);
           return (
@@ -421,7 +423,7 @@ function BadgesCard({
               key={badge.id}
               title={isEarned ? badge.name : "Coming soon"}
               className={cn(
-                "relative flex h-11 w-11 items-center justify-center rounded-2xl text-xl",
+                "relative flex h-9 w-9 items-center justify-center rounded-2xl text-lg [@media(min-height:760px)]:h-11 [@media(min-height:760px)]:w-11 [@media(min-height:760px)]:text-xl",
                 isEarned ? "bg-secondary/25" : "bg-accent/60",
               )}
             >
@@ -436,9 +438,9 @@ function BadgesCard({
         })}
         {shown.length === 0 && <MedalIcon className="h-6 w-6 text-primary/40" />}
       </div>
-      <p className="mt-1.5 text-[11.5px] font-medium leading-snug text-ink-soft">{footnote}</p>
-
-
+      <p className="mt-1.5 line-clamp-2 shrink-0 text-[11.5px] font-medium leading-snug text-ink-soft sm:hidden sm:[@media(min-height:720px)]:block">
+        {footnote}
+      </p>
     </Card>
   );
 }
@@ -518,9 +520,11 @@ function CardHeading({ icon, title }: { icon: ReactNode; title: string }) {
   );
 }
 
-function Card({ children }: { children: ReactNode }) {
+function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className="min-h-0 rounded-[22px] bg-card p-3.5 shadow-soft lg:p-4">{children}</div>
+    <div className={cn("min-h-0 rounded-[22px] bg-card p-3.5 shadow-soft lg:p-4", className)}>
+      {children}
+    </div>
   );
 }
 
