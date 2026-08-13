@@ -44,7 +44,6 @@ const PILLAR_ICONS: Record<string, typeof MessagesSquare> = {
   Handshake,
 };
 import { Reveal } from "./CharacterSection";
-import { StoryElementFramework } from "./StoryElementFramework";
 import { StoryMathFormula } from "./StoryMathFormula";
 import familyDashboardAsset from "@/assets/family-dashboard.png.asset.json";
 import familyCtaAsset from "@/assets/family-cta.png.asset.json";
