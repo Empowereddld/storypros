@@ -32,7 +32,7 @@ export const HERO = {
   headingLine1: "Improving language skills through interactive",
   headingLine2: "stories",
   heading: "Improving language skills through interactive stories",
-  subheading: "Stories are an ideal context to gain new vocabulary and grammar skills!",
+  subheading: "Stories are an ideal way to gain new vocabulary and grammar skills!",
 };
 
 
@@ -42,7 +42,7 @@ export const PARENT_PROBLEM = {
   heading: "Does your child struggle to share their ideas or tell you about their day?",
   paragraphs: [
     "Kids with language disorders often need help sharing their amazing ideas and experiences in a way others can easily follow. ",
-    "Story Pros gives children calm, guided practice understanding stories, organizing ideas, and putting their thoughts into words.",
+    "Story Pros gives children fun, guided practice with story comprehension and story-telling.\n\nThey also learn vocabulary words on a deeper level by diving into different features of target words like category, function, and location in meaningful contexts.\n",
   ],
 };
 
@@ -51,7 +51,7 @@ export const PARENT_PROBLEM = {
 /** Story elements use the same keys/labels as the in-product story engine */
 export const WHY_STORIES = {
   heading: "Why stories?",
-  lead: "When children know the elements they need to tell a complete story, they can put more brain power into thinking of their words and producing the sentences they need. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read.\u00a0",
+  lead: "When children know the elements needed to tell a complete story, they can put more brain power into thinking of specific words and producing complex sentences. That same framework also supports story comprehension, giving them a clear way to organize and make sense of what they hear or read.\u00a0",
   framework: [
     { element: "character", label: "Character" },
     { element: "place", label: "Place" },
