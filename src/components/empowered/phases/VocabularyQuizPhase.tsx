@@ -184,17 +184,18 @@ export function VocabularyQuizPhase({
         <div className="mx-auto flex w-full max-w-[980px] flex-1 flex-col overflow-hidden">
           {/* Hero: picture beside the target word */}
           <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-6 sm:p-5">
-            <div className="flex h-[104px] w-[132px] shrink-0 items-center justify-center overflow-hidden rounded-[22px] bg-accent/35 sm:h-[132px] sm:w-[190px]">
+            <div className="flex h-[104px] w-[132px] shrink-0 items-center justify-center overflow-hidden rounded-[22px] sm:h-[132px] sm:w-[190px]">
               {wordImage ? (
                 <img
                   src={wordImage}
                   alt={word.word}
-                  className="h-full w-full object-contain p-2"
+                  className="h-full w-full object-contain"
                 />
               ) : (
                 <BookCheckIcon className="h-10 w-10 text-primary" />
               )}
             </div>
+
             <div className="min-w-0 flex-1 text-center">
               <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-secondary-foreground sm:text-xs">
                 Word Check
