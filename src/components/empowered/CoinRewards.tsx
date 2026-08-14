@@ -15,6 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { CoinIcon } from "./StoryProsUi";
 import { getPaperPlanes } from "@/services/progress";
+import { playCoinReward } from "@/lib/coinSound";
 import type { CoinEarnedDetail } from "@/services/coins";
 
 const POP_MS = 620;
