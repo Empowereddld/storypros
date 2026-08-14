@@ -36,11 +36,10 @@ import { COIN_ECONOMY } from "@/services/coinEconomy";
 type HeardKey = `intro-${number}` | `feat-${number}-${number}`;
 
 /**
- * One labeled Listen control per vocabulary screen.
+ * One speaker control per vocabulary screen.
  *
- * Shows "🔊 Listen" before the child has played the audio on this screen,
- * and "🔊 Listen again" after they have played it once. The label flips
- * back to "Listen" as soon as the child moves to a new word or feature.
+ * The icon alone is the trigger — no visible label, so the UI stays clean
+ * and the child can focus on the word and picture.
  */
 function ListenButton({
   label,
@@ -266,7 +265,6 @@ export function VocabularyIntroPhase({
                 <div className="flex items-center gap-3 text-left">
                   {supported && (
                     <ListenButton
-                      label={heard.has(heardKey) ? "Listen again" : "Listen"}
                       playing={isPlaying("intro")}
                       onClick={() => playWithTrack(introNarration, "intro")}
                       ariaLabel="Hear what this word means"
@@ -306,11 +304,10 @@ export function VocabularyIntroPhase({
                 </div>
               </div>
 
-              {/* Purple sentence bar with tactile yellow Listen control */}
+              {/* Purple sentence bar with speaker control */}
               <div className="mt-5 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
                 {supported && (
                   <ListenButton
-                    label={heard.has(heardKey) ? "Listen again" : "Listen"}
                     playing={isPlaying(`feat-${featureIdx}`)}
                     onClick={() => playWithTrack(featureNarration, `feat-${featureIdx}`)}
                     ariaLabel="Hear this sentence"

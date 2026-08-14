@@ -226,7 +226,6 @@ export function VocabularyQuizPhase({
                 playing={isPlaying("prompt")}
                 onClick={() => toggle(question.prompt, "prompt")}
                 ariaLabel="Hear the question"
-                label={isPlaying("prompt") ? "Listening" : "Listen"}
                 className="hidden shrink-0 rounded-full bg-accent/40 px-3 sm:inline-flex"
               />
             )}
