@@ -311,44 +311,58 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
       {/* ── Why stories: one connected story framework ── */}
       <section
         id="why-stories"
-        className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-14 sm:px-6 sm:py-16"
+        className="scroll-mt-20 border-y border-accent/40 bg-card/50 px-5 py-16 sm:px-6 sm:py-20"
       >
         <Reveal>
-          <div className="mx-auto grid w-full max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,56fr)_minmax(0,40fr)] lg:gap-[72px]">
-            {/* Content first on mobile and on desktop (copy left, art right) */}
-            <div className="lg:order-1">
-              <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-primary sm:text-[38px]">
-                {WHY_STORIES.heading}
-              </h2>
-              <p className="mt-4 max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]">
-                {WHY_STORIES.lead}
-              </p>
-              <StoryMathFormula className="mt-8" />
+          <div className="mx-auto w-full max-w-[1180px]">
+            {/* Beat 1 — intro copy paired with the illustration */}
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,58fr)_minmax(0,38fr)] lg:items-start lg:gap-[64px]">
+              <div>
+                <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-primary sm:text-[38px]">
+                  {WHY_STORIES.heading}
+                </h2>
+                <p className="mt-4 max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]">
+                  {WHY_STORIES.lead}
+                </p>
+              </div>
 
-              <h3 className="mt-10 font-display text-2xl font-extrabold text-primary sm:text-[28px]">
+              <img
+                src={danDariaReading}
+                alt=""
+                loading="lazy"
+                className="mx-auto h-44 w-auto object-contain drop-shadow-[0_18px_28px_rgba(63,38,140,0.16)] sm:h-52 lg:mt-1 lg:h-[248px]"
+              />
+            </div>
+
+            {/* Beat 2 — the formula, full width */}
+            <StoryMathFormula className="mt-10 sm:mt-12" />
+
+            {/* Beat 3 — where the framework helps */}
+            <div className="mt-14 sm:mt-16">
+              <h3 className="font-display text-[22px] font-extrabold text-primary sm:text-[26px]">
                 {WHY_STORIES_BENEFITS.heading}
               </h3>
-              <p className="mt-3 max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]">
+              <p className="mt-3 max-w-[680px] text-base font-medium leading-[1.6] text-ink-soft sm:text-[17px] sm:leading-[1.55]">
                 {WHY_STORIES_BENEFITS.lead}
               </p>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="mt-7 grid items-stretch gap-5 sm:grid-cols-2 sm:gap-6">
                 {WHY_STORIES_BENEFITS.items.map((item) => {
                   const Icon = item.icon === "GraduationCap" ? GraduationCap : MessagesSquare;
                   return (
                     <div
                       key={item.title}
-                      className="rounded-[22px] border border-accent/50 bg-card p-5 shadow-card sm:p-6"
+                      className="rounded-[22px] border border-accent/50 bg-card p-6 shadow-card sm:p-7"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/60 sm:h-11 sm:w-11">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/60">
                           <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} aria-hidden />
                         </span>
                         <h4 className="font-display text-lg font-extrabold text-primary sm:text-xl">
                           {item.title}
                         </h4>
                       </div>
-                      <p className="mt-3 text-[14.5px] font-medium leading-relaxed text-ink-soft sm:text-[15px]">
+                      <p className="mt-3.5 text-[15px] font-medium leading-[1.65] text-ink-soft">
                         {item.body}
                       </p>
                     </div>
@@ -356,18 +370,10 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 })}
               </div>
             </div>
-
-            <div className="lg:order-2">
-              <img
-                src={danDariaReading}
-                alt=""
-                loading="lazy"
-                className="mx-auto h-48 w-auto object-contain drop-shadow-[0_18px_28px_rgba(63,38,140,0.16)] sm:h-56 lg:h-[260px]"
-              />
-            </div>
           </div>
         </Reveal>
       </section>
+
 
 
       {/* ── How Story Pros works: the four-part pathway ── */}
