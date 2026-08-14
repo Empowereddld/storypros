@@ -348,8 +348,8 @@
           {
             "feature": "parts",
             "prompt": "What parts or features does a bandage have? Listen and look.",
-            "teaching_text": "Parts or features of bandage include soft pad and sticky sides.",
-            "narration": "Parts or features of bandage include soft pad and sticky sides."
+            "teaching_text": "It has a soft pad and sticky sides.",
+            "narration": "It has a soft pad and sticky sides."
           },
           {
             "feature": "location",
