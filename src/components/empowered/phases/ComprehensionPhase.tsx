@@ -209,7 +209,22 @@ export function ComprehensionPhase({
             <p className="mt-2 text-lg font-semibold text-ink">
               {q.brain_check_prompt ?? "Did you answer the question type?"}
             </p>
-            <div className="mt-6 space-y-3">
+            <div className="mt-4 flex justify-center">
+              <AudioButton
+                text={`Brain Check! ${q.brain_check_prompt ?? "Did you answer the question type?"}`}
+                label="Listen"
+                size="lg"
+                tone="primary"
+                playing={isPlaying("brain-check-prompt")}
+                onClick={() =>
+                  toggle(
+                    `Brain Check! ${q.brain_check_prompt ?? "Did you answer the question type?"}`,
+                    "brain-check-prompt",
+                  )
+                }
+              />
+            </div>
+            <div className="mt-5 space-y-3">
               <TactileButton variant="primary" onClick={handleReveal}>
                 Yes 👍
               </TactileButton>
