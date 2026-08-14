@@ -206,7 +206,7 @@ export function VocabularyQuizPhase({
           </section>
 
           {/* Question bar */}
-          <section className="mt-3 flex items-center gap-3 rounded-[26px] bg-card px-4 py-3 shadow-card sm:mt-4">
+          <section className="mt-3 flex items-center gap-3 rounded-[26px] bg-card px-4 py-3 shadow-soft sm:mt-4">
             {supported && (
               <AudioButton
                 size="md"
@@ -218,7 +218,18 @@ export function VocabularyQuizPhase({
             <p className="min-w-0 flex-1 text-[19px] font-extrabold leading-tight text-ink sm:text-[23px]">
               {question.prompt}
             </p>
+            {supported && (
+              <AudioButton
+                size="sm"
+                playing={isPlaying("prompt")}
+                onClick={() => toggle(question.prompt, "prompt")}
+                ariaLabel="Hear the question"
+                label={isPlaying("prompt") ? "Listening" : "Listen"}
+                className="hidden shrink-0 rounded-full bg-accent/40 px-3 sm:inline-flex"
+              />
+            )}
           </section>
+
 
           {!optionsRevealed ? (
             <div className="flex flex-1 flex-col items-center justify-center">
