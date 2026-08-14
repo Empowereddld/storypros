@@ -84,6 +84,14 @@ const SFA_LABELS: Record<SFAKey, string> = {
   location: "Where / when you use it",
 };
 
+const SFA_ICONS: Record<SFAKey, (props: { className?: string }) => JSX.Element> = {
+  category: CategoryIcon,
+  function: FunctionIcon,
+  appearance: AppearanceIcon,
+  parts: PartsIcon,
+  location: LocationIcon,
+};
+
 /** vocab-bandage.webp + "category" → vocab-bandage-category.{webp,png,jpg} */
 function resolveFeatureImage(storyId: string, wordImage: string | undefined, key: SFAKey) {
   if (!wordImage) return null;
