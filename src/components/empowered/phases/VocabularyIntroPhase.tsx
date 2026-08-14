@@ -80,7 +80,7 @@ const SFA_LABELS: Record<SFAKey, string> = {
   category: "CATEGORY",
   function: "What it does",
   appearance: "Looks like",
-  parts: "Parts",
+  parts: "WHAT ARE ITS PARTS",
   location: "Where / when you use it",
 };
 
