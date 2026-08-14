@@ -19,7 +19,15 @@
  * the flow works for every word from day one.
  * ───────────────────────────────────────────── */
 
+import type * as React from "react";
 import { useEffect, useMemo, useState } from "react";
+import {
+  AppearanceIcon,
+  CategoryIcon,
+  FunctionIcon,
+  LocationIcon,
+  PartsIcon,
+} from "../SfaIcons";
 import { cn } from "@/lib/utils";
 import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
@@ -82,6 +90,14 @@ const SFA_LABELS: Record<SFAKey, string> = {
   appearance: "Looks like",
   parts: "WHAT ARE ITS PARTS",
   location: "Where / when you use it",
+};
+
+const SFA_ICONS: Record<SFAKey, (props: { className?: string }) => React.ReactElement> = {
+  category: CategoryIcon,
+  function: FunctionIcon,
+  appearance: AppearanceIcon,
+  parts: PartsIcon,
+  location: LocationIcon,
 };
 
 /** vocab-bandage.webp + "category" → vocab-bandage-category.{webp,png,jpg} */
@@ -283,18 +299,28 @@ export function VocabularyIntroPhase({
             /* ── Screens 2-6: exactly ONE semantic feature ── */
             <section
               key={`${wordIdx}-${featureIdx}`}
-              className="flex min-h-0 flex-1 flex-col items-center rounded-[40px] border-4 border-card bg-card px-5 pb-5 pt-6 text-center shadow-soft animate-pop-in sm:px-8"
+              className="flex min-h-0 flex-1 flex-col rounded-[40px] border-4 border-card bg-card px-5 pb-5 pt-5 shadow-soft animate-pop-in sm:px-8"
             >
-              {/* Stacked hierarchy: bold category label, loud word */}
-              <span className="rounded-2xl bg-primary px-6 py-3 text-[20px] font-extrabold uppercase tracking-[0.08em] text-primary-foreground shadow-soft sm:text-[24px]">
-                {SFA_LABELS[featureKey as SFAKey]}
-              </span>
-              <h2 className="mt-3 text-[26px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[32px]">
+              {/* The word stays anchored top-left across all five feature screens */}
+              <h2 className="shrink-0 text-left text-[26px] font-extrabold capitalize leading-none tracking-tight text-primary sm:text-[30px]">
                 {word.word}
               </h2>
 
-              <div className="mt-5 flex min-h-0 w-full flex-1 items-center justify-center">
-                <div className="flex h-full max-h-[300px] min-h-[150px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[32px] border-2 border-primary/10 bg-primary/[0.04] p-4 shadow-inner">
+              {/* Feature icon + label: the subject of the screen */}
+              <div className="mt-4 flex shrink-0 flex-col items-center gap-2">
+                <div className="flex h-[74px] w-[74px] items-center justify-center rounded-[26px] border-4 border-card bg-secondary text-primary shadow-[0_7px_0_color-mix(in_oklab,var(--secondary)_78%,black)] sm:h-[84px] sm:w-[84px]">
+                  {(() => {
+                    const Icon = SFA_ICONS[featureKey as SFAKey];
+                    return <Icon className="h-9 w-9 sm:h-11 sm:w-11" />;
+                  })()}
+                </div>
+                <span className="text-center text-[15px] font-extrabold uppercase tracking-[0.16em] text-primary sm:text-[17px]">
+                  {SFA_LABELS[featureKey as SFAKey]}
+                </span>
+              </div>
+
+              <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center">
+                <div className="flex h-full max-h-[260px] min-h-[130px] w-full max-w-[380px] items-center justify-center overflow-hidden rounded-[32px] border-2 border-primary/10 bg-primary/[0.04] p-4 shadow-inner">
                   {featureImage ? (
                     <img
                       src={featureImage}
@@ -308,7 +334,7 @@ export function VocabularyIntroPhase({
               </div>
 
               {/* Purple sentence bar with speaker control */}
-              <div className="mt-5 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
+              <div className="mt-4 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
                 {supported && (
                   <ListenButton
                     playing={isPlaying(`feat-${featureIdx}`)}
@@ -321,6 +347,7 @@ export function VocabularyIntroPhase({
                 </p>
               </div>
             </section>
+
 
           )}
 
