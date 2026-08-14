@@ -48,7 +48,7 @@ export function SentenceBuilderPhase({
 
   const frame = frames[frameIdx];
   const progress = (frameIdx / frames.length) * 100;
-  const [beforeBlank] = frame.frame_text.split("___");
+  const [beforeBlank, afterBlank = ""] = frame.frame_text.split("___");
   const selectedChoice = frame.choices.find((choice) => choice.id === selected);
   const showingFeedback = feedback.type !== "none";
 
@@ -217,6 +217,7 @@ export function SentenceBuilderPhase({
               >
                 {selectedChoice ? selectedChoice.text : "..."}
               </span>
+              {afterBlank}
             </p>
           </div>
 
