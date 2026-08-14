@@ -725,7 +725,7 @@
   "sentence_frames": [
     {
       "position": 1,
-      "frame_text": "Dan asked for a bandage because ___",
+      "frame_text": "Dan asked for a bandage because ___.",
       "choices": [
         {
           "id": "a",
