@@ -11,6 +11,7 @@ import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY } from "@/services/coinEconomy";
 import { getOptionPictureCue } from "@/data/optionPictureCues";
+import { resolveStoryImage } from "@/services/storyImages";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -51,6 +52,7 @@ export function VocabularyQuizPhase({
   const startTime = useRef(Date.now());
 
   const word = words[wordIdx];
+  const wordImage = resolveStoryImage(storyData.id, word.image);
   const questions = word.quiz_questions;
   const question = questions[qIdx];
   const totalQuestions = words.reduce((sum, item) => sum + item.quiz_questions.length, 0);
@@ -178,18 +180,33 @@ export function VocabularyQuizPhase({
         </div>
       )}
 
-      <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
-        <section className="rounded-[30px] bg-card p-5 text-center shadow-soft animate-slide-up">
-          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-[22px] bg-accent text-primary">
-            <BookCheckIcon className="h-8 w-8" />
-          </span>
-          <p className="mt-3 text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
-            Word Check
-          </p>
-          <h1 className="mt-1 text-[32px] font-extrabold capitalize leading-none text-primary">
-            {word.word}
-          </h1>
-          <div className="mt-4 flex items-center gap-3 text-left">
+      <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-4 pb-5 pt-3 sm:px-6">
+        <div className="mx-auto flex w-full max-w-[980px] flex-1 flex-col overflow-hidden">
+          {/* Hero: picture beside the target word */}
+          <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-6 sm:p-5">
+            <div className="flex h-[104px] w-[132px] shrink-0 items-center justify-center overflow-hidden rounded-[22px] bg-accent/35 sm:h-[132px] sm:w-[190px]">
+              {wordImage ? (
+                <img
+                  src={wordImage}
+                  alt={word.word}
+                  className="h-full w-full object-contain p-2"
+                />
+              ) : (
+                <BookCheckIcon className="h-10 w-10 text-primary" />
+              )}
+            </div>
+            <div className="min-w-0 flex-1 text-center">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-secondary-foreground sm:text-xs">
+                Word Check
+              </p>
+              <h1 className="mt-1 truncate text-[34px] font-extrabold capitalize leading-none text-primary sm:text-[44px]">
+                {word.word}
+              </h1>
+            </div>
+          </section>
+
+          {/* Question bar */}
+          <section className="mt-3 flex items-center gap-3 rounded-[26px] bg-card px-4 py-3 shadow-card sm:mt-4">
             {supported && (
               <AudioButton
                 size="md"
@@ -198,103 +215,111 @@ export function VocabularyQuizPhase({
                 ariaLabel="Hear the question"
               />
             )}
-            <p className="flex-1 text-[23px] font-extrabold leading-tight text-ink">
+            <p className="min-w-0 flex-1 text-[19px] font-extrabold leading-tight text-ink sm:text-[23px]">
               {question.prompt}
             </p>
-          </div>
+          </section>
 
-        </section>
+          {!optionsRevealed ? (
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <p className="mb-4 max-w-[280px] text-center text-base font-semibold leading-snug text-ink-soft">
+                Think about the word, then choose your answer.
+              </p>
+              <TactileButton
+                onClick={() => {
+                  setOptionsRevealed(true);
+                  startTime.current = Date.now();
+                }}
+              >
+                Show Answers <ChevronRightIcon className="h-5 w-5 text-secondary" />
+              </TactileButton>
+            </div>
+          ) : (
+            <>
+              <p className="mt-3 text-center text-[13px] font-extrabold text-primary sm:text-sm">
+                Look at the pictures, then tap your answer.
+              </p>
 
-        {!optionsRevealed ? (
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <p className="mb-4 max-w-[260px] text-center text-base font-semibold leading-snug text-ink-soft">
-              Think about the word, then choose your answer.
-            </p>
-            <TactileButton
-              onClick={() => {
-                setOptionsRevealed(true);
-                startTime.current = Date.now();
-              }}
-            >
-              Show Answers <ChevronRightIcon className="h-5 w-5 text-secondary" />
-            </TactileButton>
-          </div>
-        ) : (
-          <>
-            <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2 animate-slide-up">
-              {question.options.map((option, index) => {
-                const isSelected = selected === option.id;
-                const isDisabled = wrongIds.has(option.id);
-                const label = option.text || option.label || "";
-                // Picture cue sits beside the words (never replaces them) so a
-                // child with DLD can hold each choice in mind while comparing.
-                const cue = getOptionPictureCue(label, option.emoji);
-                return (
-                  <div
-                    key={option.id}
-                    className={cn(
-                      "flex w-full items-center gap-3 rounded-[26px] border-2 bg-card px-3 py-3 shadow-card transition-all",
-                      isSelected && "border-primary bg-primary/5",
-                      !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
-                      isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
-                    )}
-                  >
-                    {supported && !isDisabled && (
-                      <AudioButton
-                        size="md"
-                        tone="quiet"
-                        playing={isPlaying(`opt-${option.id}`)}
-                        onClick={() => toggle(label, `opt-${option.id}`)}
-                        text={label}
-                        className="-my-1"
-                      />
-                    )}
-                    <button
-                      onClick={() => !isDisabled && setSelected(option.id)}
-                      disabled={isDisabled}
-                      className="flex min-w-0 flex-1 items-center gap-3 self-stretch text-left"
-                    >
-                      <span
+              <div className="mt-2 flex-1 overflow-y-auto no-scrollbar pb-1 animate-slide-up sm:mt-3">
+                <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
+                  {question.options.map((option, index) => {
+                    const isSelected = selected === option.id;
+                    const isDisabled = wrongIds.has(option.id);
+                    const label = option.text || option.label || "";
+                    // Picture cue sits with the words (never instead of them) so a
+                    // child with DLD can hold each choice in mind while comparing.
+                    const cue = getOptionPictureCue(label, option.emoji);
+                    return (
+                      <div
+                        key={option.id}
                         className={cn(
-                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
-                          isSelected
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-accent/70 text-primary",
+                          "relative flex items-center gap-3 rounded-[26px] border-2 bg-card p-3 shadow-card transition-all sm:flex-col sm:items-stretch",
+                          isSelected && "border-primary bg-primary/5",
+                          !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
+                          isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
                         )}
                       >
-                        {String.fromCharCode(65 + index)}
-                      </span>
-                      {cue && (
+                        <button
+                          onClick={() => !isDisabled && setSelected(option.id)}
+                          disabled={isDisabled}
+                          className="flex min-w-0 flex-1 items-center gap-3 text-left sm:flex-col sm:items-stretch sm:gap-2"
+                        >
+                          <span
+                            aria-hidden
+                            className={cn(
+                              "flex h-[72px] w-[84px] shrink-0 items-center justify-center rounded-[20px] text-4xl leading-none sm:h-[112px] sm:w-full sm:text-6xl",
+                              isSelected ? "bg-primary/15" : "bg-accent/45",
+                            )}
+                          >
+                            {cue ?? String.fromCharCode(65 + index)}
+                          </span>
+                          <span
+                            className={cn(
+                              "min-w-0 flex-1 text-[17px] font-extrabold leading-snug sm:flex-none sm:text-center sm:text-lg",
+                              isDisabled ? "text-ink-soft line-through" : "text-ink",
+                            )}
+                          >
+                            {label}
+                          </span>
+                        </button>
+
                         <span
-                          aria-hidden
                           className={cn(
-                            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-2xl leading-none",
-                            isSelected ? "bg-primary/15" : "bg-accent/45",
+                            "absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full text-xs font-extrabold shadow-card",
+                            isSelected
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-card text-primary",
                           )}
                         >
-                          {cue}
+                          {String.fromCharCode(65 + index)}
                         </span>
-                      )}
-                      <span
-                        className={cn(
-                          "min-w-0 flex-1 text-base font-extrabold leading-snug",
-                          isDisabled ? "text-ink-soft line-through" : "text-ink",
-                        )}
-                      >
-                        {label}
-                      </span>
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
 
-            <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-              Check Answer
-            </TactileButton>
-          </>
-        )}
+                        {supported && !isDisabled && (
+                          <AudioButton
+                            size="md"
+                            tone="quiet"
+                            playing={isPlaying(`opt-${option.id}`)}
+                            onClick={() => toggle(label, `opt-${option.id}`)}
+                            text={label}
+                            className="shrink-0 sm:self-center"
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-3">
+                <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
+                  Check Answer
+                </TactileButton>
+              </div>
+            </>
+          )}
+        </div>
       </div>
+
     </div>
   );
 }
