@@ -264,7 +264,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
           {/* The app preview does the visual talking */}
-          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[600px]">
+          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[620px] min-[1200px]:max-w-[680px]">
             <img
               src={heroTabletAsset.url}
               alt="A Story Pros comprehension question on a tablet"
