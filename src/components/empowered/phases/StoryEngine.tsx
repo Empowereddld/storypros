@@ -95,7 +95,6 @@ const SECTION_INTROS: Partial<Record<StoryPhase, { title: string; buddy: Buddy; 
 /** The ordered list of phases a child goes through */
 const PHASE_ORDER: StoryPhase[] = [
   "slides",
-  "immediate-retell",
   "intro-questions",
   "comprehension",
   "intro-sequencing",
