@@ -229,23 +229,24 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
         <div className="mx-auto grid w-full max-w-[1240px] items-center gap-6 px-5 pb-8 pt-4 sm:gap-9 sm:px-8 sm:pb-10 sm:pt-8 lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)] lg:gap-[56px] lg:pb-[24px] lg:pt-[40px] min-[1200px]:min-h-[calc(100svh-72px)] min-[1200px]:py-[48px]">
           {/* Text first on mobile, matching the requested order */}
           <div className="animate-slide-up text-center lg:text-left">
-            <p className="inline-flex max-w-[36ch] items-center justify-center gap-2 rounded-full bg-card px-3.5 py-2 text-center text-[10px] font-bold uppercase leading-[1.5] tracking-[0.06em] text-primary shadow-card text-balance sm:max-w-none sm:px-4 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.07em]">
+            <p className="inline-flex max-w-[36ch] items-center justify-center gap-2 rounded-full bg-primary/8 px-3.5 py-1.5 text-center text-[10px] font-bold uppercase leading-[1.5] tracking-[0.08em] text-primary text-balance sm:max-w-none sm:px-4 sm:text-[11px] sm:leading-[1.55] sm:tracking-[0.09em]">
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-3 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-4 sm:max-w-[19ch] sm:text-[42px] sm:leading-[1.08] lg:mx-0 lg:mt-4 lg:max-w-[15ch] lg:text-[46px] lg:leading-[1.08]">
+            <h1 className="mx-auto mt-2.5 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-3.5 sm:max-w-[19ch] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-3.5 lg:max-w-[22ch] lg:text-[54px] lg:leading-[1.04] min-[1200px]:text-[58px]">
               {HERO.heading}
             </h1>
 
-            <p className="mx-auto mt-2 max-w-[30ch] text-[17.5px] font-semibold leading-[1.4] text-ink sm:mt-3 sm:max-w-[34ch] sm:text-[21px] sm:leading-[1.35] lg:mx-0">
+            <p className="mx-auto mt-3 max-w-[30ch] text-[17.5px] font-medium leading-[1.45] text-ink-soft sm:mt-4 sm:max-w-[34ch] sm:text-[19px] sm:leading-[1.45] lg:mx-0 lg:max-w-[38ch] lg:text-[19.5px]">
               {HERO.subheading}
             </p>
 
-            <div className="mt-5 flex flex-col items-center gap-2.5 sm:mt-6 sm:gap-3 lg:flex-row lg:items-center lg:justify-start">
+            <div className="mt-6 flex flex-col items-center gap-2.5 sm:mt-8 sm:flex-row sm:justify-center sm:gap-3 lg:items-center lg:justify-start">
+
 
               <button
                 onClick={onDemo}
-                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] lg:w-auto lg:px-7"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center gap-2 whitespace-nowrap rounded-3xl bg-primary px-8 text-base font-extrabold text-primary-foreground shadow-[0_4px_0_0_var(--primary-deep)] transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:w-auto sm:max-w-none sm:px-7 lg:px-7"
               >
                 Try the Free Story
                 <ChevronRightIcon className="h-5 w-5 shrink-0 text-secondary" />
@@ -254,7 +255,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] sm:border-2 sm:border-primary/70 sm:bg-card lg:w-auto lg:px-7"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:w-auto sm:max-w-none sm:border-2 sm:border-primary/70 sm:bg-card sm:px-7 lg:px-7"
               >
                 Join the Waitlist
               </a>
@@ -263,7 +264,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
           {/* The app preview does the visual talking */}
-          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[600px]">
+          <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[620px] min-[1200px]:max-w-[680px]">
             <img
               src={heroTabletAsset.url}
               alt="A Story Pros comprehension question on a tablet"
