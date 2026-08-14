@@ -183,8 +183,8 @@ export function VocabularyQuizPhase({
       <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-4 pb-5 pt-3 sm:px-6">
         <div className="mx-auto flex w-full max-w-[980px] flex-1 flex-col overflow-hidden">
           {/* Hero: picture beside the target word */}
-          <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-8 sm:p-6">
-            <div className="flex h-[120px] w-[150px] shrink-0 items-center justify-center sm:h-[168px] sm:w-[250px]">
+          <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-8 sm:p-4">
+            <div className="flex h-[100px] w-[132px] shrink-0 items-center justify-center sm:h-[130px] sm:w-[210px] lg:h-[150px] lg:w-[240px]">
               {wordImage ? (
                 <img
                   src={wordImage}
@@ -200,7 +200,7 @@ export function VocabularyQuizPhase({
               <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground sm:text-[13px]">
                 Word Check
               </p>
-              <h1 className="mt-1.5 break-words pb-1 text-[36px] font-extrabold capitalize leading-[1.15] tracking-tight text-primary sm:text-[52px]">
+              <h1 className="mt-1.5 break-words pb-1 text-[36px] font-extrabold capitalize leading-[1.15] tracking-tight text-primary sm:text-[44px] lg:text-[50px]">
                 {word.word}
               </h1>
             </div>
@@ -280,7 +280,7 @@ export function VocabularyQuizPhase({
                           <span
                             aria-hidden
                             className={cn(
-                              "flex h-[78px] w-[88px] shrink-0 items-center justify-center rounded-[20px] text-4xl leading-none sm:h-[150px] sm:w-full sm:rounded-[22px] sm:text-[64px]",
+                              "flex h-[78px] w-[88px] shrink-0 items-center justify-center rounded-[20px] text-4xl leading-none sm:h-[104px] sm:w-full sm:rounded-[22px] sm:text-[52px] lg:h-[130px] lg:text-[60px]",
                               isSelected ? "bg-primary/15" : "bg-accent/40",
                             )}
                           >
