@@ -256,13 +256,13 @@ export function CoinRewardLayer() {
           {/* sparkle flash at the origin */}
           {!burst.reduced ? (
             <span
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/40 blur-md"
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/50 blur-xl"
               style={{
-                width: 90,
-                height: 90,
-                opacity: burst.phase === 0 ? 0.85 : 0,
-                transform: `scale(${burst.phase === 0 ? 0.5 : 1.6})`,
-                transition: `opacity 520ms ease-out, transform 520ms ease-out`,
+                width: 190,
+                height: 190,
+                opacity: burst.phase === 0 ? 0.95 : 0,
+                transform: `scale(${burst.phase === 0 ? 0.4 : 2})`,
+                transition: `opacity 900ms ease-out, transform 900ms ease-out`,
               }}
             />
           ) : null}
@@ -278,11 +278,11 @@ export function CoinRewardLayer() {
               transition: "transform 380ms cubic-bezier(0.16, 1.2, 0.4, 1), opacity 320ms ease-out",
             }}
           >
-            <div className="flex items-center gap-1.5 rounded-full border-2 border-secondary bg-card px-3 py-1.5 shadow-card">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
-                <CoinIcon className="h-3.5 w-3.5" />
+            <div className="flex items-center gap-1.5 rounded-full border-[3px] border-secondary bg-card px-4 py-2 shadow-card">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+                <CoinIcon className="h-4.5 w-4.5" />
               </span>
-              <span className="whitespace-nowrap text-sm font-extrabold text-primary">
+              <span className="whitespace-nowrap text-lg font-extrabold text-primary">
                 +{burst.amount} {burst.amount === 1 ? "coin" : "coins"}
               </span>
             </div>
