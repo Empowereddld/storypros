@@ -47,7 +47,7 @@ function ListenButton({
   onClick,
   ariaLabel,
 }: {
-  label: string;
+  label?: string;
   playing: boolean;
   onClick: () => void;
   ariaLabel?: string;
@@ -59,13 +59,16 @@ function ListenButton({
       aria-label={ariaLabel}
       aria-pressed={playing}
       className={cn(
-        "flex h-14 shrink-0 items-center gap-2.5 rounded-[24px] bg-secondary px-4 text-primary transition-transform",
+        "flex h-14 w-14 shrink-0 items-center justify-center rounded-[24px] bg-secondary text-primary transition-transform",
         "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
         playing && "ring-4 ring-primary-foreground/40",
+        label && "w-auto gap-2.5 px-4",
       )}
     >
       <SpeakerGlyph className="h-7 w-7" />
-      <span className="text-[15px] font-extrabold tracking-tight whitespace-nowrap">{label}</span>
+      {label && (
+        <span className="whitespace-nowrap text-[15px] font-extrabold tracking-tight">{label}</span>
+      )}
     </button>
   );
 }
