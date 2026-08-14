@@ -243,7 +243,7 @@ export function CoinRewardLayer() {
                     transition: `transform ${flying ? FLY_MS : POP_MS}ms ease-out ${flying ? coin.delay : 0}ms`,
                   }}
                 >
-                  <CoinIcon style={{ width: coin.size * 0.6, height: coin.size * 0.6 }} />
+                  <CoinIcon className="h-[60%] w-[60%]" />
                 </span>
               </span>
             );
