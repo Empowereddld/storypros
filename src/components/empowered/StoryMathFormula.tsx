@@ -41,7 +41,7 @@ function Operator({ symbol, className }: { symbol: "+" | "="; className?: string
   return (
     <span
       className={cn(
-        "select-none font-display text-[22px] font-extrabold leading-none text-primary/45 sm:text-[24px]",
+        "select-none font-display text-[30px] font-extrabold leading-none text-primary/50 sm:text-[36px]",
         className,
       )}
       aria-hidden
@@ -55,7 +55,7 @@ export function StoryMathFormula({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "rounded-3xl border border-accent/50 bg-card p-5 shadow-card sm:p-8",
+        "mx-auto max-w-[520px] rounded-3xl border border-accent/50 bg-card p-5 shadow-card sm:p-8",
         className,
       )}
     >
@@ -65,58 +65,60 @@ export function StoryMathFormula({ className }: { className?: string }) {
 
       {/* The equation surface — faint tint + grid lines nod to math paper */}
       <div
-        className="rounded-2xl border border-accent/40 bg-accent/15 px-3 py-5 sm:px-6 sm:py-7"
+        className="rounded-2xl border border-accent/40 bg-accent/15 px-4 py-5 sm:px-7 sm:py-7"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(82,29,153,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(82,29,153,0.045) 1px, transparent 1px)",
           backgroundSize: "22px 22px",
         }}
       >
-        {/* terms: 6 stacked on mobile, 3+3 on tablet, one line on desktop */}
-        <div className="grid grid-cols-1 gap-y-2.5 sm:grid-cols-3 sm:gap-x-1 sm:gap-y-4 lg:grid-cols-6">
-          {FORMULA.map((item, index) => {
-            const key = item.element as StoryElement;
-            const Icon = ELEMENT_ICONS[key] ?? User;
-            const colors = ELEMENT_COLORS[key] ?? ELEMENT_COLORS.character;
-            const isLast = index === FORMULA.length - 1;
-            return (
-              <div
-                key={item.label}
-                className="flex items-center justify-start gap-2.5 sm:justify-center sm:gap-2"
-              >
-                <span
-                  className={cn(
-                    "flex h-11 w-11 shrink-0 items-center justify-center rounded-full shadow-sm sm:h-10 sm:w-10 lg:h-11 lg:w-11",
-                    colors.bg,
-                    colors.text,
-                  )}
-                  aria-hidden
-                >
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span className="text-[14px] font-extrabold leading-tight text-primary sm:text-[13.5px] lg:text-[14.5px]">
-                  {item.label}
-                </span>
-                {/* invisible operator on the last term keeps every grid cell optically identical */}
-                <Operator
-                  symbol="+"
-                  className={cn("ml-1", isLast && "invisible hidden sm:block")}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* the equals moment — a real rule, so the conclusion feels earned */}
-        <div className="mt-5 flex items-center gap-3 sm:mt-6 sm:justify-center">
-          <span className="h-px flex-1 bg-primary/15 sm:hidden" aria-hidden />
-          <Operator symbol="=" className="text-primary/60" />
-          <div className="flex items-center rounded-full bg-primary px-5 py-2.5 text-primary-foreground shadow-[0_8px_18px_rgba(82,29,153,0.22)]">
-            <span className="text-[14px] font-extrabold sm:text-[15px]">A Complete Story</span>
+        {/* Column arithmetic: terms stacked, one + in the left gutter of the last row */}
+        <div className="mx-auto w-full max-w-[330px]">
+          <div className="grid grid-cols-[36px_1fr] items-center gap-y-2.5 sm:grid-cols-[44px_1fr] sm:gap-y-3">
+            {FORMULA.map((item, index) => {
+              const key = item.element as StoryElement;
+              const Icon = ELEMENT_ICONS[key] ?? User;
+              const colors = ELEMENT_COLORS[key] ?? ELEMENT_COLORS.character;
+              const isLast = index === FORMULA.length - 1;
+              return (
+                <div key={item.label} className="col-span-2 grid grid-cols-subgrid items-center">
+                  <span className="flex items-center justify-start">
+                    {isLast && <Operator symbol="+" />}
+                  </span>
+                  <span className="flex items-center gap-3">
+                    <span
+                      className={cn(
+                        "flex h-11 w-11 shrink-0 items-center justify-center rounded-full shadow-sm",
+                        colors.bg,
+                        colors.text,
+                      )}
+                      aria-hidden
+                    >
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="text-[15px] font-extrabold leading-tight text-primary sm:text-[16.5px]">
+                      {item.label}
+                    </span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
-          <span className="h-px flex-1 bg-primary/15 sm:hidden" aria-hidden />
+
+          {/* the rule under the column, then the answer */}
+          <div className="mt-3 h-[3px] w-full rounded-full bg-primary/35 sm:mt-4" aria-hidden />
+
+          <div className="mt-4 grid grid-cols-[36px_1fr] items-center sm:mt-5 sm:grid-cols-[44px_1fr]">
+            <span aria-hidden />
+            <div className="flex">
+              <div className="flex items-center rounded-full bg-primary px-5 py-2.5 text-primary-foreground shadow-[0_8px_18px_rgba(82,29,153,0.22)]">
+                <span className="text-[14px] font-extrabold sm:text-[15px]">A Complete Story</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
