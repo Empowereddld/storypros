@@ -49,10 +49,10 @@ export function CoinPill({ className }: { className?: string }) {
       const reduced = prefersReducedMotion();
 
       // Let the coins fly first, then tick the counter up as they land.
-      const delay = reduced ? 0 : POP_MS + FLY_MS - 120;
+      const delay = reduced ? 0 : POP_MS + HOLD_MS + FLY_MS - 220;
       window.setTimeout(() => {
         setBump(true);
-        window.setTimeout(() => setBump(false), 480);
+        window.setTimeout(() => setBump(false), 620);
 
         if (reduced || amount <= 1) {
           setTotal(target);
