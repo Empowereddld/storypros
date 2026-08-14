@@ -37,6 +37,16 @@ const DOMAIN_LABELS: Record<SkillDomain, string> = {
 
 const V1_DOMAINS: SkillDomain[] = ["listening", "story_structure", "vocabulary", "grammar"];
 
+/** Which story phases feed each domain score. */
+const DOMAIN_PHASE: Record<(typeof V1_DOMAINS)[number], string[]> = {
+  listening: ["comprehension"],
+  story_structure: ["sequencing"],
+  vocabulary: ["vocab-quiz"],
+  grammar: ["sentence-builder"],
+  retell: [],
+  phonological: ["phonological"],
+} as Record<SkillDomain, string[]>;
+
 /** Child-facing encouragement — never a grade, always something to feel good about. */
 function childEncouragement(label: ReturnType<typeof scoreToLabel>): string {
   switch (label) {
