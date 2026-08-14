@@ -63,7 +63,7 @@ const SECTION_INTROS: Partial<Record<StoryPhase, { title: string; buddy: Buddy; 
     title: "Story Words",
     buddy: "dan",
     script:
-      "Let's practise some words from the story. Tap each picture to hear the word and learn what it means.",
+      "Let's practise some words from the story. Tap each picture to hear the word and learn more about it.",
   },
   "intro-sentences": {
     title: "Build a Sentence",
