@@ -168,16 +168,16 @@ export function CoinRewardLayer() {
       const targetX = pillRect ? pillRect.left + pillRect.width / 2 : x;
       const targetY = pillRect ? pillRect.top + pillRect.height / 2 : y - 80;
 
-      const count = reduced ? 0 : Math.max(3, Math.min(MAX_COINS, Math.round(detail.amount / 4) + 2));
+      const count = reduced ? 0 : Math.max(5, Math.min(MAX_COINS, Math.round(detail.amount / 3) + 3));
       const coins: FlyingCoin[] = Array.from({ length: count }, (_, i) => {
         const spread = count > 1 ? (i / (count - 1) - 0.5) * 2 : 0;
         return {
           id: i,
-          popX: spread * 62,
-          popY: -46 - Math.abs(Math.cos(spread * 1.4)) * 34,
-          spin: (i % 2 === 0 ? 1 : -1) * (220 + i * 70),
-          size: 26 + ((i * 5) % 12),
-          delay: i * 55,
+          popX: spread * 128,
+          popY: -104 - Math.abs(Math.cos(spread * 1.4)) * 78,
+          spin: (i % 2 === 0 ? 1 : -1) * (540 + i * 120),
+          size: 40 + ((i * 7) % 20),
+          delay: i * 70,
         };
       });
 
