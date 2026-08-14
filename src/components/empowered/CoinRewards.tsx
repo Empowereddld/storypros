@@ -201,10 +201,12 @@ export function CoinRewardLayer() {
       const setPhase = (phase: 1 | 2) =>
         setBursts((prev) => prev.map((b) => (b.id === id ? { ...b, phase } : b)));
 
-      // pop out, then arc into the pill
+      playCoinReward();
+
+      // pop out, hold so the child can see it, then arc into the pill
       requestAnimationFrame(() => requestAnimationFrame(() => setPhase(1)));
-      window.setTimeout(() => setPhase(2), POP_MS + 60);
-      window.setTimeout(() => remove(id), POP_MS + FLY_MS + CHIP_MS);
+      window.setTimeout(() => setPhase(2), POP_MS + HOLD_MS);
+      window.setTimeout(() => remove(id), POP_MS + HOLD_MS + FLY_MS + CHIP_MS);
     }
 
     window.addEventListener("storypros:coin-earned", onEarned);
