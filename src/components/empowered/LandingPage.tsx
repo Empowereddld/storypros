@@ -255,7 +255,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
                 href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener"
-                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:max-w-[300px] sm:border-2 sm:border-primary/70 sm:bg-card lg:w-auto lg:px-7"
+                className="press-pop inline-flex h-[52px] w-full max-w-[264px] items-center justify-center whitespace-nowrap rounded-3xl border border-primary/35 bg-transparent px-8 text-base font-extrabold text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:h-[56px] sm:w-auto sm:max-w-none sm:border-2 sm:border-primary/70 sm:bg-card sm:px-7 lg:px-7"
               >
                 Join the Waitlist
               </a>
