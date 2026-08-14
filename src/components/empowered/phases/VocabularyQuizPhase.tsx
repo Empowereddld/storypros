@@ -267,7 +267,7 @@ export function VocabularyQuizPhase({
                           <span
                             aria-hidden
                             className={cn(
-                              "flex h-[72px] w-[84px] shrink-0 items-center justify-center rounded-[20px] text-4xl leading-none sm:h-[112px] sm:w-full sm:text-6xl",
+                              "flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-[20px] text-4xl leading-none sm:h-[120px] sm:w-[120px] sm:self-center sm:text-6xl",
                               isSelected ? "bg-primary/15" : "bg-accent/45",
                             )}
                           >
