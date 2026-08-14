@@ -200,7 +200,7 @@ export function VocabularyQuizPhase({
               <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-secondary-foreground sm:text-xs">
                 Word Check
               </p>
-              <h1 className="mt-1 truncate text-[34px] font-extrabold capitalize leading-none text-primary sm:text-[44px]">
+              <h1 className="mt-1 break-words pb-1 text-[34px] font-extrabold capitalize leading-[1.15] text-primary sm:text-[44px]">
                 {word.word}
               </h1>
             </div>
