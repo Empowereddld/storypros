@@ -233,7 +233,7 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
               {HERO.eyebrow}
             </p>
 
-            <h1 className="mx-auto mt-2.5 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-3.5 sm:max-w-[19ch] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-3.5 lg:max-w-[18ch] lg:text-[54px] lg:leading-[1.04] min-[1200px]:text-[58px]">
+            <h1 className="mx-auto mt-2.5 max-w-[17ch] text-balance font-display text-[33px] font-extrabold leading-[1.12] text-primary sm:mt-3.5 sm:max-w-[19ch] sm:text-[44px] sm:leading-[1.06] lg:mx-0 lg:mt-3.5 lg:max-w-[22ch] lg:text-[54px] lg:leading-[1.04] min-[1200px]:text-[58px]">
               {HERO.heading}
             </h1>
 
