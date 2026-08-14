@@ -17,10 +17,11 @@ import { CoinIcon } from "./StoryProsUi";
 import { getPaperPlanes } from "@/services/progress";
 import type { CoinEarnedDetail } from "@/services/coins";
 
-const POP_MS = 320;
-const FLY_MS = 620;
-const CHIP_MS = 1100;
-const MAX_COINS = 7;
+const POP_MS = 620;
+const HOLD_MS = 420;
+const FLY_MS = 1050;
+const CHIP_MS = 1300;
+const MAX_COINS = 11;
 
 function prefersReducedMotion(): boolean {
   if (typeof window === "undefined" || !window.matchMedia) return false;
