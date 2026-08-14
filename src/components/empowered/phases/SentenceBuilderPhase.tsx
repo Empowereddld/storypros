@@ -217,6 +217,7 @@ export function SentenceBuilderPhase({
               >
                 {selectedChoice ? selectedChoice.text : "..."}
               </span>
+              {afterBlank}
             </p>
           </div>
 
