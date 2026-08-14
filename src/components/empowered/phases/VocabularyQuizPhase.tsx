@@ -183,28 +183,29 @@ export function VocabularyQuizPhase({
       <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-4 pb-5 pt-3 sm:px-6">
         <div className="mx-auto flex w-full max-w-[980px] flex-1 flex-col overflow-hidden">
           {/* Hero: picture beside the target word */}
-          <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-6 sm:p-5">
-            <div className="flex h-[104px] w-[132px] shrink-0 items-center justify-center overflow-hidden rounded-[22px] sm:h-[132px] sm:w-[190px]">
+          <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-8 sm:p-6">
+            <div className="flex h-[120px] w-[150px] shrink-0 items-center justify-center sm:h-[168px] sm:w-[250px]">
               {wordImage ? (
                 <img
                   src={wordImage}
                   alt={word.word}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full -rotate-[8deg] object-contain drop-shadow-[0_14px_22px_rgba(48,20,80,0.18)]"
                 />
               ) : (
-                <BookCheckIcon className="h-10 w-10 text-primary" />
+                <BookCheckIcon className="h-12 w-12 text-primary" />
               )}
             </div>
 
             <div className="min-w-0 flex-1 text-center">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-secondary-foreground sm:text-xs">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground sm:text-[13px]">
                 Word Check
               </p>
-              <h1 className="mt-1 break-words pb-1 text-[34px] font-extrabold capitalize leading-[1.15] text-primary sm:text-[44px]">
+              <h1 className="mt-1.5 break-words pb-1 text-[36px] font-extrabold capitalize leading-[1.15] tracking-tight text-primary sm:text-[52px]">
                 {word.word}
               </h1>
             </div>
           </section>
+
 
           {/* Question bar */}
           <section className="mt-3 flex items-center gap-3 rounded-[26px] bg-card px-4 py-3 shadow-soft sm:mt-4">
