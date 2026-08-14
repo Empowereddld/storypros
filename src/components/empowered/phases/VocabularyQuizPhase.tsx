@@ -11,6 +11,7 @@ import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY } from "@/services/coinEconomy";
 import { getOptionPictureCue } from "@/data/optionPictureCues";
+import { resolveStoryImage } from "@/services/storyImages";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
@@ -51,6 +52,7 @@ export function VocabularyQuizPhase({
   const startTime = useRef(Date.now());
 
   const word = words[wordIdx];
+  const wordImage = resolveStoryImage(storyData.id, word.image);
   const questions = word.quiz_questions;
   const question = questions[qIdx];
   const totalQuestions = words.reduce((sum, item) => sum + item.quiz_questions.length, 0);
