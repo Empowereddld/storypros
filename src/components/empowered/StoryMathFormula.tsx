@@ -47,14 +47,14 @@ export function StoryMathFormula({ className }: { className?: string }) {
       <p className="mb-5 text-center text-sm font-semibold leading-snug text-ink-soft sm:text-base">
         Think of it like a math formula:{"\u00a0"}
       </p>
-      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:gap-x-4">
+      <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-3 sm:gap-x-3">
         {FORMULA.map((item, index) => {
           const key = item.element as StoryElement;
           const Icon = ELEMENT_ICONS[key] ?? User;
           const colors = ELEMENT_COLORS[key] ?? ELEMENT_COLORS.character;
           const isLast = index === FORMULA.length - 1;
           return (
-            <div key={item.label} className="flex items-center gap-2 sm:gap-3">
+            <div key={item.label} className="flex items-center gap-2 sm:gap-2.5">
               <span
                 className={cn(
                   "flex h-10 w-10 items-center justify-center rounded-full sm:h-11 sm:w-11",
@@ -74,7 +74,7 @@ export function StoryMathFormula({ className }: { className?: string }) {
             </div>
           );
         })}
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <Equal className="h-5 w-5 shrink-0 text-primary/70" aria-hidden />
           <div className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-white shadow-sm">
             <span className="text-[13px] font-extrabold sm:text-[14.5px]">A Complete Story</span>
