@@ -59,7 +59,7 @@ export function StoryMathFormula({ className }: { className?: string }) {
         className,
       )}
     >
-      <p className="mb-5 text-center text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary/70 sm:mb-6 sm:text-xs">
+      <p className="mb-5 text-center text-[13px] font-extrabold uppercase tracking-[0.14em] text-primary/75 sm:mb-6 sm:text-[15px]">
         Think of it like a math formula
       </p>
 
@@ -97,7 +97,11 @@ export function StoryMathFormula({ className }: { className?: string }) {
                 <span className="text-[14px] font-extrabold leading-tight text-primary sm:text-[13.5px] lg:text-[14.5px]">
                   {item.label}
                 </span>
-                {!isLast && <Operator symbol="+" className="ml-1" />}
+                {/* invisible operator on the last term keeps every grid cell optically identical */}
+                <Operator
+                  symbol="+"
+                  className={cn("ml-1", isLast && "invisible hidden sm:block")}
+                />
               </div>
             );
           })}
