@@ -19,7 +19,15 @@
  * the flow works for every word from day one.
  * ───────────────────────────────────────────── */
 
+import type * as React from "react";
 import { useEffect, useMemo, useState } from "react";
+import {
+  AppearanceIcon,
+  CategoryIcon,
+  FunctionIcon,
+  LocationIcon,
+  PartsIcon,
+} from "../SfaIcons";
 import { cn } from "@/lib/utils";
 import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
