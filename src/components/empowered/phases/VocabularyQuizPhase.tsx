@@ -331,17 +331,6 @@ export function VocabularyQuizPhase({
         </div>
       </div>
 
-
-              <div className="mt-3">
-                <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-                  Check Answer
-                </TactileButton>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-
     </div>
   );
 }
