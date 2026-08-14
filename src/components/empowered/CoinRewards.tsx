@@ -15,12 +15,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { CoinIcon } from "./StoryProsUi";
 import { getPaperPlanes } from "@/services/progress";
+import { playCoinReward } from "@/lib/coinSound";
 import type { CoinEarnedDetail } from "@/services/coins";
 
-const POP_MS = 320;
-const FLY_MS = 620;
-const CHIP_MS = 1100;
-const MAX_COINS = 7;
+const POP_MS = 620;
+const HOLD_MS = 420;
+const FLY_MS = 1050;
+const CHIP_MS = 1300;
+const MAX_COINS = 11;
 
 function prefersReducedMotion(): boolean {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -48,10 +50,10 @@ export function CoinPill({ className }: { className?: string }) {
       const reduced = prefersReducedMotion();
 
       // Let the coins fly first, then tick the counter up as they land.
-      const delay = reduced ? 0 : POP_MS + FLY_MS - 120;
+      const delay = reduced ? 0 : POP_MS + HOLD_MS + FLY_MS - 220;
       window.setTimeout(() => {
         setBump(true);
-        window.setTimeout(() => setBump(false), 480);
+        window.setTimeout(() => setBump(false), 620);
 
         if (reduced || amount <= 1) {
           setTotal(target);
@@ -167,16 +169,16 @@ export function CoinRewardLayer() {
       const targetX = pillRect ? pillRect.left + pillRect.width / 2 : x;
       const targetY = pillRect ? pillRect.top + pillRect.height / 2 : y - 80;
 
-      const count = reduced ? 0 : Math.max(3, Math.min(MAX_COINS, Math.round(detail.amount / 4) + 2));
+      const count = reduced ? 0 : Math.max(5, Math.min(MAX_COINS, Math.round(detail.amount / 3) + 3));
       const coins: FlyingCoin[] = Array.from({ length: count }, (_, i) => {
         const spread = count > 1 ? (i / (count - 1) - 0.5) * 2 : 0;
         return {
           id: i,
-          popX: spread * 62,
-          popY: -46 - Math.abs(Math.cos(spread * 1.4)) * 34,
-          spin: (i % 2 === 0 ? 1 : -1) * (220 + i * 70),
-          size: 26 + ((i * 5) % 12),
-          delay: i * 55,
+          popX: spread * 128,
+          popY: -104 - Math.abs(Math.cos(spread * 1.4)) * 78,
+          spin: (i % 2 === 0 ? 1 : -1) * (540 + i * 120),
+          size: 40 + ((i * 7) % 20),
+          delay: i * 70,
         };
       });
 
@@ -200,10 +202,12 @@ export function CoinRewardLayer() {
       const setPhase = (phase: 1 | 2) =>
         setBursts((prev) => prev.map((b) => (b.id === id ? { ...b, phase } : b)));
 
-      // pop out, then arc into the pill
+      playCoinReward();
+
+      // pop out, hold so the child can see it, then arc into the pill
       requestAnimationFrame(() => requestAnimationFrame(() => setPhase(1)));
-      window.setTimeout(() => setPhase(2), POP_MS + 60);
-      window.setTimeout(() => remove(id), POP_MS + FLY_MS + CHIP_MS);
+      window.setTimeout(() => setPhase(2), POP_MS + HOLD_MS);
+      window.setTimeout(() => remove(id), POP_MS + HOLD_MS + FLY_MS + CHIP_MS);
     }
 
     window.addEventListener("storypros:coin-earned", onEarned);
@@ -252,13 +256,13 @@ export function CoinRewardLayer() {
           {/* sparkle flash at the origin */}
           {!burst.reduced ? (
             <span
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/40 blur-md"
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/50 blur-xl"
               style={{
-                width: 90,
-                height: 90,
-                opacity: burst.phase === 0 ? 0.85 : 0,
-                transform: `scale(${burst.phase === 0 ? 0.5 : 1.6})`,
-                transition: `opacity 520ms ease-out, transform 520ms ease-out`,
+                width: 190,
+                height: 190,
+                opacity: burst.phase === 0 ? 0.95 : 0,
+                transform: `scale(${burst.phase === 0 ? 0.4 : 2})`,
+                transition: `opacity 900ms ease-out, transform 900ms ease-out`,
               }}
             />
           ) : null}
@@ -274,11 +278,11 @@ export function CoinRewardLayer() {
               transition: "transform 380ms cubic-bezier(0.16, 1.2, 0.4, 1), opacity 320ms ease-out",
             }}
           >
-            <div className="flex items-center gap-1.5 rounded-full border-2 border-secondary bg-card px-3 py-1.5 shadow-card">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
-                <CoinIcon className="h-3.5 w-3.5" />
+            <div className="flex items-center gap-1.5 rounded-full border-[3px] border-secondary bg-card px-4 py-2 shadow-card">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+                <CoinIcon className="h-4.5 w-4.5" />
               </span>
-              <span className="whitespace-nowrap text-sm font-extrabold text-primary">
+              <span className="whitespace-nowrap text-lg font-extrabold text-primary">
                 +{burst.amount} {burst.amount === 1 ? "coin" : "coins"}
               </span>
             </div>
