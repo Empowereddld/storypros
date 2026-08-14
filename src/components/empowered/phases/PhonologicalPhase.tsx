@@ -154,88 +154,125 @@ export function PhonologicalPhase({
         </div>
       )}
 
-      <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
-        <section className="rounded-[30px] bg-card p-5 text-center shadow-soft animate-slide-up">
-          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-[22px] bg-accent text-primary">
-            <SoundIcon />
-          </span>
-          <p className="mt-3 text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
-            {typeLabel}
-          </p>
-          <h1 className="mt-3 text-[28px] font-extrabold leading-tight text-primary">
-            {item.prompt}
-          </h1>
-          {supported && (
-            <div className="mt-3 flex justify-center">
-              <AudioButton
-                size="lg"
-                tone="primary"
-                playing={isPlaying("prompt")}
-                onClick={() => toggle(item.prompt, "prompt")}
-                text={item.prompt}
-              />
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center overflow-hidden px-4 pb-5 pt-2 sm:px-6">
+        <div className="w-full max-w-2xl overflow-hidden rounded-[40px] border-8 border-accent/50 bg-card shadow-soft animate-slide-up">
+          {/* Header / Question Area */}
+          <section className="pt-8 pb-6 text-center sm:pt-10 sm:pb-8">
+            <div className="flex justify-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-[22px] bg-accent text-primary">
+                <SoundIcon />
+              </span>
             </div>
-          )}
-        </section>
-
-        <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
-          {item.options.map((option, index) => {
-            const label = option.text ?? option.label ?? "";
-            const isSelected = selected === option.id;
-            const isDisabled = wrongIds.has(option.id);
-            return (
-              <div
-                key={option.id}
-                className={cn(
-                  "flex min-h-[62px] items-center gap-3 rounded-[26px] border-2 bg-card px-3 py-2.5 shadow-card transition-all",
-                  isSelected && "border-primary bg-primary/5",
-                  !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
-                  isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
-                )}
-              >
-                {supported && !isDisabled && (
-                  <AudioButton
-                    size="md"
-                    tone="quiet"
-                    playing={isPlaying(`opt-${option.id}`)}
-                    onClick={() => toggle(label, `opt-${option.id}`)}
-                    text={label}
-                    className="-my-1"
-                  />
-                )}
-                <button
-                  onClick={() => !isDisabled && setSelected(option.id)}
-                  disabled={isDisabled}
-                  className="flex min-w-0 flex-1 items-center gap-3 self-stretch text-left"
-                >
-                  <span
-                    className={cn(
-                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold",
-                      isSelected ? "bg-primary text-primary-foreground" : "bg-accent/70 text-primary",
-                    )}
-                  >
-                    {String.fromCharCode(65 + index)}
-                  </span>
-                  <span
-                    className={cn(
-                      "min-w-0 flex-1 text-[22px] font-extrabold leading-tight",
-                      isDisabled ? "text-ink-soft line-through" : "text-primary",
-                    )}
-                  >
-                    {label}
-                  </span>
-                </button>
+            <p className="mt-4 text-xs font-extrabold uppercase tracking-[0.2em] text-muted-foreground">
+              {typeLabel}
+            </p>
+            <h1 className="mt-3 px-6 text-[26px] font-extrabold leading-tight text-primary sm:text-4xl">
+              <PromptText prompt={item.prompt} />
+            </h1>
+            {supported && (
+              <div className="mt-4 flex justify-center">
+                <AudioButton
+                  size="lg"
+                  tone="primary"
+                  playing={isPlaying("prompt")}
+                  onClick={() => toggle(item.prompt, "prompt")}
+                  text={item.prompt}
+                />
               </div>
-            );
-          })}
+            )}
+          </section>
+
+          {/* Answer Options */}
+          <div className="px-5 pb-6 sm:px-8 sm:pb-8">
+            <div className="space-y-3">
+              {item.options.map((option, index) => {
+                const label = option.text ?? option.label ?? "";
+                const isSelected = selected === option.id;
+                const isDisabled = wrongIds.has(option.id);
+                const letter = String.fromCharCode(65 + index);
+                return (
+                  <button
+                    key={option.id}
+                    onClick={() => !isDisabled && setSelected(option.id)}
+                    disabled={isDisabled}
+                    className={cn(
+                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-4 text-left transition-all duration-200 sm:p-5",
+                      isSelected && "border-primary bg-primary/5 shadow-md",
+                      !isSelected && !isDisabled && "border-accent/50 hover:border-primary/50 hover:bg-accent/35 shadow-sm hover:shadow-md",
+                      isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
+                    )}
+                  >
+                    <div className="flex min-w-0 flex-1 items-center gap-4 sm:gap-6">
+                      <span
+                        className={cn(
+                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-lg font-bold sm:h-12 sm:w-12 sm:text-xl",
+                          isSelected
+                            ? "bg-primary text-primary-foreground shadow-lg"
+                            : "bg-primary text-primary-foreground shadow-md",
+                          isDisabled && "bg-muted text-muted-foreground shadow-none",
+                        )}
+                      >
+                        {letter}
+                      </span>
+                      <span
+                        className={cn(
+                          "min-w-0 text-[22px] font-extrabold leading-tight sm:text-3xl",
+                          isDisabled ? "text-ink-soft line-through" : "text-primary",
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </div>
+                    {supported && !isDisabled && (
+                      <AudioButton
+                        size="md"
+                        tone="quiet"
+                        playing={isPlaying(`opt-${option.id}`)}
+                        onClick={() => toggle(label, `opt-${option.id}`)}
+                        text={label}
+                        className="ml-2"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Action Area */}
+          <div className="bg-accent/30 p-5 sm:p-6">
+            <TactileButton
+              onClick={handleCheck}
+              disabled={!selected || showingFeedback}
+              className="h-[60px] text-xl sm:h-16 sm:text-2xl"
+            >
+              Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
+            </TactileButton>
+          </div>
         </div>
-
-
-        <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-          Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
-        </TactileButton>
       </div>
     </div>
+  );
+}
+
+function PromptText({ prompt }: { prompt: string }) {
+  const rhymeMatch = prompt.match(/^(Which word rhymes with )(.+?)(\?)$/);
+  const soundMatch = prompt.match(/^(Which word starts with the same sound as )(.+?)(\?)$/);
+  const match = rhymeMatch ?? soundMatch;
+
+  if (!match) {
+    return <span>{prompt}</span>;
+  }
+
+  const [, prefix, target, suffix] = match;
+  return (
+    <>
+      {prefix}
+      <span className="text-primary underline decoration-primary/30 underline-offset-[6px] sm:underline-offset-8">
+        {target}
+      </span>
+      {suffix}
+    </>
   );
 }
 
@@ -254,4 +291,3 @@ function SoundIcon() {
     </svg>
   );
 }
-
