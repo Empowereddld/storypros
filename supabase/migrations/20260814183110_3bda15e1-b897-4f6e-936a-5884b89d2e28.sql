@@ -1,0 +1,1 @@
+DELETE FROM public.coins_ledger WHERE child_id = '1f1c9a19-e289-4805-979f-a002be4c6189';
