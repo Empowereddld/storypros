@@ -338,7 +338,8 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
             <StoryMathFormula className="mt-10 sm:mt-12" />
 
             {/* Beat 3 — where the framework helps */}
-            <div className="mt-14 sm:mt-16">
+            <div className="mt-16 sm:mt-20">
+
               <h3 className="font-display text-[22px] font-extrabold text-primary sm:text-[26px]">
                 {WHY_STORIES_BENEFITS.heading}
               </h3>
