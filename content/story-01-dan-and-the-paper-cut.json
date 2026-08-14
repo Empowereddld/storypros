@@ -725,7 +725,7 @@
   "sentence_frames": [
     {
       "position": 1,
-      "frame_text": "Dan asked for a bandage because ___",
+      "frame_text": "Dan asked for a bandage because ___.",
       "choices": [
         {
           "id": "a",
@@ -745,7 +745,7 @@
     },
     {
       "position": 2,
-      "frame_text": "Daria's dad helped Dan because ___",
+      "frame_text": "Daria's dad helped Dan because ___.",
       "choices": [
         {
           "id": "a",
@@ -765,7 +765,7 @@
     },
     {
       "position": 3,
-      "frame_text": "Dan felt calm because ___",
+      "frame_text": "Dan felt calm because ___.",
       "choices": [
         {
           "id": "a",
