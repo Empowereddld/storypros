@@ -97,7 +97,7 @@ export function StoryMathFormula({ className }: { className?: string }) {
                 <span className="text-[14px] font-extrabold leading-tight text-primary sm:text-[13.5px] lg:text-[14.5px]">
                   {item.label}
                 </span>
-                {!isLast && <Operator symbol="+" className="ml-auto sm:ml-1" />}
+                {!isLast && <Operator symbol="+" className="ml-1" />}
               </div>
             );
           })}
