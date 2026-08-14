@@ -280,25 +280,29 @@ export function LandingPage({ onLogin, onDemo }: LandingPageProps) {
 
 
       {/* ── Parent problem (two-column editorial) ── */}
-      <section className="px-5 pb-14 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-[72px]">
+      <section className="px-5 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:pb-[88px] lg:pt-[88px]">
         <Reveal>
           <div className="mx-auto grid w-full max-w-[1240px] gap-6 sm:gap-8 lg:grid-cols-[minmax(0,40fr)_minmax(0,58fr)] lg:gap-[80px]">
-            <h2 className="text-left font-display text-[34px] font-extrabold leading-[1.1] text-primary sm:text-[40px] lg:text-[50px]">
+            <h2 className="text-left font-display text-[31px] font-extrabold leading-[1.12] text-primary sm:text-[37px] lg:text-[43px] lg:leading-[1.1]">
               {PARENT_PROBLEM.heading}
             </h2>
-            <div className="text-left">
+            <div className="text-left lg:pt-[10px]">
               {PARENT_PROBLEM.paragraphs.map((paragraph, i) => (
                 <p
                   key={paragraph.slice(0, 24)}
                   className={cn(
-                    "max-w-[620px] text-base font-medium leading-[1.6] text-ink-soft sm:text-lg sm:leading-[1.55]",
-                    i > 0 ? "mt-4 sm:mt-5" : "",
+                    "max-w-[600px] font-medium text-ink-soft",
+                    i === 0
+                      ? "text-[17px] leading-[1.55] sm:text-[20px] sm:leading-[1.5]"
+                      : "text-base leading-[1.65] sm:text-[17.5px] sm:leading-[1.6]",
+                    i > 0 ? "mt-5 sm:mt-6" : "",
                   )}
                 >
                   {paragraph}
                 </p>
               ))}
             </div>
+
           </div>
         </Reveal>
       </section>
