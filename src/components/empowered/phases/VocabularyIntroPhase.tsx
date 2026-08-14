@@ -84,7 +84,7 @@ const SFA_LABELS: Record<SFAKey, string> = {
   location: "Where / when you use it",
 };
 
-const SFA_ICONS: Record<SFAKey, (props: { className?: string }) => JSX.Element> = {
+const SFA_ICONS: Record<SFAKey, (props: { className?: string }) => React.ReactElement> = {
   category: CategoryIcon,
   function: FunctionIcon,
   appearance: AppearanceIcon,
