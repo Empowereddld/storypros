@@ -36,11 +36,10 @@ import { COIN_ECONOMY } from "@/services/coinEconomy";
 type HeardKey = `intro-${number}` | `feat-${number}-${number}`;
 
 /**
- * One labeled Listen control per vocabulary screen.
+ * One speaker control per vocabulary screen.
  *
- * Shows "🔊 Listen" before the child has played the audio on this screen,
- * and "🔊 Listen again" after they have played it once. The label flips
- * back to "Listen" as soon as the child moves to a new word or feature.
+ * The icon alone is the trigger — no visible label, so the UI stays clean
+ * and the child can focus on the word and picture.
  */
 function ListenButton({
   label,
@@ -48,7 +47,7 @@ function ListenButton({
   onClick,
   ariaLabel,
 }: {
-  label: string;
+  label?: string;
   playing: boolean;
   onClick: () => void;
   ariaLabel?: string;
@@ -60,13 +59,16 @@ function ListenButton({
       aria-label={ariaLabel}
       aria-pressed={playing}
       className={cn(
-        "flex h-14 shrink-0 items-center gap-2.5 rounded-[24px] bg-secondary px-4 text-primary transition-transform",
+        "flex h-14 w-14 shrink-0 items-center justify-center rounded-[24px] bg-secondary text-primary transition-transform",
         "shadow-[0_6px_0_color-mix(in_oklab,var(--secondary)_78%,black)] active:translate-y-[4px] active:shadow-[0_2px_0_color-mix(in_oklab,var(--secondary)_78%,black)]",
         playing && "ring-4 ring-primary-foreground/40",
+        label && "w-auto gap-2.5 px-4",
       )}
     >
       <SpeakerGlyph className="h-7 w-7" />
-      <span className="text-[15px] font-extrabold tracking-tight whitespace-nowrap">{label}</span>
+      {label && (
+        <span className="whitespace-nowrap text-[15px] font-extrabold tracking-tight">{label}</span>
+      )}
     </button>
   );
 }
@@ -266,7 +268,6 @@ export function VocabularyIntroPhase({
                 <div className="flex items-center gap-3 text-left">
                   {supported && (
                     <ListenButton
-                      label={heard.has(heardKey) ? "Listen again" : "Listen"}
                       playing={isPlaying("intro")}
                       onClick={() => playWithTrack(introNarration, "intro")}
                       ariaLabel="Hear what this word means"
@@ -306,11 +307,10 @@ export function VocabularyIntroPhase({
                 </div>
               </div>
 
-              {/* Purple sentence bar with tactile yellow Listen control */}
+              {/* Purple sentence bar with speaker control */}
               <div className="mt-5 flex w-full shrink-0 items-center gap-4 rounded-[32px] bg-primary p-3 text-left shadow-soft">
                 {supported && (
                   <ListenButton
-                    label={heard.has(heardKey) ? "Listen again" : "Listen"}
                     playing={isPlaying(`feat-${featureIdx}`)}
                     onClick={() => playWithTrack(featureNarration, `feat-${featureIdx}`)}
                     ariaLabel="Hear this sentence"

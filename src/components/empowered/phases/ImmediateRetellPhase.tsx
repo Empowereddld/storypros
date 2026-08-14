@@ -122,7 +122,6 @@ export function ImmediateRetellPhase({
                       playing={fullPlaying}
                       onClick={() => toggle(fullStory, "full-story")}
                       ariaLabel="Listen to the full story"
-                      label="Listen to Story"
                       className="shrink-0 justify-center"
                     />
                   )}
