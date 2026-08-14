@@ -330,8 +330,8 @@
           {
             "feature": "category",
             "prompt": "What group is a bandage in? Listen and look.",
-            "teaching_text": "bandage is a first aid item.",
-            "narration": "bandage is a first aid item."
+            "teaching_text": "Bandage is a first aid item.",
+            "narration": "Bandage is a first aid item."
           },
           {
             "feature": "function",
