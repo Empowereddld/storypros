@@ -184,7 +184,7 @@ export function VocabularyQuizPhase({
         <div className="mx-auto flex w-full max-w-[980px] flex-1 flex-col overflow-hidden">
           {/* Hero: picture beside the target word */}
           <section className="flex items-center gap-4 rounded-[30px] bg-card p-4 shadow-soft animate-slide-up sm:gap-6 sm:p-5">
-            <div className="flex h-[104px] w-[132px] shrink-0 items-center justify-center overflow-hidden rounded-[22px] bg-accent/35 sm:h-[132px] sm:w-[190px]">
+            <div className="flex h-[120px] w-[120px] shrink-0 items-center justify-center overflow-hidden rounded-[22px] bg-accent/35 sm:h-[140px] sm:w-[140px]">
               {wordImage ? (
                 <img
                   src={wordImage}
