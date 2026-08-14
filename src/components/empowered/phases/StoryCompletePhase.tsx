@@ -192,7 +192,7 @@ export function StoryCompletePhase({
                   +{paperPlanesEarned}
                 </p>
               </div>
-              <span className="flex h-13 w-13 shrink-0 items-center justify-center rounded-[20px] bg-secondary p-3 text-secondary-foreground shadow-[0_5px_0_var(--secondary-deep)]">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[20px] bg-secondary text-secondary-foreground shadow-[0_5px_0_var(--secondary-deep)]">
                 <CoinIcon className="h-7 w-7" />
               </span>
             </div>
