@@ -12,6 +12,7 @@
  * --------------------------------------------- */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 import { CoinIcon } from "./StoryProsUi";
 import { getPaperPlanes } from "@/services/progress";
@@ -271,8 +272,12 @@ export function CoinRewardLayer() {
 
   if (bursts.length === 0) return null;
 
-  return (
-    <div className="pointer-events-none fixed inset-0 z-[70]" aria-hidden={false}>
+  return createPortal(
+    <div
+      data-coin-reward-layer
+      className="pointer-events-none fixed inset-0 z-[70] overflow-hidden"
+      aria-hidden={false}
+    >
       {bursts.map((burst) => (
         <div key={burst.id} className="absolute" style={{ left: burst.x, top: burst.y }}>
           {/* flying coins */}
@@ -284,6 +289,7 @@ export function CoinRewardLayer() {
             return (
               <span
                 key={coin.id}
+                data-flying-coin
                 className="absolute -translate-x-1/2 -translate-y-1/2"
                 style={{
                   transform: `translate3d(${tx}px, ${ty}px, 0)`,
@@ -324,6 +330,7 @@ export function CoinRewardLayer() {
 
           {/* "+N coins" chip */}
           <div
+            data-coin-reward-chip
             className="absolute -translate-x-1/2 -translate-y-1/2"
             style={{
               transform: `translate3d(0, ${
@@ -349,6 +356,7 @@ export function CoinRewardLayer() {
           </div>
         </div>
       ))}
-    </div>
+    </div>,
+    document.body,
   );
 }
