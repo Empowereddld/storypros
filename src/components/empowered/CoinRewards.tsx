@@ -161,10 +161,32 @@ export function CoinRewardLayer() {
       const pill = document.querySelector("[data-coin-pill]");
       const pillRect = pill?.getBoundingClientRect();
 
-      const fallbackX = pillRect ? pillRect.left + pillRect.width / 2 : window.innerWidth - 60;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      const fallbackX = pillRect ? pillRect.left + pillRect.width / 2 : vw - 60;
       const fallbackY = pillRect ? pillRect.bottom + 96 : 140;
-      const x = detail.from?.x ?? fallbackX;
-      const y = detail.from?.y ?? fallbackY;
+      const rawX = detail.from?.x ?? fallbackX;
+      const rawY = detail.from?.y ?? fallbackY;
+
+      // The effect needs room for the fan of coins plus the "+N coins" chip.
+      // Scale the fan down on tight viewports, then pull the origin inward so
+      // nothing pops off screen or collides with the header.
+      const CHIP_HALF_W = 150;
+      const CHIP_H = 78;
+      const topSafe = pillRect ? Math.max(pillRect.bottom + 12, 64) : 64;
+
+      const spreadX = Math.max(48, Math.min(128, (vw - 2 * 56) / 2.6));
+      const popTop = Math.max(72, Math.min(182, (vh - topSafe) * 0.34));
+
+      const marginX = Math.max(spreadX + 36, CHIP_HALF_W + 12);
+      const x = Math.min(Math.max(rawX, marginX), Math.max(marginX, vw - marginX));
+
+      // Prefer the chip above the origin; flip below when there is no room.
+      const chipAbove = rawY - popTop - CHIP_H > topSafe;
+      const minY = chipAbove ? topSafe + popTop + CHIP_H : topSafe + 24;
+      const maxY = chipAbove ? vh - 24 : vh - CHIP_H - 24;
+      const y = Math.min(Math.max(rawY, minY), Math.max(minY, maxY));
 
       const targetX = pillRect ? pillRect.left + pillRect.width / 2 : x;
       const targetY = pillRect ? pillRect.top + pillRect.height / 2 : y - 80;
@@ -174,8 +196,8 @@ export function CoinRewardLayer() {
         const spread = count > 1 ? (i / (count - 1) - 0.5) * 2 : 0;
         return {
           id: i,
-          popX: spread * 128,
-          popY: -104 - Math.abs(Math.cos(spread * 1.4)) * 78,
+          popX: spread * spreadX,
+          popY: -(popTop * 0.58) - Math.abs(Math.cos(spread * 1.4)) * (popTop * 0.42),
           spin: (i % 2 === 0 ? 1 : -1) * (540 + i * 120),
           size: 40 + ((i * 7) % 20),
           delay: i * 70,
@@ -194,10 +216,12 @@ export function CoinRewardLayer() {
           dx: targetX - x,
           dy: targetY - y,
           coins,
+          chipAbove,
           phase: 0,
           reduced,
         },
       ]);
+
 
       const setPhase = (phase: 1 | 2) =>
         setBursts((prev) => prev.map((b) => (b.id === id ? { ...b, phase } : b)));
