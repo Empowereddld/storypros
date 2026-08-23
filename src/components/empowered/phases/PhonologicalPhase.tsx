@@ -197,7 +197,7 @@ export function PhonologicalPhase({
                     onClick={() => !isDisabled && setSelected(option.id)}
                     disabled={isDisabled}
                     className={cn(
-                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-4 text-left transition-all duration-200 sm:p-5",
+                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-3 text-left transition-all duration-200 sm:p-4",
                       isSelected && "border-primary bg-primary/5 shadow-md",
                       !isSelected && !isDisabled && "border-accent/50 hover:border-primary/50 hover:bg-accent/35 shadow-sm hover:shadow-md",
                       isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
@@ -206,7 +206,7 @@ export function PhonologicalPhase({
                     <div className="flex min-w-0 flex-1 items-center gap-4 sm:gap-6">
                       <span
                         className={cn(
-                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-lg font-bold sm:h-12 sm:w-12 sm:text-xl",
+                          "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-base font-bold sm:h-11 sm:w-11 sm:text-lg",
                           isSelected
                             ? "bg-primary text-primary-foreground shadow-lg"
                             : "bg-primary text-primary-foreground shadow-md",
@@ -217,7 +217,7 @@ export function PhonologicalPhase({
                       </span>
                       <span
                         className={cn(
-                          "min-w-0 text-[22px] font-extrabold leading-tight sm:text-3xl",
+                          "min-w-0 text-[20px] font-extrabold leading-tight sm:text-[26px]",
                           isDisabled ? "text-ink-soft line-through" : "text-primary",
                         )}
                       >
@@ -241,15 +241,16 @@ export function PhonologicalPhase({
           </div>
 
           {/* Action Area */}
-          <div className="bg-accent/30 p-5 sm:p-6">
+          <div className="shrink-0 bg-accent/30 p-4 sm:p-5">
             <TactileButton
               onClick={handleCheck}
               disabled={!selected || showingFeedback}
-              className="h-[60px] text-xl sm:h-16 sm:text-2xl"
+              className="h-[54px] text-lg sm:h-[60px] sm:text-xl"
             >
               Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
             </TactileButton>
           </div>
+
         </div>
       </div>
     </div>
