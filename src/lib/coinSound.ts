@@ -1,6 +1,11 @@
-/* Short, warm reward chime for coin payoffs.
- * Synthesised with WebAudio so there is no asset to load and
- * nothing to buffer before the animation starts. */
+/* Premium coin reward sound — synthesised with WebAudio so there is
+ * no asset to load and nothing to buffer before the animation starts.
+ *
+ * Layers:
+ *  1. A bright, bell-like "ding" (sine + triangle harmonics).
+ *  2. A quick metallic "clink" from shaped high-frequency noise.
+ *  3. A tiny sparkle echo for a satisfying payoff tail.
+ */
 
 let ctx: AudioContext | null = null;
 
@@ -15,34 +20,73 @@ function getContext(): AudioContext | null {
   return ctx;
 }
 
-function ping(context: AudioContext, freq: number, at: number, dur: number, gain: number) {
+function bellTone(
+  context: AudioContext,
+  freq: number,
+  at: number,
+  dur: number,
+  gain: number,
+  type: OscillatorType = "sine"
+) {
   const osc = context.createOscillator();
   const amp = context.createGain();
-  osc.type = "triangle";
+  osc.type = type;
   osc.frequency.setValueAtTime(freq, at);
-  osc.frequency.linearRampToValueAtTime(freq * 1.02, at + dur);
+  // Slight pitch drop gives a physical "strike" feel.
+  osc.frequency.exponentialRampToValueAtTime(freq * 0.96, at + dur * 0.6);
   amp.gain.setValueAtTime(0.0001, at);
-  amp.gain.exponentialRampToValueAtTime(gain, at + 0.015);
+  amp.gain.exponentialRampToValueAtTime(gain, at + 0.01);
   amp.gain.exponentialRampToValueAtTime(0.0001, at + dur);
   osc.connect(amp).connect(context.destination);
   osc.start(at);
-  osc.stop(at + dur + 0.05);
+  osc.stop(at + dur + 0.03);
 }
 
-/** Rising sparkle arpeggio + a soft landing "chink". */
+function clinkNoise(context: AudioContext, at: number, gain: number) {
+  const bufferSize = context.sampleRate * 0.08;
+  const buffer = context.createBuffer(1, bufferSize, context.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = Math.random() * 2 - 1;
+  }
+
+  const src = context.createBufferSource();
+  src.buffer = buffer;
+
+  // Band-pass around the "coin" metallic region (~4kHz).
+  const band = context.createBiquadFilter();
+  band.type = "bandpass";
+  band.frequency.value = 4200;
+  band.Q.value = 8;
+
+  const amp = context.createGain();
+  amp.gain.setValueAtTime(0.0001, at);
+  amp.gain.exponentialRampToValueAtTime(gain, at + 0.005);
+  amp.gain.exponentialRampToValueAtTime(0.0001, at + 0.07);
+
+  src.connect(band).connect(amp).connect(context.destination);
+  src.start(at);
+  src.stop(at + 0.1);
+}
+
+/** Bright, satisfying coin payoff — a ding, a clink, and a sparkle. */
 export function playCoinReward(): void {
   try {
     const context = getContext();
     if (!context) return;
     const t = context.currentTime + 0.01;
 
-    // sparkle run (C6 - E6 - G6 - C7)
-    const notes = [1046.5, 1318.5, 1568, 2093];
-    notes.forEach((freq, i) => ping(context, freq, t + i * 0.085, 0.22, 0.16));
+    // Main coin "ding" — two slightly detuned sines for richness.
+    bellTone(context, 1568, t, 0.28, 0.18); // G6
+    bellTone(context, 1578, t + 0.005, 0.26, 0.1, "sine"); // subtle detune
+    bellTone(context, 3136, t, 0.18, 0.07, "triangle"); // harmonic octave
 
-    // landing chime, a beat later — coins hitting the pile
-    ping(context, 1760, t + 0.52, 0.5, 0.13);
-    ping(context, 2637, t + 0.55, 0.42, 0.08);
+    // Metallic clink on attack.
+    clinkNoise(context, t, 0.14);
+
+    // Echo sparkle — two quick high notes that trail off.
+    bellTone(context, 2093, t + 0.09, 0.16, 0.09); // C7
+    bellTone(context, 2637, t + 0.15, 0.14, 0.06); // E7
   } catch {
     /* audio is decorative — never break the activity */
   }
