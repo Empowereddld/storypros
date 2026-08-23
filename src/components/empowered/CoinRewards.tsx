@@ -136,8 +136,8 @@ interface Burst {
   dx: number;
   dy: number;
   coins: FlyingCoin[];
-  /** chip sits above the origin unless there is no room */
-  chipAbove: boolean;
+  /** vertical offset of the "+N coins" chip from the origin */
+  chipOffset: number;
 
   phase: 0 | 1 | 2;
   reduced: boolean;
@@ -219,7 +219,7 @@ export function CoinRewardLayer() {
           dx: targetX - x,
           dy: targetY - y,
           coins,
-          chipAbove,
+          chipOffset: chipAbove ? -(popTop + 26) : CHIP_H * 0.6,
           phase: 0,
           reduced,
         },
@@ -298,9 +298,9 @@ export function CoinRewardLayer() {
           <div
             className="absolute -translate-x-1/2 -translate-y-1/2"
             style={{
-              transform: `translate3d(0, ${burst.phase === 0 ? 8 : -6}px, 0) scale(${
-                burst.phase === 0 ? 0.85 : 1
-              })`,
+              transform: `translate3d(0, ${
+                burst.chipOffset + (burst.phase === 0 ? 14 : 0)
+              }px, 0) scale(${burst.phase === 0 ? 0.85 : 1})`,
               opacity: burst.phase === 0 ? 0 : burst.phase === 2 ? 1 : 0.95,
               transition: "transform 380ms cubic-bezier(0.16, 1.2, 0.4, 1), opacity 320ms ease-out",
             }}
