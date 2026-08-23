@@ -136,6 +136,9 @@ interface Burst {
   dx: number;
   dy: number;
   coins: FlyingCoin[];
+  /** chip sits above the origin unless there is no room */
+  chipAbove: boolean;
+
   phase: 0 | 1 | 2;
   reduced: boolean;
 }
