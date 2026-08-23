@@ -201,19 +201,26 @@ export function CoinRewardLayer() {
       // nothing pops off screen or collides with the header.
       const CHIP_HALF_W = 150;
       const CHIP_H = 78;
+      const COIN_HALF = 34; // half of the largest coin, incl. ring
       const topSafe = pillRect ? Math.max(pillRect.bottom + 12, 64) : 64;
 
       const spreadX = Math.max(48, Math.min(128, (vw - 2 * 56) / 2.6));
-      const popTop = Math.max(72, Math.min(182, (vh - topSafe) * 0.34));
 
       const marginX = Math.max(spreadX + 36, CHIP_HALF_W + 12);
       const x = Math.min(Math.max(rawX, marginX), Math.max(marginX, vw - marginX));
 
-      // Prefer the chip above the origin; flip below when there is no room.
-      const chipAbove = rawY - popTop - CHIP_H > topSafe;
-      const minY = chipAbove ? topSafe + popTop + CHIP_H : topSafe + 24;
-      const maxY = chipAbove ? vh - 24 : vh - CHIP_H - 24;
+      // Keep the origin inside a band that leaves room for the upward pop.
+      const minY = topSafe + COIN_HALF + 24;
+      const maxY = vh - CHIP_H - 24;
       const y = Math.min(Math.max(rawY, minY), Math.max(minY, maxY));
+
+      // Derive the pop height from the space actually above the origin, so the
+      // fan of coins can never travel past the top of the viewport.
+      const headroom = y - topSafe - COIN_HALF;
+      const popTop = Math.max(40, Math.min(182, (vh - topSafe) * 0.34, headroom));
+
+      // Prefer the chip above the fan; flip below when there is no room.
+      const chipAbove = y - popTop - COIN_HALF - CHIP_H > topSafe;
 
       // Large coins include a ring and shadow, so keep their entire landing
       // footprint inside the viewport even when the counter hugs an edge.
