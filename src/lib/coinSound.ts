@@ -21,74 +21,82 @@ function getContext(): AudioContext | null {
   return ctx;
 }
 
-function bellTone(
+/** A punchy chiptune blip. */
+function blip(
   context: AudioContext,
   freq: number,
   at: number,
   dur: number,
   gain: number,
-  type: OscillatorType = "sine"
+  type: OscillatorType = "square"
 ) {
   const osc = context.createOscillator();
   const amp = context.createGain();
+  // Soften the raw square edge a touch so it stays cute, not harsh.
+  const tone = context.createBiquadFilter();
+  tone.type = "lowpass";
+  tone.frequency.value = 6000;
+
   osc.type = type;
   osc.frequency.setValueAtTime(freq, at);
-  // Slight pitch drop gives a physical "strike" feel.
-  osc.frequency.exponentialRampToValueAtTime(freq * 0.96, at + dur * 0.6);
+
   amp.gain.setValueAtTime(0.0001, at);
-  amp.gain.exponentialRampToValueAtTime(gain, at + 0.01);
+  amp.gain.exponentialRampToValueAtTime(gain, at + 0.008);
+  amp.gain.setValueAtTime(gain, at + dur * 0.55);
   amp.gain.exponentialRampToValueAtTime(0.0001, at + dur);
-  osc.connect(amp).connect(context.destination);
+
+  osc.connect(tone).connect(amp).connect(context.destination);
   osc.start(at);
-  osc.stop(at + dur + 0.03);
+  osc.stop(at + dur + 0.02);
 }
 
-function clinkNoise(context: AudioContext, at: number, gain: number) {
-  const bufferSize = context.sampleRate * 0.08;
+function sparkleNoise(context: AudioContext, at: number, gain: number) {
+  const bufferSize = Math.floor(context.sampleRate * 0.06);
   const buffer = context.createBuffer(1, bufferSize, context.sampleRate);
   const data = buffer.getChannelData(0);
   for (let i = 0; i < bufferSize; i++) {
-    data[i] = Math.random() * 2 - 1;
+    data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
   }
 
   const src = context.createBufferSource();
   src.buffer = buffer;
 
-  // Band-pass around the "coin" metallic region (~4kHz).
   const band = context.createBiquadFilter();
   band.type = "bandpass";
-  band.frequency.value = 4200;
-  band.Q.value = 8;
+  band.frequency.value = 5200;
+  band.Q.value = 4;
 
   const amp = context.createGain();
   amp.gain.setValueAtTime(0.0001, at);
-  amp.gain.exponentialRampToValueAtTime(gain, at + 0.005);
-  amp.gain.exponentialRampToValueAtTime(0.0001, at + 0.07);
+  amp.gain.exponentialRampToValueAtTime(gain, at + 0.004);
+  amp.gain.exponentialRampToValueAtTime(0.0001, at + 0.05);
 
   src.connect(band).connect(amp).connect(context.destination);
   src.start(at);
-  src.stop(at + 0.1);
+  src.stop(at + 0.08);
 }
 
-/** Bright, satisfying coin payoff — a ding, a clink, and a sparkle. */
+/** Playful arcade coin payoff — blip, blip, then a happy little run up. */
 export function playCoinReward(): void {
   try {
     const context = getContext();
     if (!context) return;
     const t = context.currentTime + 0.01;
 
-    // Main coin "ding" — two slightly detuned sines for richness.
-    bellTone(context, 1568, t, 0.28, 0.18); // G6
-    bellTone(context, 1578, t + 0.005, 0.26, 0.1, "sine"); // subtle detune
-    bellTone(context, 3136, t, 0.18, 0.07, "triangle"); // harmonic octave
+    // Classic coin: quick B5 grace note snapping into a held E6.
+    blip(context, 988, t, 0.075, 0.16); // B5
+    blip(context, 1319, t + 0.075, 0.24, 0.17); // E6 (held)
+    blip(context, 2637, t + 0.075, 0.2, 0.045, "triangle"); // octave shimmer
 
-    // Metallic clink on attack.
-    clinkNoise(context, t, 0.14);
+    // Bright metallic attack.
+    sparkleNoise(context, t, 0.1);
 
-    // Echo sparkle — two quick high notes that trail off.
-    bellTone(context, 2093, t + 0.09, 0.16, 0.09); // C7
-    bellTone(context, 2637, t + 0.15, 0.14, 0.06); // E7
+    // Bouncy ascending tail: G6 - B6 - E7.
+    blip(context, 1568, t + 0.3, 0.07, 0.1, "triangle");
+    blip(context, 1976, t + 0.37, 0.07, 0.09, "triangle");
+    blip(context, 2637, t + 0.44, 0.16, 0.08, "triangle");
   } catch {
     /* audio is decorative — never break the activity */
   }
 }
+
