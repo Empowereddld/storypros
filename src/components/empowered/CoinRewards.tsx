@@ -12,6 +12,7 @@
  * --------------------------------------------- */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 import { CoinIcon } from "./StoryProsUi";
 import { getPaperPlanes } from "@/services/progress";
@@ -27,6 +28,31 @@ const MAX_COINS = 11;
 function prefersReducedMotion(): boolean {
   if (typeof window === "undefined" || !window.matchMedia) return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/** Find the coin counter that is actually visible in the current activity view. */
+function getVisibleCoinPill(): DOMRect | undefined {
+  const pills = Array.from(document.querySelectorAll<HTMLElement>("[data-coin-pill]"));
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+
+  for (const pill of pills) {
+    const rect = pill.getBoundingClientRect();
+    const style = window.getComputedStyle(pill);
+    const visible =
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      rect.width > 0 &&
+      rect.height > 0 &&
+      rect.right > 0 &&
+      rect.bottom > 0 &&
+      rect.left < viewportWidth &&
+      rect.top < viewportHeight;
+
+    if (visible) return rect;
+  }
+
+  return undefined;
 }
 
 /** Persistent coin balance. Anchor for the reward burst. */
@@ -161,11 +187,9 @@ export function CoinRewardLayer() {
       if (!detail?.amount) return;
 
       const reduced = prefersReducedMotion();
-      const pill = document.querySelector("[data-coin-pill]");
-      const pillRect = pill?.getBoundingClientRect();
-
       const vw = window.innerWidth;
       const vh = window.innerHeight;
+      const pillRect = getVisibleCoinPill();
 
       const fallbackX = pillRect ? pillRect.left + pillRect.width / 2 : vw - 60;
       const fallbackY = pillRect ? pillRect.bottom + 96 : 140;
@@ -191,8 +215,13 @@ export function CoinRewardLayer() {
       const maxY = chipAbove ? vh - 24 : vh - CHIP_H - 24;
       const y = Math.min(Math.max(rawY, minY), Math.max(minY, maxY));
 
-      const targetX = pillRect ? pillRect.left + pillRect.width / 2 : x;
-      const targetY = pillRect ? pillRect.top + pillRect.height / 2 : y - 80;
+      // Large coins include a ring and shadow, so keep their entire landing
+      // footprint inside the viewport even when the counter hugs an edge.
+      const LANDING_MARGIN = 40;
+      const rawTargetX = pillRect ? pillRect.left + pillRect.width / 2 : x;
+      const rawTargetY = pillRect ? pillRect.top + pillRect.height / 2 : y - 80;
+      const targetX = Math.min(Math.max(rawTargetX, LANDING_MARGIN), vw - LANDING_MARGIN);
+      const targetY = Math.min(Math.max(rawTargetY, LANDING_MARGIN), vh - LANDING_MARGIN);
 
       const count = reduced ? 0 : Math.max(5, Math.min(MAX_COINS, Math.round(detail.amount / 3) + 3));
       const coins: FlyingCoin[] = Array.from({ length: count }, (_, i) => {
@@ -243,8 +272,12 @@ export function CoinRewardLayer() {
 
   if (bursts.length === 0) return null;
 
-  return (
-    <div className="pointer-events-none fixed inset-0 z-[70]" aria-hidden={false}>
+  return createPortal(
+    <div
+      data-coin-reward-layer
+      className="pointer-events-none fixed inset-0 z-[70] overflow-hidden"
+      aria-hidden={false}
+    >
       {bursts.map((burst) => (
         <div key={burst.id} className="absolute" style={{ left: burst.x, top: burst.y }}>
           {/* flying coins */}
@@ -256,6 +289,7 @@ export function CoinRewardLayer() {
             return (
               <span
                 key={coin.id}
+                data-flying-coin
                 className="absolute -translate-x-1/2 -translate-y-1/2"
                 style={{
                   transform: `translate3d(${tx}px, ${ty}px, 0)`,
@@ -296,6 +330,7 @@ export function CoinRewardLayer() {
 
           {/* "+N coins" chip */}
           <div
+            data-coin-reward-chip
             className="absolute -translate-x-1/2 -translate-y-1/2"
             style={{
               transform: `translate3d(0, ${
@@ -321,6 +356,7 @@ export function CoinRewardLayer() {
           </div>
         </div>
       ))}
-    </div>
+    </div>,
+    document.body,
   );
 }
