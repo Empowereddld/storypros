@@ -1,11 +1,12 @@
-/* Premium coin reward sound — synthesised with WebAudio so there is
+/* Fun arcade coin sound — synthesised with WebAudio so there is
  * no asset to load and nothing to buffer before the animation starts.
  *
  * Layers:
- *  1. A bright, bell-like "ding" (sine + triangle harmonics).
- *  2. A quick metallic "clink" from shaped high-frequency noise.
- *  3. A tiny sparkle echo for a satisfying payoff tail.
+ *  1. The classic two-note arcade "coin blip" (B5 snap into a held E6).
+ *  2. A short metallic sparkle on the attack.
+ *  3. A bouncy ascending arpeggio tail for the payoff.
  */
+
 
 let ctx: AudioContext | null = null;
 
