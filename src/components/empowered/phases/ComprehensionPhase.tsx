@@ -134,7 +134,12 @@ export function ComprehensionPhase({
         amount: comprehensionAward(currentAttempt),
         anchor: document.querySelector(`[data-answer-option="${selected}"]`),
       });
-      setBrainCheck({ type: "correct", message: q.brain_check_correct });
+      const elementLabel = ELEMENT_LABELS[q.story_element] ?? "Story";
+      const article = q.story_element === "action" ? "an" : "a";
+      setBrainCheck({
+        type: "correct",
+        message: `Great job answering with ${article} ${elementLabel.toUpperCase()}!`,
+      });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
       setBrainCheck({ type: "wrong", message: q.brain_check_wrong });
