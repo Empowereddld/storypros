@@ -155,22 +155,22 @@ export function PhonologicalPhase({
       )}
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden px-4 pb-4 pt-2 sm:px-6">
-        <div className="flex max-h-full w-full max-w-2xl flex-col overflow-hidden rounded-[40px] border-8 border-accent/50 bg-card shadow-soft animate-slide-up">
+        <div className="flex max-h-full w-full max-w-2xl flex-col overflow-hidden rounded-[36px] border-[6px] border-accent/50 bg-card shadow-soft animate-slide-up">
           {/* Header / Question Area */}
-          <section className="shrink-0 pb-4 pt-5 text-center sm:pb-6 sm:pt-7">
+          <section className="shrink-0 pb-2 pt-3 text-center sm:pb-3 sm:pt-4">
             <div className="flex justify-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-[20px] bg-accent text-primary sm:h-14 sm:w-14">
+              <span className="flex h-10 w-10 items-center justify-center rounded-[18px] bg-accent text-primary sm:h-12 sm:w-12">
                 <SoundIcon />
               </span>
             </div>
-            <p className="mt-3 text-xs font-extrabold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="mt-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-muted-foreground">
               {typeLabel}
             </p>
-            <h1 className="mt-2 px-6 text-[24px] font-extrabold leading-tight text-primary sm:text-[32px]">
+            <h1 className="mt-1.5 px-5 text-[21px] font-extrabold leading-tight text-primary sm:text-[26px] lg:text-[30px]">
               <PromptText prompt={item.prompt} />
             </h1>
             {supported && (
-              <div className="mt-3 flex justify-center">
+              <div className="mt-2 flex justify-center">
                 <AudioButton
                   size="lg"
                   tone="primary"
@@ -183,9 +183,9 @@ export function PhonologicalPhase({
           </section>
 
           {/* Answer Options */}
-          <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-4 sm:px-8 sm:pb-5">
+          <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-3 sm:px-7 sm:pb-4">
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {item.options.map((option, index) => {
                 const label = option.text ?? option.label ?? "";
                 const isSelected = selected === option.id;
@@ -197,16 +197,16 @@ export function PhonologicalPhase({
                     onClick={() => !isDisabled && setSelected(option.id)}
                     disabled={isDisabled}
                     className={cn(
-                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-3 text-left transition-all duration-200 sm:p-4",
+                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-2 text-left transition-all duration-200 sm:p-2.5",
                       isSelected && "border-primary bg-primary/5 shadow-md",
                       !isSelected && !isDisabled && "border-accent/50 hover:border-primary/50 hover:bg-accent/35 shadow-sm hover:shadow-md",
                       isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
                     )}
                   >
-                    <div className="flex min-w-0 flex-1 items-center gap-4 sm:gap-6">
+                    <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-5">
                       <span
                         className={cn(
-                          "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-base font-bold sm:h-11 sm:w-11 sm:text-lg",
+                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl text-sm font-bold sm:h-10 sm:w-10 sm:text-base",
                           isSelected
                             ? "bg-primary text-primary-foreground shadow-lg"
                             : "bg-primary text-primary-foreground shadow-md",
@@ -217,7 +217,7 @@ export function PhonologicalPhase({
                       </span>
                       <span
                         className={cn(
-                          "min-w-0 text-[20px] font-extrabold leading-tight sm:text-[26px]",
+                          "min-w-0 text-[18px] font-extrabold leading-tight sm:text-[22px]",
                           isDisabled ? "text-ink-soft line-through" : "text-primary",
                         )}
                       >
@@ -241,11 +241,11 @@ export function PhonologicalPhase({
           </div>
 
           {/* Action Area */}
-          <div className="shrink-0 bg-accent/30 p-4 sm:p-5">
+          <div className="shrink-0 bg-accent/30 p-3 sm:p-4">
             <TactileButton
               onClick={handleCheck}
               disabled={!selected || showingFeedback}
-              className="h-[54px] text-lg sm:h-[60px] sm:text-xl"
+              className="h-[48px] text-base sm:h-[56px] sm:text-lg"
             >
               Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
             </TactileButton>
