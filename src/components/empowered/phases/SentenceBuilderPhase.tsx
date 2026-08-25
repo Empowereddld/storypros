@@ -33,6 +33,7 @@ export function SentenceBuilderPhase({
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const [speaking, setSpeaking] = useState(false);
+  const [brainSpeaking, setBrainSpeaking] = useState(false);
   const startTime = useRef(Date.now());
 
   useEffect(() => {
@@ -68,6 +69,23 @@ export function SentenceBuilderPhase({
       // Ignore browser TTS errors.
     }
     setSpeaking(false);
+  }
+
+  async function handleListenBrainCheck() {
+    if (feedback.type === "none") return;
+    if (brainSpeaking) {
+      stop();
+      setBrainSpeaking(false);
+      return;
+    }
+
+    setBrainSpeaking(true);
+    try {
+      await speak(`Brain Check! ${feedback.brainCheck}`, { rate: speedToRate(ttsSpeed) });
+    } catch {
+      // Ignore browser TTS errors.
+    }
+    setBrainSpeaking(false);
   }
 
   function handleCheck() {
@@ -155,7 +173,7 @@ export function SentenceBuilderPhase({
         />
       </div>
 
-      {showingFeedback && feedback.type !== "none" && feedback.stage === "brain" && (
+      {showingFeedback && feedback.stage === "brain" && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
           <div className="w-full max-w-[440px] rounded-[28px] bg-card p-6 text-center shadow-soft animate-slide-up">
             <h3 className="font-display text-[26px] font-extrabold text-primary">Brain Check!</h3>
@@ -185,7 +203,7 @@ export function SentenceBuilderPhase({
         </div>
       )}
 
-      {showingFeedback && feedback.type !== "none" && feedback.stage === "result" && (
+      {showingFeedback && feedback.stage === "result" && (
         <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm">
           <div className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up">
             <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
