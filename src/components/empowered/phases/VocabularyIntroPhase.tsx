@@ -325,18 +325,27 @@ export function VocabularyIntroPhase({
                 {word.word}
               </h2>
 
-              {/* Feature icon + label: the subject of the screen */}
-              <div className="mt-4 flex shrink-0 flex-col items-center gap-2">
-                <div className="flex h-[74px] w-[74px] items-center justify-center rounded-[26px] border-4 border-card bg-secondary text-primary shadow-[0_7px_0_color-mix(in_oklab,var(--secondary)_78%,black)] sm:h-[84px] sm:w-[84px]">
+              {/* Feature icon + label: one unit, identical across all five screens */}
+              <div className="mt-4 flex shrink-0 flex-col items-center gap-2.5">
+                <div className="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-[24px] bg-secondary p-[15px] text-primary shadow-[0_6px_14px_-6px_color-mix(in_oklab,var(--secondary)_70%,black)] sm:h-[84px] sm:w-[84px] sm:p-[17px]">
                   {(() => {
                     const Icon = SFA_ICONS[featureKey as SFAKey];
-                    return <Icon className="h-9 w-9 sm:h-11 sm:w-11" />;
+                    return <Icon className="h-full w-full" />;
                   })()}
                 </div>
-                <span className="text-center text-[15px] font-extrabold uppercase tracking-[0.16em] text-primary sm:text-[17px]">
-                  {SFA_LABELS[featureKey as SFAKey]}
-                </span>
+                <div className="flex flex-col items-center gap-1">
+                  <span className="text-center text-[19px] font-extrabold leading-tight tracking-tight text-primary sm:text-[22px]">
+                    {SFA_LABELS[featureKey as SFAKey]}
+                  </span>
+                  {SFA_HELPERS[featureKey as SFAKey] && (
+                    <span className="text-center text-[11px] font-extrabold uppercase tracking-[0.18em] text-primary/55">
+                      {SFA_HELPERS[featureKey as SFAKey]}
+                    </span>
+                  )}
+                </div>
               </div>
+
+
 
               <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center">
                 <div className="flex h-full max-h-[260px] min-h-[130px] w-full max-w-[380px] items-center justify-center overflow-hidden rounded-[32px] border-2 border-primary/10 bg-primary/[0.04] p-4 shadow-inner">
