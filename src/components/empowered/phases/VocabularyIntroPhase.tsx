@@ -196,10 +196,12 @@ export function VocabularyIntroPhase({
   const teachingSlide = featureKey
     ? word.sfa_teaching?.slides?.find((slide: SFATeachingSlide) => slide.feature === featureKey)
     : undefined;
-  const featureText = featureKey
+  const featureFullText = featureKey
     ? teachingSlide?.teaching_text || word.sfa[featureKey as keyof SFAFeatures]
     : "";
-  const featureNarration = teachingSlide?.narration || featureText;
+  const featureText = featureKey ? shortSentence(featureFullText) : "";
+  const featureNarration = teachingSlide?.narration || featureFullText;
+
   const featureImage = featureKey
     ? (resolveFeatureImage(storyData.id, word.image, featureKey) ?? wordImage)
     : wordImage;
