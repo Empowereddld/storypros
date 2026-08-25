@@ -14,8 +14,8 @@ import { COIN_ECONOMY, sentenceAward } from "@/services/coinEconomy";
 
 type FeedbackState =
   | { type: "none" }
-  | { type: "correct"; brainCheck: string }
-  | { type: "wrong"; brainCheck: string };
+  | { type: "correct"; brainCheck: string; stage: "brain" | "result" }
+  | { type: "wrong"; brainCheck: string; stage: "brain" | "result" };
 
 export function SentenceBuilderPhase({
   storyData,
