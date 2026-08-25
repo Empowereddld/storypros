@@ -85,12 +85,29 @@ const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as 
 type SFAKey = (typeof SFA_KEYS)[number];
 
 const SFA_LABELS: Record<SFAKey, string> = {
-  category: "CATEGORY",
-  function: "What it does",
-  appearance: "Looks like",
-  parts: "WHAT ARE ITS PARTS",
-  location: "Where / when you use it",
+  category: "What kind is it?",
+  function: "What it does?",
+  appearance: "What it looks like?",
+  parts: "What are its parts?",
+  location: "Where you find it?",
 };
+
+/** Supporting academic term shown under the child-facing question. */
+const SFA_HELPERS: Partial<Record<SFAKey, string>> = {
+  category: "CATEGORY",
+};
+
+/**
+ * Keep the on-screen sentence short and concrete — one idea.
+ * Longer detail still plays through the audio narration.
+ */
+function shortSentence(text: string) {
+  const trimmed = (text ?? "").trim();
+  const match = trimmed.match(/^[^.!?]*[.!?]/);
+  const first = match ? match[0].trim() : trimmed;
+  return first.length >= 12 ? first : trimmed;
+}
+
 
 const SFA_ICONS: Record<SFAKey, (props: { className?: string }) => React.ReactElement> = {
   category: CategoryIcon,
