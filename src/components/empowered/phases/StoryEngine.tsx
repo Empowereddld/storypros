@@ -375,7 +375,7 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
   const overallProgress = Math.min(100, (phaseIndex / (PHASE_ORDER.length - 1)) * 100);
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-cream">
+    <div className="relative h-full min-h-0 w-full overflow-hidden bg-cream">
       {currentPhase !== "story-complete" && (
         <div
           className="absolute inset-x-0 top-0 z-40 h-1 bg-accent/40"
