@@ -51,13 +51,13 @@
       "options": [
         {
           "id": "a",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "The classroom whiteboard",
+          "emoji": "🖊️"
         },
         {
           "id": "b",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "The project instructions",
+          "emoji": "📋"
         },
         {
           "id": "c",
@@ -82,13 +82,13 @@
         },
         {
           "id": "b",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Daria’s teacher",
+          "emoji": "👩‍🏫"
         },
         {
           "id": "c",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Confused",
+          "emoji": "😕"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -107,13 +107,13 @@
         },
         {
           "id": "b",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "The teacher repeated the steps",
+          "emoji": "🗣️"
         },
         {
           "id": "c",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "The whiteboard in the classroom",
+          "emoji": "🖊️"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,13 +126,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Excited",
+          "emoji": "😃"
         },
         {
           "id": "b",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Proud",
+          "emoji": "😌"
         },
         {
           "id": "c",
@@ -151,8 +151,8 @@
       "options": [
         {
           "id": "a",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Confused",
+          "emoji": "😕"
         },
         {
           "id": "b",
@@ -162,8 +162,8 @@
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "The classroom whiteboard",
+          "emoji": "🖊️"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,8 +176,8 @@
       "options": [
         {
           "id": "a",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "The project steps",
+          "emoji": "📋"
         },
         {
           "id": "b",
@@ -187,8 +187,8 @@
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Confused",
+          "emoji": "😕"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",

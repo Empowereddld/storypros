@@ -57,13 +57,13 @@
         },
         {
           "id": "b",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "The backyard",
+          "emoji": "🌳"
         },
         {
           "id": "c",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "The flashlight",
+          "emoji": "🔦"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,8 +76,8 @@
       "options": [
         {
           "id": "a",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Dan’s mom",
+          "emoji": "👩"
         },
         {
           "id": "b",
@@ -87,8 +87,8 @@
         },
         {
           "id": "c",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Worried",
+          "emoji": "😟"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -107,13 +107,13 @@
         },
         {
           "id": "b",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "Dan’s mom found a battery",
+          "emoji": "🔋"
         },
         {
           "id": "c",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "The dark backyard",
+          "emoji": "🌙"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,13 +126,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Excited",
+          "emoji": "😃"
         },
         {
           "id": "b",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Brave",
+          "emoji": "💪"
         },
         {
           "id": "c",
@@ -151,13 +151,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Worried",
+          "emoji": "😟"
         },
         {
           "id": "b",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "The treasure in the backyard",
+          "emoji": "🗺️"
         },
         {
           "id": "c",
@@ -176,8 +176,8 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "A new battery",
+          "emoji": "🔋"
         },
         {
           "id": "b",
@@ -187,8 +187,8 @@
         },
         {
           "id": "c",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "Worried",
+          "emoji": "😟"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",

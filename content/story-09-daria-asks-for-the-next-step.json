@@ -51,8 +51,8 @@
       "options": [
         {
           "id": "a",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "The science table",
+          "emoji": "🔬"
         },
         {
           "id": "b",
@@ -62,8 +62,8 @@
         },
         {
           "id": "c",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "The instruction page",
+          "emoji": "📄"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -82,13 +82,13 @@
         },
         {
           "id": "b",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Daria’s partner",
+          "emoji": "🧒"
         },
         {
           "id": "c",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Confused",
+          "emoji": "😕"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,13 +101,13 @@
       "options": [
         {
           "id": "a",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "Her partner showed her the page",
+          "emoji": "📄"
         },
         {
           "id": "b",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "The table near the window",
+          "emoji": "🪟"
         },
         {
           "id": "c",
@@ -126,13 +126,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Excited",
+          "emoji": "😃"
         },
         {
           "id": "b",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Proud",
+          "emoji": "😌"
         },
         {
           "id": "c",
@@ -151,8 +151,8 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Confused",
+          "emoji": "😕"
         },
         {
           "id": "b",
@@ -162,8 +162,8 @@
         },
         {
           "id": "c",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Science class at the table",
+          "emoji": "🔬"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -182,13 +182,13 @@
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "The instruction page",
+          "emoji": "📄"
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Confused",
+          "emoji": "😕"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",

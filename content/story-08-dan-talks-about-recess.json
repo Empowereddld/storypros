@@ -51,13 +51,13 @@
       "options": [
         {
           "id": "a",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "The basketball court",
+          "emoji": "🏀"
         },
         {
           "id": "b",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "Embarrassed",
+          "emoji": "😳"
         },
         {
           "id": "c",
@@ -76,8 +76,8 @@
       "options": [
         {
           "id": "a",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Dan’s mom",
+          "emoji": "👩"
         },
         {
           "id": "b",
@@ -87,8 +87,8 @@
         },
         {
           "id": "c",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Embarrassed",
+          "emoji": "😳"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,8 +101,8 @@
       "options": [
         {
           "id": "a",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "Dan’s mom listened to him",
+          "emoji": "👩"
         },
         {
           "id": "b",
@@ -112,8 +112,8 @@
         },
         {
           "id": "c",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "The basketball court at recess",
+          "emoji": "🏀"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -132,13 +132,13 @@
         },
         {
           "id": "b",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Excited",
+          "emoji": "😃"
         },
         {
           "id": "c",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Proud",
+          "emoji": "😌"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -157,13 +157,13 @@
         },
         {
           "id": "b",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Embarrassed",
+          "emoji": "😳"
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "The basketball court",
+          "emoji": "🏀"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,13 +176,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Dan’s teacher",
+          "emoji": "👩‍🏫"
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "Embarrassed",
+          "emoji": "😳"
         },
         {
           "id": "c",
