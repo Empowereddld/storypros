@@ -12,23 +12,6 @@ import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY } from "@/services/coinEconomy";
 
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M12 2l2.4 5.6L20 9l-4.6 3.8L17 19l-5-3-5 3 1.6-6.2L4 9l5.6-1.4L12 2z" />
-    </svg>
-  );
-}
-
-function SparklesIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
-      <path d="M19 3L20 6L23 7L20 8L19 11L18 8L15 7L18 6L19 3Z" opacity="0.7" />
-      <path d="M5 13L6 16L9 17L6 18L5 21L4 18L1 17L4 16L5 13Z" opacity="0.7" />
-    </svg>
-  );
-}
 
 function splitJoke(jokeText: string): { setup: string; punchline: string } {
   const split = jokeText.split("? ");
@@ -196,8 +179,7 @@ export function JokePhase({
           <ActivityCard
             header={
               <>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
-                  <SparklesIcon className="h-4 w-4" />
+                <div className="mb-4 inline-flex items-center rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
                   Word Play
                 </div>
                 <h2 className="text-[22px] font-bold leading-tight text-primary-foreground">
@@ -206,25 +188,23 @@ export function JokePhase({
               </>
             }
           >
-            <div className="relative -mt-8">
-              <div className="rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center">
+            <div className="flex flex-col items-center gap-5">
+              <div className="w-full rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center">
                 <p className="text-[26px] font-extrabold leading-snug text-primary">
                   {splitJoke(joke.joke_text).punchline}
                 </p>
               </div>
 
               {supported && (
-                <div className="absolute -bottom-7 left-1/2 -translate-x-1/2">
-                  <AudioButton
-                    size="xl"
-                    tone="primary"
-                    playing={isPlaying("joke")}
-                    onClick={() => toggle(joke.joke_text, "joke")}
-                    ariaLabel="Hear the joke"
-                    text={joke.joke_text}
-                    className="rounded-full border-4 border-card bg-primary text-primary-foreground shadow-xl hover:bg-primary/95"
-                  />
-                </div>
+                <AudioButton
+                  size="xl"
+                  tone="primary"
+                  playing={isPlaying("joke")}
+                  onClick={() => toggle(joke.joke_text, "joke")}
+                  ariaLabel="Hear the joke"
+                  text={joke.joke_text}
+                  className="rounded-full border-4 border-card bg-primary text-primary-foreground shadow-xl hover:bg-primary/95"
+                />
               )}
             </div>
 
