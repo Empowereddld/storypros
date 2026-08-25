@@ -344,6 +344,11 @@ export function CoinRewardLayer() {
               transition: "transform 380ms cubic-bezier(0.16, 1.2, 0.4, 1), opacity 320ms ease-out",
             }}
           >
+            {burst.label ? (
+              <p className="mb-1.5 whitespace-nowrap text-center text-xs font-extrabold text-cream drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]">
+                {burst.label}
+              </p>
+            ) : null}
             <div className="flex items-center gap-1.5 rounded-full border-[3px] border-secondary bg-card px-4 py-2 shadow-card">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
                 <CoinIcon className="h-4.5 w-4.5" />
@@ -352,11 +357,7 @@ export function CoinRewardLayer() {
                 +{burst.amount} {burst.amount === 1 ? "coin" : "coins"}
               </span>
             </div>
-            {burst.label ? (
-              <p className="mt-1 whitespace-nowrap text-center text-xs font-bold text-primary/80">
-                {burst.label}
-              </p>
-            ) : null}
+
           </div>
         </div>
       ))}
