@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { LandingPage } from "@/components/empowered/LandingPage";
 import { useAuth } from "@/contexts/AuthContext";
@@ -13,18 +13,25 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { user, profile, children, loading, startDemoSession } = useAuth();
   const navigate = useNavigate();
+  // Redirect exactly once: object identities from the auth context can change
+  // on every render, and re-firing navigate() loops the router.
+  const redirected = useRef(false);
 
   // Auto-forward signed-in users
   useEffect(() => {
-    if (loading || !user) return;
+    if (loading || !user || redirected.current) return;
     if (profile?.role === "slp" || profile?.role === "teacher") {
+      redirected.current = true;
       navigate({ to: "/slp" });
     } else if (profile && !profile.onboarded) {
+      redirected.current = true;
       navigate({ to: hasSeenIntro() ? "/onboarding/profile" : "/intro" });
     } else if (profile?.onboarded) {
+      redirected.current = true;
       navigate({ to: children.length > 1 ? "/select-child" : "/home" });
     }
   }, [loading, user, profile, children, navigate]);
+
 
   if (loading || user) {
     // Signed in (or still checking) — the effect routes to the right place
