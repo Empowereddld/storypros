@@ -253,7 +253,7 @@ export function CoinRewardLayer() {
           dx: targetX - x,
           dy: targetY - y,
           coins,
-          chipOffset: chipAbove ? -(popTop + 26) : CHIP_H * 0.6,
+          chipOffset: -(popTop + 26),
           phase: 0,
           reduced,
         },
