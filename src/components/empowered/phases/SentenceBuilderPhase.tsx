@@ -267,6 +267,7 @@ export function SentenceBuilderPhase({
                 {selectedChoice ? selectedChoice.text : "..."}
               </span>
               {afterBlank}
+              {selectedChoice && !/[.!?]$/.test(afterBlank) ? "." : null}
             </p>
           </div>
 
