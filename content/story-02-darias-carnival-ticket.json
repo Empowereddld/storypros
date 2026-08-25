@@ -57,13 +57,13 @@
         },
         {
           "id": "b",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "The carnival",
+          "emoji": "🎡"
         },
         {
           "id": "c",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "Her wet ticket",
+          "emoji": "🎟️"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,8 +76,8 @@
       "options": [
         {
           "id": "a",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Daria’s dad",
+          "emoji": "👨"
         },
         {
           "id": "b",
@@ -87,8 +87,8 @@
         },
         {
           "id": "c",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Spilled juice",
+          "emoji": "🧃"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,13 +101,13 @@
       "options": [
         {
           "id": "a",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "Her dad dried the ticket",
+          "emoji": "🎟️"
         },
         {
           "id": "b",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "The carnival entrance",
+          "emoji": "🎪"
         },
         {
           "id": "c",
@@ -132,13 +132,13 @@
         },
         {
           "id": "b",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Excited",
+          "emoji": "😃"
         },
         {
           "id": "c",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Surprised",
+          "emoji": "😮"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -151,8 +151,8 @@
       "options": [
         {
           "id": "a",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Worried",
+          "emoji": "😟"
         },
         {
           "id": "b",
@@ -162,8 +162,8 @@
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "The carnival entrance",
+          "emoji": "🎪"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,13 +176,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Daria’s juice cup",
+          "emoji": "🧃"
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "Worried",
+          "emoji": "😟"
         },
         {
           "id": "c",

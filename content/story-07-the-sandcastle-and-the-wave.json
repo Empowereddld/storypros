@@ -51,8 +51,8 @@
       "options": [
         {
           "id": "a",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "The sandy beach",
+          "emoji": "🏖️"
         },
         {
           "id": "b",
@@ -62,8 +62,8 @@
         },
         {
           "id": "c",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "Their sandcastle",
+          "emoji": "🏰"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,8 +76,8 @@
       "options": [
         {
           "id": "a",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Dan and Daria’s families",
+          "emoji": "👨‍👩‍👧"
         },
         {
           "id": "b",
@@ -87,8 +87,8 @@
         },
         {
           "id": "c",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Disappointed",
+          "emoji": "😞"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -107,13 +107,13 @@
         },
         {
           "id": "b",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "They built a new sandcastle",
+          "emoji": "🏰"
         },
         {
           "id": "c",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "The sandy beach in summer",
+          "emoji": "🏖️"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED question!",
@@ -126,13 +126,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Proud",
+          "emoji": "😌"
         },
         {
           "id": "b",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Excited",
+          "emoji": "😃"
         },
         {
           "id": "c",
@@ -151,13 +151,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "Disappointed",
+          "emoji": "😞"
         },
         {
           "id": "b",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "The waves at the beach",
+          "emoji": "🌊"
         },
         {
           "id": "c",
@@ -182,13 +182,13 @@
         },
         {
           "id": "b",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "A big ocean wave",
+          "emoji": "🌊"
         },
         {
           "id": "c",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "Disappointed",
+          "emoji": "😞"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT HAPPENED AFTER question!",

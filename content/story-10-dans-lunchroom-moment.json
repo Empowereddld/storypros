@@ -51,8 +51,8 @@
       "options": [
         {
           "id": "a",
-          "label": "A robot",
-          "emoji": "🤖"
+          "label": "The lunchroom",
+          "emoji": "🍽️"
         },
         {
           "id": "b",
@@ -62,8 +62,8 @@
         },
         {
           "id": "c",
-          "label": "A cat",
-          "emoji": "🐱"
+          "label": "His lunch tray",
+          "emoji": "🍱"
         }
       ],
       "brain_check_correct": "Great job answering that WHO question with a PERSON!",
@@ -76,8 +76,8 @@
       "options": [
         {
           "id": "a",
-          "label": "The moon",
-          "emoji": "🌙"
+          "label": "Dan’s mom",
+          "emoji": "👩"
         },
         {
           "id": "b",
@@ -87,8 +87,8 @@
         },
         {
           "id": "c",
-          "label": "A store",
-          "emoji": "🏪"
+          "label": "Embarrassed",
+          "emoji": "😳"
         }
       ],
       "brain_check_correct": "Great job answering that WHERE question with a PLACE!",
@@ -101,13 +101,13 @@
       "options": [
         {
           "id": "a",
-          "label": "He fell down",
-          "emoji": "🤕"
+          "label": "Dan told his mom about lunch",
+          "emoji": "👩"
         },
         {
           "id": "b",
-          "label": "She lost her shoe",
-          "emoji": "👟"
+          "label": "The lunchroom table",
+          "emoji": "🍽️"
         },
         {
           "id": "c",
@@ -132,13 +132,13 @@
         },
         {
           "id": "b",
-          "label": "Angry",
-          "emoji": "😠"
+          "label": "Proud",
+          "emoji": "😌"
         },
         {
           "id": "c",
-          "label": "Happy",
-          "emoji": "😊"
+          "label": "Excited",
+          "emoji": "😃"
         }
       ],
       "brain_check_correct": "Great job answering that FEELING question with an emotion!",
@@ -157,13 +157,13 @@
         },
         {
           "id": "b",
-          "label": "Ate lunch",
-          "emoji": "🍽️"
+          "label": "Embarrassed",
+          "emoji": "😳"
         },
         {
           "id": "c",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "A table in the lunchroom",
+          "emoji": "🍽️"
         }
       ],
       "brain_check_correct": "Great job answering that WHAT DID THEY DO question!",
@@ -176,13 +176,13 @@
       "options": [
         {
           "id": "a",
-          "label": "Went to sleep",
-          "emoji": "😴"
+          "label": "His lunch tray",
+          "emoji": "🍱"
         },
         {
           "id": "b",
-          "label": "Went home",
-          "emoji": "🏠"
+          "label": "Embarrassed",
+          "emoji": "😳"
         },
         {
           "id": "c",
