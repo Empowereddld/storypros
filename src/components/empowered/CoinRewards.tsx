@@ -276,7 +276,13 @@ export function CoinRewardLayer() {
       className="pointer-events-none fixed inset-0 z-[70] overflow-hidden"
       aria-hidden={false}
     >
+      {/* Soft scrim so the payoff reads cleanly over any screen behind it. */}
+      <div
+        className="absolute inset-0 animate-fade-in bg-ink/20 transition-opacity duration-500"
+        style={{ opacity: bursts.some((b) => b.phase < 2) ? 1 : 0 }}
+      />
       {bursts.map((burst) => (
+
         <div key={burst.id} className="absolute" style={{ left: burst.x, top: burst.y }}>
           {/* flying coins */}
           {burst.coins.map((coin) => {
