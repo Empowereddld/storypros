@@ -191,40 +191,31 @@ export function CoinRewardLayer() {
       const vh = window.innerHeight;
       const pillRect = getVisibleCoinPill();
 
-      const fallbackX = pillRect ? pillRect.left + pillRect.width / 2 : vw - 60;
-      const fallbackY = pillRect ? pillRect.bottom + 96 : 140;
-      const rawX = detail.from?.x ?? fallbackX;
-      const rawY = detail.from?.y ?? fallbackY;
-
-      // The effect needs room for the fan of coins plus the "+N coins" chip.
-      // Scale the fan down on tight viewports, then pull the origin inward so
-      // nothing pops off screen or collides with the header.
-      const CHIP_HALF_W = 150;
-      const CHIP_H = 78;
+      // One predictable stage for every screen: the burst always plays from the
+      // horizontal centre, in the open middle band of the viewport. Anchoring to
+      // the tapped element made the fan collide with headings, feedback sheets
+      // and screen edges, so element anchors are intentionally ignored here.
+      const CHIP_H = 84;
       const COIN_HALF = 34; // half of the largest coin, incl. ring
-      const topSafe = pillRect ? Math.max(pillRect.bottom + 12, 64) : 64;
+      const BOTTOM_SAFE = 56;
+      const topSafe = pillRect ? Math.max(pillRect.bottom + 16, 72) : 72;
 
-      const spreadX = Math.max(48, Math.min(128, (vw - 2 * 56) / 2.6));
+      const spreadX = Math.max(52, Math.min(150, vw * 0.28));
 
-      const marginX = Math.max(spreadX + 36, CHIP_HALF_W + 12);
-      const x = Math.min(Math.max(rawX, marginX), Math.max(marginX, vw - marginX));
+      // Height of the upward pop, sized to the room actually available.
+      const available = Math.max(120, vh - topSafe - BOTTOM_SAFE);
+      const popTop = Math.max(72, Math.min(170, available * 0.3));
 
-      // Keep the origin inside a band that leaves room for the upward pop AND
-      // for the "+N coins" chip that always sits above the fan.
-      const minY = topSafe + COIN_HALF + CHIP_H + 40;
-      const maxY = vh - CHIP_H - 24;
-      const y = Math.min(Math.max(rawY, minY), Math.max(minY, maxY));
-
-      // Derive the pop height from the space actually above the origin, so the
-      // fan of coins (and the chip above it) never travels past the top.
-      const headroom = y - topSafe - COIN_HALF - CHIP_H;
-      const popTop = Math.max(40, Math.min(182, (vh - topSafe) * 0.34, Math.max(40, headroom)));
+      const x = vw / 2;
+      const minY = topSafe + CHIP_H + popTop + COIN_HALF;
+      const maxY = vh - BOTTOM_SAFE;
+      const y = Math.min(Math.max(vh * 0.52, minY), Math.max(minY, maxY));
 
       // Large coins include a ring and shadow, so keep their entire landing
       // footprint inside the viewport even when the counter hugs an edge.
       const LANDING_MARGIN = 40;
-      const rawTargetX = pillRect ? pillRect.left + pillRect.width / 2 : x;
-      const rawTargetY = pillRect ? pillRect.top + pillRect.height / 2 : y - 80;
+      const rawTargetX = pillRect ? pillRect.left + pillRect.width / 2 : vw - 72;
+      const rawTargetY = pillRect ? pillRect.top + pillRect.height / 2 : topSafe;
       const targetX = Math.min(Math.max(rawTargetX, LANDING_MARGIN), vw - LANDING_MARGIN);
       const targetY = Math.min(Math.max(rawTargetY, LANDING_MARGIN), vh - LANDING_MARGIN);
 
@@ -234,7 +225,8 @@ export function CoinRewardLayer() {
         return {
           id: i,
           popX: spread * spreadX,
-          popY: -(popTop * 0.58) - Math.abs(Math.cos(spread * 1.4)) * (popTop * 0.42),
+          // Symmetric arch: coins at the centre rise highest, edges sit lower.
+          popY: -(popTop * 0.5) - Math.cos((spread * Math.PI) / 2) * (popTop * 0.5),
           spin: (i % 2 === 0 ? 1 : -1) * (540 + i * 120),
           size: 40 + ((i * 7) % 20),
           delay: i * 70,
@@ -253,11 +245,12 @@ export function CoinRewardLayer() {
           dx: targetX - x,
           dy: targetY - y,
           coins,
-          chipOffset: -(popTop + 26),
+          chipOffset: -(popTop + COIN_HALF + 18),
           phase: 0,
           reduced,
         },
       ]);
+
 
 
       const setPhase = (phase: 1 | 2) =>
@@ -283,7 +276,13 @@ export function CoinRewardLayer() {
       className="pointer-events-none fixed inset-0 z-[70] overflow-hidden"
       aria-hidden={false}
     >
+      {/* Soft scrim so the payoff reads cleanly over any screen behind it. */}
+      <div
+        className="absolute inset-0 animate-fade-in bg-ink/20 transition-opacity duration-500"
+        style={{ opacity: bursts.some((b) => b.phase < 2) ? 1 : 0 }}
+      />
       {bursts.map((burst) => (
+
         <div key={burst.id} className="absolute" style={{ left: burst.x, top: burst.y }}>
           {/* flying coins */}
           {burst.coins.map((coin) => {
@@ -345,6 +344,11 @@ export function CoinRewardLayer() {
               transition: "transform 380ms cubic-bezier(0.16, 1.2, 0.4, 1), opacity 320ms ease-out",
             }}
           >
+            {burst.label ? (
+              <p className="mb-1.5 whitespace-nowrap text-center text-xs font-extrabold text-cream drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]">
+                {burst.label}
+              </p>
+            ) : null}
             <div className="flex items-center gap-1.5 rounded-full border-[3px] border-secondary bg-card px-4 py-2 shadow-card">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
                 <CoinIcon className="h-4.5 w-4.5" />
@@ -353,11 +357,7 @@ export function CoinRewardLayer() {
                 +{burst.amount} {burst.amount === 1 ? "coin" : "coins"}
               </span>
             </div>
-            {burst.label ? (
-              <p className="mt-1 whitespace-nowrap text-center text-xs font-bold text-primary/80">
-                {burst.label}
-              </p>
-            ) : null}
+
           </div>
         </div>
       ))}
