@@ -14,8 +14,8 @@ import { COIN_ECONOMY, sentenceAward } from "@/services/coinEconomy";
 
 type FeedbackState =
   | { type: "none" }
-  | { type: "correct"; brainCheck: string }
-  | { type: "wrong"; brainCheck: string };
+  | { type: "correct"; brainCheck: string; stage: "brain" | "result" }
+  | { type: "wrong"; brainCheck: string; stage: "brain" | "result" };
 
 export function SentenceBuilderPhase({
   storyData,
@@ -33,6 +33,7 @@ export function SentenceBuilderPhase({
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const [speaking, setSpeaking] = useState(false);
+  const [brainSpeaking, setBrainSpeaking] = useState(false);
   const startTime = useRef(Date.now());
 
   useEffect(() => {
@@ -70,6 +71,23 @@ export function SentenceBuilderPhase({
     setSpeaking(false);
   }
 
+  async function handleListenBrainCheck() {
+    if (feedback.type === "none") return;
+    if (brainSpeaking) {
+      stop();
+      setBrainSpeaking(false);
+      return;
+    }
+
+    setBrainSpeaking(true);
+    try {
+      await speak(`Brain Check! ${feedback.brainCheck}`, { rate: speedToRate(ttsSpeed) });
+    } catch {
+      // Ignore browser TTS errors.
+    }
+    setBrainSpeaking(false);
+  }
+
   function handleCheck() {
     if (!selected) return;
 
@@ -96,10 +114,10 @@ export function SentenceBuilderPhase({
         amount: sentenceAward(currentAttempt, frames.length),
         anchor: document.querySelector(`[data-choice-id="${selected}"]`),
       });
-      setFeedback({ type: "correct", brainCheck: frame.brain_check_prompt });
+      setFeedback({ type: "correct", brainCheck: frame.brain_check_prompt, stage: "brain" });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
-      setFeedback({ type: "wrong", brainCheck: frame.brain_check_prompt });
+      setFeedback({ type: "wrong", brainCheck: frame.brain_check_prompt, stage: "brain" });
       setCurrentAttempt((attemptNumber) => attemptNumber + 1);
     }
   }
@@ -155,7 +173,37 @@ export function SentenceBuilderPhase({
         />
       </div>
 
-      {showingFeedback && (
+      {showingFeedback && feedback.stage === "brain" && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
+          <div className="w-full max-w-[440px] rounded-[28px] bg-card p-6 text-center shadow-soft animate-slide-up">
+            <h3 className="font-display text-[26px] font-extrabold text-primary">Brain Check!</h3>
+            <p className="mt-2 text-lg font-semibold text-ink">{feedback.brainCheck}</p>
+            <div className="mt-4 flex justify-center">
+              <AudioButton
+                text={`Brain Check! ${feedback.brainCheck}`}
+                size="lg"
+                tone="primary"
+                playing={brainSpeaking}
+                onClick={handleListenBrainCheck}
+              />
+            </div>
+            <div className="mt-5">
+              <TactileButton
+                variant="primary"
+                onClick={() =>
+                  setFeedback((prev) =>
+                    prev.type === "none" ? prev : { ...prev, stage: "result" },
+                  )
+                }
+              >
+                Show me
+              </TactileButton>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showingFeedback && feedback.stage === "result" && (
         <div className="absolute inset-0 z-50 flex items-end justify-center bg-ink/40 backdrop-blur-sm">
           <div className="w-full rounded-t-[32px] bg-card p-6 pb-8 shadow-soft animate-slide-up">
             <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-accent" />
@@ -172,8 +220,8 @@ export function SentenceBuilderPhase({
               </p>
               <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
                 {feedback.type === "correct"
-                  ? `Yes. ${feedback.brainCheck}`
-                  : `${feedback.brainCheck} Think about the story again.`}
+                  ? "Your ending tells why it happened."
+                  : "Think about the story again."}
               </p>
             </div>
             <div className="mt-5">
@@ -187,6 +235,7 @@ export function SentenceBuilderPhase({
           </div>
         </div>
       )}
+
 
       <div className="relative z-10 flex flex-1 flex-col overflow-hidden px-5 pb-5 pt-4">
         <section className="rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
