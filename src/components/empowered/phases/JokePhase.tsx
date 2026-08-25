@@ -196,8 +196,7 @@ export function JokePhase({
           <ActivityCard
             header={
               <>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
-                  <SparklesIcon className="h-4 w-4" />
+                <div className="mb-4 inline-flex items-center rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
                   Word Play
                 </div>
                 <h2 className="text-[22px] font-bold leading-tight text-primary-foreground">
@@ -206,25 +205,23 @@ export function JokePhase({
               </>
             }
           >
-            <div className="relative -mt-8">
-              <div className="rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center">
+            <div className="flex flex-col items-center gap-5">
+              <div className="w-full rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center">
                 <p className="text-[26px] font-extrabold leading-snug text-primary">
                   {splitJoke(joke.joke_text).punchline}
                 </p>
               </div>
 
               {supported && (
-                <div className="absolute -bottom-7 left-1/2 -translate-x-1/2">
-                  <AudioButton
-                    size="xl"
-                    tone="primary"
-                    playing={isPlaying("joke")}
-                    onClick={() => toggle(joke.joke_text, "joke")}
-                    ariaLabel="Hear the joke"
-                    text={joke.joke_text}
-                    className="rounded-full border-4 border-card bg-primary text-primary-foreground shadow-xl hover:bg-primary/95"
-                  />
-                </div>
+                <AudioButton
+                  size="xl"
+                  tone="primary"
+                  playing={isPlaying("joke")}
+                  onClick={() => toggle(joke.joke_text, "joke")}
+                  ariaLabel="Hear the joke"
+                  text={joke.joke_text}
+                  className="rounded-full border-4 border-card bg-primary text-primary-foreground shadow-xl hover:bg-primary/95"
+                />
               )}
             </div>
 
