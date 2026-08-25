@@ -157,7 +157,7 @@ export function PhonologicalPhase({
       <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden px-4 pb-4 pt-2 sm:px-6">
         <div className="flex max-h-full w-full max-w-2xl flex-col overflow-hidden rounded-[36px] border-[6px] border-accent/50 bg-card shadow-soft animate-slide-up">
           {/* Header / Question Area */}
-          <section className="shrink-0 pb-2 pt-3 text-center sm:pb-4 sm:pt-5">
+          <section className="shrink-0 pb-2 pt-3 text-center sm:pb-3 sm:pt-4">
             <div className="flex justify-center">
               <span className="flex h-10 w-10 items-center justify-center rounded-[18px] bg-accent text-primary sm:h-12 sm:w-12">
                 <SoundIcon />
@@ -185,7 +185,7 @@ export function PhonologicalPhase({
           {/* Answer Options */}
           <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-3 sm:px-7 sm:pb-4">
 
-            <div className="space-y-2 sm:space-y-2.5">
+            <div className="space-y-2">
               {item.options.map((option, index) => {
                 const label = option.text ?? option.label ?? "";
                 const isSelected = selected === option.id;
@@ -197,7 +197,7 @@ export function PhonologicalPhase({
                     onClick={() => !isDisabled && setSelected(option.id)}
                     disabled={isDisabled}
                     className={cn(
-                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-2.5 text-left transition-all duration-200 sm:p-3",
+                      "group flex w-full items-center justify-between rounded-3xl border-3 bg-card p-2 text-left transition-all duration-200 sm:p-2.5",
                       isSelected && "border-primary bg-primary/5 shadow-md",
                       !isSelected && !isDisabled && "border-accent/50 hover:border-primary/50 hover:bg-accent/35 shadow-sm hover:shadow-md",
                       isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
