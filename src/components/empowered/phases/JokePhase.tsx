@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { resolveStoryImage } from "@/services/storyImages";
 import type { StoryPhaseProps } from "@/types/story";
+import { cn } from "@/lib/utils";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY } from "@/services/coinEconomy";
@@ -18,6 +20,16 @@ function StarIcon({ className }: { className?: string }) {
   );
 }
 
+function SparklesIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+      <path d="M19 3L20 6L23 7L20 8L19 11L18 8L15 7L18 6L19 3Z" opacity="0.7" />
+      <path d="M5 13L6 16L9 17L6 18L5 21L4 18L1 17L4 16L5 13Z" opacity="0.7" />
+    </svg>
+  );
+}
+
 function splitJoke(jokeText: string): { setup: string; punchline: string } {
   const split = jokeText.split("? ");
   if (split.length >= 2) {
@@ -25,8 +37,6 @@ function splitJoke(jokeText: string): { setup: string; punchline: string } {
   }
   return { setup: "", punchline: jokeText };
 }
-
-
 
 type Step = "intro" | "meaning1" | "meaning2" | "joke";
 
@@ -36,6 +46,35 @@ const PROGRESS: Record<Step, number> = {
   meaning2: 66,
   joke: 90,
 };
+
+interface ActivityCardProps {
+  children: React.ReactNode;
+  header: React.ReactNode;
+  headerClassName?: string;
+}
+
+function ActivityCard({ children, header, headerClassName }: ActivityCardProps) {
+  return (
+    <div className="w-full max-w-[520px] overflow-hidden rounded-[34px] bg-card shadow-soft animate-pop-in">
+      <div
+        className={cn(
+          "relative bg-primary px-6 pb-12 pt-6 text-center",
+          headerClassName,
+        )}
+      >
+        {header}
+        <div
+          className="absolute -bottom-1 left-0 right-0 h-10 bg-card"
+          style={{ clipPath: "ellipse(60% 100% at 50% 100%)" }}
+          aria-hidden
+        />
+      </div>
+      <div className="relative z-10 flex flex-col gap-6 px-6 pb-8 pt-4">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export function JokePhase({
   storyData,
@@ -93,26 +132,18 @@ export function JokePhase({
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-5 pt-4">
-        <section className="relative mt-8 w-full max-w-[520px] rounded-[34px] bg-card p-6 text-center shadow-soft animate-pop-in">
-          {step === "intro" && (
-            <div className="flex flex-col items-center gap-6">
-              <span
-                className="pointer-events-none absolute inset-0 overflow-hidden rounded-[34px]"
-                aria-hidden
-              >
-                <span className="absolute -right-12 -top-12 block h-28 w-28 rounded-full bg-secondary/10 blur-[2px]" />
-              </span>
-
-
-
-              <div className="space-y-2">
-                <h1 className="text-[30px] font-extrabold leading-tight text-primary">
-                  Words Can Have
-                  <br />
-                  Two Meanings
-                </h1>
-                <p className="text-base font-bold text-ink-soft">Today&apos;s word is…</p>
-              </div>
+        {step === "intro" && (
+          <ActivityCard
+            header={
+              <h1 className="text-[28px] font-extrabold leading-tight text-primary-foreground">
+                Words Can Have
+                <br />
+                Two Meanings
+              </h1>
+            }
+          >
+            <div className="flex flex-col items-center gap-6 pt-2">
+              <p className="text-base font-bold text-ink-soft">Today&apos;s word is…</p>
 
               <div className="flex items-center gap-3">
                 <div className="-rotate-1 rounded-[24px] bg-secondary px-10 py-4 shadow-[0_6px_0_0_color-mix(in_oklab,var(--secondary)_70%,black)]">
@@ -129,97 +160,126 @@ export function JokePhase({
                   />
                 )}
               </div>
-
             </div>
-          )}
 
+            <TactileButton
+              variant="secondary"
+              className="shadow-[0_8px_0_0_var(--secondary-deep)] active:translate-y-2 active:shadow-none"
+              onClick={handleNext}
+            >
+              Next <ChevronRightIcon className="h-5 w-5 text-secondary-foreground" />
+            </TactileButton>
+          </ActivityCard>
+        )}
 
-          {step === "meaning1" && (
-            <MeaningCard
-              number={1}
-              word={joke.word}
-              text={joke.meaning_1.text}
-              image={meaningOneImage}
-            />
-          )}
+        {step === "meaning1" && (
+          <MeaningStep
+            number={1}
+            word={joke.word}
+            text={joke.meaning_1.text}
+            image={meaningOneImage}
+            onNext={handleNext}
+          />
+        )}
 
-          {step === "meaning2" && (
-            <MeaningCard
-              number={2}
-              word={joke.word}
-              text={joke.meaning_2.text}
-              image={meaningTwoImage}
-            />
-          )}
+        {step === "meaning2" && (
+          <MeaningStep
+            number={2}
+            word={joke.word}
+            text={joke.meaning_2.text}
+            image={meaningTwoImage}
+            onNext={handleNext}
+          />
+        )}
 
-          {step === "joke" && (
-            <div className="flex flex-col items-center gap-6">
-              {/* Floating star badge */}
-              <span
-                className="absolute -top-8 left-1/2 z-10 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-2xl border-4 border-card bg-secondary text-secondary-foreground shadow-card rotate-3"
-                aria-hidden
-              >
-                <StarIcon className="h-8 w-8" />
-              </span>
-
-              {/* Joke content */}
-              <div className="space-y-4 pt-2">
-                <p className="text-xl font-medium leading-tight text-primary/80">
+        {step === "joke" && (
+          <ActivityCard
+            header={
+              <>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
+                  <SparklesIcon className="h-4 w-4" />
+                  Word Play
+                </div>
+                <h2 className="text-[22px] font-bold leading-tight text-primary-foreground">
                   {splitJoke(joke.joke_text).setup}
-                </p>
-                <p className="text-[28px] font-extrabold leading-tight text-primary">
+                </h2>
+              </>
+            }
+          >
+            <div className="relative -mt-8">
+              <div className="rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center">
+                <p className="text-[26px] font-extrabold leading-snug text-primary">
                   {splitJoke(joke.joke_text).punchline}
                 </p>
               </div>
 
-              {/* Audio action */}
               {supported && (
-                <ListenButton
-                  playing={isPlaying("joke")}
-                  onClick={() => toggle(joke.joke_text, "joke")}
-                  ariaLabel="Hear the joke"
-                  size="xl"
-                  tone="primary"
-                />
+                <div className="absolute -bottom-7 left-1/2 -translate-x-1/2">
+                  <AudioButton
+                    size="xl"
+                    tone="primary"
+                    playing={isPlaying("joke")}
+                    onClick={() => toggle(joke.joke_text, "joke")}
+                    ariaLabel="Hear the joke"
+                    text={joke.joke_text}
+                    className="rounded-full border-4 border-card bg-primary text-primary-foreground shadow-xl hover:bg-primary/95"
+                  />
+                </div>
               )}
+            </div>
 
-              {/* Why it works caption */}
-              <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+            <div className="h-3" />
+
+            <div className="rounded-2xl border border-accent bg-accent/50 p-4 text-center">
+              <span className="mb-1 block text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">
+                Why it works
+              </span>
+              <p className="text-sm font-semibold leading-snug text-ink">
                 Both meanings of &quot;{joke.word}&quot; make the joke work
               </p>
             </div>
-          )}
-        </section>
 
-        <div className="w-full max-w-[520px]">
-          <TactileButton className="mt-4" onClick={handleNext}>
-            {step === "joke" ? "Keep Going" : "Next"}
-            <ChevronRightIcon className="h-5 w-5 text-secondary" />
-          </TactileButton>
-        </div>
-
+            <TactileButton
+              variant="secondary"
+              className="shadow-[0_8px_0_0_var(--secondary-deep)] active:translate-y-2 active:shadow-none"
+              onClick={handleNext}
+            >
+              Keep Going <ChevronRightIcon className="h-5 w-5 text-secondary-foreground" />
+            </TactileButton>
+          </ActivityCard>
+        )}
       </div>
     </div>
   );
 }
 
-function MeaningCard({
+function MeaningStep({
   number,
   word,
   text,
   image,
+  onNext,
 }: {
   number: number;
   word: string;
   text: string;
   image: string | null;
+  onNext: () => void;
 }) {
   return (
-    <>
-      <span className="mx-auto rounded-full bg-primary px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-primary-foreground">
-        Meaning {number}
-      </span>
-      <div className="mt-4 aspect-video w-full overflow-hidden rounded-[28px] bg-accent shadow-card">
+    <ActivityCard
+      header={
+        <>
+          <span className="mb-3 inline-block rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
+            Meaning {number}
+          </span>
+          <h2 className="text-[26px] font-extrabold leading-tight text-primary-foreground">
+            <span className="capitalize">{word}</span>
+          </h2>
+        </>
+      }
+    >
+      <div className="aspect-video w-full overflow-hidden rounded-[28px] bg-accent shadow-card">
         {image ? (
           <img src={image} alt="" className="h-full w-full object-contain" />
         ) : (
@@ -228,9 +288,18 @@ function MeaningCard({
           </div>
         )}
       </div>
-      <p className="mt-5 text-[24px] font-extrabold leading-snug text-primary">
+
+      <p className="text-center text-[24px] font-extrabold leading-snug text-primary">
         <span className="capitalize">{word}</span>: {text}
       </p>
-    </>
+
+      <TactileButton
+        variant="secondary"
+        className="shadow-[0_8px_0_0_var(--secondary-deep)] active:translate-y-2 active:shadow-none"
+        onClick={onNext}
+      >
+        Next <ChevronRightIcon className="h-5 w-5 text-secondary-foreground" />
+      </TactileButton>
+    </ActivityCard>
   );
 }
