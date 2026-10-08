@@ -42,7 +42,7 @@ export const PARENT_PROBLEM = {
   heading: "Does your child struggle to share their ideas or tell you about their day?",
   paragraphs: [
     "Kids with language disorders often need help sharing their amazing ideas and experiences in a way others can easily follow. ",
-    "Story Pros gives children fun, guided practice with story comprehension and story-telling. They also deepen vocabulary knowledge, practice making complex sentences, and learn to reflect on their own thinking.\u00a0",
+    "Story Pros gives children fun, guided practice with story comprehension and story-telling. It also deepens vocabulary knowledge, provides practice making complex sentences, and helps kids reflect on their own thinking.\u00a0",
   ],
 };
 
