@@ -3,6 +3,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { seedDemoAccount } from "@/services/demoSeed";
 import { PhoneFrame } from "@/components/empowered/PhoneFrame";
 import { NotFoundState } from "@/components/empowered/StateScreens";
+import { AdminQuickNav } from "@/components/empowered/AdminQuickNav";
 
 // Seed demo data before React renders (browser only — uses localStorage)
 if (typeof window !== "undefined") {
@@ -95,6 +96,7 @@ function RootComponent() {
   return (
     <AuthProvider>
       <Outlet />
+      <AdminQuickNav />
     </AuthProvider>
   );
 }
