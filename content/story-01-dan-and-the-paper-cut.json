@@ -688,8 +688,8 @@
           {
             "feature": "category",
             "prompt": "What group is calm in? Listen and look.",
-            "teaching_text": "calm is a feeling word.",
-            "narration": "calm is a feeling word."
+            "teaching_text": "Calm is a feeling word.",
+            "narration": "Calm is a feeling word."
           },
           {
             "feature": "function",
