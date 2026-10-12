@@ -89,7 +89,7 @@ const SFA_LABELS: Record<SFAKey, string> = {
   function: "What it does",
   appearance: "What it looks like",
   parts: "Tell its parts",
-  location: "Where you find it?",
+  location: "Where you find it",
 };
 
 /** Supporting academic term shown under the child-facing question. */
