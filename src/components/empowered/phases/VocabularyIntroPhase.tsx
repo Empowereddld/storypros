@@ -88,7 +88,7 @@ const SFA_LABELS: Record<SFAKey, string> = {
   category: "Tell what group it's in",
   function: "What it does",
   appearance: "What it looks like",
-  parts: "What are its parts?",
+  parts: "Tell its parts",
   location: "Where you find it?",
 };
 
