@@ -155,7 +155,7 @@
           "correct": true
         }
       ],
-      "brain_check_prompt": "Did you answer with what Dan did?",
+      "brain_check_prompt": "Did you answer with an action?",
       "brain_check_correct": "You found the action!",
       "brain_check_wrong": "Think about what Dan DID to solve the problem."
     },
