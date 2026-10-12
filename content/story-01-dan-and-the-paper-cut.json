@@ -178,7 +178,7 @@
           "correct": true
         }
       ],
-      "brain_check_prompt": "Did you answer with what fixed it?",
+      "brain_check_prompt": "Did you answer with the result?",
       "brain_check_correct": "You found the solution!",
       "brain_check_wrong": "Think about what fixed the problem in the end."
     }
