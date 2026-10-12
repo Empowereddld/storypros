@@ -93,8 +93,12 @@ const SFA_LABELS: Record<SFAKey, string> = {
 };
 
 /** Supporting academic term shown under the child-facing question. */
-const SFA_HELPERS: Partial<Record<SFAKey, string>> = {
+const SFA_HELPERS: Record<SFAKey, string> = {
   category: "CATEGORY",
+  function: "FUNCTION",
+  appearance: "APPEARANCE",
+  parts: "PARTS",
+  location: "LOCATION",
 };
 
 /**
