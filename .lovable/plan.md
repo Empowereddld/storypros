@@ -2,11 +2,11 @@
 
 ## What changes
 
-In the vocabulary quiz ("Word Check"), when a child answers incorrectly, the hint under "Try again" should match the question's targeted semantic feature:
+In the vocabulary quiz ("Word Check"), when a child answers the "Which sentence uses 'bandage' correctly?" question incorrectly, the hint under "Try again" should point to the relevant semantic feature — function, because that is why the wrong sentences are wrong (e.g. "I ride it to school", "I put it on a sandwich"):
 
-- Function questions get the specific hint, because function is why the distractor answers are wrong:
-  - Object words (e.g. "What do you do with a bandage?") -> `Think about what a bandage is used for.`
-  - Feeling words (e.g. "When do you feel calm?") -> `Think about when you feel calm.`
+- Sentence-use questions get the specific hint:
+  - Object words (e.g. "Which sentence uses 'bandage' correctly?") -> `Think about what a bandage is used for.`
+  - Feeling words (e.g. "Which sentence uses 'calm' correctly?") -> `Think about when you feel calm.`
 - All other question types keep the current general hint: `Think about what we learned about "bandage".`
 
 ## Where
