@@ -86,7 +86,7 @@ type SFAKey = (typeof SFA_KEYS)[number];
 
 const SFA_LABELS: Record<SFAKey, string> = {
   category: "What group is it in?",
-  function: "What it does?",
+  function: "What it does",
   appearance: "What it looks like?",
   parts: "What are its parts?",
   location: "Where you find it?",
