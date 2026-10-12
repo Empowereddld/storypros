@@ -15,6 +15,26 @@ import { resolveStoryImage } from "@/services/storyImages";
 
 type FeedbackState = { type: "none" } | { type: "correct" } | { type: "wrong" };
 
+function correctFeedback(prompt: string, wordText: string): string {
+  const p = prompt.toLowerCase();
+  if (p.startsWith("what category") || p.startsWith("what group"))
+    return `You know what category ${wordText} is in.`;
+  if (p.startsWith("what do you do with"))
+    return `You know what you do with a ${wordText}.`;
+  if (p.startsWith("when do you feel")) return `You know when you feel ${wordText}.`;
+  if (p.startsWith("what does someone look like"))
+    return `You know what someone looks like when they feel ${wordText}.`;
+  if (p.startsWith("what does") && p.includes("look like"))
+    return `You know what ${wordText} looks like.`;
+  if (p.startsWith("what is a part") || p.startsWith("what parts"))
+    return `You know what parts a ${wordText} has.`;
+  if (p.startsWith("where or when"))
+    return `You know where you might find a ${wordText}.`;
+  if (p.startsWith("which sentence"))
+    return `You know how to use "${wordText}" in a sentence.`;
+  return `You know what "${wordText}" means.`;
+}
+
 export function VocabularyQuizPhase({
   storyData,
   onComplete,
@@ -164,9 +184,7 @@ export function VocabularyQuizPhase({
               </p>
               <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
                 {feedback.type === "correct"
-                  ? word.word.toLowerCase() === "bandage"
-                    ? `You know what category ${word.word} is in.`
-                    : `You know what "${word.word}" means.`
+                  ? correctFeedback(question.prompt, word.word)
                   : `Think about what we learned about "${word.word}".`}
               </p>
             </div>
