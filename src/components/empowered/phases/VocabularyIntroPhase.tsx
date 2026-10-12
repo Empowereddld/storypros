@@ -177,6 +177,7 @@ export function VocabularyIntroPhase({
   useEffect(() => cancel, [wordIdx, featureIdx, cancel]);
 
   const word = words[wordIdx];
+  const featureKeys = keysForWord(word);
   const wordImage = resolveStoryImage(storyData.id, word.image);
   const introText = word.sfa_teaching?.intro_text ?? "Let's learn what this word means.";
   const introNarration = word.sfa_teaching?.intro_narration ?? introText;
@@ -186,7 +187,7 @@ export function VocabularyIntroPhase({
   const progress = ((currentStep + 1) / totalSteps) * 100;
   const isIntro = featureIdx === -1;
   const isVeryFirstScreen = wordIdx === 0 && isIntro;
-  const isLastScreen = wordIdx === words.length - 1 && featureIdx === SFA_KEYS.length - 1;
+  const isLastScreen = wordIdx === words.length - 1 && featureIdx === featureKeys.length - 1;
 
   const heardKey = useMemo<HeardKey>(
     () => (isIntro ? `intro-${wordIdx}` : `feat-${wordIdx}-${featureIdx}`),
@@ -205,7 +206,7 @@ export function VocabularyIntroPhase({
     toggle(text, audioKey);
   }
 
-  const featureKey = isIntro ? null : SFA_KEYS[featureIdx];
+  const featureKey = isIntro ? null : featureKeys[featureIdx];
   const teachingSlide = featureKey
     ? word.sfa_teaching?.slides?.find((slide: SFATeachingSlide) => slide.feature === featureKey)
     : undefined;
@@ -220,7 +221,7 @@ export function VocabularyIntroPhase({
     : wordImage;
 
   function goNext() {
-    if (featureIdx < SFA_KEYS.length - 1) {
+    if (featureIdx < featureKeys.length - 1) {
       setFeatureIdx(featureIdx + 1);
       return;
     }
@@ -252,7 +253,7 @@ export function VocabularyIntroPhase({
     }
     if (wordIdx > 0) {
       setWordIdx(wordIdx - 1);
-      setFeatureIdx(SFA_KEYS.length - 1);
+      setFeatureIdx(keysForWord(words[wordIdx - 1]).length - 1);
     }
   }
 
