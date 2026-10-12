@@ -219,7 +219,7 @@
         },
         {
           "position": 2,
-          "prompt": "What do you do with bandage?",
+          "prompt": "What do you do with a bandage?",
           "options": [
             {
               "id": "a",
