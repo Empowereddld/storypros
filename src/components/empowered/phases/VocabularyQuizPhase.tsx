@@ -262,6 +262,9 @@ export function VocabularyQuizPhase({
                     // Picture cue sits with the words (never instead of them) so a
                     // child with DLD can hold each choice in mind while comparing.
                     const cue = getOptionPictureCue(label, option.emoji);
+                    // Category cues are a group of member emojis — render them
+                    // smaller so the whole group fits inside the picture tile.
+                    const isGroupCue = cue !== null && [...cue].length > 2;
                     return (
                       <div
                         key={option.id}
@@ -279,7 +282,10 @@ export function VocabularyQuizPhase({
                           <span
                             aria-hidden
                             className={cn(
-                              "flex h-[78px] w-[88px] shrink-0 items-center justify-center rounded-[20px] text-4xl leading-none sm:h-[104px] sm:w-full sm:rounded-[22px] sm:text-[52px] lg:h-[130px] lg:text-[60px]",
+                              "flex h-[78px] w-[88px] shrink-0 items-center justify-center rounded-[20px] leading-none sm:h-[104px] sm:w-full sm:rounded-[22px]",
+                              isGroupCue
+                                ? "text-xl sm:text-3xl lg:text-4xl"
+                                : "text-4xl sm:text-[52px] lg:text-[60px]",
                               isSelected ? "bg-primary/15" : "bg-accent/40",
                             )}
                           >
