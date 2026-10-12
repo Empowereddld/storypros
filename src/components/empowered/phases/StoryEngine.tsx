@@ -54,7 +54,7 @@ const SECTION_INTROS: Partial<Record<StoryPhase, { title: string; buddy: Buddy; 
     script: "Read or listen to the question. Then choose the best answer.",
   },
   "intro-sequencing": {
-    title: "Put It in Order",
+    title: "Put It In Order",
     buddy: "daria",
     script:
       "Put the story pictures in order, from what happened first to what happened last.",
