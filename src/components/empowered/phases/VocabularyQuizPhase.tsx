@@ -164,7 +164,9 @@ export function VocabularyQuizPhase({
               </p>
               <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
                 {feedback.type === "correct"
-                  ? `You know what "${word.word}" means.`
+                  ? word.word.toLowerCase() === "bandage"
+                    ? `You know what category ${word.word} is in.`
+                    : `You know what "${word.word}" means.`
                   : `Think about what we learned about "${word.word}".`}
               </p>
             </div>
