@@ -128,7 +128,7 @@ export function OnboardingAssessment({ childName, onComplete }: OnboardingAssess
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary via-primary/70 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <h2 className="text-xl font-extrabold leading-tight text-primary-foreground drop-shadow">
-                  Dan and the Papercut
+                  Dan and the Paper Cut
                 </h2>
               </div>
             </div>

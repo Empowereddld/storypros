@@ -20,7 +20,7 @@
     },
     {
       "position": 3,
-      "text": "When Dan was folding his paper airplane, he got a papercut that started to bleed.",
+      "text": "When Dan was folding his paper airplane, he got a paper cut that started to bleed.",
       "story_element": "problem",
       "image": "slide-03.webp"
     },
@@ -105,7 +105,7 @@
         },
         {
           "id": "c",
-          "label": "He got a papercut",
+          "label": "He got a paper cut",
           "correct": true
         }
       ],
@@ -325,7 +325,7 @@
       ],
       "sfa_teaching": {
         "intro_text": "Bandage: first aid item. Dan needed a bandage after he got a paper cut.",
-        "intro_narration": "Listen for this word in the story: bandage. Dan needed a bandage after he got a papercut.",
+        "intro_narration": "Listen for this word in the story: bandage. Dan needed a bandage after he got a paper cut.",
         "slides": [
           {
             "feature": "category",
@@ -354,13 +354,13 @@
           {
             "feature": "location",
             "prompt": "Where or when might you see a bandage? Listen and look.",
-            "teaching_text": "You might find or use a bandage in a first aid kit at home or at school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow.",
-            "narration": "You might find or use a bandage in a first aid kit at home or at school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow."
+            "teaching_text": "You might find or use a bandage in a first aid kit at home or at school. You might use a bandage when you fall, scrape your knee, get a paper cut, or bump your elbow.",
+            "narration": "You might find or use a bandage in a first aid kit at home or at school. You might use a bandage when you fall, scrape your knee, get a paper cut, or bump your elbow."
           }
         ],
         "transition_text": "Now let’s show what you know about a bandage.",
-        "connection_text": "Dan needed a bandage after he got a papercut.",
-        "connection_narration": "In this story, Dan needed a bandage after he got a papercut."
+        "connection_text": "Dan needed a bandage after he got a paper cut.",
+        "connection_narration": "In this story, Dan needed a bandage after he got a paper cut."
       }
     },
     {
@@ -503,8 +503,8 @@
         }
       ],
       "sfa_teaching": {
-        "intro_text": "Paper airplane: Toy. Dan was making a paper airplane when he got a papercut.",
-        "intro_narration": "Listen for this word in the story: paper airplane. Dan was making a paper airplane when he got a papercut.",
+        "intro_text": "Paper airplane: Toy. Dan was making a paper airplane when he got a paper cut.",
+        "intro_narration": "Listen for this word in the story: paper airplane. Dan was making a paper airplane when he got a paper cut.",
         "slides": [
           {
             "feature": "category",
@@ -538,8 +538,8 @@
           }
         ],
         "transition_text": "Now let’s show what you know about a paper airplane.",
-        "connection_text": "Dan was making a paper airplane when he got a papercut.",
-        "connection_narration": "In this story, Dan was making a paper airplane when he got a papercut."
+        "connection_text": "Dan was making a paper airplane when he got a paper cut.",
+        "connection_narration": "In this story, Dan was making a paper airplane when he got a paper cut."
       }
     },
     {
@@ -733,7 +733,7 @@
         },
         {
           "id": "b",
-          "text": "he got a papercut",
+          "text": "he got a paper cut",
           "correct": true
         },
         {
@@ -797,7 +797,7 @@
     },
     {
       "correct_position": 3,
-      "caption": "When Dan was folding his paper airplane, he got a papercut that sta...",
+      "caption": "When Dan was folding his paper airplane, he got a paper cut that sta...",
       "image": "slide-03.webp"
     },
     {
