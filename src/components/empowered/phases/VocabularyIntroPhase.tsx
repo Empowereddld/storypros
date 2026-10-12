@@ -29,7 +29,7 @@ import {
   PartsIcon,
 } from "../SfaIcons";
 import { cn } from "@/lib/utils";
-import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps } from "@/types/story";
+import type { SFAFeatures, SFATeachingSlide, StoryPhaseProps, VocabularyWord } from "@/types/story";
 import { resolveStoryImage } from "@/services/storyImages";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";

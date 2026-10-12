@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is worried, facial expression and body clues.",
-        "parts": "Worried has parts like: face, body, voice.",
-        "location": "You might feel worried during or after the problem."
+        "appearance": "When someone is worried, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -631,48 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel worried?",
-          "options": [
-            {
-              "text": "Nothing at all",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "You feel very sleepy",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Your tummy feels funny and you can't stop thinking",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel worried?",
-          "options": [
-            {
-              "text": "Before a test or when something goes wrong",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "While eating lunch with friends",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "While watching your favorite show",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'worried' correctly?",
           "options": [
             {
@@ -714,18 +670,6 @@
             "prompt": "What does worried look like? Listen and look.",
             "teaching_text": "worried looks like a tense face and eyes that dart around.",
             "narration": "worried looks like a tense face and eyes that dart around."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show worried? Listen and look.",
-            "teaching_text": "Worried shows up in your face, your stomach, and your thoughts.",
-            "narration": "Worried shows up in your face, your stomach, and your thoughts."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel worried? Listen and look.",
-            "teaching_text": "You might feel worried before something new or uncertain happens.",
-            "narration": "You might feel worried before something new or uncertain happens."
           }
         ],
         "transition_text": "Now let's show what you know about feeling worried.",

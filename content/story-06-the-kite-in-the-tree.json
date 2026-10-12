@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is frustrated, facial expression and body clues.",
-        "parts": "Frustrated has parts like: face, body, voice.",
-        "location": "You might feel frustrated during or after the problem."
+        "appearance": "When someone is frustrated, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -631,48 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel frustrated?",
-          "options": [
-            {
-              "text": "You feel very sleepy",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "You feel calm and peaceful",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Your face gets hot and you feel like giving up",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel frustrated?",
-          "options": [
-            {
-              "text": "While taking a bubble bath",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "When something gets stuck and you cannot fix it",
-              "correct": true,
-              "id": "b"
-            },
-            {
-              "text": "When opening a birthday present",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'frustrated' correctly?",
           "options": [
             {
@@ -714,18 +670,6 @@
             "prompt": "What does frustrated look like? Listen and look.",
             "teaching_text": "frustrated looks like a tight face and clenched hands.",
             "narration": "frustrated looks like a tight face and clenched hands."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show frustrated? Listen and look.",
-            "teaching_text": "Frustrated shows up in your face, your hands, and your voice.",
-            "narration": "Frustrated shows up in your face, your hands, and your voice."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel frustrated? Listen and look.",
-            "teaching_text": "You might feel frustrated when something is tricky or keeps going wrong.",
-            "narration": "You might feel frustrated when something is tricky or keeps going wrong."
           }
         ],
         "transition_text": "Now let's show what you know about feeling frustrated.",

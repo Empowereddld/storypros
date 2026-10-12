@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It tells how Daria felt when she missed the instructions.",
-        "appearance": "When someone is confused, they may frown and tilt their head.",
-        "parts": "Confused shows in parts like: face, eyebrows, voice.",
-        "location": "You might feel confused when you don't know what to do next."
+        "appearance": "When someone is confused, they may frown and tilt their head."
       },
       "quiz_questions": [
         {
@@ -714,18 +712,6 @@
             "prompt": "What does confused look like? Listen and look.",
             "teaching_text": "confused looks like a tilted head and a wrinkled forehead.",
             "narration": "confused looks like a tilted head and a wrinkled forehead."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show confused? Listen and look.",
-            "teaching_text": "Confused shows up in your face, your eyebrows, and your voice.",
-            "narration": "Confused shows up in your face, your eyebrows, and your voice."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel confused? Listen and look.",
-            "teaching_text": "You might feel confused when you don't know what to do next.",
-            "narration": "You might feel confused when you don't know what to do next."
           }
         ],
         "transition_text": "Now let's show what you know about feeling confused.",
