@@ -109,7 +109,7 @@
           "correct": true
         }
       ],
-      "brain_check_prompt": "Did you answer with what went wrong?",
+      "brain_check_prompt": "Did you answer with what a problem?",
       "brain_check_correct": "You identified the problem!",
       "brain_check_wrong": "Think about what went wrong in the story."
     },
