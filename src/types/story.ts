@@ -63,8 +63,9 @@ export interface SFAFeatures {
   category: string;
   function: string;
   appearance: string;
-  parts: string;
-  location: string;
+  /** Omitted for feeling words, where parts/location don't apply */
+  parts?: string;
+  location?: string;
 }
 
 export interface VocabQuizQuestion {

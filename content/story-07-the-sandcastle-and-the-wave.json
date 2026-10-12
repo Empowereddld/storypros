@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is disappointed, facial expression and body clues.",
-        "parts": "Disappointed has parts like: face, body, voice.",
-        "location": "You might feel disappointed during or after the problem."
+        "appearance": "When someone is disappointed, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -631,48 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel disappointed?",
-          "options": [
-            {
-              "text": "Your heart sinks and you feel let down",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "Nothing changes at all",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "You feel very energetic",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel disappointed?",
-          "options": [
-            {
-              "text": "When you pet a puppy",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "When something you built gets knocked down",
-              "correct": true,
-              "id": "b"
-            },
-            {
-              "text": "When you win a game",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'disappointed' correctly?",
           "options": [
             {
@@ -714,18 +670,6 @@
             "prompt": "What does disappointed look like? Listen and look.",
             "teaching_text": "disappointed looks like a sad face and slumped shoulders.",
             "narration": "disappointed looks like a sad face and slumped shoulders."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show disappointed? Listen and look.",
-            "teaching_text": "Disappointed shows up in your face, your shoulders, and your voice.",
-            "narration": "Disappointed shows up in your face, your shoulders, and your voice."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel disappointed? Listen and look.",
-            "teaching_text": "You might feel disappointed when a plan changes or falls through.",
-            "narration": "You might feel disappointed when a plan changes or falls through."
           }
         ],
         "transition_text": "Now let's show what you know about feeling disappointed.",

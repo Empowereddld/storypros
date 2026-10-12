@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is confused, facial expression and body clues.",
-        "parts": "Confused has parts like: face, body, voice.",
-        "location": "You might feel confused during or after the problem."
+        "appearance": "When someone is confused, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -631,48 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel confused?",
-          "options": [
-            {
-              "text": "Your head feels fuzzy and you need to think harder",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "You feel very relaxed",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Your tummy growls",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel confused?",
-          "options": [
-            {
-              "text": "When you open a birthday present",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "When the teacher gives instructions too fast",
-              "correct": true,
-              "id": "b"
-            },
-            {
-              "text": "While eating lunch",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'confused' correctly?",
           "options": [
             {
@@ -714,18 +670,6 @@
             "prompt": "What does confused look like? Listen and look.",
             "teaching_text": "confused looks like a tilted head and a wrinkled forehead.",
             "narration": "confused looks like a tilted head and a wrinkled forehead."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show confused? Listen and look.",
-            "teaching_text": "Confused shows up in your face, your eyebrows, and your voice.",
-            "narration": "Confused shows up in your face, your eyebrows, and your voice."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel confused? Listen and look.",
-            "teaching_text": "You might feel confused when you don't know what to do next.",
-            "narration": "You might feel confused when you don't know what to do next."
           }
         ],
         "transition_text": "Now let's show what you know about feeling confused.",

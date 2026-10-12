@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is upset, facial expression and body clues.",
-        "parts": "Upset has parts like: face, body, voice.",
-        "location": "You might feel upset during or after the problem."
+        "appearance": "When someone is upset, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -631,48 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel upset?",
-          "options": [
-            {
-              "text": "You feel very relaxed",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "You feel very hungry",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Your face gets tight and you might want to cry",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel upset?",
-          "options": [
-            {
-              "text": "When someone takes your turn or breaks something",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "While sleeping",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "When you eat your favorite dessert",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'upset' correctly?",
           "options": [
             {
@@ -714,18 +670,6 @@
             "prompt": "What does upset look like? Listen and look.",
             "teaching_text": "upset looks like a frown and eyes that might tear up.",
             "narration": "upset looks like a frown and eyes that might tear up."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show upset? Listen and look.",
-            "teaching_text": "Upset shows up in your face, your voice, and your body.",
-            "narration": "Upset shows up in your face, your voice, and your body."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel upset? Listen and look.",
-            "teaching_text": "You might feel upset when something doesn't go your way.",
-            "narration": "You might feel upset when something doesn't go your way."
           }
         ],
         "transition_text": "Now let's show what you know about feeling upset.",

@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It tells how Dan felt when the kid laughed at him.",
-        "appearance": "When someone is embarrassed, their cheeks may turn red and they look down.",
-        "parts": "Embarrassed shows in parts like: face, eyes, shoulders.",
-        "location": "You might feel embarrassed when people notice a mistake."
+        "appearance": "When someone is embarrassed, their cheeks may turn red and they look down."
       },
       "quiz_questions": [
         {
@@ -714,18 +712,6 @@
             "prompt": "What does embarrassed look like? Listen and look.",
             "teaching_text": "embarrassed looks like red cheeks and eyes that look away.",
             "narration": "embarrassed looks like red cheeks and eyes that look away."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show embarrassed? Listen and look.",
-            "teaching_text": "Embarrassed shows up in your face, your cheeks, and your posture.",
-            "narration": "Embarrassed shows up in your face, your cheeks, and your posture."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel embarrassed? Listen and look.",
-            "teaching_text": "You might feel embarrassed when people notice a mistake.",
-            "narration": "You might feel embarrassed when people notice a mistake."
           }
         ],
         "transition_text": "Now let's show what you know about feeling embarrassed.",

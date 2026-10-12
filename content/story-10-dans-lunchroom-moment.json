@@ -561,9 +561,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is embarrassed, facial expression and body clues.",
-        "parts": "Embarrassed has parts like: face, body, voice.",
-        "location": "You might feel embarrassed during or after the problem."
+        "appearance": "When someone is embarrassed, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -631,48 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel embarrassed?",
-          "options": [
-            {
-              "text": "You feel very cold",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "You feel very hungry",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Your face gets hot and you want to disappear",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel embarrassed?",
-          "options": [
-            {
-              "text": "When someone laughs at you at school",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "When you blow out birthday candles",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "While drawing a picture at home",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'embarrassed' correctly?",
           "options": [
             {
@@ -714,18 +670,6 @@
             "prompt": "What does embarrassed look like? Listen and look.",
             "teaching_text": "embarrassed looks like red cheeks and eyes that look away.",
             "narration": "embarrassed looks like red cheeks and eyes that look away."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show embarrassed? Listen and look.",
-            "teaching_text": "Embarrassed shows up in your face, your cheeks, and your posture.",
-            "narration": "Embarrassed shows up in your face, your cheeks, and your posture."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel embarrassed? Listen and look.",
-            "teaching_text": "You might feel embarrassed when people notice a mistake.",
-            "narration": "You might feel embarrassed when people notice a mistake."
           }
         ],
         "transition_text": "Now let's show what you know about feeling embarrassed.",

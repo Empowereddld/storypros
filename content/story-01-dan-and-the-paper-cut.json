@@ -549,9 +549,7 @@
       "sfa": {
         "category": "It belongs to the feeling word group.",
         "function": "It's a feeling you get when describes how the character felt.",
-        "appearance": "When someone is calm, facial expression and body clues.",
-        "parts": "Calm has parts like: face, body, voice.",
-        "location": "You might feel calm during or after the problem."
+        "appearance": "When someone is calm, facial expression and body clues."
       },
       "quiz_questions": [
         {
@@ -619,48 +617,6 @@
         },
         {
           "position": 4,
-          "prompt": "What happens in your body when you feel calm?",
-          "options": [
-            {
-              "text": "Your heart beats very fast",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "You feel very hungry",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Your breathing slows down and muscles relax",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
-          "prompt": "Where or when might you feel calm?",
-          "options": [
-            {
-              "text": "During a loud thunderstorm",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "While running a race",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "After taking a deep breath or resting",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 6,
           "prompt": "Which sentence uses 'calm' correctly?",
           "options": [
             {
@@ -702,18 +658,6 @@
             "prompt": "What does calm look like? Listen and look.",
             "teaching_text": "Calm looks like a relaxed face and slow, easy breathing.",
             "narration": "Calm looks like a relaxed face and slow, easy breathing."
-          },
-          {
-            "feature": "parts",
-            "prompt": "What parts show calm? Listen and look.",
-            "teaching_text": "Calm shows up in your face, your body, and your breathing.",
-            "narration": "Calm shows up in your face, your body, and your breathing."
-          },
-          {
-            "feature": "location",
-            "prompt": "When might you feel calm? Listen and look.",
-            "teaching_text": "You might feel calm after taking a deep breath or resting.",
-            "narration": "You might feel calm after taking a deep breath or resting."
           }
         ],
         "transition_text": "Now let's show what you know about feeling calm.",
