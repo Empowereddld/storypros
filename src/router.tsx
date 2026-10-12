@@ -1,7 +1,8 @@
+import { lazy } from "react";
 import { createRouter, useRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
-function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
@@ -53,6 +54,8 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
     </div>
   );
 }
+
+const DefaultErrorComponent = lazy(async () => ({ default: ErrorComponent }));
 
 export const getRouter = () => {
   const router = createRouter({
