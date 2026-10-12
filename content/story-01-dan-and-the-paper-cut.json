@@ -700,8 +700,8 @@
           {
             "feature": "appearance",
             "prompt": "What does calm look like? Listen and look.",
-            "teaching_text": "calm looks like a relaxed face and slow, easy breathing.",
-            "narration": "calm looks like a relaxed face and slow, easy breathing."
+            "teaching_text": "Calm looks like a relaxed face and slow, easy breathing.",
+            "narration": "Calm looks like a relaxed face and slow, easy breathing."
           },
           {
             "feature": "parts",
