@@ -14,8 +14,7 @@ In the vocabulary quiz ("Word Check"), when a child answers the "Which sentence 
 `src/components/empowered/phases/VocabularyQuizPhase.tsx`
 
 - Add a small `hintFeedback(prompt, wordText)` helper next to the existing `correctFeedback` helper. It checks the prompt the same way `correctFeedback` does:
-  - Prompts starting with "what do you do with" (function, object words) -> `Think about what a ${word} is used for.`
-  - Prompts starting with "when do you feel" (function, feeling words) -> `Think about when you feel ${word}.`
+  - Prompts starting with "which sentence" -> `Think about what a ${word} is used for.` for object words, `Think about when you feel ${word}.` for feeling words (word type from `word.sfa.category`).
   - Everything else -> current general message `Think about what we learned about "${word}".`
 - Replace the hardcoded wrong-feedback string in the feedback card (line ~188) with `hintFeedback(question.prompt, word.word)`.
 
