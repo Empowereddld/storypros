@@ -211,7 +211,7 @@ export function VocabularyIntroPhase({
     ? word.sfa_teaching?.slides?.find((slide: SFATeachingSlide) => slide.feature === featureKey)
     : undefined;
   const featureFullText = featureKey
-    ? teachingSlide?.teaching_text || word.sfa[featureKey as keyof SFAFeatures]
+    ? teachingSlide?.teaching_text || word.sfa[featureKey as keyof SFAFeatures] || ""
     : "";
   const featureText = featureKey ? shortSentence(featureFullText) : "";
   const featureNarration = teachingSlide?.narration || featureFullText;
