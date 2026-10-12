@@ -84,6 +84,15 @@ function ListenButton({
 const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
 type SFAKey = (typeof SFA_KEYS)[number];
 
+/** Features actually taught for a word — feeling words skip parts/location. */
+function keysForWord(word: VocabularyWord): SFAKey[] {
+  return SFA_KEYS.filter(
+    (k) =>
+      word.sfa?.[k] ||
+      word.sfa_teaching?.slides?.some((slide: SFATeachingSlide) => slide.feature === k),
+  );
+}
+
 const SFA_LABELS: Record<SFAKey, string> = {
   category: "Tell what group it's in",
   function: "What it does",
