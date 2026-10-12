@@ -527,8 +527,8 @@
           {
             "feature": "parts",
             "prompt": "What parts or features does a paper airplane have? Listen and look.",
-            "teaching_text": "Parts or features of paper airplane include wings, nose, and middle fold.",
-            "narration": "Parts or features of paper airplane include wings, nose, and middle fold."
+            "teaching_text": "Parts or features of a paper airplane include wings, nose, and middle fold.",
+            "narration": "Parts or features of a paper airplane include wings, nose, and middle fold."
           },
           {
             "feature": "location",
