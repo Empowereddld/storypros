@@ -533,8 +533,8 @@
           {
             "feature": "location",
             "prompt": "Where or when might you see a paper airplane? Listen and look.",
-            "teaching_text": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends.",
-            "narration": "You might find or use paper airplane in home, school, or an open space. You might use a paper airplane when you are in a big open space with friends."
+            "teaching_text": "You might find or use a paper airplane at home, school, or an open space. You might use a paper airplane when you are in a big open space with friends.",
+            "narration": "You might find or use a paper airplane at home, school, or an open space. You might use a paper airplane when you are in a big open space with friends."
           }
         ],
         "transition_text": "Now let’s show what you know about a paper airplane.",
