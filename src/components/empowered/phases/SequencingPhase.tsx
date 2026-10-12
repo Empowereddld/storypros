@@ -204,7 +204,7 @@ export function SequencingPhase({
               </p>
               <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
                 {feedback.type === "correct"
-                  ? "You remembered what happened first, next, and last."
+                  ? "You remembered character + place + problem + feeling + action + result = story"
                   : "Remember: Character + Place + Problem + Action + Feeling + Result = STORY"}
               </p>
             </div>
