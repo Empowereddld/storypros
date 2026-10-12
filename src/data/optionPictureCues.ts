@@ -17,20 +17,22 @@ type Cue = [pattern: RegExp, emoji: string];
 
 const CUES: Cue[] = [
   // ── Categories / word-class answers ──
-  [/\bfeelings?\b|\bemotions?\b|emotion word/, "😊"],
-  [/\bfood word\b|\bfoods?\b/, "🍎"],
-  [/\bperson word\b/, "🧑"],
-  [/\bplace word\b|\bplaces?\b/, "📍"],
-  [/\bweather word\b/, "🌦️"],
-  [/\bcolors?\b/, "🎨"],
-  [/\banimals?\b/, "🐶"],
-  [/\bfurniture\b/, "🪑"],
-  [/\bclothes\b|\bclothing\b|wear it/, "👕"],
-  [/\bvehicles?\b/, "🚗"],
-  [/\bfirst aid (item|kit)\b/, "🩹"],
-  [/\bclassroom tool\b|\btool\b/, "🛠️"],
-  [/\btoys?\b|activity or toy|\bactivity\b/, "🧸"],
-  [/\bfruits?\b/, "🍓"],
+  // Category options show a small GROUP of members (3 emojis), not one:
+  // a single member doesn't portray the "this is a group" idea.
+  [/\bfeelings?\b|\bemotions?\b|emotion word/, "😊😢😠"],
+  [/\bfood word\b|\bfoods?\b/, "🍎🍌🧀"],
+  [/\bperson word\b/, "🧑👧🧓"],
+  [/\bplace word\b|\bplaces?\b/, "🏫🏖️🌳"],
+  [/\bweather word\b/, "🌦️☀️🌧️"],
+  [/\bcolors?\b/, "🔴🔵🟢"],
+  [/\banimals?\b/, "🐶🐱🐰"],
+  [/\bfurniture\b/, "🪑🛏️🛋️"],
+  [/\bclothes\b|\bclothing\b|wear it/, "👕🧦🧢"],
+  [/\bvehicles?\b/, "🚗🚌🚲"],
+  [/\bfirst aid (item|kit)\b/, "🩹💊🌡️"],
+  [/\bclassroom tool\b|\btool\b/, "🛠️🔨✂️"],
+  [/\btoys?\b|activity or toy|\bactivity\b/, "🧸⚽🪁"],
+  [/\bfruits?\b/, "🍓🍎🍇"],
 
   // ── Actions ──
   [/eat (it|them)|\beating\b|\beat\b/, "🍽️"],
@@ -146,10 +148,10 @@ const CUES: Cue[] = [
   [/\bcar\b/, "🚗"],
 
   // ── Generic fallbacks (kept last) ──
-  [/\ba feeling\b/, "😊"],
-  [/\ba food\b/, "🍎"],
-  [/\ban animal\b/, "🐶"],
-  [/\ba place\b|place or furniture/, "📍"],
+  [/\ba feeling\b/, "😊😢😠"],
+  [/\ba food\b/, "🍎🍌🧀"],
+  [/\ban animal\b/, "🐶🐱🐰"],
+  [/\ba place\b|place or furniture/, "🏫🏖️🌳"],
   [/\bobject\b/, "📦"],
 ];
 
