@@ -354,8 +354,8 @@
           {
             "feature": "location",
             "prompt": "Where or when might you see a bandage? Listen and look.",
-            "teaching_text": "You might find or use bandage in first aid kit, home, school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow.",
-            "narration": "You might find or use bandage in first aid kit, home, school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow."
+            "teaching_text": "You might find or use a bandage in a first aid kit at home or at school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow.",
+            "narration": "You might find or use a bandage in a first aid kit at home or at school. You might use a bandage when you fall, scrape your knee, get a papercut, or bump your elbow."
           }
         ],
         "transition_text": "Now let’s show what you know about a bandage.",
