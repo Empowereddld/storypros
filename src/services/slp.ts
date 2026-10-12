@@ -582,7 +582,7 @@ export function seedDemoCaseload(slpId: string) {
       childId: "demo-child-2",
       date: new Date(Date.now() - 3 * 86400000).toISOString(),
       content:
-        "Liam started Dan's Paper Cut today. Good engagement with story slides. Needed 3 replays on slide 4. Vocabulary recall strong for 'bandage' but struggled with 'papercut'.",
+        "Liam started Dan's Paper Cut today. Good engagement with story slides. Needed 3 replays on slide 4. Vocabulary recall strong for 'bandage' but struggled with 'paper cut'.",
       storyId: "dan-and-the-paper-cut",
       tags: ["vocabulary", "engagement"],
     },
