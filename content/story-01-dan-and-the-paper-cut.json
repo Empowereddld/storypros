@@ -509,7 +509,7 @@
           {
             "feature": "category",
             "prompt": "What group is a paper airplane in? Listen and look.",
-            "teaching_text": "paper airplane is a toy.",
+            "teaching_text": "A paper airplane is a toy.",
             "narration": "paper airplane is a toy."
           },
           {
