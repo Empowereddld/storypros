@@ -236,9 +236,6 @@ export function VocabularyQuizPhase({
 
           {!optionsRevealed ? (
             <div className="flex flex-1 flex-col items-center justify-center">
-              <p className="mb-4 max-w-[280px] text-center text-base font-semibold leading-snug text-ink-soft">
-                Think about the word, then choose your answer.
-              </p>
               <TactileButton
                 onClick={() => {
                   setOptionsRevealed(true);
