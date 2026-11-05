@@ -9,7 +9,7 @@ import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
-import { COIN_ECONOMY } from "@/services/coinEconomy";
+import { COIN_ECONOMY, vocabularyAward } from "@/services/coinEconomy";
 import { getOptionPictureCue } from "@/data/optionPictureCues";
 import { resolveStoryImage } from "@/services/storyImages";
 
@@ -106,6 +106,13 @@ export function VocabularyQuizPhase({
     setAttempts((prev) => [...prev, attempt]);
 
     if (isCorrect) {
+      earnCoins({
+        storyId: storyData.id,
+        activity: "vocabulary",
+        item: `q-${wordIdx}-${qIdx}`,
+        amount: vocabularyAward(currentAttempt),
+        anchor: document.querySelector(`[data-answer-option="${selected}"]`),
+      });
       setFeedback({ type: "correct" });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
@@ -271,6 +278,7 @@ export function VocabularyQuizPhase({
                 return (
                   <div
                     key={option.id}
+                    data-answer-option={option.id}
                     className={cn(
                       "relative flex items-center gap-3 rounded-[28px] bg-card p-3 shadow-soft ring-2 transition-all sm:flex-col sm:items-stretch sm:p-3.5",
                       isSelected ? "ring-primary" : "ring-transparent hover:ring-primary/30",

@@ -57,6 +57,8 @@ export const COIN_ECONOMY = {
   vocabulary: {
     label: "Story Words",
     perWord: 4,
+    first: 2,
+    retry: 1,
     completion: 3,
     max: 15,
   },
@@ -121,6 +123,12 @@ export function comprehensionAward(attemptNumber: number): number {
 export function sequencingAward(attemptNumber: number): number {
   const s = COIN_ECONOMY.sequencing;
   return attemptNumber <= 1 ? s.first : s.supported;
+}
+
+/** Story Words quiz: 2 for a correct answer first time, 1 after a retry. */
+export function vocabularyAward(attemptNumber: number): number {
+  const v = COIN_ECONOMY.vocabulary;
+  return attemptNumber <= 1 ? v.first : v.retry;
 }
 
 /**
