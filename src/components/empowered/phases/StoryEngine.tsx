@@ -38,6 +38,7 @@ import { VocabularyQuizPhase } from "./VocabularyQuizPhase";
 import { SentenceBuilderPhase } from "./SentenceBuilderPhase";
 import { BrainBreakPhase } from "./BrainBreakPhase";
 import { DelayedRetellPhase } from "./DelayedRetellPhase";
+import { RetellCheckPhase } from "./RetellCheckPhase";
 import { PhonologicalPhase } from "./PhonologicalPhase";
 import { JokePhase } from "./JokePhase";
 import { PersonalConnectionPhase } from "./PersonalConnectionPhase";
