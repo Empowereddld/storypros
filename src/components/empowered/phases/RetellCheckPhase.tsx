@@ -18,7 +18,7 @@ export const RETELL_CHECK_SCRIPT =
 
 export function RetellCheckPhase({ onComplete, onClose, ttsSpeed = "normal" }: StoryPhaseProps) {
   const { isPlaying, toggle, cancel } = useListen(ttsSpeed);
-  const playing = isPlaying("check");
+  const playing = isPlaying("check") || isPlaying("check-replay");
   const startedRef = useRef(false);
 
   // Play once on arrival (browsers may block this; the replay button still works).
@@ -31,8 +31,9 @@ export function RetellCheckPhase({ onComplete, onClose, ttsSpeed = "normal" }: S
   }, []);
 
   function handleReplay() {
-    if (playing) cancel();
-    void toggle(RETELL_CHECK_SCRIPT, playing ? "check-replay" : "check");
+    // Always restart from the beginning (alternate keys so toggle never just stops).
+    const key = isPlaying("check") ? "check-replay" : "check";
+    void toggle(RETELL_CHECK_SCRIPT, key);
   }
 
   function handleDone() {
