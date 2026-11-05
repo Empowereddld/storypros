@@ -7,7 +7,7 @@
  * otherwise, so this control is hidden for demo/local kids.
  * ───────────────────────────────────────────── */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { uploadRetellRecording, type RetellPhase } from "@/services/retell";
 import { isCloudId } from "@/services/cloud";
@@ -185,7 +185,7 @@ function RoundAction({
   label: string;
   onClick: () => void;
   className: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div className="flex flex-col items-center gap-1">
