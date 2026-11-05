@@ -70,7 +70,7 @@ export function DelayedRetellPhase({
       </div>
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
-        <section className="flex min-h-0 flex-1 flex-col justify-center rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
+        <section className="flex min-h-0 flex-1 flex-col justify-center rounded-[30px] bg-card px-5 py-4 shadow-soft animate-slide-up">
           <div className="flex items-center justify-center">
             <h1 className="text-center text-[28px] font-extrabold leading-tight text-primary">
               Remember the Story?
@@ -99,7 +99,7 @@ export function DelayedRetellPhase({
                   key={`${element}-${index}`}
                   className="flex min-w-0 flex-col overflow-hidden rounded-[18px] border-2 border-accent bg-card shadow-card"
                 >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-accent/40">
+                  <div className="relative aspect-square w-full overflow-hidden bg-accent/40">
                     {image ? (
                       <img src={image} alt="" className="h-full w-full object-cover" />
                     ) : (
@@ -122,14 +122,15 @@ export function DelayedRetellPhase({
           <div className="mt-5 flex justify-center">
             <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" size="large" />
           </div>
+
+          <div className="mt-4 flex justify-center">
+            <TactileButton onClick={handleDone} fullWidth={false}>
+              Done <ChevronRightIcon className="h-5 w-5 text-secondary" />
+            </TactileButton>
+          </div>
         </section>
       </div>
 
-      <div className="relative z-10 mx-5 mb-4 flex shrink-0 justify-center">
-        <TactileButton onClick={handleDone} fullWidth={false}>
-          Done <ChevronRightIcon className="h-5 w-5 text-secondary" />
-        </TactileButton>
-      </div>
     </div>
   );
 }
