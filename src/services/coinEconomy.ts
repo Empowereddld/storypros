@@ -70,7 +70,7 @@ export const COIN_ECONOMY = {
     max: 10,
   },
   jokes: {
-    label: "Word Play",
+    label: "Joke",
     completion: 5,
     max: 5,
   },

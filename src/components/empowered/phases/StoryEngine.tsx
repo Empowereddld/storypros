@@ -73,7 +73,7 @@ const SECTION_INTROS: Partial<Record<StoryPhase, { title: string; buddy: Buddy; 
       "Choose the word that makes the sentence make sense. Tap or drag it into place.",
   },
   "intro-jokes": {
-    title: "Word Play",
+    title: "Joke",
     buddy: "dan",
     script:
       "Some words can mean more than one thing. Learn the meanings, then listen to the joke and see what makes it funny.",
