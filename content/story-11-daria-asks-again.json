@@ -833,7 +833,7 @@
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",
-    "delayed": "Think about the whole story. Can you tell it to someone using all the story parts?",
+    "delayed": "Tell the story again using each story part.",
     "story_elements": [
       "character",
       "place",
