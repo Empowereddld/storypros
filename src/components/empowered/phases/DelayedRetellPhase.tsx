@@ -5,14 +5,13 @@
  * Placed AFTER vocab + grammar activities.
  * ───────────────────────────────────────────── */
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TactileButton } from "../TactileButton";
 import { ProgressHeader } from "./ProgressHeader";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookIcon, ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
+import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { resolveStoryImage } from "@/services/storyImages";
 import type { StoryPhaseProps, StoryElement } from "@/types/story";
-import { cn } from "@/lib/utils";
 import { ListenButton, useListen } from "./ListenButton";
 import { RetellRecorder } from "../RetellRecorder";
 import { earnCoins } from "@/services/coins";
@@ -35,21 +34,14 @@ export function DelayedRetellPhase({
   childId,
 }: StoryPhaseProps) {
   const elements = storyData.retell_prompts.story_elements;
-  const [tapped, setTapped] = useState<Set<number>>(new Set());
-  const [started, setStarted] = useState(false);
   const delayedPrompt = storyData.retell_prompts.delayed;
   const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
 
-  // Stop narration once the child starts tapping story parts.
-  useEffect(() => cancel, [started, cancel]);
-
-  const progress = started ? (tapped.size / elements.length) * 80 + 20 : 0;
-
-  function handleTap(idx: number) {
-    setTapped((prev) => new Set(prev).add(idx));
-  }
+  useEffect(() => cancel, [cancel]);
+  const progress = 50;
 
   function handleDone() {
+    cancel();
     earnCoins({
       storyId: storyData.id,
       activity: "delayed-retell",
@@ -77,133 +69,71 @@ export function DelayedRetellPhase({
         <ProgressHeader progress={progress} label="Tell it again!" onClose={onClose} />
       </div>
 
-      {!started ? (
-        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-4 sm:overflow-hidden">
-          <section className="flex min-h-0 flex-col rounded-[30px] bg-card p-5 shadow-soft animate-slide-up sm:flex-1">
-            <div className="flex items-start gap-4">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[24px] bg-accent text-primary">
-                <BrainIcon className="h-9 w-9" />
-              </div>
-              <div>
-                <h1 className="text-[30px] font-extrabold leading-tight text-primary">
-                  Remember the Story?
-                </h1>
-                <p className="mt-1 text-sm font-semibold leading-snug text-ink-soft">
-                  Tap each story part as you talk about it.
-                </p>
-              </div>
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
+        <section className="flex min-h-0 flex-1 flex-col rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
+          <div className="flex items-center gap-4">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[22px] bg-accent text-primary">
+              <BrainIcon className="h-8 w-8" />
             </div>
+            <h1 className="text-[28px] font-extrabold leading-tight text-primary">
+              Remember the Story?
+            </h1>
+          </div>
 
-            <div className="mt-4 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
-              <p className="flex-1 text-lg font-extrabold leading-snug text-primary sm:text-xl">
-                {delayedPrompt}
-              </p>
-              {supported && (
-                <ListenButton
-                  playing={isPlaying("delayed")}
-                  onClick={() => toggle(delayedPrompt, "delayed")}
-                  ariaLabel="Hear the retell prompt"
-                />
-              )}
-            </div>
+          <div className="mt-3 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
+            <p className="flex-1 text-lg font-extrabold leading-snug text-primary sm:text-xl">
+              {delayedPrompt}
+            </p>
+            {supported && (
+              <ListenButton
+                playing={isPlaying("delayed")}
+                onClick={() => toggle(delayedPrompt, "delayed")}
+                ariaLabel="Hear the retell prompt"
+              />
+            )}
+          </div>
 
-            <div className="mt-4 min-h-0 flex-1 overflow-y-auto no-scrollbar sm:overflow-hidden">
-              <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" />
-            </div>
-          </section>
-        </div>
-      ) : (
-        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-2 sm:overflow-hidden">
-          <section className="flex min-h-0 flex-1 flex-col">
-            <div className="flex items-center gap-2">
-              <BookIcon className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-extrabold text-primary">Story Parts</h2>
-            </div>
-
-            <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-2 sm:min-h-0 sm:flex-1 sm:grid-cols-3 sm:grid-rows-[auto_auto] sm:content-center sm:items-center sm:gap-4">
-              {elements.map((element, index) => {
-                const selected = tapped.has(index);
-                const slide = storyData.slides.find((item) => item.story_element === element);
-                const image = slide ? resolveStoryImage(storyData.id, slide.image) : null;
-
-                return (
-                  <button
-                    key={`${element}-${index}`}
-                    onClick={() => handleTap(index)}
-                    className={cn(
-                      "hover-lift flex flex-col overflow-hidden rounded-[24px] border-2 bg-card text-left shadow-card transition-all active:scale-[0.98]",
-                      "sm:min-h-0 sm:self-center",
-                      selected ? "border-success bg-success/5" : "border-accent/60",
+          <div className="mt-3 flex gap-2">
+            {elements.map((element, index) => {
+              const slide = storyData.slides.find((item) => item.story_element === element);
+              const image = slide ? resolveStoryImage(storyData.id, slide.image) : null;
+              return (
+                <div
+                  key={`${element}-${index}`}
+                  className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-[16px] border-2 border-accent/60 bg-card"
+                >
+                  <div className="relative aspect-video w-full overflow-hidden bg-accent/40">
+                    {image ? (
+                      <img src={image} alt="" className="h-full w-full object-contain" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-primary">
+                        <PaperPlaneIcon className="h-8 w-8" />
+                      </div>
                     )}
-                  >
-                    <div className="relative mx-auto aspect-video w-full max-h-full shrink-0 overflow-hidden rounded-[18px] bg-accent/40">
-                      {image ? (
-                        <img
-                          src={image}
-                          alt=""
-                          className="h-full w-full object-contain"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center text-primary">
-                          <PaperPlaneIcon className="h-10 w-10" />
-                        </div>
-                      )}
-                      <span
-                        className={cn(
-                          "absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full text-sm font-extrabold shadow-card",
-                          selected
-                            ? "bg-success text-success-foreground"
-                            : "bg-primary text-primary-foreground",
-                        )}
-                      >
-                        {index + 1}
-                      </span>
-                      {selected && (
-                        <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-card text-success shadow-card">
-                          <CheckIcon />
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex shrink-0 items-center justify-center px-2 py-2">
-                      <p className="text-center text-sm font-extrabold leading-tight text-primary sm:text-base">
-                        {ELEMENT_LABELS[element]}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-        </div>
-      )}
+                    <span className="absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-extrabold text-primary-foreground">
+                      {index + 1}
+                    </span>
+                  </div>
+                  <p className="px-1 py-1 text-center text-xs font-extrabold leading-tight text-primary sm:text-sm">
+                    {ELEMENT_LABELS[element]}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
 
-      <div className="relative z-10 mx-5 mb-4 shrink-0">
-        {!started ? (
-          <TactileButton onClick={() => setStarted(true)}>
-            Let's go! <ChevronRightIcon className="h-5 w-5 text-secondary" />
-          </TactileButton>
-        ) : (
-          <TactileButton onClick={handleDone} disabled={tapped.size < elements.length}>
-            I Told the Whole Story! <ChevronRightIcon className="h-5 w-5 text-secondary" />
-          </TactileButton>
-        )}
+          <div className="mt-3 min-h-0 flex-1">
+            <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" />
+          </div>
+        </section>
+      </div>
+
+      <div className="relative z-10 mx-5 mb-4 flex shrink-0 justify-center">
+        <TactileButton onClick={handleDone} fullWidth={false}>
+          Done <ChevronRightIcon className="h-5 w-5 text-secondary" />
+        </TactileButton>
       </div>
     </div>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      aria-hidden
-    >
-      <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
