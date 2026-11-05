@@ -7,6 +7,13 @@ import { BookCheckIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
+import {
+  AppearanceIcon,
+  CategoryIcon,
+  FunctionIcon,
+  LocationIcon,
+  PartsIcon,
+} from "../SfaIcons";
 import { useDevSubSteps } from "./DevPhaseNav";
 import { earnCoins } from "@/services/coins";
 import { COIN_ECONOMY, vocabularyAward } from "@/services/coinEconomy";
@@ -33,6 +40,37 @@ function correctFeedback(prompt: string, wordText: string): string {
   if (p.startsWith("which sentence"))
     return `You know how to use "${wordText}" in a sentence.`;
   return `You know what "${wordText}" means.`;
+}
+
+/** The semantic feature each word-check question targets. */
+type SFAFeatureKey = "category" | "function" | "appearance" | "parts" | "location";
+
+const SFA_ICONS: Record<SFAFeatureKey, (props: { className?: string }) => React.ReactElement> = {
+  category: CategoryIcon,
+  function: FunctionIcon,
+  appearance: AppearanceIcon,
+  parts: PartsIcon,
+  location: LocationIcon,
+};
+
+function featureForPrompt(prompt: string): SFAFeatureKey | null {
+  const p = prompt.toLowerCase();
+  if (p.startsWith("what category") || p.startsWith("what group") || p.startsWith("is '"))
+    return "category";
+  if (
+    p.startsWith("what do you do with") ||
+    p.startsWith("when do you feel") ||
+    p.startsWith("which one could make someone feel")
+  )
+    return "function";
+  if (
+    (p.startsWith("what does") && p.includes("look like")) ||
+    p.startsWith("what might your face")
+  )
+    return "appearance";
+  if (p.startsWith("what is a part") || p.startsWith("what parts")) return "parts";
+  if (p.startsWith("where or when") || p.startsWith("where do you find")) return "location";
+  return null;
 }
 
 export function VocabularyQuizPhase({
@@ -259,6 +297,19 @@ export function VocabularyQuizPhase({
             <p className="min-w-0 flex-1 text-[19px] font-extrabold leading-tight text-ink sm:text-[23px]">
               {question.prompt}
             </p>
+            {(() => {
+              const feature = featureForPrompt(question.prompt);
+              if (!feature) return null;
+              const Icon = SFA_ICONS[feature];
+              return (
+                <span
+                  aria-hidden
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] bg-secondary p-2 text-primary shadow-card sm:h-12 sm:w-12 sm:p-2.5"
+                >
+                  <Icon className="h-full w-full" />
+                </span>
+              );
+            })()}
           </section>
 
 
