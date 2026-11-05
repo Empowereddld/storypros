@@ -146,7 +146,7 @@
     },
     {
       "position": 5,
-      "prompt": "What did the character do?",
+      "prompt": "What did Dan do to solve the problem?",
       "story_element": "action",
       "options": [
         {
