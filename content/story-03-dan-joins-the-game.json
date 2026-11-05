@@ -560,7 +560,7 @@
       "image": "vocab-lonely.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It's a feeling you get when describes how the character felt.",
+        "synonyms": "Alone and left out mean almost the same as lonely.",
         "appearance": "When someone is lonely, facial expression and body clues."
       },
       "quiz_questions": [
@@ -587,20 +587,20 @@
         },
         {
           "position": 2,
-          "prompt": "When do you feel lonely?",
+          "prompt": "Which word means almost the same as 'lonely'?",
           "options": [
             {
-              "text": "When you are playing with all your friends",
-              "correct": false,
+              "text": "alone",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "When you are by yourself and wish someone was with you",
-              "correct": true,
+              "text": "game",
+              "correct": false,
               "id": "b"
             },
             {
-              "text": "When you eat a big meal",
+              "text": "happy",
               "correct": false,
               "id": "c"
             }
@@ -660,10 +660,10 @@
             "narration": "lonely is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel lonely? Listen and look.",
-            "teaching_text": "Lonely means you feel sad because you want company or a friend.",
-            "narration": "Lonely means you feel sad because you want company or a friend."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as lonely? Listen and look.",
+            "teaching_text": "Alone and left out mean almost the same as lonely.",
+            "narration": "Alone and left out mean almost the same as lonely."
           },
           {
             "feature": "appearance",
