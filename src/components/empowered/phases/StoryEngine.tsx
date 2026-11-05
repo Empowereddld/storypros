@@ -109,7 +109,6 @@ const PHASE_ORDER: StoryPhase[] = [
   "brain-break-2",
   "intro-jokes",
   "joke",
-  "intro-phonological",
   "phonological",
   "intro-retell",
   "delayed-retell",
