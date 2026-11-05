@@ -118,7 +118,7 @@ export function DevPhaseNav({ phases, index, onChange }: DevPhaseNavProps) {
             className="max-w-[190px] rounded-full bg-transparent px-2 text-xs font-medium text-foreground outline-none"
           >
             {phases.map((p, i) => (
-              <option key={p} value={i}>
+              <option key={`${p}-${i}`} value={i}>
                 {i + 1}. {p}
               </option>
             ))}
