@@ -132,29 +132,22 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
 
       <div className="relative z-10 flex-1 overflow-y-auto no-scrollbar px-4 pb-6 pt-3 lg:px-8 lg:pb-10">
         {/* Intro */}
-        <div className="relative min-h-[248px] overflow-hidden rounded-[34px] border-2 border-card bg-card p-5 shadow-soft animate-pop-in">
-          <div className="relative z-10">
-            <p className="text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
-              Story Pros Shop
+        <div className="relative flex items-end justify-between overflow-hidden rounded-[34px] bg-gradient-to-br from-accent/60 via-card to-sky/50 px-6 pt-5 shadow-soft animate-pop-in lg:px-10">
+          <div className="relative z-10 self-center py-4">
+            <h1 className="text-[44px] font-extrabold leading-none text-primary lg:text-[52px]">Shop</h1>
+            <p className="mt-2 max-w-[280px] text-base font-semibold leading-snug text-ink-soft lg:text-lg">
+              Use your coins to collect cool things!
             </p>
-            <h1 className="mt-1 text-[46px] font-extrabold leading-none text-primary">Shop</h1>
-            <p className="mt-3 max-w-[164px] text-base font-semibold leading-snug text-ink-soft">
-              Spend Coins on V1 collectibles for your story world.
-            </p>
-          </div>
-          <div className="absolute bottom-4 left-5 z-10 flex items-center gap-2 rounded-full bg-secondary/20 px-3 py-1.5 text-xs font-extrabold text-secondary-foreground">
-            <CoinIcon className="h-4 w-4" />
-            Coins only
           </div>
           <img
             src={dariaAndFriend}
             alt=""
-            className="absolute -right-16 bottom-0 h-56 w-auto object-contain"
+            className="relative z-10 h-40 w-auto shrink-0 object-contain object-bottom lg:h-48"
           />
         </div>
 
         {/* Category chips */}
-        <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <div className="mt-5 flex gap-2 overflow-x-auto no-scrollbar pb-1">
           {CATEGORIES.map((cat) => {
             const meta = CATEGORY_TREATMENT[cat];
             const active = activeTab === cat;
@@ -182,28 +175,14 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
           </p>
         )}
 
-        <div
-          className={cn(
-            "mt-3 flex items-center justify-between overflow-hidden rounded-[28px] bg-gradient-to-br p-4 shadow-card",
-            CATEGORY_TREATMENT[activeTab].className,
-          )}
-        >
-          <div>
-            <p className="text-xs font-extrabold uppercase tracking-wider opacity-75">Collection</p>
-            <h2 className="mt-1 text-xl font-extrabold leading-tight">
-              {CATEGORY_TREATMENT[activeTab].label}
-            </h2>
-            <p className="mt-1 max-w-[190px] text-xs font-semibold leading-snug text-ink-soft">
-              {CATEGORY_TREATMENT[activeTab].description}
-            </p>
-          </div>
-          <div className="flex h-20 w-24 shrink-0 items-center justify-center rounded-[24px] bg-card/80 text-primary shadow-card">
-            <CategoryIcon category={activeTab} className="h-12 w-12" />
-          </div>
+        <div className="mt-4 flex items-baseline gap-3">
+          <h2 className="text-xl font-extrabold text-primary">{CATEGORY_TREATMENT[activeTab].label}</h2>
+          <p className="text-sm font-semibold text-ink-soft">{CATEGORY_TREATMENT[activeTab].description}</p>
         </div>
 
-        {/* Item grid */}
-        <div className="mt-3 grid grid-cols-2 gap-3 stagger-in lg:grid-cols-4 lg:gap-4">
+        {/* Item slider (one row) */}
+        <div className="-mx-4 mt-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 stagger-in lg:-mx-8 lg:px-8">
+
           {items.map((item, i) => {
             const owned = isOwned(childId, item.id);
             return (
@@ -211,7 +190,7 @@ export function CollectibleShopScreen({ onClose }: CollectibleShopScreenProps) {
                 key={item.id}
                 onClick={() => setSelectedItem(item)}
                 className={cn(
-                  "relative flex min-h-[214px] flex-col items-center overflow-hidden rounded-[26px] border-2 border-accent/50 bg-card text-center shadow-card transition-all hover-lift active:scale-[0.98]",
+                  "relative flex min-h-[214px] w-[180px] shrink-0 snap-start flex-col items-center overflow-hidden rounded-[26px] border-2 border-accent/50 bg-card text-center shadow-card transition-all hover-lift active:scale-[0.98]",
                   owned && "border-success/35",
                 )}
               >
