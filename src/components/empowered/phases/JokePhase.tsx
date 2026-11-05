@@ -227,12 +227,17 @@ export function JokePhase({
 
             {revealed && (
             <div className="rounded-2xl border border-accent bg-accent/50 p-4 text-center">
-              <span className="mb-1 block text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">
-                Why it works
+              <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-primary">
+                Get the joke? 💡
               </span>
-              <p className="text-sm font-semibold leading-snug text-ink">
-                Both meanings of &quot;{joke.word}&quot; make the joke work
-              </p>
+              <div className="space-y-1 text-sm font-semibold leading-snug text-ink">
+                {(joke.explanation?.length
+                  ? joke.explanation
+                  : [`The joke uses two meanings of the word ${joke.word}!`]
+                ).map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
             </div>
             )}
 

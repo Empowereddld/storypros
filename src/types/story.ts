@@ -140,6 +140,8 @@ export interface JokeData {
   meaning_1: JokeMeaning;
   meaning_2: JokeMeaning;
   joke_text: string;
+  /** Lines shown under "Get the joke?" after the punchline is revealed. */
+  explanation?: string[];
 }
 
 // ── Retell prompts ──
