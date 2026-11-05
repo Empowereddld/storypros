@@ -154,12 +154,21 @@ export function VocabularyIntroPhase({
   const [featureIdx, setFeatureIdx] = useState(-1);
 
   const stepsPerWord = SFA_KEYS.length + 1;
+  // Each word has its own number of screens (intro + its feature screens).
+  const screensPerWord = words.map((w) => keysForWord(w).length + 1);
+  const wordOffset = screensPerWord.slice(0, wordIdx).reduce((a, b) => a + b, 0);
   useDevSubSteps(
-    words.length * stepsPerWord,
-    wordIdx * stepsPerWord + (featureIdx + 1),
+    screensPerWord.reduce((a, b) => a + b, 0),
+    wordOffset + (featureIdx + 1),
     (i: number) => {
-      setWordIdx(Math.floor(i / stepsPerWord));
-      setFeatureIdx((i % stepsPerWord) - 1);
+      let w = 0;
+      let rest = i;
+      while (w < screensPerWord.length - 1 && rest >= screensPerWord[w]) {
+        rest -= screensPerWord[w];
+        w++;
+      }
+      setWordIdx(w);
+      setFeatureIdx(Math.min(rest, screensPerWord[w] - 1) - 1);
     },
     "screen",
   );
