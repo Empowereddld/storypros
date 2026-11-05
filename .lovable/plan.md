@@ -1,21 +1,21 @@
-# Make the Sentence Builder screen lighter and more fun
+# Make the "Tell it again" screen fuller and more fun
 
-## Quick fixes (what you asked for)
-1. **Remove "Finish the idea"** and the small "Sentence Builder" label above it. The book icon goes too, so the sentence becomes the first thing the child sees.
-2. **Add a speaker button to each answer choice (A, B, C)**, the same as on the word-check pictures, so a child who can't read yet can hear every ending.
-3. **Shorten the Check Answer button** to a centered pill sized to its words (the same fix as on the word check). On iPad, full-width bars are a phone pattern. A centered pill that's at least 44pt tall is the tablet best practice. It will sit right under the choices instead of pinned to the bottom.
+## What's wrong now
+- The six story pictures are small and sit in a thin strip near the top.
+- The record button is a small pill on the left of a pale bar, with lots of empty white space below it.
+- The bottom of the screen is empty apart from a small "Done" button.
 
-## Suggestions to make it feel more fun (less text-heavy)
-4. **Picture cue on each choice.** Each ending gets a big emoji picture (for example 🩹 "he needed a bandage."), using the same picture cues as the word check. Kids scan pictures first, and words second.
-5. **Choices as cards in a row, not stacked text bars.** Three tiles side by side, each with a letter badge, a picture, the ending and a speaker, matching the word-check layout so the app feels consistent.
-6. **A glowing, bouncy blank.** The empty slot in the sentence becomes a dashed gold "?" bubble that gently pulses. When a choice is tapped, the words "drop" into it with a little pop.
-7. **Make the target word a sticker.** Instead of the plain "Word: because" chip, the connective word (because, so, but) shows inside the sentence as a gold highlighted sticker. That removes one extra line of text.
-8. **Character peek.** Dan or Daria peeks in from the corner of the sentence card. This uses art we already have, and adds warmth without adding words.
+## Changes
+1. **Bigger story pictures.** Make the six pictures the main part of the screen, in one row that stretches across the full width. Each picture gets a colored number badge and a label underneath (Who, Where, and so on), so kids can follow along as they talk.
+2. **A big round mic button in the middle.** Replace the small pill with a large purple circle with a white mic, in the center under the pictures, labeled "Tap to record."
+   - **While recording:** the circle turns red and pulses gently, with a large timer ("0:12") and a "Recording..." label. That way kids always know it's still listening.
+   - **After stopping:** a green check and "Saved!" appear in the same spot.
+3. **Less empty space.** Center the heading, question, pictures and mic as one group, so the screen feels full instead of top-heavy. Keep the soft gold background and sparkles.
+4. **Done button.** Keep it as a centered button sized to its words, matching the other screens. It stays usable at any time.
 
-Feedback, coins and the rules for right answers stay exactly as they are.
+Everything has to fit on one screen without scrolling, on iPad and on your current window size.
 
-## Technical notes
-- File: `SentenceBuilderPhase.tsx` only (plus reuse of `getOptionPictureCue`, `AudioButton`, the existing `useListen` toggle, and the character images).
-- Check Answer: `fullWidth={false}` inside a centered wrapper. Tiles and button are grouped in a `flex min-h-full flex-col justify-center` container, the same as in VocabularyQuizPhase.
-- Per-choice audio key `choice-${id}`. Audio is cancelled on check/continue.
-- Single-viewport rule respected: 3-column tile grid on tablet/desktop, stacking on narrow phones.
+## Technical details
+- **Story pictures:** `DelayedRetellPhase.tsx`. Set the picture row to `flex-1` so it fills the spare height, and make the images taller.
+- **Mic button:** add a `size="large"` variant to `RetellRecorder.tsx`, so the immediate-retell screen keeps its current compact look. Use semantic tokens only: primary for the idle circle, destructive for recording, success for saved. The pulse uses the existing `animate-pulse`.
+- **Check:** use Playwright to look at screen 17 at 1454x715, 991x715 and iPad 1024x768.
