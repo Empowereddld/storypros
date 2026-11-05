@@ -106,8 +106,8 @@ function SongStage({ onDone }: { onDone: () => void }) {
 
 /* ── 2. Pick what your brain needs ── */
 const CHOICES: { id: Exclude<Stage, "song" | "choose" | "ready">; emoji: string; label: string }[] = [
-  { id: "tictactoe", emoji: "⭕", label: "Tic-tac-toe with Dan & Daria" },
-  { id: "jumping", emoji: "🤸", label: "Jumping jacks for 60 seconds" },
+  { id: "tictactoe", emoji: "⭕", label: "Tic-tac-toe with Dan" },
+  { id: "jumping", emoji: "🤸", label: "Jumping jacks for 60 seconds with Ming" },
   { id: "dance", emoji: "💃", label: "Dance party with Daria" },
 ];
 
@@ -294,7 +294,7 @@ function TicTacToe({ onDone }: { onDone: () => void }) {
   };
 
   const message =
-    result === "X" ? "You won! 🎉" : result === "O" ? "Dan & Daria won!" : result === "draw" ? "It's a tie!" : "You are X. Tap a square!";
+    result === "X" ? "You won! 🎉" : result === "O" ? "Dan won!" : result === "draw" ? "It's a tie!" : "You are X. Tap a square!";
 
   return (
     <div className="text-center animate-slide-up">
