@@ -68,9 +68,6 @@ export function PersonalConnectionPhase({
           </section>
         ) : (
           <section className="flex flex-1 flex-col justify-center rounded-[34px] bg-card p-5 shadow-soft animate-slide-up">
-            <span className="mb-4 inline-flex w-fit rounded-full bg-secondary/25 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
-              Think and Share
-            </span>
             <div className="flex items-start gap-3">
               <h1 className="flex-1 text-[30px] font-extrabold leading-tight text-primary">
                 {prompt}
