@@ -829,7 +829,7 @@
     "joke_text": "Why did the car go to the carnival? Because it already had a ticket!"
   },
   "personal_connection": {
-    "prompt": "Have you ever been worried that something might not work out? What happened?"
+    "prompt": "Have you ever been worried that something might not work out?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

@@ -829,7 +829,7 @@
     "joke_text": "Why did the puzzle go to the party? Because it wanted a piece of cake!"
   },
   "personal_connection": {
-    "prompt": "Have you ever had to share something with a friend, even when it was hard? What happened?"
+    "prompt": "Have you ever had to share something with a friend, even when it was hard?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

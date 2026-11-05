@@ -829,7 +829,7 @@
     "joke_text": "Why did the flashlight like the feather? Because it was so light!"
   },
   "personal_connection": {
-    "prompt": "Have you ever needed help when something was not working? Who did you ask?"
+    "prompt": "Have you ever needed help when something was not working?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

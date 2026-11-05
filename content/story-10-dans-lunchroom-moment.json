@@ -829,7 +829,7 @@
     "joke_text": "Why did the dalmatian sit in the lunchroom? Because it needed a spot!"
   },
   "personal_connection": {
-    "prompt": "Have you ever felt left out at school or somewhere else? What did you do?"
+    "prompt": "Have you ever felt left out at school or somewhere else?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",
