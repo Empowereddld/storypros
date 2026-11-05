@@ -822,7 +822,7 @@
     ]
   },
   "personal_connection": {
-    "prompt": "Has something ever hurt you, like a cut or a bump? Who helped you feel better? What did they do?"
+    "prompt": "Have you ever gotten a cut or a bump? Share your story using all the story parts."
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

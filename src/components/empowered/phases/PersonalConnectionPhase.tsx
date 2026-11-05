@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
-import type { StoryPhaseProps } from "@/types/story";
+import type { StoryPhaseProps, StoryElement } from "@/types/story";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, PaperPlaneIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { ListenButton, useListen } from "./ListenButton";
+import { StoryElementFramework } from "../StoryElementFramework";
+
+const ELEMENT_LABELS: Record<StoryElement, string> = {
+  character: "Who",
+  place: "Where",
+  problem: "Problem",
+  emotion: "Feeling",
+  action: "Action",
+  result: "Result",
+};
 
 export function PersonalConnectionPhase({
   storyData,
@@ -71,14 +81,13 @@ export function PersonalConnectionPhase({
                 />
               )}
             </div>
-            <div className="mt-6 rounded-[28px] border-2 border-dashed border-primary/25 bg-accent/40 p-5 text-center">
-              <p className="text-base font-extrabold text-primary">
-                Tell someone near you, or think about your answer quietly.
-              </p>
-              <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
-                There is no wrong answer here. This part is about making the story yours.
-              </p>
-            </div>
+            <StoryElementFramework
+              className="mt-8"
+              items={storyData.retell_prompts.story_elements.map((element) => ({
+                element,
+                label: ELEMENT_LABELS[element as StoryElement] ?? element,
+              }))}
+            />
           </section>
         )}
 
