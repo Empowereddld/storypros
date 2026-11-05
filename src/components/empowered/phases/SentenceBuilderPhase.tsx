@@ -293,29 +293,29 @@ export function SentenceBuilderPhase({
             )}
           </div>
 
-          <div className="mt-3 flex items-center gap-2">
-            <span className="rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
-              Word: {storyData.target_connective}
-            </span>
-          </div>
         </section>
 
-        <div className="mt-4 flex-1 space-y-3 overflow-y-auto no-scrollbar pb-2">
+        <div className="mt-4 flex-1 overflow-y-auto no-scrollbar pb-2">
+        <div className="flex min-h-full flex-col justify-center">
+        <div className="space-y-3">
           {frame.choices.map((choice, index) => {
             const isSelected = selected === choice.id;
             const isDisabled = wrongIds.has(choice.id);
             return (
-              <div key={choice.id} className="flex items-center gap-2">
-              <button
-                data-choice-id={choice.id}
-                onClick={() => !isDisabled && setSelected(choice.id)}
-                disabled={isDisabled}
+              <div
+                key={choice.id}
                 className={cn(
-                  "flex min-w-0 flex-1 items-center gap-3 rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
+                  "flex items-center gap-2 rounded-[26px] border-2 bg-card pr-3 shadow-card transition-all",
                   isSelected && "border-primary bg-primary/5 -translate-y-0.5",
                   !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
                   isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
                 )}
+              >
+              <button
+                data-choice-id={choice.id}
+                onClick={() => !isDisabled && setSelected(choice.id)}
+                disabled={isDisabled}
+                className="flex min-w-0 flex-1 items-center gap-3 rounded-[24px] p-4 text-left"
               >
                 <span
                   className={cn(
@@ -347,10 +347,17 @@ export function SentenceBuilderPhase({
             );
           })}
         </div>
-
-        <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-          Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
-        </TactileButton>
+        <div className="mt-4 flex justify-center">
+          <TactileButton
+            fullWidth={false}
+            onClick={handleCheck}
+            disabled={!selected || showingFeedback}
+          >
+            Check Answer <ChevronRightIcon className="h-5 w-5 text-secondary" />
+          </TactileButton>
+        </div>
+        </div>
+        </div>
       </div>
     </div>
   );
