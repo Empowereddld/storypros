@@ -34,6 +34,7 @@ export function SentenceBuilderPhase({
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
   const [speaking, setSpeaking] = useState(false);
   const [brainSpeaking, setBrainSpeaking] = useState(false);
+  const [choiceSpeaking, setChoiceSpeaking] = useState<string | null>(null);
   const startTime = useRef(Date.now());
 
   useEffect(() => {
@@ -44,6 +45,7 @@ export function SentenceBuilderPhase({
     return () => {
       stop();
       setSpeaking(false);
+      setChoiceSpeaking(null);
     };
   }, [frameIdx]);
 
@@ -69,6 +71,22 @@ export function SentenceBuilderPhase({
       // Ignore browser TTS errors.
     }
     setSpeaking(false);
+  }
+
+  async function handleListenChoice(id: string, text: string) {
+    stop();
+    setSpeaking(false);
+    if (choiceSpeaking === id) {
+      setChoiceSpeaking(null);
+      return;
+    }
+    setChoiceSpeaking(id);
+    try {
+      await speak(text, { rate: speedToRate(ttsSpeed) });
+    } catch {
+      // Ignore browser TTS errors.
+    }
+    setChoiceSpeaking((cur) => (cur === id ? null : cur));
   }
 
   async function handleListenBrainCheck() {
@@ -243,18 +261,13 @@ export function SentenceBuilderPhase({
             <span className="flex h-14 w-14 items-center justify-center rounded-[22px] bg-accent text-primary">
               <BookCheckIcon className="h-8 w-8" />
             </span>
-            <div>
-              <p className="text-xs font-extrabold uppercase tracking-wide text-secondary-foreground">
-                Sentence Builder
-              </p>
-              <h1 className="text-[28px] font-extrabold leading-tight text-primary">
-                Finish the idea
-              </h1>
-            </div>
+            <h1 className="text-[28px] font-extrabold leading-tight text-primary">
+              Sentence Builder
+            </h1>
           </div>
 
-          <div className="mt-5 rounded-[24px] bg-accent/60 p-4">
-            <p className="text-[22px] font-extrabold leading-snug text-primary">
+          <div className="mt-5 flex items-center gap-3 rounded-[24px] bg-accent/60 p-4">
+            <p className="flex-1 text-[22px] font-extrabold leading-snug text-primary">
               {highlightConnective(beforeBlank, storyData.target_connective)}
               <span
                 className={cn(
@@ -269,21 +282,21 @@ export function SentenceBuilderPhase({
               {afterBlank}
               {selectedChoice && !/[.!?]$/.test(afterBlank) ? "." : null}
             </p>
-          </div>
-
-          <div className="mt-3 flex items-center justify-between gap-2">
-            <span className="rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
-              Word: {storyData.target_connective}
-            </span>
             {isSupported() && (
               <AudioButton
                 size="md"
-                tone="quiet"
+                tone="primary"
                 playing={speaking}
                 onClick={handleListenFrame}
                 ariaLabel="Hear the sentence"
               />
             )}
+          </div>
+
+          <div className="mt-3 flex items-center gap-2">
+            <span className="rounded-full bg-secondary/25 px-3 py-1 text-xs font-extrabold text-secondary-foreground">
+              Word: {storyData.target_connective}
+            </span>
           </div>
         </section>
 
@@ -292,13 +305,13 @@ export function SentenceBuilderPhase({
             const isSelected = selected === choice.id;
             const isDisabled = wrongIds.has(choice.id);
             return (
+              <div key={choice.id} className="flex items-center gap-2">
               <button
-                key={choice.id}
                 data-choice-id={choice.id}
                 onClick={() => !isDisabled && setSelected(choice.id)}
                 disabled={isDisabled}
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
+                  "flex min-w-0 flex-1 items-center gap-3 rounded-[26px] border-2 bg-card p-4 text-left shadow-card transition-all",
                   isSelected && "border-primary bg-primary/5 -translate-y-0.5",
                   !isSelected && !isDisabled && "border-accent/60 hover:border-primary/50",
                   isDisabled && "border-destructive/30 bg-destructive/5 opacity-45",
@@ -321,6 +334,16 @@ export function SentenceBuilderPhase({
                   {choice.text}
                 </span>
               </button>
+              {isSupported() && (
+                <AudioButton
+                  size="md"
+                  tone="quiet"
+                  playing={choiceSpeaking === choice.id}
+                  onClick={() => handleListenChoice(choice.id, choice.text ?? "")}
+                  ariaLabel={`Hear choice ${String.fromCharCode(65 + index)}`}
+                />
+              )}
+              </div>
             );
           })}
         </div>
