@@ -65,10 +65,9 @@ export function AppearanceIcon({ className }: IconProps) {
 export function PartsIcon({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
-      <circle cx="12" cy="12" r="9.2" />
-      <path d="M12 12V2.8" />
-      <path d="M12 12l8 4.6" />
-      <path d="M12 12 4 16.6" />
+      <path d="M10.8 13.2V5.2A8 8 0 1 0 18.8 13.2Z" />
+      <path d="M10.8 13.2H2.8M10.8 13.2V21.2" />
+      <path d="M13.2 10.8V2.8A8 8 0 0 1 21.2 10.8Z" />
     </svg>
   );
 }
