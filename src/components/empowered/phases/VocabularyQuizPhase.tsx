@@ -79,6 +79,10 @@ export function VocabularyQuizPhase({
     words.slice(0, wordIdx).reduce((sum, item) => sum + item.quiz_questions.length, 0) + qIdx;
   const progress = (questionsCompleted / totalQuestions) * 100;
   const showingFeedback = feedback.type !== "none";
+  const feedbackText =
+    feedback.type === "correct"
+      ? correctFeedback(question.prompt, word.word)
+      : `Think about what we learned about "${word.word}".`;
 
   // Stop narration when the question changes.
   useEffect(() => cancel, [wordIdx, qIdx, cancel]);
@@ -111,6 +115,7 @@ export function VocabularyQuizPhase({
   }
 
   function handleContinue() {
+    cancel();
     if (feedback.type === "correct") {
       if (qIdx + 1 < questions.length) {
         setQIdx(qIdx + 1);
@@ -177,14 +182,26 @@ export function VocabularyQuizPhase({
                   : "bg-sky animate-shake",
               )}
             >
-              <p className="text-xl font-extrabold text-primary">
-                {feedback.type === "correct" ? "Correct!" : "Try again"}
-              </p>
-              <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
-                {feedback.type === "correct"
-                  ? correctFeedback(question.prompt, word.word)
-                  : `Think about what we learned about "${word.word}".`}
-              </p>
+              {feedback.type === "correct" && (
+                <p className="text-xl font-extrabold text-primary">Correct!</p>
+              )}
+              <div
+                className={cn(
+                  "flex items-center justify-center gap-3",
+                  feedback.type === "correct" && "mt-2",
+                )}
+              >
+                <AudioButton
+                  size="md"
+                  tone="primary"
+                  playing={isPlaying("feedback")}
+                  onClick={() => toggle(feedbackText, "feedback")}
+                  ariaLabel="Hear the feedback"
+                />
+                <p className="text-sm font-semibold leading-snug text-ink-soft">
+                  {feedbackText}
+                </p>
+              </div>
             </div>
             <div className="mt-5">
               <TactileButton
