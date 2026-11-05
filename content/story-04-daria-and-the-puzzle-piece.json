@@ -319,17 +319,17 @@
           "options": [
             {
               "id": "a",
-              "text": "The puzzle cooked dinner",
+              "text": "The puzzle cooked dinner.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "She rode the puzzle to school",
+              "text": "She rode the puzzle to school.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "Daria was building a puzzle with her friend",
+              "text": "Daria was building a puzzle with her friend.",
               "correct": true
             }
           ]
@@ -498,17 +498,17 @@
           "options": [
             {
               "id": "a",
-              "text": "The piece flew through the sky like a bird",
+              "text": "The piece flew through the sky like a bird.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "They both wanted the same puzzle piece",
+              "text": "They both wanted the same puzzle piece.",
               "correct": true
             },
             {
               "id": "c",
-              "text": "He planted the piece in the garden",
+              "text": "He planted the piece in the garden.",
               "correct": false
             }
           ]
@@ -632,17 +632,17 @@
           "prompt": "Which sentence uses 'upset' correctly?",
           "options": [
             {
-              "text": "Daria felt upset when they both wanted the same piece",
+              "text": "Daria felt upset when they both wanted the same piece.",
               "correct": true,
               "id": "a"
             },
             {
-              "text": "The upset drove a car",
+              "text": "The upset drove a car.",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "She wore the upset on her feet",
+              "text": "She wore the upset on her feet.",
               "correct": false,
               "id": "c"
             }

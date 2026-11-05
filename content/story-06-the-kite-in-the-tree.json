@@ -319,17 +319,17 @@
           "options": [
             {
               "id": "a",
-              "text": "Dan flew his kite at the park",
+              "text": "Dan flew his kite at the park.",
               "correct": true
             },
             {
               "id": "b",
-              "text": "She ate the kite for dessert",
+              "text": "She ate the kite for dessert.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "The kite cooked dinner",
+              "text": "The kite cooked dinner.",
               "correct": false
             }
           ]
@@ -498,17 +498,17 @@
           "options": [
             {
               "id": "a",
-              "text": "He ate the ladder with ketchup",
+              "text": "He ate the ladder with ketchup.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "The ladder sang a song",
+              "text": "The ladder sang a song.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "They used a ladder to reach the kite in the tree",
+              "text": "They used a ladder to reach the kite in the tree.",
               "correct": true
             }
           ]
@@ -632,17 +632,17 @@
           "prompt": "Which sentence uses 'frustrated' correctly?",
           "options": [
             {
-              "text": "The frustrated went to sleep",
+              "text": "The frustrated went to sleep.",
               "correct": false,
               "id": "a"
             },
             {
-              "text": "She put the frustrated in her bag",
+              "text": "She put the frustrated in her bag.",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Dan felt frustrated when his kite got stuck in the tree",
+              "text": "Dan felt frustrated when his kite got stuck in the tree.",
               "correct": true,
               "id": "c"
             }

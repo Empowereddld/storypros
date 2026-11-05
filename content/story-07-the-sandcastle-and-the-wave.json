@@ -319,17 +319,17 @@
           "options": [
             {
               "id": "a",
-              "text": "She ate the sandcastle for dinner",
+              "text": "She ate the sandcastle for dinner.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "The sandcastle drove to school",
+              "text": "The sandcastle drove to school.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "Dan and Daria built a sandcastle on the beach",
+              "text": "Dan and Daria built a sandcastle on the beach.",
               "correct": true
             }
           ]
@@ -498,17 +498,17 @@
           "options": [
             {
               "id": "a",
-              "text": "He wore the wave as a scarf",
+              "text": "He wore the wave as a scarf.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "The wave did homework",
+              "text": "The wave did homework.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "A big wave knocked down the sandcastle",
+              "text": "A big wave knocked down the sandcastle.",
               "correct": true
             }
           ]
@@ -632,17 +632,17 @@
           "prompt": "Which sentence uses 'disappointed' correctly?",
           "options": [
             {
-              "text": "The disappointed climbed a ladder",
+              "text": "The disappointed climbed a ladder.",
               "correct": false,
               "id": "a"
             },
             {
-              "text": "Dan felt disappointed when the wave destroyed the sandcastle",
+              "text": "Dan felt disappointed when the wave destroyed the sandcastle.",
               "correct": true,
               "id": "b"
             },
             {
-              "text": "She rode the disappointed to the park",
+              "text": "She rode the disappointed to the park.",
               "correct": false,
               "id": "c"
             }

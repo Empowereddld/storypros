@@ -307,17 +307,17 @@
           "options": [
             {
               "id": "a",
-              "text": "Mom put a bandage on my scraped knee",
+              "text": "Mom put a bandage on my scraped knee.",
               "correct": true
             },
             {
               "id": "b",
-              "text": "I put a bandage on my sandwich",
+              "text": "I put a bandage on my sandwich.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "I rode my bandage to school",
+              "text": "I rode my bandage to school.",
               "correct": false
             }
           ]
@@ -486,17 +486,17 @@
           "options": [
             {
               "id": "a",
-              "text": "The paper airplane sang a song",
+              "text": "The paper airplane sang a song.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "I ate a paper airplane for breakfast",
+              "text": "I ate a paper airplane for breakfast.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "Dan folded a paper airplane and it flew across the room",
+              "text": "Dan folded a paper airplane and it flew across the room.",
               "correct": true
             }
           ]
@@ -620,17 +620,17 @@
           "prompt": "Which sentence uses 'calm' correctly?",
           "options": [
             {
-              "text": "She put the calm in a box",
+              "text": "She put the calm in a box.",
               "correct": false,
               "id": "a"
             },
             {
-              "text": "Dan took a deep breath and felt calm",
+              "text": "Dan took a deep breath and felt calm.",
               "correct": true,
               "id": "b"
             },
             {
-              "text": "The calm tasted like chocolate",
+              "text": "The calm tasted like chocolate.",
               "correct": false,
               "id": "c"
             }

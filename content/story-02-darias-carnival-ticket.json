@@ -319,17 +319,17 @@
           "options": [
             {
               "id": "a",
-              "text": "The ticket climbed a tree",
+              "text": "The ticket climbed a tree.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "She ate the ticket for lunch",
+              "text": "She ate the ticket for lunch.",
               "correct": false
             },
             {
               "id": "c",
-              "text": "Daria showed her ticket to get into the carnival",
+              "text": "Daria showed her ticket to get into the carnival.",
               "correct": true
             }
           ]
@@ -498,17 +498,17 @@
           "options": [
             {
               "id": "a",
-              "text": "The entrance barked at a cat",
+              "text": "The entrance barked at a cat.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "They walked through the entrance to the carnival",
+              "text": "They walked through the entrance to the carnival.",
               "correct": true
             },
             {
               "id": "c",
-              "text": "He put the entrance in his pocket",
+              "text": "He put the entrance in his pocket.",
               "correct": false
             }
           ]
@@ -632,17 +632,17 @@
           "prompt": "Which sentence uses 'worried' correctly?",
           "options": [
             {
-              "text": "The worried was under the table",
+              "text": "The worried was under the table.",
               "correct": false,
               "id": "a"
             },
             {
-              "text": "He wore the worried on his head",
+              "text": "He wore the worried on his head.",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Daria felt worried when her ticket got wet",
+              "text": "Daria felt worried when her ticket got wet.",
               "correct": true,
               "id": "c"
             }
