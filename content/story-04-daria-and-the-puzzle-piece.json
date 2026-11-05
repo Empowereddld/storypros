@@ -587,27 +587,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'upset'?",
-          "options": [
-            {
-              "text": "puzzle",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "sad",
-              "correct": true,
-              "id": "b"
-            },
-            {
-              "text": "happy",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What does someone look like when they are upset?",
           "options": [
             {
@@ -622,6 +601,27 @@
             },
             {
               "text": "Smiling with bright eyes",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'upset'?",
+          "options": [
+            {
+              "text": "puzzle",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "sad",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "happy",
               "correct": false,
               "id": "c"
             }
@@ -660,16 +660,16 @@
             "narration": "upset is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as upset? Listen and look.",
-            "teaching_text": "Sad and mad mean almost the same as upset.",
-            "narration": "Sad and mad mean almost the same as upset."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does upset look like? Listen and look.",
             "teaching_text": "upset looks like a frown and eyes that might tear up.",
             "narration": "upset looks like a frown and eyes that might tear up."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as upset? Listen and look.",
+            "teaching_text": "Sad and mad mean almost the same as upset.",
+            "narration": "Sad and mad mean almost the same as upset."
           }
         ],
         "transition_text": "Now let's show what you know about feeling upset.",

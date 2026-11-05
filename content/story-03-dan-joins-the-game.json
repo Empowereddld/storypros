@@ -587,27 +587,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'lonely'?",
-          "options": [
-            {
-              "text": "alone",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "game",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "happy",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What does someone look like when they feel lonely?",
           "options": [
             {
@@ -622,6 +601,27 @@
             },
             {
               "text": "Dancing and singing",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'lonely'?",
+          "options": [
+            {
+              "text": "alone",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "game",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "happy",
               "correct": false,
               "id": "c"
             }
@@ -660,16 +660,16 @@
             "narration": "lonely is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as lonely? Listen and look.",
-            "teaching_text": "Alone and left out mean almost the same as lonely.",
-            "narration": "Alone and left out mean almost the same as lonely."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does lonely look like? Listen and look.",
             "teaching_text": "lonely looks like a quiet face and shoulders that droop a little.",
             "narration": "lonely looks like a quiet face and shoulders that droop a little."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as lonely? Listen and look.",
+            "teaching_text": "Alone and left out mean almost the same as lonely.",
+            "narration": "Alone and left out mean almost the same as lonely."
           }
         ],
         "transition_text": "Now let's show what you know about feeling lonely.",

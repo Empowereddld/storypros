@@ -587,27 +587,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'frustrated'?",
-          "options": [
-            {
-              "text": "mad",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "kite",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "calm",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What does someone look like when they are frustrated?",
           "options": [
             {
@@ -622,6 +601,27 @@
             },
             {
               "text": "Sleeping on the couch",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'frustrated'?",
+          "options": [
+            {
+              "text": "mad",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "kite",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "calm",
               "correct": false,
               "id": "c"
             }
@@ -660,16 +660,16 @@
             "narration": "frustrated is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as frustrated? Listen and look.",
-            "teaching_text": "Mad and annoyed mean almost the same as frustrated.",
-            "narration": "Mad and annoyed mean almost the same as frustrated."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does frustrated look like? Listen and look.",
             "teaching_text": "frustrated looks like a tight face and clenched hands.",
             "narration": "frustrated looks like a tight face and clenched hands."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as frustrated? Listen and look.",
+            "teaching_text": "Mad and annoyed mean almost the same as frustrated.",
+            "narration": "Mad and annoyed mean almost the same as frustrated."
           }
         ],
         "transition_text": "Now let's show what you know about feeling frustrated.",

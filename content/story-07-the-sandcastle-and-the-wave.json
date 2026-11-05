@@ -587,27 +587,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'disappointed'?",
-          "options": [
-            {
-              "text": "let down",
-              "correct": true,
-              "id": "a"
-            },
-            {
-              "text": "happy",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "sandcastle",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What does someone look like when they are disappointed?",
           "options": [
             {
@@ -623,6 +602,27 @@
             {
               "text": "Shoulders droop, face looks sad, might sigh",
               "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'disappointed'?",
+          "options": [
+            {
+              "text": "let down",
+              "correct": true,
+              "id": "a"
+            },
+            {
+              "text": "happy",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "sandcastle",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -660,16 +660,16 @@
             "narration": "disappointed is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as disappointed? Listen and look.",
-            "teaching_text": "Let down and sad mean almost the same as disappointed.",
-            "narration": "Let down and sad mean almost the same as disappointed."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does disappointed look like? Listen and look.",
             "teaching_text": "disappointed looks like a sad face and slumped shoulders.",
             "narration": "disappointed looks like a sad face and slumped shoulders."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as disappointed? Listen and look.",
+            "teaching_text": "Let down and sad mean almost the same as disappointed.",
+            "narration": "Let down and sad mean almost the same as disappointed."
           }
         ],
         "transition_text": "Now let's show what you know about feeling disappointed.",
