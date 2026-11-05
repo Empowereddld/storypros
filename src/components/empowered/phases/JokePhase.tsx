@@ -81,6 +81,9 @@ export function JokePhase({
   useEffect(() => cancel, [step, cancel]);
   useEffect(() => setRevealed(false), [step]);
   const { setup, punchline } = splitJoke(joke.joke_text);
+  const explanationLines = joke.explanation?.length
+    ? joke.explanation
+    : [`The joke uses two meanings of the word ${joke.word}!`];
   const spokenJoke = revealed ? joke.joke_text : setup || joke.joke_text;
   const meaningOneImage = resolveStoryImage(storyData.id, joke.meaning_1.image);
   const meaningTwoImage = resolveStoryImage(storyData.id, joke.meaning_2.image);
@@ -227,14 +230,25 @@ export function JokePhase({
 
             {revealed && (
             <div className="rounded-2xl border border-accent bg-accent/50 p-4 text-center">
-              <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-primary">
-                Get the joke? 💡
-              </span>
+              <div className="mb-2 flex items-center justify-center gap-2">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-primary">
+                  Get the joke? 💡
+                </span>
+                {supported && (
+                  <AudioButton
+                    size="sm"
+                    tone="primary"
+                    playing={isPlaying("explain")}
+                    onClick={() =>
+                      toggle(`Get the joke? ${explanationLines.join(" ")}`, "explain")
+                    }
+                    ariaLabel="Hear why the joke is funny"
+                    text={`Get the joke? ${explanationLines.join(" ")}`}
+                  />
+                )}
+              </div>
               <div className="space-y-1 text-sm font-semibold leading-snug text-ink">
-                {(joke.explanation?.length
-                  ? joke.explanation
-                  : [`The joke uses two meanings of the word ${joke.word}!`]
-                ).map((line) => (
+                {explanationLines.map((line) => (
                   <p key={line}>{line}</p>
                 ))}
               </div>
