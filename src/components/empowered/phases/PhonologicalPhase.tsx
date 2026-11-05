@@ -135,7 +135,7 @@ export function PhonologicalPhase({
               <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
                 {feedback.type === "correct"
                   ? item.type === "rhyme"
-                    ? "Those words sound alike at the end."
+                    ? "Those words sound the same at the end."
                     : "You found the first sound."
                   : item.type === "rhyme"
                     ? "Listen for words that end the same way."
