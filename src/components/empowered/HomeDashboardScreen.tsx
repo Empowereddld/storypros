@@ -212,29 +212,9 @@ export function HomeDashboardScreen({ childName, onNavigate }: HomeDashboardScre
                       )}
                     </div>
 
-                    {doneToday ? (
-                      <div className="mt-3 flex items-center gap-3 rounded-[20px] border border-accent/70 bg-accent/30 p-3">
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card text-primary shadow-card">
-                          <StarIcon filled className="h-6 w-6 text-secondary" />
-                        </span>
-                        <p className="min-w-0 flex-1 text-[14px] font-extrabold leading-snug text-primary">
-                          You&apos;re done for today!
-                          <span className="block font-medium text-ink-soft">
-                            Come back tomorrow.
-                          </span>
-                        </p>
-                        <button
-                          onClick={openContinue}
-                          className="min-h-11 shrink-0 rounded-full border border-primary/30 px-4 text-xs font-extrabold text-primary"
-                        >
-                          Read more
-                        </button>
-                      </div>
-                    ) : (
                       <TactileButton className="mt-3 w-full" onClick={openContinue} noShadow>
                         {ctaLabel} <ChevronRightIcon className="h-5 w-5 text-secondary" />
                       </TactileButton>
-                    )}
                   </div>
                 </article>
               )}
