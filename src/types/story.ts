@@ -24,6 +24,7 @@ export type StoryPhase =
   | "sentence-builder"
   | "intro-retell"
   | "delayed-retell"
+  | "retell-check"
   | "intro-phonological"
   | "phonological"
   | "intro-jokes"

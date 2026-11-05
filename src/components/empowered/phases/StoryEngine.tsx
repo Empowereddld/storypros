@@ -112,6 +112,7 @@ const PHASE_ORDER: StoryPhase[] = [
   "phonological",
   "intro-retell",
   "delayed-retell",
+  "retell-check",
   "personal-connection",
   "story-complete",
 ];
@@ -128,6 +129,7 @@ const PHASE_LABELS: Partial<Record<StoryPhase, string>> = {
   "brain-break-2": "a brain check-in",
   "sentence-builder": "building sentences",
   "delayed-retell": "telling the story again",
+  "retell-check": "a story check",
   phonological: "sound games",
   joke: "a joke",
   "personal-connection": "your story",
@@ -271,6 +273,8 @@ export function StoryEngine({ storyData, onFinish }: StoryEngineProps) {
         return <SentenceBuilderPhase {...phaseProps} />;
       case "delayed-retell":
         return <DelayedRetellPhase {...phaseProps} />;
+      case "retell-check":
+        return <RetellCheckPhase {...phaseProps} />;
       case "phonological":
         return <PhonologicalPhase {...phaseProps} />;
       case "joke":
