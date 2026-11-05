@@ -6,9 +6,9 @@
  *
  * Approved visual metaphors (do not redesign):
  *   category   → circle + square + triangle
- *   function   → gear + right-facing arrow
+ *   function   → two meshing gears (same design, two sizes)
  *   appearance → eye with accent lines
- *   parts      → circle divided into three sections
+ *   parts      → circle divided into four quarters, one pulled out
  *   location   → location pin with oval base
  *
  * Bold, even linework · rounded caps · no gradients ·
@@ -38,14 +38,15 @@ export function CategoryIcon({ className }: IconProps) {
   );
 }
 
-/** WHAT IT DOES? (function) — gear + right arrow */
+/** WHAT IT DOES? (function) — two meshing gears, same design at two sizes */
 export function FunctionIcon({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
       <path d="M13.50 8.42 L15.15 8.62 L15.15 10.18 L13.50 10.38 L12.76 12.18 L13.78 13.49 L12.69 14.58 L11.38 13.56 L9.58 14.30 L9.38 15.95 L7.82 15.95 L7.62 14.30 L5.82 13.56 L4.51 14.58 L3.42 13.49 L4.44 12.18 L3.70 10.38 L2.05 10.18 L2.05 8.62 L3.70 8.42 L4.44 6.62 L3.42 5.31 L4.51 4.22 L5.82 5.24 L7.62 4.50 L7.82 2.85 L9.38 2.85 L9.58 4.50 L11.38 5.24 L12.69 4.22 L13.78 5.31 L12.76 6.62Z" />
       <circle cx="8.6" cy="9.4" r="2" />
-      <path d="M20.38 17.11 L21.57 17.96 L20.81 19.28 L19.47 18.67 L17.91 19.58 L17.77 21.04 L16.23 21.04 L16.09 19.58 L14.53 18.67 L13.19 19.28 L12.43 17.96 L13.62 17.11 L13.62 15.29 L12.43 14.44 L13.19 13.12 L14.53 13.73 L16.09 12.82 L16.23 11.36 L17.77 11.36 L17.91 12.82 L19.47 13.73 L20.81 13.12 L21.57 14.44 L20.38 15.29Z" />
-      <circle cx="17" cy="16.2" r="1.4" />
+      {/* exact miniature of the gear above: 8 teeth, same profile, stroke scaled with it */}
+      <path strokeWidth={1.5} d="M20.70 16.54 L21.83 17.03 L21.50 18.13 L20.29 17.93 L19.37 19.05 L19.83 20.20 L18.82 20.75 L18.10 19.74 L16.66 19.90 L16.17 21.03 L15.07 20.70 L15.27 19.49 L14.15 18.57 L13.00 19.03 L12.45 18.02 L13.46 17.30 L13.30 15.86 L12.17 15.37 L12.50 14.27 L13.71 14.47 L14.63 13.35 L14.17 12.20 L15.18 11.65 L15.90 12.66 L17.34 12.50 L17.83 11.37 L18.93 11.70 L18.73 12.91 L19.85 13.83 L21.00 13.37 L21.55 14.38 L20.54 15.10Z" />
+      <circle cx="17" cy="16.2" r="1.48" strokeWidth={1.5} />
     </svg>
   );
 }
