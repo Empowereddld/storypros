@@ -66,6 +66,7 @@ export function JokePhase({
   ttsSpeed = "normal",
 }: StoryPhaseProps) {
   const [step, setStep] = useState<Step>("intro");
+  const [revealed, setRevealed] = useState(false);
   const JOKE_STEPS: Step[] = ["intro", "meaning1", "meaning2", "joke"];
   useDevSubSteps(
     JOKE_STEPS.length,
@@ -78,6 +79,9 @@ export function JokePhase({
 
   // Stop narration when the child moves to another step.
   useEffect(() => cancel, [step, cancel]);
+  useEffect(() => setRevealed(false), [step]);
+  const { setup, punchline } = splitJoke(joke.joke_text);
+  const spokenJoke = revealed ? joke.joke_text : setup || joke.joke_text;
   const meaningOneImage = resolveStoryImage(storyData.id, joke.meaning_1.image);
   const meaningTwoImage = resolveStoryImage(storyData.id, joke.meaning_2.image);
 
@@ -183,33 +187,45 @@ export function JokePhase({
                   Word Play
                 </div>
                 <h2 className="text-[22px] font-bold leading-tight text-primary-foreground">
-                  {splitJoke(joke.joke_text).setup}
+                  {setup}
                 </h2>
               </>
             }
           >
             <div className="flex flex-col items-center gap-5">
-              <div className="w-full rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center">
-                <p className="text-[26px] font-extrabold leading-snug text-primary">
-                  {splitJoke(joke.joke_text).punchline}
-                </p>
-              </div>
+              {revealed ? (
+                <div className="w-full rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center animate-pop-in">
+                  <p className="text-[26px] font-extrabold leading-snug text-primary">
+                    {punchline} 😂
+                  </p>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    cancel();
+                    setRevealed(true);
+                  }}
+                  className="w-full rounded-[2rem] border-2 border-dashed border-secondary bg-secondary/20 p-6 text-center text-[22px] font-extrabold text-primary transition-transform hover:scale-[1.02] active:scale-95"
+                >
+                  🤔 Tap to see the answer!
+                </button>
+              )}
 
               {supported && (
                 <AudioButton
                   size="xl"
                   tone="primary"
                   playing={isPlaying("joke")}
-                  onClick={() => toggle(joke.joke_text, "joke")}
+                  onClick={() => toggle(spokenJoke, "joke")}
                   ariaLabel="Hear the joke"
-                  text={joke.joke_text}
+                  text={spokenJoke}
                   className="rounded-full border-4 border-card bg-primary text-primary-foreground shadow-xl hover:bg-primary/95"
                 />
               )}
             </div>
 
-            <div className="h-3" />
-
+            {revealed && (
             <div className="rounded-2xl border border-accent bg-accent/50 p-4 text-center">
               <span className="mb-1 block text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">
                 Why it works
@@ -218,11 +234,13 @@ export function JokePhase({
                 Both meanings of &quot;{joke.word}&quot; make the joke work
               </p>
             </div>
+            )}
 
             <TactileButton
               variant="secondary"
               className="shadow-[0_8px_0_0_var(--secondary-deep)] active:translate-y-2 active:shadow-none"
               onClick={handleNext}
+              disabled={!revealed}
             >
               Keep Going <ChevronRightIcon className="h-5 w-5 text-secondary-foreground" />
             </TactileButton>
