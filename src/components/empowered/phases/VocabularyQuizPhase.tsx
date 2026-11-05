@@ -215,10 +215,7 @@ export function VocabularyQuizPhase({
             </div>
 
             <div className="min-w-0 flex-1 text-center">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-secondary-foreground sm:text-[13px]">
-                Word Check
-              </p>
-              <h1 className="mt-1.5 break-words pb-1 text-[36px] font-extrabold capitalize leading-[1.15] tracking-tight text-primary sm:text-[44px] lg:text-[50px]">
+              <h1 className="break-words pb-1 text-[36px] font-extrabold capitalize leading-[1.15] tracking-tight text-primary sm:text-[44px] lg:text-[50px]">
                 {word.word}
               </h1>
             </div>
@@ -241,12 +238,7 @@ export function VocabularyQuizPhase({
           </section>
 
 
-          <p className="mt-3 flex items-center justify-center gap-2 text-center text-[13px] font-extrabold text-primary sm:text-sm">
-            <span aria-hidden>💡</span>
-            Look at the pictures, then tap your answer.
-          </p>
-
-          <div className="mt-2 flex-1 overflow-y-auto no-scrollbar pb-1 animate-slide-up sm:mt-3">
+          <div className="mt-3 flex-1 overflow-y-auto no-scrollbar pb-1 animate-slide-up sm:mt-4">
             <div className="grid gap-3 sm:grid-cols-3 sm:gap-5">
               {question.options.map((option, index) => {
                 const isSelected = selected === option.id;
