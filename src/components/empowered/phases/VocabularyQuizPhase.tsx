@@ -11,6 +11,7 @@ import {
   AppearanceIcon,
   CategoryIcon,
   FunctionIcon,
+  SynonymsIcon,
   LocationIcon,
   PartsIcon,
 } from "../SfaIcons";
@@ -28,6 +29,8 @@ function correctFeedback(prompt: string, wordText: string): string {
     return `You know what category ${wordText} is in.`;
   if (p.startsWith("what do you do with"))
     return `You know what you do with a ${wordText}.`;
+  if (p.startsWith("which word means"))
+    return `You know a word that means almost the same as ${wordText}.`;
   if (p.startsWith("when do you feel")) return `You know when you feel ${wordText}.`;
   if (p.startsWith("what does someone look like"))
     return `You know what someone looks like when they feel ${wordText}.`;
@@ -43,11 +46,12 @@ function correctFeedback(prompt: string, wordText: string): string {
 }
 
 /** The semantic feature each word-check question targets. */
-type SFAFeatureKey = "category" | "function" | "appearance" | "parts" | "location";
+type SFAFeatureKey = "category" | "function" | "synonyms" | "appearance" | "parts" | "location";
 
 const SFA_ICONS: Record<SFAFeatureKey, (props: { className?: string }) => React.ReactElement> = {
   category: CategoryIcon,
   function: FunctionIcon,
+  synonyms: SynonymsIcon,
   appearance: AppearanceIcon,
   parts: PartsIcon,
   location: LocationIcon,
@@ -57,6 +61,7 @@ function featureForPrompt(prompt: string): SFAFeatureKey | null {
   const p = prompt.toLowerCase();
   if (p.startsWith("what category") || p.startsWith("what group") || p.startsWith("is '"))
     return "category";
+  if (p.startsWith("which word means")) return "synonyms";
   if (
     p.startsWith("what do you do with") ||
     p.startsWith("when do you feel") ||

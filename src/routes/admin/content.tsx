@@ -116,7 +116,10 @@ function validateStoryData(data: unknown): {
         });
       } else {
         const sfa = word.sfa as Record<string, unknown>;
-        const sfaKeys = ["category", "function", "appearance", "parts", "location"];
+        const sfaKeys =
+          word.type === "emotion"
+            ? ["category", "synonyms", "appearance"]
+            : ["category", "function", "appearance", "parts", "location"];
         for (const key of sfaKeys) {
           if (!sfa[key]) {
             errors.push({

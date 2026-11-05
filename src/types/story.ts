@@ -61,8 +61,11 @@ export interface ComprehensionQuestion {
 // ── Vocabulary ──
 export interface SFAFeatures {
   category: string;
-  function: string;
+  /** Object words only — feeling words use `synonyms` instead */
+  function?: string;
   appearance: string;
+  /** Feeling words only — child-friendly similar words */
+  synonyms?: string;
   /** Omitted for feeling words, where parts/location don't apply */
   parts?: string;
   location?: string;
