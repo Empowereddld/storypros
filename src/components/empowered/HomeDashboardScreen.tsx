@@ -441,7 +441,7 @@ function WordsStrip({
       <div className="flex shrink-0 items-center justify-between gap-2">
         <CardHeading
           icon={<BookIcon className="h-5 w-5 text-primary" />}
-          title="Words you're learning"
+          title="New Words"
         />
         <button
           onClick={onViewAll}
