@@ -251,90 +251,90 @@ export function VocabularyQuizPhase({
 
 
           <p className="mt-3 flex items-center justify-center gap-2 text-center text-[13px] font-extrabold text-primary sm:text-sm">
-                <span aria-hidden>💡</span>
-                Look at the pictures, then tap your answer.
-              </p>
+            <span aria-hidden>💡</span>
+            Look at the pictures, then tap your answer.
+          </p>
 
-              <div className="mt-2 flex-1 overflow-y-auto no-scrollbar pb-1 animate-slide-up sm:mt-3">
-                <div className="grid gap-3 sm:grid-cols-3 sm:gap-5">
-                  {question.options.map((option, index) => {
-                    const isSelected = selected === option.id;
-                    const isDisabled = wrongIds.has(option.id);
-                    const label = option.text || option.label || "";
-                    // Picture cue sits with the words (never instead of them) so a
-                    // child with DLD can hold each choice in mind while comparing.
-                    const cue = getOptionPictureCue(label, option.emoji);
-                    // Category cues are a group of member emojis — render them
-                    // smaller so the whole group fits inside the picture tile.
-                    const isGroupCue = cue !== null && [...cue].length > 2;
-                    return (
-                      <div
-                        key={option.id}
+          <div className="mt-2 flex-1 overflow-y-auto no-scrollbar pb-1 animate-slide-up sm:mt-3">
+            <div className="grid gap-3 sm:grid-cols-3 sm:gap-5">
+              {question.options.map((option, index) => {
+                const isSelected = selected === option.id;
+                const isDisabled = wrongIds.has(option.id);
+                const label = option.text || option.label || "";
+                // Picture cue sits with the words (never instead of them) so a
+                // child with DLD can hold each choice in mind while comparing.
+                const cue = getOptionPictureCue(label, option.emoji);
+                // Category cues are a group of member emojis — render them
+                // smaller so the whole group fits inside the picture tile.
+                const isGroupCue = cue !== null && [...cue].length > 2;
+                return (
+                  <div
+                    key={option.id}
+                    className={cn(
+                      "relative flex items-center gap-3 rounded-[28px] bg-card p-3 shadow-soft ring-2 transition-all sm:flex-col sm:items-stretch sm:p-3.5",
+                      isSelected ? "ring-primary" : "ring-transparent hover:ring-primary/30",
+                      isDisabled && "bg-destructive/5 opacity-45 ring-destructive/25",
+                    )}
+                  >
+                    <button
+                      onClick={() => !isDisabled && setSelected(option.id)}
+                      disabled={isDisabled}
+                      className="flex min-w-0 flex-1 items-center gap-3 text-left sm:flex-col sm:items-stretch sm:gap-3"
+                    >
+                      <span
+                        aria-hidden
                         className={cn(
-                          "relative flex items-center gap-3 rounded-[28px] bg-card p-3 shadow-soft ring-2 transition-all sm:flex-col sm:items-stretch sm:p-3.5",
-                          isSelected ? "ring-primary" : "ring-transparent hover:ring-primary/30",
-                          isDisabled && "bg-destructive/5 opacity-45 ring-destructive/25",
+                          "flex h-[78px] w-[88px] shrink-0 items-center justify-center rounded-[20px] leading-none sm:h-[104px] sm:w-full sm:rounded-[22px]",
+                          isGroupCue
+                            ? "text-xl sm:text-3xl lg:text-4xl"
+                            : "text-4xl sm:text-[52px] lg:text-[60px]",
+                          isSelected ? "bg-primary/15" : "bg-accent/40",
                         )}
                       >
-                        <button
-                          onClick={() => !isDisabled && setSelected(option.id)}
-                          disabled={isDisabled}
-                          className="flex min-w-0 flex-1 items-center gap-3 text-left sm:flex-col sm:items-stretch sm:gap-3"
-                        >
-                          <span
-                            aria-hidden
-                            className={cn(
-                              "flex h-[78px] w-[88px] shrink-0 items-center justify-center rounded-[20px] leading-none sm:h-[104px] sm:w-full sm:rounded-[22px]",
-                              isGroupCue
-                                ? "text-xl sm:text-3xl lg:text-4xl"
-                                : "text-4xl sm:text-[52px] lg:text-[60px]",
-                              isSelected ? "bg-primary/15" : "bg-accent/40",
-                            )}
-                          >
-                            {cue ?? String.fromCharCode(65 + index)}
-                          </span>
-                          <span
-                            className={cn(
-                              "min-w-0 flex-1 text-[17px] font-extrabold leading-snug sm:flex-none sm:pb-1 sm:text-center sm:text-xl",
-                              isDisabled ? "text-ink-soft line-through" : "text-ink",
-                            )}
-                          >
-                            {label}
-                          </span>
-                        </button>
-
-                        <span
-                          className={cn(
-                            "absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-sm font-extrabold shadow-card sm:left-4 sm:top-4",
-                            isSelected
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-card text-primary",
-                          )}
-                        >
-                          {String.fromCharCode(65 + index)}
-                        </span>
-
-                        {supported && !isDisabled && (
-                          <AudioButton
-                            size="sm"
-                            tone="quiet"
-                            playing={isPlaying(`opt-${option.id}`)}
-                            onClick={() => toggle(label, `opt-${option.id}`)}
-                            text={label}
-                            className="shrink-0 sm:absolute sm:right-2 sm:top-2"
-                          />
+                        {cue ?? String.fromCharCode(65 + index)}
+                      </span>
+                      <span
+                        className={cn(
+                          "min-w-0 flex-1 text-[17px] font-extrabold leading-snug sm:flex-none sm:pb-1 sm:text-center sm:text-xl",
+                          isDisabled ? "text-ink-soft line-through" : "text-ink",
                         )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+                      >
+                        {label}
+                      </span>
+                    </button>
 
-              <div className="mt-3">
-              <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-                Check Answer
-              </TactileButton>
+                    <span
+                      className={cn(
+                        "absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-sm font-extrabold shadow-card sm:left-4 sm:top-4",
+                        isSelected
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-card text-primary",
+                      )}
+                    >
+                      {String.fromCharCode(65 + index)}
+                    </span>
+
+                    {supported && !isDisabled && (
+                      <AudioButton
+                        size="sm"
+                        tone="quiet"
+                        playing={isPlaying(`opt-${option.id}`)}
+                        onClick={() => toggle(label, `opt-${option.id}`)}
+                        text={label}
+                        className="shrink-0 sm:absolute sm:right-2 sm:top-2"
+                      />
+                    )}
+                  </div>
+                );
+              })}
             </div>
+          </div>
+
+          <div className="mt-3">
+          <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
+            Check Answer
+          </TactileButton>
+        </div>
         </div>
       </div>
 
