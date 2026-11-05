@@ -16,6 +16,8 @@ const ELEMENT_LABELS: Record<StoryElement, string> = {
   result: "Result",
 };
 
+const SUBTITLE = "Share your story using all the story parts.";
+
 export function PersonalConnectionPhase({
   storyData,
   onComplete,
@@ -76,11 +78,12 @@ export function PersonalConnectionPhase({
               {supported && (
                 <ListenButton
                   playing={isPlaying("prompt")}
-                  onClick={() => toggle(prompt, "prompt")}
+                  onClick={() => toggle(`${prompt} ${SUBTITLE}`, "prompt")}
                   ariaLabel="Hear the question"
                 />
               )}
             </div>
+            <p className="mt-2 text-lg font-bold leading-snug text-ink-soft sm:text-xl">{SUBTITLE}</p>
             <StoryElementFramework
               className="mt-8"
               items={storyData.retell_prompts.story_elements.map((element) => ({
