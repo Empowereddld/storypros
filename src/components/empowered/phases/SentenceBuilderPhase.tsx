@@ -132,10 +132,10 @@ export function SentenceBuilderPhase({
         amount: sentenceAward(currentAttempt, frames.length),
         anchor: document.querySelector(`[data-choice-id="${selected}"]`),
       });
-      setFeedback({ type: "correct", brainCheck: frame.brain_check_prompt, stage: "brain" });
+      setFeedback({ type: "correct", brainCheck: frame.brain_check_prompt, stage: "result" });
     } else {
       setWrongIds((prev) => new Set(prev).add(selected));
-      setFeedback({ type: "wrong", brainCheck: frame.brain_check_prompt, stage: "brain" });
+      setFeedback({ type: "wrong", brainCheck: frame.brain_check_prompt, stage: "result" });
       setCurrentAttempt((attemptNumber) => attemptNumber + 1);
     }
   }
