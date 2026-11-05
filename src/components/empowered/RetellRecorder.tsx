@@ -120,10 +120,6 @@ export function RetellRecorder({ childId, storyId, phase }: RetellRecorderProps)
           {status === "saving" ? "Saving..." : "Record my retelling"}
         </button>
       )}
-      <p className="text-[11px] font-semibold leading-snug text-ink-soft">
-        Optional — saved for your parent
-        {status === "idle" || status === "recording" ? " to hear later." : "."}
-      </p>
     </div>
   );
 }
