@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import type { ActivityAttempt, StoryPhaseProps } from "@/types/story";
 import { TactileButton } from "../TactileButton";
 import { MiniPlane, Star } from "../StoryProsBrand";
-import { BookCheckIcon, ChevronRightIcon } from "../StoryProsUi";
+import { BookCheckIcon } from "../StoryProsUi";
 import { ProgressHeader } from "./ProgressHeader";
 import { useListen } from "./ListenButton";
 import { AudioButton } from "../AudioButton";
@@ -68,7 +68,6 @@ export function VocabularyQuizPhase({
   const [attempts, setAttempts] = useState<ActivityAttempt[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState(1);
   const [wrongIds, setWrongIds] = useState<Set<string>>(new Set());
-  const [optionsRevealed, setOptionsRevealed] = useState(false);
   const startTime = useRef(Date.now());
 
   const word = words[wordIdx];
@@ -141,7 +140,6 @@ export function VocabularyQuizPhase({
       setFeedback({ type: "none" });
       setCurrentAttempt(1);
       setWrongIds(new Set());
-      setOptionsRevealed(false);
       startTime.current = Date.now();
       return;
     }
@@ -252,20 +250,7 @@ export function VocabularyQuizPhase({
           </section>
 
 
-          {!optionsRevealed ? (
-            <div className="flex flex-1 flex-col items-center justify-center">
-              <TactileButton
-                onClick={() => {
-                  setOptionsRevealed(true);
-                  startTime.current = Date.now();
-                }}
-              >
-                Show Answers <ChevronRightIcon className="h-5 w-5 text-secondary" />
-              </TactileButton>
-            </div>
-          ) : (
-            <>
-              <p className="mt-3 flex items-center justify-center gap-2 text-center text-[13px] font-extrabold text-primary sm:text-sm">
+          <p className="mt-3 flex items-center justify-center gap-2 text-center text-[13px] font-extrabold text-primary sm:text-sm">
                 <span aria-hidden>💡</span>
                 Look at the pictures, then tap your answer.
               </p>
@@ -346,12 +331,10 @@ export function VocabularyQuizPhase({
               </div>
 
               <div className="mt-3">
-                <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
-                  Check Answer
-                </TactileButton>
-              </div>
-            </>
-          )}
+              <TactileButton onClick={handleCheck} disabled={!selected || showingFeedback}>
+                Check Answer
+              </TactileButton>
+            </div>
         </div>
       </div>
 
