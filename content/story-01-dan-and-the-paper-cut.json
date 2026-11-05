@@ -781,6 +781,27 @@
           "correct": false
         }
       ]
+    },
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with finger?",
+      "options": [
+        {
+          "id": "a",
+          "text": "rocket",
+          "correct": false
+        },
+        {
+          "id": "b",
+          "text": "table",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "singer",
+          "correct": true
+        }
+      ]
     }
   ],
   "joke": {

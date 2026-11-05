@@ -793,6 +793,27 @@
           "correct": false
         }
       ]
+    },
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with puzzle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "pencil",
+          "correct": false
+        },
+        {
+          "id": "b",
+          "text": "monkey",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "muzzle",
+          "correct": true
+        }
+      ]
     }
   ],
   "joke": {
