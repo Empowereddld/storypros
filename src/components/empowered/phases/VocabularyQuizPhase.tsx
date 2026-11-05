@@ -238,15 +238,6 @@ export function VocabularyQuizPhase({
             <p className="min-w-0 flex-1 text-[19px] font-extrabold leading-tight text-ink sm:text-[23px]">
               {question.prompt}
             </p>
-            {supported && (
-              <AudioButton
-                size="sm"
-                playing={isPlaying("prompt")}
-                onClick={() => toggle(question.prompt, "prompt")}
-                ariaLabel="Hear the question"
-                className="hidden shrink-0 rounded-full bg-accent/40 px-3 sm:inline-flex"
-              />
-            )}
           </section>
 
 
