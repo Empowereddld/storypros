@@ -122,10 +122,10 @@ export function StoryCompletePhase({
       <Star className="pointer-events-none absolute right-10 top-40 z-0 h-4 w-4 text-primary/35 animate-sparkle" />
       <MiniPlane className="pointer-events-none absolute right-8 top-20 z-0 h-7 w-7 rotate-[18deg] text-secondary/55 animate-float" />
 
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-5 pt-4 no-scrollbar lg:grid lg:grid-cols-[1.02fr_1fr] lg:items-center lg:gap-8 lg:overflow-hidden lg:px-10">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center gap-5 overflow-y-auto px-5 pb-4 pt-16 no-scrollbar">
         {/* Celebration */}
         <div className="text-center">
-          <div className="relative mx-auto h-[clamp(96px,18vh,190px)] max-w-[300px]">
+          <div className="relative mx-auto h-[clamp(110px,22vh,200px)] max-w-[300px]">
             <div className="absolute inset-x-6 bottom-2 h-16 rounded-full bg-secondary/12 blur-xl" />
             <img
               src={dariaAndFriend}
@@ -137,24 +137,18 @@ export function StoryCompletePhase({
             />
           </div>
 
-          <div className="relative -mt-7 flex justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border-[5px] border-card bg-secondary text-secondary-foreground shadow-soft animate-star-pop">
-              <svg
-                viewBox="0 0 24 24"
-                className="h-7 w-7"
-                stroke="currentColor"
-                strokeWidth="3"
-                fill="none"
-              >
+          <div className="relative -mt-6 flex justify-center">
+            <span className="relative z-20 flex h-14 w-14 items-center justify-center rounded-full border-[5px] border-card bg-secondary text-secondary-foreground shadow-soft animate-star-pop">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" stroke="currentColor" strokeWidth="3" fill="none">
                 <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
           </div>
 
-          <div className="mt-2 flex items-center justify-center gap-3">
-          <h1 className="font-display text-[clamp(28px,4.6vh,42px)] font-extrabold leading-none text-primary animate-slide-up">
-            You did it!
-          </h1>
+          <div className="mt-3 flex items-center justify-center gap-3">
+            <h1 className="font-display text-[clamp(28px,4.6vh,42px)] font-extrabold leading-none text-primary animate-slide-up">
+              You did it!
+            </h1>
             {supported && (
               <ListenButton
                 playing={isPlaying("done")}
@@ -163,60 +157,40 @@ export function StoryCompletePhase({
               />
             )}
           </div>
-          <p className="mx-auto mt-2 max-w-[21rem] text-sm font-semibold leading-snug text-ink-soft sm:text-base">
+          <p className="mx-auto mt-2 max-w-[24rem] text-sm font-semibold leading-snug text-ink-soft sm:text-base">
             Amazing work! You finished “{storyData.title}” and leveled up your skills.
           </p>
-
         </div>
 
-        {/* Coins + skills */}
-        <div className="flex min-h-0 flex-col gap-3 lg:max-h-full">
-          <div className="overflow-hidden rounded-[26px] border-2 border-secondary/80 bg-card shadow-card animate-pop-in">
-            <div className="flex items-center justify-between gap-4 bg-secondary/12 px-4 py-3">
-              <div>
-                <p className="text-[11px] font-extrabold uppercase tracking-wider text-secondary-deep">
-                  Coins earned this story
-                </p>
-                <p className="font-display text-[clamp(26px,4vh,36px)] font-extrabold leading-none text-primary">
-                  +{paperPlanesEarned}
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-              {supported && (
-                <ListenButton
-                  playing={isPlaying("coins")}
-                  onClick={() => toggle(`You earned ${paperPlanesEarned} coins this story. Your total is ${totalPaperPlanes} coins.`, "coins")}
-                  ariaLabel="Hear your coins"
-                />
-              )}
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[20px] bg-secondary text-secondary-foreground shadow-[0_5px_0_var(--secondary-deep)]">
-                <CoinIcon className="h-7 w-7" />
-              </span>
-              </div>
+        {/* Coins */}
+        <div className="w-full max-w-md rounded-[26px] border-2 border-secondary/80 bg-card p-4 shadow-card animate-pop-in">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <p className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-secondary-deep">
+              <CoinIcon className="h-5 w-5" /> Your coins
+            </p>
+            {supported && (
+              <ListenButton
+                playing={isPlaying("coins")}
+                onClick={() => toggle(`You earned ${paperPlanesEarned} coins this story. Your total is ${totalPaperPlanes} coins.`, "coins")}
+                ariaLabel="Hear your coins"
+              />
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-3 text-center">
+            <div className="rounded-2xl bg-secondary/15 px-3 py-3">
+              <span className="block text-xs font-bold text-ink-soft">Earned</span>
+              <span className="font-display text-3xl font-extrabold tabular-nums text-secondary-deep">+{paperPlanesEarned}</span>
             </div>
-            <div className="grid grid-cols-2 divide-x-2 divide-accent/50 px-2 py-2 text-center text-[11px] font-bold text-ink-soft">
-              <div>
-                <span className="block">Earned</span>
-                <span className="text-base font-extrabold tabular-nums text-secondary-deep">
-                  +{paperPlanesEarned}
-                </span>
-              </div>
-              <div>
-                <span className="block">Total</span>
-                <span className="text-base font-extrabold tabular-nums text-primary">
-                  {totalPaperPlanes}
-                </span>
-              </div>
+            <div className="rounded-2xl bg-accent/40 px-3 py-3">
+              <span className="block text-xs font-bold text-ink-soft">Total</span>
+              <span className="font-display text-3xl font-extrabold tabular-nums text-primary">{totalPaperPlanes}</span>
             </div>
           </div>
-
         </div>
-      </div>
 
-      {/* Continue */}
-      <div className="relative z-10 mx-5 mb-4 mt-3 shrink-0 lg:mx-10">
         <TactileButton
           variant="secondary"
+          fullWidth={false}
           onClick={handleFinish}
           leadingIcon={<ChevronRightIcon className="h-5 w-5" />}
         >
