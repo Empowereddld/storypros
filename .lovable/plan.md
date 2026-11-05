@@ -1,25 +1,21 @@
-# Feature-matched hint on wrong answers in the Word Check
+# Make the Sentence Builder screen lighter and more fun
 
-## What changes
+## Quick fixes (what you asked for)
+1. **Remove "Finish the idea"** and the small "Sentence Builder" label above it. The book icon goes too, so the sentence becomes the first thing the child sees.
+2. **Add a speaker button to each answer choice (A, B, C)**, the same as on the word-check pictures, so a child who can't read yet can hear every ending.
+3. **Shorten the Check Answer button** to a centered pill sized to its words (the same fix as on the word check). On iPad, full-width bars are a phone pattern. A centered pill that's at least 44pt tall is the tablet best practice. It will sit right under the choices instead of pinned to the bottom.
 
-In the vocabulary quiz ("Word Check"), when a child answers the "Which sentence uses 'bandage' correctly?" question incorrectly, the hint under "Try again" should point to the relevant semantic feature — function, because that is why the wrong sentences are wrong (e.g. "I ride it to school", "I put it on a sandwich"):
+## Suggestions to make it feel more fun (less text-heavy)
+4. **Picture cue on each choice.** Each ending gets a big emoji picture (for example 🩹 "he needed a bandage."), using the same picture cues as the word check. Kids scan pictures first, and words second.
+5. **Choices as cards in a row, not stacked text bars.** Three tiles side by side, each with a letter badge, a picture, the ending and a speaker, matching the word-check layout so the app feels consistent.
+6. **A glowing, bouncy blank.** The empty slot in the sentence becomes a dashed gold "?" bubble that gently pulses. When a choice is tapped, the words "drop" into it with a little pop.
+7. **Make the target word a sticker.** Instead of the plain "Word: because" chip, the connective word (because, so, but) shows inside the sentence as a gold highlighted sticker. That removes one extra line of text.
+8. **Character peek.** Dan or Daria peeks in from the corner of the sentence card. This uses art we already have, and adds warmth without adding words.
 
-- Sentence-use questions get the specific hint:
-  - Object words (e.g. "Which sentence uses 'bandage' correctly?") -> `Think about what a bandage is used for.`
-  - Feeling words (e.g. "Which sentence uses 'calm' correctly?") -> `Think about when you feel calm.`
-- All other question types keep the current general hint: `Think about what we learned about "bandage".`
+Feedback, coins and the rules for right answers stay exactly as they are.
 
-## Where
-
-`src/components/empowered/phases/VocabularyQuizPhase.tsx`
-
-- Add a small `hintFeedback(prompt, wordText)` helper next to the existing `correctFeedback` helper. It checks the prompt the same way `correctFeedback` does:
-  - Prompts starting with "which sentence" -> `Think about what a ${word} is used for.` for object words, `Think about when you feel ${word}.` for feeling words (word type from `word.sfa.category`).
-  - Everything else -> current general message `Think about what we learned about "${word}".`
-- Replace the hardcoded wrong-feedback string in the feedback card (line ~188) with `hintFeedback(question.prompt, word.word)`.
-
-Correct-answer feedback is unchanged. No data files change — the hints are built from the question prompts that already exist.
-
-## Verification
-
-Build stays clean; the wrong-answer hint text is visible by answering a function question incorrectly in the preview.
+## Technical notes
+- File: `SentenceBuilderPhase.tsx` only (plus reuse of `getOptionPictureCue`, `AudioButton`, the existing `useListen` toggle, and the character images).
+- Check Answer: `fullWidth={false}` inside a centered wrapper. Tiles and button are grouped in a `flex min-h-full flex-col justify-center` container, the same as in VocabularyQuizPhase.
+- Per-choice audio key `choice-${id}`. Audio is cancelled on check/continue.
+- Single-viewport rule respected: 3-column tile grid on tablet/desktop, stacking on narrow phones.
