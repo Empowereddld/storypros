@@ -91,7 +91,7 @@ export function RetellRecorder({ childId, storyId, phase, size = "compact" }: Re
     );
   }
 
-  if (size === "large" && status !== "denied") {
+  if (size === "large") {
     const recording = status === "recording";
     const saved = status === "saved";
     return (
