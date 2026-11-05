@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with puzzle?",
+      "prompt": "Which word rhymes with box?",
       "options": [
         {
           "id": "a",
-          "text": "pencil",
+          "text": "hat",
           "correct": false
         },
         {
           "id": "b",
-          "text": "monkey",
+          "text": "sun",
           "correct": false
         },
         {
           "id": "c",
-          "text": "muzzle",
+          "text": "fox",
           "correct": true
         }
       ]

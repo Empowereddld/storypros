@@ -817,21 +817,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with after?",
+      "prompt": "Which word rhymes with play?",
       "options": [
         {
           "id": "a",
-          "text": "button",
+          "text": "bed",
           "correct": false
         },
         {
           "id": "b",
-          "text": "laughter",
+          "text": "day",
           "correct": true
         },
         {
           "id": "c",
-          "text": "window",
+          "text": "cup",
           "correct": false
         }
       ]

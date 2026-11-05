@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with worried?",
+      "prompt": "Which word rhymes with map?",
       "options": [
         {
           "id": "a",
-          "text": "garden",
+          "text": "sock",
           "correct": false
         },
         {
           "id": "b",
-          "text": "hurried",
+          "text": "cap",
           "correct": true
         },
         {
           "id": "c",
-          "text": "rocket",
+          "text": "bed",
           "correct": false
         }
       ]

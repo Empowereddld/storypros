@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with table?",
+      "prompt": "Which word rhymes with seat?",
       "options": [
         {
           "id": "a",
-          "text": "garden",
+          "text": "hat",
           "correct": false
         },
         {
           "id": "b",
-          "text": "tiger",
+          "text": "bell",
           "correct": false
         },
         {
           "id": "c",
-          "text": "label",
+          "text": "feet",
           "correct": true
         }
       ]
