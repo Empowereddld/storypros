@@ -22,7 +22,7 @@ export function PersonalConnectionPhase({
   onClose,
   ttsSpeed = "normal",
 }: StoryPhaseProps) {
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(true);
   const prompt = storyData.personal_connection.prompt;
   const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
 
