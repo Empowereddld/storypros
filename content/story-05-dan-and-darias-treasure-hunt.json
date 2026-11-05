@@ -319,17 +319,17 @@
           "options": [
             {
               "id": "a",
-              "text": "She planted a flashlight in the garden",
+              "text": "She planted a flashlight in the garden.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "Dan used the flashlight to see in the dark",
+              "text": "Dan used the flashlight to see in the dark.",
               "correct": true
             },
             {
               "id": "c",
-              "text": "The flashlight ate a pizza",
+              "text": "The flashlight ate a pizza.",
               "correct": false
             }
           ]
@@ -498,17 +498,17 @@
           "options": [
             {
               "id": "a",
-              "text": "The battery went swimming",
+              "text": "The battery went swimming.",
               "correct": false
             },
             {
               "id": "b",
-              "text": "Dan's mom put a new battery in the flashlight",
+              "text": "Dan's mom put a new battery in the flashlight.",
               "correct": true
             },
             {
               "id": "c",
-              "text": "He wore the battery as a hat",
+              "text": "He wore the battery as a hat.",
               "correct": false
             }
           ]
@@ -632,17 +632,17 @@
           "prompt": "Which sentence uses 'worried' correctly?",
           "options": [
             {
-              "text": "The worried was under the table",
+              "text": "The worried was under the table.",
               "correct": false,
               "id": "a"
             },
             {
-              "text": "He wore the worried on his head",
+              "text": "He wore the worried on his head.",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Daria felt worried when her ticket got wet",
+              "text": "Daria felt worried when her ticket got wet.",
               "correct": true,
               "id": "c"
             }
