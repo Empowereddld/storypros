@@ -1,4 +1,5 @@
-import { createFileRoute, Outlet, Navigate, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router";
+import { RedirectOnce } from "@/components/empowered/RedirectOnce";
 import { useEffect } from "react";
 import { DesktopNav, DemoBanner } from "@/components/empowered/AppChrome";
 import { useAuth } from "@/contexts/AuthContext";
@@ -26,7 +27,7 @@ function AuthenticatedLayout() {
   }
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <RedirectOnce to="/login" />;
   }
 
   const path = location.pathname;
@@ -45,13 +46,13 @@ function AuthenticatedLayout() {
       !path.startsWith("/settings") &&
       !path.startsWith("/dashboard")
     ) {
-      return <Navigate to="/slp" />;
+      return <RedirectOnce to="/slp" />;
     }
 
     // Parents who haven't onboarded must finish onboarding first —
     // starting with the four child-friendly intro screens at /intro.
     if (!isSlpRole && profile && !profile.onboarded && !path.startsWith("/onboarding")) {
-      return <Navigate to={hasSeenIntro() ? "/onboarding/profile" : "/intro"} />;
+      return <RedirectOnce to={hasSeenIntro() ? "/onboarding/profile" : "/intro"} />;
     }
   }
 

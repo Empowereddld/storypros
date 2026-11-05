@@ -1,4 +1,5 @@
-import { createFileRoute, useNavigate, Navigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { RedirectOnce } from "@/components/empowered/RedirectOnce";
 import { StoryEngine } from "@/components/empowered/phases";
 import { StoryErrorBoundary } from "@/components/empowered/ErrorBoundary";
 import { getStory } from "@/services/stories";
@@ -17,10 +18,10 @@ function StoryPage() {
   const story = getStory(storyId);
 
   if (!story) {
-    return <Navigate to="/home" />;
+    return <RedirectOnce to="/home" />;
   }
   if (!canAccessStory(childId, storyId)) {
-    return <Navigate to="/paywall" search={{ storyId }} />;
+    return <RedirectOnce to="/paywall" search={{ storyId }} />;
   }
 
   const finish = () => navigate({ to: "/home" });
