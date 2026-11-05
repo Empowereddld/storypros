@@ -104,6 +104,18 @@ export function ComprehensionPhase({
 
 
   const q = questions[qi];
+  const BRAIN_PROMPTS: Record<string, string> = {
+    character: "Did you answer with a character?",
+    place: "Did you answer with a place?",
+    problem: "Did you answer with a problem?",
+    emotion: "Did you answer with a feeling word?",
+    action: "Did you answer with an action?",
+    result: "Did you answer with the result?",
+  };
+  const brainPrompt =
+    q?.brain_check_prompt?.trim() ||
+    BRAIN_PROMPTS[q?.story_element as string] ||
+    "Did you answer the question?";
   const progress = (qi / questions.length) * 100;
 
   function handleReveal() {
@@ -212,17 +224,17 @@ export function ComprehensionPhase({
             </div>
             <h3 className="font-display text-[26px] font-extrabold text-primary">Brain Check!</h3>
             <p className="mt-2 text-lg font-semibold text-ink">
-              {q.brain_check_prompt ?? "Did you answer the question type?"}
+              {brainPrompt}
             </p>
             <div className="mt-4 flex justify-center">
               <AudioButton
-                text={`Brain Check! ${q.brain_check_prompt ?? "Did you answer the question type?"}`}
+                text={`Brain Check! ${brainPrompt}`}
                 size="lg"
                 tone="primary"
                 playing={isPlaying("brain-check-prompt")}
                 onClick={() =>
                   toggle(
-                    `Brain Check! ${q.brain_check_prompt ?? "Did you answer the question type?"}`,
+                    `Brain Check! ${brainPrompt}`,
                     "brain-check-prompt",
                   )
                 }
