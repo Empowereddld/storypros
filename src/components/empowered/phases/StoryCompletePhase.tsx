@@ -15,6 +15,7 @@ import {
   type SkillDomain,
 } from "@/services/scoring";
 import { cn } from "@/lib/utils";
+import { ListenButton, useListen } from "./ListenButton";
 import dariaAndFriend from "@/assets/dan-daria-celebrate.webp";
 import { AuthBackdrop, MiniPlane, Star } from "../StoryProsBrand";
 import { ChevronRightIcon, CoinIcon } from "../StoryProsUi";
@@ -72,7 +73,9 @@ export function StoryCompletePhase({
   storyData,
   phaseData,
   onComplete,
+  ttsSpeed = "normal",
 }: StoryPhaseProps<StoryCompleteData>) {
+  const { supported, isPlaying, toggle, cancel } = useListen(ttsSpeed);
   const [celebrationDone, setCelebrationDone] = useState(false);
 
   const data = phaseData as StoryCompleteData | undefined;
@@ -103,6 +106,7 @@ export function StoryCompletePhase({
   }, []);
 
   function handleFinish() {
+    cancel();
     onComplete({
       phase: "story-complete",
       attempts: [],
@@ -147,37 +151,22 @@ export function StoryCompletePhase({
             </span>
           </div>
 
-          <h1 className="mt-2 font-display text-[clamp(28px,4.6vh,42px)] font-extrabold leading-none text-primary animate-slide-up">
+          <div className="mt-2 flex items-center justify-center gap-3">
+          <h1 className="font-display text-[clamp(28px,4.6vh,42px)] font-extrabold leading-none text-primary animate-slide-up">
             You did it!
           </h1>
+            {supported && (
+              <ListenButton
+                playing={isPlaying("done")}
+                onClick={() => toggle(`You did it! Amazing work! You finished ${storyData.title} and leveled up your skills.`, "done")}
+                ariaLabel="Hear the message"
+              />
+            )}
+          </div>
           <p className="mx-auto mt-2 max-w-[21rem] text-sm font-semibold leading-snug text-ink-soft sm:text-base">
             Amazing work! You finished “{storyData.title}” and leveled up your skills.
           </p>
 
-          {/* Star rating */}
-          <div
-            className="mt-3 flex items-center justify-center gap-2"
-            aria-label={`${stars} of 3 stars`}
-          >
-            {[1, 2, 3].map((n) => (
-              <svg
-                key={n}
-                viewBox="0 0 24 24"
-                style={n <= stars ? { animationDelay: `${0.2 + 0.15 * n}s` } : undefined}
-                className={cn(
-                  "h-[clamp(26px,3.4vh,36px)] w-[clamp(26px,3.4vh,36px)]",
-                  n <= stars ? "text-secondary animate-star-pop" : "text-accent",
-                )}
-                fill="currentColor"
-                aria-hidden
-              >
-                <path d="M12 2l2.4 5.6L20 9l-4.6 3.8L17 19l-5-3-5 3 1.6-6.2L4 9l5.6-1.4L12 2z" />
-              </svg>
-            ))}
-          </div>
-          <p className="mt-1.5 text-xs font-extrabold uppercase tracking-[0.14em] text-secondary-deep">
-            {OVERALL_ENCOURAGEMENT[scoreToLabel(hasScores ? ratingScore : 100)]}
-          </p>
         </div>
 
         {/* Coins + skills */}
@@ -192,17 +181,20 @@ export function StoryCompletePhase({
                   +{paperPlanesEarned}
                 </p>
               </div>
+              <div className="flex items-center gap-3">
+              {supported && (
+                <ListenButton
+                  playing={isPlaying("coins")}
+                  onClick={() => toggle(`You earned ${paperPlanesEarned} coins this story. Your total is ${totalPaperPlanes} coins.`, "coins")}
+                  ariaLabel="Hear your coins"
+                />
+              )}
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[20px] bg-secondary text-secondary-foreground shadow-[0_5px_0_var(--secondary-deep)]">
                 <CoinIcon className="h-7 w-7" />
               </span>
-            </div>
-            <div className="grid grid-cols-3 divide-x-2 divide-accent/50 px-2 py-2 text-center text-[11px] font-bold text-ink-soft">
-              <div>
-                <span className="block">Before</span>
-                <span className="text-base font-extrabold tabular-nums text-ink">
-                  {previousPaperPlanes}
-                </span>
               </div>
+            </div>
+            <div className="grid grid-cols-2 divide-x-2 divide-accent/50 px-2 py-2 text-center text-[11px] font-bold text-ink-soft">
               <div>
                 <span className="block">Earned</span>
                 <span className="text-base font-extrabold tabular-nums text-secondary-deep">
@@ -210,7 +202,7 @@ export function StoryCompletePhase({
                 </span>
               </div>
               <div>
-                <span className="block">New total</span>
+                <span className="block">Total</span>
                 <span className="text-base font-extrabold tabular-nums text-primary">
                   {totalPaperPlanes}
                 </span>
@@ -218,48 +210,6 @@ export function StoryCompletePhase({
             </div>
           </div>
 
-          {/* Skill breakdown */}
-          <div className="min-h-0 rounded-[26px] border-2 border-accent/70 bg-card p-3.5 shadow-card">
-            <h3 className="mb-2.5 text-[11px] font-extrabold uppercase tracking-[0.14em] text-primary">
-              Your skills
-            </h3>
-            <div className="grid grid-cols-2 gap-2.5">
-              {V1_DOMAINS.map((domain) => {
-                const score = domainScores[domain];
-                const label = scoreToLabel(score);
-                const barColor =
-                  label === "strength"
-                    ? "bg-success"
-                    : label === "growing"
-                      ? "bg-primary"
-                      : label === "budding"
-                        ? "bg-secondary"
-                        : "bg-coral";
-
-                return (
-                  <div key={domain} className="rounded-2xl bg-accent/25 p-2.5">
-                    <div className="flex min-w-0 items-center gap-2">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-sky text-primary">
-                        <SkillIcon domain={domain} />
-                      </span>
-                      <span className="truncate text-[11px] font-extrabold text-primary">
-                        {DOMAIN_LABELS[domain]}
-                      </span>
-                    </div>
-                    <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-card">
-                      <div
-                        className={cn("h-full rounded-full transition-all duration-700", barColor)}
-                        style={{ width: Math.max(5, score) + "%" }}
-                      />
-                    </div>
-                    <p className="mt-1 text-[10px] font-bold text-ink-soft">
-                      {childEncouragement(label)}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
       </div>
 
