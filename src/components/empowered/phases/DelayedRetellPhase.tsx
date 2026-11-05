@@ -22,7 +22,7 @@ const ELEMENT_LABELS: Record<StoryElement, string> = {
   place: "Where",
   problem: "Problem",
   emotion: "Feeling",
-  action: "What happened",
+  action: "Action",
   result: "Result",
 };
 
