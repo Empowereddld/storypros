@@ -829,7 +829,7 @@
     "joke_text": "What did the kite say when the bug landed on it? Let's fly, Fly!"
   },
   "personal_connection": {
-    "prompt": "Have you ever felt frustrated when something did not go your way? What did you do?"
+    "prompt": "Have you ever felt frustrated when something did not go your way?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

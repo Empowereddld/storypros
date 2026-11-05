@@ -829,7 +829,7 @@
     "joke_text": "Why did the instructions go for a walk? Because they had so many steps!"
   },
   "personal_connection": {
-    "prompt": "Have you ever had to ask for help when you did not understand something? How did it go?"
+    "prompt": "Have you ever had to ask for help when you did not understand something?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

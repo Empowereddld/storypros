@@ -850,7 +850,7 @@
     "joke_text": "Why did the math book sit on the furniture? Because it needed a table!"
   },
   "personal_connection": {
-    "prompt": "Have you ever been confused about what to do? Who helped you figure it out?"
+    "prompt": "Have you ever been confused about what to do?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

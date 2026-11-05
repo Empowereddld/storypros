@@ -850,7 +850,7 @@
     "joke_text": "Why did the basketball go to see the judge? Because it was already at court!"
   },
   "personal_connection": {
-    "prompt": "Has someone ever laughed at you or made you feel embarrassed? What happened after?"
+    "prompt": "Has someone ever laughed at you or made you feel embarrassed?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",

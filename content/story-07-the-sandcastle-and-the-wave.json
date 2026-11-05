@@ -829,7 +829,7 @@
     "joke_text": "Why did Dan greet the ocean? Because he liked to wave at waves!"
   },
   "personal_connection": {
-    "prompt": "Have you ever built something and then it broke or got ruined? How did you feel? What did you do?"
+    "prompt": "Have you ever built something and then it broke or got ruined?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",
