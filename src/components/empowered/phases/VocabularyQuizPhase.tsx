@@ -286,17 +286,6 @@ export function VocabularyQuizPhase({
 
           {/* Question bar */}
           <section className="mt-3 flex items-center gap-3 rounded-[26px] bg-card px-4 py-3 shadow-soft sm:mt-4">
-            {supported && (
-              <AudioButton
-                size="md"
-                playing={isPlaying("prompt")}
-                onClick={() => toggle(question.prompt, "prompt")}
-                ariaLabel="Hear the question"
-              />
-            )}
-            <p className="min-w-0 flex-1 text-[19px] font-extrabold leading-tight text-ink sm:text-[23px]">
-              {question.prompt}
-            </p>
             {(() => {
               const feature = featureForPrompt(question.prompt);
               if (!feature) return null;
@@ -310,6 +299,17 @@ export function VocabularyQuizPhase({
                 </span>
               );
             })()}
+            <p className="min-w-0 flex-1 text-[19px] font-extrabold leading-tight text-ink sm:text-[23px]">
+              {question.prompt}
+            </p>
+            {supported && (
+              <AudioButton
+                size="md"
+                playing={isPlaying("prompt")}
+                onClick={() => toggle(question.prompt, "prompt")}
+                ariaLabel="Hear the question"
+              />
+            )}
           </section>
 
 
