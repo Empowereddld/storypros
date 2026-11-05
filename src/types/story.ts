@@ -18,6 +18,7 @@ export type StoryPhase =
   | "intro-vocabulary"
   | "vocab-intro"
   | "vocab-quiz"
+  | "brain-break"
   | "intro-sentences"
   | "sentence-builder"
   | "intro-retell"
