@@ -339,7 +339,7 @@ export function SentenceBuilderPhase({
                   size="md"
                   tone="quiet"
                   playing={choiceSpeaking === choice.id}
-                  onClick={() => handleListenChoice(choice.id, choice.text)}
+                  onClick={() => handleListenChoice(choice.id, choice.text ?? "")}
                   ariaLabel={`Hear choice ${String.fromCharCode(65 + index)}`}
                 />
               )}
