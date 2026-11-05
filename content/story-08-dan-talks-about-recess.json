@@ -814,6 +814,27 @@
           "correct": false
         }
       ]
+    },
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with after?",
+      "options": [
+        {
+          "id": "a",
+          "text": "button",
+          "correct": false
+        },
+        {
+          "id": "b",
+          "text": "laughter",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "window",
+          "correct": false
+        }
+      ]
     }
   ],
   "joke": {

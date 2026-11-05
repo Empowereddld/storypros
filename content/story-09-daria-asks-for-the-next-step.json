@@ -814,6 +814,27 @@
           "correct": false
         }
       ]
+    },
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with table?",
+      "options": [
+        {
+          "id": "a",
+          "text": "cable",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "rocket",
+          "correct": false
+        },
+        {
+          "id": "c",
+          "text": "apple",
+          "correct": false
+        }
+      ]
     }
   ],
   "joke": {

@@ -793,6 +793,27 @@
           "correct": false
         }
       ]
+    },
+    {
+      "type": "rhyme",
+      "prompt": "Which word rhymes with ticket?",
+      "options": [
+        {
+          "id": "a",
+          "text": "apple",
+          "correct": false
+        },
+        {
+          "id": "b",
+          "text": "cricket",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "window",
+          "correct": false
+        }
+      ]
     }
   ],
   "joke": {
