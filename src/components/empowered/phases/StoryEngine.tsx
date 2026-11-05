@@ -100,6 +100,7 @@ const PHASE_ORDER: StoryPhase[] = [
   "comprehension",
   "intro-sequencing",
   "sequencing",
+  "brain-break",
   "intro-vocabulary",
   "vocab-intro",
   "vocab-quiz",
