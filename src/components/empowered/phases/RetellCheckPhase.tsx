@@ -23,9 +23,11 @@ export function RetellCheckPhase({ onComplete, onClose, ttsSpeed = "normal" }: S
 
   // Play once on arrival (browsers may block this; the replay button still works).
   useEffect(() => {
-    if (startedRef.current) return;
-    startedRef.current = true;
-    const t = setTimeout(() => void toggle(RETELL_CHECK_SCRIPT, "check"), 400);
+    const t = setTimeout(() => {
+      if (startedRef.current) return;
+      startedRef.current = true;
+      void toggle(RETELL_CHECK_SCRIPT, "check");
+    }, 300);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
