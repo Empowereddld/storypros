@@ -560,7 +560,7 @@
       "image": "vocab-frustrated.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It's a feeling you get when describes how the character felt.",
+        "synonyms": "Mad and annoyed mean almost the same as frustrated.",
         "appearance": "When someone is frustrated, facial expression and body clues."
       },
       "quiz_questions": [
@@ -587,20 +587,20 @@
         },
         {
           "position": 2,
-          "prompt": "When do you feel frustrated?",
+          "prompt": "Which word means almost the same as 'frustrated'?",
           "options": [
             {
-              "text": "When you try hard but things do not work",
+              "text": "mad",
               "correct": true,
               "id": "a"
             },
             {
-              "text": "When you play your favorite game",
+              "text": "kite",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "When you eat a snack",
+              "text": "calm",
               "correct": false,
               "id": "c"
             }
@@ -660,10 +660,10 @@
             "narration": "frustrated is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel frustrated? Listen and look.",
-            "teaching_text": "Frustrated means something is hard or not working, and it's bothering you.",
-            "narration": "Frustrated means something is hard or not working, and it's bothering you."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as frustrated? Listen and look.",
+            "teaching_text": "Mad and annoyed mean almost the same as frustrated.",
+            "narration": "Mad and annoyed mean almost the same as frustrated."
           },
           {
             "feature": "appearance",

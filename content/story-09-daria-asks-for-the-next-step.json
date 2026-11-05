@@ -560,7 +560,7 @@
       "image": "vocab-confused.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It tells how Daria felt when she missed the instructions.",
+        "synonyms": "Mixed up and puzzled mean almost the same as confused.",
         "appearance": "When someone is confused, they may frown and tilt their head."
       },
       "quiz_questions": [
@@ -587,21 +587,21 @@
         },
         {
           "position": 2,
-          "prompt": "How did Daria feel when she missed one part of the instructions?",
+          "prompt": "Which word means almost the same as 'confused'?",
           "options": [
             {
-              "text": "Excited",
-              "correct": false,
+              "text": "mixed up",
+              "correct": true,
               "id": "a"
             },
             {
-              "text": "Sleepy",
+              "text": "sure",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Confused",
-              "correct": true,
+              "text": "table",
+              "correct": false,
               "id": "c"
             }
           ]
@@ -629,27 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "Which one could make someone feel confused?",
-          "options": [
-            {
-              "text": "Eating your favorite snack",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "Missing part of the directions",
-              "correct": true,
-              "id": "b"
-            },
-            {
-              "text": "Playing your favorite game",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
           "prompt": "What can help when you feel confused?",
           "options": [
             {
@@ -670,7 +649,7 @@
           ]
         },
         {
-          "position": 6,
+          "position": 5,
           "prompt": "Which sentence uses 'confused' correctly?",
           "options": [
             {
@@ -702,10 +681,10 @@
             "narration": "confused is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel confused? Listen and look.",
-            "teaching_text": "Confused means you're not sure what to do or what's happening.",
-            "narration": "Confused means you're not sure what to do or what's happening."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as confused? Listen and look.",
+            "teaching_text": "Mixed up and puzzled mean almost the same as confused.",
+            "narration": "Mixed up and puzzled mean almost the same as confused."
           },
           {
             "feature": "appearance",

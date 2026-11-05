@@ -548,7 +548,7 @@
       "image": "vocab-calm.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It's a feeling you get when describes how the character felt.",
+        "synonyms": "Peaceful and relaxed mean almost the same as calm.",
         "appearance": "When someone is calm, facial expression and body clues."
       },
       "quiz_questions": [
@@ -575,21 +575,21 @@
         },
         {
           "position": 2,
-          "prompt": "When do you feel calm?",
+          "prompt": "Which word means almost the same as 'calm'?",
           "options": [
             {
-              "text": "When you take a deep breath and relax",
-              "correct": true,
+              "text": "angry",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "When you stub your toe",
+              "text": "bandage",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "When you eat ice cream",
-              "correct": false,
+              "text": "peaceful",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -648,10 +648,10 @@
             "narration": "Calm is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel calm? Listen and look.",
-            "teaching_text": "Calm means your body and mind feel relaxed and peaceful.",
-            "narration": "Calm means your body and mind feel relaxed and peaceful."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as calm? Listen and look.",
+            "teaching_text": "Peaceful and relaxed mean almost the same as calm.",
+            "narration": "Peaceful and relaxed mean almost the same as calm."
           },
           {
             "feature": "appearance",

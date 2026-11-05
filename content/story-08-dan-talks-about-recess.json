@@ -560,7 +560,7 @@
       "image": "vocab-embarrassed.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It tells how Dan felt when the kid laughed at him.",
+        "synonyms": "Shy and awkward mean almost the same as embarrassed.",
         "appearance": "When someone is embarrassed, their cheeks may turn red and they look down."
       },
       "quiz_questions": [
@@ -587,21 +587,21 @@
         },
         {
           "position": 2,
-          "prompt": "How did Dan feel when the kid laughed at him?",
+          "prompt": "Which word means almost the same as 'embarrassed'?",
           "options": [
             {
-              "text": "Embarrassed",
-              "correct": true,
+              "text": "proud",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "Sleepy",
+              "text": "basketball court",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "Hungry",
-              "correct": false,
+              "text": "shy",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -629,27 +629,6 @@
         },
         {
           "position": 4,
-          "prompt": "Which one could make someone feel embarrassed?",
-          "options": [
-            {
-              "text": "Getting a hug from grandma",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "Eating breakfast at home",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "Tripping in front of the class",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 5,
           "prompt": "What can help when you feel embarrassed?",
           "options": [
             {
@@ -670,7 +649,7 @@
           ]
         },
         {
-          "position": 6,
+          "position": 5,
           "prompt": "Which sentence uses 'embarrassed' correctly?",
           "options": [
             {
@@ -702,10 +681,10 @@
             "narration": "embarrassed is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel embarrassed? Listen and look.",
-            "teaching_text": "Embarrassed means you feel shy or uncomfortable because others noticed something.",
-            "narration": "Embarrassed means you feel shy or uncomfortable because others noticed something."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as embarrassed? Listen and look.",
+            "teaching_text": "Shy and awkward mean almost the same as embarrassed.",
+            "narration": "Shy and awkward mean almost the same as embarrassed."
           },
           {
             "feature": "appearance",

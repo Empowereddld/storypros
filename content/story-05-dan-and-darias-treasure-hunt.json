@@ -560,7 +560,7 @@
       "image": "vocab-worried.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It's a feeling you get when describes how the character felt.",
+        "synonyms": "Nervous and scared mean almost the same as worried.",
         "appearance": "When someone is worried, facial expression and body clues."
       },
       "quiz_questions": [
@@ -587,20 +587,20 @@
         },
         {
           "position": 2,
-          "prompt": "When do you feel worried?",
+          "prompt": "Which word means almost the same as 'worried'?",
           "options": [
             {
-              "text": "When you think something bad might happen",
-              "correct": true,
+              "text": "calm",
+              "correct": false,
               "id": "a"
             },
             {
-              "text": "When you play with friends",
-              "correct": false,
+              "text": "nervous",
+              "correct": true,
               "id": "b"
             },
             {
-              "text": "When you eat your favorite food",
+              "text": "flashlight",
               "correct": false,
               "id": "c"
             }
@@ -660,10 +660,10 @@
             "narration": "worried is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel worried? Listen and look.",
-            "teaching_text": "Worried means you feel nervous about something that might happen.",
-            "narration": "Worried means you feel nervous about something that might happen."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as worried? Listen and look.",
+            "teaching_text": "Nervous and scared mean almost the same as worried.",
+            "narration": "Nervous and scared mean almost the same as worried."
           },
           {
             "feature": "appearance",

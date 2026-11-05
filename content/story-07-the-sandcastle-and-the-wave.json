@@ -560,7 +560,7 @@
       "image": "vocab-disappointed.webp",
       "sfa": {
         "category": "It belongs to the feeling word group.",
-        "function": "It's a feeling you get when describes how the character felt.",
+        "synonyms": "Let down and sad mean almost the same as disappointed.",
         "appearance": "When someone is disappointed, facial expression and body clues."
       },
       "quiz_questions": [
@@ -587,20 +587,20 @@
         },
         {
           "position": 2,
-          "prompt": "When do you feel disappointed?",
+          "prompt": "Which word means almost the same as 'disappointed'?",
           "options": [
             {
-              "text": "When something you hoped for does not happen",
+              "text": "let down",
               "correct": true,
               "id": "a"
             },
             {
-              "text": "When you eat lunch",
+              "text": "happy",
               "correct": false,
               "id": "b"
             },
             {
-              "text": "When you get a surprise gift",
+              "text": "sandcastle",
               "correct": false,
               "id": "c"
             }
@@ -660,10 +660,10 @@
             "narration": "disappointed is a feeling word."
           },
           {
-            "feature": "function",
-            "prompt": "What does it mean to feel disappointed? Listen and look.",
-            "teaching_text": "Disappointed means you hoped for something, and it didn't happen the way you wanted.",
-            "narration": "Disappointed means you hoped for something, and it didn't happen the way you wanted."
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as disappointed? Listen and look.",
+            "teaching_text": "Let down and sad mean almost the same as disappointed.",
+            "narration": "Let down and sad mean almost the same as disappointed."
           },
           {
             "feature": "appearance",

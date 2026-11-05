@@ -25,6 +25,7 @@ import {
   AppearanceIcon,
   CategoryIcon,
   FunctionIcon,
+  SynonymsIcon,
   LocationIcon,
   PartsIcon,
 } from "../SfaIcons";
@@ -81,7 +82,7 @@ function ListenButton({
   );
 }
 
-const SFA_KEYS = ["category", "function", "appearance", "parts", "location"] as const;
+const SFA_KEYS = ["category", "function", "synonyms", "appearance", "parts", "location"] as const;
 type SFAKey = (typeof SFA_KEYS)[number];
 
 /** Features actually taught for a word — feeling words skip parts/location. */
@@ -96,6 +97,7 @@ function keysForWord(word: VocabularyWord): SFAKey[] {
 const SFA_LABELS: Record<SFAKey, string> = {
   category: "Tell what group it's in",
   function: "What it does",
+  synonyms: "Words that mean the same",
   appearance: "What it looks like",
   parts: "Tell its parts",
   location: "Where you find it",
@@ -105,6 +107,7 @@ const SFA_LABELS: Record<SFAKey, string> = {
 const SFA_HELPERS: Record<SFAKey, string> = {
   category: "CATEGORY",
   function: "FUNCTION",
+  synonyms: "SIMILAR WORDS",
   appearance: "APPEARANCE",
   parts: "PARTS",
   location: "LOCATION",
@@ -125,6 +128,7 @@ function shortSentence(text: string) {
 const SFA_ICONS: Record<SFAKey, (props: { className?: string }) => React.ReactElement> = {
   category: CategoryIcon,
   function: FunctionIcon,
+  synonyms: SynonymsIcon,
   appearance: AppearanceIcon,
   parts: PartsIcon,
   location: LocationIcon,

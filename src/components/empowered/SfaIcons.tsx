@@ -83,3 +83,14 @@ export function LocationIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+/** SIMILAR WORDS (synonyms, feeling words) — two speech bubbles with an equals sign */
+export function SynonymsIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M3 4.5h10a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-1.5 1.5H8l-3 2.5v-2.5H3A1.5 1.5 0 0 1 1.5 11V6A1.5 1.5 0 0 1 3 4.5Z" />
+      <path d="M17.5 9.5H21a1.5 1.5 0 0 1 1.5 1.5v5A1.5 1.5 0 0 1 21 17.5h-1v2.5l-3-2.5h-4a1.5 1.5 0 0 1-1.5-1.5v-1" />
+      <path d="M5.5 7.6h5M5.5 9.6h5" />
+    </svg>
+  );
+}
