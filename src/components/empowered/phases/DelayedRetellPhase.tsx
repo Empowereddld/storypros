@@ -122,13 +122,13 @@ export function DelayedRetellPhase({
           <div className="mt-5 flex justify-center">
             <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" size="large" />
           </div>
-        </section>
-      </div>
 
-      <div className="relative z-10 mx-5 mb-4 flex shrink-0 justify-center">
-        <TactileButton onClick={handleDone} fullWidth={false}>
-          Done <ChevronRightIcon className="h-5 w-5 text-secondary" />
-        </TactileButton>
+          <div className="mt-5 flex justify-center">
+            <TactileButton onClick={handleDone} fullWidth={false}>
+              Done <ChevronRightIcon className="h-5 w-5 text-secondary" />
+            </TactileButton>
+          </div>
+        </section>
       </div>
     </div>
   );
