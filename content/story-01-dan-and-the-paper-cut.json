@@ -822,7 +822,7 @@
     ]
   },
   "personal_connection": {
-    "prompt": "Have you ever gotten a cut or a bump? Share your story using all the story parts."
+    "prompt": "Have you ever gotten a cut or a bump?"
   },
   "retell_prompts": {
     "immediate": "Can you tell me what happened in the story?",
