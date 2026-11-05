@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with pencil?",
+      "prompt": "Which word rhymes with hand?",
       "options": [
         {
           "id": "a",
-          "text": "window",
+          "text": "fish",
           "correct": false
         },
         {
           "id": "b",
-          "text": "stencil",
+          "text": "sand",
           "correct": true
         },
         {
           "id": "c",
-          "text": "monkey",
+          "text": "cup",
           "correct": false
         }
       ]

@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with water?",
+      "prompt": "Which word rhymes with sand?",
       "options": [
         {
           "id": "a",
-          "text": "pencil",
+          "text": "bell",
           "correct": false
         },
         {
           "id": "b",
-          "text": "monkey",
+          "text": "fish",
           "correct": false
         },
         {
           "id": "c",
-          "text": "daughter",
+          "text": "hand",
           "correct": true
         }
       ]

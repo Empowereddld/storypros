@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with ladder?",
+      "prompt": "Which word rhymes with tree?",
       "options": [
         {
           "id": "a",
-          "text": "sadder",
+          "text": "bee",
           "correct": true
         },
         {
           "id": "b",
-          "text": "bucket",
+          "text": "cup",
           "correct": false
         },
         {
           "id": "c",
-          "text": "tiger",
+          "text": "hat",
           "correct": false
         }
       ]

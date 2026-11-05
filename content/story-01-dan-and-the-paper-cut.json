@@ -784,21 +784,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with finger?",
+      "prompt": "Which word rhymes with dad?",
       "options": [
         {
           "id": "a",
-          "text": "rocket",
+          "text": "cup",
           "correct": false
         },
         {
           "id": "b",
-          "text": "table",
+          "text": "bell",
           "correct": false
         },
         {
           "id": "c",
-          "text": "singer",
+          "text": "sad",
           "correct": true
         }
       ]

@@ -796,21 +796,21 @@
     },
     {
       "type": "rhyme",
-      "prompt": "Which word rhymes with ticket?",
+      "prompt": "Which word rhymes with line?",
       "options": [
         {
           "id": "a",
-          "text": "apple",
+          "text": "bed",
           "correct": false
         },
         {
           "id": "b",
-          "text": "cricket",
+          "text": "nine",
           "correct": true
         },
         {
           "id": "c",
-          "text": "window",
+          "text": "sock",
           "correct": false
         }
       ]
