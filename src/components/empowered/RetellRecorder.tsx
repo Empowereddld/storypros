@@ -16,11 +16,12 @@ interface RetellRecorderProps {
   childId: string | undefined;
   storyId: string;
   phase: RetellPhase;
+  size?: "compact" | "large";
 }
 
 type Status = "idle" | "recording" | "saving" | "saved" | "error" | "denied";
 
-export function RetellRecorder({ childId, storyId, phase }: RetellRecorderProps) {
+export function RetellRecorder({ childId, storyId, phase, size = "compact" }: RetellRecorderProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [seconds, setSeconds] = useState(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -87,6 +88,55 @@ export function RetellRecorder({ childId, storyId, phase }: RetellRecorderProps)
       <p className="mt-3 rounded-2xl bg-accent/50 px-4 py-3 text-xs font-semibold leading-snug text-ink-soft">
         We couldn't hear the mic — you can still finish the retell out loud without saving it.
       </p>
+    );
+  }
+
+  if (size === "large") {
+    const recording = status === "recording";
+    const saved = status === "saved";
+    return (
+      <div className="flex flex-col items-center gap-2">
+        <button
+          onClick={recording ? handleStop : saved ? undefined : handleStart}
+          disabled={status === "saving" || saved}
+          aria-label={recording ? "Stop recording" : "Start recording"}
+          className={cn(
+            "relative flex h-20 w-20 items-center justify-center rounded-full shadow-soft press-pop transition-colors disabled:cursor-default",
+            recording
+              ? "bg-destructive text-destructive-foreground"
+              : saved
+                ? "bg-success text-success-foreground"
+                : "bg-primary text-primary-foreground",
+          )}
+        >
+          {recording && (
+            <span className="absolute inset-0 rounded-full bg-destructive/40 animate-ping" aria-hidden />
+          )}
+          {recording ? (
+            <span className="relative h-7 w-7 rounded-md bg-destructive-foreground" />
+          ) : saved ? (
+            <CheckCircleIcon />
+          ) : (
+            <MicIcon className="h-9 w-9" />
+          )}
+        </button>
+        <p
+          className={cn(
+            "text-base font-extrabold",
+            recording ? "text-destructive" : saved ? "text-success" : "text-primary",
+          )}
+        >
+          {recording
+            ? `Recording... ${formatTime(seconds)}`
+            : saved
+              ? "Saved!"
+              : status === "saving"
+                ? "Saving..."
+                : status === "error"
+                  ? "Didn't save — tap to try again"
+                  : "Tap to record"}
+        </p>
+      </div>
     );
   }
 

@@ -70,14 +70,14 @@ export function DelayedRetellPhase({
       </div>
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
-        <section className="flex min-h-0 flex-1 flex-col rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
-          <div className="flex items-center gap-4">
-            <h1 className="text-[28px] font-extrabold leading-tight text-primary">
+        <section className="flex min-h-0 flex-1 flex-col justify-center rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
+          <div className="flex items-center justify-center">
+            <h1 className="text-center text-[28px] font-extrabold leading-tight text-primary">
               Remember the Story?
             </h1>
           </div>
 
-          <div className="mt-3 flex items-start gap-3 rounded-[24px] bg-accent/60 p-4">
+          <div className="mx-auto mt-3 flex w-full max-w-3xl items-center gap-3 rounded-[24px] bg-accent/60 px-4 py-3">
             <p className="flex-1 text-lg font-extrabold leading-snug text-primary sm:text-xl">
               {delayedPrompt}
             </p>
@@ -90,28 +90,28 @@ export function DelayedRetellPhase({
             )}
           </div>
 
-          <div className="mt-3 flex gap-2">
+          <div className="mt-4 grid grid-cols-6 gap-2 sm:gap-3">
             {elements.map((element, index) => {
               const slide = storyData.slides.find((item) => item.story_element === element);
               const image = slide ? resolveStoryImage(storyData.id, slide.image) : null;
               return (
                 <div
                   key={`${element}-${index}`}
-                  className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-[16px] border-2 border-accent/60 bg-card"
+                  className="flex min-w-0 flex-col overflow-hidden rounded-[18px] border-2 border-accent bg-card shadow-card"
                 >
-                  <div className="relative aspect-video w-full overflow-hidden bg-accent/40">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-accent/40">
                     {image ? (
-                      <img src={image} alt="" className="h-full w-full object-contain" />
+                      <img src={image} alt="" className="h-full w-full object-cover" />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-primary">
                         <PaperPlaneIcon className="h-8 w-8" />
                       </div>
                     )}
-                    <span className="absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-extrabold text-primary-foreground">
+                    <span className="absolute left-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-sm font-extrabold text-primary shadow-card">
                       {index + 1}
                     </span>
                   </div>
-                  <p className="px-1 py-1 text-center text-xs font-extrabold leading-tight text-primary sm:text-sm">
+                  <p className="bg-primary px-1 py-1.5 text-center text-xs font-extrabold leading-tight text-primary-foreground sm:text-sm">
                     {ELEMENT_LABELS[element]}
                   </p>
                 </div>
@@ -119,8 +119,8 @@ export function DelayedRetellPhase({
             })}
           </div>
 
-          <div className="mt-3 min-h-0 flex-1">
-            <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" />
+          <div className="mt-5 flex justify-center">
+            <RetellRecorder childId={childId} storyId={storyData.id} phase="delayed" size="large" />
           </div>
         </section>
       </div>
