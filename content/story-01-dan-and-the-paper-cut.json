@@ -575,27 +575,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'calm'?",
-          "options": [
-            {
-              "text": "angry",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "bandage",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "peaceful",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What does someone look like when they feel calm?",
           "options": [
             {
@@ -611,6 +590,27 @@
             {
               "text": "Crying with a red face",
               "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'calm'?",
+          "options": [
+            {
+              "text": "angry",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "bandage",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "peaceful",
+              "correct": true,
               "id": "c"
             }
           ]
@@ -648,16 +648,16 @@
             "narration": "Calm is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as calm? Listen and look.",
-            "teaching_text": "Peaceful and relaxed mean almost the same as calm.",
-            "narration": "Peaceful and relaxed mean almost the same as calm."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does calm look like? Listen and look.",
             "teaching_text": "Calm looks like a relaxed face and slow, easy breathing.",
             "narration": "Calm looks like a relaxed face and slow, easy breathing."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as calm? Listen and look.",
+            "teaching_text": "Peaceful and relaxed mean almost the same as calm.",
+            "narration": "Peaceful and relaxed mean almost the same as calm."
           }
         ],
         "transition_text": "Now let's show what you know about feeling calm.",

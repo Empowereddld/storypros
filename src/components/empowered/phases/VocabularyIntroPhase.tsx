@@ -82,7 +82,7 @@ function ListenButton({
   );
 }
 
-const SFA_KEYS = ["category", "function", "synonyms", "appearance", "parts", "location"] as const;
+const SFA_KEYS = ["category", "function", "appearance", "synonyms", "parts", "location"] as const;
 type SFAKey = (typeof SFA_KEYS)[number];
 
 /** Features actually taught for a word — feeling words skip parts/location. */

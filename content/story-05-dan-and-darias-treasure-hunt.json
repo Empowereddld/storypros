@@ -587,27 +587,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'worried'?",
-          "options": [
-            {
-              "text": "calm",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "nervous",
-              "correct": true,
-              "id": "b"
-            },
-            {
-              "text": "flashlight",
-              "correct": false,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What does someone look like when they are worried?",
           "options": [
             {
@@ -622,6 +601,27 @@
             },
             {
               "text": "Smiling and laughing",
+              "correct": false,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'worried'?",
+          "options": [
+            {
+              "text": "calm",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "nervous",
+              "correct": true,
+              "id": "b"
+            },
+            {
+              "text": "flashlight",
               "correct": false,
               "id": "c"
             }
@@ -660,16 +660,16 @@
             "narration": "worried is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as worried? Listen and look.",
-            "teaching_text": "Nervous and scared mean almost the same as worried.",
-            "narration": "Nervous and scared mean almost the same as worried."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does worried look like? Listen and look.",
             "teaching_text": "worried looks like a tense face and eyes that dart around.",
             "narration": "worried looks like a tense face and eyes that dart around."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as worried? Listen and look.",
+            "teaching_text": "Nervous and scared mean almost the same as worried.",
+            "narration": "Nervous and scared mean almost the same as worried."
           }
         ],
         "transition_text": "Now let's show what you know about feeling worried.",

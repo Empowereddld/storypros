@@ -587,27 +587,6 @@
         },
         {
           "position": 2,
-          "prompt": "Which word means almost the same as 'embarrassed'?",
-          "options": [
-            {
-              "text": "proud",
-              "correct": false,
-              "id": "a"
-            },
-            {
-              "text": "basketball court",
-              "correct": false,
-              "id": "b"
-            },
-            {
-              "text": "shy",
-              "correct": true,
-              "id": "c"
-            }
-          ]
-        },
-        {
-          "position": 3,
           "prompt": "What might your face do when you feel embarrassed?",
           "options": [
             {
@@ -622,6 +601,27 @@
             },
             {
               "text": "Turn red and look down",
+              "correct": true,
+              "id": "c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "prompt": "Which word means almost the same as 'embarrassed'?",
+          "options": [
+            {
+              "text": "proud",
+              "correct": false,
+              "id": "a"
+            },
+            {
+              "text": "basketball court",
+              "correct": false,
+              "id": "b"
+            },
+            {
+              "text": "shy",
               "correct": true,
               "id": "c"
             }
@@ -681,16 +681,16 @@
             "narration": "embarrassed is a feeling word."
           },
           {
-            "feature": "synonyms",
-            "prompt": "What words mean almost the same as embarrassed? Listen and look.",
-            "teaching_text": "Shy and awkward mean almost the same as embarrassed.",
-            "narration": "Shy and awkward mean almost the same as embarrassed."
-          },
-          {
             "feature": "appearance",
             "prompt": "What does embarrassed look like? Listen and look.",
             "teaching_text": "embarrassed looks like red cheeks and eyes that look away.",
             "narration": "embarrassed looks like red cheeks and eyes that look away."
+          },
+          {
+            "feature": "synonyms",
+            "prompt": "What words mean almost the same as embarrassed? Listen and look.",
+            "teaching_text": "Shy and awkward mean almost the same as embarrassed.",
+            "narration": "Shy and awkward mean almost the same as embarrassed."
           }
         ],
         "transition_text": "Now let's show what you know about feeling embarrassed.",
