@@ -72,9 +72,6 @@ export function DelayedRetellPhase({
       <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar px-5 pb-4 pt-4">
         <section className="flex min-h-0 flex-1 flex-col rounded-[30px] bg-card p-5 shadow-soft animate-slide-up">
           <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[22px] bg-accent text-primary">
-              <BrainIcon className="h-8 w-8" />
-            </div>
             <h1 className="text-[28px] font-extrabold leading-tight text-primary">
               Remember the Story?
             </h1>
@@ -134,30 +131,5 @@ export function DelayedRetellPhase({
         </TactileButton>
       </div>
     </div>
-  );
-}
-
-function BrainIcon({ className = "h-6 w-6" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      aria-hidden
-    >
-      <path
-        d="M9 4a3 3 0 0 0-3 3v.3A3 3 0 0 0 4 10v1a3 3 0 0 0 1.5 2.6A3 3 0 0 0 8 18h1v-2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M15 4a3 3 0 0 1 3 3v.3A3 3 0 0 1 20 10v1a3 3 0 0 1-1.5 2.6A3 3 0 0 1 16 18h-1v-2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M9 4h6v11.5a2.5 2.5 0 0 1-5 0" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
