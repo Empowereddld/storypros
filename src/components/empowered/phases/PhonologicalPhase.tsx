@@ -129,16 +129,21 @@ export function PhonologicalPhase({
                   : "bg-sky animate-shake",
               )}
             >
-              <p className="text-xl font-extrabold text-primary">
-                {feedback.type === "correct" ? "Great listening!" : "Listen again"}
-              </p>
-              <p className="mt-2 text-sm font-semibold leading-snug text-ink-soft">
+              {feedback.type === "correct" && (
+                <p className="text-xl font-extrabold text-primary">Great listening!</p>
+              )}
+              <p
+                className={cn(
+                  "text-sm font-semibold leading-snug text-ink-soft",
+                  feedback.type === "correct" && "mt-2",
+                )}
+              >
                 {feedback.type === "correct"
                   ? item.type === "rhyme"
                     ? "Those words sound the same at the end."
                     : "You found the first sound."
                   : item.type === "rhyme"
-                    ? "Listen for words that end the same way."
+                    ? "Listen for words that sound the same at the end."
                     : "Listen to the very first sound."}
               </p>
             </div>
