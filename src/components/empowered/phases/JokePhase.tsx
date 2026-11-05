@@ -94,7 +94,7 @@ export function JokePhase({
         storyId: storyData.id,
         activity: "jokes",
         amount: COIN_ECONOMY.jokes.completion,
-        label: "Word Play complete!",
+        label: "Joke complete!",
       });
       onComplete({
         phase: "joke",
@@ -115,7 +115,7 @@ export function JokePhase({
       </div>
 
       <div className="relative z-10">
-        <ProgressHeader progress={PROGRESS[step]} label="Word Play" onClose={onClose} />
+        <ProgressHeader progress={PROGRESS[step]} label="Joke" onClose={onClose} />
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-5 pt-4">
@@ -184,7 +184,7 @@ export function JokePhase({
             header={
               <>
                 <div className="mb-4 inline-flex items-center rounded-full bg-secondary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary-foreground shadow-md">
-                  Word Play
+                  Joke
                 </div>
                 <h2 className="text-[22px] font-bold leading-tight text-primary-foreground">
                   {setup}
