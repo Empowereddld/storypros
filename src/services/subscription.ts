@@ -178,6 +178,13 @@ export function canAccessStory(childId: string, storyId: string): boolean {
   // Free stories are always accessible
   if (FREE_STORY_IDS.includes(storyId)) return true;
 
+  // Demo mode unlocks every story so the team can review them all
+  try {
+    if (typeof window !== "undefined" && localStorage.getItem("storypros_demo_session")) return true;
+  } catch {
+    /* ignore */
+  }
+
   // Premium users can access everything
   return isPremium(childId);
 }
