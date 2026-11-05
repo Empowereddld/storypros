@@ -239,6 +239,7 @@ export function VocabularyQuizPhase({
 
 
           <div className="mt-3 flex-1 overflow-y-auto no-scrollbar pb-1 animate-slide-up sm:mt-4">
+            <div className="flex min-h-full flex-col justify-center">
             <div className="grid gap-3 sm:grid-cols-3 sm:gap-5">
               {question.options.map((option, index) => {
                 const isSelected = selected === option.id;
@@ -311,16 +312,17 @@ export function VocabularyQuizPhase({
                 );
               })}
             </div>
-          </div>
 
-          <div className="mt-3 flex justify-center">
-            <TactileButton
-              fullWidth={false}
-              onClick={handleCheck}
-              disabled={!selected || showingFeedback}
-            >
-              Check Answer
-            </TactileButton>
+            <div className="mt-4 flex justify-center">
+              <TactileButton
+                fullWidth={false}
+                onClick={handleCheck}
+                disabled={!selected || showingFeedback}
+              >
+                Check Answer
+              </TactileButton>
+            </div>
+            </div>
           </div>
         </div>
       </div>
